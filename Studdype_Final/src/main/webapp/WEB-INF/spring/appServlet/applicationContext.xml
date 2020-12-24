@@ -5,7 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<!-- db.properties db와 관련된 설정 -->	
-<!-- 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>
@@ -16,8 +16,8 @@
 		</property>
 	</bean>
 	
-	dataSource
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+
+	<!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driver}"/>
 		<property name="url" value="${url}"/>
 		<property name="username" value="${username}"/>
