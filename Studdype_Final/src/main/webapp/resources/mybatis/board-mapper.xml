@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <!DOCTYPE mapper
+  		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="myboard">
+  
+  	<resultMap type="boardDto" id="boardMap">
+  		<result property="myno" column="MYNO"/>
+  		<result property="myname" column="MYNAME"/>
+  		<result property="mytitle" column="MYTITLE"/>
+  		<result property="mycontent" column="MYCONTENT"/>
+  		<result property="mydate" column="MYDATE"/>
+  	</resultMap>
+  	
+  	
+  	<select id="selectList" resultMap="boardMap"><!-- 컬럼명과 dto명이 다를 경우 resultmap사용 -->
+  		
+  	</select>
+  
+  	<select id="selectOne" parameterType="int" resultType="boardDto">
+  		
+  	</select>
+  	
+  	<insert id="insert" parameterType="boardDto">
+  	
+  	</insert>
+  
+  	<update id="update" parameterType="boardDto">
+  		
+  	</update>
+  
+  	<delete id="delete" parameterType="int">
+  		
+  	
+  	</delete>
+  
+  
+  
+  
+  
+  
+  </mapper>
+  
+
+
+
