@@ -13,19 +13,21 @@
  
 
   
-
+   
   <section class="make-center">
+    <img src="logo.png" alt="" class="log1" style="width: 600px; height:200px ; margin-right: 80px;">
     <div>
-      <label><input type="checkbox" id="record-entire-conference"> Record Entire Conference In The Browser?</label>
+      
       <span id="recording-status" style="display: none;"></span>
       <button id="btn-stop-recording" style="display: none;">Stop Recording</button>
       <br><br>
 
       <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20 style="display: none;">
-      <button id="open-room">화상 회의방 만들기</button>
-      <button id="join-room">화상 회의 참가</button>
-      <button id="comeback">회의 종료</button>
+      <button id="open-room">방 만들기</button>
+      <button id="join-room">참가</button>
+      <button id="comeback">종료</button>
       <button id="open-or-join-room" style="display: none;">Auto Open Or Join Room</button>
+      <br><br><br><br>
     </div>
 
     <div id="videos-container" style="margin: 20px 0;"></div>
@@ -61,8 +63,8 @@
 
     //구현 후 삭제
     $(function(){
-        alert(getParam("studyid"));
-        alert(getParam("memberid"));
+        alert(getParam("studyid")+" " +getParam("memberid"));
+      
     })
 // ......................................................
 // .......................UI Code........................
@@ -74,7 +76,7 @@ document.getElementById('open-room').onclick = function() {
     //get방식을 넘어온 studyid로
     connection.open(getParam("studyid"), function(isRoomOpened, roomid, error) {
         if(isRoomOpened === true) {
-          showRoomURL(connection.sessionid);
+          
         }
         else {
           disableInputButtons(true);
