@@ -51,9 +51,26 @@
   color: white;
   font-weight: bold;
 }
+.leftnavi-item:hover #webBtn {
+  border-radius: 30px;
+  background-color: rgb(115, 98, 222);
+  color: white;
+  font-weight: bold;
+}
 
 .leftnavi-item div {
   padding: 10px;
   display: inline;
   transition: all 0.7s;
 }
+
+.leftnavi-item #webBtn {
+  padding: 10px;
+  display: inline;
+  transition: all 0.7s;
+  background-color: #dfdfdf;	
+	border: 1px solid #dfdfdf;
+	 color: #969494ef;
+	 cursor: pointer;
+}
+
