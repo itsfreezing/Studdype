@@ -22,6 +22,11 @@
                 $('.left-navigation').removeClass('fixed');
             }
         });
+        
+        function openWebMeeting(){    		
+    		window.open("https://localhost:9001/qwe.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
+    		//172.30.1.38  -> localhost
+    	};
     </script>
 </head>
 <body>
@@ -36,12 +41,14 @@
             <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_gallery.png"><div>갤러리</div></a></li>
             <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_schedule.png"><div>일정관리</div></a></li>
             <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_meet.png"><div>모임관리</div></a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_webcam.png"><div>화상회의</div></a></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_webcam.png"><input type="button" value="화상회의" onclick="openWebMeeting();" id="webBtn"></li>
             <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_searchBook.png"><div>도서검색</div></a></li>
             <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_management_gray.png"><div>스터디관리</div></a></li>
 
         </ul>
         </div>
     </div>
+    <input type="hidden" value="${memberid }" id="memberid">
+    <input type="hidden" value="${studyid }" id="studyid">
 </body>
 </html>
