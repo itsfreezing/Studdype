@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>main page</title>
-	
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComunityHome</title>
+
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
@@ -18,15 +18,15 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/assets/css/responsive.css">
     <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
-    <link rel="stylesheet" href="./resources/css/studdype/footer.css">
+    <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
     <script src="./resources/assets/js/popper.min.js"></script>
     <script src="./resources/assets/js/bootstrap.min.js"></script>
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
-
-	<script type="text/javascript">
+    
+    <script type="text/javascript">
 		$(document).ready(function(){
 		    var owl = $('.owl-carousel');
 		    
@@ -49,27 +49,8 @@
 		});
 	</script>
 	
-	<style type="text/css">
-		input#search{
-			height: 55px;
-			margin-top: 15px;
-			border-top: none;
-			border-right: none;
-			border-left: none;
-			border-bottom: 1px solid;
-			background-color: F9FAFC;
-			background-color: transparent;
-		}
-		
-		input#search:focus{
-			border-bottom: 3px solid #6610F2;
-		}
-	</style>
-	
 </head>
-
 <body>
-
 	<!-- 헤더 시작 -->
 	<div class="articles header-area">
 		<div class="container">
@@ -338,17 +319,9 @@
 		<!--End of container-->
 	</div>
 	<!--End of control area-->
-
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
-
-
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/modal-video.js"></script>
-	<script src="../js/loadmore.js"></script>
-	<script src="../js/prefixfree.min.js"></script>
-	<script src="../js/main.js"></script>
+    
 </body>
+
+    <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 
 </html>
