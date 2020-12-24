@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="header-top">
 				<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-					<a class="navbar-brand" href="index.html"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
+					<a class="navbar-brand" href="mainPage.jsp"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -24,7 +24,7 @@
 						<div class="mainmenu">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item">
-									<a class="nav-link" href="#">StuDdype Home <span class="sr-only">(current)</span></a>
+									<a class="nav-link" href="#">스터띱홈<span class="sr-only">(current)</span></a>
 								</li>								
                                 <li class="nav-item">
 									<a class="nav-link" href="#">로그아웃</a>
@@ -47,7 +47,7 @@
 						<div class="hero-text-inner">
 							<div class="hero-text">
 								
-								<h1>Study 이름</h1>
+								<h1>스터디 이름</h1>
 								
 							</div>
 						</div>

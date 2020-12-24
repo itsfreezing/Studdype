@@ -17,19 +17,18 @@
 	<link rel="stylesheet" href="./resources/assets/css/normalize.css">
 	<link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-    <link rel="stylesheet" href="./resources/css/leftnavi/leftnavi.css">
-    <link rel="stylesheet" href="./resources/css/mainsection/mainsetion.css">
+    <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+    <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
     <script src="./resources/assets/js/popper.min.js"></script>
     <script src="./resources/assets/js/bootstrap.min.js"></script>
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
-
+	
 </head>
 <body>
-	<jsp:include page="./studyheader.jsp"></jsp:include>
-	<jsp:include page="./studyleftnavi.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	
      <!--main conternt 섹션-->
@@ -44,5 +43,9 @@
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
+   
+    <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 </body>
+
+
 </html>
