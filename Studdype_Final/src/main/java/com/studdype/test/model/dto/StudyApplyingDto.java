@@ -1,10 +1,10 @@
 package com.studdype.test.model.dto;
 
 public class StudyApplyingDto {
-	private int s_no; 		// ½ºÅÍµğ ¹øÈ£
-	private int mem_no; 	// È¸¿ø¹øÈ£
-	private String agree;	// ¼ö¶ôÇöÈ²
-	private String info;	// ÀÚ±â¼Ò°³
+	private int s_no; 		// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private int mem_no; 	// íšŒì›ë²ˆí˜¸
+	private String agree;	// ìˆ˜ë½í˜„í™©
+	private String info;	// ìê¸°ì†Œê°œ
 
 	public StudyApplyingDto() {
 		super();

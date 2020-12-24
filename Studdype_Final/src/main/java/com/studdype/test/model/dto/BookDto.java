@@ -1,14 +1,14 @@
 package com.studdype.test.model.dto;
 
 public class BookDto {
-	private int b_no; 				// °Ô½Ã±Û ¹øÈ£
-	private int s_no; 				// ½ºÅÍµğ ¹øÈ£
-	private String book_title; 		// Ã¥ ÀÌ¸§
-	private String book_author; 	// Ã¥ ÀúÀÚ
-	private String book_publish;	// Ã¥ ÃâÆÇ»ç
-	private String book_img; 		// µµ¼­ ÀÌ¹ÌÁö URL
-	private String book_url; 		// µµ¼­ »ó¼¼ URL
-	private String book_ismain; 	// ´ëÇ¥µµ¼­¿©ºÎ
+	private int b_no; 				// ê²Œì‹œê¸€ ë²ˆí˜¸
+	private int s_no; 				// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private String book_title; 		// ì±… ì´ë¦„
+	private String book_author; 	// ì±… ì €ì
+	private String book_publish;	// ì±… ì¶œíŒì‚¬
+	private String book_img; 		// ë„ì„œ ì´ë¯¸ì§€ URL
+	private String book_url; 		// ë„ì„œ ìƒì„¸ URL
+	private String book_ismain; 	// ëŒ€í‘œë„ì„œì—¬ë¶€
 
 	public BookDto() {
 		super();

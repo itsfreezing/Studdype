@@ -1,14 +1,14 @@
 package com.studdype.test.model.dto;
 
 public class MemberDto {
-	private int mem_no; 		// È¸¿ø ¹øÈ£
-	private String mem_id; 		// ¾ÆÀÌµğ
-	private String mem_pw; 		// ºñ¹Ğ¹øÈ£
-	private String mem_name; 	// ÀÌ¸§
-	private String mem_rno; 	// ÁÖ¹Î¹øÈ£
-	private String mem_gender; 	// ¼ºº°
-	private String mem_phone; 	// ÇÚµåÆù ¹øÈ£
-	private String mem_email; 	// ÀÌ¸ŞÀÏ
+	private int mem_no; 		// íšŒì› ë²ˆí˜¸
+	private String mem_id; 		// ì•„ì´ë””
+	private String mem_pw; 		// ë¹„ë°€ë²ˆí˜¸
+	private String mem_name; 	// ì´ë¦„
+	private String mem_rno; 	// ì£¼ë¯¼ë²ˆí˜¸
+	private String mem_gender; 	// ì„±ë³„
+	private String mem_phone; 	// í•¸ë“œí° ë²ˆí˜¸
+	private String mem_email; 	// ì´ë©”ì¼
 
 	public MemberDto() {
 		super();

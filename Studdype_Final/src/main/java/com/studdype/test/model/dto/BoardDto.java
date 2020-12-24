@@ -3,21 +3,21 @@ package com.studdype.test.model.dto;
 import java.util.Date;
 
 public class BoardDto {
-	private int b_no; 			// °Ô½Ã±Û ¹øÈ£
-	private int s_no; 			// ½ºÅÍµğ ¹øÈ£
-	private String title; 		// °Ô½Ã±Û Á¦¸ñ
-	private int b_writer; 		// ÀÛ¼ºÀÚ
-	private String b_content; 	// °Ô½Ã±Û ³»¿ë
-	private Date b_regdate; 	// °Ô½Ã±Û ÀÛ¼º ½Ã°£
-	private int b_important; 	// ÇÊ¼ö°øÁö»çÇ×¿©ºÎ
-	private int b_cnt; 			// Á¶È¸¼ö
+	private int b_no; 			// ê²Œì‹œê¸€ ë²ˆí˜¸
+	private int s_no; 			// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private String title; 		// ê²Œì‹œê¸€ ì œëª©
+	private int b_writer; 		// ì‘ì„±ì
+	private String b_content; 	// ê²Œì‹œê¸€ ë‚´ìš©
+	private Date b_regdate; 	// ê²Œì‹œê¸€ ì‘ì„± ì‹œê°„
+	private int b_important; 	// í•„ìˆ˜ê³µì§€ì‚¬í•­ì—¬ë¶€
+	private int b_cnt; 			// ì¡°íšŒìˆ˜
 
 	public BoardDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// °øÁö»çÇ× °Ô½ÃÆÇ »ı¼ºÀÚ
+	// ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ ìƒì„±ì
 	public BoardDto(int b_no, int s_no, String title, int b_writer, String b_content, Date b_regdate,
 			int b_important, int b_cnt) {
 		super();
@@ -31,7 +31,7 @@ public class BoardDto {
 		this.b_cnt = b_cnt;
 	}
 	
-	// ÀÏ¹İ °Ô½ÃÆÇ »ı¼ºÀÚ
+	// ì¼ë°˜ ê²Œì‹œíŒ ìƒì„±ì
 	public BoardDto(int b_no, int s_no, String title, int b_writer, String b_content, Date b_regdate, int b_cnt) {
 		super();
 		this.b_no = b_no;

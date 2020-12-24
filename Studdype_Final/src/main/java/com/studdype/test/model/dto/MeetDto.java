@@ -3,17 +3,17 @@ package com.studdype.test.model.dto;
 import java.util.Date;
 
 public class MeetDto {
-	private int meet_no; 			// ¸ğÀÓ ¹øÈ£
-	private int s_no; 				// ½ºÅÍµğ ¹øÈ£
-	private String meet_title; 		// ¸ğÀÓ Á¦¸ñ
-	private int meet_writer; 		// ¸ğÀÓ ÀÛ¼ºÀÚ
-	private String meet_content; 	// ¸ğÀÓ ³»¿ë
-	private String meet_addr; 		// ¸ğÀÓ µµ·Î¸í ÁÖ¼Ò
-	private Date meet_date; 		// ¸ğÀÓ ³¯Â¥
-	private Date meet_time; 		// ¸ğÀÓ ½Ã°£
-	private Date meet_regdate; 		// ¸ğÀÓ ÀÛ¼º ½Ã°£
-	private Date vote_startdate; 	// ÅõÇ¥ ½ÃÀÛÀÏ
-	private Date vote_enddate; 		// ÅõÇ¥ ¸¶°¨ÀÏ
+	private int meet_no; 			// ëª¨ì„ ë²ˆí˜¸
+	private int s_no; 				// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private String meet_title; 		// ëª¨ì„ ì œëª©
+	private int meet_writer; 		// ëª¨ì„ ì‘ì„±ì
+	private String meet_content; 	// ëª¨ì„ ë‚´ìš©
+	private String meet_addr; 		// ëª¨ì„ ë„ë¡œëª… ì£¼ì†Œ
+	private Date meet_date; 		// ëª¨ì„ ë‚ ì§œ
+	private Date meet_time; 		// ëª¨ì„ ì‹œê°„
+	private Date meet_regdate; 		// ëª¨ì„ ì‘ì„± ì‹œê°„
+	private Date vote_startdate; 	// íˆ¬í‘œ ì‹œì‘ì¼
+	private Date vote_enddate; 		// íˆ¬í‘œ ë§ˆê°ì¼
 
 	public MeetDto() {
 		super();

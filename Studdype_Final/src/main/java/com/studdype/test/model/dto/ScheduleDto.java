@@ -3,13 +3,13 @@ package com.studdype.test.model.dto;
 import java.util.Date;
 
 public class ScheduleDto {
-	private int sche_no; 			// ÀÏÁ¤ ¹øÈ£
-	private int s_no; 				// ½ºÅÍµğ ¹øÈ£
-	private String sche_title; 		// ÀÏÁ¤ ÀÌ¸§
-	private int sche_writer; 		// ÀÏÁ¤ µî·ÏÀÚ
-	private String sche_content; 	// ÀÏÁ¤ ³»¿ë
-	private Date sche_startdate; 	// ÀÏÁ¤ ½ÃÀÛÀÏ
-	private Date sche_enddate; 		// ÀÏÁ¤ Á¾·áÀÏ
+	private int sche_no; 			// ì¼ì • ë²ˆí˜¸
+	private int s_no; 				// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private String sche_title; 		// ì¼ì • ì´ë¦„
+	private int sche_writer; 		// ì¼ì • ë“±ë¡ì
+	private String sche_content; 	// ì¼ì • ë‚´ìš©
+	private Date sche_startdate; 	// ì¼ì • ì‹œì‘ì¼
+	private Date sche_enddate; 		// ì¼ì • ì¢…ë£Œì¼
 
 	public ScheduleDto() {
 		super();

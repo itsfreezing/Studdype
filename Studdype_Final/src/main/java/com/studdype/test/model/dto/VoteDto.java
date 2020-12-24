@@ -1,9 +1,9 @@
 package com.studdype.test.model.dto;
 
 public class VoteDto {
-	private int meet_no; 		// ¸ğÀÓ ¹øÈ£
-	private int mem_no; 		// È¸¿ø ¹øÈ£
-	private String vote_attend; // Âü¼® ¿©ºÎ
+	private int meet_no; 		// ëª¨ì„ ë²ˆí˜¸
+	private int mem_no; 		// íšŒì› ë²ˆí˜¸
+	private String vote_attend; // ì°¸ì„ ì—¬ë¶€
 
 	public VoteDto() {
 		super();

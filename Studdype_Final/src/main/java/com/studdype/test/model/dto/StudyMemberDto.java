@@ -1,8 +1,8 @@
 package com.studdype.test.model.dto;
 
 public class StudyMemberDto {
-	private int s_no; 	// ½ºÅÍµğ ¹øÈ£
-	private int mem_no; // È¸¿ø ¹øÈ£
+	private int s_no; 	// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private int mem_no; // íšŒì› ë²ˆí˜¸
 
 	public StudyMemberDto() {
 		super();

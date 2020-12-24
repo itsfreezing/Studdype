@@ -1,17 +1,17 @@
 package com.studdype.test.model.dto;
 
 public class StudyDto {
-	private int s_no; 			// ½ºÅÍµğ ¹øÈ£
-	private int leader_no; 		// ÆÀÀå ¹øÈ£
-	private String s_name; 		// ½ºÅÍµğ ÀÌ¸§
-	private String s_info; 		// ½ºÅÍµğ ÇÑÁÙ ¼Ò°³
-	private String s_content; 	// ½ºÅÍµğ ÀÚ¼¼ÇÑ ¼Ò°³
-	private String photo; 		// ½ºÅÍµğ ´ëÇ¥»çÁø ÆÄÀÏÀÌ¸§
-	private int cate_no; 		// ½ºÅÍµğ Ä«Å×°í¸®
-	private int si_no; 			// ½ºÅÍµğ Áö¿ª(½Ã)
-	private int gu_no; 			// ½ºÅÍµğ Áö¿ª(±¸)
-	private int s_maxcnt; 		// ½ºÅÍµğ ÃÖ´ë ÀÎ¿ø
-	private int s_currentcnt;	// ½ºÅÍµğ ÇöÀç ÀÎ¿ø
+	private int s_no; 			// ìŠ¤í„°ë”” ë²ˆí˜¸
+	private int leader_no; 		// íŒ€ì¥ ë²ˆí˜¸
+	private String s_name; 		// ìŠ¤í„°ë”” ì´ë¦„
+	private String s_info; 		// ìŠ¤í„°ë”” í•œì¤„ ì†Œê°œ
+	private String s_content; 	// ìŠ¤í„°ë”” ìì„¸í•œ ì†Œê°œ
+	private String photo; 		// ìŠ¤í„°ë”” ëŒ€í‘œì‚¬ì§„ íŒŒì¼ì´ë¦„
+	private int cate_no; 		// ìŠ¤í„°ë”” ì¹´í…Œê³ ë¦¬
+	private int si_no; 			// ìŠ¤í„°ë”” ì§€ì—­(ì‹œ)
+	private int gu_no; 			// ìŠ¤í„°ë”” ì§€ì—­(êµ¬)
+	private int s_maxcnt; 		// ìŠ¤í„°ë”” ìµœëŒ€ ì¸ì›
+	private int s_currentcnt;	// ìŠ¤í„°ë”” í˜„ì¬ ì¸ì›
 
 	public StudyDto() {
 		super();

@@ -1,9 +1,9 @@
 package com.studdype.test.model.dto;
 
 public class LocationGuDto {
-	private int gu_no; // ±¸ ¹øÈ£
-	private int si_no; // ½Ã ¹øÈ£
-	private String gu_name; // ±¸ ÀÌ¸§
+	private int gu_no; // êµ¬ ë²ˆí˜¸
+	private int si_no; // ì‹œ ë²ˆí˜¸
+	private String gu_name; // êµ¬ ì´ë¦„
 
 	public LocationGuDto() {
 		super();

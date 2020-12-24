@@ -1,8 +1,8 @@
 package com.studdype.test.model.dto;
 
 public class StudyCategoryDto {
-	private int cate_no; 		// Ä«Å×°í¸® ¹øÈ£
-	private String cate_name;	// Ä«Å×°í¸® ÀÌ¸§
+	private int cate_no; 		// ì¹´í…Œê³ ë¦¬ ë²ˆí˜¸
+	private String cate_name;	// ì¹´í…Œê³ ë¦¬ ì´ë¦„
 
 	public StudyCategoryDto() {
 		super();

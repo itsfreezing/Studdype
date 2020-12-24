@@ -1,8 +1,8 @@
 package com.studdype.test.model.dto;
 
 public class LocationSiDto {
-	private int si_no; // ½Ã ¹øÈ£
-	private String si_name; // ½Ã ÀÌ¸§
+	private int si_no; // ì‹œ ë²ˆí˜¸
+	private String si_name; // ì‹œ ì´ë¦„
 
 	public LocationSiDto() {
 		super();

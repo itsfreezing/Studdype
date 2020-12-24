@@ -3,21 +3,21 @@ package com.studdype.test.model.dto;
 import java.util.Date;
 
 public class ReplyDto {
-	private int r_no; 			// ´ñ±Û ¹øÈ£
-	private int b_no; 			// °Ô½Ã±Û ¹øÈ£
-	private int r_groupno; 		// ´ñ±Û ±×·ì ¹øÈ£
-	private int r_class; 		// ´ñ±Û °èÃş
-	private int order; 			// ´ñ,´ä±Û ¼ø¼­
-	private int r_writer; 		// ÀÛ¼ºÀÚ
-	private String r_comment; 	// ´ñ±Û ³»¿ë
-	private Date r_regdate; 	// ´ñ±Û ÀÛ¼º ½Ã°£
+	private int r_no; 			// ëŒ“ê¸€ ë²ˆí˜¸
+	private int b_no; 			// ê²Œì‹œê¸€ ë²ˆí˜¸
+	private int r_groupno; 		// ëŒ“ê¸€ ê·¸ë£¹ ë²ˆí˜¸
+	private int r_class; 		// ëŒ“ê¸€ ê³„ì¸µ
+	private int order; 			// ëŒ“,ë‹µê¸€ ìˆœì„œ
+	private int r_writer; 		// ì‘ì„±ì
+	private String r_comment; 	// ëŒ“ê¸€ ë‚´ìš©
+	private Date r_regdate; 	// ëŒ“ê¸€ ì‘ì„± ì‹œê°„
 
 	public ReplyDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// ÀÏ¹İ °Ô½ÃÆÇ ´ñ±Û »ı¼ºÀÚ
+	// ì¼ë°˜ ê²Œì‹œíŒ ëŒ“ê¸€ ìƒì„±ì
 	public ReplyDto(int r_no, int b_no, int r_groupno, int r_class, int order, int r_writer, String r_comment,
 			Date r_regdate) {
 		super();
@@ -31,7 +31,7 @@ public class ReplyDto {
 		this.r_regdate = r_regdate;
 	}
 
-	// ¸ğÀÓ ´ñ±Û »ı¼ºÀÚ
+	// ëª¨ì„ ëŒ“ê¸€ ìƒì„±ì
 	public ReplyDto(int r_no, int b_no, int r_writer, String r_comment, Date r_regdate) {
 		super();
 		this.r_no = r_no;

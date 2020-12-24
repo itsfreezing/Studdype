@@ -1,17 +1,17 @@
 package com.studdype.test.model.dto;
 
 public class FileDto {
-	private int f_no; // ÆÄÀÏ ¹øÈ£
-	private int b_no; // °Ô½Ã±Û ¹øÈ£
-	private String f_name; // ÆÄÀÏ ½ÇÁ¦ ÀÌ¸§
-	private String photo_ismain; // ´ëÇ¥»çÁø
+	private int f_no; // íŒŒì¼ ë²ˆí˜¸
+	private int b_no; // ê²Œì‹œê¸€ ë²ˆí˜¸
+	private String f_name; // íŒŒì¼ ì‹¤ì œ ì´ë¦„
+	private String photo_ismain; // ëŒ€í‘œì‚¬ì§„
 
 	public FileDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// »çÁø °Ô½ÃÆÇ ÆÄÀÏ »ı¼ºÀÚ
+	// ì‚¬ì§„ ê²Œì‹œíŒ íŒŒì¼ ìƒì„±ì
 	public FileDto(int f_no, int b_no, String f_name, String photo_ismain) {
 		super();
 		this.f_no = f_no;
@@ -20,7 +20,7 @@ public class FileDto {
 		this.photo_ismain = photo_ismain;
 	}
 
-	// ÀÏ¹İ ÆÄÀÏ »ı¼ºÀÚ
+	// ì¼ë°˜ íŒŒì¼ ìƒì„±ì
 	public FileDto(int f_no, int b_no, String f_name) {
 		super();
 		this.f_no = f_no;
