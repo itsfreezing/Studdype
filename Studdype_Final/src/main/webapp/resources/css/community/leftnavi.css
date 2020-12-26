@@ -1,0 +1,70 @@
+.left-navigation {
+	display: block;
+	margin-left: 2%;
+	margin-top: 3%;
+	width: 20%;
+	height: 600px;
+}
+
+.real-left {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 75%; 
+	background: #dfdfdf;
+	box-shadow: 0 0 28px 8px #ddd;
+	border-radius: 10px;
+	overflow: auto;	
+	height: auto; 
+	float: left;
+	padding: 0 20px 10px 20px;  
+}
+
+.leftnavi-ul {
+	list-style-type: none;
+	padding: 0 0 0 30px;
+}
+
+.left-navigation.fixed {
+	position: fixed;
+	top: 50px;
+}
+
+.leftnavi-item img {
+	display: inline;
+	margin-right: 15px;
+	width: 30px;
+	height: 30px;
+}
+
+.leftnavi-item {
+	display: block; 
+	margin-top: 20px;
+	color: #969494ef;
+}
+
+.leftnavi-item:hover .navBtn {
+	border-radius: 30px;
+	background-color: rgb(115, 98, 222);
+	color: white;
+	font-weight: bold;
+}
+
+.leftnavi-item .active {
+	padding: 8px;
+	border-radius: 30px;
+	border: 0;
+	background-color: rgb(115, 98, 222);
+	color: white;
+	font-weight: bold;
+	z-index: 5;
+}
+
+.leftnavi-item .navBtn {
+	padding: 7px;
+	display: inline;
+	transition: all 0.3s;
+	background-color: #dfdfdf;	
+	border: 1px solid #dfdfdf;
+	color: #969494ef;
+	cursor: pointer;
+}

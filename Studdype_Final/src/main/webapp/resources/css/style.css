@@ -45,7 +45,7 @@ h6 {
 
 /* 濡쒓퀬 */
 img.logo {
-	width: 260px;
+	width: 250px;
 	height: 90px;
 	display: inline-block;
 }
@@ -76,6 +76,7 @@ div.blog-meta > span > img#placeHolderIcon{
 
 .header-area {
 	background-image: url(./resources/assets/img/img_startPage.png);
+	
 	background-size: cover;
 	background-position: center;
 	height: 1080px;
@@ -1090,56 +1091,7 @@ a.scroll-down:hover {
 	margin-top: 210px;
 }
 
-/*Footer*/
 
-.footer-menu {
-	position: relative;
-	z-index: 3;
-}
-
-.footer-bottom {
-	padding: 50px 0;
-	border-bottom: 1px solid #f2f2f3
-}
-
-.footer-menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	text-align: right;
-}
-
-.footer-menu li {
-	display: inline-block;
-}
-
-.footer-menu li a {
-	display: block;
-	padding: 12px 22px;
-	font-size: 16px;
-	font-weight: 500;
-	color: #6a6a77;
-	transition: 0.3s
-}
-
-.footer-menu li a:hover {
-	color: #756edc
-}
-
-.footer-menu li.active a {
-	color: #756edc
-}
-
-.footer-menu span a {
-	display: inline-block;
-	background: #6e45e2;
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: 600;
-	font-size: 12px;
-	padding: 18px 35px 16px;
-	border-radius: 50px;
-}
 
 .copyright p {
 	margin: 0;
@@ -1264,9 +1216,6 @@ a.scroll-down:hover {
 
 /*Features Style*/
 /*�뒪�꽣�뵒 �씠誘몄�*/
-.feature-page.header-area {
-	background-image: url(../img/features/feature-hero-bg.jpg)
-}
 
 .feature-page.header-area {
 	height: 500px;
@@ -1653,33 +1602,7 @@ div.mainBanner > img{
 
 
 
-.footer-menu li a {
-	display: block;
-	padding: 12px 22px;
-	font-size: 16px;
-	font-weight: 500;
-	color: #6a6a77;
-	transition: 0.3s
-}
 
-.footer-menu li a:hover {
-	color: #756edc
-}
-
-.footer-menu li.active a {
-	color: #756edc
-}
-
-.footer-menu span a {
-	display: inline-block;
-	background: #6e45e2;
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: 600;
-	font-size: 12px;
-	padding: 18px 35px 16px;
-	border-radius: 50px;
-}
 /* �쇊履� �꽕鍮꾨컮 */
 ul.left-navi {
 	background: #dfdfdf;
