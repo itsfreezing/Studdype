@@ -22,7 +22,19 @@
                 $('.left-navigation').removeClass('fixed');
             }
         });
-        
+		
+        //	input태그 클릭 시 
+        //	input태그의 active 클래스를 지운다.
+        //	그리고, 클릭한 input태그(this)에 active 클래스를 추가한다.
+        //	미완성 아직 안됐음 ㅠㅠ
+        $(function(){
+        	var btn = document.querySelector('input');
+        	btn.click(function(){
+        		btn.removeClass('active');
+        		$(this).addClass('active');
+        	});
+        });
+       
         function openWebMeeting(){    		
     		window.open("https://localhost:9001/qwe.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
     		//172.30.1.38  -> localhost
@@ -34,16 +46,16 @@
     <div class="left-navigation">
         <div class="real-left">
         <ul class="leftnavi-ul">
-            <li class="leftnavi-item"> <a href="#"> <img src="./resources/assets/img/category_home_gray.png"><div>스터디 홈</div> </a></li>
-            <li class="leftnavi-item"> <a href="#"> <img src="./resources/assets/img/category_notice.png"><div>공지사항</div> </a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_freeBoard.png"><div>자유게시판</a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_dataRoom.png"><div>학습자료실</div></a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_gallery.png"><div>갤러리</div></a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_schedule.png"><div>일정관리</div></a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_meet.png"><div>모임관리</div></a></li>
-            <li class="leftnavi-item"> <img src="./resources/assets/img/category_webcam.png"><input type="button" value="화상회의" onclick="openWebMeeting();" id="webBtn"></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_searchBook.png"><div>도서검색</div></a></li>
-            <li class="leftnavi-item"> <a href="#"><img src="./resources/assets/img/category_management_gray.png"><div>스터디관리</div></a></li>
+            <li class="active leftnavi-item"> <img src="./resources/assets/img/category_home_gray.png"><input type="button" value="스터디홈" onclick="" class="active" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_notice.png"><input type="button" value="공지사항" onclick="location.href='notice.do'" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_freeBoard.png"><input type="button" value="자유게시판" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_dataRoom.png"><input type="button" value="학습자료실" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_gallery.png"><input type="button" value="갤러리" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_schedule.png"><input type="button" value="일정관리" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_meet.png"><input type="button" value="모임관리" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_webcam.png"><input type="button" value="화상회의" onclick="openWebMeeting();" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_searchBook.png"><input type="button" value="도서검색" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="" class="navBtn"></li>
 
         </ul>
         </div>
