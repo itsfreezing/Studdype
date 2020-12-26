@@ -30,4 +30,13 @@ public class HomeController {
 		return "comunitycommon/studyhome";
 	}
 	
+	@RequestMapping("/signup.do")
+	public String signup() {
+		return "loginpage/signup";
+	}
+	
+	@RequestMapping("/login.do")
+	public String login() {
+		return "loginpage/login";
+	}
 }
