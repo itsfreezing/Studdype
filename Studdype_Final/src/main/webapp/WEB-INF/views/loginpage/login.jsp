@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	<link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <style type="text/css">
-	div{
+	#center{
 		background-color:lightblue;
 		background-image:url('./resources/assets/img/img_study8.png');/*임의 배경 설정 */
 		width:100%;
@@ -25,8 +25,10 @@
 		margin-left:45%;
 		
 	}
-	
-	hr{
+	#line1{
+		margin-top:0.5%;
+	}
+	#line{
 		margin-top:5%;
 	}
 	#title{
@@ -65,17 +67,21 @@
 		font-weight:bold;
 		font-size:20px;
 	}
+	
+	#email{
+		margin-left:40%;
+	}
+	#foot{
+		margin-left:1%;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function signup(){
-	window.open("/signup.jsp");
-}
 
 </script>
 </head>
 <body>
-	<div>
+	<div id="center">
 		<button id="btn">지역별 검색</button>
 		<button>카테고리별 검색</button>
 		<button>홈으로 가기</button>
@@ -90,21 +96,27 @@ function signup(){
 	
 		</header>
 		
-		<hr>
+		<hr id="line">
 	</div>
 	<input type="text" placeholder="아이디를 입력해주세요" id="chk" style="border:2px solid #F5A9F2">
 	<br>
 	<br>
-	<input type="text" placeholder="비밀번호를 입력해주세요" id="chk1" style="border:2px solid #F5A9F2">
-
+	<input type="password" placeholder="비밀번호를 입력해주세요" id="chk1" style="border:2px solid #F5A9F2">
 	<br>
 	<br>
 	<br>
-	<button id="sign" style="border:0 " onclick="location.href='home.jsp'">Sign</button>
+	<button id="sign" style="border:0" onclick="location.href='home.jsp'">Sign</button>
+	<br>
+	<br>
+	<a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
+	|<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
+	|<a href="signup.do" id="">회원가입</a>
+	
 
 
-
-
+		
+	<hr id="line1">
+		<p id="foot">Copyright © StuDdype Inc. All Rights Reserved.</p>
 
 
 

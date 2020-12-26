@@ -39,4 +39,8 @@ public class HomeController {
 	public String login() {
 		return "loginpage/login";
 	}
+	@RequestMapping("/email.do")
+	public String email() {
+		return "loginpage/emailFind";
+	}
 }
