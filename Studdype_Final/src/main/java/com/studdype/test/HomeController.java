@@ -15,17 +15,18 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	//	
-	@RequestMapping("/studdypehome.do")
-	public String studdypeHeader() {
-		return "studdype/studdypeHome";
+	
+	@RequestMapping("/mainpage.do")
+	public String mainPage() {
+		return "studdypemain/mainPage";
 	}
 	
-	@RequestMapping("/studdypeexample.do")
-	public String studdypeExample() {
-		return "studdype/studdypeExample";
+
+	@RequestMapping("/studyhome.do")
+	public String studyHome(HttpSession session) {
+			return "comunitycommon/studyhome";
+		
 	}
-	
 	@RequestMapping("/searchbycategory.do")
 	public String searchByCategory() {
 		return "studdype/searchByCategory";
@@ -34,11 +35,12 @@ public class HomeController {
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
+
 		///////////////////////
 		session.setAttribute("studyid", 1);
 		session.setAttribute("memberid", 3);
 		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
-		return "community/communityHome";
+		return "comunitycommon/studyhome";
 	}
 	
 	@RequestMapping("/notice.do")
