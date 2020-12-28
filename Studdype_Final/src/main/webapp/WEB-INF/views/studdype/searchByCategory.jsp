@@ -41,7 +41,7 @@
         	<img src="./resources/assets/img/profile_user.png">
         </div>
         <div id="photo-zone">
-        	스터띱 예시 페이지
+        	카테고리별 검색 페이지
         </div>
         <div id="photo-zone">
         	여기에 사진 넣어도 되고

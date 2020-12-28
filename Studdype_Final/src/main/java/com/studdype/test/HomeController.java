@@ -26,6 +26,11 @@ public class HomeController {
 		return "studdype/studdypeExample";
 	}
 	
+	@RequestMapping("/searchbycategory.do")
+	public String searchByCategory() {
+		return "studdype/searchByCategory";
+	}
+	
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
@@ -34,6 +39,11 @@ public class HomeController {
 		session.setAttribute("memberid", 3);
 		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
 		return "community/communityHome";
+	}
+	
+	@RequestMapping("/notice.do")
+	public String notice() {
+		return "community/notice";
 	}
 	
 }
