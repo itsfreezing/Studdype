@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComunityHome</title>
+    <title>Notice Page</title>
 
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -17,8 +17,9 @@
 	<link rel="stylesheet" href="./resources/assets/css/normalize.css">
 	<link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-    <link rel="stylesheet" href="./resources/css/leftnavi/leftnavi.css">
-    <link rel="stylesheet" href="./resources/css/mainsection/mainsetion.css">
+    <link rel="stylesheet" href="./resources/css/community/header&footer.css">
+    <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
+    <link rel="stylesheet" href="./resources/css/community/mainsection.css">
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
     <script src="./resources/assets/js/popper.min.js"></script>
     <script src="./resources/assets/js/bootstrap.min.js"></script>
@@ -28,13 +29,12 @@
 
 </head>
 <body>
-	<jsp:include page="./studyheader.jsp"></jsp:include>
-	<jsp:include page="./studyleftnavi.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
+	<jsp:include page="../comunitycommon/studyleftnavi.jsp"></jsp:include>
 	
-	 
+	
      <!--main conternt 섹션-->
      <div class="main-section">
-        메인섹션 내용~~~~
         <div id="photo-zone">
         	<img src="./resources/assets/img/img_study7.png">
         </div>
@@ -42,7 +42,7 @@
         	<img src="./resources/assets/img/profile_user.png">
         </div>
         <div id="photo-zone">
-        	스터띱 예시 페이지
+        	공지사항이야
         </div>
         <div id="photo-zone">
         	여기에 사진 넣어도 되고
@@ -65,5 +65,7 @@
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
+    
+    <jsp:include page="../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

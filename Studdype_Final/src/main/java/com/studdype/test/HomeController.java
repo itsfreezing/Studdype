@@ -21,8 +21,21 @@ public class HomeController {
 		return "studdypemain/mainPage";
 	}
 	
+
 	@RequestMapping("/studyhome.do")
 	public String studyHome(HttpSession session) {
+		return "comunitycommon/studyhome";
+	}
+
+	@RequestMapping("/searchbycategory.do")
+	public String searchByCategory() {
+		return "studdype/searchByCategory";
+	}
+	
+	
+	@RequestMapping("/communityhome.do")
+	public String communityHome(HttpSession session) {
+
 		///////////////////////
 		session.setAttribute("studyid", 1);
 		session.setAttribute("memberid", 3);
@@ -35,6 +48,7 @@ public class HomeController {
 		return "loginpage/signup";
 	}
 	
+
 	@RequestMapping("/login.do")
 	public String login() {
 		return "loginpage/login";
@@ -43,4 +57,10 @@ public class HomeController {
 	public String email() {
 		return "loginpage/emailFind";
 	}
+
+	@RequestMapping("/notice.do")
+	public String notice() {
+		return "community/notice";
+	}
+
 }
