@@ -33,14 +33,24 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		<!-- 트랜잭션 처리용 라이브러리 -->		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
