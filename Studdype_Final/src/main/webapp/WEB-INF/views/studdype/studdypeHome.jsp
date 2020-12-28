@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-	 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComunityHome</title>
+<html lang="en">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>main page</title>
+	
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
@@ -20,13 +20,8 @@
     <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
     <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-    <script src="./resources/assets/js/popper.min.js"></script>
-    <script src="./resources/assets/js/bootstrap.min.js"></script>
-    <script src="./resources/assets/js/owl.carousel.min.js"></script>
-    <script src="./resources/assets/js/modal-video.js"></script>
-    <script src="./resources/assets/js/main.js"></script>
-    
-    <script type="text/javascript">
+
+	<script type="text/javascript">
 		$(document).ready(function(){
 		    var owl = $('.owl-carousel');
 		    
@@ -49,8 +44,27 @@
 		});
 	</script>
 	
+	<style type="text/css">
+		input#search{
+			height: 55px;
+			margin-top: 15px;
+			border-top: none;
+			border-right: none;
+			border-left: none;
+			border-bottom: 1px solid;
+			background-color: F9FAFC;
+			background-color: transparent;
+		}
+		
+		input#search:focus{
+			border-bottom: 3px solid #6610F2;
+		}
+	</style>
+	
 </head>
+
 <body>
+
 	<!-- 헤더 시작 -->
 	<div class="articles header-area">
 		<div class="container">
@@ -58,7 +72,7 @@
 				<nav class="navbar navbar-expand-lg navbar-light fixed-top">
 				
 					<!-- 헤더 좌측 로고 -->
-					<a class="navbar-brand" href="mainPage.jsp"><img src="../img/logo_purple.png" alt="" class="logo2"></a>
+					<a class="navbar-brand" href="studdypehome.do"><img src="./resources/assets/img/logo_purple.png" alt="" class="logo2"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				    	<span class="navbar-toggler-icon"></span>
 				  	</button>
@@ -67,22 +81,22 @@
 					<div class="mainmenu">
 						<ul class="navbar-nav ml-auto">
 							<li class="active nav-item">
-							<a class="nav-link" href="mainPage.jsp">Home</a>
+							<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="createStudyPage.jsp">Create Study</a>
+								<a class="nav-link" href="studdypeexample.do">스터디 생성</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="searchByCategoryPage.jsp">Search by Category</a>
+								<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="searchByLocalPage.jsp">Search by Local</a>
+								<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="loginPage.jsp">Log In</a>
+								<a class="nav-link" href="loginPage.jsp">로그인</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="membershipPage.jsp">Membership</a>
+								<a class="nav-link" href="membershipPage.jsp">회원가입</a>
 							</li>
 							<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 							<li class="nav-item"></li>
@@ -100,16 +114,16 @@
 	<!-- 속성 검색 시 owl-carousel로 검색하면 찾기 쉬움! -->
 	<div class="owl-carousel hero-slider-area" id="mainBanner" style=" box-shadow: 5px 5px 5px;">
 		<div class="hero-slider-info">
-			<img src="../img/banner_mainPage1.png">
+			<img src="./resources/assets/img/banner_mainPage1.png">
 		</div>
 		<div class="hero-slider-info">
-			<img src="../img/banner_mainPage2.png">
+			<img src="./resources/assets/img/banner_mainPage2.png">
 		</div>
 		<div class="hero-slider-info">
-			<img src="../img/banner_mainPage3.png">
+			<img src="./resources/assets/img/banner_mainPage3.png">
 		</div>
 		<div class="hero-slider-info">
-			<img src="../img/banner_mainPage4.png">
+			<img src="./resources/assets/img/banner_mainPage4.png">
 		</div>
 	</div>
 	<!-- 슬라이더 끝 -->
@@ -119,9 +133,9 @@
 		<!-- 검색창 -->
 		<form action="/.do" method="get">
 			<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 100px;">
-				<span><img src="../img/logo_purple.png" class="logo"></span>
+				<span><img src="./resources/assets/img/logo_purple.png" class="logo"></span>
 				<input type="text" class="form-control" id="search" placeholder="원하는 스터디나 카테고리를 검색하세요.">
-				<span><button type="submit" id="search"><img src="../img/icon_search_white.png" style="width:20px;"></button></span>
+				<span><button type="submit" id="search"><img src="./resources/assets/img/icon_search_white.png" style="width:20px;"></button></span>
 			</div>
 		</form>
 		
@@ -134,18 +148,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study1.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study1.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -154,18 +168,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study2.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study2.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -174,18 +188,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study3.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study3.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -194,18 +208,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study4.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study4.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -214,18 +228,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study5.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study5.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -234,18 +248,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study6.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study6.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -254,18 +268,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study7.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study7.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -274,18 +288,18 @@
 					<div class="single-blog-post">
 						<div class="blog-img">
 							<!-- 스터디 이미지 -->
-							<img  src="../img/img_study8.png" alt="" class="img-fluid">
+							<img  src="./resources/assets/img/img_study8.png" alt="" class="img-fluid">
 						</div>
 						<!-- 제목/장소아이콘/장소/카테고리 -->
 						<div class="blog-meta">
 							<a><h3>title</h3></a><br>
-							<span><img src="../img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
 						</div>
 
 						<p>#hashTag??</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="../img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
+							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
 						</div>
 					</div>
 				</div>
@@ -319,9 +333,16 @@
 		<!--End of container-->
 	</div>
 	<!--End of control area-->
-    
-</body>
 
-    <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	
+	<script src="./resources/assets/js/popper.min.js"></script>
+    <script src="./resources/assets/js/bootstrap.min.js"></script>
+    <script src="./resources/assets/js/owl.carousel.min.js"></script>
+    <script src="./resources/assets/js/modal-video.js"></script>
+    <script src="./resources/assets/js/loadmore.js"></script>
+    <script src="./resources/assets/js/prefixfree.min.js"></script>
+    <script src="./resources/assets/js/main.js"></script>
+</body>
 
 </html>
