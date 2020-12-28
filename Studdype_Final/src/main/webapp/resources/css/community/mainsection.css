@@ -1,3 +1,4 @@
+/*
 .main-section {
   float: right;
   display: inline-block;
@@ -7,4 +8,25 @@
 
   border: 1px solid rgb(115, 98, 222);
   border-radius: 10px;
+}
+*/
+
+.main-section {
+  display: block;
+  float: right;
+  width: 80%;
+  margin: 3%;
+  border: 1px solid rgb(115, 98, 222);
+  border-radius: 10px;
+}
+
+#photo-zone{
+	display: block;
+	position: relative;
+	top: 10px;
+	right: -300px;
+	width: 300px;
+	border: 3px solid rgb(115, 98, 222);
+ 	border-radius: 10px;
+ 	clear: both;
 }

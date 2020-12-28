@@ -24,34 +24,39 @@
 	text-align: right;
 }
 
-.footer-menu li {
+.footernavi-item {
 	display: inline-block;
 }
 
-.footer-menu li a {
-	display: block;
+.footernavi-item .footerBtn {
 	padding: 12px 22px;
+	display: block;
+	transition: all 0.3s;
+	background-color: #fff;	
+	border: 0;
 	font-size: 16px;
 	font-weight: 500;
-	color: #6a6a77;
-	transition: 0.3s
+	cursor: pointer;
 }
 
-.footer-menu li a:hover {
-	color: #756edc
+.footernavi-item:hover .footerBtn {
+	border-radius: 30px;
+	background-color: rgb(115, 98, 222);
+	color: white;
+	font-weight: bold;
 }
-
+/*
 .footer-menu li.active a {
 	color: #756edc
-}
+}*/
 
-.footer-menu span a {
+.footer-menu span a:hover {
 	display: inline-block;
 	background: #6e45e2;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: 600;
-	font-size: 12px;
+	font-size: 16px;
 	padding: 18px 35px 16px;
 	border-radius: 50px;
 }
