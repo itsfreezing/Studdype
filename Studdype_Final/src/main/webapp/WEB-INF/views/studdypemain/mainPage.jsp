@@ -8,10 +8,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>main page</title>
-<<<<<<< HEAD:Studdype_Final/src/main/webapp/WEB-INF/views/studdypemain/mainPage.jsp
-=======
-	
->>>>>>> db461ba248491969843f1443a3db2c115e644ec9:Studdype_Final/src/main/webapp/WEB-INF/views/studdype/studdypeHome.jsp
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
@@ -19,17 +15,13 @@
 	<link rel="stylesheet" href="./resources/assets/css/animate.css">
 	<link rel="stylesheet" href="./resources/assets/css/normalize.css">
 	<link rel="stylesheet" href="./resources/css/style.css">
-<<<<<<< HEAD:Studdype_Final/src/main/webapp/WEB-INF/views/studdypemain/mainPage.jsp
-	<link rel="stylesheet" href="./resources/assets/css/responsive.css">
+<link rel="stylesheet" href="./resources/assets/css/responsive.css">
 
 	<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-=======
-    <link rel="stylesheet" href="./resources/assets/css/responsive.css">
+	<link rel="stylesheet" href="./resources/assets/css/responsive.css">
     <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
     <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
->>>>>>> db461ba248491969843f1443a3db2c115e644ec9:Studdype_Final/src/main/webapp/WEB-INF/views/studdype/studdypeHome.jsp
-
 	<script type="text/javascript">
 		$(document).ready(function(){
 		    var owl = $('.owl-carousel');
@@ -52,10 +44,6 @@
 		    })
 		});
 	</script>
-	
-<<<<<<< HEAD:Studdype_Final/src/main/webapp/WEB-INF/views/studdypemain/mainPage.jsp
-	
-=======
 	<style type="text/css">
 		input#search{
 			height: 55px;
@@ -72,8 +60,7 @@
 			border-bottom: 3px solid #6610F2;
 		}
 	</style>
->>>>>>> db461ba248491969843f1443a3db2c115e644ec9:Studdype_Final/src/main/webapp/WEB-INF/views/studdype/studdypeHome.jsp
-	
+
 </head>
 
 <body>
@@ -85,11 +72,9 @@
 				<nav class="navbar navbar-expand-lg navbar-light fixed-top">
 				
 					<!-- 헤더 좌측 로고 -->
-<<<<<<< HEAD:Studdype_Final/src/main/webapp/WEB-INF/views/studdypemain/mainPage.jsp
 					<a class="navbar-brand" href="mainPage.jsp"><img src="./resources/assets/img/logo_purple.png" alt="" class="logo2"></a>
-=======
+
 					<a class="navbar-brand" href="studdypehome.do"><img src="./resources/assets/img/logo_purple.png" alt="" class="logo2"></a>
->>>>>>> db461ba248491969843f1443a3db2c115e644ec9:Studdype_Final/src/main/webapp/WEB-INF/views/studdype/studdypeHome.jsp
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				    	<span class="navbar-toggler-icon"></span>
 				  	</button>
@@ -110,10 +95,10 @@
 								<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="loginPage.jsp">로그인</a>
+								<a class="nav-link" href="loginPage.do">로그인</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="membershipPage.jsp">회원가입</a>
+								<a class="nav-link" href="membershipPage.do">회원가입</a>
 							</li>
 							<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 							<li class="nav-item"></li>
@@ -351,7 +336,6 @@
 	</div>
 	<!--End of control area-->
 
-<<<<<<< HEAD:Studdype_Final/src/main/webapp/WEB-INF/views/studdypemain/mainPage.jsp
 	<!-- footer 영역 -->
 	<div class="footer-menu">
 		<div class="footer-bottom">
@@ -411,7 +395,7 @@
 	<script src="./resources/assets/js/loadmore.js"></script>
 	<script src="./resources/assets/js/prefixfree.min.js"></script>
 	<script src="./resources/assets/js/main.js"></script>
-=======
+
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 	
 	<script src="./resources/assets/js/popper.min.js"></script>
@@ -421,7 +405,6 @@
     <script src="./resources/assets/js/loadmore.js"></script>
     <script src="./resources/assets/js/prefixfree.min.js"></script>
     <script src="./resources/assets/js/main.js"></script>
->>>>>>> db461ba248491969843f1443a3db2c115e644ec9:Studdype_Final/src/main/webapp/WEB-INF/views/studdype/studdypeHome.jsp
 </body>
 
 </html>

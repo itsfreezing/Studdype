@@ -43,14 +43,14 @@ public class HomeController {
 		return "comunitycommon/studyhome";
 	}
 	
-	@RequestMapping("/signup.do")
-	public String signup() {
-		return "loginpage/signup";
+	@RequestMapping("/membershipPage.do")
+	public String membershipPage() {
+		return "loginpage/MemberShip";
 	}
 	
 
-	@RequestMapping("/login.do")
-	public String login() {
+	@RequestMapping("/loginPage.do")
+	public String loginpage() {
 		return "loginpage/login";
 	}
 	@RequestMapping("/email.do")
