@@ -20,7 +20,11 @@ public class HomeController {
 	public String mainPage() {
 		return "studdypemain/mainPage";
 	}
-	
+
+	@RequestMapping("/login.do")
+	public String login() {
+		return "loginpage/login";
+	}
 
 	@RequestMapping("/studyhome.do")
 	public String studyHome(HttpSession session) {
