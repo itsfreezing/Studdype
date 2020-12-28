@@ -26,7 +26,7 @@
 		
 	}
 	#line1{
-		margin-top:0.5%;
+		margin-top:7%;
 	}
 	#line{
 		margin-top:5%;
@@ -37,8 +37,14 @@
 		color:white;
 	}
 	#btn{	
-	
-		margin-left:65%;
+		margin-top:15%;
+		margin-left:280%;
+		width:280px;
+		height:50px;
+		background-color:lightblue;
+	}
+	#btn1{	
+		margin-left:70%;
 	}
 	#img{
 		height:50px;
@@ -46,20 +52,22 @@
 		border-radius:60%;
 		margin-left:5%;
 	}
-	#chk{
-		margin-left:43%;
-		margin-top:10%;
+	#memberid{
+		margin-left:280%;
+		margin-top:40%;
 		width:280px;
 		height:50px;
 	}
-	#chk1{
-		margin-left:43%;
+	#memberpw{
+		margin-left:280%;
+		margin-top:15%;
 		width:280px;
 		height:50px;
 		
 	}
 	#sign{
-		margin-left:43%;
+		margin-left:280%;
+		margin-top:15%;
 		width:280px;
 		height:50px;
 		background-color:purple;
@@ -77,12 +85,52 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+$(function() {
+    $("#loginChk").hide();
+ });
+	
+function sign() {
+    var memberid = $("#memberid").val().trim();
+    var memberpw = $("#memberpw").val().trim();
+    console.log(memberid + "/" + memberpw);
 
+    var loginVal = {
+       "memberid" : memberid,
+       "memberpw" : memberpw
+    };
+
+    if (memberid == null || memberid == "" || memberpw == null
+          || memberpw == "") {
+       alert("ID 및 PW를 확인해 주세요");
+    } else {
+       $.ajax({
+          type:"POST",
+          url:"ajaxlogin.do",
+          data:JSON.stringify(loginVal),
+          contentType:"application/json",
+          dataType:"json",
+          success:function(msg){
+             
+             if(msg.check == true) {
+                location.href="mainpage.do";
+             } else {
+          	   alert("잘못");
+                $("#loginchk").show();
+                $("#loginchk").html("ID 혹은 PW가 잘못되었습니다.");
+             }
+          },
+          error:function(){
+             alert("통신 실패");
+          }
+       });
+    }
+ }
 </script>
 </head>
 <body>
+
 	<div id="center">
-		<button id="btn">지역별 검색</button>
+		<button id="btn1">지역별 검색</button>
 		<button>카테고리별 검색</button>
 		<button>홈으로 가기</button>
 		<button>스터디 생성</button>
@@ -98,19 +146,41 @@
 		
 		<hr id="line">
 	</div>
-	<input type="text" placeholder="아이디를 입력해주세요" id="chk" style="border:2px solid #F5A9F2">
+	
+	 <table>
+		<tr>
+			<td>
+				<input type="text" id="memberid" placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="password" id="memberpw" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="Sign" id="sign" onclick="sign()">
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" align="center" id="loginchk">
+			</td>
+		</tr>
+	
+	
+	
+	</table>
+	
+	 
+	 
+	 
 	<br>
 	<br>
-	<input type="password" placeholder="비밀번호를 입력해주세요" id="chk1" style="border:2px solid #F5A9F2">
-	<br>
-	<br>
-	<br>
-	<button id="sign" style="border:0" onclick="location.href='home.jsp'">Sign</button>
-	<br>
-	<br>
-	<a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
-	|<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
-	|<a href="membershipPage.do" id="">회원가입</a>
+	 <a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
+	|     <a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
+	|         <a href="membershipPage.do" id="">회원가입</a>
 	
 
 

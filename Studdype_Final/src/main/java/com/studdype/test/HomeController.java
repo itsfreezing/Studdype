@@ -49,9 +49,9 @@ public class HomeController {
 	}
 	
 
-	@RequestMapping("/loginPage.do")
+	@RequestMapping("/login.do")
 	public String loginpage() {
-		return "loginpage/login";
+		return "loginpage/logintest";
 	}
 	@RequestMapping("/email.do")
 	public String email() {
