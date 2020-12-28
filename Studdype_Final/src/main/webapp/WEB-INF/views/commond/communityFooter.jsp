@@ -20,12 +20,9 @@
 						<!-- footer 네비-->
 						<div class="footer-menu">
 							<ul>
-								<span><a href="mainPage.jsp">home</a></span>
-								<li><a href="createStudyPage.jsp">Create Study</a></li>
-								<li><a href="searchByCategoryPage.jsp">Search by Category</a></li>
-								<li><a href="searchByLocalPage.jsp">Search by Local</a></li>
-								<li><a href="loginPage.jsp">Log In</a></li>
-								<li><a href="membershipPage.jsp">Membership</a></li>
+								<li class="footernavi-item"><input type="button" value="스터띱 홈" onclick="" class="footerBtn"></li>
+								<li class="footernavi-item"><input type="button" value="로그아웃" onclick="" class="footerBtn"></li>
+								<li class="footernavi-item"><input type="button" value="마이페이지" onclick="" class="footerBtn"></li>
 							</ul>
 						</div>
 						
