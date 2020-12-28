@@ -19,6 +19,11 @@
 
 	<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
+    <link rel="stylesheet" href="./resources/assets/css/responsive.css">
+    <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+    <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+    <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 		    var owl = $('.owl-carousel');
@@ -41,9 +46,23 @@
 		    })
 		});
 	</script>
-	
-	
-	
+	<style type="text/css">
+		input#search{
+			height: 55px;
+			margin-top: 15px;
+			border-top: none;
+			border-right: none;
+			border-left: none;
+			border-bottom: 1px solid;
+			background-color: F9FAFC;
+			background-color: transparent;
+		}
+		
+		input#search:focus{
+			border-bottom: 3px solid #6610F2;
+		}
+	</style>
+
 </head>
 
 <body>
@@ -56,6 +75,8 @@
 				
 					<!-- 헤더 좌측 로고 -->
 					<a class="navbar-brand" href="mainPage.jsp"><img src="./resources/assets/img/logo_purple.png" alt="" class="logo2"></a>
+
+					<a class="navbar-brand" href="studdypehome.do"><img src="./resources/assets/img/logo_purple.png" alt="" class="logo2"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				    	<span class="navbar-toggler-icon"></span>
 				  	</button>
@@ -64,22 +85,22 @@
 					<div class="mainmenu">
 						<ul class="navbar-nav ml-auto">
 							<li class="active nav-item">
-							<a class="nav-link" href="mainPage.jsp">Home</a>
+							<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="createStudyPage.jsp">Create Study</a>
+								<a class="nav-link" href="studdypeexample.do">스터디 생성</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="searchByCategoryPage.jsp">Search by Category</a>
+								<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="searchByLocalPage.jsp">Search by Local</a>
+								<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="loginPage.jsp">Log In</a>
+								<a class="nav-link" href="loginPage.jsp">로그인</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="membershipPage.jsp">Membership</a>
+								<a class="nav-link" href="membershipPage.jsp">회원가입</a>
 							</li>
 							<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 							<li class="nav-item"></li>
@@ -317,6 +338,7 @@
 	</div>
 	<!--End of control area-->
 
+
 	<!-- footer 영역 -->
 	<div class="footer-menu">
 		<div class="footer-bottom">
@@ -376,6 +398,17 @@
 	<script src="./resources/assets/js/loadmore.js"></script>
 	<script src="./resources/assets/js/prefixfree.min.js"></script>
 	<script src="./resources/assets/js/main.js"></script>
+
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	
+	<script src="./resources/assets/js/popper.min.js"></script>
+    <script src="./resources/assets/js/bootstrap.min.js"></script>
+    <script src="./resources/assets/js/owl.carousel.min.js"></script>
+    <script src="./resources/assets/js/modal-video.js"></script>
+    <script src="./resources/assets/js/loadmore.js"></script>
+    <script src="./resources/assets/js/prefixfree.min.js"></script>
+    <script src="./resources/assets/js/main.js"></script>
+
 </body>
 
 </html>
