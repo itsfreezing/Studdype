@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notice Page</title>
+    <title>Meet Page</title>
 
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -26,7 +26,7 @@
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
-
+	
 </head>
 <body>
 	<jsp:include page="../commond/communityHeader.jsp"></jsp:include>
