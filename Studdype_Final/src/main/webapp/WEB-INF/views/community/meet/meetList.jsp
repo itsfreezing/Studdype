@@ -60,14 +60,6 @@
 	
      <!--main conternt 섹션-->
      <div class="main-section">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
 		<!-- 모임관리 페이지 슬라이더 영역 -->
 		<div class="owl-carousel hero-slider-area" id="mainBanner" style=" box-shadow: 5px 5px 5px;">
@@ -111,7 +103,9 @@
 		<button onclick="location.href='controller.do?command=writeform'">글쓰기</button>
         -->
         
-        <table id="mergeTable">
+        <!-- 모임리스트와 투표리스트 테이블을 각각 구현 -->
+        <!-- table 중첩 되어있음 현재 경로는 테스트용으로 잡아놓은 것임 -->
+        <table id="tableList">
         	<tr>
         		<td>
 			        <div>
@@ -193,17 +187,9 @@
 				</td>
 			</tr>
 		</table>
-		<div id="rightBtn">
-			<button class="submitBtn" onclick="location.href='meetinsertform.do'">모임 등록</button>
+		<div>
+			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
 		</div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
    
     

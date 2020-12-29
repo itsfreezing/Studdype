@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notice Page</title>
+    <title>Meet Detail Page</title>
 
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -36,14 +36,10 @@
 	
      <!--main conternt 섹션-->
      <div class="main-section">
-     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <form action="vote.do" method="post">
+     	
+     	<!-- 모임 상세페이지 -->
+     	<!-- form의 action은 updateform으로 넘어가는 용도 -->
+        <form action="meetupdateform.do" method="post">
 	        <table border="1" id="meetInsertTable">
 	        	<tr>
 	        		<th colspan="2">작성자:&nbsp;홍길동</th>
@@ -65,24 +61,19 @@
 						<textarea rows="30" class="meetInsertInput" readonly>인기만점 홍길동의 2021 스터디 첫 정모 참가인원 모집합니다! 오른쪽 투표함에서 참가/불참가 투표 부탁드리며, 참석 결정 하신 분들은 혹시 못오게 되시면 댓글로 미리 말씀 부탁드립니다!
 						</textarea>
 					</td>
+					
+					<!-- 투표 -->
 					<th colspan="5" id="vote_text" align="center">참가여부<br><br><br>
 						<input type="radio" name="fruit" value="apple">참석<br><br>
       					<input type="radio" name="fruit" value="banana">불참석<br><br> 						
-			        	<button type="submit" class="submitBtn vote">투표하기</button>
+			        	<input type="button" value="투표하기" class="submitBtn vote" onclick="">
 					</th>
 	        </table>
-	        <div id="rightBtn">
-		        <button class="submitBtn">수정</button>&nbsp;&nbsp;
-		        <button class="submitBtn">삭제</button>
+	        <div>
+		        <button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp;
+		        <input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetlist.do'">
 		    </div>
         </form>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
     
     <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>

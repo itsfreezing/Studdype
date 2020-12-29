@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 	 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meet Insert Page</title>
+    <title>Meet Update Page</title>
 
 	<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -144,7 +144,7 @@
      <!--main conternt 섹션-->
      <div class="main-section">
      
-     	<!-- form의 action은 모임생성을 submit 하는 용도 -->
+     	<!-- form의 action은 수정사항을 submit 하는 용도 -->
         <form action="meetinsert.do" method="post">
 	        <table border="1" id="meetInsertTable">
 	        	<tr>
@@ -185,8 +185,9 @@
 				</tr>
 	        </table>
 	        <div>
-        		<button type="submit" class="submitBtn" id="insertBtn_insert">등록하기</button>
-        	</div>
+		        <button class="submitBtn" id="updateBtn_update" type="submit">완료</button>&nbsp;&nbsp;
+		        <input type="button" value="취소" class="submitBtn" id="updateBtn_cancle" onclick="location.href='meetlist.do'">
+		    </div>
         </form>
     </div>
     
