@@ -9,56 +9,9 @@
 
 .footer-menu {
 	position: relative;
-	width: 82%;
+	width: 100%;
 	float: right;
 	z-index: 3;
+	text-align: center;
 }
 
-.footer-bottom {
-	padding: 50px 0;
-	border-bottom: 1px solid #f2f2f3
-}
-
-.footer-menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	text-align: right;
-}
-
-.footernavi-item {
-	display: inline-block;
-}
-
-.footernavi-item .footerBtn {
-	padding: 12px 22px;
-	display: block;
-	transition: all 0.3s;
-	background-color: #fff;	
-	border: 0;
-	font-size: 16px;
-	font-weight: 500;
-	cursor: pointer;
-}
-
-.footernavi-item:hover .footerBtn {
-	border-radius: 30px;
-	background-color: rgb(115, 98, 222);
-	color: white;
-	font-weight: bold;
-}
-/*
-.footer-menu li.active a {
-	color: #756edc
-}*/
-
-.footer-menu span a:hover {
-	display: inline-block;
-	background: #6e45e2;
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: 600;
-	font-size: 16px;
-	padding: 18px 35px 16px;
-	border-radius: 50px;
-}
