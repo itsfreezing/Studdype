@@ -38,7 +38,7 @@
 		    });    
 		    
 		    $('.customNextBtn').click(function() {
-		        owl.trigger('next.owl.carousel');
+		        owl.trigger('next.owl.carousel');mee
 		    })
 		    
 		    $('.customPrevBtn').click(function() {
@@ -61,6 +61,8 @@
 		input#search:focus{
 			border-bottom: 3px solid #6610F2;
 		}
+		
+		
 	</style>
 
 </head>
@@ -91,7 +93,7 @@
 								<a class="nav-link" href="studdypeexample.do">스터디 생성</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
+								<a class="nav-link" href="studdypecategory.do">카테고리별 검색</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
