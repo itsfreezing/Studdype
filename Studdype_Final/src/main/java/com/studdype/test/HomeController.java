@@ -25,12 +25,26 @@ public class HomeController {
 	public String login() {
 		return "loginpage/login";
 	}
-
+	
 	@RequestMapping("/studyhome.do")
 	public String studyHome(HttpSession session) {
 			return "comunitycommon/studyhome";
 		
 	}
+	
+	
+	@RequestMapping("/member/auth.do")
+	public String email(HttpSession session) {
+			return "member/email";
+		
+	}
+	
+	@RequestMapping("/member/email_injeung.do")
+	public String emailchk(HttpSession session) {
+			return "member/email_injeung";
+		
+	}
+	
 	@RequestMapping("/searchbycategory.do")
 	public String searchByCategory() {
 		return "studdype/searchByCategory";

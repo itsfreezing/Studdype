@@ -4,7 +4,7 @@ public interface MemberDao {
 	//회원 
 	String NAMESPACE="mymember.";
 	
-	
+	public boolean email_check(String e_mail) throws Exception;
 	
 	
 	
