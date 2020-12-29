@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 @Controller
-public class NoticeBoardController {
-	private static final Logger logger = LoggerFactory.getLogger(NoticeBoardController.class);
+public class CommentController {
+private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 	
 	
-	@RequestMapping(value = "/NoticeBoard.do",method = RequestMethod.GET)
-	public String NoticeBoard(Locale locale,Model model) {
+	@RequestMapping(value = "/Comment.do",method = RequestMethod.GET)
+	public String Comment(Locale locale,Model model) {
 		logger.info("Welcome Member! The client locale is{}.", locale);
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG,locale);
@@ -24,7 +25,7 @@ public class NoticeBoardController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime",formattedDate);
-		return "NoticeBoard";
+		return "Comment";
 		
 		
 		
@@ -33,6 +34,4 @@ public class NoticeBoardController {
 		
 		
 	}
-	
-	
 }

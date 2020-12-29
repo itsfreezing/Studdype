@@ -20,7 +20,7 @@ public class StudyController {
 
 	
 	@RequestMapping(value = "Study.do", method = RequestMethod.GET)
-	public String board(Locale locale, Model model) {
+	public String Study(Locale locale, Model model) {
 		logger.info("Welcome board! The client locale is{}.",locale);
 		
 		Date date = new Date();

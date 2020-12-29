@@ -28,11 +28,6 @@ public class MemberController {
 		model.addAttribute("serverTime",formattedDate);
 		return "Member";
 		
-		
-		
-		
-		
-		
-		
+	
 	}
 }

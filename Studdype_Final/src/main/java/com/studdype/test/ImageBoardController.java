@@ -17,7 +17,7 @@ private static final Logger logger = LoggerFactory.getLogger(ImageBoardControlle
 	
 	
 	@RequestMapping(value = "/ImageBoard.do",method = RequestMethod.GET)
-	public String NoticeBoard(Locale locale,Model model) {
+	public String Image(Locale locale,Model model) {
 		logger.info("Welcome Member! The client locale is{}.", locale);
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG,locale);
