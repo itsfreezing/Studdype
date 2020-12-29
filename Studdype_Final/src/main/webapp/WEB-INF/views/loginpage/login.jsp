@@ -108,7 +108,7 @@
 	<button id="sign" style="border:0" onclick="location.href='home.jsp'">Sign</button>
 	<br>
 	<br>
-	<a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
+	<a href="member/auth.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
 	|<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
 	|<a href="signup.do" id="">회원가입</a>
 	

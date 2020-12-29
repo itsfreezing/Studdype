@@ -25,13 +25,31 @@ public class HomeController {
 	public String login() {
 		return "loginpage/login";
 	}
-
+	
 	@RequestMapping("/studyhome.do")
 	public String studyHome(HttpSession session) {
 			return "comunitycommon/studyhome";
 		
 	}
+<<<<<<< HEAD
 	@RequestMapping("/studdypecategory.do")
+=======
+	
+	
+	@RequestMapping("/member/auth.do")
+	public String email(HttpSession session) {
+			return "member/email";
+		
+	}
+	
+	@RequestMapping("/member/email_injeung.do")
+	public String emailchk(HttpSession session) {
+			return "member/email_injeung";
+		
+	}
+	
+	@RequestMapping("/searchbycategory.do")
+>>>>>>> d32abc34fe773c36bcf27050c11341ccfb23101a
 	public String searchByCategory() {
 		return "category/studdypeCategory";
 	}
@@ -45,11 +63,18 @@ public class HomeController {
 		session.setAttribute("memberid", 3);
 		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return "comunitycommon/studyhome";
 =======
 		session.setAttribute("leftnavi", "studyhome");
 		return "community/communityHome";
 >>>>>>> 0c0eb1df5e2ab831ae2e3ed9b3f6abc1875ad4e4
+=======
+
+		session.setAttribute("leftnavi", "studyhome");
+		return "community/communityHome";
+
+>>>>>>> d32abc34fe773c36bcf27050c11341ccfb23101a
 	}
 	
 	@RequestMapping("/notice.do")

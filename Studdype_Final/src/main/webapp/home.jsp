@@ -8,6 +8,7 @@
 
 <a href="mainpage.do">스터띱 홈</a>
 <a href="studyhome.do">커뮤니티 홈</a>
-<a href="loginpage.do">로그인</a>
+<a href="login.do">로그인</a>
+<a href="mail.do">이메일 </a>
 </body>
 </html>
