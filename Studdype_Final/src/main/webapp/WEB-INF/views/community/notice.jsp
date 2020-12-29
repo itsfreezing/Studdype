@@ -29,8 +29,8 @@
 	
 </head>
 <body>
-	<jsp:include page="../commond/communityHeader.jsp"></jsp:include>
-	<jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
+<!--  	<jsp:include page="../commond/communityHeader.jsp"></jsp:include>
+	<jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>-->
 	
 	
      <!--main conternt 섹션-->
