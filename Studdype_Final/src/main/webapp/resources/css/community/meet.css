@@ -1,0 +1,172 @@
+/* table 속성 */
+#meetInsertTable{
+	text-align: center;
+	border: 1px solid #e3ddfd;
+	width: 1000px;
+	height: 800px;
+}
+
+/* 입력란 꽉 채우기 & textarea에 크기조절 바 없애기 */
+.meetInsertInput{
+	width: 100%;
+	border: 0;
+	resize: none;
+	wrap: hard;
+}
+
+/* 입력란 선택 시 border에 focus */
+.meetInsertInput:focus{
+	border: 1px solid #6610F2;
+	height: 100%;
+}
+
+/* 주소 입력란에 버튼 추가를 위해 width 값 조정 */
+.meetInsertAddr{
+	width: 80%;
+	border: 0;
+}
+
+/* select option 선택 시 border에 focus */
+#meetInsertTable select:focus{
+	border: 1px solid #6610F2;
+}
+
+/* 흰색 버튼 css(submit) */
+button.submitBtn{
+	background: #fff;
+	color: #c2c9db;
+	border: 1px solid #d7dbe8;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin-top: 40px;
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	line-height: 52px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+button.submitBtn:hover{
+	background: #7362DE;
+	color: #fff;
+}
+
+/* 흰색 버튼 크기 조절(search) */
+input.searchBtn{
+	background: #fff;
+	color: #c2c9db;
+	border: 1px solid #d7dbe8;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 130px;
+	height: 30px;
+	padding: 5px;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+input.searchBtn:hover{
+	background: #7362DE;
+	color: #fff;
+}
+
+/* 버튼 오른쪽으로 정렬하기 */
+div#rightBtn{
+	float: right;
+	clear: both;
+	margin-right: 20px;
+}
+
+/* meetList의 table css */
+#meetList{
+	border: 0;
+	border-radius: 3em;
+	box-shadow: 8px 8px 8px gray;
+	cursor: pointer;
+	width: 100%;
+	margin: 50px;
+}
+
+#date{
+	padding: 15px 25px;
+	text-align: left;
+	color: #7f7f81;
+}
+
+#writer{
+	padding: 15px 25px;
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: #686869;
+}
+
+#location{
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+#recruitment{
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+#location img{
+	width: 20px;
+	height: 20px;
+}
+
+
+#title{
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+/* 모임관리 페이지의 슬라이더 box-shadow 제거하기 */
+div.owl-carousel{
+	box-shadow: none!important;
+}
+
+/* 투표 */
+#vote_text{
+	font-size: 30px;
+}
+
+/* voteList의 table css */
+#voteList{
+	border: 0;
+	border-radius: 3em;
+	box-shadow: 8px 8px 8px gray;
+	cursor: pointer;
+	width: 90%;
+	margin: 50px;
+	height: 190px;
+}
+
+#attend_y{
+	padding: 15px 25px;
+	text-align: right;
+}
+
+#attend_n{
+	padding: 15px 25px;
+	text-align: right;
+}
+
+#member_count{
+	padding: 15px 25px;
+	text-align: right;
+}
+
+
