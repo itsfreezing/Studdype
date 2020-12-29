@@ -27,9 +27,9 @@ public class HomeController {
 			return "comunitycommon/studyhome";
 		
 	}
-	@RequestMapping("/searchbycategory.do")
+	@RequestMapping("/studdypecategory.do")
 	public String searchByCategory() {
-		return "studdype/searchByCategory";
+		return "category/studdypeCategory";
 	}
 	
 	
