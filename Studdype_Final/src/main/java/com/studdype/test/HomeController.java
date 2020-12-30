@@ -48,4 +48,13 @@ public class HomeController {
 		return "community/notice";
 	}
 	
+	@RequestMapping("/loginform.do")
+	public String Login(HttpSession session) {
+		return "loginpage/login";
+	}
+	
+	@RequestMapping("/signupform.do")
+	public String Signup(HttpSession session) {
+		return "loginpage/signup";
+	}
 }
