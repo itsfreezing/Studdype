@@ -37,6 +37,7 @@
     		window.open("https://172.30.1.38:9001/webmeeting.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
     		
     		//172.30.1.38  -> localhost
+    		//우선 테스트를 위해 아이피주소로 변경해놈
     	};
     </script>
 </head>
