@@ -93,7 +93,7 @@
 								<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="loginPage.jsp">로그인</a>
+								<a class="nav-link" href="login.jsp">로그인</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="membershipPage.jsp">회원가입</a>

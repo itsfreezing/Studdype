@@ -46,4 +46,9 @@ public class HomeController {
 		return "community/notice";
 	}
 	
+	@RequestMapping("/login.do")
+	public String login() {
+		return "loginpage/login";
+	}
+	
 }
