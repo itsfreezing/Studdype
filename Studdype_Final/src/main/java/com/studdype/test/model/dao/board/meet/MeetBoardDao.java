@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-package com.studdype.test.model.dao.board.meet;
 
-public interface MeetBoardDao {
-	
-	//모임 게시판 게시글 
-	String NAMESPACE="meetboard.";
-	
-}
-=======
 /*
  * package com.studdype.test.model.dao.board.meet;
  * 
@@ -26,4 +17,4 @@ public interface MeetBoardDao {
  * 
  * }
  */
->>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
+
