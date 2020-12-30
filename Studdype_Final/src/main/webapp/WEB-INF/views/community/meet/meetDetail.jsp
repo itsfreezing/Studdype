@@ -27,13 +27,7 @@
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 
-=======
->>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
-    
     <!-- kakao map API -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04bc0d5da72e456d3406d52a61067ecd"></script>
 	
