@@ -21,8 +21,10 @@ public class LocationDao {
 			
 			for(int i = 0; i < dtos.size(); i++) {
 				SiDto dto = dtos.get(i);
-				
+
 				//pstm.setInt(1, dto.getSi_no());
+
+				
 				pstm.setString(1, dto.getSi_name());
 				
 				pstm.addBatch();
@@ -58,7 +60,7 @@ public class LocationDao {
 		PreparedStatement pstm = null;
 		int res = 0;
 		
-		String sql = " INSERT INTO LOCATION_GU VALUES(?,?,?) ";
+		String sql = " INSERT INTO LOCATION_GU VALUES(GUSEQ.NEXTVAL,?,?) ";
 		
 		try {
 			pstm = con.prepareStatement(sql);
@@ -68,9 +70,9 @@ public class LocationDao {
 			for(int i = 0; i < dtos.size(); i++) {
 				GuDto dto = dtos.get(i);
 				
-				pstm.setInt(1, dto.getGu_no());
-				pstm.setInt(2, dto.getSi_no());
-				pstm.setString(3, dto.getGu_name());
+				
+				pstm.setInt(1, dto.getSi_no());
+				pstm.setString(2, dto.getGu_name());
 				
 				pstm.addBatch();
 				cnt++;
