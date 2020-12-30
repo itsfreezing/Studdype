@@ -24,11 +24,9 @@
 	height: 100%;
 }
 
-
 .meetInsertAddr:focus{
 	border: 1px solid #6610F2;
 }
-
 
 /* 주소 입력란에 버튼 추가를 위해 width 값 조정 */
 .meetInsertAddr{
