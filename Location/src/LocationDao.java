@@ -21,7 +21,9 @@ public class LocationDao {
 			
 			for(int i = 0; i < dtos.size(); i++) {
 				SiDto dto = dtos.get(i);
-				
+
+				//pstm.setInt(1, dto.getSi_no());
+
 				
 				pstm.setString(1, dto.getSi_name());
 				
