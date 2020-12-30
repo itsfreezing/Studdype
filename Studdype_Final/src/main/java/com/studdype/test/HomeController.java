@@ -31,6 +31,11 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
+	@RequestMapping("/createStuddype.do")
+	public String createStuddype() {
+		return "studdype/createStuddype";
+	}
+	
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
