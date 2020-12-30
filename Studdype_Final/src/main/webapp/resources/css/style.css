@@ -1133,6 +1133,9 @@ a.scroll-down:hover {
 	opacity: 0.3;
 	transition: 0.5s;
 	display: none;
+	background-image: url(../assets/img/up.png);
+	background-size : 100%
+	
 }
 
 .back-to-top:hover {

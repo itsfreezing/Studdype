@@ -38,11 +38,13 @@ public class HomeController {
 		session.setAttribute("studyid", 1);
 		session.setAttribute("memberid", 3);
 		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
+		session.setAttribute("leftnavi", "studyhome");
 		return "community/communityHome";
 	}
 	
 	@RequestMapping("/notice.do")
-	public String notice() {
+	public String notice(HttpSession session) {
+		session.setAttribute("leftnavi", "notice");
 		return "community/notice";
 	}
 	

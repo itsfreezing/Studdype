@@ -35,7 +35,7 @@
 		    });    
 		    
 		    $('.customNextBtn').click(function() {
-		        owl.trigger('next.owl.carousel');
+		        owl.trigger('next.owl.carousel');mee
 		    })
 		    
 		    $('.customPrevBtn').click(function() {
