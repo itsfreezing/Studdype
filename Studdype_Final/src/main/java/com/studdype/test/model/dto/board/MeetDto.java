@@ -17,7 +17,6 @@ public class MeetDto {
 
 	public MeetDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public MeetDto(int meet_no, int s_no, String meet_title, int meet_writer, String meet_content,
