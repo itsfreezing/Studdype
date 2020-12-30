@@ -1,8 +1,11 @@
 ------------------계정 생성 및 권한 부여 --------------------------
---------------------------------------------------------
+-------------------------------------------------------------
 CREATE USER STUDDYPE IDENTIFIED BY STUDDYPE;
 GRANT CONNECT, RESOURCE TO STUDDYPE;
------------------- DROP  --------------------------
+-------------------------------------------------------------
+
+------------------ DROP SEQUENCE ----------------------------
+-------------------------------------------------------------
 DROP SEQUENCE MEMBERSEQ;
 DROP SEQUENCE SISEQ;
 DROP SEQUENCE GUSEQ;
@@ -25,8 +28,12 @@ DROP SEQUENCE DATAFILESEQ;
 DROP SEQUENCE MEETBOARDSEQ;
 DROP SEQUENCE MEETREPLYSEQ;
 
+-------------------------------------------------------------
 SELECT * FROM ALL_TABLES WHERE OWNER = 'STUDDYPE'; --전체 테이블 확인
+-------------------------------------------------------------
 
+------------------ DROP TABLE -------------------------------
+-------------------------------------------------------------
 DROP TABLE MEMBER;
 DROP TABLE LOCATION_SI;
 DROP TABLE LOCATION_GU;
@@ -52,10 +59,10 @@ DROP TABLE DATA_FILE;
 DROP TABLE MEET_BOARD;
 DROP TABLE MEET_VOTE;
 DROP TABLE MEET_REPLY;
---------------------------------------------------------
+-------------------------------------------------------------
 
------------------- NO 시퀀스 --------------------------
---------------------------------------------------------
+------------------ SEQUENCE_NOCACHE -------------------------
+-------------------------------------------------------------
 CREATE SEQUENCE MEMBERSEQ NOCACHE;  --회원 시퀀스
 
 CREATE SEQUENCE SISEQ NOCACHE;  --지역(시) 시퀀스
@@ -86,10 +93,11 @@ CREATE SEQUENCE DATAFILESEQ NOCACHE;  --자료실 게시판 게시그 사진
 
 CREATE SEQUENCE MEETBOARDSEQ NOCACHE;  --모임게시판게시글
 CREATE SEQUENCE MEETREPLYSEQ NOCACHE;  --모임게시판 댓글
+-------------------------------------------------------------
 
-
+------------------ DROP CONSTRAINTS -------------------------
+-------------------------------------------------------------
 DROP TABLE LOCATION_SI CASCADE CONSTRAINTS;
-
 DROP TABLE LOCATION_GU CASCADE CONSTRAINTS;
 DROP TABLE STUDY_CATEGORY CASCADE CONSTRAINTS;
 DROP TABLE LOCATION_SI CASCADE CONSTRAINTS;
@@ -98,11 +106,12 @@ DROP TABLE STUDY_MEMBER CASCADE CONSTRAINTS;
 DROP TABLE STUDY_APPLYING CASCADE CONSTRAINTS;
 DROP TABLE NOTICE_BOARD CASCADE CONSTRAINTS;
 DROP TABLE NOTICE_REPLY CASCADE CONSTRAINTS;
-
 DROP TABLE MEET_REPLY CASCADE CONSTRAINTS;
+-------------------------------------------------------------
 
-
-FREE_BOARD;
+------------------ DROP TABLE ----------------------------
+-------------------------------------------------------------
+DROP TABLE FREE_BOARD;
 DROP TABLE FREE_REPLY;
 DROP TABLE FREE_FILE;
 DROP TABLE BOOK_BOARD;
@@ -147,9 +156,10 @@ DROP TABLE DATA_FILE;
 DROP TABLE MEET_BOARD;
 DROP TABLE MEET_VOTE;
 DROP TABLE MEET_REPLY;
+-------------------------------------------------------------
 
------------------- 테이블 생성 --------------------------
---------------------------------------------------------
+------------------ CREATE TABLE -----------------------------
+-------------------------------------------------------------
 
 --회원 테이블 
 CREATE TABLE MEMBER(
@@ -169,17 +179,14 @@ CREATE TABLE LOCATION_SI(
     SI_NO NUMBER PRIMARY KEY, --시 번호
     SI_NAME VARCHAR2(50) NOT NULL UNIQUE --시 이름
 );
+
 --구
 CREATE TABLE LOCATION_GU(
     GU_NO NUMBER PRIMARY KEY, --구 번호
     SI_NO  NUMBER, -- 시 번호 외래키
-
     GU_NAME VARCHAR(50) NOT NULL , -- 구 이름    
-
     FOREIGN KEY(SI_NO) REFERENCES LOCATION_SI(SI_NO)  ON DELETE CASCADE
-    
 );
-
 
 --스터디 카테고리
 CREATE TABLE STUDY_CATEGORY(
@@ -208,15 +215,6 @@ CREATE TABLE STUDY_CATEGORY(
     FOREIGN KEY (GU_NO) REFERENCES LOCATION_GU(GU_NO) ON DELETE SET NULL
  );
 
- INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL,1,'토익스터디','토익 준비','토익 시험','TOEIC',05,001 ,003,3,1);
-
- 
- 
- 
- 
- 
- 
- 
 -- 스터디 팀원목록
 CREATE TABLE STUDY_MEMBER(
     S_NO NUMBER,
@@ -236,9 +234,10 @@ CREATE TABLE STUDY_APPLYING(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)        
 );
+-------------------------------------------------------------
 
------------------- 게시판 생성 --------------------------
---------------------------------------------------------
+------------------ CREATE BOARD -----------------------------
+-------------------------------------------------------------
 
 --공지사항 게시판
 CREATE TABLE NOTICE_BOARD(
@@ -303,7 +302,6 @@ CREATE TABLE FREE_REPLY(
     FOREIGN KEY(B_NO) REFERENCES FREE_BOARD(B_NO) ON DELETE CASCADE    
 );
 
-
 --자유 게시판 사진
 CREATE TABLE FREE_FILE(
     F_NO NUMBER PRIMARY KEY, --파일 번호
@@ -311,13 +309,6 @@ CREATE TABLE FREE_FILE(
     F_NAME VARCHAR2(1000) NOT NULL, --파일 실제이름
     FOREIGN KEY(B_NO) REFERENCES FREE_BOARD(B_NO) ON DELETE CASCADE    
 );
-FREE_FILE,BOOK_BOARD,BOOK,PHOTO_BOARD,PHOTO_REPLY,PHOTO_FILE,SCHEDULE_BOARD
-DATA_BOARD DATA_REPLY DATA_FILE MEET_BOARD MEET_VOTE MEET_REPLY
-
-
-
-DROP TABLE LOCATION_SI CASCADE CONSTRAINTS;
-
 
 -- 학습 도서 게시판
 CREATE TABLE BOOK_BOARD(
@@ -470,23 +461,4 @@ CREATE TABLE MEET_REPLY(
     FOREIGN KEY(B_NO) REFERENCES MEET_BOARD(MEET_NO) ON DELETE CASCADE    
 );
 
-
-
-
---스터디 카테고리 INSERT
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, 'IT');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '자격증');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '공무원');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '뷰티');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '대입/수능');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '어학/회화');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '취업스터디');
-INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
-
-
-SELECT * FROM STUDY_CATEGORY;
-
-
-
-
-COMMIT
+COMMIT;
