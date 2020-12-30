@@ -81,7 +81,7 @@ document.getElementById('open-room').onclick = function() {
         else {
           disableInputButtons(true);
           if(error === 'Room not available') {
-            alert('회의가 이미 진행중입니다\n화상 회의 참가 버튼을 눌러주세요');
+            alert('회의가 이미 진행중입니다\n참가 버튼을 눌러주세요!!');
             return;
           }
           alert(error);
@@ -98,7 +98,7 @@ document.getElementById('join-room').onclick = function() {
       if (error) {
             disableInputButtons(true);
             if(error === 'Room not available') {
-              alert('회의가 진행중이지 않습니다\n화상 회의방 만들기 버튼을 눌러주세요.');
+              alert('회의가 진행중이지 않습니다\n방 만들기 버튼을 눌러주세요!!');
               return;
             }
             alert(error);
@@ -263,7 +263,7 @@ connection.onstream = function(event) {
     
     var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
     var mediaElement = getHTMLMediaElement(video, {
-        title: event.userid, //화면에 뜨는 아이디
+        title: '', //화면에 뜨는 아이디
         buttons: ['full-screen'],
         width: width,
         showOnMouseEnter: false
