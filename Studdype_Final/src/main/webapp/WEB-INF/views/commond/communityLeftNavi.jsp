@@ -34,7 +34,8 @@
        });
        
         function openWebMeeting(){    		
-    		window.open("https://localhost:9001/qwe.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
+    		window.open("https://172.30.1.38:9001/webmeeting.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
+    		
     		//172.30.1.38  -> localhost
     	};
     </script>
