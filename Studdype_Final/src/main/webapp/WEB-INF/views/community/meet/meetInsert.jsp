@@ -176,12 +176,18 @@
 					<td colspan="8"><input type="text" placeholder="50자 내로 입력하세요." class="meetInsertInput"></td>	        	
 	        	</tr>
 	        	<tr>
+<<<<<<< HEAD
+	        		<th colspan="2">장소</th>
+					<td colspan="8"><input type="text" class="meetInsertAddr"><input type="button" class="searchBtn" value="도로명 주소검색" onclick="location.href='meetinsert.do'"></td>
+	        	</tr>
+=======
 				   <th colspan="2">장소</th>
 				   <td colspan="8" >
 					   <input type="text" class="meetInsertAddr" readonly ><input type="button" class="searchBtn" value="도로명 주소검색" onclick="location.href='meetinsert.do'">
 					   <input type="text" class="meetInsertAddr" placeholder="나머지 주소를 입력해주세요.">
 				   </td>
 			   </tr>
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
 	        	<tr>
 					<th colspan="2">상세<br><br>내용</th>
 					<td colspan="8"><textarea rows="30" class="meetInsertInput" placeholder="2000자 내로 입력하세요."></textarea></td>
