@@ -27,6 +27,12 @@
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
     
     <!-- kakao map API -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04bc0d5da72e456d3406d52a61067ecd"></script>
@@ -73,6 +79,10 @@
 		});
 	</script>
 	
+<<<<<<< HEAD
+=======
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 </head>
 <body>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
@@ -99,9 +109,18 @@
 	        		<th colspan="10">제목:&nbsp;홍길동의 스터디 첫 정모</th>
 	        	</tr>
 	        	<tr>
+<<<<<<< HEAD
 	        		<td colspan="10" id="map"></td>
 	        	</tr>
 	        	<tr>
+=======
+<<<<<<< HEAD
+=======
+	        		<td colspan="10" id="map"></td>
+	        	</tr>
+	        	<tr>
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 	        		<th colspan="10">장소:&nbsp;스타벅스 대치사거리점</th>
 	        	</tr>
 	        	<tr>

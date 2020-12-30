@@ -24,15 +24,31 @@
 	height: 100%;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 .meetInsertAddr:focus{
 	border: 1px solid #6610F2;
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 /* 주소 입력란에 버튼 추가를 위해 width 값 조정 */
 .meetInsertAddr{
 	width: 80%;
 	border: 0;
+<<<<<<< HEAD
 	margin-top: 9px;
+=======
+<<<<<<< HEAD
+=======
+	margin-top: 9px;
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 }
 
 /* select option 선택 시 border에 focus */
@@ -81,7 +97,14 @@ input.searchBtn{
 	border-radius: 50px;
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
+<<<<<<< HEAD
 	float: right;
+=======
+<<<<<<< HEAD
+=======
+	float: right;
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 }
 
 input.searchBtn:hover{
@@ -209,7 +232,16 @@ div.owl-carousel{
 	padding: 15px 25px;
 	text-align: right;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
 
 td#map{
 	height: 350px;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> 5bf1b79b42db84f7bd726a9887b431be39617a02
+>>>>>>> 75f8ca6a16ee21380499de3313bc063597cd1de4
