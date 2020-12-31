@@ -2,7 +2,31 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace="study">
+<mapper namespace="study">
+	<resultMap type="StudyDto" id="studyMap">
+		<result property="s_no" column="S_NO" />
+		<result property="leader_no" column="LEADER_NO" />
+		<result property="s_name" column="S_NAME" />
+		<result property="s_info" column="S_INFO" />
+		<result property="s_content" column="S_CONTENT" />
+		<result property="photo" column="S_PHOTO" />
+		<result property="cate_no" column="CATE_NO" />
+		<result property="si_no" column="SI_NO" />
+		<result property="gu_no" column="GU_NO" />
+		<result property="s_maxcnt" column="S_MAXCNT" />
+		<result property="s_currentcnt" column="S_CURRENTCNT" />
+	</resultMap>
 	
+	<select id="studyList" resultMap="studyMap">
+		SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT
+		FROM STUDY
+		ORDER BY S_NO DESC
+	</select>
 	
-	</mapper>
+	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
+		SELECT * 
+		FROM STUDY
+		WHERE S_NO = #{s_no}
+	</select>
+
+</mapper>
