@@ -50,7 +50,7 @@
 						<div class="hero-text-inner">
 							<div class="hero-text">
 								
-								<h1>스터디 이름</h1>
+								<h1>${study.s_name }</h1>
 								
 							</div>
 						</div>
