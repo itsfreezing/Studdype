@@ -20,6 +20,7 @@ public class BoardController {
 	private final static int pageGroupSize = 5; //페이지 그룹 사이즈
 	
 	
+	//자유게시판 리스트 이동 
 	@RequestMapping("/freeboard.do")
 	public String meetUpdate(HttpSession session) {
 		session.setAttribute("leftnavi", "freeboard");
