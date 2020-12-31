@@ -4,8 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.dto.member.MemberDto;
 
 /**
  * Handles requests for the application home page.
@@ -13,10 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private MemberBiz memberBiz;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+<<<<<<< HEAD
 	//	
 
+=======
+		
+	@RequestMapping("/studdypehome.do")
+	public String studdypeHeader() {
+		return "studdype/studdypeHome";
+	}
+>>>>>>> 5e8696bc09578fa7cba05c58d7d5cac3ad4f204d
 	
 	@RequestMapping("/studdypeexample.do")
 	public String studdypeExample() {
@@ -31,6 +46,9 @@ public class HomeController {
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
+		
+		MemberDto member = memberBiz.selectOne(1);
+		System.out.println(member.getMem_name());
 		///////////////////////
 		session.setAttribute("studyid", 1);
 		session.setAttribute("memberid", 3);
