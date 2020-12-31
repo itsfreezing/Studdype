@@ -13,4 +13,53 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
 
 SELECT * FROM STUDY_CATEGORY;
 
+
+--스터디 테이블
+ CREATE TABLE STUDY(
+    S_NO NUMBER PRIMARY KEY, --스터디 번호
+    LEADER_NO NUMBER NOT NULL, --팀장 번호   [ 외래키 ]
+    S_NAME VARCHAR2(100) NOT NULL, --스터디 이름
+    S_INFO VARCHAR2(100) NOT NULL, --스터디 한줄 소개
+    S_CONTENT VARCHAR2(3000) NOT NULL, --스터디 자세한 소개
+    S_PHOTO VARCHAR2(100), --스터디 대표사진 파일이름
+    CATE_NO NUMBER NOT NULL, --스터디 카테고리   [외래키]
+    SI_NO NUMBER NOT NULL, --스터디 지역(시)    [외래키]
+    GU_NO NUMBER NOT NULL, --스터디 지역(구)   [외래키]
+    S_MAXCNT NUMBER NOT NULL, --스터디 최대 인원
+    S_CURRENTCNT NUMBER DEFAULT 1 NOT NULL, --스터디 현재 인원 
+    FOREIGN KEY (LEADER_NO) REFERENCES MEMBER(MEM_NO) ON DELETE CASCADE,
+    FOREIGN KEY (CATE_NO) REFERENCES STUDY_CATEGORY(CATE_NO) ON DELETE SET NULL,
+    FOREIGN KEY (SI_NO) REFERENCES LOCATION_SI(SI_NO) ON DELETE SET NULL,
+    FOREIGN KEY (GU_NO) REFERENCES LOCATION_GU(GU_NO) ON DELETE SET NULL
+ );
+ 
+ 
+--스터디 생성
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름1', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름2', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름3', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름4', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름5', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름6', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름7', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름8', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름9', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름10', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름11', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름12', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름13', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름14', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름15', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름16', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름17', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+
+
+SELECT * FROM STUDY;
+
+
+
+
+
+
+
 COMMIT;
