@@ -43,10 +43,8 @@
 
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						mapOption = {
-							center : new kakao.maps.LatLng(33.450701,
-									126.570667), // 지도의 중심좌표
-							level : 3
-						// 지도의 확대 레벨
+							center : new kakao.maps.LatLng(33.450701,126.570667), // 지도의 중심좌표
+							level : 3 // 지도의 확대 레벨
 						};
 
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -127,18 +125,15 @@
 						</textarea></td>
 
 					<!-- 투표 -->
-					<th colspan="5" id="vote_text" align="center">참가여부<br>
-					<br>
-					<br> <input type="radio" name="fruit" value="apple">참석<br>
-					<br> <input type="radio" name="fruit" value="banana">불참석<br>
-					<br> <input type="button" value="투표하기" class="submitBtn vote"
-						onclick="">
+					<th colspan="5" id="vote_text" align="center">참가여부<br> <br>
+						<br> <input type="radio" name="fruit" value="apple">참석<br>
+						<br> <input type="radio" name="fruit" value="banana">불참석<br>
+						<br> <input type="button" value="투표하기" class="submitBtn vote" onclick="">
 					</th>
 			</table>
 			<div>
-				<button class="submitBtn" id="detailBtn_updateform">수정</button>
-				&nbsp;&nbsp; <input type="button" value="삭제" class="submitBtn"
-					id="detailBtn_delete" onclick="location.href='meetlist.do'">
+				<button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp; 
+				<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetlist.do'">
 			</div>
 		</form>
 	</div>
