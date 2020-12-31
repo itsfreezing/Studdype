@@ -33,8 +33,9 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-<!--   페이징 자바스크립트 추후 수정<script type="text/javascript">
-$(function(){
+<!-- <script type="text/javascript">
+
+페이징 부분
 
 function movePage(pagenum){
 	$("#pagenum").val(pagenum.text);
@@ -56,8 +57,18 @@ function prePageGroup(){
 		var pageform = document.getElementById('pageform');
 		pageform.submit();
 	}
-}	
-</script> -->
+
+</script>  -->
+<script type="text/javascript">
+	$(function(){
+		/* 부모 선택 후 흰색변경 JS */
+		$(".current_page").parent().css('color','white');
+		$(".current_page").css('border','1px solid #6434ef');
+		$(".current_page").css('cursor','default');
+		
+	});	
+	
+</script>
 </head>
 <body>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
@@ -70,25 +81,103 @@ function prePageGroup(){
 
 
 		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
-		<table border=1 class="boardlist">
+		<table class="boardlist">
 			<col width="600px"><col width="200px"><col width="200px"><col width="150px">
-			<tr style="text-align: center;">
+			<tr class="headtr">
 				<th>게시글 제목</th>
 				<th>작성자</th>
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
 			<tr>
-				<td>qwe</td>
-				<td>qwe</td>
-				<td>qwe</td>
-				<td>qwe</td>
+				<td class="tdtitle"><a href="#">공부 책 추천</a></td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
 			</tr>
 			<tr>
-				<td>qwe</td>
-				<td>qwe</td>
-				<td>qwe</td>
-				<td>qwe</td>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">새로 가입했습니다!</td>
+				<td class="tdwriter">하윙</td>
+				<td class="tddate">2020.11.24</td>
+				<td class="tdcnt">2</td>
+			</tr>
+			<tr>
+				<td class="tdtitle">공부 책 추천</td>
+				<td class="tdwriter">스터디팀장</td>
+				<td class="tddate">2020.12.12</td>
+				<td class="tdcnt">34</td>
 			</tr>
 		</table>
 
@@ -99,9 +188,12 @@ function prePageGroup(){
 		<!-- 페이징 -->
 		<div class="pagin_div">
 			<ul class="pagin">
-				<li class="page_li"><a class="next_page"
-					onclick="prePageGroup();"><</a></li>
-
+				<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
+				
+				<!-- 테스트용 구현 하고 지우자!!!!! -->
+				<li class="page_li li_hober"><a class="page_a current_page"	onclick="movePage(this);">1</a></li>
+				<li class="page_li li_hober"><a class="page_a "	onclick="movePage(this);">1</a></li>
+				<!-- ----------------------------------- -->
 				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"
 					varStatus="status">
 					<c:choose>
