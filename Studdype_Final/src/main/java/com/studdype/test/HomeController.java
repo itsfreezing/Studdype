@@ -1,15 +1,22 @@
 package com.studdype.test;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.biz.study.StudyBiz;
+import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyCategoryDto;
 
 /**
  * Handles requests for the application home page.
@@ -19,6 +26,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemberBiz memberBiz;
+	
+	@Autowired
+	private StudyBiz studyBiz;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -39,7 +49,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/createStuddypeform.do")
-	public String createStuddype() {
+	public String createStuddypeForm(Model model) {
+		List<LocationSiDto> sidtos = studyBiz.locationSiList();
+		List<LocationGuDto> gudtos = studyBiz.locationGuList();
+		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
+		
+		model.addAttribute("sidtos", sidtos);
+		model.addAttribute("gudtos", gudtos);
+		model.addAttribute("catedtos", catedtos);
 		
 		return "studdype/createStuddype";
 	}

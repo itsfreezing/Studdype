@@ -16,22 +16,15 @@
 #locationgu {
 	float:right;
 	width:45%;
-	right:10%;
 }
 
 #leader {
 	float:left;
 	width:45%;
-	right:10%;
 }
 
 #mem_name {
 	float:right;
-	width:45%;
-}
-
-#maxmember {
-	float:left;
 	width:45%;
 }
 
@@ -45,4 +38,18 @@
 	margin:3%;
 	width:30%;
 	font-size:20px;
+}
+
+#maxcategory {
+	clear:both;
+}
+
+#category {
+	float:left;
+	width:45%;
+}
+
+#maxcnt {
+	float:right;
+	width:45%;
 }
