@@ -16,10 +16,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	//	
-	@RequestMapping("/studdypehome.do")
-	public String studdypeHeader() {
-		return "studdype/studdypeHome";
-	}
+
 	
 	@RequestMapping("/studdypeexample.do")
 	public String studdypeExample() {

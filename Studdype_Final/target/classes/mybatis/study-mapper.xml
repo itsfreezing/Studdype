@@ -18,7 +18,7 @@
 	</resultMap>
 	
 	<select id="studyList" resultMap="studyMap">
-		SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT
+		SELECT *
 		FROM STUDY
 		ORDER BY S_NO DESC
 	</select>

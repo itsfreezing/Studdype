@@ -22,23 +22,16 @@ public class StudyController {
 	@Autowired
 	private StudyBiz studyBiz;
 	
-	@RequestMapping(value = "Study.do", method = RequestMethod.GET)
-	public String Study(Locale locale, Model model) {
-		logger.info("Welcome board! The client locale is{}.",locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG,locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime",formattedDate);
-		return "Study";
+	@RequestMapping("/studdypehome.do")
+	public String studdypeHeader() {
+		return "studdype/studdypeHome";
 	}
-	
 	@RequestMapping("/studyList.do")
 	public String list(Model model) {
 		logger.info("STUDY - SELECTLIST");
 		model.addAttribute("studyList",studyBiz.studyList());
 		
-		return "studyList";
+		return "studdype/studdypeHome";
 	}
 	
 	

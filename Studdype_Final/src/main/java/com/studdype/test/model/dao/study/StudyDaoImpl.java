@@ -21,7 +21,7 @@ public class StudyDaoImpl implements StudyDao {
 		List<StudyDto> studyList = new ArrayList<StudyDto>();
 
 		try {
-			studyList = sqlSession.selectList(NAMESPACE + "selectList");
+			studyList = sqlSession.selectList(NAMESPACE + "studyList");
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
