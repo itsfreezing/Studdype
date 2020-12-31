@@ -10,7 +10,9 @@
   		<typeAlias type="com.studdype.test.model.dto.study.StudyDto" alias="studyDto"/>
   
   	</typeAliases>
-  
+  	<mappers>
+  		<mapper resource="mybatis/study-mapper.xml"/>
+  	</mappers>
   
   
   </configuration>
