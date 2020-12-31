@@ -47,19 +47,21 @@
 		margin-left:5%;
 	}
 	#chk{
-		margin-left:43%;
+		margin-left:295%;
 		margin-top:10%;
 		width:280px;
 		height:50px;
 	}
 	#chk1{
-		margin-left:43%;
+		margin-left:295%;
 		width:280px;
+		margin-top:10%;
 		height:50px;
 		
 	}
 	#sign{
 		margin-left:43%;
+		margin-top:3%;
 		width:280px;
 		height:50px;
 		background-color:purple;
@@ -105,16 +107,34 @@
 	<br>
 	<br>
 	<br>
+	 -->
+	 
+	 <form action="loginform.do" method="POST">
+	 	<table>
+	 		<tr>
+	 			<td>
+	 				<input type="text" name="ID" id="chk"placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
+	 			</td>
+	 		</tr>
+	 		<br>
+	 		<tr>
+	 			<td>
+	 				<input type="text" name="pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+	 			</td>
+	 		</tr>
+	 	
+	 	</table>
+	 
+	 </form>
+	 
+	 
 	<button id="sign" style="border:0" onclick="location.href='home.jsp'">Sign</button>
 	<br>
 	<br>
 	<a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
 	|<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
-	|<a href="signup.do" id="">회원가입</a>
+	|<a href="signupform.do" id="">회원가입</a>
 	
-
-
-		
 	<hr id="line1">
 		<p id="foot">Copyright © StuDdype Inc. All Rights Reserved.</p>
 

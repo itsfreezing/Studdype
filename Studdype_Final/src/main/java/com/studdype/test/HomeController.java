@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.tribes.MembershipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,18 +14,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.studdype.test.model.dao.member.MemberDao;
 
+import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.dto.member.MemberDto;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private MemberBiz memberBiz;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Inject
-	MembershipService memberService;
-	
-	//	
+		
 	@RequestMapping("/studdypehome.do")
 	public String studdypeHeader() {
 		return "studdype/studdypeHome";
@@ -43,6 +47,9 @@ public class HomeController {
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
+		
+		MemberDto member = memberBiz.selectOne(1);
+		System.out.println(member.getMem_name());
 		///////////////////////
 		session.setAttribute("studyid", 1);
 		session.setAttribute("memberid", 3);
@@ -57,12 +64,15 @@ public class HomeController {
 		return "community/notice";
 	}
 	
-	@RequestMapping("/login.do")
-	public String login() {
+	@RequestMapping("/loginform.do")
+	public String loginForm(HttpSession session) {
 		return "loginpage/login";
 	}
 	
-	
+	@RequestMapping("/signupform.do")
+	public String signup(HttpSession session) {
+		return "loginpage/signup";
+	}
 }
 
 

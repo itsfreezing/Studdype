@@ -30,7 +30,7 @@
 		        loop:true,               // 반복여부
 		        //margin:35,               // 오른쪽 간격
 		        autoplay:true,           // 자동재생 여부
-		        autoplayTimeout:1800,    // 재생간격
+		        autoplayTimeout:5000,    // 재생간격
 		        autoplayHoverPause:false  //마우스오버시 멈출지 여부
 		    });    
 		    
@@ -144,9 +144,10 @@
 				
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
+				
 				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
 					<div class="single-blog-post">
-						<div class="blog-img">
+						<div class="blog-img-responsive-4by3">
 							<!-- 스터디 이미지 -->
 							<img  src="./resources/assets/img/img_study1.png" alt="" class="img-fluid">
 						</div>
@@ -163,157 +164,12 @@
 						</div>
 					</div>
 				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study2.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
+			<!-- 스터디 리스트 끝 -->
+			
+			<!-- 스터디 리스트 페이지 -->				
 
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study3.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study4.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study5.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study6.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study7.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor:pointer">
-					<div class="single-blog-post">
-						<div class="blog-img">
-							<!-- 스터디 이미지 -->
-							<img  src="./resources/assets/img/img_study8.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<a><h3>title</h3></a><br>
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">location&nbsp;&nbsp;&nbsp;&nbsp;category</span>
-						</div>
-
-						<p>#hashTag??</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span><b>User</b><a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;maximumUser</a></span>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-lg-4 text-center">
-					<a href="#" class="btn btn-primary all-blogs">load more</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Control Area
+			<!-- 스터디 리스트 페이지 끝 -->
+<!-- 	<!-- Control Area
 ======================================-->
 	<div class="blogs control-area control-bg">
 		<div class="container">
@@ -328,11 +184,11 @@
 					</div>
 				</div>
 			</div>
-			<!--End of row-->
+			End of row
 		</div>
-		<!--End of container-->
+		End of container
 	</div>
-	<!--End of control area-->
+	End of control area -->
 
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 	

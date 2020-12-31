@@ -50,96 +50,87 @@ function numchk() {
 }
 </script>
 <style type="text/css">
-	#btn{
-		width:110px;
-		height:25px;
-		margin-left:65%;
-	}
-	#header{
-		margin-left:-0.7%;
-		background-color:#F5A9F2;
-	}
-	#logo{
-		width:130px;
-		height:40px;
-	}
-	#search{
-		align:left;
-	}
-	#pagetitle{
-		margin-top:5%;
-		margin-left:44%;
-	}
-	hr{
-		margin-top:7%;
-	}
-	#pic{
-		width:100px;
-		height:100px;
-		margin-left:48%;
-	}
-	#name{
-		margin-top:0.3%;
-		margin-left:44%;
-		width:300px;
-		height:30px;
-	}
-	#userMail{
-		margin-top:0.5%;
-		margin-left:44%;
-		width:300px;
-		height:30px;
-	}
-	#nametitle{
-		font-size:20px;
-		margin-top:-2.7%;
-		margin-left:44%;
-		color:#DA81F5;
-	}
-	#chk{
-		background: #8000FF;
-		color:white;
-		font-weight:bold;
-	}
-	#mail{
-		background: #8000FF;
-		color:white;
-		font-weight:bold;
-		width:100px;
-		height:30px;
-	}
-	select{
-		margin-left:44%;
-		width:300px;
-		height:30px;
-	}
-	#sub{
-		width:300px;
-		height:35px;
-		background: #8000FF;
-		color:white;
-		font-weight:bold;
-  		margin-left:44%;
-  		text-align:center;
-  		font-size:20pt;
-	}
-	h2{
-		margin-left:45%;
-		margin-top:-1%;
-	}
-	h3{
-		margin-left:45%;
-	}
-	div{
-		background:#E2A9F3;
-		opacity:30;
-	}
+/*button{
+	margin-left:
+}
+*/
+h1{
+	margin-top:5%;
+	margin-left:46.5%;
+	color:white;
+}
+div{
+	background:#D0A9F5;
+}
+#line{
+	margin-top:6.3%;
+}
+#logo{
+	width:240px;
+	height:50px;
+}
+#title{
+	color:black;
+	margin-left:46.5%;
+}
+#pic{
+	width:170px;
+	height:50px;
+	margin-left:47.5%;
+}
+h2{
+	margin-left:46.5%;
+	margin-top:-1%;
+	color:blue;
+}
+h3{
+	margin-left:46.5%;
+	margin-top:-1%;
+	
+}
+#name{
+	margin-left:280%;
+	margin-top:10%;
+	margin-bottom:0.5%;
+	color:#F5A9F2;
+	font-weight:bold;
+}
+
+input{
+	margin-left:43%;
+	margin-bottom:-1%;
+	width:320px;
+	height:30px;
+}
+
+
+#btn{
+	background:#7401DF;
+	color:white;
+	width:130px;
+	height:30px;
+	font-weight:bold;
+}
+#sub{
+	background:#7401DF;
+	color:white;
+	width:330px;
+	height:50px;
+	font-weight:bold;
+	margin-left:43%;
+}
+select{
+	margin-left:43%;
+	width:330px;
+	height:30px;
+}
 </style>
 </head>
 <body>
 <div id="header">
 	<img src="./resources/assets/img/logo_white.png" id="logo">
-		<button  id="btn">
+
+		<button>
 			지역별 검색 
 		</button>
 		<button>
@@ -161,9 +152,11 @@ function numchk() {
 		
 		</div>
 	<img src="" id="pic">
-		<h3>--Please be our colleague--</h3>	
-		<h2>정보를 입력해주세요</h2>
-
+	<br><br>	
+		<h3>--Please be our colleague--</h3>
+		
+		<br><h2>정보를 입력해주세요</h2>
+<!--  
 	<b id="nametitle">이름</b><br><input type="text" id="name"  style="border: 2px solid #DA81F5;"placeholder="이름을 입력해주세요">
 	<b id="nametitle">아이디</b><br><input type="text" id="name"  style="border: 2px solid #DA81F5;"placeholder="아이디를 입력해주세요">
 	<button id="chk"style="border: 2px solid #8000FF;">중복확인</button>
@@ -183,6 +176,24 @@ function numchk() {
 	</select>
 	<br>
 	<br>
+	-->
+	<form action="signupform.do"method="POST">
+		<table>
+			<tr>
+				<th id="name">
+					이름
+				</th>
+				<td>
+					<input type="text" name="name" id="chk"placeholder="이름을 입력해주세요">
+				</td>
+			</tr>
+		
+		
+		</table>
+	
+	
+	</form>
+
 	<input type="button" id="sub"value="Join"style="border: none solid #DA81F5;">
 	
 </body>
