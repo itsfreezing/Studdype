@@ -12,31 +12,31 @@ import com.studdype.test.model.dto.board.MeetDto;
 public class MeetBizImpl implements MeetBiz {
 	
 	@Autowired
-	private MeetBoardDao meet_dao;
+	private MeetBoardDao meetboarddao;
 	
 	@Override
-	public List<MeetDto> meet_selectList() {
-		return meet_dao.meet_selectList();
+	public List<MeetDto> selectList() {
+		return meetboarddao.meetBoardSelectList();
 	}
 
 	@Override
-	public MeetDto meet_selectOne(int meet_no) {
-		return meet_dao.meet_selectOne(meet_no);
+	public MeetDto selectOne(int meet_no) {
+		return meetboarddao.meetBoardSelectOne(meet_no);
 	}
 
 	@Override
-	public int meet_insert(MeetDto meet_dto) {
-		return meet_dao.meet_insert(meet_dto);
+	public int insert(MeetDto dto) {
+		return meetboarddao.meetBoardInsert(dto);
 	}
 
 	@Override
-	public int meet_update(MeetDto meet_dto) {
-		return meet_dao.meet_update(meet_dto);
+	public int update(MeetDto dto) {
+		return meetboarddao.meetBoardUpdate(dto);
 	}
 
 	@Override
-	public int meet_delete(int meet_no) {
-		return meet_dao.meet_delete(meet_no);
+	public int delete(int meet_no) {
+		return meetboarddao.meetBoardDelete(meet_no);
 	}
 
 }

@@ -16,36 +16,36 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<MeetDto> meet_selectList() {
-		List<MeetDto> meet_list = new ArrayList<MeetDto>();
+	public List<MeetDto> meetBoardSelectList() {
+		List<MeetDto> list = new ArrayList<MeetDto>();
 		
 		try {
-			meet_list = sqlSession.selectList(NAMESPACE+"meet_selectList");
+			list = sqlSession.selectList(NAMESPACE+"selectList"); // NAMESPACE: dao의 nameSpace
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
 			e.printStackTrace();
 		}
 		
-		return meet_list;
+		return list;
 	}
 
 	@Override
-	public MeetDto meet_selectOne(int meet_no) {
+	public MeetDto meetBoardSelectOne(int meet_no) {
 		return null;
 	}
 
 	@Override
-	public int meet_insert(MeetDto meet_dto) {
+	public int meetBoardInsert(MeetDto dto) {
 		return 0;
 	}
 
 	@Override
-	public int meet_update(MeetDto meet_dto) {
+	public int meetBoardUpdate(MeetDto dto) {
 		return 0;
 	}
 
 	@Override
-	public int meet_delete(int meet_no) {
+	public int meetBoardDelete(int meet_no) {
 		return 0;
 	}
 

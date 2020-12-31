@@ -77,34 +77,71 @@
 			</div>
 		</div>
 		<!-- 슬라이더 끝 -->        
-	
-        <!-- 나중에 추가할 것! 참고 코드임
+		
         <c:choose>
 		
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="4">----작성된 글이 존재하지 않습니다----</td>
+					<td colspan="2">---- 모임이 존재하지 않습니다. ----</td>
 				</tr>
 			</c:when>
 			
 			<c:otherwise>
 				<c:forEach var ="dto" items="${list }">
-					<div id="container" onclick="location.href='controller.do?command=detail&seq=${dto.seq }'">
-						<div id="top-left">${dto.seq }</div>
-						<div id="top-right">${dto.writer }</div>
-						<div id="bottom">${dto.title }</div>
-						<div id="footer">${dto.regdate }</div>
-					</div>
+					<table id="tableList">
+			        	<tr>
+			        		<td>
+						        <div>
+							        <table id="meetList" onclick="location.href='meetdetail.do'">
+										<col width="400px"><col width="200px">
+										<tr>
+											<td id="date">${ dto.meet_regdate }</td>
+											<td id="location"><img src="./resources/assets/img/profile_placeholder.png">스타벅스 대치사거리</td>
+										</tr>
+										<tr>
+											<td id="title" colspan="2">${ dto.meet_title }</td>
+										</tr>
+										<tr>
+											<td id="writer">${ dto.meet_writer }</td>
+											<td id="recruitment">모집기간 ${ dto.vote_startdate } ~ ${ dto.vote_enddate }</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+							<td>
+								<div>
+							        <table id="voteList" onclick="location.href='meetdetail.do'">
+										<col width="100px"><col width="300px"><col width="200px">
+										<tr>
+											<td id="attend_y">참석</td>
+											<td></td>
+											<td>82%</td>
+										</tr>
+										<tr>
+											<td id="attend_n">불참석</td>
+											<td></td>
+											<td>18%</td>
+										</tr>
+										<tr>
+											<td colspan="3" id="member_count">참여인원: 13명</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+						
+					</table>
 				</c:forEach>
 			</c:otherwise>
 	
 		</c:choose>
-		
-		<button onclick="location.href='controller.do?command=writeform'">글쓰기</button>
-        -->
+		<div>
+			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
+		</div>
         
         <!-- 모임리스트와 투표리스트 테이블을 각각 구현 -->
         <!-- table 중첩 되어있음 현재 경로는 테스트용으로 잡아놓은 것임 -->
+        <!-- 
         <table id="tableList">
         	<tr>
         		<td>
@@ -190,6 +227,7 @@
 		<div>
 			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
 		</div>
+		-->
     </div>
    
     
