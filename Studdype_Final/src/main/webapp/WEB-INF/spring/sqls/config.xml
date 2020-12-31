@@ -8,13 +8,13 @@
   		<typeAlias type="com.studdype.test.model.dto.board.BoardDto" alias="boardDto"/>
   		<typeAlias type="com.studdype.test.model.dto.member.MemberDto" alias="memberDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyDto" alias="studyDto"/>
-  
+  		
   	</typeAliases>
   
   	<mappers>
-  		<mapper resource="/mybatis/board-mapper.xml"/>
-  		<mapper resource="/mybatis/member-mapper.xml"/>
-		  <mapper resource="mybatis/study-mapper.xml"/>
+  		<mapper resource="mybatis/freeBoard-mapper.xml"/>
+  		<mapper resource="mybatis/member-mapper.xml"/>
+		<mapper resource="mybatis/study-mapper.xml"/>
   	</mappers>  
   
   

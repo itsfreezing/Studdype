@@ -22,5 +22,11 @@
 		FROM STUDY
 		ORDER BY S_NO DESC
 	</select>
+	
+	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
+		SELECT * 
+		FROM STUDY
+		WHERE S_NO = #{s_no}
+	</select>
 
 </mapper>

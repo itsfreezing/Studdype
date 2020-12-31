@@ -3,10 +3,12 @@ package com.studdype.test.model.biz.study;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.studdype.test.model.dao.study.StudyDao;
 import com.studdype.test.model.dto.study.StudyDto;
 
+@Service
 public class StudyBizImpl implements StudyBiz{
 	
 	@Autowired
@@ -15,6 +17,12 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public List<StudyDto> studyList() {
 		return study_Dao.studyList();
+	}
+
+	//스터디 번호로 selectOne
+	@Override
+	public StudyDto selectOneBySno(int s_no) {
+		return study_Dao.selectOneBySno(s_no);
 	}
 		
 }
