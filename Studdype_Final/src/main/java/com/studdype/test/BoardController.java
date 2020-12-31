@@ -31,7 +31,7 @@ public class BoardController {
 	
 	//자유게시판 리스트 이동 
 	@RequestMapping("/freeboard.do")
-	public String meetUpdate(HttpSession session, String pagenum, Model model) {
+	public String freeBoard(HttpSession session, String pagenum, Model model) {
 		StudyDto study = (StudyDto)session.getAttribute("study"); //현재 클릭된 스터디
 		List<BoardDto> list = null;   // 15개 페이징 담을 리스트
 		Map<String,Integer> pageMap = new HashMap<String, Integer>();  // 시작페이지, 끝페이지 정보 담을 MAP
