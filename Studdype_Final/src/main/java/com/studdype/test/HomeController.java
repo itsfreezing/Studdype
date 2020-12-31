@@ -42,17 +42,16 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
-<<<<<<< HEAD
+
 	//커뮤니티 홈으로
-=======
+
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddype() {
 		
 		return "studdype/createStuddype";
 	}
 	
-	
->>>>>>> 0d883d4073d6404893d10e0d27c362d284752e73
+
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
 		
