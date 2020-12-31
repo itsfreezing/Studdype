@@ -84,7 +84,7 @@
 							<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="createStuddype.do">스터디 생성</a>
+								<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>

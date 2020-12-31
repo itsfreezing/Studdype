@@ -31,8 +31,9 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
-	@RequestMapping("/createStuddype.do")
+	@RequestMapping("/createStuddypeform.do")
 	public String createStuddype() {
+		
 		return "studdype/createStuddype";
 	}
 	
