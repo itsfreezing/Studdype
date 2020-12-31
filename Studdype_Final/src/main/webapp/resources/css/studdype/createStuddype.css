@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.main-section {
+  display: block;
+  position: relative;
+  margin: 3%;
+}
+
+#textline {
+	clear:both;
+}
+#locationsi {
+	float:left;
+	width:45%;
+}
+
+#locationgu {
+	float:right;
+	width:45%;
+	right:10%;
+}
+
+#leader {
+	float:left;
+	width:45%;
+	right:10%;
+}
+
+#mem_name {
+	float:right;
+	width:45%;
+}
+
+#maxmember {
+	float:left;
+	width:45%;
+}
+
+#btn {
+	clear:both;
+	text-align:center;
+}
+
+#btn button {
+	right:10%;
+	margin:3%;
+	width:30%;
+	font-size:20px;
+}

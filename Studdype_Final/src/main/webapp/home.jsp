@@ -9,6 +9,5 @@
 <a href="studdypeexample.do">스터띱 예시</a>
 <a href="studdypehome.do">스터띱 홈</a>
 <a href="communityhome.do">커뮤니티 홈</a>
-<a href="loginform.do">LOGIN</a>
 </body>
 </html>
