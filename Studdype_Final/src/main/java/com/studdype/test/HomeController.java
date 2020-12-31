@@ -38,6 +38,12 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
+	@RequestMapping("/createStuddypeform.do")
+	public String createStuddype() {
+		
+		return "studdype/createStuddype";
+	}
+	
 	
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
