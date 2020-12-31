@@ -11,6 +11,9 @@
   
   	</typeAliases>
   
-  
+  	<mappers>
+  		<mapper resource="/mybatis/board-mapper.xml"/>
+  		<mapper resource="/mybatis/member-mapper.xml"/>
+  	</mappers>
   
   </configuration>
