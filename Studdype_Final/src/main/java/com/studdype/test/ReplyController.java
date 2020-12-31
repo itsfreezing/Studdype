@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class CommentController {
-private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+public class ReplyController {
+private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
 	
 	
 	@RequestMapping(value = "/Comment.do",method = RequestMethod.GET)
