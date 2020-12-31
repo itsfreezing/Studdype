@@ -39,7 +39,7 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
-
+	}
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();

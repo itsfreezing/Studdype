@@ -31,10 +31,7 @@ public class HomeController {
 	private MemberBiz memberBiz;
 	@Autowired
 	private StudyBiz studyBiz;
-	
-	@Autowired
-	private StudyBiz studyBiz;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 		
