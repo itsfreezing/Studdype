@@ -34,6 +34,12 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.studyList();
 	}
 
+
+	//스터디 번호로 selectOne
+	@Override
+	public StudyDto selectOneBySno(int s_no) {
+		return study_Dao.selectOneBySno(s_no);
+	}
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
@@ -47,6 +53,7 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public List<StudyCategoryDto> categoryList() {
 		return studyCatedao.categoryList();
+
 	}
 		
 }
