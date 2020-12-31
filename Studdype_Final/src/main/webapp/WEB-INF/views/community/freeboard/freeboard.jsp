@@ -6,28 +6,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CommunityHome</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-<link rel="stylesheet"
-	href="./resources/css/community/header&footer.css">
+<link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
-<link rel="stylesheet" href="./resources/css/community/mainsection.css">
+
+<!--  freeboard mainsection css -->
+<link rel="stylesheet" href="./resources/css/community/freeboard/mainsection.css">
 
 <!-- freeboard css -->
-<link rel="stylesheet" href="./resources/css/community/freeboard.css">
+<link rel="stylesheet" href="./resources/css/community/freeboard/freeboard.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -38,42 +35,7 @@
 
 <!--   페이징 자바스크립트 추후 수정<script type="text/javascript">
 $(function(){
-	$("#fo").submit(function(){
-		var list = document.getElementsByName("type1");
-		var cnt = 0;
-		for(var i=0; i<list.length; i++){
-			if(list[i].checked == true){
-				cnt++;
-			
-			}
-		}
-		if(cnt==0){
-			for(var i=0; i<list.length; i++){
-				list[i].checked = true;
-				console.log(list[i].checked);
-			}
-		}
-	});
-});
-$(function(){
-	$("#fo").submit(function(){
-		var list = document.getElementsByName("type2");
-		var cnt = 0;
-		for(var i=0; i<list.length; i++){
-			if(list[i].checked == true){
-				cnt++;
-			
-			}
-		}
-		if(cnt==0){
-			for(var i=0; i<list.length; i++){
-				list[i].checked = true;
-				console.log(list[i].checked);
-			}
-		}
-	});
-	
-});
+
 function movePage(pagenum){
 	$("#pagenum").val(pagenum.text);
 	var pageform = document.getElementById('pageform');
@@ -81,7 +43,7 @@ function movePage(pagenum){
 	
 }
 function nextPageGroup(){
-	if( ${endPage + 1 < totalPageNum}){
+	if( ${endPage < totalPageNum}){
 		$("#pagenum").val(${endPage+1});
 		var pageform = document.getElementById('pageform');
 		pageform.submit();
@@ -104,9 +66,36 @@ function prePageGroup(){
 
 	<!--main conternt 섹션-->
 	<div class="main-section">
-		<h1>자유게시판</h1>
-	
-	
+		<h1 >스터디이름 자유게시판</h1>
+
+
+		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
+		<table border=1 class="boardlist">
+			<col width="600px"><col width="200px"><col width="200px"><col width="150px">
+			<tr style="text-align: center;">
+				<th>게시글 제목</th>
+				<th>작성자</th>
+				<th>작성시간</th>
+				<th>조회수</th>
+			</tr>
+			<tr>
+				<td>qwe</td>
+				<td>qwe</td>
+				<td>qwe</td>
+				<td>qwe</td>
+			</tr>
+			<tr>
+				<td>qwe</td>
+				<td>qwe</td>
+				<td>qwe</td>
+				<td>qwe</td>
+			</tr>
+		</table>
+
+
+
+
+
 		<!-- 페이징 -->
 		<div class="pagin_div">
 			<ul class="pagin">
@@ -130,10 +119,9 @@ function prePageGroup(){
 					onclick="nextPageGroup();">></a></li>
 			</ul>
 
-			<form action="controller.do" method="post" id="pageform"
+			<form action="freeboard.do" method="post" id="pageform"
 				name="pageform">
-				<input type="hidden" name="command" value="alba"> <input
-					type="hidden" name="pagenum" id="pagenum">
+				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
 
 		</div>
