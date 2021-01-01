@@ -34,6 +34,10 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
+<link rel="stylesheet" href="./resources/css/summernote-lite.css">
+<script src="./resources/js/summernote-ko-KR.js"></script>
+<script src="./resources/js/summernote-lite.js"></script>
+
 
 <script type="text/javascript">
 	$(function(){
@@ -73,6 +77,9 @@
 			pageform.submit();
 		}
 	}
+	function test(){
+		alert("qwe");
+	}
 
 </script>
 </head>
@@ -95,21 +102,29 @@
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
+			<c:choose>
+				<c:when test="${list == null }">
+					<td colspan="4">게 시 글 이 없 습 니 다</td>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
+						<tr>
+							<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
+							<td class="tdwriter">${writerMap.get( list.get(i).getB_no() ) }</td>
+							<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+							<td class="tdcnt">${list.get(i).getB_cnt() }</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			
-			<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
-				<tr>
-				
-					<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
-					<td class="tdwriter">${writerMap.get( list.get(i).getB_no() ) }</td>
-					<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-					<td class="tdcnt">${list.get(i).getB_cnt() }</td>
-				</tr>
-			</c:forEach>
+			
 			
 		</table>
 
-
-
+		
+		<button class="writeBtn" onclick="test()">글 작성</button>
+	
 
 
 		<!-- 페이징 -->
