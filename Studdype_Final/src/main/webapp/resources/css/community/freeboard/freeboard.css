@@ -8,7 +8,7 @@
 		float: left;
 		display: inline;
 		clear: right;
-		margin-left: 38%;
+		margin-left: 23%;
 	}
 	.page_li{
 		float:left;
@@ -65,5 +65,32 @@
 		background-color: #6434ef;
 		
 	}
+	
+	.writeBtn{
+		float: right;
+		margin-top: 3%;
+		margin-bottom: 3%;		
+		background-color: white;
+		border: 1px solid  #6434ef;
+		width: 8%;
+		height: 2%;
+		font-size: 15px;
+		padding: 1%;
+		box-shadow: 0 0 15px 5px #eaebf2;
+		border-radius: 10px 10px;
+		color: #6434ef;
+		margin-right: 20%;
+	}
+	
+
+	.writeBtn:hover{
+		background-color:#6434ef;
+		color:white;
+		cursor: pointer;
+		transition: 0.3s;
+		 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	
 /*----------------------------------------------------*/	
 
