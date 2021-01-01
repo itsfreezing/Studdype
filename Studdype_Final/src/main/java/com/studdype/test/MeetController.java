@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.studdype.test.model.biz.board.meet.MeetBiz;
+import com.studdype.test.model.biz.board.MeetBiz;
 
 @Controller
 public class MeetController {

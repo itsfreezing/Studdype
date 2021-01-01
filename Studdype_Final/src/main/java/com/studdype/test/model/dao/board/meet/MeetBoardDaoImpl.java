@@ -20,7 +20,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		List<MeetDto> list = new ArrayList<MeetDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectList"); // NAMESPACE: dao의 nameSpace
+			list = sqlSession.selectList(NAMESPACE+"meetBoardSelectList"); // NAMESPACE: dao의 nameSpace
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
 			e.printStackTrace();

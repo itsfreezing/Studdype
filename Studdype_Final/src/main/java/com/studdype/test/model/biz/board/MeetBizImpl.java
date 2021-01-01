@@ -1,4 +1,4 @@
-package com.studdype.test.model.biz.board.meet;
+package com.studdype.test.model.biz.board;
 
 import java.util.List;
 

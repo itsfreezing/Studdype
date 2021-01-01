@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.studdype.test.model.biz.board.meet.FreeBiz;
+import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.study.StudyDto;

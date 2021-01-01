@@ -82,12 +82,12 @@
 		
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="2">---- 모임이 존재하지 않습니다. ----</td>
+					<td colspan="2">---- 모임이 존재하지 않습니다. ---- ${dto.meet_title }</td>
 				</tr>
 			</c:when>
 			
 			<c:otherwise>
-				<c:forEach var ="dto" items="${list }">
+				<c:forEach var ="dto" items="${ list }">
 					<table id="tableList">
 			        	<tr>
 			        		<td>
