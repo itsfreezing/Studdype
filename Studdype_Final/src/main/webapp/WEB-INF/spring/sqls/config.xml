@@ -3,19 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
-  <configuration>
-  	<typeAliases>
-  		<typeAlias type="com.studdype.test.model.dto.board.BoardDto" alias="boardDto"/>
-  		<typeAlias type="com.studdype.test.model.dto.member.MemberDto" alias="memberDto"/>
-  		<typeAlias type="com.studdype.test.model.dto.study.StudyDto" alias="studyDto"/>
+<configuration>
+     <typeAliases>
+        <typeAlias type="com.studdype.test.model.dto.board.BoardDto" alias="boardDto"/>
+        <typeAlias type="com.studdype.test.model.dto.member.MemberDto" alias="memberDto"/>
+        <typeAlias type="com.studdype.test.model.dto.study.StudyDto" alias="studyDto"/>
+        <typeAlias type="com.studdype.test.model.dto.location.LocationSiDto" alias="locationSiDto"/>
+        <typeAlias type="com.studdype.test.model.dto.location.LocationGuDto" alias="locationGuDto"/>
+        <typeAlias type="com.studdype.test.model.dto.study.StudyCategoryDto" alias="studyCategoryDto"/>
   
-  	</typeAliases>
+     </typeAliases>
   
-  	<mappers>
-  		<mapper resource="/mybatis/board-mapper.xml"/>
-  		<mapper resource="/mybatis/member-mapper.xml"/>
-		  <mapper resource="mybatis/study-mapper.xml"/>
-  	</mappers>  
+     <mappers>
+        <mapper resource="/mybatis/board-mapper.xml"/>
+        <mapper resource="/mybatis/member-mapper.xml"/>
+      <mapper resource="mybatis/study-mapper.xml"/>
+      <mapper resource="mybatis/locationSi-mapper.xml"/>
+      <mapper resource="mybatis/locationGu-mapper.xml"/>
+      <mapper resource="mybatis/category-mapper.xml"/>
+     </mappers>  
   
   
   </configuration>

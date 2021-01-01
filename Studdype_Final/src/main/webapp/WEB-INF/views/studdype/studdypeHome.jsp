@@ -112,7 +112,7 @@ input#search:focus {
 
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
-				<c:forEach items="${studyList }" var="studyDto">
+				<c:forEach items="${studyList }" var="studyDto" items="${locationGu }" var="siDto" items="${locationSi }">
 				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor: pointer">
 					<div class="single-blog-post">
 						<div class="blog-img-responsive-4by3">
