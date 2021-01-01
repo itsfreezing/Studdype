@@ -94,4 +94,9 @@ public class HomeController {
 	public String Signup(HttpSession session) {
 		return "loginpage/signup";
 	}
+	
+	@RequestMapping("/notetest.do")
+	public String notetest() {
+		return "notetest";
+	}
 }
