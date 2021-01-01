@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 	    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	    <%@ page import="LocationGuDto"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,7 +113,7 @@ input#search:focus {
 
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
-				<c:forEach items="${studyList }" var="studyDto" items="${locationGu }" var="siDto" items="${locationSi }">
+				<c:forEach items="${studyList }" var="studyDto" items="${selectOne }" var="member">
 				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor: pointer">
 					<div class="single-blog-post">
 						<div class="blog-img-responsive-4by3">
@@ -123,14 +124,14 @@ input#search:focus {
 						<div class="blog-meta">
 							<h3>${studyDto.s_name }</h3>
 							<br> 
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">${studyDto.si_no }&nbsp; ${studyDto.gu_no }&nbsp;&nbsp;&nbsp;&nbsp;${studyDto.cate_no }</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">${locationGudto.getSi_no }&nbsp; ${studyDto.gu_no }&nbsp;&nbsp;&nbsp;&nbsp;${studyDto.cate_no }</span>
 						</div>
 
 						<p>${studyDto.s_info }</p>
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
 							<span>
-								<b>User</b>
+								<b>${ }</b>
 									<a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt }</a>
 							</span>
 						</div>

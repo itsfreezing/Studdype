@@ -30,4 +30,18 @@ public class StudyDaoImpl implements StudyDao {
 		return studyList;
 	}
 
+	//스터디 번호로 selectOne
+	@Override
+	public StudyDto selectOneBySno(int s_no) {
+		StudyDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectOneBySno", s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectOneBySno");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }
