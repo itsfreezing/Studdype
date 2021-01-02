@@ -34,9 +34,6 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-<link rel="stylesheet" href="./resources/css/summernote-lite.css">
-<script src="./resources/js/summernote-ko-KR.js"></script>
-<script src="./resources/js/summernote-lite.js"></script>
 
 
 <script type="text/javascript">
@@ -77,9 +74,7 @@
 			pageform.submit();
 		}
 	}
-	function test(){
-		alert("qwe");
-	}
+
 
 </script>
 </head>
@@ -123,7 +118,7 @@
 		</table>
 
 		
-		<button class="writeBtn" onclick="test()">글 작성</button>
+		<button class="writeBtn" onclick="location.href='freewriteform.do'">글 쓰기</button>
 	
 
 

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.model.biz.board.meet.FreeBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Controller
@@ -23,6 +28,8 @@ public class BoardController {
 	@Autowired
 	private FreeBiz freeBiz;
 	
+	@Autowired
+	private MemberBiz memberBiz;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final static int pageSize = 15; //한페이지에 보여줄 개수
@@ -78,5 +85,73 @@ public class BoardController {
 		model.addAttribute("writerMap", writerNameMap);
 		session.setAttribute("leftnavi", "freeboard");
 		return "community/freeboard/freeboard";
+	}
+	
+	//자유게시판 글 작성 form 이동
+	@RequestMapping("/freewriteform.do")
+	public String freewriteform() {
+				
+		return "community/freeboard/freewriteform";
+	}
+	
+	//자유게시판 글 작성
+	@RequestMapping("/freewrite.do")
+	public String freewrite(BoardDto board, HttpSession session) {
+		int writer = ((MemberDto)session.getAttribute("login")).getMem_no(); //작성자 번호
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); /// 스터디 번호
+		
+		board.setB_writer(writer);
+		board.setS_no(s_no);
+		int res = freeBiz.writeBoard(board );
+		
+		if ( res > 0) {
+			return "redirect:freeboard.do";
+		}else {
+			return "redirect:freewriteform.do";
+		}
+		
+	}
+	
+	//자유게시판 보드디테일
+	@RequestMapping(value = "/freedetail.do" ,method = RequestMethod.GET )
+	public String freeDetail(HttpServletRequest request,HttpServletResponse response,Model model) {
+		int b_no = Integer.parseInt(request.getParameter("boardno")); 
+		
+		
+		///////////////////////////////////////////////////////////////조회수 체크
+		int isVisit = 0; //온 게시판?
+		int isVisitPage = 0; //온 게시글?
+		Cookie[] cookies = request.getCookies(); //모든 쿠키 
+		
+		for(Cookie cookie:cookies) { //모든 쿠키 조회 
+			
+			if(cookie.getName().equals("freeboardvisit")) { //자유게시판에 온적이 있으면
+				isVisit = 1;				
+				
+				//freeboardvisit 쿠키에 글번호가 있으면
+				if(cookie.getValue().contains( request.getParameter("boardno") )) {
+					isVisitPage = 1; //온적있음 -> 1
+				}else { //없으면
+					cookie.setValue( cookie.getValue() + "_" + request.getParameter("boardno")); //쿠키값 + '_게시글번호'  업데이트해줌
+					response.addCookie(cookie); // 쿠키 추가
+				}
+			}
+		}
+		
+		if( isVisit == 0) { //자유게시판 첫 접근이면 쿠키 생성
+			Cookie cookie = new Cookie("freeboardvisit", request.getParameter("boardno"));
+			cookie.setMaxAge(60*60*24); //쿠키 하루생존
+			response.addCookie(cookie);
+		}
+		
+		
+		
+		BoardDto board = freeBiz.selectOne(b_no, isVisitPage);
+		
+		String writer = memberBiz.getNameByNo( board.getB_writer() );
+
+		model.addAttribute("dto", board);
+		model.addAttribute("writer", writer);
+		return "community/freeboard/freeDetail";
 	}
 }

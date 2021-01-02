@@ -39,6 +39,22 @@
 		]]>
 	</select>
 
+	<insert id="insertBoard" parameterType="boardDto">
+	
+		INSERT INTO FREE_BOARD 
+		VALUES( FREEBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
+		
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultMap="boardMap">
+		SELECT * 
+		FROM FREE_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+
+	<update id="updateCnt" parameterType="int">
+		UPDATE FREE_BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}	
+	</update>
 </mapper>
 
   
