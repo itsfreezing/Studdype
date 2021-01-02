@@ -44,4 +44,19 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	// 스터디 insert
+	@Override
+	public int insertStudy(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : insertStudy");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

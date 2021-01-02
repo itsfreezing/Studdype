@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.studdype.test.model.dao.board.dataFile.DataFileDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;
 import com.studdype.test.model.dao.location.LocationSiDao;
@@ -29,6 +30,9 @@ public class StudyBizImpl implements StudyBiz{
 	@Autowired
 	private StudyCateDao studyCatedao;
 	
+	@Autowired
+	private DataFileDao dataFiledao;
+	
 	@Override
 	public List<StudyDto> studyList() {
 		return study_Dao.studyList();
@@ -40,20 +44,26 @@ public class StudyBizImpl implements StudyBiz{
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
+	// 지역 (시) selectList
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
 	}
-
+	// 지역 (구/군) selectList
 	@Override
 	public List<LocationGuDto> locationGuList() {
 		return locationGudao.locationGuList();
 	}
-
+	// 카테고리 selectList
 	@Override
 	public List<StudyCategoryDto> categoryList() {
 		return studyCatedao.categoryList();
 
 	}
-		
+	// 스터디 insert
+	@Override
+	public int insertStudy(StudyDto dto) {
+		return study_Dao.insertStudy(dto);
+	}
+
 }

@@ -10,5 +10,6 @@
 <a href="studdypehome.do">스터띱 홈</a>
 <a href="communityhome.do">커뮤니티 홈</a>
 <a href="loginform.do">LOGIN</a>
+<a href="createStuddypeform.do">스터디생성</a>
 </body>
 </html>
