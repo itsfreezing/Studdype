@@ -24,8 +24,6 @@
 
 	<select id="pagingBoardList" parameterType="hashMap" resultMap="boardMap">
 		
-
-		
 		<![CDATA[
 			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
 			FROM
