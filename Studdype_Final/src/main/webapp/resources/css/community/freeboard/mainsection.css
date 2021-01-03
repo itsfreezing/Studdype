@@ -1,0 +1,53 @@
+
+.main-section {
+  float: right;
+  display: inline-block;
+  margin-right: 5%;
+  margin-top: 5%;
+  width: 70%;
+
+/*    border: 1px solid rgb(115, 98, 222);     */
+  border-radius: 10px;
+}
+	.boardlist{
+		margin: 0px auto;
+		margin-top: 5%;
+		margin-left: 0px;
+		border-top: 1px solid black;
+	}	
+	
+	.boardlist .headtr{
+		border-bottom: 1px solid  rgb(200, 200, 200);
+		height: 50px;
+		text-align: center;
+	}
+	
+	.boardlist tr{
+		border-bottom: 1px solid rgb(240, 240, 240);
+		
+	}
+	.boardlist td{
+		
+		padding: 15px;
+	}
+	
+	.tddate{
+		text-align: center;
+	}
+	
+	.tdcnt{
+		text-align: center;
+	}
+	
+	.boardlist td a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid black;
+		padding-bottom: 3px;
+	}
+	
+	
+	
+	
+
+
+

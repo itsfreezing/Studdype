@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="member">
+	
+		<resultMap type="memberDto" id="memberMap">
+			<result property="mem_no" column="MEM_NO"></result>
+			<result property="mem_id" column="MEM_ID"></result>
+			<result property="mem_pw" column="MEM_PW"></result>
+			<result property="mem_name" column="MEM_NAME"></result>
+			<result property="mem_rno" column="MEM_RNO"></result>
+			<result property="mem_gender" column="MEM_GENDER"></result>
+			<result property="mem_phone" column="MEM_PHONE"></result>
+			<result property="mem_email" column="MEM_EMAIL"></result>
+		</resultMap>
+		
+		<select id="selectOne" parameterType="int" resultMap="memberMap">
+			SELECT * FROM MEMBER WHERE MEM_NO = #{mem_no}
+		</select>
+		
+		<select id="selectWriterByFreeList" parameterType="int" resultType="string">
+			SELECT MEM_NAME
+			FROM MEMBER
+			WHERE MEM_NO = #{writerNo}
+		</select>
+	
+	</mapper>
