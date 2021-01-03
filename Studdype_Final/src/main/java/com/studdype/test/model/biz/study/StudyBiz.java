@@ -22,7 +22,7 @@ public interface StudyBiz {
 	public List<StudyCategoryDto> categoryList(); // 카테고리 selectList
 	public int insertStudy(StudyDto dto); //스터디 insert
 	public int selectStudyFinalNumber();	// 등록된 스터디 마지막 번호
-	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list); //리더이름 가져오기
+	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList); //리더이름 가져오기
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //구이름 가져오기
 	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList); //시이름 가져오기
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); //카테고리 가져오기 

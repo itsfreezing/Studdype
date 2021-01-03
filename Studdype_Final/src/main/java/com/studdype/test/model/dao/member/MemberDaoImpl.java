@@ -55,20 +55,23 @@ public class MemberDaoImpl implements MemberDao{
 
 	//스터디 메인페이지 리스트에 작성자이름 가져오기
 	@Override
-	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list) {
+	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList) {
 		Map<Integer, String> studyMainMap = new HashMap<Integer, String>();
 		String  leaderName = null;
 		int writerNo = 0;
-		for(int i=0; i<list.size(); i++) {
-			writerNo = list.get(i).getLeader_no();
+		for(int i=0; i<studyList.size(); i++) {
+			writerNo = studyList.get(i).getLeader_no();
+			System.out.println(writerNo);
 			try {
 				leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
 			}catch(Exception e) {
 					System.out.println("에러: 메인페이지 리더이름 불러오기");
 					e.printStackTrace();
 				}
-				studyMainMap.put(list.get(i).getS_no(), leaderName);
+				studyMainMap.put(studyList.get(i).getLeader_no(), leaderName);
 			}
+		System.out.println(writerNo);
+		System.out.println(leaderName);
 		
 		return studyMainMap;
 	}
