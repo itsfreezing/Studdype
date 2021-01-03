@@ -4,30 +4,23 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="meetboard">
 		
-		<!-- selectList -->
-		<select id="meetBoardSelectList" parameterType="int" resultType="meetDto">
-			SELECT MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
-			FROM MEET_BOARD
-			WHERE S_NO = #{s_no}
-			ORDER BY MEET_NO DESC  
-		</select> 
-		
-		<select id="totalBoardNum" parameterType="int"	resultType="_int">
+		<!-- 모임 게시글 총 개수 -->		
+		<select id="totalMeetBoardNum" parameterType="int"	resultType="_int">
 			SELECT COUNT(*)
-			FROM FREE_BOARD
+			FROM MEET_BOARD
 			WHERE S_NO = #{s_no}
 		</select>
 		
 		<!-- paging -->
-		<select id="pagingMeetBoardList" parameterType="hashMap" resultMap="boardMap">
+		<select id="pagingMeetBoardList" parameterType="hashMap" resultType="meetDto">
 			<![CDATA[
-				SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+				SELECT MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
 				FROM
 				(
-					SELECT ROWNUM N, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
-					FROM FREE_BOARD
+					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
+					FROM MEET_BOARD
 					WHERE S_NO = #{studyno}
-					ORDER BY B_NO DESC
+					ORDER BY MEET_NO DESC
 				)
 				WHERE N >= #{startRow} AND N <= #{endRow}
 			]]>

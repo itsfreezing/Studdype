@@ -70,6 +70,55 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고�
 
 SELECT * FROM STUDY;
 
+-- 모임 게시판
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임1', 1, '모임1의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임2', 1, '모임2의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임3', 1, '모임3의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임4', 1, '모임4의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임5', 1, '모임5의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임6', 1, '모임6의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임7', 1, '모임7의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임8', 1, '모임8의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임9', 1, '모임9의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임10', 1, '모임10의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임11', 1, '모임11의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임12', 1, '모임12의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임13', 1, '모임13의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임14', 1, '모임14의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임15', 1, '모임15의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+INSERT INTO MEET_BOARD VALUES(
+MEETBOARDSEQ.NEXTVAL, 1, '모임16', 1, '모임16의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
 
 SELECT * FROM MEET_BOARD;
 
