@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;
 import com.studdype.test.model.dao.location.LocationSiDao;
+import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dao.study.StudyDao;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
@@ -29,17 +31,21 @@ public class StudyBizImpl implements StudyBiz{
 	@Autowired
 	private StudyCateDao studyCatedao;
 	
+	@Autowired
+	private MemberDao memberDao;
+	
+	//메인페이지 스터디 list
 	@Override
 	public List<StudyDto> studyList() {
 		return study_Dao.studyList();
 	}
-
 
 	//스터디 번호로 selectOne
 	@Override
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
+	
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
@@ -54,6 +60,21 @@ public class StudyBizImpl implements StudyBiz{
 	public List<StudyCategoryDto> categoryList() {
 		return studyCatedao.categoryList();
 
+	}
+
+	@Override
+	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList) {
+		return memberDao.selectLeaderNameByMainPage(studyList);
+	}
+
+	@Override
+	public Map<Integer, String> selectGuForMainPage(List<LocationGuDto> list) {
+		return locationGudao.selectGuForMainPage(list);
+	}
+
+	@Override
+	public Map<Integer, String> selectSiForMainPage(List<LocationSiDto> list) {
+		return locationSidao.selectSiForMainPage(list);
 	}
 		
 }

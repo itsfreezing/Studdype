@@ -9,4 +9,11 @@
 		FROM LOCATION_GU
 		ORDER BY GU_NO ASC
 	</select>
+	
+	<select id="selectGuForMainPage" parameterType="int" resultType="LocationGuDto">
+		SELECT GU_NAME
+		FROM LOCATION_GU
+		WHERE #{gu_no}
+	</select>
+	
 </mapper>
