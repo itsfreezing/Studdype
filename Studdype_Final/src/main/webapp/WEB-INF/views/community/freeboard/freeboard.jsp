@@ -35,6 +35,7 @@
 <script src="./resources/assets/js/main.js"></script>
 
 
+
 <script type="text/javascript">
 	$(function(){
 		/* 부모 선택 후 흰색변경 JS */
@@ -74,6 +75,7 @@
 		}
 	}
 
+
 </script>
 </head>
 <body>
@@ -95,21 +97,29 @@
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
+			<c:choose>
+				<c:when test="${list == null }">
+					<td colspan="4">게 시 글 이 없 습 니 다</td>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
+						<tr>
+							<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
+							<td class="tdwriter">${writerMap.get( list.get(i).getB_no() ) }</td>
+							<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+							<td class="tdcnt">${list.get(i).getB_cnt() }</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			
-			<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
-				<tr>
-				
-					<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
-					<td class="tdwriter">${writerMap.get( list.get(i).getB_no() ) }</td>
-					<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-					<td class="tdcnt">${list.get(i).getB_cnt() }</td>
-				</tr>
-			</c:forEach>
+			
 			
 		</table>
 
-
-
+		
+		<button class="writeBtn" onclick="location.href='freewriteform.do'">글 쓰기</button>
+	
 
 
 		<!-- 페이징 -->

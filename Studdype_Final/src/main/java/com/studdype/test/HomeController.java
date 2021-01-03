@@ -34,7 +34,6 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-		
 	@RequestMapping("/studdypehome.do")
 	public String studdypeHeader() {
 		return "studdype/studdypeHome";
@@ -96,5 +95,10 @@ public class HomeController {
 	@RequestMapping("/signupform.do")
 	public String Signup(HttpSession session) {
 		return "loginpage/signup";
+	}
+	
+	@RequestMapping("/notetest.do")
+	public String notetest() {
+		return "notetest";
 	}
 }

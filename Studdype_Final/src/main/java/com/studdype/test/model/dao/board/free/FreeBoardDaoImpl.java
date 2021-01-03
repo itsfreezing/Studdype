@@ -43,4 +43,44 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		return resList;
 	}
 
+	//자유게시판 글 작성
+	@Override
+	public int insertBoard(BoardDto board) {
+		int res = 0;
+			
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertBoard", board);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: insertBoard!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//자유게시판 글 가져오기
+	@Override
+	public BoardDto selectOne(int b_no) {
+		BoardDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectOne!!");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public void updateCnt(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateCnt", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: UpdateCnt");
+			e.printStackTrace();
+		}
+	}
+
 }
