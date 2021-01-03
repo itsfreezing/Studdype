@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class LocationGuDaoImpl implements LocationGuDao{
@@ -29,23 +30,23 @@ public class LocationGuDaoImpl implements LocationGuDao{
 		}
 		return list;
 	}
-
+	
+	//메인페이지 리스트 넘기기
 	@Override
-	public Map<Integer, String> selectGuForMainPage(List<LocationGuDto> list) {
+	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList) {
 		Map<Integer, String> selectGuForMainMap = new HashMap<Integer, String>();
 		String  guName = null;
 		int guNo = 0;
-		for(int i=0; i<list.size(); i++) {
-			guNo = list.get(i).getGu_no();
+		for(int i=0; i<studyList.size(); i++) {
+			guNo = studyList.get(i).getGu_no();
 			try {
 				guName = sqlSession.selectOne(NAMESPACE+"selectGuForMainPage", guNo);
 			}catch(Exception e) {
 					System.out.println("에러: 구 맵에 넣기");
 					e.printStackTrace();
 				}
-			selectGuForMainMap.put(list.get(i).getGu_no(), guName);
+			selectGuForMainMap.put(studyList.get(i).getGu_no(), guName);
 			}
-		
 		return selectGuForMainMap;
 		
 	}
