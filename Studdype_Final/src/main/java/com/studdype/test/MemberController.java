@@ -30,4 +30,9 @@ public class MemberController {
 		
 	
 	}
+	
+	@RequestMapping(value="/idchk.do", method=RequestMethod.POST)
+	public String IdChk() {
+		return "loginpage/idchk";
+	}
 }
