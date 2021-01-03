@@ -238,7 +238,7 @@ td.percentage{
 
 .pagin {
 	list-style: none;
-	display: inline;
+	display: table;
 	clear: right;
 	margin-left: auto;
 	margin-right: auto;
