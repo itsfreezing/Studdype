@@ -1,10 +1,13 @@
 package com.studdype.test.model.dto.board;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileDto {
 	private int f_no; // ���� ��ȣ
 	private int b_no; // �Խñ� ��ȣ
 	private String f_name; // ���� ���� �̸�
 	private String photo_ismain; // ��ǥ����
+	private MultipartFile myfile;
 
 	public FileDto() {
 		super();
@@ -59,5 +62,21 @@ public class FileDto {
 	public void setPhoto_ismain(String photo_ismain) {
 		this.photo_ismain = photo_ismain;
 	}
+
+	public MultipartFile getMyfile() {
+		return myfile;
+	}
+
+	public void setMyfile(MultipartFile myfile) {
+		this.myfile = myfile;
+	}
+
+	@Override
+	public String toString() {
+		return "FileDto [f_no=" + f_no + ", b_no=" + b_no + ", f_name=" + f_name + ", photo_ismain=" + photo_ismain
+				+ ", myfile=" + myfile + "]";
+	}
+	
+	
 
 }
