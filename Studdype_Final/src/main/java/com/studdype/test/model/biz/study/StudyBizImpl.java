@@ -66,4 +66,10 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.insertStudy(dto);
 	}
 
+	// 등록된 스터디 마지막 번호
+	@Override
+	public int selectStudyFinalNumber() {
+		return study_Dao.selectStudyFinalNumber();
+	}
+
 }

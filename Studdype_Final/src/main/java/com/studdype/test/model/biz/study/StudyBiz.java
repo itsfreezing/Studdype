@@ -17,5 +17,6 @@ public interface StudyBiz {
 	public List<LocationGuDto> locationGuList(); // 지역(구/군) selectList
 	public List<StudyCategoryDto> categoryList(); // 카테고리 selectList
 	public int insertStudy(StudyDto dto); //스터디 insert
+	public int selectStudyFinalNumber();	// 등록된 스터디 마지막 번호
 
 }

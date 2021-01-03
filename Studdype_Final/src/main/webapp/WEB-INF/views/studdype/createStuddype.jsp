@@ -146,49 +146,43 @@
 		var maxcnt = $("#maxcnt_id").val();
 		var content = $("#content_id").val();
 		
-		var cnt = 0;
+		var errorMsg = "";
 		
 		if(mem_name == "" || mem_name == null || mem_name == undefined ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
 			$("#mem_name_id").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "스터디 이름 / ";
 		}
-		
 		if(info == "" || info == null || info == undefined ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "한줄 소개 / "
 		}
-		
 		if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "카테고리 / ";
 		}
-		
 		if(locationSi == "(시 단위)") {
 			$("#selectLocationSi").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "지역(시) / ";
 		}
-		
 		if(locationGu == "(구/군 단위)") {
 			$("#selectLocationGu").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "지역(구/군) / ";
 		}
-		
 		if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
 			$("#maxcnt_id").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "최대 인원 / ";
 		}
-		
 		if(content == "" || content == null || content == undefined ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
 			$("#content_id").css('border', '1.5px solid red');
-			cnt++;
+			errorMsg += "상세 소개글 ";
 		}
 		
-		if(cnt > 0) {
-			alert("스터디 대표사진 이외의 항목을 모두 기입해주세요.");
+		if(!(errorMsg == null) && !(errorMsg == "")) {
+			alert(errorMsg+"항목을 모두 기입해주세요. (스터디 대표사진은 미입력 가능)");
 			return false;
 		}
 		
@@ -263,7 +257,7 @@
 				<div id="mainright">
 					<div class="form-group" id="file">
 						<label>스터디 대표사진</label>
-						<img id="image_section" src="#" />
+						<img id="image_section" src="./resources/assets/img/icon_photoUpload.png" />
 						<input type="file" name="myfile" id="fileinput">
 					</div>
 				</div>

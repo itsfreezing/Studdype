@@ -31,7 +31,12 @@
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
-		VALUES(STUDYSEQ.NEXTVAL, 팀장번호 , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, 1)
+		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, 1)
 	</insert>
+	
+	<select id="selectStudyFinalNumber" resultType="int">
+		SELECT S_NO
+		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
+	</select>
 	
 </mapper>
