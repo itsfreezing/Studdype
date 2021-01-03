@@ -10,10 +10,7 @@
 <a href="studyList.do">스터띱 홈</a>
 <a href="communityhome.do">커뮤니티 홈</a>
 <a href="loginform.do">LOGIN</a>
-<<<<<<< HEAD
 <a href="createStuddypeform.do">스터디생성</a>
-=======
 <a href="notetest.do">서머노트 테스트</a>
->>>>>>> master
 </body>
 </html>

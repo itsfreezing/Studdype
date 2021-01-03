@@ -29,7 +29,6 @@
 		FROM STUDY
 		WHERE S_NO = #{s_no}
 	</select>
-<<<<<<< HEAD
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
@@ -41,8 +40,6 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
-=======
-
 <!-- 	<select id="listCriteria" resultType="BoardVO">
 		<![CDATA[
 			SELECT
@@ -54,6 +51,4 @@
 			
 		]]>
 	</select> -->
-
->>>>>>> master
 </mapper>

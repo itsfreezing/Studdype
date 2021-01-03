@@ -33,14 +33,11 @@ public class StudyBizImpl implements StudyBiz{
 	private StudyCateDao studyCatedao;
 	
 	@Autowired
-<<<<<<< HEAD
 	private DataFileDao dataFiledao;
-	
-=======
+
 	private MemberDao memberDao;
 	
 	//메인페이지 스터디 list
->>>>>>> master
 	@Override
 	public List<StudyDto> studyList() {
 		return study_Dao.studyList();
@@ -51,11 +48,8 @@ public class StudyBizImpl implements StudyBiz{
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
-<<<<<<< HEAD
 	// 지역 (시) selectList
-=======
-	
->>>>>>> master
+
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
@@ -71,7 +65,7 @@ public class StudyBizImpl implements StudyBiz{
 		return studyCatedao.categoryList();
 
 	}
-<<<<<<< HEAD
+
 	// 스터디 insert
 	@Override
 	public int insertStudy(StudyDto dto) {
@@ -83,8 +77,6 @@ public class StudyBizImpl implements StudyBiz{
 	public int selectStudyFinalNumber() {
 		return study_Dao.selectStudyFinalNumber();
 	}
-
-=======
 
 	@Override
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList) {
@@ -100,6 +92,4 @@ public class StudyBizImpl implements StudyBiz{
 	public Map<Integer, String> selectSiForMainPage(List<LocationSiDto> list) {
 		return locationSidao.selectSiForMainPage(list);
 	}
-		
->>>>>>> master
 }
