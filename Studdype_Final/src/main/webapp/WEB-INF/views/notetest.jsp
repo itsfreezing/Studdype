@@ -18,7 +18,7 @@
 <script src="./resources/summernote/summernote.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="./resources/summernote/summernote-ko-KR.js"></script>
- <script >
+ <script type="text/javascript" >
  $(document).ready(function() {
  $('#summernote').summernote({
 		height: 300,
