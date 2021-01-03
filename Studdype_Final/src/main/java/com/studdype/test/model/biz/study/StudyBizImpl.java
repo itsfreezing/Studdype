@@ -34,7 +34,8 @@ public class StudyBizImpl implements StudyBiz{
 	
 	@Autowired
 	private DataFileDao dataFiledao;
-
+	
+	@Autowired
 	private MemberDao memberDao;
 	
 	//메인페이지 스터디 list
@@ -78,7 +79,8 @@ public class StudyBizImpl implements StudyBiz{
 	public int selectStudyFinalNumber() {
 		return study_Dao.selectStudyFinalNumber();
 	}
-
+	
+	//리더이름 selectOne
 	@Override
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList) {
 		return memberDao.selectLeaderNameByMainPage(studyList);
