@@ -8,9 +8,10 @@
   		<typeAlias type="com.studdype.test.model.dto.board.BoardDto" alias="boardDto"/>
   		<typeAlias type="com.studdype.test.model.dto.member.MemberDto" alias="memberDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyDto" alias="studyDto"/>
-      <typeAlias type="com.studdype.test.model.dto.location.LocationSiDto" alias="locationSiDto"/>
+      	<typeAlias type="com.studdype.test.model.dto.location.LocationSiDto" alias="locationSiDto"/>
   		<typeAlias type="com.studdype.test.model.dto.location.LocationGuDto" alias="locationGuDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyCategoryDto" alias="studyCategoryDto"/>
+  		<typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
       </typeAliases>
   
   	<mappers>

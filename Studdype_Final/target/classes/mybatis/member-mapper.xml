@@ -24,6 +24,7 @@
 			FROM MEMBER
 			WHERE MEM_NO = #{writerNo}
 		</select>
+<<<<<<< HEAD
 	
 		<insert id="insert" parameterType="string">
 			INSERT INTO MEMBER 
@@ -35,4 +36,7 @@
 	
 	
 	
+=======
+
+>>>>>>> c03d344db8909f264d889e788bad9b40c6ecd6c4
 	</mapper>
