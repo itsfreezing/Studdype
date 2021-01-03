@@ -165,4 +165,9 @@ public class BoardController {
 		
 		return isVisitPage;
 	}
+	
+	@RequestMapping("/bookboard.do")
+	public String bookBoard() {
+		return "community/book/bookboard";
+	}
 }

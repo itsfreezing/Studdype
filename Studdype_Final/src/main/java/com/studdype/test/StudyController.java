@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -175,7 +177,7 @@ public class StudyController {
 		int studyRes = studyBiz.insertStudy(studydto);
 		
 		if(studyRes > 0) {
-			return "studdype/studdypeHome";
+			return "redirect:studyList.do";
 		}else {
 			return "redirect:createStuddypeform.do";
 		}
