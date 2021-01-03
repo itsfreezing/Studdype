@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -19,5 +20,8 @@ public interface StudyBiz {
 	public List<LocationSiDto> locationSiList();
 	public List<LocationGuDto> locationGuList();
 	public List<StudyCategoryDto> categoryList();
+	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list); //리더이름 가져오기
+	public Map<Integer, String> selectGuForMainPage(List<LocationGuDto> list); //구이름 가져오기
+	public Map<Integer, String> selectSiForMainPage(List<LocationSiDto> list); //시이름 가져오기
 
 }

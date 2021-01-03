@@ -14,7 +14,8 @@ public class StudyDaoImpl implements StudyDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	//스터디 list 전체 가져오기
 	@Override
 	public List<StudyDto> studyList() {
 

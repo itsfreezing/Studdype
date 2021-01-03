@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -50,6 +51,25 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 		return resMap;
+	}
+
+	@Override
+	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list) {
+		Map<Integer, String> studyMainMap = new HashMap<Integer, String>();
+		String  leaderName = null;
+		int leaderNo = 0;
+		for(int i=0; i<list.size(); i++) {
+			leaderNo = list.get(i).getLeader_no();
+			try {
+				leaderName = sqlSession.selectOne(NAMESPACE+"selectLeaderNameByMainPage", leaderNo);
+			}catch(Exception e) {
+					System.out.println("에러: 메인페이지 리더이름 불러오기");
+					e.printStackTrace();
+				}
+				studyMainMap.put(list.get(i).getS_no(), leaderName);
+			}
+		
+		return studyMainMap;
 	}
 
 }

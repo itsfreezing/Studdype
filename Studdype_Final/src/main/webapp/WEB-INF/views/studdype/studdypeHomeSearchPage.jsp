@@ -48,15 +48,6 @@
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
 	});
-	
-	$(document).on('click', '#btnSearch', function(e){
-		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/studdype/studyHomeSearchPage";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-		location.href = url;
-		console.log(url);
-	});
 </script>
 
 <style type="text/css">
@@ -104,14 +95,15 @@ input#search:focus {
 	<div class="blogpost-area">
 		<!-- 검색창 -->
 		<form action="/.do" method="get">
-			<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 100px;">
-				<span><img src="./resources/assets/img/logo_purple.png" class="logo"></span> 
-				<input type="text" class="form-control" id="search" placeholder="원하는 스터디나 카테고리를 검색하세요.">
-				 <span>
-				 	<button type="submit" id="homeSearch" name="studyHomeSearch">
-						<img src="./resources/assets/img/icon_search_white.png"style="width: 20px;">
-					</button>
-				</span>
+			<div class="input-group"
+				style="width: 50%; margin: auto; margin-bottom: 100px;">
+				<span><img src="./resources/assets/img/logo_purple.png"
+					class="logo"></span> <input type="text" class="form-control"
+					id="search" placeholder="원하는 스터디나 카테고리를 검색하세요."> <span><button
+						type="submit" id="search">
+						<img src="./resources/assets/img/icon_search_white.png"
+							style="width: 20px;">
+					</button></span>
 			</div>
 		</form>
 		
@@ -121,7 +113,6 @@ input#search:focus {
 
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
-				<!-- list 시작 -->
 				<c:forEach items="${studyList }" var="studyDto">
 				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor: pointer">
 					<div class="single-blog-post">
@@ -140,7 +131,7 @@ input#search:focus {
 						<!-- 최대인원수/팀장명 -->
 						<div class="blog-comments">
 							<span>
-								<b>${leaderName.get(studyDto.leader_no) }</b>
+								<b>${leaderName.get(1).getMem_name }</b>
 									<a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt }</a>
 							</span>
 						</div>

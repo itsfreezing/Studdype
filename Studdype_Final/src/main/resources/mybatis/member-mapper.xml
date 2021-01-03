@@ -24,5 +24,11 @@
 			FROM MEMBER
 			WHERE MEM_NO = #{writerNo}
 		</select>
+		
+		<select id="selectLeaderNameByMainPage" parameterType="int" resultType="string">
+			SELECT MEM_NAME
+			FROM MEMBER
+			WHERE MEM_NO = #{leaderNo}
+		</select>
 	
 	</mapper>
