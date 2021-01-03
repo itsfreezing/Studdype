@@ -71,7 +71,7 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		
 		return studyMainMap;
-
+	}
 	//멤버번호로 이름 가져오기
 	@Override
 	public String selectNameByNo(int mem_no) {
