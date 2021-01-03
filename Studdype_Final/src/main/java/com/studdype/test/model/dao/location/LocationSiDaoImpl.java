@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.location.LocationSiDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class LocationSiDaoImpl implements LocationSiDao{
@@ -29,24 +30,27 @@ public class LocationSiDaoImpl implements LocationSiDao{
 		}
 		return list;
 	}
-
+	
+	//메인페이지 리스트 넘기기
 	@Override
-	public Map<Integer, String> selectSiForMainPage(List<LocationSiDto> list) {
+	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList) {
 		Map<Integer, String> selectSiForMainMap = new HashMap<Integer, String>();
 		String  siName = null;
 		int siNo = 0;
-		for(int i=0; i<list.size(); i++) {
-			siNo = list.get(i).getSi_no();
+		for(int i=0; i<studyList.size(); i++) {
+			siNo = studyList.get(i).getSi_no();
 			try {
 				siName = sqlSession.selectOne(NAMESPACE+"selectSiForMainPage", siNo);
 			}catch(Exception e) {
 					System.out.println("에러: 시 맵에 넣기");
 					e.printStackTrace();
 				}
-			selectSiForMainMap.put(list.get(i).getSi_no(), siName);
+			selectSiForMainMap.put(studyList.get(i).getSi_no(), siName);
 			}
 		
 		return selectSiForMainMap;
 	}
+
+
 
 }

@@ -53,7 +53,7 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 
-
+	//스터디 메인페이지 리스트에 작성자이름 가져오기
 	@Override
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list) {
 		Map<Integer, String> studyMainMap = new HashMap<Integer, String>();
@@ -71,6 +71,7 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		
 		return studyMainMap;
+	}
 
 	//멤버번호로 이름 가져오기
 	@Override

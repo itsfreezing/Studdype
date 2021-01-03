@@ -1,7 +1,13 @@
 package com.studdype.test;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,11 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 
 import com.studdype.test.model.dto.study.StudyDto;
+import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -48,23 +57,8 @@ public class HomeController {
 	public String searchByCategory() {
 		return "studdype/searchByCategory";
 	}
-	
 
 	//커뮤니티 홈으로
-
-	@RequestMapping("/createStuddypeform.do")
-	public String createStuddypeForm(Model model) {
-		List<LocationSiDto> sidtos = studyBiz.locationSiList();
-		List<LocationGuDto> gudtos = studyBiz.locationGuList();
-		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
-		
-		model.addAttribute("sidtos", sidtos);
-		model.addAttribute("gudtos", gudtos);
-		model.addAttribute("catedtos", catedtos);
-		
-		return "studdype/createStuddype";
-	}
-	
 
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {

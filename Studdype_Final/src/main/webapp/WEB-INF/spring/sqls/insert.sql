@@ -64,10 +64,13 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름14', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름15', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름16', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름17', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '안녕하세요', '스터디할사람', '우리 스터디는 재밋어요', NULL, 2, 2, 2, 15, 0);
+
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고싶은  스터디 모임', '취직연습','사진',1,1,1,6,1 );
+
 SELECT * FROM STUDY;
 
 SELECT * FROM MEET_BOARD;
