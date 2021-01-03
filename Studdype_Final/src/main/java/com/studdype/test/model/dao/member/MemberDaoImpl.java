@@ -41,7 +41,7 @@ public class MemberDaoImpl implements MemberDao{
 		for(int i = 0; i < list.size(); i++) {
 			writerNo = list.get(i).getB_writer();
 			try {
-				writer = sqlSession.selectOne(NAMESPACE+"selectWriterByFreeList", writerNo);
+				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
 			} catch (Exception e) {
 				System.out.println("[ERROR]: selectWriterByFreeList !!!!!!");
 				e.printStackTrace();
@@ -50,6 +50,21 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 		return resMap;
+	}
+
+	//멤버번호로 이름 가져오기
+	@Override
+	public String selectNameByNo(int mem_no) {
+		String name = null;
+		
+		try {
+			name= sqlSession.selectOne(NAMESPACE+"selectNameByNo", mem_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectNameByNO!");
+			e.printStackTrace();
+		}
+				
+		return name;
 	}
 
 }
