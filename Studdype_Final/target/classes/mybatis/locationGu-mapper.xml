@@ -10,10 +10,10 @@
 		ORDER BY GU_NO ASC
 	</select>
 	
-	<select id="selectGuForMainPage" parameterType="int" resultType="LocationGuDto">
+	<select id="selectGuForMainPage" parameterType="int" resultType="string">
 		SELECT GU_NAME
 		FROM LOCATION_GU
-		WHERE #{gu_no}
+		WHERE GU_NO = #{gu_no}
 	</select>
 	
 </mapper>

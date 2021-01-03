@@ -133,7 +133,8 @@ input#search:focus {
 						<div class="blog-meta">
 							<h3>${studyDto.s_name }</h3>
 							<br> 
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">${studyDto.si_no }&nbsp; ${studyDto.gu_no }&nbsp;&nbsp;&nbsp;&nbsp;${studyDto.cate_no }</span>
+							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">${siList.get(studyDto.si_no) }&nbsp; ${guList.get(studyDto.gu_no) }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cateList.get(studyDto.cate_no) }</span>
 						</div>
 
 						<p>${studyDto.s_info }</p>
