@@ -130,6 +130,24 @@
 						<br> <input type="radio" name="fruit" value="banana">불참석<br>
 						<br> <input type="button" value="투표하기" class="submitBtn vote" onclick="">
 					</th>
+					<td>
+						<table id="voteList" onclick="location.href='meetdetail.do'">
+										<tr>
+											<td id="attend_y" class="attend">참석</td>
+											<td class="graph"></td>
+											<td class="percentage">82%</td>
+										</tr>
+										<tr>
+											<td id="attend_n" class="attend">불참석</td>
+											<td class="graph"></td>
+											<td class="percentage">18%</td>
+										</tr>
+										<tr>
+											<td colspan="3" id="member_count">참여인원: 13명</td>
+										</tr>
+									</table>
+					</td>
+				</tr>
 			</table>
 			<div>
 				<button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp; 
