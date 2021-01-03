@@ -75,7 +75,6 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return studyMainMap;
 	}
-
 	//멤버번호로 이름 가져오기
 	@Override
 	public String selectNameByNo(int mem_no) {
@@ -90,6 +89,22 @@ public class MemberDaoImpl implements MemberDao{
 				
 		return name;
 
+	}
+	
+	//회원가입
+	@Override
+	public int insert(MemberDto dto) {
+		int res=0;
+		System.out.println(dto.getMem_id());
+		try {
+			res=sqlSession.insert(NAMESPACE+"insert",dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error]:insert");
+			e.printStackTrace();
+		}
+
+		return res;
 	}
 
 }
