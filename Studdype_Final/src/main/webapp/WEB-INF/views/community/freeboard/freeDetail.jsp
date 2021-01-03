@@ -61,8 +61,42 @@
 			</span>
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
-		<div class="btnDiv"></div>
+		<div class="btnDiv">
+		</div>
+		
+		<div class="replyBox" >
+			<div class="replyTitle">
+				댓글(2) 등록순 최신순
+			</div>
+			<ul class="replyList">
+				<li class="replyItem">
+					<div class="reply_area">
+						<div class="reply_writer_box">작성자</div>
+						<div class="reply_comment_box">내용</div>
+						<div class="reply_info_box">2020.12.24 11:43 답글쓰기 </div>
+					</div>					
+				</li>
+				<hr>
+				<li class="replyItem">
+					<div class="reply_area">
+						<div class="reply_writer_box">작성자</div>
+						<div class="reply_comment_box">내용</div>
+						<div class="reply_info_box">2021.01.23 01:23 답글쓰기</div>
+					</div>					
+				</li>
+				<hr>
+			</ul>
+			
+			
+			<div class="replyWrite"  >
+				<p class="writerId">작성자</p>
+				<textarea class="write_content" placeholder="댓글을 남겨보세요" style="width: 100%;"></textarea>
+				<br>등록
+			</div>
+		</div>
  	</div>
+ 	
+ 
 
 	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>

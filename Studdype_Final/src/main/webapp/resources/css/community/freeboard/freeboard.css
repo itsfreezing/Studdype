@@ -113,9 +113,9 @@
 .main-section3 {
 	float: right;
 	display: inline-block;
-	width: 67%;
 	margin-top: 5%;
-	margin-right: 10%;
+   margin-right:13%;
+   width: 60%;
 	
 }
 
@@ -174,4 +174,8 @@
 	padding-right: 20px;
 	padding-left: 20px;
 	padding-top: 30px;
+}
+.btnDiv{
+	border-bottom: 1px solid #ccc;
+	
 }

@@ -44,7 +44,7 @@ public class BoardController {
 		Map<Integer, String> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
 
 	
-		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판
+		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 
 		paging(pageMap, pagenum, totalBoardNum); //페이징 함수
 	
