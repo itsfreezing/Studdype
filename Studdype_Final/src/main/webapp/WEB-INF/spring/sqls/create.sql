@@ -128,7 +128,7 @@ DROP TABLE MEET_VOTE;
 DROP TABLE MEET_REPLY;
 
 
-INSERT INTO STUDY VALUES(1, 1, '스터디 이름', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+
 
 
 DROP TABLE MEMBER;

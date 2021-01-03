@@ -1,9 +1,6 @@
 package com.studdype.test;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -30,16 +26,23 @@ public class StudyController {
 	public String list(Model model) {
 		List<StudyDto> studyList = null;
 		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
+		Map<Integer, String> selectSiForMainMap = null;
+		Map<Integer, String> selectGuForMainMap = null;
+		Map<Integer, String> selectCateForMainMap = null;
+		
 		logger.info("STUDY - SELECTLIST");
 		
-		studyList = studyBiz.studyList();
-		System.out.println(studyList.get(0).getS_name());
-		System.out.println(studyList.get(0).getLeader_no());
-		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList);
-		System.out.println(studyMainLeaderNameMap);
-		System.out.println(studyMainLeaderNameMap.get(1));
+		studyList = studyBiz.studyList();	//스터디 리스트
+		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); //구 리스트
+		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); //시 리스트
+		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); //리더이름 리스트
+		selectCateForMainMap = studyBiz.categoryListForHome(studyList); //카테고리 리스트
+		
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
+		model.addAttribute("siList", selectSiForMainMap);
+		model.addAttribute("guList", selectGuForMainMap);
+		model.addAttribute("cateList", selectCateForMainMap);
 
 		
 		return "studdype/studdypeHome";
