@@ -1,4 +1,4 @@
-package com.studdype.common.interceptor;
+package com.studdype.test.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
