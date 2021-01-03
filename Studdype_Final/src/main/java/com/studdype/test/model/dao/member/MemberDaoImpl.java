@@ -42,7 +42,7 @@ public class MemberDaoImpl implements MemberDao{
 		for(int i = 0; i < list.size(); i++) {
 			writerNo = list.get(i).getB_writer();
 			try {
-				writer = sqlSession.selectOne(NAMESPACE+"selectWriterByFreeList", writerNo);
+				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
 			} catch (Exception e) {
 				System.out.println("[ERROR]: selectWriterByFreeList !!!!!!");
 				e.printStackTrace();
@@ -53,15 +53,16 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 
+
 	@Override
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list) {
 		Map<Integer, String> studyMainMap = new HashMap<Integer, String>();
 		String  leaderName = null;
-		int leaderNo = 0;
+		int writerNo = 0;
 		for(int i=0; i<list.size(); i++) {
-			leaderNo = list.get(i).getLeader_no();
+			writerNo = list.get(i).getLeader_no();
 			try {
-				leaderName = sqlSession.selectOne(NAMESPACE+"selectLeaderNameByMainPage", leaderNo);
+				leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
 			}catch(Exception e) {
 					System.out.println("에러: 메인페이지 리더이름 불러오기");
 					e.printStackTrace();
@@ -70,6 +71,21 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		
 		return studyMainMap;
+
+	//멤버번호로 이름 가져오기
+	@Override
+	public String selectNameByNo(int mem_no) {
+		String name = null;
+		
+		try {
+			name= sqlSession.selectOne(NAMESPACE+"selectNameByNo", mem_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectNameByNO!");
+			e.printStackTrace();
+		}
+				
+		return name;
+
 	}
 
 }
