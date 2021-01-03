@@ -15,7 +15,7 @@ public interface MemberDao {
 	
 	MemberDto selectOne(int mem_no); //멤버번호로 하나 셀렉트
 	Map<Integer, String> selectWriterByFreeList(List<BoardDto> list); //자유게시판 리스트로 작성자이름 가져오기
-	Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> list); //스터디 메인페이지 리스트에 작성자이름 가져오기
+	Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList); //스터디 메인페이지 리스트에 작성자이름 가져오기
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기
 	
 

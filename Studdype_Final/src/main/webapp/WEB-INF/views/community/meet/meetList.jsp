@@ -4,6 +4,7 @@
 <%response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -57,7 +58,6 @@
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
-	
      <!--main conternt 섹션-->
      <div class="main-section">
         
@@ -77,34 +77,69 @@
 			</div>
 		</div>
 		<!-- 슬라이더 끝 -->        
-	
-        <!-- 나중에 추가할 것! 참고 코드임
+		
         <c:choose>
 		
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="4">----작성된 글이 존재하지 않습니다----</td>
+					<td colspan="2">---- 모임이 존재하지 않습니다. ---- </td>
 				</tr>
 			</c:when>
-			
+						
 			<c:otherwise>
-				<c:forEach var ="dto" items="${list }">
-					<div id="container" onclick="location.href='controller.do?command=detail&seq=${dto.seq }'">
-						<div id="top-left">${dto.seq }</div>
-						<div id="top-right">${dto.writer }</div>
-						<div id="bottom">${dto.title }</div>
-						<div id="footer">${dto.regdate }</div>
-					</div>
+				<c:forEach var ="meetDto" items="${ list }">
+					<table id="tableList">
+			        	<tr>
+			        		<td style="width: 50%">
+						        <div>
+							        <table id="meetList" onclick="location.href='meetdetail.do'">
+										<tr>
+											<td id="date"><fmt:formatDate value="${meetDto.meet_regdate}" pattern="yy.MM.dd"/></td>
+											<td id="location"><img src="./resources/assets/img/profile_placeholder.png">스타벅스 대치사거리</td>
+										</tr>
+										<tr>
+											<td id="title" colspan="2">${ meetDto.meet_title }</td>
+										</tr>
+										<tr>
+											<td id="writer">${ meetDto.meet_writer }</td>
+											<td id="recruitment">모집기간 <fmt:formatDate value="${ meetDto.vote_startdate }" pattern="yy.MM.dd"/> ~ <fmt:formatDate value="${ meetDto.vote_enddate }" pattern="yy.MM.dd"/></td>
+										</tr>
+									</table>
+								</div> 
+							</td>
+							<td style="width: 50%;">
+								<div>
+							        <table id="voteList" onclick="location.href='meetdetail.do'">
+										<tr>
+											<td id="attend_y" class="attend">참석</td>
+											<td class="graph"></td>
+											<td class="percentage">82%</td>
+										</tr>
+										<tr>
+											<td id="attend_n" class="attend">불참석</td>
+											<td class="graph"></td>
+											<td class="percentage">18%</td>
+										</tr>
+										<tr>
+											<td colspan="3" id="member_count">참여인원: 13명</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+						
+					</table>
 				</c:forEach>
 			</c:otherwise>
 	
 		</c:choose>
-		
-		<button onclick="location.href='controller.do?command=writeform'">글쓰기</button>
-        -->
+		<div>
+			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
+		</div>
         
         <!-- 모임리스트와 투표리스트 테이블을 각각 구현 -->
         <!-- table 중첩 되어있음 현재 경로는 테스트용으로 잡아놓은 것임 -->
+        <!-- 
         <table id="tableList">
         	<tr>
         		<td>
@@ -190,6 +225,7 @@
 		<div>
 			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
 		</div>
+		-->
     </div>
    
     

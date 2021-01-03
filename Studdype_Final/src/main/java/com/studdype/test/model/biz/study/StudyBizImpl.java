@@ -34,7 +34,8 @@ public class StudyBizImpl implements StudyBiz{
 	
 	@Autowired
 	private DataFileDao dataFiledao;
-
+	
+	@Autowired
 	private MemberDao memberDao;
 	
 	//메인페이지 스터디 list
@@ -59,7 +60,8 @@ public class StudyBizImpl implements StudyBiz{
 	public List<LocationGuDto> locationGuList() {
 		return locationGudao.locationGuList();
 	}
-	// 카테고리 selectList
+	
+	//시 번호로 selectOne
 	@Override
 	public List<StudyCategoryDto> categoryList() {
 		return studyCatedao.categoryList();
@@ -77,19 +79,28 @@ public class StudyBizImpl implements StudyBiz{
 	public int selectStudyFinalNumber() {
 		return study_Dao.selectStudyFinalNumber();
 	}
-
+	
+	//리더이름 selectOne
 	@Override
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList) {
 		return memberDao.selectLeaderNameByMainPage(studyList);
 	}
-
+	
+	//구 번호로 selectOne
 	@Override
-	public Map<Integer, String> selectGuForMainPage(List<LocationGuDto> list) {
-		return locationGudao.selectGuForMainPage(list);
+	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList) {
+		return locationGudao.selectGuForMainPage(studyList);
 	}
-
+	
+	//시 번호로 selectOne
 	@Override
-	public Map<Integer, String> selectSiForMainPage(List<LocationSiDto> list) {
-		return locationSidao.selectSiForMainPage(list);
+	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList) {
+		return locationSidao.selectSiForMainPage(studyList);
+	}
+	
+	//카테고리 번호로 selectOne
+	@Override
+	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList) {
+		return studyCatedao.categoryListForHome(studyList);
 	}
 }

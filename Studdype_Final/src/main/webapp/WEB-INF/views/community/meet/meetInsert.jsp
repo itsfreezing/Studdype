@@ -147,7 +147,7 @@
      	<!-- form의 action은 모임생성을 submit 하는 용도 -->
         <form action="meetinsert.do" method="post">
 	        <table border="1" id="meetInsertTable">
-	        	<tr>
+	        	<!-- <tr>
 	        		<th colspan="2">작성자:&nbsp;홍길동</th>
 	        		<th colspan="4">모임날짜&nbsp;
 	        			<select id="meet_year" onchange="lastday();"></select>년&nbsp; 
@@ -158,8 +158,17 @@
 	        			<select id="hour"></select>시&nbsp;
 						<select id="minute"></select>분
 	        		</th>
-	        	</tr>
+	        	</tr> -->
 	        	<tr>
+	        		<th colspan="2">작성자:&nbsp;홍길동</th>
+	        		<th colspan="4">모임날짜&nbsp;
+	        			<input type="date" name="meet_date">
+	        		</th>
+	        		<th colspan="4">모임시간&nbsp;
+	        			<input type="time" name="meet_time">
+	        		</th>
+	        	</tr>
+	        	<!-- <tr>
 	        		<th colspan="5">모집시작일&nbsp;
 	        			<select id="s_year" onchange="lastday();"></select>년&nbsp; 
 	        			<select id="s_month" onchange="lastday();"></select>월&nbsp; 
@@ -169,6 +178,14 @@
 	        			<select id="e_year" onchange="lastday();"></select>년&nbsp; 
 	        			<select id="e_month" onchange="lastday();"></select>월&nbsp; 
 	        			<select id="e_day" onchange="lastday();"></select>일
+	        		</th>
+	        	</tr> -->
+	        	<tr>
+	        		<th colspan="5">모집시작일&nbsp;
+	        			<input type="date" name="meet_startdate">
+	        		</th>
+	        		<th colspan="5">모집마감일&nbsp;
+	        			<input type="date" name="meetenddate">
 	        		</th>
 	        	</tr>
 	        	<tr>

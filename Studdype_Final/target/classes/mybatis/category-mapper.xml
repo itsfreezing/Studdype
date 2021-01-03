@@ -10,7 +10,10 @@
 		FROM STUDY_CATEGORY
 		ORDER BY CATE_NO ASC
 	</select>
-	
-	
-	
+
+	<select id="categoryListForHome" parameterType="int" resultType="string">
+		SELECT CATE_NAME
+		FROM STUDY_CATEGORY
+		WHERE  CATE_NO = #{cate_no}
+	</select>
 </mapper>

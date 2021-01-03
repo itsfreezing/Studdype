@@ -10,9 +10,9 @@
 		ORDER BY SI_NO ASC
 	</select>
 	
-		<select id="selectSiForMainPage" resultType="locationSiDto">
+		<select id="selectSiForMainPage" parameterType="int" resultType="string">
 		SELECT SI_NAME 
 		FROM LOCATION_SI
-		WHERE #{si_no}
+		WHERE SI_NO = #{si_no}
 	</select>
 </mapper>
