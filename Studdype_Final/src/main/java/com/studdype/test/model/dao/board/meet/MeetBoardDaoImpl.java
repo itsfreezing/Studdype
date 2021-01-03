@@ -2,6 +2,7 @@ package com.studdype.test.model.dao.board.meet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,33 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 
 	@Override
+	public int selectTotalMeetBoardNum(int s_no) {
+		int totalNum = 0;
+		
+		try {
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalMeetBoardNum", s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectTotalMeetBoardNum ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return totalNum;
+	}
+	
+	@Override
+	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
+		List<MeetDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", pageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return resList;
+	}
+	
+	@Override
 	public MeetDto meetBoardSelectOne(int meet_no) {
 		return null;
 	}
@@ -48,5 +76,6 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	public int meetBoardDelete(int meet_no) {
 		return 0;
 	}
+
 
 }
