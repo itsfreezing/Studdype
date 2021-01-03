@@ -15,6 +15,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	// 모임 게시판 리스트
 	@Override
 	public List<MeetDto> meetBoardSelectList() {
 		List<MeetDto> list = new ArrayList<MeetDto>();
@@ -25,7 +26,6 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
 			e.printStackTrace();
 		}
-		
 		return list;
 	}
 

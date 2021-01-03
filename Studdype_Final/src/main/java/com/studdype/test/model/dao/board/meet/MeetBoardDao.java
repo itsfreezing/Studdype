@@ -10,7 +10,7 @@ public interface MeetBoardDao {
 	//모임 게시판 게시글 
 	String NAMESPACE="meetboard.";
 	
-	public List<MeetDto> meetBoardSelectList();
+	public List<MeetDto> meetBoardSelectList(); // 모임 게시판 리스트
 	public MeetDto meetBoardSelectOne(int meet_no);
 	public int meetBoardInsert(MeetDto dto);
 	public int meetBoardUpdate(MeetDto dto);

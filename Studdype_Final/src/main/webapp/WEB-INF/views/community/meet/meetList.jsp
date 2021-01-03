@@ -4,6 +4,7 @@
 <%response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -57,7 +58,6 @@
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
-	
      <!--main conternt 섹션-->
      <div class="main-section">
         
@@ -82,45 +82,43 @@
 		
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="2">---- 모임이 존재하지 않습니다. ---- ${dto.meet_title }</td>
+					<td colspan="2">---- 모임이 존재하지 않습니다. ---- </td>
 				</tr>
 			</c:when>
-			
+						
 			<c:otherwise>
-				<c:forEach var ="dto" items="${ list }">
+				<c:forEach var ="meetDto" items="${ list }">
 					<table id="tableList">
 			        	<tr>
-			        		<td>
+			        		<td style="width: 50%">
 						        <div>
 							        <table id="meetList" onclick="location.href='meetdetail.do'">
-										<col width="400px"><col width="200px">
 										<tr>
-											<td id="date">${ dto.meet_regdate }</td>
+											<td id="date"><fmt:formatDate value="${meetDto.meet_regdate}" pattern="yy.MM.dd"/></td>
 											<td id="location"><img src="./resources/assets/img/profile_placeholder.png">스타벅스 대치사거리</td>
 										</tr>
 										<tr>
-											<td id="title" colspan="2">${ dto.meet_title }</td>
+											<td id="title" colspan="2">${ meetDto.meet_title }</td>
 										</tr>
 										<tr>
-											<td id="writer">${ dto.meet_writer }</td>
-											<td id="recruitment">모집기간 ${ dto.vote_startdate } ~ ${ dto.vote_enddate }</td>
+											<td id="writer">${ meetDto.meet_writer }</td>
+											<td id="recruitment">모집기간 <fmt:formatDate value="${ meetDto.vote_startdate }" pattern="yy.MM.dd"/> ~ <fmt:formatDate value="${ meetDto.vote_enddate }" pattern="yy.MM.dd"/></td>
 										</tr>
 									</table>
-								</div>
+								</div> 
 							</td>
-							<td>
+							<td style="width: 50%;">
 								<div>
 							        <table id="voteList" onclick="location.href='meetdetail.do'">
-										<col width="100px"><col width="300px"><col width="200px">
 										<tr>
-											<td id="attend_y">참석</td>
-											<td></td>
-											<td>82%</td>
+											<td id="attend_y" class="attend">참석</td>
+											<td class="graph"></td>
+											<td class="percentage">82%</td>
 										</tr>
 										<tr>
-											<td id="attend_n">불참석</td>
-											<td></td>
-											<td>18%</td>
+											<td id="attend_n" class="attend">불참석</td>
+											<td class="graph"></td>
+											<td class="percentage">18%</td>
 										</tr>
 										<tr>
 											<td colspan="3" id="member_count">참여인원: 13명</td>
