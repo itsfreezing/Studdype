@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -75,6 +76,27 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return studyMainMap;
 	}
+	
+	// [모임 게시판]리스트로 작성자 이름 가져오기
+	@Override
+	public Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list) {
+		Map<Integer, String> resMap = new HashMap<Integer, String>();
+		String writer = null;
+		int writerNo = 0;
+		for(int i = 0; i < list.size(); i++) {
+			writerNo = list.get(i).getMeet_writer();
+			try {
+				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectWriterByMeetBoardList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMeet_no(), writer);
+		}
+		
+		return resMap;
+	}
+
 	//멤버번호로 이름 가져오기
 	@Override
 	public String selectNameByNo(int mem_no) {
