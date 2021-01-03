@@ -12,5 +12,6 @@
 <a href="loginform.do">LOGIN</a>
 <a href="createStuddypeform.do">스터디생성</a>
 <a href="notetest.do">서머노트 테스트</a>
+<a href="signform.do">SIGN</a>
 </body>
 </html>

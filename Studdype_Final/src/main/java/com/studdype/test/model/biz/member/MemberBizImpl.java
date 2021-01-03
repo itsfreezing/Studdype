@@ -23,5 +23,11 @@ public class MemberBizImpl implements MemberBiz {
 	public String getNameByNo(int mem_no) {
 		return memberDao.selectNameByNo(mem_no);
 	}
+
+	//회원가입
+	@Override
+	public int insert(MemberDto dto) {
+		return memberDao.insert(dto);
+	}
 	
 }
