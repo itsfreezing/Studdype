@@ -45,4 +45,33 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	// 스터디 insert
+	@Override
+	public int insertStudy(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : insertStudy");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	// 등록된 스터디 마지막 번호
+	@Override
+	public int selectStudyFinalNumber() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectStudyFinalNumber");
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectStudyFinalNumber");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }
