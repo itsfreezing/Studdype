@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,23 +38,24 @@ public class StudyController {
 	@Autowired
 	private StudyBiz studyBiz;
 	
-	@RequestMapping(value = "Study.do", method = RequestMethod.GET)
-	public String Study(Locale locale, Model model) {
-		logger.info("Welcome board! The client locale is{}.",locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG,locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime",formattedDate);
-		return "Study";
-	}
 	
 	@RequestMapping("/studyList.do")
 	public String list(Model model) {
+		List<StudyDto> studyList = null;
+		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
 		logger.info("STUDY - SELECTLIST");
-		model.addAttribute("studyList",studyBiz.studyList());
 		
-		return "studyList";
+		studyList = studyBiz.studyList();
+		System.out.println(studyList.get(0).getS_name());
+		System.out.println(studyList.get(0).getLeader_no());
+		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList);
+		System.out.println(studyMainLeaderNameMap);
+		System.out.println(studyMainLeaderNameMap.get(1));
+		model.addAttribute("studyList", studyList);
+		model.addAttribute("leaderName", studyMainLeaderNameMap);
+
+		
+		return "studdype/studdypeHome";
 	}
 	
 	// 스터디 생성 폼

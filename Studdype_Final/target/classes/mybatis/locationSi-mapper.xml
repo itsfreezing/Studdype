@@ -9,4 +9,10 @@
 		FROM LOCATION_SI
 		ORDER BY SI_NO ASC
 	</select>
+	
+		<select id="selectSiForMainPage" resultType="locationSiDto">
+		SELECT SI_NAME 
+		FROM LOCATION_SI
+		WHERE #{si_no}
+	</select>
 </mapper>

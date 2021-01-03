@@ -14,14 +14,15 @@ public class StudyDaoImpl implements StudyDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	//스터디 list 전체 가져오기
 	@Override
 	public List<StudyDto> studyList() {
 
 		List<StudyDto> studyList = new ArrayList<StudyDto>();
 
 		try {
-			studyList = sqlSession.selectList(NAMESPACE + "selectList");
+			studyList = sqlSession.selectList(NAMESPACE + "studyList");
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();

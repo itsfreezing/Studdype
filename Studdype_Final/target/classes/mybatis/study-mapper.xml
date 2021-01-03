@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="study">
@@ -16,18 +15,21 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-	
+
 	<select id="studyList" resultMap="studyMap">
-		SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT
+		SELECT *
 		FROM STUDY
-		ORDER BY S_NO DESC
+		ORDER BY S_NO
+		DESC
 	</select>
-	
-	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
-		SELECT * 
+
+	<select id="selectOneBySno" parameterType="int"
+		resultMap="studyMap">
+		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
 	</select>
+<<<<<<< HEAD
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
@@ -39,4 +41,19 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
+=======
+
+<!-- 	<select id="listCriteria" resultType="BoardVO">
+		<![CDATA[
+			SELECT
+			*
+			FROM STUDY
+			WHERE S_NO > 0
+			ORDER BY S_NO DESC, REGDATE DESC
+			LIMIT #{pageStart}, #{perPageNum}
+			
+		]]>
+	</select> -->
+
+>>>>>>> master
 </mapper>
