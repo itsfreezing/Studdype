@@ -10,7 +10,8 @@ import com.studdype.test.model.dto.study.StudyDto;
 public interface MemberDao {
 	//회원 
 	String NAMESPACE="member.";
-
+	
+	public int insert(MemberDto dto);//회원가입
 	
 	MemberDto selectOne(int mem_no); //멤버번호로 하나 셀렉트
 	Map<Integer, String> selectWriterByFreeList(List<BoardDto> list); //자유게시판 리스트로 작성자이름 가져오기

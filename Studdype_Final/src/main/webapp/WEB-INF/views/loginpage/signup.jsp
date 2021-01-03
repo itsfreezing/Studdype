@@ -263,7 +263,7 @@ input{
       <h3>--Please be our colleague--</h3>
       <br><h2 id="big">정보를 입력해주세요</h2>
    <div id="signtitle">
-      <form action="signupform.do" method="POST" onsubmit = "return finish_check()">
+      <form action="signup.do" method="POST" onsubmit = "return finish_check()">
          <table>
                     <tr>
                         <td><h3 id="idtitle">아이디</h3></td>

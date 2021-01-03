@@ -11,5 +11,6 @@
 <a href="communityhome.do">커뮤니티 홈</a>
 <a href="loginform.do">LOGIN</a>
 <a href="notetest.do">서머노트 테스트</a>
+<a href="signform.do">SIGN</a>
 </body>
 </html>

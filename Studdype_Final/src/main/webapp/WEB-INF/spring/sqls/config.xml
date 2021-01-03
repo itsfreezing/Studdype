@@ -14,12 +14,12 @@
       </typeAliases>
   
   	<mappers>
-  	  <mapper resource="mybatis/freeBoard-mapper.xml"/>
-    	<mapper resource="mybatis/member-mapper.xml"/>
-	  	<mapper resource="mybatis/study-mapper.xml"/>
-      <mapper resource="mybatis/locationSi-mapper.xml"/>
-	  	<mapper resource="mybatis/locationGu-mapper.xml"/>
-	  	<mapper resource="mybatis/category-mapper.xml"/>
+  	  <mapper resource="/mybatis/freeBoard-mapper.xml"/>
+    	<mapper resource="/mybatis/member-mapper.xml"/>
+	  	<mapper resource="/mybatis/study-mapper.xml"/>
+      <mapper resource="/mybatis/locationSi-mapper.xml"/>
+	  	<mapper resource="/mybatis/locationGu-mapper.xml"/>
+	  	<mapper resource="/mybatis/category-mapper.xml"/>
 
   	</mappers>  
   

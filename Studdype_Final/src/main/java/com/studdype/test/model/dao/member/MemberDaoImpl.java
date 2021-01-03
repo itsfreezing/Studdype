@@ -87,5 +87,21 @@ public class MemberDaoImpl implements MemberDao{
 		return name;
 
 	}
+	
+	//회원가입
+	@Override
+	public int insert(MemberDto dto) {
+		int res=0;
+		System.out.println(dto.getMem_id());
+		try {
+			res=sqlSession.insert(NAMESPACE+"insert",dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error]:insert");
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 
 }
