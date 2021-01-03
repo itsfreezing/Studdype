@@ -98,7 +98,7 @@
 				<th>조회수</th>
 			</tr>
 			<c:choose>
-				<c:when test="${list == null }">
+				<c:when test="${empty list }">
 					<td colspan="4">게 시 글 이 없 습 니 다</td>
 				</c:when>
 				<c:otherwise>

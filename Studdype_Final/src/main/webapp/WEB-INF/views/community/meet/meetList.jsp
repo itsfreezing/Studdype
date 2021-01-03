@@ -142,30 +142,11 @@
 											<td id="title" colspan="2">${ list.get(i).getMeet_title() }</td>
 										</tr>
 										<tr>
-											<td id="writer">${ writerMap.get( list.get(i).getMeet_title() ) }</td>
+											<td id="writer">${ writerMap.get( list.get(i).getMeet_writer() ) }</td>
 											<td id="recruitment">모집기간 <fmt:formatDate value="${ list.get(i).getVote_startdate() }" pattern="yy.MM.dd"/> ~ <fmt:formatDate value="${ list.get(i).getVote_enddate() }" pattern="yy.MM.dd"/></td>
 										</tr>
 									</table>
 								</div> 
-							</td>
-							<td style="width: 50%;">
-								<div>
-							        <table id="voteList" onclick="location.href='meetdetail.do'">
-										<tr>
-											<td id="attend_y" class="attend">참석</td>
-											<td class="graph"></td>
-											<td class="percentage">82%</td>
-										</tr>
-										<tr>
-											<td id="attend_n" class="attend">불참석</td>
-											<td class="graph"></td>
-											<td class="percentage">18%</td>
-										</tr>
-										<tr>
-											<td colspan="3" id="member_count">참여인원: 13명</td>
-										</tr>
-									</table>
-								</div>
 							</td>
 						</tr>
 						

@@ -24,5 +24,7 @@
 			FROM MEMBER
 			WHERE MEM_NO = #{writerNo}
 		</select>
-	
+		
+
+
 	</mapper>

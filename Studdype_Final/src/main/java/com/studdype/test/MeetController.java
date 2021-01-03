@@ -39,7 +39,6 @@ public class MeetController {
 		int totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum(study.getS_no()); // 모임 게시판 게시글 총 개수
 		
 		paging(pageMap, pagenum, totalMeetBoardNum); 	   // 페이징 함수
-		System.out.println(study.getS_no());
 		pageMap.put("studyno", study.getS_no()); 	 	   // 스터디 번호 put
 		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
@@ -51,7 +50,6 @@ public class MeetController {
 		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
 		model.addAttribute("writerMap", writerNameMap);
-		//model.addAttribute("selectList", meetBiz.selectList());
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetList";
 	}
