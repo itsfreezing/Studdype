@@ -42,7 +42,7 @@ public class FreeBizImpl implements FreeBiz {
 		return freeBoardDao.insertBoard(board);
 	}
 
-	//자유게시판 글 가져오기
+	//자유게시판 글 가져오기(오류 무시하고 진행 가능)
 	@Transactional
 	@Override
 	public BoardDto selectOne(int b_no, int isVisitPage) {		
