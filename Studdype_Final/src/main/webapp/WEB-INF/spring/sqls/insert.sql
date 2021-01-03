@@ -73,5 +73,4 @@ SELECT * FROM STUDY;
 
 
 
-
 COMMIT;
