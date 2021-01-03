@@ -7,47 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function email_check( email ) {
-    
-    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    return (email != '' && email != 'undefined' && regex.test(email));
 
-}
-function sendemail() {
-	
-   var email = $("#userMail").val()
-   if(! email_check(email)){
-		 alert("올바른 이메일을 입력해주세요");
-		return false;
-	 }
-      $.ajax({
-         type: 'GET',
-         url: "../membercontroller.do?command=sendemail",
-         data:{email: email},
-         success:function(ramdom){
-            $("#code").html("<input type='text' id='num'><input type='button' value='인증확인' onclick='numchk();'><input type='hidden' id='num2' value='"+ramdom+"'>");
-            document.getElementById("userMail").title="n"
-            alert("인증번호가 전송되었습니다.");
-
-         },
-         error:function(){
-            alert("ajax 통신 실패");
-         }
-   });      
-}
-function numchk() {
-   var num = $("#num").val();
-   var num2 = $("#num2").val();
-   console.log(num);
-   console.log(num2);
-   if(num===num2){
-      alert("인증되었습니다");
-      document.getElementById("userMail").title="y";
-      $("#ssss").css('display','none');
-   }else{
-      alert("인증번호가 틀립니다");
-   }
-}
 </script>
 <style type="text/css">
 button{
@@ -87,9 +47,9 @@ h3{
 	margin-top:-1%;
 	
 }
-#name{
-	margin-left:280%;
-	margin-top:10%;
+b{
+	margin-left:40%;
+	margin-top:25%;
 	margin-bottom:0.5%;
 	color:#F5A9F2;
 	font-weight:bold;
@@ -97,6 +57,7 @@ h3{
 
 input{
 	margin-left:43%;
+	margin-top:0.1%;
 	margin-bottom:-1%;
 	width:320px;
 	height:30px;
@@ -176,23 +137,7 @@ select{
 	<br>
 	<br>
 	-->
-	<form action="signupform.do"method="POST">
-		<table>
-			<tr>
-				<th id="name">
-					이름
-				</th>
-				<td>
-					<input type="text" name="name" id="chk"placeholder="이름을 입력해주세요">
-				</td>
-			</tr>
-		
-		
-		</table>
-	
-	
-	</form>
-	
+
 	
 	
 	
