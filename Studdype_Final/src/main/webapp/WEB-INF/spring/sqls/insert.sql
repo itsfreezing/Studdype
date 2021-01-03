@@ -1,6 +1,9 @@
 -- 규칙: 테이블명 주석달기
 -- 예시: -- 모임 --모임댓글
 
+-- location_si/location_gu
+-- LocationProject_location.jsp실행 시 insert 됨.
+
 --스터디 카테고리 
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, 'IT');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '자격증');
@@ -69,7 +72,12 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고싶은  스터디 모임', '취직연습','사진',1,1,1,6,1 );
 
 SELECT * FROM STUDY;
+
+
+SELECT * FROM MEET_BOARD;
+
 SELECT * FROM MEMBER;
+
 
 
 

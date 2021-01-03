@@ -133,17 +133,19 @@ input.searchBtn:hover{
 	border-radius: 3em;
 	box-shadow: 8px 8px 8px gray;
 	cursor: pointer;
-	width: 100%;
-	margin: 0;
+	width: 98%;
+	margin: 1%;
 }
 
 #date{
+	width: 30%;
 	padding: 15px 25px;
 	text-align: left;
 	color: #7f7f81;
 }
 
 #writer{
+	width: 30%;
 	padding: 15px 25px;
 	text-align: left;
 	font-size: 20px;
@@ -152,12 +154,14 @@ input.searchBtn:hover{
 }
 
 #location{
+	width: 70%;
 	padding: 15px 25px;
 	text-align: right;
 	color: #7f7f81;
 }
 
 #recruitment{
+	width: 70%;
 	padding: 15px 25px;
 	text-align: right;
 	color: #7f7f81;
@@ -176,6 +180,10 @@ input.searchBtn:hover{
 	font-size: 30px;
 }
 
+td#map{
+	height: 350px;
+}
+
 /* 모임관리 페이지의 슬라이더 box-shadow 제거하기 */
 div.owl-carousel{
 	box-shadow: none!important;
@@ -192,9 +200,8 @@ div.owl-carousel{
 	border-radius: 3em;
 	box-shadow: 8px 8px 8px gray;
 	cursor: pointer;
-	width: 90%;
-	margin: 50px;
-	height: 190px;
+	width: 98%;
+	margin: 2%;
 }
 
 #attend_y{
@@ -208,10 +215,20 @@ div.owl-carousel{
 }
 
 #member_count{
-	padding: 15px 25px;
+	padding: 21px 25px;
 	text-align: right;
 }
 
-td#map{
-	height: 350px;
+td.attend{
+	width: 30%;
 }
+
+td.graph{
+	width: 50%;
+}
+
+td.percentage{
+	width: 20%;
+}
+
+
