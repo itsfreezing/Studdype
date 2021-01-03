@@ -1,7 +1,9 @@
 package com.studdype.test.model.dao.location;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,26 @@ public class LocationGuDaoImpl implements LocationGuDao{
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public Map<Integer, String> selectGuForMainPage(List<LocationGuDto> list) {
+		Map<Integer, String> selectGuForMainMap = new HashMap<Integer, String>();
+		String  guName = null;
+		int guNo = 0;
+		for(int i=0; i<list.size(); i++) {
+			guNo = list.get(i).getGu_no();
+			try {
+				guName = sqlSession.selectOne(NAMESPACE+"selectGuForMainPage", guNo);
+			}catch(Exception e) {
+					System.out.println("에러: 구 맵에 넣기");
+					e.printStackTrace();
+				}
+			selectGuForMainMap.put(list.get(i).getGu_no(), guName);
+			}
+		
+		return selectGuForMainMap;
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
@@ -33,6 +34,23 @@ public class FreeBizImpl implements FreeBiz {
 	@Override
 	public Map<Integer, String> getWriterNameByList(List<BoardDto> list) {
 		return memberDao.selectWriterByFreeList(list);
+	}
+
+	//자유게시판 글 작성
+	@Override
+	public int writeBoard(BoardDto board) {
+		return freeBoardDao.insertBoard(board);
+	}
+
+	//자유게시판 글 가져오기
+	@Transactional
+	@Override
+	public BoardDto selectOne(int b_no, int isVisitPage) {		
+		if(isVisitPage == 0) {
+			freeBoardDao.updateCnt(b_no);
+		}
+		BoardDto dto = freeBoardDao.selectOne(b_no);
+		return dto;
 	}
 
 }

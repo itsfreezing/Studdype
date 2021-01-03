@@ -4,12 +4,20 @@
   display: inline-block;
   
   margin-top: 5%;
-  width: 70%;
+  margin-right: 8%;
   
 
-/*    border: 1px solid rgb(115, 98, 222);     */
-  border-radius: 10px;
 }
+.main-section2 {
+  float: right;
+  display: inline-block;
+  
+  margin-top: 5%;
+  margin-right:17%;
+  
+
+}
+
 	.boardlist{
 		margin: 0px auto;
 		margin-top: 5%;
@@ -46,6 +54,7 @@
 		border-bottom: 1px solid black;
 		padding-bottom: 3px;
 	}
+
 	
 	
 	

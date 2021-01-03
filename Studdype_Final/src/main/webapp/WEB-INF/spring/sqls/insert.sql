@@ -46,6 +46,7 @@ INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '24번째 글입니다.',
 SELECT * FROM FREE_BOARD;
 
 --스터디 생성
+
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름1', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름2', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름3', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
