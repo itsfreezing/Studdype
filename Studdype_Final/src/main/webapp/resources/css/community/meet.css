@@ -1,14 +1,234 @@
-/* table 속성 */
-#meetInsertTable{
+/* --------------------------------- meetList */
+
+/* banner css */
+.hero-slider-info {
+	color: #fff;
+	margin-top: 0!important;
+	margin-bottom: 30px;
+}
+
+/* table css */
+#meetList{
+	border: 0;
+	border-radius: 3em;
+	box-shadow: 8px 8px 8px gray;
+	cursor: pointer;
+	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 3%;
+}
+
+/* td css */
+#date{
+	width: 30%;
+	padding: 15px 25px;
+	text-align: left;
+	color: #7f7f81;
+}
+
+#location{
+	width: 70%;
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+#location img{
+	width: 20px;
+	height: 20px;
+}
+
+#title{
+	padding: 10px;
 	text-align: center;
-	border: 1px solid #e3ddfd;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+#writer{
+	width: 30%;
+	padding: 15px 25px;
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: #686869;
+}
+
+#recruitment{
+	width: 70%;
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+/* 모임등록버튼 */
+#listBtn_insertform{
+	position: relative;
+	right: -72%;  
+}
+/* --------------------------------- */
+
+/* --------------------------------- paging */
+.pagin {
+	list-style: none;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	cursor: pointer;
+}
+
+.next_page {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.next_page:hover {
+	cursor: pointer;
+}
+
+.pagin_div {
+	margin-top: 25px;
+}
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+/* --------------------------------- */
+
+
+/* --------------------------------- meeDetail */
+
+/* table css */
+#meetDetailTable{
+	border: 2px solid #e3ddfd;
 	width: 100%;
 	height: 80%;
 }
 
-#tableList{
-	width: 100%;
+/* th css */
+.small_th{
+	height: 40px;
+	width: 40%;
+	text-align: left;
+	padding: 1%;
 }
+
+/* map */
+td#map{
+	width: 60%;
+}
+
+/* 수정버튼 */
+#detailBtn_updateform{
+	position: relative;
+	right: -71%;  
+}
+  
+/* 삭제버튼 */
+#detailBtn_delete{
+	position: relative;
+	right: -71%;  
+}
+
+#detailHR{
+	width: 98%;
+	border: 1px solid #6610F2;
+}
+/* --------------------------------- */
+
+/* --------------------------------- vote */
+
+/* 참가여부 */
+#voteDiv{
+	text-align: center;
+	display: inline-block;
+	width: 40%;
+	padding: 2%;
+}
+
+label.btn.btn-danger,
+label.btn.btn-success{
+	width: 80px;
+	height: 50px;
+}
+
+/* radio button */
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+
+/* radio button active */
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+/* 투표현황 */
+#voteList{
+	display: inline-block;
+	border: 0;
+	border-radius: 3em;
+	box-shadow: 5px 5px 5px gray;
+	cursor: pointer;
+	width: 55%;
+}
+
+#member_count{
+	width: 100%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+td.attend{
+	padding: 3% 5%;
+	text-align: right;
+	width: 30%;
+}
+
+td.graph{
+	width: 50%;
+	padding: 3% 5%;
+}
+
+td.percentage{
+	width: 20%;
+	padding: 3% 5%;
+}
+/* --------------------------------- */
 
 /* 입력란 꽉 채우기 & textarea에 크기조절 바 없애기 */
 .meetInsertInput{
@@ -45,8 +265,8 @@
 input.submitBtn,
 button.submitBtn{
 	background: #fff;
-	color: #c2c9db;
-	border: 1px solid #d7dbe8;
+	color: #7362DE;
+	border: 1px solid #7362DE;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	margin-top: 40px;
 	padding-bottom: 50px;
@@ -91,10 +311,12 @@ input.searchBtn:hover{
 	color: #fff;
 }
 
-/* meetList의 모임등록버튼 위치 */
-#listBtn_insertform{
-	position: relative;
-	right: -86%;  
+
+#meetInsertTable{
+	text-align: center;
+	border: 1px solid #e3ddfd;
+	width: 100%;
+	height: 80%;
 }
 
 /* meetInsert의 등록하기버튼 위치 */
@@ -103,17 +325,7 @@ input.searchBtn:hover{
 	right: -86%; 
 }
 
-/* meetDetail의 수정버튼 위치 */
-#detailBtn_updateform{
-	position: relative;
-	right: -71%;  
-}
 
-/* meetDetail의 삭제버튼 위치 */
-#detailBtn_delete{
-	position: relative;
-	right: -71%;  
-}
 
 /* meetUpdate의 완료버튼 위치 */
 #updateBtn_update{
@@ -127,173 +339,8 @@ input.searchBtn:hover{
 	right: -71%;  
 }
 
-/* meetList의 table css */
-#meetList{
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 8px 8px 8px gray;
-	cursor: pointer;
-	width: 98%;
-	margin: 1%;
-}
-
-#date{
-	width: 30%;
-	padding: 15px 25px;
-	text-align: left;
-	color: #7f7f81;
-}
-
-#writer{
-	width: 30%;
-	padding: 15px 25px;
-	text-align: left;
-	font-size: 20px;
-	font-weight: bold;
-	color: #686869;
-}
-
-#location{
-	width: 70%;
-	padding: 15px 25px;
-	text-align: right;
-	color: #7f7f81;
-}
-
-#recruitment{
-	width: 70%;
-	padding: 15px 25px;
-	text-align: right;
-	color: #7f7f81;
-}
-
-#location img{
-	width: 20px;
-	height: 20px;
-}
 
 
-#title{
-	padding: 10px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 30px;
-}
 
-td#map{
-	height: 350px;
-}
 
-/* 모임관리 페이지의 슬라이더 box-shadow 제거하기 */
-div.owl-carousel{
-	box-shadow: none!important;
-}
-
-/* 투표 */
-#vote_text{
-	font-size: 30px;
-}
-
-/* voteList의 table css */
-#voteList{
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 8px 8px 8px gray;
-	cursor: pointer;
-	width: 98%;
-	margin: 2%;
-}
-
-#attend_y{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#attend_n{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#member_count{
-	padding: 21px 25px;
-	text-align: right;
-}
-
-td.attend{
-	width: 30%;
-}
-
-td.graph{
-	width: 50%;
-}
-
-td.percentage{
-	width: 20%;
-}
-
-/*----------------------- 페이징 css  */
-.pagination {
-	margin-left: 35%;
-}
-
-.pagin {
-	list-style: none;
-	display: table;
-	clear: right;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.page_li {
-	float: left;
-	color: black;
-}
-
-.page_a {
-	float: left;
-	padding: 4px;
-	padding-top: 10px;
-	margin-right: 3px;
-	width: 40px;
-	height: 40px;
-	color: pink;
-	font-weight: bold;
-	border: 1px solid #dee2e6;
-	text-align: center;
-	text-decoration: none;
-}
-
-.page_a:hover {
-	transition: 0.3s;
-	border: 2px solid #6434ef;
-	/* background-color: #6434ef; */
-	cursor: pointer;
-}
-
-.next_page {
-	float: left;
-	padding: 4px;
-	padding-top: 10px;
-	margin-right: 3px;
-	width: 40px;
-	height: 40px;
-	color: pink;
-	font-weight: bold;
-	border: 1px solid #dee2e6;
-	text-align: center;
-	text-decoration: none;
-}
-
-.next_page:hover {
-	cursor: pointer;
-}
-
-.pagin_div {
-	margin-top: 25px;
-}
-
-.current_page {
-	color: white;
-	background-color: #6434ef;
-}
 

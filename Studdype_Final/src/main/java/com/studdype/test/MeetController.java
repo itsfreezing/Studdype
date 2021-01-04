@@ -43,7 +43,7 @@ public class MeetController {
 		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
 		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
-		
+
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));

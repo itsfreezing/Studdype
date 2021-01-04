@@ -98,62 +98,76 @@
 		<!-- 모임 상세페이지 -->
 		<!-- form의 action은 updateform으로 넘어가는 용도 -->
 		<form action="meetupdateform.do" method="post">
-			<table border="1" id="meetInsertTable">
+			<table border="1" id="meetDetailTable">
 				<tr>
-					<th colspan="2">작성자:&nbsp;홍길동</th>
-					<th colspan="4">모임날짜:&nbsp;2021년&nbsp;1월&nbsp;1일</th>
-					<th colspan="4">모임시간:&nbsp;오후2시</th>
+					<th class="small_th">작성자:&nbsp;홍길동</th>
+					<td rowspan="8" id="map"></td>
 				</tr>
 				<tr>
-					<th colspan="5">모집시작일:&nbsp;2020년&nbsp;12월&nbsp;25일</th>
-					<th colspan="5">모집마감일:&nbsp;2020년&nbsp;12월&nbsp;31일</th>
+					<th class="small_th">제목:&nbsp;홍길동의 스터디 첫 정모</th>
 				</tr>
 				<tr>
-					<th colspan="10">제목:&nbsp;홍길동의 스터디 첫 정모</th>
+					<th class="small_th">모임날짜:&nbsp;2021년&nbsp;1월&nbsp;1일</th>
 				</tr>
 				<tr>
-
-					<td colspan="10" id="map"></td>
+					<th class="small_th">모임시간:&nbsp;오후2시</th>
 				</tr>
 				<tr>
-
-					<th colspan="10">장소:&nbsp;스타벅스 대치사거리점</th>
+					<th class="small_th">모집시작일:&nbsp;2020년&nbsp;12월&nbsp;25일</th>
 				</tr>
 				<tr>
-					<td colspan="5"><textarea rows="30" class="meetInsertInput"
-							readonly>인기만점 홍길동의 2021 스터디 첫 정모 참가인원 모집합니다! 오른쪽 투표함에서 참가/불참가 투표 부탁드리며, 참석 결정 하신 분들은 혹시 못오게 되시면 댓글로 미리 말씀 부탁드립니다!
-						</textarea></td>
-
-					<!-- 투표 -->
-					<th colspan="5" id="vote_text" align="center">참가여부<br> <br>
-						<br> <input type="radio" name="fruit" value="apple">참석<br>
-						<br> <input type="radio" name="fruit" value="banana">불참석<br>
-						<br> <input type="button" value="투표하기" class="submitBtn vote" onclick="">
-					</th>
+					<th class="small_th">모집마감일:&nbsp;2020년&nbsp;12월&nbsp;31일</th>
+				</tr>
+				<tr>
+					<th class="small_th">장소:&nbsp;스타벅스 대치사거리점</th>
+				</tr>
+				<tr>
 					<td>
-						<table id="voteList" onclick="location.href='meetdetail.do'">
-										<tr>
-											<td id="attend_y" class="attend">참석</td>
-											<td class="graph"></td>
-											<td class="percentage">82%</td>
-										</tr>
-										<tr>
-											<td id="attend_n" class="attend">불참석</td>
-											<td class="graph"></td>
-											<td class="percentage">18%</td>
-										</tr>
-										<tr>
-											<td colspan="3" id="member_count">참여인원: 13명</td>
-										</tr>
-									</table>
+						<textarea rows="13" class="meetInsertInput" readonly>
+							인기만점 홍길동의 2021 스터디 첫 정모 참가인원 모집합니다! 오른쪽 투표함에서 참가/불참가 투표 부탁드리며, 참석 결정 하신 분들은 혹시 못오게 되시면 댓글로 미리 말씀 부탁드립니다!
+						</textarea>
 					</td>
-				</tr>
+				<tr>
 			</table>
 			<div>
 				<button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp; 
 				<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetlist.do'">
 			</div>
 		</form>
+		
+		<hr id="detailHR">
+			
+		<!-- 투표 -->
+		<div id="voteDiv">참가여부<br><br>
+			<div class="btn-group" data-toggle="buttons">
+				<label class="btn btn-success">
+					<input type="radio" name="options" id="option2" autocomplete="off">
+					<span class="glyphicon glyphicon-ok"></span>
+				</label>
+				<label class="btn btn-danger">
+					<input type="radio" name="options" id="option2" autocomplete="off">
+					<span class="glyphicon glyphicon-ok"></span>
+				</label>
+			</div>
+			<br>
+			<input type="button" value="투표하기" class="submitBtn vote" onclick="">
+		</div>
+		
+		<table id="voteList" onclick="location.href='meetdetail.do'">
+			<tr>
+				<td class="attend">참석</td>
+				<td class="graph"></td>
+				<td class="percentage">82%</td>
+			</tr>
+			<tr>
+				<td class="attend">불참석</td>
+				<td class="graph"></td>
+				<td class="percentage">18%</td>
+			</tr>
+			<tr>
+				<td colspan="3" id="member_count">참여인원: 13명</td>
+			</tr>
+		</table>
 	</div>
 
 	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
