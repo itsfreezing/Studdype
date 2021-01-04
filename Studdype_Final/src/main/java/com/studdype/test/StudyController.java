@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
+import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -36,6 +38,9 @@ public class StudyController {
 	
 	@Autowired
 	private StudyBiz studyBiz;
+	
+	@Autowired
+	private MemberBiz memberBiz;
 	
 	
 	@RequestMapping("/studyList.do")
@@ -70,7 +75,9 @@ public class StudyController {
 		List<LocationSiDto> sidtos = studyBiz.locationSiList();
 		List<LocationGuDto> gudtos = studyBiz.locationGuList();
 		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
+		MemberDto login = memberBiz.selectOne(1);
 		
+		model.addAttribute("login", login);
 		model.addAttribute("sidtos", sidtos);
 		model.addAttribute("gudtos", gudtos);
 		model.addAttribute("catedtos", catedtos);
@@ -85,21 +92,22 @@ public class StudyController {
 		// 스터디 마지막 번호 가져오기
 		///////////////////////////////////////////
 		int studyFinalNumber = studyBiz.selectStudyFinalNumber();
-		///////////////////////////////////////////
+		
+		String name = ""; // 파일 이름
 		
 		// 파일을 객체에 담기
 		MultipartFile file = filedto.getMyfile();
-		String name = "(Representative"+(studyFinalNumber+1)+")"+file.getOriginalFilename(); // 대표사진 파일명 확인
+		if(file.getOriginalFilename().equals("")) {
+			name = "noImage"; // 
+		}else {
+			name = "(Representative"+(studyFinalNumber+1)+")"+file.getOriginalFilename(); // 대표사진 파일명 확인
+		}
 		
-		// Map으로 로그인 세션 받아서 팀장번호 받아오기
-		///////////////////////////////////////////
-		
-		///////////////////////////////////////////
-		
+		System.out.println(name);
 		// 생성할 스터디 정보 담기
 		StudyDto studydto = new StudyDto();
 		studydto.setS_no(studyFinalNumber+1);
-		//studydto.setLeader_no(); Session 회원번호 담기
+		studydto.setLeader_no(dto.getLeader_no()); // Session 회원번호 담기
 		studydto.setS_name(dto.getS_name());
 		studydto.setS_info(dto.getS_info());
 		studydto.setS_content(dto.getS_content());
@@ -115,10 +123,7 @@ public class StudyController {
 		studyFile.setF_name(name);
 		
 		System.out.println(studyFile);
-		////////////////////////////////////////////// File 확인 코드 (스터디 생성 구현 완료 후 삭제)
-		
 		System.out.println(studydto);
-		
 		
 		////////////////////// 로그인 세션 구현 완료 후 Biz에서 기능 처리
 		InputStream inputStream = null;
@@ -170,13 +175,10 @@ public class StudyController {
 		int studyRes = studyBiz.insertStudy(studydto);
 		
 		if(studyRes > 0) {
-			model.addAttribute("msg", "스터디가 생성되었습니다.");
 			return "studdype/studdypeHome";
 		}else {
-			model.addAttribute("msg", "스터디 생성에 실패하셨습니다.");
 			return "redirect:createStuddypeform.do";
 		}
-		
 	}
 	
 }
