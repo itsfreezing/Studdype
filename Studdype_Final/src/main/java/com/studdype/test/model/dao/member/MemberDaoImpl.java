@@ -71,8 +71,6 @@ public class MemberDaoImpl implements MemberDao{
 				}
 				studyMainMap.put(studyList.get(i).getLeader_no(), leaderName);
 			}
-		System.out.println(writerNo);
-		System.out.println(leaderName);
 		
 		return studyMainMap;
 	}

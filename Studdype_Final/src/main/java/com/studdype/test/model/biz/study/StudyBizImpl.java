@@ -103,4 +103,10 @@ public class StudyBizImpl implements StudyBiz{
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList) {
 		return studyCatedao.categoryListForHome(studyList);
 	}
+	
+	//메인페이지 리스트 개수
+	@Override
+	public int studyListCnt() {
+		return study_Dao.studyListCnt();
+	}
 }

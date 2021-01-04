@@ -19,8 +19,15 @@
 	<select id="studyList" resultMap="studyMap">
 		SELECT *
 		FROM STUDY
+		LIMIT #{startList}, #{listSize}
 		ORDER BY S_NO
 		DESC
+	</select>
+	
+	<select id="studyListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM STUDY
 	</select>
 
 	<select id="selectOneBySno" parameterType="int"
@@ -40,15 +47,5 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
-<!-- 	<select id="listCriteria" resultType="BoardVO">
-		<![CDATA[
-			SELECT
-			*
-			FROM STUDY
-			WHERE S_NO > 0
-			ORDER BY S_NO DESC, REGDATE DESC
-			LIMIT #{pageStart}, #{perPageNum}
-			
-		]]>
-	</select> -->
+
 </mapper>

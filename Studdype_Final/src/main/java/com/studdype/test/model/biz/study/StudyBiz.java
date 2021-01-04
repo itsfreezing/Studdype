@@ -26,5 +26,5 @@ public interface StudyBiz {
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //구이름 가져오기
 	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList); //시이름 가져오기
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); //카테고리 가져오기 
-
+	public int studyListCnt(); //메인페이지 리스트 개수
 }

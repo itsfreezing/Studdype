@@ -13,6 +13,7 @@ public interface StudyDao {
 	public StudyDto selectOneBySno(int s_no); //스터디 번호로 selectOne
 	public int insertStudy(StudyDto dto);	// 스터디 insert
 	public int selectStudyFinalNumber(); // 등록된 스터디 마지막 번호
+	public int studyListCnt(); //총 게시글 개수
 	
 	
 }

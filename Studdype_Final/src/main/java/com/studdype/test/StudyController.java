@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,8 @@ import com.studdype.test.model.dto.study.StudyDto;
 public class StudyController {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(StudyController.class);
+	private final static int pageSize = 15; // 한페이지에 보여줄 개수
+	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 	
 	@Autowired
 	private StudyBiz studyBiz;
@@ -45,11 +48,12 @@ public class StudyController {
 	
 	@RequestMapping("/studyList.do")
 	public String list(Model model) {
-		List<StudyDto> studyList = null;
 		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
-		Map<Integer, String> selectSiForMainMap = null;
-		Map<Integer, String> selectGuForMainMap = null;
-		Map<Integer, String> selectCateForMainMap = null;
+		List<StudyDto> studyList = null;	//스터디 리스트 담을 곳
+		Map<Integer, String> selectSiForMainMap = null;	//시 리스트 담을 곳
+		Map<Integer, String> selectGuForMainMap = null;	//구 리스트 담을 곳
+		Map<Integer, String> selectCateForMainMap = null;	//카테고리 리스트 담을 곳
+		
 		
 		logger.info("STUDY - SELECTLIST");
 		
@@ -175,7 +179,7 @@ public class StudyController {
 		int studyRes = studyBiz.insertStudy(studydto);
 		
 		if(studyRes > 0) {
-			return "studdype/studdypeHome";
+			return "redirect:studdype/studdypeHome";
 		}else {
 			return "redirect:createStuddypeform.do";
 		}

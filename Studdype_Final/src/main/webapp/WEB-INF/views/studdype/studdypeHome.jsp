@@ -51,9 +51,9 @@
 	
 	$(document).on('click', '#btnSearch', function(e){
 		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/studdype/studyHomeSearchPage";
+		var url = "${studyList}";
 		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
+		url = url + "&search=" + $('#search').val();
 		location.href = url;
 		console.log(url);
 	});
@@ -108,7 +108,7 @@ input#search:focus {
 				<span><img src="./resources/assets/img/logo_purple.png" class="logo"></span> 
 				<input type="text" class="form-control" id="search" placeholder="원하는 스터디나 카테고리를 검색하세요.">
 				 <span>
-				 	<button type="submit" id="homeSearch" name="studyHomeSearch">
+				 	<button type="submit" id="buttonSearch" name="studyHomeSearch">
 						<img src="./resources/assets/img/icon_search_white.png"style="width: 20px;">
 					</button>
 				</span>

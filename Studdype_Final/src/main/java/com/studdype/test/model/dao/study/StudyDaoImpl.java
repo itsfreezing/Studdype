@@ -73,5 +73,17 @@ public class StudyDaoImpl implements StudyDao {
 		}
 		return res;
 	}
+	
+	//메인페이지 리스트 개수
+	@Override
+	public int studyListCnt() {
+		int cnt = 0;	
+		try {
+		cnt = sqlSession.selectOne(NAMESPACE+"studyListCnt");
+		}catch (Exception e) {
+			System.out.println("에러 스터디 페이지에 쓰는 리스트 카운트");
+		}
+		return cnt;
+	}
 
 }
