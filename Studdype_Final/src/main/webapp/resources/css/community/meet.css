@@ -198,13 +198,31 @@ label.btn.btn-success{
 }
 
 /* 투표현황 */
-#voteList{
+div#voteList{
 	display: inline-block;
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 5px 5px 5px gray;
-	cursor: pointer;
-	width: 55%;
+	width: 56%;
+	padding: 2%;
+}
+
+div.attend{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+div.graph{
+	display: inline-block;
+	width: 60%;
+	padding: 3% 5%;
+}
+
+div.percentage{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+	margin: 0;
 }
 
 #member_count{
@@ -213,21 +231,11 @@ label.btn.btn-success{
 	text-align: right;
 }
 
-td.attend{
-	padding: 3% 5%;
-	text-align: right;
-	width: 30%;
+#member_count img{
+	width: 24px;
+	height: 24px; 
 }
 
-td.graph{
-	width: 50%;
-	padding: 3% 5%;
-}
-
-td.percentage{
-	width: 20%;
-	padding: 3% 5%;
-}
 /* --------------------------------- */
 
 /* 입력란 꽉 채우기 & textarea에 크기조절 바 없애기 */

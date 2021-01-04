@@ -136,8 +136,9 @@
 		</form>
 		
 		<hr id="detailHR">
-			
+		
 		<!-- 투표 -->
+		<!--투표_참가여부 -->
 		<div id="voteDiv">참가여부<br><br>
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-success">
@@ -152,22 +153,13 @@
 			<br>
 			<input type="button" value="투표하기" class="submitBtn vote" onclick="">
 		</div>
+		<!-- 투표_투표현황 -->
+		<div id="voteList">
+			<div id="div1"><div class="attend">참석</div><div class="graph">---------</div><div class="percentage">82%</div></div>
+			<div id="div2"><div class="attend">불참석</div><div class="graph">---------</div><div class="percentage">18%</div></div>
+			<div id="member_count">참여인원: 13명&nbsp;<img src="./resources/assets/img/icon_questionMark.png"></div>
+		</div>
 		
-		<table id="voteList" onclick="location.href='meetdetail.do'">
-			<tr>
-				<td class="attend">참석</td>
-				<td class="graph"></td>
-				<td class="percentage">82%</td>
-			</tr>
-			<tr>
-				<td class="attend">불참석</td>
-				<td class="graph"></td>
-				<td class="percentage">18%</td>
-			</tr>
-			<tr>
-				<td colspan="3" id="member_count">참여인원: 13명</td>
-			</tr>
-		</table>
 	</div>
 
 	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>

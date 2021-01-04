@@ -477,4 +477,4 @@ end;
 
 
 
-COMMIT
+COMMIT;
