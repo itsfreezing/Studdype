@@ -91,4 +91,12 @@ public class MemberDto {
 		this.mem_email = mem_email;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberDto [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name
+				+ ", mem_rno=" + mem_rno + ", mem_gender=" + mem_gender + ", mem_phone=" + mem_phone + ", mem_email="
+				+ mem_email + "]";
+	}
+	
+	
 }

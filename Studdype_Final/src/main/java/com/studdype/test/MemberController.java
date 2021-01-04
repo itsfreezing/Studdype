@@ -36,23 +36,28 @@ public class MemberController {
 		
 	
 	}
-	
+
 	@RequestMapping("/signform.do")
 	public String memberInsertForm() {
+		logger.info("signup form ");
+		
 		return "loginpage/signup";
 	}
 	
 	@RequestMapping("/signup.do")
 	public String memberInsert(MemberDto dto) {
+		logger.info("signup page");
 		int res=0;
+	System.out.println(dto);
 		System.out.println(dto.getMem_id());
 		System.out.println(dto.getMem_pw());
-		
-		res=biz.insert(dto);
+
+		res=biz.memberInsert(dto);
 		if(res>0) {
-			return "redirect:loginpage/loginform.do";
+			return "loginpage/login";
 		}else {
-			return "redirect:loginpage/signupform.do";
+			
+			return "redirect:signupform.do";
 		}
 	}
 	
