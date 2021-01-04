@@ -464,12 +464,12 @@ CREATE TABLE MEET_REPLY(
 
 --스터디 신청 트리거 
 CREATE OR REPLACE TRIGGER study_trigger
-AFTER INSERT OR DELETE OR UPDATE ON STUDY
+AFTER INSERT ON STUDY
 FOR EACH ROW
 BEGIN 
 if INSERTING then 
 insert into study_member 
-values(:NEW.S_NO,1);
+values(:NEW.S_NO,:NEW.LEADER_NO);
 
 end if;
 end;
