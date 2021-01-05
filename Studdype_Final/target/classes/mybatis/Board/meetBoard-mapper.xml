@@ -26,16 +26,25 @@
 			]]>
 		</select>
 		
+		<!-- 모임 게시판 디테일 -->
 		<select id="meetBoardSelectOne" parameterType="int" resultType="meetDto">
 			SELECT * 
 			FROM MEET_BOARD
 			WHERE MEET_NO = #{meet_no}
 		</select>
 	
+		<!-- 모임 게시판 조회수 -->
 		<update id="updateMeetCnt" parameterType="int">
 			UPDATE MEET_BOARD
 			SET MEET_CNT = MEET_CNT + 1
 			WHERE MEET_NO = #{meet_no}
 		</update>
+		
+		<!-- 모임 생성 -->
+		<insert id="insertMeetBoard" parameterType="meetDto">
+			INSERT INTO MEET_BOARD
+			VALUES( MEETBOARDSEQ.NEXTVAL, #{s_no}, #{meet_title}, #{meet_writer},  #{meet_content}, #{meet_addr}, #{meet_addr_detail},
+			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
+		</insert>
 	
 	</mapper>

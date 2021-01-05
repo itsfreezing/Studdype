@@ -2,6 +2,8 @@ package com.studdype.test.model.dto.board;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MeetDto {
 	private int meet_no; 				// 모임 게시글 번호
 	private int s_no; 					// 스터디 번호
@@ -10,11 +12,21 @@ public class MeetDto {
 	private String meet_content; 		// 모임 상세내용
 	private String meet_addr; 			// 모임 도로명 주소
 	private String meet_addr_detail;	// 모임 상세주소
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meet_date; 			// 모임 날짜
+	
+	@DateTimeFormat(pattern = "HH:mi")
 	private Date meet_time; 			// 모임 시간
+	
 	private Date meet_regdate; 			// 모임 작성일자
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date vote_startdate; 		// 투표 시작일
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date vote_enddate; 			// 투표 마감일
+	
 	private int meet_cnt;				// 모임 게시판 조회수
 
 	public MeetDto() {
