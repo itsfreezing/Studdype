@@ -1,4 +1,4 @@
-package com.studdype.test;
+package com.studdype.test.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
