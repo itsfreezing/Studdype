@@ -17,11 +17,27 @@
 	</resultMap>
 
 	<select id="studyList" resultMap="studyMap">
-		SELECT *
-		FROM STUDY
-		ORDER BY S_NO
-		DESC
+		<![CDATA[
+SELECT
+    S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+FROM
+    (
+    	SELECT
+    	ROWNUM N,  S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+    	FROM STUDY
+    	ORDER BY S_NO DESC
+    )
+WHERE N >= #{startRow} AND N <=#{endRow}
+]]>
 	</select>
+	
+	<sql id = "studyTitleSearch">
+		<if test="searchType != null">
+			<if test="searchType == s_name.toSring()">WHERE S_NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == s_info.toSring()">WHERE S_INFO LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == s_content.toSring()">WHERE S_CONTENT LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</sql>
 
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">
@@ -40,15 +56,8 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
-<!-- 	<select id="listCriteria" resultType="BoardVO">
-		<![CDATA[
-			SELECT
-			*
-			FROM STUDY
-			WHERE S_NO > 0
-			ORDER BY S_NO DESC, REGDATE DESC
-			LIMIT #{pageStart}, #{perPageNum}
-			
-		]]>
-	</select> -->
+		<select id="selectTotalStudyListNum" parameterType="int"	resultType="_int">
+		SELECT COUNT(*)
+		FROM STUDY
+		</select>
 </mapper>

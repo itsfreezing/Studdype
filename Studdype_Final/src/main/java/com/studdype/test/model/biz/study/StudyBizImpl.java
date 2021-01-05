@@ -40,8 +40,8 @@ public class StudyBizImpl implements StudyBiz{
 	
 	//메인페이지 스터디 list
 	@Override
-	public List<StudyDto> studyList() {
-		return study_Dao.studyList();
+	public List<StudyDto> studyList(Map pageMap) {
+		return study_Dao.studyList(pageMap);
 	}
 
 	//스터디 번호로 selectOne
@@ -102,5 +102,11 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList) {
 		return studyCatedao.categoryListForHome(studyList);
+	}
+	
+	//메인페이지 리스트 갯수
+	@Override
+	public int selectTotalStudyListNum() {
+		return study_Dao.selectTotalStudyListNum();
 	}
 }

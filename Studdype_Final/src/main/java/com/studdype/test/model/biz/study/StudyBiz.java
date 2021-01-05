@@ -13,10 +13,8 @@ import com.studdype.test.model.dto.study.StudyDto;
 @Service
 public interface StudyBiz {
 	
-	public List<StudyDto> studyList();
-
+	public List<StudyDto> studyList(Map pageMap);	//스터디 리스트
 	public StudyDto selectOneBySno(int s_no);  //스터디 번호로 selectOne
-	//public StudyDto selectOneByLeaderNo(int leader_no);  //팀장 번호로 selectOne
 	public List<LocationSiDto> locationSiList(); // 지역 (시) selectList
 	public List<LocationGuDto> locationGuList(); // 지역(구/군) selectList
 	public List<StudyCategoryDto> categoryList(); // 카테고리 selectList
@@ -26,5 +24,7 @@ public interface StudyBiz {
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //구이름 가져오기
 	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList); //시이름 가져오기
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); //카테고리 가져오기 
+	public int selectTotalStudyListNum(); //메인페이지 리스트 개수
+	
 
 }

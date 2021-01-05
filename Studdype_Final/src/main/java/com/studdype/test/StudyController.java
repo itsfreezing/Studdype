@@ -7,10 +7,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,28 +40,71 @@ public class StudyController {
 	@Autowired
 	private StudyBiz studyBiz;
 	
+	//paging에 필요
+	private final static int pageSize = 9; // 한페이지에 보여줄 개수
+	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
+	
+		//페이징 함수 
+		public void paging(Map<String, Integer> pagingMap, String pagenum,  int selectTotalStudyListNum) {
+
+			int currentPage = (pagenum == null || pagenum.trim() == "") ? 1 : Integer.parseInt(pagenum); // 현재 페이지
+			int startRow = (currentPage - 1) * pageSize + 1; // 페이지 첫번째 글
+			int endRow = currentPage * pageSize; // 페이지 마지막 글
+			int numPageGroup = (int) Math.ceil((double) currentPage / pageGroupSize); // 페이지 그룹
+			/*
+			 * [1][2][3][4][5] -> 1 ( numPageGroup ) [6][7][8][9][10] -> 2
+			 */
+			int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
+			int endPage = numPageGroup * pageGroupSize; // 끝 페이지
+			int totalPageNum = selectTotalStudyListNum / pageSize + 1; // 총페이지 개수
+
+			// 마지막 페이지가 총 페이지 갯수보다 많으면
+			if (endPage > totalPageNum) {
+				endPage = totalPageNum;
+			}
+	
+
+			pagingMap.put("currentPage", currentPage);
+			pagingMap.put("startRow", startRow);
+			pagingMap.put("endRow", endRow);
+			pagingMap.put("startPage", startPage);
+			pagingMap.put("endPage", endPage);
+			pagingMap.put("totalPageNum", totalPageNum);
+
+		}
+		
 	
 	@RequestMapping("/studyList.do")
-	public String list(Model model) {
+	public String list(Model model, String pagenum) {
 		List<StudyDto> studyList = null;
 		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
 		Map<Integer, String> selectSiForMainMap = null;
 		Map<Integer, String> selectGuForMainMap = null;
 		Map<Integer, String> selectCateForMainMap = null;
+		Map<String, Integer> pageMap = new HashMap<String, Integer>();
 		
+		//로그
 		logger.info("STUDY - SELECTLIST");
+		int selectTotalStudyListNum = studyBiz.selectTotalStudyListNum(); //메인페이지 리스트 갯수
+		paging(pageMap, pagenum, selectTotalStudyListNum);
 		
-		studyList = studyBiz.studyList();	//스터디 리스트
+		
+		studyList = studyBiz.studyList(pageMap);	//스터디 리스트
 		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); //구 리스트
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); //시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); //리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); //카테고리 리스트
 		
+		model.addAttribute("startPage", pageMap.get("startPage"));
+		model.addAttribute("endPage", pageMap.get("endPage"));
+		model.addAttribute("currentPage", pageMap.get("currentPage"));
+		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
+		
 
 		
 		return "studdype/studdypeHome";

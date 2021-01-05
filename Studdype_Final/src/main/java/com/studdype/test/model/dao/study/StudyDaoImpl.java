@@ -2,6 +2,7 @@ package com.studdype.test.model.dao.study;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ public class StudyDaoImpl implements StudyDao {
 	
 	//스터디 list 전체 가져오기
 	@Override
-	public List<StudyDto> studyList() {
+	public List<StudyDto> studyList(Map pageMap) {
 
-		List<StudyDto> studyList = new ArrayList<StudyDto>();
+		List<StudyDto> studyList = null;
 
 		try {
-			studyList = sqlSession.selectList(NAMESPACE + "studyList");
+			studyList = sqlSession.selectList(NAMESPACE + "studyList", pageMap);
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
@@ -72,6 +73,20 @@ public class StudyDaoImpl implements StudyDao {
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	//스터디 리스트 총 갯수
+	@Override
+	public int selectTotalStudyListNum() {
+		int totalListNum = 0;
+		try {
+			totalListNum = sqlSession.selectOne(NAMESPACE+"selectTotalStudyListNum");
+		}catch(Exception e) {
+			System.out.println("에러: 스터디 리스트 총 갯수");
+			e.printStackTrace();
+		}
+		
+		return totalListNum;
 	}
 
 }

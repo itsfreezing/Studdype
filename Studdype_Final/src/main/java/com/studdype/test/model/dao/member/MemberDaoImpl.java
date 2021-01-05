@@ -62,7 +62,6 @@ public class MemberDaoImpl implements MemberDao{
 		int writerNo = 0;
 		for(int i=0; i<studyList.size(); i++) {
 			writerNo = studyList.get(i).getLeader_no();
-			System.out.println(writerNo);
 			try {
 				leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
 			}catch(Exception e) {
@@ -71,9 +70,6 @@ public class MemberDaoImpl implements MemberDao{
 				}
 				studyMainMap.put(studyList.get(i).getLeader_no(), leaderName);
 			}
-		System.out.println(writerNo);
-		System.out.println(leaderName);
-		
 		return studyMainMap;
 	}
 	

@@ -12,8 +12,7 @@
 <title>main page</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="./resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
@@ -49,14 +48,32 @@
 		})
 	});
 	
-	$(document).on('click', '#btnSearch', function(e){
-		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/studdype/studyHomeSearchPage";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-		location.href = url;
-		console.log(url);
-	});
+	// 페이징---------------------- 
+	// 페이지 이동 
+	function movePage(pagenum){
+		$("#pagenum").val(pagenum.text);
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+	}
+	
+	// 다음 페이지그룹 
+	function nextPageGroup(){
+	if( ${endPage < totalPageNum}){
+		$("#pagenum").val(${endPage+1});
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+	}
+	
+	}
+	
+	// 이전 페이지 그룹 
+	function prePageGroup(){
+		if( ${startPage - 1 > 0}){
+			$("#pagenum").val(${startPage-1});
+			var pageform = document.getElementById('pageform');
+			pageform.submit();
+		}
+	}
 </script>
 
 <style type="text/css">
@@ -152,29 +169,39 @@ input#search:focus {
 		</div>
 	</div>
 	<!-- 스터디 리스트 끝 -->
+	
+	<!-- 스터디 리스트 페이징 -->
+			<div class="pagin_div">
+			<ul class="pagination">
+				<li class="page_li">
+				<a class="next_page" onclick="prePageGroup();"><</a>
+				</li>
+				
+			
+				<!-- ----------------------------------- -->
+				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"	varStatus="status">
+					<c:choose>
+						<c:when test="${currentPage == startPage + status.count -1 }">
+							<li class="page_li li_hober"><a class="page_a current_page"
+								onclick="movePage(this);">${startPage + status.count -1 }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page_li li_hober"><a class="page_a"	onclick="movePage(this);">${startPage + status.count -1 }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<li class="page_li"><a class="next_page"
+					onclick="nextPageGroup();">></a></li>
+			</ul>
 
-	<!-- 스터디 리스트 페이지 -->
+			<form action="studyList.do" method="post" id="pageform" name="pageform">
+				<input type="hidden" name="pagenum" id="pagenum">
+			</form>
 
-	<!-- 스터디 리스트 페이지 끝 -->
-	<!-- Control Area-->
-	<!-- <div class="blogs control-area control-bg">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8 text-center">
-					<div class="control-text">
-						<h6>SOCAL MARKETING &amp; ANALYTICS</h6>
-						<h1>Take control of your data</h1>
-
-						<a href="#" class="btn btn-primary">get started</a> <a href="#"
-							class="btn btn-light">EXPLORE FEATURES</a>
-					</div>
-				</div>
-			</div>
-			End of row
 		</div>
-		End of container
-	</div>
-	End of control area -->
+		
+	<!-- 스터디 리스트 페이징 끝 -->
+
 
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 
