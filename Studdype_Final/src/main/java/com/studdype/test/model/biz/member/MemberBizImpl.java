@@ -26,8 +26,8 @@ public class MemberBizImpl implements MemberBiz {
 
 	//회원가입
 	@Override
-	public int insert(MemberDto dto) {
-		return memberDao.insert(dto);
+	public int memberInsert(MemberDto dto) {
+		return memberDao.memberInsert(dto);
 	}
 	
 }

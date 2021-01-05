@@ -113,7 +113,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	//회원가입
 	@Override
-	public int insert(MemberDto dto) {
+	public int memberInsert(MemberDto dto) {
 		int res=0;
 		System.out.println(dto.getMem_id());
 		try {

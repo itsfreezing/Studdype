@@ -12,7 +12,7 @@ public interface MemberDao {
 	//회원 
 	String NAMESPACE="member.";
 	
-	public int insert(MemberDto dto);//회원가입
+	public int memberInsert(MemberDto dto);//회원가입
 	
 	MemberDto selectOne(int mem_no);   //멤버번호로 하나 셀렉트
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기
