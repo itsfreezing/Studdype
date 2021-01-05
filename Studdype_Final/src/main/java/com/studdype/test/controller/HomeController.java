@@ -64,7 +64,7 @@ public class HomeController {
 	public String communityHome(HttpSession session) {
 		
 		/////////////////////// 테스트용 세션
-		MemberDto login = memberBiz.selectOne(2);
+		MemberDto login = memberBiz.selectOne(1);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		

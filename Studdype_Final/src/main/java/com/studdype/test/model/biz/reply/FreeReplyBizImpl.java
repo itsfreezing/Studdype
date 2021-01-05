@@ -35,7 +35,16 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 
 		// 2. 넘어온 댓글이 부모 댓글이면 값 수정 / 아니면 삭제
 		if (reply.getR_class() == 0) {
-			res = freeReplyDao.deleteParentReply(r_no);
+			//그룹번호로 남은 게시글 수확인위해 리스트찾아옴
+			List<ReplyDto> groupReplyList = freeReplyDao.selectGroupReplyList(reply.getR_groupno());
+			
+			//사이즈가 1개면 삭제
+			if (groupReplyList.size() == 1) { 
+				res = freeReplyDao.deleteReply(r_no);
+			}else { //사이즈가 1이아니면 -> 답글이 있으면
+				res = freeReplyDao.deleteParentReply(r_no);
+			}
+			
 		} else {
 			res = freeReplyDao.deleteReply(r_no);
 
