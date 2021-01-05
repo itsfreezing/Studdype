@@ -21,6 +21,7 @@
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
 	</repositories>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -201,6 +202,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+   <dependency>
+       <groupId>org.aspectj</groupId>
+       <artifactId>aspectjweaver</artifactId>
+       <version>${org.aspectj-version}</version>
+   </dependency>
+   
 	</dependencies>
 	<build>
 		<plugins>

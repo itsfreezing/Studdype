@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.studdype.test.model.biz.board.meet.FreeBiz;
+import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.member.MemberDto;
