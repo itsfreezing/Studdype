@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Controller
@@ -22,6 +27,9 @@ public class MeetController {
 	
 	@Autowired
 	private MeetBiz meetBiz;
+	
+	@Autowired
+	private MemberBiz memberBiz;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MeetController.class);
 	private final static int pageSize = 5; // 한 페이지에 보여줄 개수
@@ -43,7 +51,7 @@ public class MeetController {
 		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
 		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
-		
+
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
@@ -82,16 +90,74 @@ public class MeetController {
 
 	}
 	
+	//	모임게시판 보드디테일
+	@RequestMapping("/meetdetail.do")
+	public String meetDetail(HttpSession session,HttpServletRequest request, HttpServletResponse response, Model model) {
+		int meet_no = Integer.parseInt(request.getParameter("meetno"));
+		
+		// 조회수 함수 isVisitPage = 1:방문 / 0:미방문
+		int isVisitPage = chkVisited(request, response, "meetboardvisit", request.getParameter("meetno"));
+		
+		MeetDto dto = meetBiz.selectOne(meet_no, isVisitPage);			// 모임게시판 디테일 & 모임게시판 조회수 증가
+		String writer = memberBiz.getNameByNo(dto.getMeet_writer());	// 작성자 이름 회원번호로 가져오기
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("writer", writer);
+		session.setAttribute("leftnavi", "meet");
+		return "community/meet/meetDetail";
+	}
+	
+	//한게시글에 하루에 1번만 조회수 함수
+	private int chkVisited(HttpServletRequest request, HttpServletResponse response, String cookieName, String meet_no) {
+		int isVisit = 0; 	 // 온 게시판?
+		int isVisitPage = 0; // 온 게시글?
+		Cookie[] cookies = request.getCookies(); // 모든 쿠키
+
+		for (Cookie cookie : cookies) { 		 // 모든 쿠키 조회
+
+			if (cookie.getName().equals(cookieName)) { 				 // 모임게시판에 온적이 있으면
+				isVisit = 1;
+
+				// meetBoardVisit 쿠키에 글번호가 있으면
+				if (cookie.getValue().contains(meet_no)) {
+					isVisitPage = 1; // 온적있음 -> 1
+				} else { // 없으면
+					cookie.setValue(cookie.getValue() + "_" + meet_no); // 쿠키값 + '_게시글번호' 업데이트해줌
+					response.addCookie(cookie); // 쿠키 추가
+				}
+			}
+		}
+
+		if (isVisit == 0) { 								// 모임게시판 첫 접근이면 쿠키 생성
+			Cookie cookie = new Cookie(cookieName, meet_no);
+			cookie.setMaxAge(60 * 60 * 24); 				// 쿠키 하루생존
+			response.addCookie(cookie); 					//쿠키 추가
+		}
+		
+		return isVisitPage;
+	}
+	
+	// 모임게시판 글 작성 폼 이동
 	@RequestMapping("/meetinsertform.do")
-	public String meetInsert(HttpSession session) {
+	public String meetInsertFrom(HttpSession session) {
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetInsert";
 	}
 	
-	@RequestMapping("/meetdetail.do")
-	public String meetDetail(HttpSession session) {
-		session.setAttribute("leftnavi", "meet");
-		return "community/meet/meetDetail";
+	@RequestMapping("/meetinsert.do")
+	public String meetInsert(MeetDto dto,HttpSession session) {
+		int writer = ( (MemberDto)session.getAttribute("login") ).getMem_no(); // 작성자 번호
+		int s_no = ( (StudyDto)session.getAttribute("study") ).getS_no();	   // 스터디 번호
+		
+		dto.setMeet_writer(writer);
+		dto.setS_no(s_no);
+		int res = meetBiz.insert(dto);
+		
+		if (res > 0) {
+			return "redirect:meetlist.do";
+		} else {
+			return "redirect:meetinsertform.do";
+		}
 	}
 	
 	@RequestMapping("/meetupdateform.do")

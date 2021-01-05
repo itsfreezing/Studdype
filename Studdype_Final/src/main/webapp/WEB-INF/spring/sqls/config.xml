@@ -25,7 +25,7 @@
      	<mapper resource="./mybatis/Location/locationSi-mapper.xml"/>
 	  	<mapper resource="./mybatis/Location/locationGu-mapper.xml"/>
 	  	<mapper resource="./mybatis/Category/category-mapper.xml"/>
-		<mapper resource="./mybatis/Meet/meet-mapper.xml"/>
+		<mapper resource="./mybatis/Board/meetBoard-mapper.xml"/>
       	<mapper resource="./mybatis/File/file-mapper.xml"/>
 		  <mapper resource="mybatis/reply/freeReply-mapper.xml"/>
 
