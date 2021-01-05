@@ -5,15 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>login page</title>
-   <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
-   <link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
-   <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
-   <link rel="stylesheet" href="./resources/assets/css/nice-select.css">
-   <link rel="stylesheet" href="./resources/assets/css/animate.css">
-   <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-   <link rel="stylesheet" href="./resources/css/style.css">
-   <link rel="stylesheet" href="./resources/assets/css/responsive.css">
+   
+<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
+<link rel="stylesheet" href="./resources/assets/css/animate.css">
+<link rel="stylesheet" href="./resources/assets/css/normalize.css">
+<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/assets/css/responsive.css">
+<link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <style type="text/css">
    #center{
       background-color:lightblue;
@@ -77,39 +81,14 @@
       margin-left:1%;
    }
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
 
 </script>
 </head>
 <body>
-   <div id="center">
-      <button id="btn">지역별 검색</button>
-      <button>카테고리별 검색</button>
-      <button>홈으로 가기</button>
-      <button>스터디 생성</button>
-   
-      <header>
-         <h1 id="title">
-            Login
-         </h1>
-         <img src="./resources/assets/img/icon_arrow_gray.png" id="img">
-      
-   
-      </header>
-      
-      <hr id="line">
-   </div>
-   
-<!--    <input type="text" placeholder="아이디를 입력해주세요" id="chk" style="border:2px solid #F5A9F2">
-   <br>
-   <br>
-   <input type="password" placeholder="비밀번호를 입력해주세요" id="chk1" style="border:2px solid #F5A9F2">
-   <br>
-   <br>
-   <br>
-    -->
-    
+<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
+
     <form action="loginform.do" method="POST">
        <table>
           <tr>
@@ -138,13 +117,18 @@
    |<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
    |<a href="signform.do" id="">회원가입</a>
    
+	
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 
+	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/bootstrap.min.js"></script>
+	<script src="./resources/assets/js/owl.carousel.min.js"></script>
+	<script src="./resources/assets/js/modal-video.js"></script>
+	<script src="./resources/assets/js/loadmore.js"></script>
+	<script src="./resources/assets/js/prefixfree.min.js"></script>
+	<script src="./resources/assets/js/main.js"></script>
 
-      
-   <hr id="line1">
-      <p id="foot">Copyright © StuDdype Inc. All Rights Reserved.</p>
-
-
+ 
 
 </body>
 </html>
