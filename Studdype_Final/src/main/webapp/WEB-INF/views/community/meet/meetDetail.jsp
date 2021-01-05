@@ -109,7 +109,7 @@ $(function(){
 				</div> 
 			</div>
 			<div>
-				<button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp; 
+				<button class="submitBtn" id="detailBtn_updateform" type="submit">수정</button>&nbsp;&nbsp; 
 				<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetlist.do'">
 			</div>
 		</form>

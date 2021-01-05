@@ -16,8 +16,8 @@ public interface MeetBoardDao {
 	public List<MeetDto> meetBoardSelectList(); 				 // 모임게시판 리스트
 	public MeetDto meetBoardSelectOne(int meet_no);				 // 모임게시판 디테일 		
 	public void updateMeetCnt(int meet_no);					 	 // 모임게시판 조회수 증가
-	public int meetBoardInsert(MeetDto dto);
-	public int meetBoardUpdate(MeetDto dto);
-	public int meetBoardDelete(int meet_no);
+	public int insertMeetBoard(MeetDto dto); 					 // 모임게시판 모임생성
+	public int updateMeetBoard(MeetDto dto);
+	public int deleteMeetBoard(int meet_no);
 	
 }
