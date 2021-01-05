@@ -1,4 +1,4 @@
-package com.studdype.test;
+package com.studdype.test.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

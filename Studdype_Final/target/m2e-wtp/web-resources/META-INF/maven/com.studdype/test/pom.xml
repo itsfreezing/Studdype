@@ -185,7 +185,11 @@
         	<version>2.6</version>
 		</dependency>
 
-
+		 <dependency>
+      		 <groupId>org.aspectj</groupId>
+     		 <artifactId>aspectjweaver</artifactId>
+     		  <version>${org.aspectj-version}</version>
+  		 </dependency>
 		<!--  jackson !! -->
 		
 		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
@@ -203,12 +207,8 @@
 			<version>1.9.13</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-   <dependency>
-       <groupId>org.aspectj</groupId>
-       <artifactId>aspectjweaver</artifactId>
-       <version>${org.aspectj-version}</version>
-   </dependency>
-   
+  
+      
 	</dependencies>
 	<build>
 		<plugins>
