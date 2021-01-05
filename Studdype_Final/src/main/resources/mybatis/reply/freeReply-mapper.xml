@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  		
+<mapper namespace="freereply">
+	<resultMap type="replyDto" id="replyMap">
+		<result property="r_no" column="R_NO"></result>
+		<result property="b_no" column="B_NO"></result>
+		<result property="r_groupno" column="R_GROUPNO"></result>
+		<result property="r_class" column="R_CLASS"></result>
+		<result property="r_order" column="R_ORDER"></result>
+		<result property="r_writer" column="R_WRITER"></result>
+		<result property="r_comment" column="R_COMMENT"></result>
+		<result property="r_regdate" column="R_REGDATE"></result>
+	</resultMap>
+
+	<select id="selectReplyList" parameterType="int" resultMap="replyMap">
+		SELECT * FROM FREE_REPLY WHERE B_NO = #{b_no} ORDER BY R_GROUPNO, R_ORDER
+	</select>
+
+	<select id="selectOne" parameterType="int" resultMap="replyMap">
+		SELECT * FROM FREE_REPLY WHERE R_NO = #{r_no}
+	</select>
+	
+	<update id="deleteParentReply" parameterType="int">
+		UPDATE FREE_REPLY SET R_CLASS = -1 WHERE R_NO = #{r_no}
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM FREE_REPLY WHERE R_NO = #{r_no}
+	</delete>
+	
+	<select id="selectGroupReplyList" parameterType="int" resultMap="replyMap">
+		SELECT * FROM FREE_REPLY WHERE R_GROUPNO = #{r_groupno}
+	</select>
+</mapper>
