@@ -31,7 +31,7 @@
 								<li class="nav-item">
 								<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
 								</li>
-								<li class="active nav-item">
+								<li class="active-nav-item">
 									<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
 								</li>
 								<li class="nav-item">
@@ -60,7 +60,7 @@
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-								<h1>네비 메뉴 이름</h1><br><br><br>
+								<h1></h1>
 							</div>
 						</div>
 					</div>

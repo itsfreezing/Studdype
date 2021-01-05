@@ -166,8 +166,10 @@ public class BoardController {
 		return isVisitPage;
 	}
 	
+	// 도서 검색
 	@RequestMapping("/bookboard.do")
-	public String bookBoard() {
+	public String bookBoard(HttpSession session) {
+		session.setAttribute("leftnavi", "book");
 		return "community/book/bookboard";
 	}
 }
