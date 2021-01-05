@@ -82,7 +82,7 @@
 			$("#pagenum").val(${endPage+1});
 			var pageform = document.getElementById('pageform');
 			pageform.submit();
-		}
+		};
 	}
 	
 	// 이전 페이지 그룹 
@@ -91,7 +91,7 @@
 			$("#pagenum").val(${startPage-1});
 			var pageform = document.getElementById('pageform');
 			pageform.submit();
-		}
+		};
 	}
 </script>
 
@@ -129,7 +129,7 @@
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
-			        <table id="meetList" onclick="location.href='meetdetail.do'">
+			        <table id="meetList" onclick="location.href='meetdetail.do?meetno=${list.get(i).getMeet_no() }'">
 						<tr>
 							<td id="date"><fmt:formatDate value="${list.get(i).getMeet_regdate()}" pattern="yy.MM.dd"/></td>
 							<td id="location"><img src="./resources/assets/img/profile_placeholder.png">${ list.get(i).getMeet_addr() }&nbsp;${ list.get(i).getMeet_addr_detail() }</td>
