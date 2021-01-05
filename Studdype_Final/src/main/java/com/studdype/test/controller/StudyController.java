@@ -7,21 +7,28 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import com.studdype.test.common.PageMaker;
+import com.studdype.test.common.Pagination;
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.dto.board.FileDto;
@@ -37,33 +44,40 @@ public class StudyController {
 	private static final Logger logger =  LoggerFactory.getLogger(StudyController.class);
 	
 	@Autowired
-	private StudyBiz studyBiz;
+	private StudyBiz studyBiz;		
 	
-	@Autowired
-	private MemberBiz memberBiz;
-	
-	
-	@RequestMapping("/studyList.do")
-	public String list(Model model) {
+
+	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
+	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
+
 		List<StudyDto> studyList = null;
 		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
 		Map<Integer, String> selectSiForMainMap = null;
 		Map<Integer, String> selectGuForMainMap = null;
 		Map<Integer, String> selectCateForMainMap = null;
 		
+		//로그
 		logger.info("STUDY - SELECTLIST");
 		
-		studyList = studyBiz.studyList();	//스터디 리스트
+
+		
+		
+		studyList = studyBiz.studyList(searchPagination);	//스터디 리스트
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPagination(searchPagination);
+		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
 		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); //구 리스트
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); //시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); //리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); //카테고리 리스트
 		
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
+		
 
 		
 		return "studdype/studdypeHome";
