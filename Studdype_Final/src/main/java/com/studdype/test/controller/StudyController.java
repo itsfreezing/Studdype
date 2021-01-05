@@ -45,7 +45,7 @@ public class StudyController {
 	
 	@Autowired
 	private StudyBiz studyBiz;		
-	
+	private MemberBiz memberBiz;
 
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class FreeBizImpl implements FreeBiz {
@@ -51,6 +52,11 @@ public class FreeBizImpl implements FreeBiz {
 		}
 		BoardDto dto = freeBoardDao.selectOne(b_no);
 		return dto;
+	}
+
+	@Override
+	public Map<Integer, MemberDto> getMemberMap(List<BoardDto> list) {
+		return memberDao.selectMemberByFreeList(list);
 	}
 
 }

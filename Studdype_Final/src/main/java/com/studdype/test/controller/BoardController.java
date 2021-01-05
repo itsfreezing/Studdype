@@ -41,9 +41,7 @@ public class BoardController {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
-		Map<Integer, String> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-		
-		
+		Map<Integer, MemberDto> memberMap = null; //게시글 멤버정보 담을 MAP
 	
 		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 
@@ -54,14 +52,14 @@ public class BoardController {
 		// 15개 게시물만 가져오기
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
-		writerNameMap = freeBiz.getWriterNameByList(list);
+		memberMap = freeBiz.getMemberMap(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
 		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
-		model.addAttribute("writerMap", writerNameMap);
+		model.addAttribute("memberMap", memberMap);
 		session.setAttribute("leftnavi", "freeboard");
 		return "community/freeboard/freeboard";
 	}
@@ -100,10 +98,10 @@ public class BoardController {
 		
 		
 		BoardDto board = freeBiz.selectOne(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
-		String writer = memberBiz.getNameByNo(board.getB_writer()); //작성자 이름 가져오기
+		MemberDto member = memberBiz.selectOne( board.getB_writer() ); //작성자 이름 가져오기
 
 		model.addAttribute("dto", board);
-		model.addAttribute("writer", writer);
+		model.addAttribute("member", member);
 		return "community/freeboard/freeDetail";
 	}
 
