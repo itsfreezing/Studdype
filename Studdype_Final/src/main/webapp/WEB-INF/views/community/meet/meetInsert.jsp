@@ -32,40 +32,38 @@
 
 <script type="text/javascript">
 	
-	
-	// 도로명주소 검색 버튼 함수 
-	function execPostcode(){ 
-		daum.postcode.load(function(){ 
-			new daum.Postcode({
-				oncomplete: function(data) { 
+// 도로명주소 검색 버튼 함수 
+function execPostcode(){ 
+	daum.postcode.load(function(){ 
+		new daum.Postcode({
+			oncomplete: function(data) { 
 
-					// 주소 변수
-					var addr = ''; 
-					
-					// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다. 
-					if (data.userSelectedType === 'R') { 		// 사용자가 도로명 주소를 선택했을 경우 
-						addr = data.roadAddress; 
-					} else { 									// 사용자가 지번 주소를 선택했을 경우(J) 
-						addr = data.jibunAddress; 
-					}  
-					 
-					// 주소 정보를 해당 필드에 넣는다.				
-					document.getElementById("address").value = addr; 
+				// 주소 변수
+				var addr = ''; 
+				
+				// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다. 
+				if (data.userSelectedType === 'R') { 		// 사용자가 도로명 주소를 선택했을 경우 
+					addr = data.roadAddress; 
+				} else { 									// 사용자가 지번 주소를 선택했을 경우(J) 
+					addr = data.jibunAddress; 
+				}  
+				 
+				// 주소 정보를 해당 필드에 넣는다.				
+				document.getElementById("address").value = addr; 
 
-					// 커서를 상세주소 필드로 이동한다. 
-					document.getElementById("detailAddress").focus(); 
-				}
-			}).open();
-			
-		});
-	}
-$(document).ready(function(){
-});
+				// 커서를 상세주소 필드로 이동한다. 
+				document.getElementById("detailAddress").focus(); 
+			}
+		}).open();
+		
+	});
+}
 	
 </script>
 	
 </head>
 <body>
+
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
@@ -74,44 +72,35 @@ $(document).ready(function(){
      <div class="main-section">
      
      	<!-- form의 action은 모임생성을 submit 하는 용도 -->
-        <form action="meetinsert.do" method="post">
-	        <table border="1" id="meetInsertTable">
-	        	
-	        	<tr>
-	        		<th colspan="2">작성자:&nbsp;홍길동</th>
-	        		<th colspan="4">모임날짜&nbsp;
-	        			<input type="date" name="meet_date">
-	        		</th>
-	        		<th colspan="4">모임시간&nbsp;
-	        			<input type="time" name="meet_time">
-	        		</th>
-	        	</tr>
-	        	
-	        	<tr>
-	        		<th colspan="5">모집시작일&nbsp;
-	        			<input type="date" name="meet_startdate">
-	        		</th>
-	        		<th colspan="5">모집마감일&nbsp;
-	        			<input type="date" name="meetenddate">
-	        		</th>
-	        	</tr>
-	        	<tr>
-	        		<th colspan="2">제목</th>
-					<td colspan="8"><input type="text" placeholder="50자 내로 입력하세요." class="meetInsertInput"></td>	        	
-	        	</tr>
-	        	<tr>
-				   <th colspan="2">장소</th>
-				   <td colspan="8" >
-					   <input type="text" id="address" class="meetInsertAddr" readonly ><input type="button" class="searchBtn" value="도로명 주소검색" onclick="execPostcode();">
-					   <input type="text" id="detailAddress" class="meetInsertAddr" placeholder="나머지 주소를 입력해주세요.">
-				   </td>
-			   </tr>
-	        	<tr>
-					<th colspan="2">상세<br><br>내용</th>
-					<td colspan="8"><textarea rows="30" class="meetInsertInput" placeholder="2000자 내로 입력하세요."></textarea></td>
-				</tr>
-	        </table>
-	        <div>
+     	<img src="./resources/assets/img/banner_meetInsert.png" id="meetInsertBanner">
+        <form action="meetinsert.do" method="post" autocomplete="off">
+        	<div id="firstRow">
+        		<div class="insertText">모임날짜</div>
+        		<div class="dateCol1"><input type="date" name="meet_date"></div>
+        		<div class="insertText">모임시간</div>
+        		<div class="dateCol2"><input type="time" name="meet_time"></div>
+        	</div>
+        	<div id="secondRow">
+        		<div class="insertText">모집시작일</div>
+        		<div class="dateCol1"><input type="date" name="meet_startdate"></div>
+        		<div class="insertText">모집마감일</div>
+        		<div class="dateCol2"><input type="date" name="meet_enddate"></div>
+        	</div>
+        	<div id="thirdRow">
+        		<div class="insertText">제목</div>
+        		<div class="longDiv"><input type="text" name="meet_title" placeholder="50자 내로 입력하세요."></div>
+        	</div>
+        	<div id="fourthRow">
+        		<div class="insertText">장소</div>
+        		<div class="longDiv"><input type="text" name="meet_addr" id="address" readonly></div>
+        		<div id="addrBtn"><input type="button" id="addrBtn" value="도로명 주소검색" onclick="execPostcode();"></div>
+        		<div id="addrDiv"><input type="text" name="meet_addr_detail" id="detailAddress" placeholder="나머지 주소를 입력해주세요."></div>
+        	</div>
+        	<div id="fifthRow">
+        		<div id="fifthRow-left"><div class="insertText">상세내용</div><br><br><br><br><br><br><br><br><br><br><br><br></div>
+        		<div id="fifthRow-right"><textarea id="contentArea" name="meet_content" placeholder="2000자 내로 입력하세요."></textarea></div>
+        	</div>
+	        <div id="sixthRow">
         		<button type="submit" class="submitBtn" id="insertBtn_insert">등록하기</button>
         	</div>
         </form>
