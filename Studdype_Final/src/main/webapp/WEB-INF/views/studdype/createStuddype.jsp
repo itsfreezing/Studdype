@@ -197,7 +197,7 @@
 	<div class="main-section">
 		<form method="post" enctype="multipart/form-data" action="createStuddype.do"
 				 onsubmit='return frmsubmit();' modelAttribute="uploadFile" autocomplete="off" >
-
+			<input type="hidden" name="leader_no" value="${login.mem_no }">
 			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="main-contrainer">
 			<!-- 메인 왼쪽 영역 -->

@@ -16,7 +16,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 모임 게시판 리스트
+	// 모임게시판 리스트
 	@Override
 	public List<MeetDto> meetBoardSelectList() {
 		List<MeetDto> list = new ArrayList<MeetDto>();
@@ -57,25 +57,56 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return resList;
 	}
 	
+	// 모임게시판 디테일
 	@Override
 	public MeetDto meetBoardSelectOne(int meet_no) {
-		return null;
+		MeetDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"meetBoardSelectOne", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO meetBoardSelectOne ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
-	public int meetBoardInsert(MeetDto dto) {
+	public void updateMeetCnt(int meet_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMeetCnt", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO updateMeetCnt ---------- [ERROR]");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int insertMeetBoard(MeetDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertMeetBoard", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO insertMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+ 
+	@Override
+	public int updateMeetBoard(MeetDto dto) {
 		return 0;
 	}
 
 	@Override
-	public int meetBoardUpdate(MeetDto dto) {
+	public int deleteMeetBoard(int meet_no) {
 		return 0;
 	}
 
-	@Override
-	public int meetBoardDelete(int meet_no) {
-		return 0;
-	}
 
 
 }
