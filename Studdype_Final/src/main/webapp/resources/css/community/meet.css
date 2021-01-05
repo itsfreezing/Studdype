@@ -1,14 +1,319 @@
-/* table 속성 */
-#meetInsertTable{
-	text-align: center;
-	border: 1px solid #e3ddfd;
-	width: 100%;
-	height: 80%;
+/* --------------------------------- meetList */
+
+/* banner css */
+.hero-slider-info {
+	color: #fff;
+	margin-top: 0!important;
+	margin-bottom: 30px;
 }
 
-#tableList{
+/* table css */
+#meetList{
+	border: 0;
+	border-radius: 3em;
+	box-shadow: 8px 8px 8px gray;
+	cursor: pointer;
+	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 3%;
+}
+
+/* td css */
+#date{
+	width: 30%;
+	padding: 15px 25px;
+	text-align: left;
+	color: #7f7f81;
+}
+
+#location{
+	width: 70%;
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+#location img{
+	width: 20px;
+	height: 20px;
+}
+
+#title{
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+#writer{
+	width: 30%;
+	padding: 15px 25px;
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: #686869;
+}
+
+#recruitment{
+	width: 70%;
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
+}
+
+/* 모임등록버튼 */
+#listBtn_insertform{
+	position: relative;
+	right: -72%;  
+}
+/* --------------------------------- */
+
+/* --------------------------------- paging */
+.pagin {
+	list-style: none;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	cursor: pointer;
+}
+
+.next_page {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.next_page:hover {
+	cursor: pointer;
+}
+
+.pagin_div {
+	margin-top: 25px;
+}
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+/* --------------------------------- */
+
+
+/* --------------------------------- meeDetail */
+
+/* 조회수 & 작성자 & 제목 DIV */
+div#topDiv{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+	padding: 2% 0;
+}
+
+div#topDiv-left{
+	float: left;
+	width: 10%;
+	border: none;
+} 
+
+div#topDiv-right{
+	float: right;
+	width: 90%;
+	border: none;
+}
+
+div#writerDiv{
+	font-size: 100%;
+	color: #949495;
+	border: none;
+	margin: 9% 0; 
+	padding: 2% 8%;
+}
+
+div#cntDiv{ 
+	font-size: 100%;
+	color: #949495;
+	border: none;
+	margin: 9% 0;
+	padding: 2% 8%;
+}
+
+div#titleDiv{
+	font-size: 300%; 
+	font-weight: bold;
+	color: #baabfb;
+	text-align: center;
+	margin: 0;
+	padding: 1% 5% 1% 0;
+}
+
+/* 모임날짜 & 모임시간 & 모집기간 DIV */
+div#contentDiv{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
 	width: 100%;
 }
+
+div#contentDiv-left{
+	float: left;
+	width: 40%;
+	border-left: none;
+}
+
+div#contentDiv-right{
+	float: right;
+	width: 60%;
+	height: auto;
+	border-left: 3px solid #e3ddfd;
+}
+
+div.meetDetailDiv{
+	font-size: 130%;
+	font-weight: bold;
+	padding: 5% 2%;
+	border-bottom: 2px solid #e3ddfd;
+}
+
+
+div#meetContentDiv{
+	font-size: 120%;
+	padding: 5% 2%;
+}
+
+div#map{
+	width: 100%;
+}
+
+
+/* 수정버튼 */
+#detailBtn_updateform{
+	position: relative;
+	right: -75%;  
+}
+  
+/* 삭제버튼 */
+#detailBtn_delete{
+	position: relative;
+	right: -75%;  
+}
+
+#detailHR{
+	width: 98%;
+	border: 1px solid #6610F2;
+}
+/* --------------------------------- */
+
+/* --------------------------------- vote */
+
+/* vote 전체 DIV */
+div#vote{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+	margin-top: 3%;
+}
+
+/* 참가여부 */
+#voteDiv{
+	text-align: center;
+	display: inline-block;
+	width: 40%;
+	padding: 2%;
+}
+
+label.btn.btn-danger,
+label.btn.btn-success{
+	width: 80px;
+	height: 50px;
+}
+
+/* radio button */
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+
+/* radio button active */
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+/* 투표현황 */
+div#voteList{
+	display: inline-block;
+	width: 56%;
+	padding: 2%;
+}
+
+div.attend{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+div.graph{
+	display: inline-block;
+	width: 60%;
+	padding: 3% 5%;
+}
+
+div.percentage{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+	margin: 0;
+}
+
+#member_count{
+	width: 100%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+#member_count img{
+	width: 24px;
+	height: 24px; 
+}
+
+/* --------------------------------- */
 
 /* 입력란 꽉 채우기 & textarea에 크기조절 바 없애기 */
 .meetInsertInput{
@@ -45,8 +350,8 @@
 input.submitBtn,
 button.submitBtn{
 	background: #fff;
-	color: #c2c9db;
-	border: 1px solid #d7dbe8;
+	color: #7362DE;
+	border: 1px solid #7362DE;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	margin-top: 40px;
 	padding-bottom: 50px;
@@ -91,10 +396,12 @@ input.searchBtn:hover{
 	color: #fff;
 }
 
-/* meetList의 모임등록버튼 위치 */
-#listBtn_insertform{
-	position: relative;
-	right: -86%;  
+
+#meetInsertTable{
+	text-align: center;
+	border: 1px solid #e3ddfd;
+	width: 100%;
+	height: 80%;
 }
 
 /* meetInsert의 등록하기버튼 위치 */
@@ -103,17 +410,7 @@ input.searchBtn:hover{
 	right: -86%; 
 }
 
-/* meetDetail의 수정버튼 위치 */
-#detailBtn_updateform{
-	position: relative;
-	right: -71%;  
-}
 
-/* meetDetail의 삭제버튼 위치 */
-#detailBtn_delete{
-	position: relative;
-	right: -71%;  
-}
 
 /* meetUpdate의 완료버튼 위치 */
 #updateBtn_update{
@@ -127,91 +424,8 @@ input.searchBtn:hover{
 	right: -71%;  
 }
 
-/* meetList의 table css */
-#meetList{
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 8px 8px 8px gray;
-	cursor: pointer;
-	width: 100%;
-	margin: 0;
-}
-
-#date{
-	padding: 15px 25px;
-	text-align: left;
-	color: #7f7f81;
-}
-
-#writer{
-	padding: 15px 25px;
-	text-align: left;
-	font-size: 20px;
-	font-weight: bold;
-	color: #686869;
-}
-
-#location{
-	padding: 15px 25px;
-	text-align: right;
-	color: #7f7f81;
-}
-
-#recruitment{
-	padding: 15px 25px;
-	text-align: right;
-	color: #7f7f81;
-}
-
-#location img{
-	width: 20px;
-	height: 20px;
-}
 
 
-#title{
-	padding: 10px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 30px;
-}
 
-/* 모임관리 페이지의 슬라이더 box-shadow 제거하기 */
-div.owl-carousel{
-	box-shadow: none!important;
-}
 
-/* 투표 */
-#vote_text{
-	font-size: 30px;
-}
 
-/* voteList의 table css */
-#voteList{
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 8px 8px 8px gray;
-	cursor: pointer;
-	width: 90%;
-	margin: 50px;
-	height: 190px;
-}
-
-#attend_y{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#attend_n{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#member_count{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-td#map{
-	height: 350px;
-}

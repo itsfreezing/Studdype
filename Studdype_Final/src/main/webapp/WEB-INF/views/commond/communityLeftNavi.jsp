@@ -61,7 +61,7 @@
         </ul>
         </div>
     </div>
-    <input type="hidden" value="${memberid }" id="memberid">
-    <input type="hidden" value="${studyid }" id="studyid">
+    <input type="hidden" value="${login.mem_no }" id="memberid">
+    <input type="hidden" value="${study.s_no}" id="studyid">
 </body>
 </html>

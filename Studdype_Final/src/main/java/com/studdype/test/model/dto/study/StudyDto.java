@@ -121,4 +121,14 @@ public class StudyDto {
 	public void setS_currentcnt(int s_currentcnt) {
 		this.s_currentcnt = s_currentcnt;
 	}
+
+	@Override
+	public String toString() {
+		return "StudyDto [s_no=" + s_no + ", leader_no=" + leader_no + ", s_name=" + s_name + ", s_info=" + s_info
+				+ ", s_content=" + s_content + ", photo=" + photo + ", cate_no=" + cate_no + ", si_no=" + si_no
+				+ ", gu_no=" + gu_no + ", s_maxcnt=" + s_maxcnt + ", s_currentcnt=" + s_currentcnt + "]";
+	}
+	
+	
+	
 }

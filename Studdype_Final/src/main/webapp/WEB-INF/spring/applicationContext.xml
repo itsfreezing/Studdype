@@ -38,4 +38,14 @@
 		<constructor-arg  ref="sqlSession"/>
 	</bean>
 	 
+	<!-- file upload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000000" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<!--  transaction: 트랜잭션매니저가 트랜잭션 관리를 할 수 있게 등록 -->
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
 </beans>

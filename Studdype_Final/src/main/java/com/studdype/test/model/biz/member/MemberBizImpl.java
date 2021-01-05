@@ -17,5 +17,17 @@ public class MemberBizImpl implements MemberBiz {
 	public MemberDto selectOne(int mem_no) { 
 		return memberDao.selectOne(mem_no);
 	}
+
+	//멤버번호로 이름 하나 가져오기
+	@Override
+	public String getNameByNo(int mem_no) {
+		return memberDao.selectNameByNo(mem_no);
+	}
+
+	//회원가입
+	@Override
+	public int memberInsert(MemberDto dto) {
+		return memberDao.memberInsert(dto);
+	}
 	
 }

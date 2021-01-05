@@ -1,69 +1,289 @@
 @charset "UTF-8";
 /*----------------------- 페이징 css  */
-	.pagination{
-		margin-left:35%;
-	}
-	.pagin{
-		list-style: none;
-		float: left;
-		display: inline;
-		clear: right;
-		margin-left: 38%;
-	}
-	.page_li{
-		float:left;
-		color: black;
-	}
-	.page_a{
-		float: left;
-		padding: 4px;
-		padding-top:10px;
-		margin-right: 3px;
-		width: 40px;
-		height: 40px;
-		color: pink;
-		font-weight:bold;
-		border: 1px solid #dee2e6;
-		text-align: center;
-		text-decoration: none;
-		
-	}
-	
-	.page_a:hover{
-		transition: 0.3s;
-		border: 2px solid #6434ef;
-		/* background-color: #6434ef; */
-		cursor: pointer;
-		
-	}
-	
-	
-	
-	.next_page{
-		float: left;
-		padding: 4px;
-		padding-top:10px;
-		margin-right: 3px;
-		width: 40px;
-		height: 40px;
-		color: pink;
-		font-weight:bold;
-		border: 1px solid #dee2e6;
-		text-align: center;
-		text-decoration: none;
-	}
-	.next_page:hover{
-		cursor: pointer;
-	}
-	.pagin_div{
-		
-		margin-top: 25px; 
-		
-	}
-	.current_page{
-		color: white;		
-		background-color: #6434ef;
-		
-	}
-/*----------------------------------------------------*/	
+.pagination {
+	margin-left: 35%;
+}
 
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+	margin-left: 23%;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	/* background-color: #6434ef; */
+	cursor: pointer;
+}
+
+.next_page {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.next_page:hover {
+	cursor: pointer;
+}
+
+.pagin_div {
+	margin-top: 25px;
+}
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+
+.writeBtn {
+	float: right;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	background-color: white;
+	border: 1px solid #6434ef;
+	width: 8%;
+	height: 2%;
+	font-size: 15px;
+	padding: 1%;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	border-radius: 10px 10px;
+	color: #6434ef;
+	margin-right: 20%;
+}
+
+.writeBtn:hover {
+	background-color: #6434ef;
+	color: white;
+	cursor: pointer;
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+/*----------------------------------------------------*/
+/*  글 쓰기 form  */
+.maintable td {
+	padding-bottom: 30px;
+}
+
+.writeBtns {
+	float: right;
+}
+
+#boardtitle {
+	width: 100%;
+	height: 50px;
+}
+
+.uploadFile {
+	float: right;
+}
+
+/*  보드 디테일 */
+.main-section3 {
+	float: right;
+	display: inline-block;
+	margin-top: 5%;
+   margin-right:13%;
+   width: 60%;
+	
+}
+
+.main-section3 div {
+	width: 100%;
+}
+
+.title {
+	font-size: 40px;
+	font-weight: bold;
+	float: left;
+}
+
+.writer {
+	font-size: 20px;
+	float: left;
+}
+
+.regdate {
+	padding: 15px;
+	font-size: 20px;
+	float: right;
+}
+
+.cnt {
+	font-size: 20px;
+	float: right;
+}
+
+.cnt2 {
+	font-weight: bold;
+}
+
+.titleDiv {
+	height: 100px;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	background-color: #fcfcfc;
+}
+
+.writerDiv {
+	padding: 15px;
+	border-bottom: 1px solid #ccc;
+	height: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.contentDiv {
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 30px;
+}
+.btnDiv{
+	border-bottom: 1px solid #ccc;
+	
+}
+
+/* 댓글 */
+.replyItem{
+		list-style: none;
+}
+
+.replyWrite{
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.replyWrite table{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.write_td{
+	width: 90%;	
+}
+
+.write_btn_td{
+	width: 5%;
+}
+
+.write_content{
+	width: 100%;
+	height: 100px;
+	resize: none;
+	border: 1px solid #808080;
+	border-radius: 5px 5px;
+	padding: 20px;
+	
+}
+
+.reply_write_btn{
+	width: 100px;
+	height: 105px;
+	background-color: white;
+	border: 1px solid #808080;
+	font-size: 25px;
+		border-radius: 5px 5px;
+	color: #808080;
+	cursor: pointer;
+	padding: 0px;
+	
+}
+
+.reply_write_btn:hover {
+	background-color: #6434ef;
+	color: white;	
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.replyBox{
+	margin-top: 20px;
+	
+}
+
+.replyTitle{
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.replyTitle span{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+
+.reply_arrow{
+	width:30px; 
+	height:auto;
+	padding-right: 5px;
+	padding-bottom: 15px;
+	
+}
+
+.reply_writer_box{
+	font-weight: bold;
+}
+
+.reply_comment_box{
+	padding-bottom: 15px;
+}
+
+.reply_info_box{
+	color:rgb(170,170,170);
+	
+}
+
+.write_recomeent_btn{
+	font-size: 15px;
+	color:rgb(170,170,170);
+	background: white;
+	border: none;
+	cursor: pointer;
+}
+
+.write_recomeent_btn:hover{
+	font-weight: bold;
+	color: black;
+}
+
+.writerId{
+	font-weight: bold;
+}
