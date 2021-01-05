@@ -130,25 +130,42 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
-	//댓글 리스트로 작성자 이르 ㅁ가져오기
+	//[자유게시판]게시판 리스트로 member리스트 받아서 map에 넣기
 	@Override
-	public Map<Integer, String> selectWriterByFreeReply(List<ReplyDto> replyList) {
-		Map<Integer,String> resMap = new HashMap<Integer, String>();
-		String name = null;
-		int writerNo = 0;
-		
-		for( int i = 0 ; i < replyList.size() ; i++) {
-			writerNo = replyList.get(i).getR_writer();
+	public Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getB_writer();
 			try {
-				name = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
-				resMap.put(replyList.get(i).getB_no(), name);
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR]: selectWrtierByFreeReply");
+				System.out.println("[ERROR]:  selectMemberByFreeList( !!!!!!");
 				e.printStackTrace();
 			}
+			resMap.put(list.get(i).getB_no(), dto);
 		}
 		
-		
+		return resMap;
+	}
+
+	//[자유게시판 댓글]  리스트로 member 정보 가져오기 
+	@Override
+	public Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR]: selectMemberByFreeReply !!!!!!");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
 		
 		return resMap;
 	}

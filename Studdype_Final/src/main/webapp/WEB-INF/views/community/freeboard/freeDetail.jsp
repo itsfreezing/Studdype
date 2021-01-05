@@ -53,8 +53,7 @@ function getReplyList() {
 		dataType:"json",
 		success:function(map){
 			var list = map.replyList;
-			
-			
+		
 			var html = "<div class='replyTitle'><span>댓글</span> "+map.replyList.length+" 개 </div>"+
 					"<ul class='replyList'>";
 				
@@ -64,7 +63,7 @@ function getReplyList() {
 					 var hour = (replyDate.getHours() / 10 < 1 ) ?  '0' + replyDate.getHours() : replyDate.getHours();
 					 var minute =  (replyDate.getMinutes() / 10 < 1 ) ?  '0' + replyDate.getMinutes() : replyDate.getMinutes();
 					
-					
+					//데이트 포멧 맞추기
 					var dateFormat = replyDate.getFullYear() +'.'+ ( replyDate.getMonth()+1 ) +'.' + replyDate.getDate() +'  ' +
 										hour+':'+ minute;					
 					
@@ -72,13 +71,13 @@ function getReplyList() {
 						
 						var reply = "<li class='replyItem'>"+
 										"<div class='reply_area'>"
-										+"<div class='reply_writer_box' style='padding-bottom: 15px;'>"+ map.replyWriter[map.replyList[i].b_no]+"</div>"
+										+"<div class='reply_writer_box' style='padding-bottom: 15px;'>"+ map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name+ ")"  +"</div>"
 										+"<div class='reply_comment_box'>"+map.replyList[i].r_comment+"</div>"
 										+"<div class='reply_info_box'>"+dateFormat;
 						
 						if(${login.mem_no} == map.replyList[i].r_writer ){
 							reply += "   <button class='write_recomeent_btn'>답글쓰기</button>"+
-										" <button class='write_recomeent_btn'>수정하기</button>" +
+										" <button class='write_recomeent_btn' onclick='updateReplyForm(this)' value="+map.replyList[i].r_no+">수정하기</button>" +
 										" <button class='write_recomeent_btn' value="+map.replyList[i].r_no+" onclick='deleteReply(this);'>삭제하기</button></div></div></li><hr>"
 						}else{
 							reply += "   <button class='write_recomeent_btn'>답글쓰기</button></div></div></li><hr>";
@@ -89,11 +88,11 @@ function getReplyList() {
 					}else{
 						var reply = "<li class='replyItem'>"+
 						"<div class='reply_area' style='margin-left:35px;'>"
-							+"<div class='reply_writer_box'><img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"+ map.replyWriter[map.replyList[i].b_no]+"</div>"
+							+"<div class='reply_writer_box'><img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"+map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name+ ")"   +"</div>"
 							+"<div class='reply_comment_box' style='margin-left:30px;'>"+map.replyList[i].r_comment+"</div>"
 							+"<div class='reply_info_box' style='margin-left:30px;'>"+dateFormat;
 						if(${login.mem_no} == map.replyList[i].r_writer ){
-							reply +=	"   <button class='write_recomeent_btn'>수정하기</button>" +
+							reply +=	"   <button class='write_recomeent_btn' onclick='updateReplyForm(this)'  value="+map.replyList[i].r_no+">수정하기</button>" +
 										" <button class='write_recomeent_btn' value="+map.replyList[i].r_no+" onclick='deleteReply(this);'>삭제하기</button></div></div></li><hr>"
 						}else{
 							reply += "</div></div></li><hr>";
@@ -149,6 +148,67 @@ function deleteReply(btn){
 	
 };
 
+<!-- 댓글 쓰기 AJAX -->
+function insertReply(){
+	var content = $("#write_content").val();
+	var b_no = ${dto.b_no}
+	var r_writer = ${login.mem_no}
+	
+	var replyVal = {
+			"b_no" : b_no ,
+			"r_writer":r_writer ,
+			"r_comment" : content
+	};
+
+	//댓글 쓰기
+	$.ajax({
+		type:"post",
+		url:"freeReplyWrite.do",
+		data:JSON.stringify(replyVal),
+		contentType:"application/json",
+		dataType:"json",
+		success: function(res){
+			if ( res > 0 ){
+				getReplyList();
+			}else{
+				alert("[ERROR]: 댓글 등록 실패!!");
+				getReplyList();
+			}
+		} 
+		,
+		error:function(){
+			alert("댓글 등록 ajax 실패 ㅠ..");
+		}
+		
+		
+	});
+	
+	
+}
+
+
+function updateReplyForm(btn){
+
+	
+	setTimeout(function(){  btn.className += ' update_btn';  //update_btn 클래스 추가
+	var reply_area = $(".update_btn").parent().parent();
+	var writer = reply_area.children(".reply_writer_box").text();
+	var comment = reply_area.children(".reply_comment_box").text();
+
+	var html = "<div class='update_reply_div'><table>" +
+			"<tr> <td class='update_reply_writer'>" + writer + "</td></tr>" +
+			"<tr><td><textarea class='update_reply_comment'>" + comment + "</textarea></td></tr></table>"+
+			"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button class='update_reply_btn' value="+btn.value+">수정</button></div></div>";
+			
+	reply_area.html(html);  }, 2000);
+	
+			
+
+
+
+			//alert( $(".update_reply_writer").text() );
+}
+
 
 //페이지 로드 후에
 $(document).ready( getReplyList() );
@@ -171,7 +231,7 @@ $(document).ready( getReplyList() );
 			<span class="regdate"><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
 		</div>
 		<div class="writerDiv">
-			<span class="writer"> ${writer }</span>
+			<span class="writer"> ${member.mem_id } (${member.mem_name })</span>
 			<span class="cnt">조회수
 				<span class="cnt2">${dto.b_cnt }</span>
 			</span>
@@ -187,15 +247,15 @@ $(document).ready( getReplyList() );
 			<div class="replyWrite"  >
 				<table >
 				<tr>
-					<td colspan="2"><p class="writerId">${writer }</p></td>
+					<td colspan="2"><p class="writerId">${login.mem_id } (${login.mem_name })</p></td>
 				</tr>
 				<tr>
-					<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요" onchange="test();"></textarea></td>
-					<td class="write_btn_td" ><button class="reply_write_btn" onclick="test();">등록</button></td>
+					<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
+					<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
 				</tr>				
 				</table>
 			</div>
-		
+			
  	</div>
  	
  

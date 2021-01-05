@@ -13,4 +13,5 @@ public interface FreeReplyDao {
 	int deleteParentReply(int r_no); //댓글이 부모댓글이면 r_class -> -1로변경
 	int deleteReply(int r_no); // 댓글 삭제
 	List<ReplyDto> selectGroupReplyList(int r_groupno); //댓글 그룹번호로 리스트 뽑기
+	int insertReply(ReplyDto dto); //댓글 쓰기
 }
