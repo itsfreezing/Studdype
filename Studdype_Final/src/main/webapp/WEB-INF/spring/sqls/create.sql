@@ -172,7 +172,8 @@ CREATE TABLE MEMBER(
     MEM_PHONE VARCHAR2(13) NOT NULL, --핸드폰 번호
     MEM_EMAIL VARCHAR2(100) NOT NULL -- 이메일    
 );
-
+select * from member;
+delete from member;
 ------지역 카테고리 
 ---시
 CREATE TABLE LOCATION_SI(
@@ -471,7 +472,6 @@ BEGIN
 if INSERTING then 
 insert into study_member 
 values(:NEW.S_NO,1);
-
 end if;
 end;
 /

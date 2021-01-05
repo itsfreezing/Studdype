@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -115,7 +116,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	//회원가입
 	@Override
-	public int insert(MemberDto dto) {
+	public int memberInsert(MemberDto dto) {
 		int res=0;
 		System.out.println(dto.getMem_id());
 		try {
@@ -127,6 +128,29 @@ public class MemberDaoImpl implements MemberDao{
 		}
 
 		return res;
+	}
+
+	//댓글 리스트로 작성자 이르 ㅁ가져오기
+	@Override
+	public Map<Integer, String> selectWriterByFreeReply(List<ReplyDto> replyList) {
+		Map<Integer,String> resMap = new HashMap<Integer, String>();
+		String name = null;
+		int writerNo = 0;
+		
+		for( int i = 0 ; i < replyList.size() ; i++) {
+			writerNo = replyList.get(i).getR_writer();
+			try {
+				name = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
+				resMap.put(replyList.get(i).getB_no(), name);
+			} catch (Exception e) {
+				System.out.println("[ERROR]: selectWrtierByFreeReply");
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		return resMap;
 	}
 
 }
