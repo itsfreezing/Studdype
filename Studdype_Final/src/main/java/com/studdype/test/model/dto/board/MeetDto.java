@@ -15,6 +15,7 @@ public class MeetDto {
 	private Date meet_regdate; 			// 모임 작성일자
 	private Date vote_startdate; 		// 투표 시작일
 	private Date vote_enddate; 			// 투표 마감일
+	private int meet_cnt;				// 모임 게시판 조회수
 
 	public MeetDto() {
 		super();
@@ -22,7 +23,7 @@ public class MeetDto {
 
 	public MeetDto(int meet_no, int s_no, String meet_title, int meet_writer, String meet_content, String meet_addr,
 			String meet_addr_detail, Date meet_date, Date meet_time, Date meet_regdate, Date vote_startdate,
-			Date vote_enddate) {
+			Date vote_enddate, int meet_cnt) {
 		super();
 		this.meet_no = meet_no;
 		this.s_no = s_no;
@@ -36,6 +37,7 @@ public class MeetDto {
 		this.meet_regdate = meet_regdate;
 		this.vote_startdate = vote_startdate;
 		this.vote_enddate = vote_enddate;
+		this.meet_cnt = meet_cnt;
 	}
 
 	public int getMeet_no() {
@@ -132,6 +134,14 @@ public class MeetDto {
 
 	public void setVote_enddate(Date vote_enddate) {
 		this.vote_enddate = vote_enddate;
+	}
+
+	public int getMeet_cnt() {
+		return meet_cnt;
+	}
+
+	public void setMeet_cnt(int meet_cnt) {
+		this.meet_cnt = meet_cnt;
 	}
 
 	

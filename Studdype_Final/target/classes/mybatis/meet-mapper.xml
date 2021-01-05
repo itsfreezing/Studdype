@@ -25,7 +25,17 @@
 				WHERE N >= #{startRow} AND N <= #{endRow}
 			]]>
 		</select>
+		
+		<select id="meetBoardSelectOne" parameterType="int" resultType="meetDto">
+			SELECT * 
+			FROM MEET_BOARD
+			WHERE MEET_NO = #{meet_no}
+		</select>
 	
-	
+		<update id="updateMeetCnt" parameterType="int">
+			UPDATE MEET_BOARD
+			SET MEET_CNT = MEET_CNT + 1
+			WHERE MEET_NO = #{meet_no}
+		</update>
 	
 	</mapper>
