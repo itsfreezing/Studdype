@@ -17,5 +17,6 @@ public interface FreeReplyBiz {
 	int deleteReply(int r_no); //댓글 삭제
 	Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList); //리플 리스트로 member정보 받아오기
 	int writeReply(ReplyDto dto); //댓글 쓰기
+	int updateReply(ReplyDto dto); //댓글 수정
 
 }

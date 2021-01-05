@@ -14,4 +14,5 @@ public interface FreeReplyDao {
 	int deleteReply(int r_no); // 댓글 삭제
 	List<ReplyDto> selectGroupReplyList(int r_groupno); //댓글 그룹번호로 리스트 뽑기
 	int insertReply(ReplyDto dto); //댓글 쓰기
+	int updateReply(ReplyDto dto); //댓글 업데이트
 }

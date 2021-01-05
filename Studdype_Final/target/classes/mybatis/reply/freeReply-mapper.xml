@@ -41,4 +41,8 @@
 		INSERT INTO FREE_REPLY 
 		VALUES ( FREEREPLYSEQ.NEXTVAL, #{b_no}, FREEGROUPSEQ.NEXTVAL, 0, 0, #{r_writer}, #{r_comment}, SYSDATE   )		
 	</insert>
+	
+	<update id="updateReply" parameterType="replyDto">
+		UPDATE FREE_REPLY SET R_COMMENT = #{r_comment} WHERE R_NO = #{r_no}
+	</update>
 </mapper>

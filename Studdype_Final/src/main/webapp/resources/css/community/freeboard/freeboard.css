@@ -351,3 +351,11 @@
 	color:white;
 	transition: 0.3s;
 }
+
+.showDiv{
+	display: block;
+}
+
+.hideDiv{
+	display: none;
+}

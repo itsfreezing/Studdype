@@ -71,4 +71,10 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 	public int writeReply(ReplyDto dto) {
 		return freeReplyDao.insertReply(dto);
 	}
+	
+	//댓글 수정
+	@Override
+	public int updateReply(ReplyDto dto) {
+		return freeReplyDao.updateReply(dto);
+	}
 }

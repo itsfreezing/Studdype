@@ -57,14 +57,22 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	//자유게시판 댓글 쓰기 메소드
 	@RequestMapping(value="/freeReplyWrite.do", method=RequestMethod.POST)
 	public @ResponseBody int freeReplyWrite(@RequestBody ReplyDto dto) {
-		logger.info("[FreeReplyWrite");
+		logger.info("[FreeReplyWrite]");
 		
 		int res = freeReplyBiz.writeReply(dto);
 		
 		return res;
 	}
 	
-	
+	//자유게시판 댓글 수정 메소드
+	@RequestMapping(value="/freeReplyUpdate.do", method=RequestMethod.POST)
+	public @ResponseBody int freeReplyUpdate(@RequestBody ReplyDto dto) {
+		logger.info("[FreeReplyUpdate]");
+		
+		int res = freeReplyBiz.updateReply(dto);
+		
+		return res;
+	}
 		
 		
 		
