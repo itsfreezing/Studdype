@@ -53,7 +53,7 @@
 
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">
-		SELECT 
+		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
 	</select>
