@@ -85,4 +85,33 @@ public class FreeReplyDaoImpl implements FreeReplyDao{
 		return resList                ;
 	}
 
+	//댓글 쓰기
+	@Override
+	public int insertReply(ReplyDto dto) {
+		int res = 0 ;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertReply", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: insertReply");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//댓글 수정
+	@Override
+	public int updateReply(ReplyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateReply", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: updateReply!!!");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

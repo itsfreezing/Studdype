@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class FreeReplyBizImpl implements FreeReplyBiz {
@@ -24,13 +25,6 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 	public List<ReplyDto> selectReplyList(int b_no) {
 		return freeReplyDao.selectReplyList(b_no);
 	}
-
-	// 작성자 이름 받아오기
-	@Override
-	public Map<Integer, String> getWriterNameByList(List<ReplyDto> replyList) {
-		return memberDao.selectWriterByFreeReply(replyList);
-	}
-
 	// 댓글 삭제
 	@Transactional
 	@Override
@@ -64,5 +58,23 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 		}
 
 		return res;
+	}
+
+	//댓글리스트로 member 정보 받아오기
+	@Override
+	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList) {
+		return memberDao.selectMemberByFreeReply(replyList);
+	}
+	
+	//댓글 쓰기
+	@Override
+	public int writeReply(ReplyDto dto) {
+		return freeReplyDao.insertReply(dto);
+	}
+	
+	//댓글 수정
+	@Override
+	public int updateReply(ReplyDto dto) {
+		return freeReplyDao.updateReply(dto);
 	}
 }
