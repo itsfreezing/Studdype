@@ -84,17 +84,26 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 
 	@Override
-	public int meetBoardInsert(MeetDto dto) {
+	public int insertMeetBoard(MeetDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertMeetBoard", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO insertMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+ 
+	@Override
+	public int updateMeetBoard(MeetDto dto) {
 		return 0;
 	}
 
 	@Override
-	public int meetBoardUpdate(MeetDto dto) {
-		return 0;
-	}
-
-	@Override
-	public int meetBoardDelete(int meet_no) {
+	public int deleteMeetBoard(int meet_no) {
 		return 0;
 	}
 
