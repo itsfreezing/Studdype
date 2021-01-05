@@ -11,6 +11,7 @@
       <typeAlias type="com.studdype.test.model.dto.location.LocationSiDto" alias="locationSiDto"/>
   		<typeAlias type="com.studdype.test.model.dto.location.LocationGuDto" alias="locationGuDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyCategoryDto" alias="studyCategoryDto"/>
+  		<typeAlias type="com.studdype.test.model.dto.board.ReplyDto" alias="replyDto"/>
       </typeAliases>
   
   	<mappers>
@@ -20,7 +21,7 @@
       <mapper resource="mybatis/locationSi-mapper.xml"/>
 	  	<mapper resource="mybatis/locationGu-mapper.xml"/>
 	  	<mapper resource="mybatis/category-mapper.xml"/>
-
+		<mapper resource="mybatis/reply/freeReply-mapper.xml"/>
   	</mappers>  
   
   

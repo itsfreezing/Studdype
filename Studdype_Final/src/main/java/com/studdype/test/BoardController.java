@@ -42,7 +42,8 @@ public class BoardController {
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, String> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-
+		
+		
 	
 		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 

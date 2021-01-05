@@ -69,8 +69,15 @@ SELECT * FROM STUDY;
 
 
 
+-------자유게시판 댓글
+--댓글 순서 편하게 보기
+SELECT * FROM FREE_REPLY WHERE B_NO = 132 ORDER BY R_GROUPNO, R_ORDER;
+--자유게시판 댓글 삭제 확인용 insert
+INSERT INTO FREE_REPLY VALUES (5, 132,3, 0, 1, 1, '삭제 수정테스트중', SYSDATE  );
+INSERT INTO FREE_REPLY VALUES (6, 132,3, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
+INSERT INTO FREE_REPLY VALUES (7, 132,3, 1, 3, 1, '삭제 수정테스트중', SYSDATE  );
 
-
-
+--자유게시판 일반 insert
+INSERT INTO FREE_REPLY VALUES (FREEREPLYSEQ.NEXTVAL, 132, FREEGROUPSEQ.NEXTVAL, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
 
 COMMIT;
