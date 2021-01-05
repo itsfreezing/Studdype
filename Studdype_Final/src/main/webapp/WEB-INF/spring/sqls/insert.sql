@@ -62,6 +62,23 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름15', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름16', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름17', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '안녕하세요', '스터디할사람', '우리 스터디는 재밋어요', NULL, 2, 2, 2, 15, 0);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름18', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름19', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름20', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름21', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름22', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름23', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름24', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름25', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름26', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름27', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름28', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름29', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름30', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름31', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름32', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름33', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
