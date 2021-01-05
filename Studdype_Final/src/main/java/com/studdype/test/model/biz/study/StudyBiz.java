@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.studdype.test.common.Pagination;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
@@ -13,7 +14,7 @@ import com.studdype.test.model.dto.study.StudyDto;
 @Service
 public interface StudyBiz {
 	
-	public List<StudyDto> studyList(Map pageMap);	//스터디 리스트
+	public List<StudyDto> studyList(Pagination pagination);	//스터디 리스트
 	public StudyDto selectOneBySno(int s_no);  //스터디 번호로 selectOne
 	public List<LocationSiDto> locationSiList(); // 지역 (시) selectList
 	public List<LocationGuDto> locationGuList(); // 지역(구/군) selectList

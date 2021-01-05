@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.common.Pagination;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -18,12 +19,12 @@ public class StudyDaoImpl implements StudyDao {
 	
 	//스터디 list 전체 가져오기
 	@Override
-	public List<StudyDto> studyList(Map pageMap) {
+	public List<StudyDto> studyList(Pagination pagination) {
 
 		List<StudyDto> studyList = null;
 
 		try {
-			studyList = sqlSession.selectList(NAMESPACE + "studyList", pageMap);
+			studyList = sqlSession.selectList(NAMESPACE + "studyList", pagination);
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
