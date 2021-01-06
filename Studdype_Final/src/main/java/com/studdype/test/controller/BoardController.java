@@ -105,6 +105,34 @@ public class BoardController {
 		}
 		
 	}
+	
+	//자유게시판 글 수정 폼으로
+	@RequestMapping(value="/freeBoardUpdateForm.do", method = RequestMethod.GET)
+	public String freeBoardUpdateForm(Model model, HttpServletRequest request) {
+		int b_no = Integer.parseInt( request.getParameter("b_no") );
+		
+		BoardDto dto = freeBiz.selectOne(b_no);
+		model.addAttribute("dto", dto);
+		return "community/freeboard/freeupdateform";
+	
+	}
+	
+	//자유게시판 글 수정
+	@RequestMapping("/freeBoardUpdate.do")
+	public String freeBoardUpdate(BoardDto dto, Model model) {
+		
+		int res = freeBiz.updateBoard(dto);
+		
+	
+		if( res > 0) {
+			return "redirect:freeboard.do?b_no="+dto.getB_no();
+		}else {
+			model.addAttribute("msg", "글 수정 실패!!");
+			model.addAttribute("url", "freeBoardUpdateForm.do?b_no="+dto.getB_no());
+			return "commond/alert";
+		}
+		
+	}
 
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
@@ -115,7 +143,7 @@ public class BoardController {
 		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		
 		
-		BoardDto board = freeBiz.selectOne(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
+		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
 		MemberDto member = memberBiz.selectOne( board.getB_writer() ); //작성자 이름 가져오기
 
 		model.addAttribute("dto", board);
