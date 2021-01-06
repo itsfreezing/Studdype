@@ -6,11 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
 
+@Validated
 @Service
 public class MeetBizImpl implements MeetBiz {
 	

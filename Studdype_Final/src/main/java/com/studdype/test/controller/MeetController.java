@@ -148,7 +148,8 @@ public class MeetController {
 	public String meetInsert(MeetDto dto,HttpSession session) {
 		int writer = ( (MemberDto)session.getAttribute("login") ).getMem_no(); // 작성자 번호
 		int s_no = ( (StudyDto)session.getAttribute("study") ).getS_no();	   // 스터디 번호
-		
+		System.out.println("dto: "+dto);
+		System.out.println("dto.getMeet_date(): "+dto.getMeet_date());
 		dto.setMeet_writer(writer);
 		dto.setS_no(s_no);
 		int res = meetBiz.insert(dto);
