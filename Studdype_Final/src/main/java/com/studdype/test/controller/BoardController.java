@@ -87,14 +87,32 @@ public class BoardController {
 		}
 
 	}
+	
+	//자유게시판 글 삭제
+	@RequestMapping(value="/freeBoardDelete.do", method = RequestMethod.GET)
+	public String freeBoardDelete(HttpServletRequest request, Model model) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
+		int res = freeBiz.deleteBoard(b_no);
+		
+		
+		if( res > 0) {
+			return "redirect:freeboard.do";
+		}else {			
+			model.addAttribute("msg", "글 삭제 실패!!");
+			model.addAttribute("url", "freedetail.do?b_no="+b_no);
+			return "commond/alert";
+		}
+		
+	}
 
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
 	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model) {
-		int b_no = Integer.parseInt(request.getParameter("boardno"));
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
 
 		//조회수 함수  isVisitPage = 1 -> 방문한 적있음  0 -> 없음
-		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("boardno"));
+		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		
 		
 		BoardDto board = freeBiz.selectOne(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가

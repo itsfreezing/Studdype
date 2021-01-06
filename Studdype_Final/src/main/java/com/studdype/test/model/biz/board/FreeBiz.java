@@ -14,5 +14,7 @@ public interface FreeBiz {
 	public int writeBoard(BoardDto board); //자유게시판 글 작성
 	public BoardDto selectOne(int b_no, int isVisitPage); //자유게시판 글 가져오기
 	public Map<Integer, MemberDto> getMemberMap(List<BoardDto> list); //자유게시판 memberMap
+	public int deleteBoard(int b_no); //자유게시판 글 삭제
+	public int updateBoard(BoardDto board); // 자유게시판 글 수정
 
 }

@@ -83,4 +83,32 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		}
 	}
 
+	//자유게시판 글 삭제
+	@Override
+	public int deleteBoard(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: deleteBoard!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//자유게시판 글 수정
+	@Override
+	public int updateBoard(BoardDto board) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateBoard", board);
+		} catch (Exception e) {
+			System.out.println("[ERROR}: updateBoard");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

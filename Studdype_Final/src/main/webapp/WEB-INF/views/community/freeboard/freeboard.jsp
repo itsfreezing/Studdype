@@ -104,7 +104,7 @@
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
 						<tr>
-							<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
+							<td class="tdtitle"><a href="freedetail.do?b_no=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
 							<td class="tdwriter">${memberMap.get( list.get(i).getB_no()).getMem_id() }(${memberMap.get( list.get(i).getB_no()).getMem_name()})</td>
 							<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
 							<td class="tdcnt">${list.get(i).getB_cnt() }</td>

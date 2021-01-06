@@ -35,8 +35,7 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-
-
+<!-- 댓글 구현 AJAX JS -->
 <script type="text/javascript" >
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
@@ -187,6 +186,12 @@ function deleteReply(btn){
 <!-- 댓글 쓰기 AJAX -->
 function insertReply(){
 	var content = $("#write_content").val();
+	
+	if(content.length > 500){
+		alert("500자 이하로 댓글을 작성해주세요!");
+		return false;
+	}
+	
 	var b_no = ${dto.b_no};
 	var r_writer = ${login.mem_no};
 	
@@ -239,6 +244,7 @@ function updateReplyForm(btn){
 	var updateReplyDivList = $(".update_reply_div");
 	var writeRecommentDiv = $(".write_recomment_div");
 	$(".write_recomment_hr").remove(); //답글쓰기 hr삭제
+	
 		
 	for(var i = 0 ; i < replyAreaList.length ; i++){
 		replyAreaList.eq(i).attr("class","reply_area showDiv")
@@ -277,6 +283,10 @@ function updateReply(btn){
 	var r_no = btn.value;
 	var r_comment = updateReplyDiv.find(".update_reply_comment").val();
 	
+	if(r_comment.length > 500){
+		alert("500자 이하로 댓글을 작성해주세요!");
+		return false;
+	}
 	var replyVal = {
 			"r_no" : r_no ,
 			"r_comment" : r_comment
@@ -361,6 +371,11 @@ function writeRecomment(btn){
 	var b_no = ${dto.b_no}; //글번호
 	var r_writer = ${login.mem_no};//댓글작성자
 	var r_comment = updateReplyDiv.find(".update_reply_comment").val(); //댓글 내용
+	if(r_comment.length > 500){
+		alert("500자 이하로 댓글을 작성해주세요!");
+		return false;
+	}
+	
 	var replyVal = {
 			"r_no" : r_no, //부모 댓글
 			"b_no" : b_no , //게시글 번호
@@ -410,6 +425,7 @@ $(document).ready( getReplyList() );
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
+	
  	<div class="main-section3">
 		<div class="titleDiv" >
 			<span class="title">${dto.b_title }</span>
@@ -423,6 +439,9 @@ $(document).ready( getReplyList() );
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
 		<div class="btnDiv">
+			<input type="button" value="목록" onclick="location.href='freeboard.do'">
+			<input type="button" value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
+			<input type="button" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
 		</div>
 		
 		<div class="replyBox" >
