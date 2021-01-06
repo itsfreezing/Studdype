@@ -74,6 +74,15 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		return res;
 	}
 		
+	//자유게시판 댓글 답글 작성 메소드
+	@RequestMapping(value="/freeRecommentWrite.do", method=RequestMethod.POST)
+	public @ResponseBody int freeRecommentWrite(@RequestBody ReplyDto dto) {
+		logger.info("[FreeRecommentWrite]");
+		
+		int res = freeReplyBiz.writeRecomment(dto);
+		
+		return res;
+	}
 		
 		
 	
