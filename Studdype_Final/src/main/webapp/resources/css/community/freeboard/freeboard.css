@@ -289,23 +289,23 @@
 }
 
 /* 댓글 수정 css */
-.update_reply_div{
+.recomment_div{
 	width: 80%;
 	border: 1px solid rgb(180,180,180);
 }
-.update_reply_div table{
+.recomment_div table{
 	width: 100%;
 	
 	margin-top: 15px;
 	
 }
 
-.update_reply_div table tr td{
+.recomment_div table tr td{
 	padding-bottom: 15px;
 	padding-right: 15px;
 	padding-left: 15px;
 }
-.update_reply_div table tr{
+.recomment_div table tr{
 	margin-left: 20px;
 	margin-right:20px;
 }
@@ -359,3 +359,4 @@
 .hideDiv{
 	display: none;
 }
+

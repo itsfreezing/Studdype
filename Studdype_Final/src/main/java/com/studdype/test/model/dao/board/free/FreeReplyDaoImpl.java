@@ -114,4 +114,18 @@ public class FreeReplyDaoImpl implements FreeReplyDao{
 		return res;
 	}
 
+	//댓글 답글 쓰기
+	@Override
+	public int insertRecomment(ReplyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertRecomment", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: insertRecomment");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

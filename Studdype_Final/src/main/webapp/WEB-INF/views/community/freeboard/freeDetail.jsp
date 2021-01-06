@@ -40,7 +40,8 @@
 <script type="text/javascript" >
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
-
+	
+	
 	var boardVal = {
 			"b_no":${dto.b_no }
 	};
@@ -67,6 +68,7 @@ function getReplyList() {
 					var dateFormat = replyDate.getFullYear() +'.'+ ( replyDate.getMonth()+1 ) +'.' + replyDate.getDate() +'  ' +
 										hour+':'+ minute;					
 					
+					//댓글이 부모댓글이면
 					if( map.replyList[i].r_class == 0){
 						
 						var reply = "<li class='replyItem'>"+
@@ -75,39 +77,59 @@ function getReplyList() {
 										+"<div class='reply_comment_box'>"+map.replyList[i].r_comment+"</div>"
 										+"<div class='reply_info_box'>"+dateFormat;
 						
+						//로그인 아이디와 댓글 작성자가 같으면
 						if(${login.mem_no} == map.replyList[i].r_writer ){
-							reply += "   <button class='write_recomeent_btn'>답글쓰기</button>"+
-										" <button class='write_recomeent_btn' onclick='updateReplyForm(this)' value="+map.replyList[i].r_no+">수정하기</button>" +
+							reply += "   <button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button>"+
+										" <button class='write_recomeent_btn' onclick='updateReplyForm(this);' value="+map.replyList[i].r_no+">수정하기</button>" +
 										" <button class='write_recomeent_btn' value="+map.replyList[i].r_no+" onclick='deleteReply(this);'>삭제하기</button></div></div>"+
 										
 										//댓글 수정 html 추가부분
-										"<div class='update_reply_div hideDiv' ><table>" +
+										"<div class='update_reply_div hideDiv recomment_div' ><table>" +
 										"<tr> <td class='update_reply_writer'>" + map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name + ")</td></tr>" +
 										"<tr><td><textarea class='update_reply_comment'>" + map.replyList[i].r_comment + "</textarea></td></tr></table>"+
 										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='updateReply(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">수정</button></div></div>"+
-										"</li><hr>"
+										//댓글 답글달기 html 추가부분
+										"<div class='hideDiv write_recomment_div recomment_div' style='margin-left:35px;' ><table>" +
+										"<tr> <td class='update_reply_writer'><img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"+$("#mem_id").val() +"("+$("#mem_name").val() +")</td></tr>" +
+										"<tr><td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td></tr></table>"+
+										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='writeRecomment(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">작성</button></div></div>"+
+										"</li><hr>";
+										
+										
+						//로그인 아이디와 댓글 작성자가 다르면
 						}else{
-							reply += "   <button class='write_recomeent_btn'>답글쓰기</button></div></div></li><hr>";
+							reply += "   <button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button></div></div>"+
+										//댓글 답글달기 html 추가부분
+										"<div class='hideDiv write_recomment_div recomment_div' style='margin-left:35px;' ><table>" +
+										"<tr> <td class='update_reply_writer'><img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"+$("#mem_id").val() +"("+$("#mem_name").val() +")</td></tr>" +
+										"<tr><td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td></tr></table>"+
+										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='writeRecomment(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">작성</button></div></div>"+
+										"</li><hr>";
 						}
-							
+					
+					//댓글이 부모댓글인데 삭제된 댓글이면
 					}else if( map.replyList[i].r_class == -1){
-						var reply = "<li class='replyItem'><div class='delete_reply'>삭제된 댓글 입니다.</div></li><hr>"
+						var reply = "<li class='replyItem'><div class='delete_reply'>삭제된 댓글 입니다.</div></li><hr>";
+						
+					//댓글이 부모 댓글이 아니면	
 					}else{
 						var reply = "<li class='replyItem'>"+
 						"<div class='reply_area showDiv' style='margin-left:35px;'>"
 							+"<div class='reply_writer_box'><img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"+map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name+ ")"   +"</div>"
 							+"<div class='reply_comment_box' style='margin-left:30px;'>"+map.replyList[i].r_comment+"</div>"
 							+"<div class='reply_info_box' style='margin-left:30px;'>"+dateFormat;
-						if(${login.mem_no} == map.replyList[i].r_writer ){
-							reply +=	"   <button class='write_recomeent_btn' onclick='updateReplyForm(this)'  value="+map.replyList[i].r_no+">수정하기</button>" +
+						//로그인된 아이디와 댓글 작성자가 같으면
+						if(${login.mem_no} == map.replyList[i].r_writer ){               
+							reply +=	"   <button class='write_recomeent_btn' onclick='updateReplyForm(this);'  value="+map.replyList[i].r_no+">수정하기</button>" +
 										" <button class='write_recomeent_btn' value="+map.replyList[i].r_no+" onclick='deleteReply(this);'>삭제하기</button></div></div>"+
 										
 										//댓글 수정 html 추가부분
-										"<div class='update_reply_div hideDiv'><table>" +
+										"<div class='update_reply_div hideDiv recomment_div'><table>" +
 										"<tr> <td class='update_reply_writer'>" + map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name + ")</td></tr>" +
 										"<tr><td><textarea class='update_reply_comment'>" + map.replyList[i].r_comment + "</textarea></td></tr></table>"+
 										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='updateReply(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">수정</button></div></div>"+
 										"</li><hr>"
+						//로그인된 아이디와 댓글 작성자가 다르면
 						}else{
 							reply += "</div></div></li><hr>";
 						}
@@ -165,8 +187,8 @@ function deleteReply(btn){
 <!-- 댓글 쓰기 AJAX -->
 function insertReply(){
 	var content = $("#write_content").val();
-	var b_no = ${dto.b_no}
-	var r_writer = ${login.mem_no}
+	var b_no = ${dto.b_no};
+	var r_writer = ${login.mem_no};
 	
 	var replyVal = {
 			"b_no" : b_no ,
@@ -182,6 +204,7 @@ function insertReply(){
 		contentType:"application/json",
 		dataType:"json",
 		success: function(res){
+			$(".write_content").val(""); //댓글 입력창 비우기
 			if ( res > 0 ){
 				getReplyList();
 			}else{
@@ -214,12 +237,17 @@ function updateReplyForm(btn){
 	//  1번
 	var replyAreaList = $(".reply_area");
 	var updateReplyDivList = $(".update_reply_div");
+	var writeRecommentDiv = $(".write_recomment_div");
+	$(".write_recomment_hr").remove(); //답글쓰기 hr삭제
 		
 	for(var i = 0 ; i < replyAreaList.length ; i++){
 		replyAreaList.eq(i).attr("class","reply_area showDiv")
 	}
 	for(var i = 0 ; i < updateReplyDivList.length ; i++){
-		updateReplyDivList.eq(i).attr("class","update_reply_div hideDiv")
+		updateReplyDivList.eq(i).attr("class","update_reply_div hideDiv recomment_div")
+	}
+	for(var i = 0 ; i < writeRecommentDiv.length ; i++){
+		writeRecommentDiv.eq(i).attr("class","write_recomment_div hideDiv recomment_div")
 	}
 	
 	//2번
@@ -228,10 +256,11 @@ function updateReplyForm(btn){
 	
 	
 	//3번
-	var reply_area = replyItem.children("div").eq(0).removeClass('showDiv');
-	var update_reply_div = replyItem.children("div").eq(0).addClass('hideDiv');
-	var reply_area = replyItem.children("div").eq(1).removeClass('hideDiv');
-	var update_reply_div = replyItem.children("div").eq(1).addClass('showDiv');
+	replyItem.children((".reply_area")).removeClass('showDiv');
+	replyItem.children((".reply_area")).addClass('hideDiv');
+	replyItem.children((".update_reply_div")).removeClass('hideDiv');
+	replyItem.children((".update_reply_div")).addClass('showDiv');
+
 	
 	//4번
 	btn.className = 'write_recomeent_btn'; //추가한 클래스 원상복구
@@ -280,6 +309,92 @@ function updateReply(btn){
 	
 }
 
+<!-- 답글쓰기 눌렀을시 hide/show 관리하는 함수 -->
+function writeRecommentForm(btn){
+	/*
+	1. reply_area 리스트와 update_reply_div 리스트들을 가져온 후 
+	   class이름들을 초기화 해준다.
+	2. 그 후 btn으로 넘어온 element값을 이용해 replyItem(<li>)태그를 선택한다.
+	3. replyItem의 자식선택자를 이용해 showDiv 와 hideDiv 클래스를 적절하게 추가/제거 해준다.
+	4. btn을 이용해 추가한 클래스를 제거한다.
+	*/
+
+	//  1번 초기화
+	var replyAreaList = $(".reply_area");
+	var writeRecommentDiv = $(".write_recomment_div");
+	var updateReplyDivList = $(".update_reply_div");
+	$(".write_recomment_hr").remove(); //답글쓰기 hr삭제
+	
+	for(var i = 0 ; i < replyAreaList.length ; i++){
+		replyAreaList.eq(i).attr("class","reply_area showDiv")
+	}
+	for(var i = 0 ; i < writeRecommentDiv.length ; i++){
+		writeRecommentDiv.eq(i).attr("class","write_recomment_div hideDiv recomment_div")
+	}
+	for(var i = 0 ; i < updateReplyDivList.length ; i++){
+		updateReplyDivList.eq(i).attr("class","update_reply_div hideDiv recomment_div")
+	}
+
+	//2번
+	btn.className += ' write_recomment_btn';  //update_btn 클래스 추가
+	var replyItem = $(".write_recomment_btn").parent().parent().parent();
+
+
+	//3번
+	replyItem.children((".write_recomment_div")).removeClass('hideDiv');	
+	replyItem.children((".write_recomment_div")).addClass('showDiv');
+	
+	//hr태그 추가
+	$("<hr class='write_recomment_hr'>").insertAfter(replyItem.children((".reply_area")))
+	
+	//4번
+	btn.className = 'write_recomeent_btn'; //추가한 클래스 원상복구
+}
+
+<!-- 댓글 답글쓰기 AJAX -->
+function writeRecomment(btn){
+	btn.className += ' write_recomment_btn';  //update_btn 클래스 추가
+	var updateReplyDiv = $(".write_recomment_btn").parent().parent();
+	
+	
+	var r_no = btn.value; //부모 댓글 번호
+	var b_no = ${dto.b_no}; //글번호
+	var r_writer = ${login.mem_no};//댓글작성자
+	var r_comment = updateReplyDiv.find(".update_reply_comment").val(); //댓글 내용
+	var replyVal = {
+			"r_no" : r_no, //부모 댓글
+			"b_no" : b_no , //게시글 번호
+			"r_writer":r_writer , //댓글 작성자
+			"r_comment" : r_comment //댓글 내용
+	};
+
+	//댓글 답글 쓰기
+	$.ajax({
+		type:"post",
+		url:"freeRecommentWrite.do",
+		data:JSON.stringify(replyVal),
+		contentType:"application/json",
+		dataType:"json",
+		success: function(res){
+			
+			if ( res > 0 ){
+				getReplyList();
+			}else{
+				alert("[ERROR]: 댓글 답글 등록 실패!!");
+				getReplyList();
+			}
+		} 
+		,
+		error:function(){
+			alert("댓글 등록 ajax 실패 ㅠ..");
+		}
+		
+		
+	});
+	
+	btn.className = 'write_recomment_btn'; //추가한 클래스 원상복구
+}
+
 //페이지 로드 후에
 $(document).ready( getReplyList() );
 
@@ -298,7 +413,7 @@ $(document).ready( getReplyList() );
  	<div class="main-section3">
 		<div class="titleDiv" >
 			<span class="title">${dto.b_title }</span>
-			<span class="regdate"><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
+			<span class="regdate" ><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
 		</div>
 		<div class="writerDiv">
 			<span class="writer"> ${member.mem_id } (${member.mem_name })</span>
@@ -329,7 +444,9 @@ $(document).ready( getReplyList() );
  	</div>
  	
  
-	<input type="hidden" id="b_no" name="b_no" value="${dto.b_no }">
+
+	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
+	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
 	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>
