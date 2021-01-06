@@ -10,7 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.tribes.MembershipService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,19 +59,19 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 
-	//커뮤니티 홈으로
+	//而ㅻ�ㅻ땲�떚 �솃�쑝濡�
 
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
 		
-		/////////////////////// 테스트용 세션
+		/////////////////////// �뀒�뒪�듃�슜 �꽭�뀡
 		MemberDto login = memberBiz.selectOne(1);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		
-		session.setAttribute("study", study); //스터디 세션
-		session.setAttribute("login", login); //로그인 세션
-		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
+		session.setAttribute("study", study); //�뒪�꽣�뵒 �꽭�뀡
+		session.setAttribute("login", login); //濡쒓렇�씤 �꽭�뀡
+		//////////////////// �솕�긽�쉶�쓽 �뀒�뒪�듃瑜� �쐞�븳 session login, study而ㅻ�ㅻ땲�떚�젒洹� �꽭�뀡 援ы쁽�썑 �궘�젣
 		session.setAttribute("leftnavi", "studyhome");
 		return "community/communityHome";
 	}
@@ -80,11 +80,6 @@ public class HomeController {
 	public String notice(HttpSession session) {
 		session.setAttribute("leftnavi", "notice");
 		return "community/notice";
-	}
-	
-	@RequestMapping("/loginform.do")
-	public String loginForm(HttpSession session) {
-		return "loginpage/login";
 	}
 	
 	@RequestMapping("/signupform.do")

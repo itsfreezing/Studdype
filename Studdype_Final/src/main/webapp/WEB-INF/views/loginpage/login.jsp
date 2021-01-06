@@ -89,28 +89,28 @@
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-    <form action="loginform.do" method="POST">
+    <form action="login.do" method="POST">
        <table>
           <tr>
              <td>
-                <input type="text" name="ID" id="chk"placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
+                <input type="text" name="mem_id" id="chk"placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
              </td>
           </tr>
           <br>
           <tr>
              <td>
-                <input type="text" name="pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+                <input type="text" name="mem_pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
              </td>
           </tr>
        
        </table>
     
+       <button id="sign" type="submit" style="border:0">LOGIN</button>
     
     
     </form>
     
     
-   <button id="sign" style="border:0" onclick="location.href='home.jsp'">Sign</button>
    <br>
    <br>
    <a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>

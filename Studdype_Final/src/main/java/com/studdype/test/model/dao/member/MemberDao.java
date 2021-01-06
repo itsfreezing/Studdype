@@ -22,6 +22,7 @@ public interface MemberDao {
 	Map<Integer, String> selectWriterByFreeList(List<BoardDto> list); 	  		// 자유 게시판 리스트로 작성자이름 가져오기
 	Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list); 		// 모임 게시판 리스트로 작성자이름 가져오기
 	
+	
 
 	
 	

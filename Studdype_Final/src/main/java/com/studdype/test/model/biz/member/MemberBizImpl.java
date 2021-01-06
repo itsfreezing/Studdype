@@ -30,4 +30,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.memberInsert(dto);
 	}
 	
+	//로그인
+	@Override
+	public MemberDto login(MemberDto dto) {
+		return memberDao.login(dto);
+	}
+	
+	
 }

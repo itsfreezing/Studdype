@@ -24,14 +24,16 @@ public class MemberDaoImpl implements MemberDao{
 	//로그인
 	@Override
 	public MemberDto login(MemberDto dto) {
-		return null;
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"login",dto);
+		}catch (Exception e) {
+			System.out.println("[ERROR]:login");
+		}
+		return res;
 	}
 
-	//회원가입
-	@Override
-	public void register(MemberDto dto) {
-		return;
-	}
 
 	//멤버번호로 하나 셀렉트
 	@Override
