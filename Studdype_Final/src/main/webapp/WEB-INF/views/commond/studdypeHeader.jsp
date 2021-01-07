@@ -60,7 +60,7 @@
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-								<h1>네비 메뉴 이름</h1><br><br><br>
+								<h1></h1>
 							</div>
 						</div>
 					</div>

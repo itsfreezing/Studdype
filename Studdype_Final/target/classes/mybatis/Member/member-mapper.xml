@@ -30,6 +30,10 @@
 
 		</insert>
 	
-	
+		<select id="selectWriterByBookList" parameterType="int" resultType="memberDto">
+			SELECT *
+			FROM MEMBER
+			WHERE MEM_NO = #{mem_no}
+		</select>
 	
 	</mapper>
