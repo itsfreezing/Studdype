@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="locsi">
+	<select id="locationSiList" resultType="locationSiDto">
+		SELECT * 
+		FROM LOCATION_SI
+		ORDER BY SI_NO ASC
+	</select>
+	
+		<select id="selectSiForMainPage" parameterType="int" resultType="string">
+		SELECT SI_NAME 
+		FROM LOCATION_SI
+		WHERE SI_NO = #{si_no}
+	</select>
+</mapper>

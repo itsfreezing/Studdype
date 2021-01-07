@@ -1,8 +1,8 @@
 .left-navigation {
 	display: inline-block;
-	margin-left: 2%;
+	margin-left: 5%;
 	margin-top: 3%;
-	width: 20%;
+	width: 18%;
 	height: 600px;
 }
 
@@ -54,9 +54,12 @@
 	border-radius: 30px;
 	border: 0;
 	background-color: rgb(115, 98, 222);
+	
 	color: white;
 	font-weight: bold;
 	z-index: 5;
+	cursor: pointer;
+	
 }
 
 .leftnavi-item .navBtn {

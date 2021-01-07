@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeboard">
+	<resultMap type="boardDto" id="boardMap">
+		<result property="b_no" column="B_NO"></result>
+		<result property="s_no" column="S_NO"></result>
+		<result property="b_title" column="B_TITLE"></result>
+		<result property="b_writer" column="B_WRITER"></result>
+		<result property="b_content" column="B_CONTENT"></result>
+		<result property="b_regdate" column="B_REGDATE"></result>
+		<result property="b_cnt" column="B_CNT"></result>
+	</resultMap>
+
+
+	<select id="totalBoardNum" parameterType="int"	resultType="_int">
+		SELECT COUNT(*)
+		FROM FREE_BOARD
+		WHERE S_NO = #{s_no}
+	</select>
+
+	<select id="pagingBoardList" parameterType="hashMap" resultMap="boardMap">
+		
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+			FROM
+			(
+				SELECT ROWNUM N, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+				FROM FREE_BOARD
+				WHERE S_NO = #{studyno}
+				ORDER BY B_NO DESC
+			)
+			WHERE N >= #{startRow} AND N <= #{endRow}
+		]]>
+	</select>
+
+	<insert id="insertBoard" parameterType="boardDto">
+	
+		INSERT INTO FREE_BOARD 
+		VALUES( FREEBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
+		
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultMap="boardMap">
+		SELECT * 
+		FROM FREE_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+
+	<update id="updateCnt" parameterType="int">
+		UPDATE FREE_BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}	
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM FREE_BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE FREE_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
+</mapper>
+
+  
+  	
+	

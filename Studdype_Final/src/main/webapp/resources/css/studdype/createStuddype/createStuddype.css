@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.main-section {
+	display: block;
+	position: relative;
+	width: 60%;
+	margin: 0px auto;
+}
+
+#main-contrainer {
+	position: relative;
+	width: 100%;
+	hight: 100%;
+	margin: 0px auto;
+	margin-top: 5%;
+}
+
+#mainleft {
+	position: relative;
+	float: left;
+	width: 50%;
+}
+
+#mainright {
+	position: relative;
+	float: right;
+	width: 50%;
+	padding-left: 5%;
+}
+
+image_section {
+	width: 100%;
+	height: 60%;;
+	border: 2px solid #f8f9fa;
+}
+
+#mainbottom {
+	clear: both;
+}
+
+#btndiv {
+	text-align: center;
+}
+
+input#fileinput {
+	margin-top: 6.5%;
+}
+
+button.submitBtn {
+	background: #fff;
+	color: #7362DE;
+	border: 1px solid #7362DE;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin-top: 40px;
+	padding-bottom: 50px;
+	width: 300px;
+	height: 50px;
+	line-height: 52px;
+	padding: 0;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+input.submitBtn:hover, button.submitBtn:hover {
+	background: #7362DE;
+	color: #fff;
+}
+
+
+label {
+	color: #7362DE;
+	font-weight: bold;
+}

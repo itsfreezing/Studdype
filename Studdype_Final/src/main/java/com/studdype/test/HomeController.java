@@ -25,7 +25,7 @@ public class HomeController {
 	public String studdypeExample() {
 		return "studdype/studdypeExample";
 	}
-	
+																
 	@RequestMapping("/searchbycategory.do")
 	public String searchByCategory() {
 		return "studdype/searchByCategory";

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="locgu">
+	<select id="locationGuList" resultType="locationGuDto">
+		SELECT *
+		FROM LOCATION_GU
+		ORDER BY GU_NO ASC
+	</select>
+	
+	<select id="selectGuForMainPage" parameterType="int" resultType="string">
+		SELECT GU_NAME
+		FROM LOCATION_GU
+		WHERE GU_NO = #{gu_no}
+	</select>
+	
+</mapper>

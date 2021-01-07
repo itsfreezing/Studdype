@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="studycate">
+	
+	<select id="categoryList" resultType="studyCategoryDto">
+		SELECT *
+		FROM STUDY_CATEGORY
+		ORDER BY CATE_NO ASC
+	</select>
+
+	<select id="categoryListForHome" parameterType="int" resultType="string">
+		SELECT CATE_NAME
+		FROM STUDY_CATEGORY
+		WHERE  CATE_NO = #{cate_no}
+	</select>
+</mapper>
