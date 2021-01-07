@@ -101,6 +101,7 @@ public class StudyController {
 		return "studdype/createStuddype";
 	}
 	
+	
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
 	public String createStuddype(HttpServletRequest request, StudyDto dto, Model model, FileDto filedto) {
@@ -197,5 +198,16 @@ public class StudyController {
 		}
 	}
 	
+	//스터디 관리 페이지 이동
+	@RequestMapping("/updateStudy.do")
+	public String updateStudy(HttpSession session) {
+		List<StudyCategoryDto> category = studyBiz.categoryList();
+		
+		session.setAttribute("category", category);
+		session.setAttribute("leftnavi", "updateStudy");
+		
+		return "studdype/updateStudy";
+	}
+
 }
 
