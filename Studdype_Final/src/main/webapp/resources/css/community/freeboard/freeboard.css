@@ -78,7 +78,7 @@
 	box-shadow: 0 0 15px 5px #eaebf2;
 	border-radius: 10px 10px;
 	color: #6434ef;
-	margin-right: 20%;
+	margin-right: 5%;
 }
 
 .writeBtn:hover {
@@ -113,9 +113,9 @@
 .main-section3 {
 	float: right;
 	display: inline-block;
-	width: 67%;
 	margin-top: 5%;
-	margin-right: 10%;
+   margin-right:13%;
+   width: 60%;
 	
 }
 
@@ -175,3 +175,192 @@
 	padding-left: 20px;
 	padding-top: 30px;
 }
+.btnDiv{
+	border-bottom: 1px solid #ccc;
+	
+}
+
+/* 댓글 */
+.replyItem{
+		list-style: none;
+}
+
+.replyWrite{
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.replyWrite table{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.write_td{
+	width: 90%;	
+}
+
+.write_btn_td{
+	width: 5%;
+}
+
+.write_content{
+	width: 100%;
+	height: 100px;
+	resize: none;
+	border: 1px solid #808080;
+	border-radius: 5px 5px;
+	padding: 20px;
+	
+}
+
+.reply_write_btn{
+	width: 100px;
+	height: 105px;
+	background-color: white;
+	border: 1px solid #808080;
+	font-size: 25px;
+		border-radius: 5px 5px;
+	color: #808080;
+	cursor: pointer;
+	padding: 0px;
+	
+}
+
+.reply_write_btn:hover {
+	background-color: #6434ef;
+	color: white;	
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.replyBox{
+	margin-top: 20px;
+	
+}
+
+.replyTitle{
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.replyTitle span{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+
+.reply_arrow{
+	width:30px; 
+	height:auto;
+	padding-right: 5px;
+	padding-bottom: 15px;
+	
+}
+
+.reply_writer_box{
+	font-weight: bold;
+}
+
+.reply_comment_box{
+	padding-bottom: 15px;
+	word-break:break-all;
+}
+
+.reply_info_box{
+	color:rgb(170,170,170);
+	
+}
+
+.write_recomeent_btn{
+	font-size: 15px;
+	color:rgb(170,170,170);
+	background: white;
+	border: none;
+	cursor: pointer;
+}
+
+.write_recomeent_btn:hover{
+	font-weight: bold;
+	color: black;
+}
+
+.writerId{
+	font-weight: bold;
+}
+
+/* 댓글 수정 css */
+.recomment_div{
+	width: 80%;
+	border: 1px solid rgb(180,180,180);
+}
+.recomment_div table{
+	width: 100%;
+	
+	margin-top: 15px;
+	
+}
+
+.recomment_div table tr td{
+	padding-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.recomment_div table tr{
+	margin-left: 20px;
+	margin-right:20px;
+}
+.update_reply_btnDiv{
+	height: 60px;
+	border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.update_reply_comment{
+	width: 98%;
+	height: 100px;
+	resize: none;	
+	border: none;	
+	padding: 20px;	
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	word-break:break-all;
+	
+	
+}
+
+.update_reply_comment:focus{
+	border: 1px solid #ccc;
+	border-radius: 5px 5px;
+}
+
+.update_reply_writer{
+	font-weight: bold;
+}
+
+.update_reply_btn{
+	float: right;
+	cursor: pointer;
+	height: 100%;
+	background-color:white;
+	border: none;
+	border-left: 1px solid rgba(0,0,0,.1);
+	font-weight: bold;
+	width: 100px;
+}
+
+.update_reply_btn:hover{
+	background-color:  #6434ef;
+	color:white;
+	transition: 0.3s;
+}
+
+.showDiv{
+	display: block;
+}
+
+.hideDiv{
+	display: none;
+}
+

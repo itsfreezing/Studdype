@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
@@ -41,25 +42,33 @@ public class MeetBizImpl implements MeetBiz {
 	public Map<Integer, String> getWriterNameByList(List<MeetDto> list) {
 		return memberDao.selectWriterByMeetBoardList(list);
 	}
-
+	
+	// 모임게시판 디테일
+	@Transactional
 	@Override
-	public MeetDto selectOne(int meet_no) {
-		return meetBoardDao.meetBoardSelectOne(meet_no);
+	public MeetDto selectOne(int meet_no, int isVisitPage) {
+		if(isVisitPage == 0) {
+			meetBoardDao.updateMeetCnt(meet_no);
+		}
+		MeetDto dto = meetBoardDao.meetBoardSelectOne(meet_no);
+		
+		return dto;
 	}
-
+	
+	// 모임게시판 모임생성
 	@Override
 	public int insert(MeetDto dto) {
-		return meetBoardDao.meetBoardInsert(dto);
+		return meetBoardDao.insertMeetBoard(dto);
 	}
 
 	@Override
 	public int update(MeetDto dto) {
-		return meetBoardDao.meetBoardUpdate(dto);
+		return meetBoardDao.updateMeetBoard(dto);
 	}
 
 	@Override
 	public int delete(int meet_no) {
-		return meetBoardDao.meetBoardDelete(meet_no);
+		return meetBoardDao.deleteMeetBoard(meet_no);
 	}
 
 }

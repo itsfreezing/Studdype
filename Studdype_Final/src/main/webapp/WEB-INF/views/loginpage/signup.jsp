@@ -5,9 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
+<link rel="stylesheet" href="./resources/assets/css/animate.css">
+<link rel="stylesheet" href="./resources/assets/css/normalize.css">
+<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/assets/css/responsive.css">
+<link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
-var finish_flag = 0;  //전체 검사 flag 설정
+
+/*var finish_flag = 0;  //전체 검사 flag 설정
 
 
 function pw_check() {   //비밀번호, 비밀번호 확인 비교 함수
@@ -125,6 +139,35 @@ function show_birth()  //주민번호 생년월일로 자동 출력 함수
 	   }
 	}
 	
+	$(document).ready(function(){
+		// 취소
+		$(".cencle").on("click", function(){
+			
+			location.href = "/login";
+					    
+		})
+	
+		$("#submit").on("click", function(){
+			if($("#userId").val()==""){
+				alert("아이디를 입력해주세요.");
+				$("#userId").focus();
+				return false;
+			}
+			if($("#userPass").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#userPass").focus();
+				return false;
+			}
+			if($("#userName").val()==""){
+				alert("성명을 입력해주세요.");
+				$("#userName").focus();
+				return false;
+			}
+		});
+		
+			
+		
+	})*/
 </script>		
 <style type="text/css">
 h1{
@@ -234,30 +277,8 @@ input{
 
 </head>
 <body>
-<div id="header">
-   <img src="./resources/assets/img/logo_white.png" id="logo">
+<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-      <button>
-         지역별 검색 
-      </button>
-      <button>
-         카테고리별 검색 
-      </button>
-      <button >
-         Home
-      </button>
-      <button >
-         Create Study
-      </button>
-      <button >
-         MemberShip
-      </button>
-
-      <h1 id="pagetitle">Member Ship</h1>
-
-      <hr id="line">
-      
-      </div>
    <img src="" id="pic">
    <br><br>   
       <h3>--Please be our colleague--</h3>
@@ -271,7 +292,7 @@ input{
                     <tr>
                       <td> 
                            
-                           <input type="text" name="id" value="" style="border:2px solid #DA81F5;" size="25" maxlength="12" placeholder="아이디를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}" title = "4~12자의 영문 대소문자와 숫자로만 입력" required />
+                           <input type="text" name="mem_id" value="" style="border:2px solid #DA81F5;" size="25" maxlength="12" placeholder="아이디를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}" title = "4~12자의 영문 대소문자와 숫자로만 입력" required />
                      </td>
                     </tr>
 
@@ -293,7 +314,7 @@ input{
                     </tr> 
                     <tr>
                         <td colspan="5">
-                            <input type="password" name="repw"style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" id="repw" value="" size="20" maxlength="12">
+                            <input type="password" name="mem_pw"style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" id="repw" value="" size="20" maxlength="12">
                             <input type="button" name="pwc"  id="btn"value="check" onclick="pw_check()">
                         </td>
                     </tr>
@@ -305,7 +326,7 @@ input{
                     </tr> 
                     <tr>
                     	<td>
-                    		<input type="text" name="mail" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}" required />
+                    		<input type="text" name="mem_email" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}" required />
                     	</td>
                     </tr>
                     <tr id="ssss">
@@ -320,7 +341,7 @@ input{
                         </td>
                     </tr> 
                     <tr>
-                        <td><input type="text" style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요"></td>
+                        <td><input type="text" name="mem_name" style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요"></td>
                     </tr>
                     <tr>
                     	<td>
@@ -329,9 +350,20 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    		<input type="text" name="id_num_1" style="border: 2px solid #DA81F5;" id ="id_num_1" maxlength="6" onkeyup="show_birth()" required /> -<input type="password" name="id_num_2" style="border: 2px solid #DA81F5;" id ="id_num_2" maxlength="7" onkeyup="personal_num_check()">
+                    		<input type="text" name="mem_rno" style="border: 2px solid #DA81F5;" id ="id_num_1" maxlength="6" onkeyup="show_birth()" required /> -<input type="password" name="id_num_2" style="border: 2px solid #DA81F5;" id ="id_num_2" maxlength="7" onkeyup="personal_num_check()">
                     	</td>
                     </tr>
+                    <tr>
+                    	<td>
+                    		<h3 id="idtitle">핸드폰 번호 </h3>
+                    	</td>
+                    </tr>
+                    <tr>
+                    	<td colspan="5">
+                    		<input type="text" name ="mem_phone" style="border: 2px solid #DA81F5;" placeholder="번호를 입력해주세요">
+                    	</td>
+                    </tr>
+
                     <tr>
                     	<td>
                     		<h3 id="idtitle">성별 </h3>
@@ -339,11 +371,11 @@ input{
                     </tr>
                     <tr>
                     	<td>
-		               		<select id="select" style="border: 2px solid #DA81F5;">
-					        	<option value="male">
+		               		<select id="select" name="mem_gender" style="border: 2px solid #DA81F5;">
+					        	<option value="M">
 					        		남자 
 					        	</option>
-					        	<option value="female">
+					        	<option value="F">
 					        		여자
 					        	</option>
 					        </select>
@@ -359,10 +391,19 @@ input{
 		      </center>
         
       </form>
-      
-        
-      
-      
+
    </div>
+
+	  
+	  
+		<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	
+		<script src="./resources/assets/js/popper.min.js"></script>
+		<script src="./resources/assets/js/bootstrap.min.js"></script>
+		<script src="./resources/assets/js/owl.carousel.min.js"></script>
+		<script src="./resources/assets/js/modal-video.js"></script>
+		<script src="./resources/assets/js/loadmore.js"></script>
+		<script src="./resources/assets/js/prefixfree.min.js"></script>
+		<script src="./resources/assets/js/main.js"></script>
   </body>
   </html> 

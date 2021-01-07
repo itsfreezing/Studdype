@@ -41,10 +41,10 @@
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="loginPage.jsp">로그인</a>
+									<a class="nav-link" href="loginform.do">로그인</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="membershipPage.jsp">회원가입</a>
+									<a class="nav-link" href="signform.do">회원가입</a>
 								</li>
 								<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 								<li class="nav-item"></li>
@@ -60,7 +60,7 @@
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-								<h1>네비 메뉴 이름</h1><br><br><br>
+								<h1></h1>
 							</div>
 						</div>
 					</div>
