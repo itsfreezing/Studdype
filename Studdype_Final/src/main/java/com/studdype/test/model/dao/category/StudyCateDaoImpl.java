@@ -48,8 +48,6 @@ public class StudyCateDaoImpl implements StudyCateDao{
 			}
 			cateListForHomeMap.put(studyList.get(i).getCate_no(), cateName); //put (번호, 카테이름);
 		}
-		System.out.println(cateNo);
-		System.out.println(cateName);
 		return cateListForHomeMap;
 	}
 

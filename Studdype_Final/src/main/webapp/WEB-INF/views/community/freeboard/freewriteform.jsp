@@ -86,6 +86,8 @@
 	
 	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
+	}else if( title.val().length  > 50  ){
+		alert("제목을 50글자 이하로 작성해주세요!!");
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("글 내용을 작성해주세요.")
 	}else{
