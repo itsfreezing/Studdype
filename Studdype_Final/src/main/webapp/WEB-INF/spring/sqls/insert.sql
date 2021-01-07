@@ -62,6 +62,23 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름15', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름16', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름17', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '안녕하세요', '스터디할사람', '우리 스터디는 재밋어요', NULL, 2, 2, 2, 15, 0);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름18', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름19', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름20', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름21', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름22', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름23', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름24', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름25', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름26', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름27', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름28', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름29', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름30', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름31', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름32', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름33', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
@@ -135,5 +152,32 @@ INSERT INTO FREE_REPLY VALUES (7, 132,3, 1, 3, 1, '삭제 수정테스트중', S
 
 --자유게시판 일반 insert
 INSERT INTO FREE_REPLY VALUES (FREEREPLYSEQ.NEXTVAL, 132, FREEGROUPSEQ.NEXTVAL, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
+
+-- 도서 게시판 insert
+INSERT INTO BOOK_BOARD VALUES(BOOKBOARDSEQ.NEXTVAL, 1, '도서 추천', 1, '추천드립니다.', SYSDATE);
+
+-- 학습 도서
+INSERT INTO BOOK VALUES(1, 1, '자바', '자바', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+--자유게시판 댓글 답글 insert
+INSERT INTO FREE_REPLY 
+VALUES(
+    FREEREPLYSEQ.NEXTVAL,
+    132,
+    ( SELECT R_GROUPNO FROM FREE_REPLY WHERE R_NO = 1 ),
+    1,
+    (SELECT MAX(R_ORDER)  FROM FREE_REPLY  WHERE R_GROUPNO =(SELECT R_GROUPNO FROM FREE_REPLY WHERE R_NO = 1) ) +1,
+    1,
+    '답글 INSERT 연습',
+    SYSDATE
+) ;
+
+--자유게시판 제약조건확인
+ALTER TABLE FREE_BOARD MODIFY B_CONTENT LONG;
+SELECT * FROM ALL_CONSTRAINTS
+WHERE TABLE_NAME = 'FREE_BOARD';
+
+ALTER TABLE FREE_BOARD DROP CONSTRAINT SYS_C009669;
+UPDATE FREE_BOARD SET B_CONTENT = NULL;
+ALTER TABLE FREE_BOARD MODIFY B_CONTENT LONG;
 
 COMMIT;

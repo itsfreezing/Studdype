@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class FreeBizImpl implements FreeBiz {
@@ -51,6 +52,24 @@ public class FreeBizImpl implements FreeBiz {
 		}
 		BoardDto dto = freeBoardDao.selectOne(b_no);
 		return dto;
+	}
+
+	//자유게시판 리스트 member리스트 함수
+	@Override
+	public Map<Integer, MemberDto> getMemberMap(List<BoardDto> list) {
+		return memberDao.selectMemberByFreeList(list);
+	}
+
+	//자유게시판 글 삭제
+	@Override
+	public int deleteBoard(int b_no) {
+		return freeBoardDao.deleteBoard(b_no);
+	}
+
+	//자유게시판 글 수정
+	@Override
+	public int updateBoard(BoardDto board) {
+		return freeBoardDao.updateBoard(board);
 	}
 
 }

@@ -121,6 +121,11 @@
 			$(this).css('border', '1px solid #ced4da');
 		});
 		///////////////////////////////////////////////////////////////
+		
+		// 헤더 메뉴 선택 시 h1태그 이름 변경
+		var menuName = $(".active-nav-item").text().trim();
+		$(".hero-text h1").text(menuName);
+		
 	});
 	
 	// 이미지 미리보기 함수
@@ -196,7 +201,7 @@
 	<!--main conternt 섹션-->
 	<div class="main-section">
 		<form method="post" enctype="multipart/form-data" action="createStuddype.do"
-				 onsubmit='return frmsubmit();' modelAttribute="uploadFile" autocomplete="off" >
+				 onsubmit='return frmsubmit();' autocomplete="off" >
 			<input type="hidden" name="leader_no" value="${login.mem_no }">
 			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="main-contrainer">
