@@ -15,8 +15,7 @@ public class MeetDto {
 	private String meet_time; 			// 모임 시간
 	private Date meet_regdate; 			// 모임 작성일자
 	private String vote_startdate; 		// 투표 시작일
-	private String vote_enddate; 			// 투표 마감일
-	
+	private String vote_enddate; 		// 투표 마감일
 	private int meet_cnt;				// 모임 게시판 조회수
 
 	public MeetDto() {
