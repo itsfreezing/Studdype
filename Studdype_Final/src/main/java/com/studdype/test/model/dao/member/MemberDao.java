@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -22,7 +23,8 @@ public interface MemberDao {
 	Map<Integer, String> selectWriterByFreeList(List<BoardDto> list); 	  		// 자유 게시판 리스트로 작성자이름 가져오기
 	Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list); 		// 모임 게시판 리스트로 작성자이름 가져오기
 	
-
+	// 도서 관련 메소드
+	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
 	
 	
 	

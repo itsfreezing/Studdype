@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+	<resultMap type="bookDto" id="bookMap">
+		<result property="b_no" column="B_NO"></result>
+		<result property="s_no" column="S_NO"></result>
+		<result property="book_title" column="BOOK_TITLE"></result>
+		<result property="b_writer" column="B_WRITER" />
+		<result property="book_author" column="BOOK_AUTHOR"></result>
+		<result property="book_publish" column="BOOK_PUBLISH"></result>
+		<result property="book_img" column="BOOK_IMG"></result>
+		<result property="book_url" column="BOOK_URL"></result>
+		<result property="book_ismain" column="BOOK_ISMAIN" />
+		<result property="b_regdate" column="B_REGDATE" />
+	</resultMap>
+
+	<select id="selectTotalRegisterBookNum" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOOK
+		WHERE S_NO = #{s_no}
+	</select>
+
+	<select id="selectPageBookList" parameterType="hashMap" resultType="bookDto">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_REGDATE, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISH, BOOK_IMG, BOOK_URL, BOOK_ISMAIN
+			FROM (
+			SELECT ROWNUM RNUM, B_NO, S_NO, B_TITLE, B_WRITER, B_REGDATE, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISH, BOOK_IMG, BOOK_URL, BOOK_ISMAIN 
+			FROM BOOK
+			ORDER BY B_REGDATE DESC
+			)
+			WHERE RNUM >= #{startRow}  AND RNUM <= #{endRow}
+		]]>
+	</select>
+
+</mapper>	

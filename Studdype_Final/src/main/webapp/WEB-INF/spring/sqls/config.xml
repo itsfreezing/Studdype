@@ -14,7 +14,8 @@
   		<typeAlias type="com.studdype.test.model.dto.location.LocationGuDto" alias="locationGuDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyCategoryDto" alias="studyCategoryDto"/>
   		<typeAlias type="com.studdype.test.model.dto.board.ReplyDto" alias="replyDto"/>
-		  <typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
+		<typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
+		<typeAlias type="com.studdype.test.model.dto.board.BookDto" alias="bookDto"/>
       </typeAliases>
   
   	  		
@@ -27,7 +28,8 @@
 	  	<mapper resource="./mybatis/Category/category-mapper.xml"/>
 		<mapper resource="./mybatis/Board/meetBoard-mapper.xml"/>
       	<mapper resource="./mybatis/File/file-mapper.xml"/>
-		  <mapper resource="mybatis/reply/freeReply-mapper.xml"/>
+		<mapper resource="mybatis/reply/freeReply-mapper.xml"/>
+		<mapper resource="./mybatis/Board/book-mapper.xml"/>
 
   	</mappers>  
   

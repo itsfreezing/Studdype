@@ -1,5 +1,6 @@
 package com.studdype.test.model.dao.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -151,6 +153,29 @@ public class MemberDaoImpl implements MemberDao{
 		
 		
 		return resMap;
+	}
+
+	// [도서 게시판] 리스트로 작성자 이름 가져오기
+	@Override
+	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList) {
+		Map<Integer, Map<String, String>> bookMap = new HashMap<Integer, Map<String, String>>();
+		Map<String, String> memberInfo = new HashMap<String, String>();
+		int mem_no;
+		
+		for(int i = 0; i <bookList.size(); i++) {
+			mem_no = bookList.get(i).getB_writer();
+			MemberDto dto = new MemberDto();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectWriterByBookList", mem_no);
+				memberInfo.put(dto.getMem_id(), dto.getMem_name());
+			} catch (Exception e) {
+				System.out.println("[ERROR] : selectWriterByBookList"+i+"번째 실행");
+				e.printStackTrace();
+			}
+			bookMap.put(mem_no, memberInfo);
+		}
+		
+		return bookMap;
 	}
 
 }

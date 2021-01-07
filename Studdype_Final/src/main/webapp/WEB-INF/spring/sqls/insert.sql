@@ -136,4 +136,10 @@ INSERT INTO FREE_REPLY VALUES (7, 132,3, 1, 3, 1, '삭제 수정테스트중', S
 --자유게시판 일반 insert
 INSERT INTO FREE_REPLY VALUES (FREEREPLYSEQ.NEXTVAL, 132, FREEGROUPSEQ.NEXTVAL, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
 
+-- 도서 게시판 insert
+INSERT INTO BOOK_BOARD VALUES(BOOKBOARDSEQ.NEXTVAL, 1, '도서 추천', 1, '추천드립니다.', SYSDATE);
+
+-- 학습 도서
+INSERT INTO BOOK VALUES(1, 1, '자바', '자바', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+
 COMMIT;
