@@ -63,8 +63,8 @@ function chkForm(){
 	var form = $("#meetWriteForm");
 	var meetDate = $("#meetDate");
 	var meetTime = $("#meetTime");
-	var meetStartDate = $("#meetStartDate");
-	var meetEndDate = $("meetEndDate");
+	var meetStartDate = $("#voteStartDate");
+	var meetEndDate = $("voteEndDate");
 	var title = $("#meetTitle");
 	var address = $("address");
 	var detailAddress = $("detailAddress");
@@ -74,9 +74,9 @@ function chkForm(){
 		alert("모임날짜를 입력 해주세요.")
 	}else if( meetTime.val() == null || meetTime.val().trim() == ''){
 		alert("모임시간을 입력 해주세요.")
-	}else if( meetStartDate.val() == null || meetStartDate.val().trim() == ''){
+	}else if( voteStartDate.val() == null || voteStartDate.val().trim() == ''){
 		alert("모집 시작일을 입력 해주세요.")
-	}else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
+	}else if( voteEndDate.val() == null || voteEndDate.val().trim() == ''){
 		alert("모집 마감일을 입력 해주세요.")
 	}else if( address.val() == null || address.val().trim() == ''){
 		alert("도로명 주소를 입력 해주세요.")
@@ -91,7 +91,6 @@ function chkForm(){
 	}
 	
  };
-	
 </script>
 	
 </head>
@@ -115,9 +114,9 @@ function chkForm(){
         	</div>
         	<div id="secondRow">
         		<div class="insertText">모집시작일</div>
-        		<div class="dateCol1"><input type="date" name="meet_startdate" id="meetStartDate"></div>
+        		<div class="dateCol1"><input type="date" name="vote_startdate" id="voteStartDate"></div>
         		<div class="insertText">모집마감일</div>
-        		<div class="dateCol2"><input type="date" name="meet_enddate" id="meetEndDate"></div>
+        		<div class="dateCol2"><input type="date" name="vote_enddate" id="voteEndDate"></div>
         	</div>
         	<div id="thirdRow">
         		<div class="insertText">제목</div>
