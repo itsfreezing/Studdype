@@ -45,17 +45,27 @@ public class HomeController {
 	
 	@RequestMapping("/studdypehome.do")
 	public String studdypeHeader() {
+		
 		return "studdype/studdypeHome";
 	}
 	
 	@RequestMapping("/studdypeexample.do")
 	public String studdypeExample() {
+	
 		return "studdype/studdypeExample";
 	}
 	
 	@RequestMapping("/searchbycategory.do")
 	public String searchByCategory() {
+	
 		return "studdype/searchByCategory";
+	}
+	
+	//마이페이지로 이동
+	@RequestMapping("/myPage.do")
+	public String myPage() {
+	
+		return "studdype/myPage";
 	}
 
 	//커뮤니티 홈으로
@@ -72,6 +82,7 @@ public class HomeController {
 		session.setAttribute("login", login); //로그인 세션
 		//////////////////// 화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
 		session.setAttribute("leftnavi", "studyhome");
+	
 		return "community/communityHome";
 	}
 	
@@ -80,6 +91,7 @@ public class HomeController {
 		session.setAttribute("leftnavi", "notice");
 		return "community/notice";
 	}
+	
 	
 	@RequestMapping("/loginform.do")
 	public String Login(HttpSession session) {

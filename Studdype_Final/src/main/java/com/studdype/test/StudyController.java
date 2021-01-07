@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +85,7 @@ public class StudyController {
 		
 		return "studdype/createStuddype";
 	}
+	
 	
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
@@ -181,5 +183,16 @@ public class StudyController {
 		}
 	}
 	
+	//스터디 관리 페이지 이동
+	@RequestMapping("/updateStudy.do")
+	public String updateStudy(HttpSession session) {
+		List<StudyCategoryDto> category = studyBiz.categoryList();
+		
+		session.setAttribute("category", category);
+		session.setAttribute("leftnavi", "updateStudy");
+		
+		return "studdype/updateStudy";
+	}
+
 }
 
