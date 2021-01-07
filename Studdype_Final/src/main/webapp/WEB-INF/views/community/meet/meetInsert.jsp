@@ -64,26 +64,26 @@ function chkForm(){
 	var meetDate = $("#meetDate");
 	var meetTime = $("#meetTime");
 	var meetStartDate = $("#voteStartDate");
-	var meetEndDate = $("voteEndDate");
+	var meetEndDate = $("#voteEndDate");
 	var title = $("#meetTitle");
-	var address = $("address");
-	var detailAddress = $("detailAddress");
+	var address = $("#address");
+	var detailAddress = $("#detailAddress");
 	var content = $("#contentArea");
 	
 	if( meetDate.val() == null || meetDate.val().trim() == ''){
 		alert("모임날짜를 입력 해주세요.")
 	}else if( meetTime.val() == null || meetTime.val().trim() == ''){
 		alert("모임시간을 입력 해주세요.")
-	}else if( voteStartDate.val() == null || voteStartDate.val().trim() == ''){
+	}else if( meetStartDate.val() == null || meetStartDate.val().trim() == ''){
 		alert("모집 시작일을 입력 해주세요.")
-	}else if( voteEndDate.val() == null || voteEndDate.val().trim() == ''){
+	}else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
 		alert("모집 마감일을 입력 해주세요.")
+	}else if( title.val() == null || title.val().trim() == ''){
+		alert("제목을 작성해주세요")
 	}else if( address.val() == null || address.val().trim() == ''){
 		alert("도로명 주소를 입력 해주세요.")
 	}else if( detailAddress.val() == null || detailAddress.val().trim() == ''){
 		alert("상세주소를 작성해주세요")
-	}else if( title.val() == null || title.val().trim() == ''){
-		alert("제목을 작성해주세요")
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("모임 상세내용을 작성해주세요.")
 	}else{
@@ -133,7 +133,7 @@ function chkForm(){
         		<div id="fifthRow-right"><textarea id="contentArea" name="meet_content" placeholder="2000자 내로 입력하세요."></textarea></div>
         	</div>
 	        <div id="sixthRow">
-        		<button class="submitBtn" id="insertBtn_insert" onclick="chkForm();">등록하기</button>
+        		<input type="button" class="submitBtn" id="insertBtn_insert" onclick="chkForm();" value="등록하기">
         	</div>
         </form>
     </div>
