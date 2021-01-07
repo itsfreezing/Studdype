@@ -48,9 +48,7 @@ public class BoardController {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트 
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
-		Map<Integer, String> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-		
-		
+		Map<Integer, MemberDto> memberMap = null; //게시글 멤버정보 담을 MAP
 	
 		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 
@@ -61,14 +59,14 @@ public class BoardController {
 		// 15개 게시물만 가져오기
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
-		writerNameMap = freeBiz.getWriterNameByList(list);
+		memberMap = freeBiz.getMemberMap(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
 		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
-		model.addAttribute("writerMap", writerNameMap);
+		model.addAttribute("memberMap", memberMap);
 		session.setAttribute("leftnavi", "freeboard");
 		return "community/freeboard/freeboard";
 	}
@@ -96,21 +94,39 @@ public class BoardController {
 		}
 
 	}
+	
+	//자유게시판 글 삭제
+	@RequestMapping(value="/freeBoardDelete.do", method = RequestMethod.GET)
+	public String freeBoardDelete(HttpServletRequest request, Model model) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
+		int res = freeBiz.deleteBoard(b_no);
+		
+		
+		if( res > 0) {
+			return "redirect:freeboard.do";
+		}else {			
+			model.addAttribute("msg", "글 삭제 실패!!");
+			model.addAttribute("url", "freedetail.do?b_no="+b_no);
+			return "commond/alert";
+		}
+		
+	}
 
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
 	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model) {
-		int b_no = Integer.parseInt(request.getParameter("boardno"));
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
 
 		//조회수 함수  isVisitPage = 1 -> 방문한 적있음  0 -> 없음
-		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("boardno"));
+		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		
 		
 		BoardDto board = freeBiz.selectOne(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
-		String writer = memberBiz.getNameByNo(board.getB_writer()); //작성자 이름 가져오기
+		MemberDto member = memberBiz.selectOne( board.getB_writer() ); //작성자 이름 가져오기
 
 		model.addAttribute("dto", board);
-		model.addAttribute("writer", writer);
+		model.addAttribute("member", member);
 		return "community/freeboard/freeDetail";
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class FreeReplyBizImpl implements FreeReplyBiz {
@@ -24,13 +25,6 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 	public List<ReplyDto> selectReplyList(int b_no) {
 		return freeReplyDao.selectReplyList(b_no);
 	}
-
-	// 작성자 이름 받아오기
-	@Override
-	public Map<Integer, String> getWriterNameByList(List<ReplyDto> replyList) {
-		return memberDao.selectWriterByFreeReply(replyList);
-	}
-
 	// 댓글 삭제
 	@Transactional
 	@Override
@@ -41,7 +35,16 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 
 		// 2. 넘어온 댓글이 부모 댓글이면 값 수정 / 아니면 삭제
 		if (reply.getR_class() == 0) {
-			res = freeReplyDao.deleteParentReply(r_no);
+			//그룹번호로 남은 게시글 수확인위해 리스트찾아옴
+			List<ReplyDto> groupReplyList = freeReplyDao.selectGroupReplyList(reply.getR_groupno());
+			
+			//사이즈가 1개면 삭제
+			if (groupReplyList.size() == 1) { 
+				res = freeReplyDao.deleteReply(r_no);
+			}else { //사이즈가 1이아니면 -> 답글이 있으면
+				res = freeReplyDao.deleteParentReply(r_no);
+			}
+			
 		} else {
 			res = freeReplyDao.deleteReply(r_no);
 
@@ -64,5 +67,29 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 		}
 
 		return res;
+	}
+
+	//댓글리스트로 member 정보 받아오기
+	@Override
+	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList) {
+		return memberDao.selectMemberByFreeReply(replyList);
+	}
+	
+	//댓글 쓰기
+	@Override
+	public int writeReply(ReplyDto dto) {
+		return freeReplyDao.insertReply(dto);
+	}
+	
+	//댓글 수정
+	@Override
+	public int updateReply(ReplyDto dto) {
+		return freeReplyDao.updateReply(dto);
+	}
+	
+	//댓글 답글 쓰기
+	@Override
+	public int writeRecomment(ReplyDto dto) {
+		return freeReplyDao.insertRecomment(dto);
 	}
 }

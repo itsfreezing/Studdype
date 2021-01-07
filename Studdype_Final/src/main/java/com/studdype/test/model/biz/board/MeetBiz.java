@@ -12,7 +12,7 @@ public interface MeetBiz {
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap); 		 // 페이징(5개 게시글만 가져오기)
 	public Map<Integer, String> getWriterNameByList(List<MeetDto> list); // 리스트로 작성자 이름 가져오기
 	public MeetDto selectOne(int meet_no, int isVisitPage);				 // 모임게시판 디테일
-	public int insert(MeetDto dto); 
+	public int insert(MeetDto dto); 									 // 모임게시판 모임생성
 	public int update(MeetDto dto);
 	public int delete(int meet_no);
 }

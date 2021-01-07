@@ -53,6 +53,14 @@
 	<update id="updateCnt" parameterType="int">
 		UPDATE FREE_BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}	
 	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM FREE_BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE FREE_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
 </mapper>
 
   
