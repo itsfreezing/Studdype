@@ -16,7 +16,7 @@ public class MeetDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date meet_date; 			// 모임 날짜
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH24:mi")
+	@DateTimeFormat(pattern = "HH24:mi")
 	private Date meet_time; 			// 모임 시간
 	
 	private Date meet_regdate; 			// 모임 작성일자
