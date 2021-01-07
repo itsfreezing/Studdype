@@ -1,0 +1,67 @@
+
+.main-section {
+  float: right;
+  display: inline-block;
+  
+  margin-top: 5%;
+  margin-right: 8%;
+  
+
+}
+.main-section2 {
+  float: right;
+  display: inline-block;
+  
+  margin-top: 5%;
+  margin-right:17%;
+  
+
+}
+
+	.boardlist{
+		margin: 0px auto;
+		margin-top: 5%;
+		margin-left: 0px;
+		margin-right: 5%;
+		border-top: 1px solid black;
+	}	
+	
+	.boardlist .headtr{
+		border-bottom: 1px solid  rgb(200, 200, 200);
+		height: 50px;
+		text-align: center;
+	}
+	
+	.boardlist tr{
+		border-bottom: 1px solid rgb(240, 240, 240);
+		
+	}
+	.boardlist td{
+		
+		padding: 15px;
+	}
+	.tdwriter{
+		text-align: center;
+	}
+	
+	.tddate{
+		text-align: center;
+	}
+	
+	.tdcnt{
+		text-align: center;
+	}
+	
+	.boardlist td a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid black;
+		padding-bottom: 3px;
+	}
+
+	
+	
+	
+	
+
+
+

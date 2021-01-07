@@ -1,8 +1,10 @@
 package com.studdype.common;
 
 import org.aspectj.lang.JoinPoint;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class LogAop {
 	
@@ -16,6 +18,7 @@ public class LogAop {
 			logger.info("method: "+join.getSignature().getName());	
 			for(int i = 0; i < args.length; i++) {
 				logger.info(i + "번째: " + args[i]);
+				
 			}
 		}
 		
