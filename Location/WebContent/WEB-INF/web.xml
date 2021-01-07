@@ -14,5 +14,5 @@
   	<servlet-name>location</servlet-name>
   	<url-pattern>/location.do</url-pattern>
   </servlet-mapping>
-
+  
 </web-app>
