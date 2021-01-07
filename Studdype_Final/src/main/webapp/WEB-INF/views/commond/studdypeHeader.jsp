@@ -31,7 +31,7 @@
 								<li class="nav-item">
 								<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
 								</li>
-								<li class="active-nav-item">
+								<li class="active nav-item">
 									<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
 								</li>
 								<li class="nav-item">
