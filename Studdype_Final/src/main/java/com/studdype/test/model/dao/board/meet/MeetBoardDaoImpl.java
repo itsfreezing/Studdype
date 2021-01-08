@@ -83,6 +83,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 	}
 
+	// 모임 게시판 모임생성
 	@Override
 	public int insertMeetBoard(MeetDto dto) {
 		int res = 0;
@@ -101,10 +102,20 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	public int updateMeetBoard(MeetDto dto) {
 		return 0;
 	}
-
+	
+	// 모임 게시판 모임삭제
 	@Override
 	public int deleteMeetBoard(int meet_no) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteMeetBoard", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO deleteMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 

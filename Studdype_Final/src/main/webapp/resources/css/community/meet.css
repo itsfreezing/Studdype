@@ -417,13 +417,24 @@ div#map{
 /* 수정버튼 */
 #detailBtn_updateform{
 	position: relative;
-	right: -75%;  
+	right: -63%;  
 }
   
 /* 삭제버튼 */
 #detailBtn_delete{
 	position: relative;
-	right: -75%;  
+	right: -63%;  
+}
+
+/* 목록버튼1 */
+#detailBtn_list1{
+	position: relative;
+	right: -63%;
+}
+
+#detailBtn_list2{
+	position: relative;
+	right: -88%;
 }
 
 #detailHR{

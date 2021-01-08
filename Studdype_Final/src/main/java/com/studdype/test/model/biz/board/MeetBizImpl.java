@@ -67,7 +67,8 @@ public class MeetBizImpl implements MeetBiz {
 	public int update(MeetDto dto) {
 		return meetBoardDao.updateMeetBoard(dto);
 	}
-
+	
+	// 모임게시판 모임삭제
 	@Override
 	public int delete(int meet_no) {
 		return meetBoardDao.deleteMeetBoard(meet_no);

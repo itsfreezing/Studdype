@@ -44,6 +44,7 @@
 
 (function ($) {
 	 $ (document) .ready (function () {
+		 
 		 /* 슬라이더 */
 		 $('.owl-carousel').owlCarousel({
 		        items:1,                 	// 한번에 보여줄 아이템 수
@@ -61,42 +62,44 @@
 		    $('.customPrevBtn').click(function() {
 		    	$('.owl-carousel').trigger('prev.owl.carousel', [300]);
 		    })
-		 });
-	 })(jQuery);
+	});
+	 
+})(jQuery);
 
-	$(function(){
-		/* 부모 선택 후 흰색변경 JS */
-		$(".current_page").parent().css('color','white');
-		$(".current_page").css('border','1px solid #6434ef');
-		$(".current_page").css('cursor','default');
-		
-	});	
+$(function(){
+	/* 부모 선택 후 흰색변경 JS */
+	$(".current_page").parent().css('color','white');
+	$(".current_page").css('border','1px solid #6434ef');
+	$(".current_page").css('cursor','default');
 	
-	// 페이징---------------------- 
-	// 페이지 이동 
-	function movePage(pagenum){
-		$("#pagenum").val(pagenum.text);
+});	
+
+// 페이징---------------------- 
+// 페이지 이동 
+function movePage(pagenum){
+	$("#pagenum").val(pagenum.text);
+	var pageform = document.getElementById('pageform');
+	pageform.submit();
+}
+
+// 다음 페이지그룹 
+function nextPageGroup(){
+	if( ${endPage < totalPageNum}){
+		$("#pagenum").val(${endPage+1});
 		var pageform = document.getElementById('pageform');
 		pageform.submit();
-	}
-	
-	// 다음 페이지그룹 
-	function nextPageGroup(){
-		if( ${endPage < totalPageNum}){
-			$("#pagenum").val(${endPage+1});
-			var pageform = document.getElementById('pageform');
-			pageform.submit();
-		};
-	}
-	
-	// 이전 페이지 그룹 
-	function prePageGroup(){
-		if( ${startPage - 1 > 0}){
-			$("#pagenum").val(${startPage-1});
-			var pageform = document.getElementById('pageform');
-			pageform.submit();
-		};
-	}
+	};
+}
+
+// 이전 페이지 그룹 
+function prePageGroup(){
+	if( ${startPage - 1 > 0}){
+		$("#pagenum").val(${startPage-1});
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+	};
+}
+
 </script>
 </head>
 <body>
@@ -143,6 +146,7 @@
 			</div> 
        	</div>
        	
+       	<!-- meetList -->
 		<c:choose>
 			<c:when test="${empty list}">
 				<tr>
