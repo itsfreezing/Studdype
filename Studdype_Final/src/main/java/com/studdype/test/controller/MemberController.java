@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -33,8 +37,6 @@ public class MemberController {
 		
 		model.addAttribute("serverTime",formattedDate);
 		return "Member";
-		
-	
 	}
 
 	@RequestMapping("/signform.do")
@@ -56,15 +58,43 @@ public class MemberController {
 		if(res>0) {
 			return "loginpage/login";
 		}else {
-			
 			return "redirect:signupform.do";
 		}
 	}
+
+	@RequestMapping("/loginform.do")
+	public String loginForm() {
+		logger.info("login page");
+		return "loginpage/login";
+	}
 	
+	@RequestMapping("/login.do")
+	public String login(HttpSession session, MemberDto dto) {
+		logger.info("login");
+		MemberDto loginDto = biz.login(dto);
+		if(loginDto == null) {
+			session.setAttribute("login", null);
+		}else {
+			session.setAttribute("login", loginDto);
+		}
+		if(session.getAttribute("login") == null)
+		{
+			//TODO: 세션설정이 안된 경우
+			return "";
+		}
+		else			
+		{
+			//TODO: 세션설정이 된 경우
+			session.setMaxInactiveInterval(-1);
+			return "studdype/studdypeHome";
+		}		
+	}
 	
-	
-	
-	
-	
-	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		logger.info("logout");
+		
+		session.invalidate();
+		return "loginpage/login";
+	}
 }
