@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
@@ -164,5 +165,20 @@ public class MeetController {
 	public String meetUpdate(HttpSession session) {
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetUpdate";
+	}
+	
+	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.GET)
+	public String meetDelete(HttpServletRequest request, Model model) {
+		int meet_no = Integer.parseInt(request.getParameter("meet_no"));
+		
+		int res = meetBiz.delete(meet_no);
+		
+		if(res > 0) {
+			return "redirect:meetlist.do";
+		} else {
+			model.addAttribute("msg", "글 삭제 실패!!");
+			model.addAttribute("url", "meetdetail.do?meet_no"+meet_no);
+			return "commond/alert";
+		}
 	}
 }
