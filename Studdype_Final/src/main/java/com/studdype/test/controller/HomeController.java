@@ -54,18 +54,19 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 
-	
 	//커뮤니티 홈으로
+
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session) {
 		
+
 		/////////////////////// 테스트용 세션
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = memberBiz.selectOne(2);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		
 		session.setAttribute("study", study); //스터디 세션
-		session.setAttribute("login", login); //로그인 세션
+		session.setAttribute("login", login); //스터디 세션
 		//////////////////화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
 		session.setAttribute("leftnavi", "studyhome");
 		return "community/communityHome";

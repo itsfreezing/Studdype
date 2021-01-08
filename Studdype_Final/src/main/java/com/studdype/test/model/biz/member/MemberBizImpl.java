@@ -1,10 +1,8 @@
 package com.studdype.test.model.biz.member;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -38,15 +36,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.login(dto);
 	}
 	
-<<<<<<< HEAD
 	//로그아웃
 	@Override
 	public String logout(HttpSession session) {
 		return null;
-		
 	}
-	
-=======
->>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
+
 	
 }
