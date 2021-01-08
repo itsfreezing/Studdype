@@ -44,7 +44,8 @@ public class StudyController {
 	private static final Logger logger =  LoggerFactory.getLogger(StudyController.class);
 	
 	@Autowired
-	private StudyBiz studyBiz;		
+	private StudyBiz studyBiz;	
+	private MemberBiz memberBiz;
 	
 
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
