@@ -47,7 +47,7 @@
 <script type="text/javascript" >
  $(document).ready(function() {
  $('#summernote').summernote({
-		height: 300,
+		height: 450,
 		width : 1000,
 		minHeight: null,
 		maxHeight: null,
@@ -86,6 +86,8 @@
 	
 	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
+	}else if( title.val().length  > 50  ){
+		alert("제목을 50글자 이하로 작성해주세요!!");
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("글 내용을 작성해주세요.")
 	}else{
@@ -123,7 +125,7 @@
 			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
 		</tr>
 		<tr>
-			<td ><input type="button" onclick="chkForm();" value="완료" class="writeBtns"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="writeBtns"></td>			
+			<td ><input type="button" onclick="chkForm();" value="완료" class="free_Btn"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="free_Btn"></td>			
 		</tr>
 	</table>
 	</form>

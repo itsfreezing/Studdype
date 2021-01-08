@@ -6,11 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
 
+@Validated
 @Service
 public class MeetBizImpl implements MeetBiz {
 	
@@ -54,20 +56,21 @@ public class MeetBizImpl implements MeetBiz {
 		
 		return dto;
 	}
-
+	
+	// 모임게시판 모임생성
 	@Override
 	public int insert(MeetDto dto) {
-		return meetBoardDao.meetBoardInsert(dto);
+		return meetBoardDao.insertMeetBoard(dto);
 	}
 
 	@Override
 	public int update(MeetDto dto) {
-		return meetBoardDao.meetBoardUpdate(dto);
+		return meetBoardDao.updateMeetBoard(dto);
 	}
 
 	@Override
 	public int delete(int meet_no) {
-		return meetBoardDao.meetBoardDelete(meet_no);
+		return meetBoardDao.deleteMeetBoard(meet_no);
 	}
 
 }

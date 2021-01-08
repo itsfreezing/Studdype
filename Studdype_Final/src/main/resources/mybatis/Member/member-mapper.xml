@@ -29,6 +29,7 @@
 			INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL,#{mem_id},#{mem_pw},#{mem_name},#{mem_rno},#{mem_gender},#{mem_phone},#{mem_email})
 		</insert>
 	
+<<<<<<< HEAD
 		<select id="login" parameterType="memberDto" resultType="memberDto">
 			SELECT * FROM MEMBER 
 			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
@@ -37,5 +38,12 @@
 	
 	
 	
+=======
+		<select id="selectWriterByBookList" parameterType="int" resultType="memberDto">
+			SELECT *
+			FROM MEMBER
+			WHERE MEM_NO = #{mem_no}
+		</select>
+>>>>>>> 09376d56bd72b6effb4da007aa40be9b9fe4977f
 	
 	</mapper>
