@@ -35,7 +35,9 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-<!-- 댓글 구현 AJAX JS -->
+<!-- ToolTip CSS -->
+<link href="./resources/css/community/freeboard/pop-pop.min.css" rel="stylesheet" />
+
 <script type="text/javascript" >
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
@@ -414,10 +416,6 @@ function writeRecomment(btn){
 $(document).ready( getReplyList() );
 
 
-
-
-
-
  
 </script>
 </head>
@@ -427,9 +425,11 @@ $(document).ready( getReplyList() );
 
 	
  	<div class="main-section3">
-		<div class="titleDiv" >
-			<span class="title">${dto.b_title }</span>
+		<div class="titleDiv" aria-label="${dto.b_title }" data-pop="bottom"  data-pop-delay="short"  >
+			<span class="title" >${dto.b_title }</span>
 			<span class="regdate" ><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
+
+			
 		</div>
 		<div class="writerDiv">
 			<span class="writer"> ${member.mem_id } (${member.mem_name })</span>
@@ -439,9 +439,17 @@ $(document).ready( getReplyList() );
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
 		<div class="btnDiv">
-			<input type="button" value="목록" onclick="location.href='freeboard.do'">
-			<input type="button" value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
-			<input type="button" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
+			<c:choose>
+				<c:when test="${dto.b_writer == login.mem_no }">
+					<input type="button" class="free_Btn" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn"  value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+				</c:otherwise>
+			</c:choose>
+		
 		</div>
 		
 		<div class="replyBox" >

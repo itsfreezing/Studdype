@@ -43,10 +43,10 @@ public class FreeBizImpl implements FreeBiz {
 		return freeBoardDao.insertBoard(board);
 	}
 
-	//자유게시판 글 가져오기(오류 무시하고 진행 가능)
+	//자유게시판 글 가져오기(오류 무시하고 진행 가능) 디테일가져오기(조회수)
 	@Transactional
 	@Override
-	public BoardDto selectOne(int b_no, int isVisitPage) {		
+	public BoardDto selectDetail(int b_no, int isVisitPage) {		
 		if(isVisitPage == 0) {
 			freeBoardDao.updateCnt(b_no);
 		}
@@ -70,6 +70,12 @@ public class FreeBizImpl implements FreeBiz {
 	@Override
 	public int updateBoard(BoardDto board) {
 		return freeBoardDao.updateBoard(board);
+	}
+
+	//자유게시판 글 가져오기
+	@Override
+	public BoardDto selectOne(int b_no) {
+		return freeBoardDao.selectOne(b_no);
 	}
 
 }
