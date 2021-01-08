@@ -44,7 +44,7 @@
 		<insert id="insertMeetBoard" parameterType="meetDto">
 			INSERT INTO MEET_BOARD
 			VALUES( MEETBOARDSEQ.NEXTVAL, #{s_no}, #{meet_title}, #{meet_writer},  #{meet_content}, #{meet_addr}, #{meet_addr_detail},
-			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
+			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE ,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
 		</insert>
 	
 	</mapper>
