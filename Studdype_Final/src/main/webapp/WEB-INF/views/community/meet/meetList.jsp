@@ -122,7 +122,7 @@
 		<!-- 슬라이더 끝 -->        
        
 		<c:choose>
-			<c:when test="${list == null}">
+			<c:when test="${empty list}">
 				<tr>
 					<td colspan="2">---- 모임이 존재하지 않습니다. ---- </td>
 				</tr>
