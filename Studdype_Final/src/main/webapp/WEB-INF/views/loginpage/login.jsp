@@ -100,13 +100,21 @@
           <br>
           <tr>
              <td>
+<<<<<<< HEAD
                 <input type="password" name="mem_pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+=======
+                <input type="text" name="mem_pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
              </td>
           </tr>
        
        </table>
     
+<<<<<<< HEAD
        <button id="login" type="submit" style="border:0">LOGIN</button>
+=======
+       <button id="sign" type="submit" style="border:0">LOGIN</button>
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
     
     
     </form>

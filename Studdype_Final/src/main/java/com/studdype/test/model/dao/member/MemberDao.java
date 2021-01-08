@@ -27,8 +27,13 @@ public interface MemberDao {
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); //자유게시판 리스트로 memberMap 가져오기
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); //[자유게시판 댓글]  리스트로 member 정보 가져오기 
 	
+<<<<<<< HEAD
 	// 도서 관련 메소드
 	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
+=======
+	
+
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 	
 	
 	

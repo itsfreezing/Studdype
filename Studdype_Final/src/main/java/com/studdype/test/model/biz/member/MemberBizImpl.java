@@ -38,6 +38,7 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.login(dto);
 	}
 	
+<<<<<<< HEAD
 	//로그아웃
 	@Override
 	public String logout(HttpSession session) {
@@ -45,5 +46,7 @@ public class MemberBizImpl implements MemberBiz {
 		
 	}
 	
+=======
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 	
 }

@@ -9,6 +9,9 @@ public interface MemberBiz {
 	public String getNameByNo(int MEM_NO); //멤버 번호로 이름 가져오기
 	public int memberInsert(MemberDto dto); //회원가입
 	public MemberDto login(MemberDto dto); //로그인
+<<<<<<< HEAD
 	public String logout(HttpSession session); //로그아웃
+=======
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 
 }

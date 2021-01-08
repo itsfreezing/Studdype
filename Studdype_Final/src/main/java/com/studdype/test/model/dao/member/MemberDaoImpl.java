@@ -38,6 +38,7 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
+<<<<<<< HEAD
 	//로그아웃
 	@Override
 	public String logout(HttpSession session) {
@@ -45,6 +46,9 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 	
+=======
+
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 	//멤버번호로 하나 셀렉트
 	@Override
 	public MemberDto selectOne(int mem_no) {

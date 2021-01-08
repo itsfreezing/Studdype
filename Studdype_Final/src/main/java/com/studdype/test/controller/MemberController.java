@@ -73,6 +73,7 @@ public class MemberController {
 		logger.info("login");
 		MemberDto loginDto = biz.login(dto);
 		if(loginDto == null) {
+<<<<<<< HEAD
 			session.setAttribute("login", null);
 		}else {
 			session.setAttribute("login", loginDto);
@@ -88,6 +89,13 @@ public class MemberController {
 			session.setMaxInactiveInterval(-1);
 			return "studdype/studdypeHome";
 		}		
+=======
+			session.setAttribute("member", true);
+		}else {
+			session.setAttribute("member", false);
+		}
+		return "studdype/studdypeHome";
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 	}
 	
 	@RequestMapping("/logout.do")
@@ -95,6 +103,14 @@ public class MemberController {
 		logger.info("logout");
 		
 		session.invalidate();
+<<<<<<< HEAD
 		return "loginpage/login";
 	}
+=======
+		return "studdype/studdypeHome";
+	}
+	
+	
+	
+>>>>>>> 0e232a854a3787c2c9ae5384bc983575544f8f77
 }
