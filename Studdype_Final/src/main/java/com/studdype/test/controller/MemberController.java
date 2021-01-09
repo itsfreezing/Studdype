@@ -3,7 +3,6 @@ package com.studdype.test.controller;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -82,7 +80,7 @@ public class MemberController {
 		else			
 		{
 			//TODO: 세션설정이 된 경우
-			session.setMaxInactiveInterval(-1);
+			session.setMaxInactiveInterval(1);
 			return "studdype/studdypeHome";
 		}		
 	}
@@ -90,10 +88,8 @@ public class MemberController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		logger.info("logout");
-		
 		session.invalidate();
-
-		return "studdype/studdypeHome";
+		return "studyList.do";
 	}
 	
 	
