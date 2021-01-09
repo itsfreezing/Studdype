@@ -47,7 +47,7 @@
 <script type="text/javascript" >
  $(document).ready(function() {
  $('#summernote').summernote({
-		height: 450,
+		height: 300,
 		width : 1000,
 		minHeight: null,
 		maxHeight: null,
@@ -80,14 +80,14 @@
 	}
  });
  function chkForm(){
-	var form = $("#writeForm");
+	var form = $("#updateForm");
 	var title = $("#boardtitle");
 	var content = $("#summernote");
 	
 	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
 	}else if( title.val().length  > 50  ){
-		alert("제목을 50글자 이하로 작성해주세요!!");
+		alert("제목을 50글자 이하로 수정해주세요!!");
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("글 내용을 작성해주세요.")
 	}else{
@@ -106,13 +106,14 @@
 
 
  	<div class="main-section2">
-	<form action="freewrite.do" method="post" id="writeForm" >
+	<form action="freeBoardUpdate.do" method="post" id="updateForm" >
+		<input type="hidden" name="b_no" value="${dto.b_no }">
  		<table class="maintable">
 		<tr>
-			<td><h1>자유게시판 글 쓰기</h1></td>
+			<td><h1>자유게시판 글 수정</h1></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요"></td>
+			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" value="${dto.b_title }"></td>
 		</tr>
 		<tr>
 			<td>파일 첨부<input type="file" class="uploadFile"></td>
@@ -122,10 +123,10 @@
 			<td><div>공간</div></td>
 		</tr>
 		<tr>
-			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
+			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;">${dto.b_content }</textarea></td>
 		</tr>
 		<tr>
-			<td ><input type="button" onclick="chkForm();" value="완료" class="free_Btn"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="free_Btn"></td>			
+			<td ><input type="button" onclick="chkForm();" value="완료" class="writeBtns"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="writeBtns"></td>			
 		</tr>
 	</table>
 	</form>

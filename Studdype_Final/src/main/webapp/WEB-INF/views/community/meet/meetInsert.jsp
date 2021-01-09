@@ -58,7 +58,39 @@ function execPostcode(){
 		
 	});
 }
+
+function chkForm(){
+	var form = $("#meetWriteForm");
+	var meetDate = $("#meetDate");
+	var meetTime = $("#meetTime");
+	var meetStartDate = $("#voteStartDate");
+	var meetEndDate = $("#voteEndDate");
+	var title = $("#meetTitle");
+	var address = $("#address");
+	var detailAddress = $("#detailAddress");
+	var content = $("#contentArea");
 	
+	if( meetDate.val() == null || meetDate.val().trim() == ''){
+		alert("모임날짜를 입력 해주세요.")
+	}else if( meetTime.val() == null || meetTime.val().trim() == ''){
+		alert("모임시간을 입력 해주세요.")
+	}else if( meetStartDate.val() == null || meetStartDate.val().trim() == ''){
+		alert("모집 시작일을 입력 해주세요.")
+	}else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
+		alert("모집 마감일을 입력 해주세요.")
+	}else if( title.val() == null || title.val().trim() == ''){
+		alert("제목을 작성해주세요")
+	}else if( address.val() == null || address.val().trim() == ''){
+		alert("도로명 주소를 입력 해주세요.")
+	}else if( detailAddress.val() == null || detailAddress.val().trim() == ''){
+		alert("상세주소를 작성해주세요")
+	}else if( content.val() == null || content.val().trim() == ''){
+		alert("모임 상세내용을 작성해주세요.")
+	}else{
+		form.submit();
+	}
+	
+ };
 </script>
 	
 </head>
@@ -73,22 +105,22 @@ function execPostcode(){
      
      	<!-- form의 action은 모임생성을 submit 하는 용도 -->
      	<img src="./resources/assets/img/banner_meetInsert.png" id="meetInsertBanner">
-        <form action="meetinsert.do" method="post" autocomplete="off">
+        <form action="meetinsert.do" method="post" id="meetWriteForm">
         	<div id="firstRow">
         		<div class="insertText">모임날짜</div>
-        		<div class="dateCol1"><input type="date" name="meet_date"></div>
+        		<div class="dateCol1"><input type="date" name="meet_date" id="meetDate"></div>
         		<div class="insertText">모임시간</div>
-        		<div class="dateCol2"><input type="time" name="meet_time"></div>
+        		<div class="dateCol2"><input type="time" name="meet_time" id="meetTime"></div>
         	</div>
         	<div id="secondRow">
         		<div class="insertText">모집시작일</div>
-        		<div class="dateCol1"><input type="date" name="meet_startdate"></div>
+        		<div class="dateCol1"><input type="date" name="vote_startdate" id="voteStartDate"></div>
         		<div class="insertText">모집마감일</div>
-        		<div class="dateCol2"><input type="date" name="meet_enddate"></div>
+        		<div class="dateCol2"><input type="date" name="vote_enddate" id="voteEndDate"></div>
         	</div>
         	<div id="thirdRow">
         		<div class="insertText">제목</div>
-        		<div class="longDiv"><input type="text" name="meet_title" placeholder="50자 내로 입력하세요."></div>
+        		<div class="longDiv"><input type="text" name="meet_title" placeholder="50자 내로 입력하세요." id="meetTitle"></div>
         	</div>
         	<div id="fourthRow">
         		<div class="insertText">장소</div>
@@ -101,7 +133,7 @@ function execPostcode(){
         		<div id="fifthRow-right"><textarea id="contentArea" name="meet_content" placeholder="2000자 내로 입력하세요."></textarea></div>
         	</div>
 	        <div id="sixthRow">
-        		<button type="submit" class="submitBtn" id="insertBtn_insert">등록하기</button>
+        		<input type="button" class="submitBtn" id="insertBtn_insert" onclick="chkForm();" value="등록하기">
         	</div>
         </form>
     </div>
