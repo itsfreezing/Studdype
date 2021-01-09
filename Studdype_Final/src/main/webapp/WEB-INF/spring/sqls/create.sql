@@ -191,7 +191,7 @@ CREATE TABLE LOCATION_GU(
     FOREIGN KEY(SI_NO) REFERENCES LOCATION_SI(SI_NO)  ON DELETE CASCADE
     
 );
-
+select * from book;
 --스터디 카테고리
 CREATE TABLE STUDY_CATEGORY(
     CATE_NO NUMBER PRIMARY KEY, --카테고리 번호
@@ -489,6 +489,7 @@ BEGIN
     END;
 /
 
-
+select * from location_si;
+select * from location_gu;
 
 COMMIT;

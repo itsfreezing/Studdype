@@ -38,7 +38,7 @@
 		border: 1px solid rgb(115, 98, 222); 
   		border-radius: 10px;
 	}
-	#book{
+	#book1{
 		border: 1px solid grey;
 		height: 400px;
 		width: 500px;
@@ -185,9 +185,19 @@
 		position:absolute;
 		left:1100px;
 		width:672px;
+		top:1450px;
+	}
+	#mainbook{
+		color:black;
 	}
 
 	</style>
+	<script type="text/javascript">
+	$(function (){
+		
+	});
+	
+	</script>
 </head>
 <body>
 
@@ -202,7 +212,7 @@
   	
   	
   	<!-- 대표 도서 table -->
-	<table id="book" class="table table-striped table-bordered table-hover" style="border: 1px solid; ">
+	<table id="book1" class="table table-striped table-bordered table-hover" style="border: 1px solid; ">
 
 		<thead >
 			<tr>
@@ -212,36 +222,16 @@
 			</tr>
 		</thead>
 		<tbody >
+		<c:forEach var="bookList" items="${bookList}" varStatus="status">
 			<tr>
-				<td>1</td>
-				<td>꿈꾸는 다락방</td>
-				<td>대표</td>
+				<td>${status.count }</td>
+				<td>${bookList.book_title }</td>
+				<c:if test="${bookList.book_ismain eq 'N' }">
+				<td id="mainbook">대표</td>
+				</c:if>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>꿈꾸는 다락방2</td>
-				<td>대표</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>꿈꾸는 다락방3</td>
-				<td>대표</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>꿈꾸는 다락방4</td>
-				<td>대표</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td>꿈꾸는 다락방5</td>
-				<td>대표</td>
-			</tr>
-			<tr>
-				<td>6</td>
-				<td>꿈꾸는 다락방6</td>
-				<td>대표</td>
-			</tr>
+		</c:forEach>
+		
 		</tbody>
 	</table>
 	<!--  대표 도서 table 끝 -->
@@ -322,11 +312,15 @@
 	</select>
 	<p id="locsi">지역(시)</p>
 	<select id="locationsi">
-		
+		<c:forEach var="sidto" items="${sidto }">
+			<option value="${sidto.si_no }">${sidto.si_name }</option>
+		</c:forEach>
 	</select>
 	<p id="locgu">지역(구)</p>
 	<select id="locationgu">
-		
+		<c:forEach var="gudto" items="${gudto }">
+			<option value="${gudto.gu_no }">${gudto.gu_name}</option>
+		</c:forEach>
 	</select>
 	<p id="studyinfo">스터디 소개</p>
 	<input id="studyinfot">
@@ -341,7 +335,7 @@
 	
 	
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	</div>
 	<!--  메인 세션 끝 -->

@@ -37,9 +37,9 @@ public class BookBizImpl implements BookBiz{
 	}
 
 	@Override
-	public List<BookDto> booklist() {
+	public List<BookDto> bookList() {
 		
-		return null;
+		return bookDao.bookList();
 	}
 
 

@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,22 +14,20 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.PageMaker;
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
@@ -47,7 +42,10 @@ public class StudyController {
 	
 	@Autowired
 	private StudyBiz studyBiz;		
+	@Autowired
 	private MemberBiz memberBiz;
+	@Autowired
+	private BookBiz bookBiz;
 
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
@@ -202,7 +200,13 @@ public class StudyController {
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session) {
 		List<StudyCategoryDto> category = studyBiz.categoryList();
+		List<LocationGuDto> gudto = studyBiz.locationGuList();
+		List<LocationSiDto> sidto = studyBiz.locationSiList();
+		List<BookDto> bookList = bookBiz.bookList();
 		
+		session.setAttribute("bookList", bookList);
+		session.setAttribute("gudto", gudto);
+		session.setAttribute("sidto", sidto);
 		session.setAttribute("category", category);
 		session.setAttribute("leftnavi", "updateStudy");
 		
