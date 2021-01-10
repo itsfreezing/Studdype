@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpServerErrorException;
 
 import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
@@ -105,6 +106,13 @@ public class BoardController {
 		model.addAttribute("dto", board);
 		model.addAttribute("writer", writer);
 		return "community/freeboard/freeDetail";
+	}
+	
+	//켈린더
+	@RequestMapping(value="/calendar.do", method = RequestMethod.GET)
+	public String calendar(Model model) {
+		
+		return "community/schedule/Calendar";
 	}
 
 

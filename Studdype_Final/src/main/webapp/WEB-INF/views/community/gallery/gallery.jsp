@@ -256,10 +256,11 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
+		
+		<button class="btn-sm-btn-primary" onclick="location.href='gallerywriteform.do'">글쓰기</button>
 	</div>
+
 
 	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>

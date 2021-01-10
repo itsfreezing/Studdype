@@ -41,7 +41,16 @@ private static final Logger logger = LoggerFactory.getLogger(ImageBoardControlle
 		@RequestMapping("/galleryDetail.do")
 		public String detail(Model model) {
 			
+			
+			
 			return "community/gallery/galleryDetail";
+		}
+		
+		@RequestMapping("/gallerywriteform.do")
+		public String galleryWriteForm(Model model) {
+			
+			
+			return "community/gallery/galleryWriteForm";
 		}
 	
 }
