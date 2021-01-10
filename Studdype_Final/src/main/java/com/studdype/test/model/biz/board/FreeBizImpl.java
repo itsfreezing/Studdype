@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class FreeBizImpl implements FreeBiz {
@@ -42,15 +43,39 @@ public class FreeBizImpl implements FreeBiz {
 		return freeBoardDao.insertBoard(board);
 	}
 
-	//자유게시판 글 가져오기(오류 무시하고 진행 가능)
+	//자유게시판 글 가져오기(오류 무시하고 진행 가능) 디테일가져오기(조회수)
 	@Transactional
 	@Override
-	public BoardDto selectOne(int b_no, int isVisitPage) {		
+	public BoardDto selectDetail(int b_no, int isVisitPage) {		
 		if(isVisitPage == 0) {
 			freeBoardDao.updateCnt(b_no);
 		}
 		BoardDto dto = freeBoardDao.selectOne(b_no);
 		return dto;
+	}
+
+	//자유게시판 리스트 member리스트 함수
+	@Override
+	public Map<Integer, MemberDto> getMemberMap(List<BoardDto> list) {
+		return memberDao.selectMemberByFreeList(list);
+	}
+
+	//자유게시판 글 삭제
+	@Override
+	public int deleteBoard(int b_no) {
+		return freeBoardDao.deleteBoard(b_no);
+	}
+
+	//자유게시판 글 수정
+	@Override
+	public int updateBoard(BoardDto board) {
+		return freeBoardDao.updateBoard(board);
+	}
+
+	//자유게시판 글 가져오기
+	@Override
+	public BoardDto selectOne(int b_no) {
+		return freeBoardDao.selectOne(b_no);
 	}
 
 }

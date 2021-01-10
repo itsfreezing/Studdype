@@ -49,6 +49,15 @@
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
 	});
+	
+	$(document).on('click', '#btnSearch', function(e){
+		e.preventDefault();
+		var url = "${studyList}";
+		url = url + "?searchType=" + $('#searchType').val();
+		url = url + "&search=" + $('#search').val();
+		location.href = url;
+		console.log(url);
+	});
 </script>
 
 <style type="text/css">

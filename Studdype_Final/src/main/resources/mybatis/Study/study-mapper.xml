@@ -15,7 +15,6 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-
 	<select id="studyList" resultType="studyDto" parameterType="com.studdype.test.common.SearchPagination">
       SELECT *
       FROM (
@@ -42,8 +41,12 @@
       AND S_NO > 0
 </select>
 
-	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
-		SELECT * FROM STUDY WHERE S_NO = ${s_no}
+
+	<select id="selectOneBySno" parameterType="int"
+		resultMap="studyMap">
+		SELECT *
+		FROM STUDY
+		WHERE S_NO = #{s_no}
 	</select>
 	
 	
