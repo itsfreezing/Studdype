@@ -27,5 +27,4 @@ pom.properties
 MANIFEST.MF
 bin/
 .classpath
-.project
-.settings/
+
