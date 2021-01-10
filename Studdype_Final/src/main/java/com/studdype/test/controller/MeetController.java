@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Controller
@@ -136,12 +137,28 @@ public class MeetController {
 		return isVisitPage;
 	}
 	
+	// 모임게시판 글 작성 폼 이동
 	@RequestMapping("/meetinsertform.do")
-	public String meetInsert(HttpSession session) {
+	public String meetInsertFrom(HttpSession session) {
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetInsert";
 	}
 	
+	@RequestMapping("/meetinsert.do")
+	public String meetInsert(MeetDto dto,HttpSession session) {
+		int writer = ( (MemberDto)session.getAttribute("login") ).getMem_no(); // 작성자 번호
+		int s_no = ( (StudyDto)session.getAttribute("study") ).getS_no();	   // 스터디 번호
+		
+		dto.setMeet_writer(writer);
+		dto.setS_no(s_no);
+		int res = meetBiz.insert(dto);
+		
+		if (res > 0) {
+			return "redirect:meetlist.do";
+		} else {
+			return "redirect:meetinsertform.do";
+		}
+	}
 	
 	@RequestMapping("/meetupdateform.do")
 	public String meetUpdate(HttpSession session) {

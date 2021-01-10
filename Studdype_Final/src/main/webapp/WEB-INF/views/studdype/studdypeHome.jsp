@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
 <script type="text/javascript">
@@ -74,6 +75,7 @@ input#search {
 input#search:focus {
 	border-bottom: 3px solid #6610F2;
 }
+
 </style>
 
 </head>
@@ -103,18 +105,24 @@ input#search:focus {
 	<!-- 스터디 영역 -->
 	<div class="blogpost-area">
 		<!-- 검색창 -->
-		<form action="/.do" method="get">
-			<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 100px;">
-				<span><img src="./resources/assets/img/logo_purple.png" class="logo"></span> 
-				<input type="text" class="form-control" id="search" placeholder="원하는 스터디나 카테고리를 검색하세요.">
-				 <span>
-				 	<button type="submit" id="buttonSearch" name="studyHomeSearch">
-						<img src="./resources/assets/img/icon_search_white.png"style="width: 20px;">
+		<form action="/.do" method="get" role="form">
+			<div class="input-group"
+				style="width: 50%; margin: auto; margin-bottom: 100px;">
+				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 
+					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword }"> <span>
+					<button type="button" id="homeSearch" name="homeSearch">
+						<img src="./resources/assets/img/icon_search_white.png" style="width: 20px;">
 					</button>
 				</span>
 			</div>
 		</form>
-		
+		<script>
+		 $(function(){
+		        $('#homeSearch').click(function() {
+		          self.location = "studyList.do" + '${pageMaker.makeQuery(1)}' +  "&keyword=" + encodeURIComponent($('#keywordInput').val());
+		        });
+		      }); 
+		</script>
 
 		<div class="container">
 			<div class="row">
@@ -123,58 +131,61 @@ input#search:focus {
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
 				<c:forEach items="${studyList }" var="studyDto">
-				<div class="col-lg-4 blogs-load" onclick="location.href='index.jsp'" style="cursor: pointer">
-					<div class="single-blog-post">
-						<div class="blog-img-responsive-4by3">
-							<!-- 스터디 이미지 -->
-							<img src="./resources/assets/img/img_study1.png" alt="" class="img-fluid">
-						</div>
-						<!-- 제목/장소아이콘/장소/카테고리 -->
-						<div class="blog-meta">
-							<h3>${studyDto.s_name }</h3>
-							<br> 
-							<span><img src="./resources/assets/img/profile_placeholder.png" style="width: 15px;">${siList.get(studyDto.si_no) }&nbsp; ${guList.get(studyDto.gu_no) }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cateList.get(studyDto.cate_no) }</span>
-						</div>
+					<div class="col-lg-4 blogs-load"
+						onclick="location.href='index.jsp'" style="cursor: pointer">
+						<div class="single-blog-post">
+							<div class="blog-img-responsive-4by3">
+								<!-- 스터디 이미지 -->
+								<img src="./resources/assets/img/img_study1.png" alt=""
+									class="img-fluid">
+							</div>
+							<!-- 제목/장소아이콘/장소/카테고리 -->
+							<div class="blog-meta">
+								<h3>${studyDto.s_name }</h3>
+								<br> <span><img
+									src="./resources/assets/img/profile_placeholder.png"
+									style="width: 15px;">${siList.get(studyDto.si_no) }&nbsp;
+									${guList.get(studyDto.gu_no) }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cateList.get(studyDto.cate_no) }</span>
+							</div>
 
-						<p>${studyDto.s_info }</p>
-						<!-- 최대인원수/팀장명 -->
-						<div class="blog-comments">
-							<span>
-								<b>${leaderName.get(studyDto.leader_no) }</b>
-									<a style="float: right;"><img src="./resources/assets/img/profile_user.png" style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt }</a>
-							</span>
+							<p>${studyDto.s_info }</p>
+							<!-- 최대인원수/팀장명 -->
+							<div class="blog-comments">
+								<span> <b>${leaderName.get(studyDto.leader_no) }</b> <a
+									style="float: right;"><img
+										src="./resources/assets/img/profile_user.png"
+										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt }</a>
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
 				</c:forEach>
 			</div>
 		</div>
 	</div>
 	<!-- 스터디 리스트 끝 -->
 
-	<!-- 스터디 리스트 페이지 -->
+	<!-- 스터디 리스트 페이징 -->
+	<div>
+		<ul>
+			<c:if test="${pageMaker.prev}">
+				<li><a href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+			</c:if>
 
-	<!-- 스터디 리스트 페이지 끝 -->
-	<!-- Control Area-->
-	<!-- <div class="blogs control-area control-bg">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8 text-center">
-					<div class="control-text">
-						<h6>SOCAL MARKETING &amp; ANALYTICS</h6>
-						<h1>Take control of your data</h1>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				<li><a href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+			</c:forEach>
 
-						<a href="#" class="btn btn-primary">get started</a> <a href="#"
-							class="btn btn-light">EXPLORE FEATURES</a>
-					</div>
-				</div>
-			</div>
-			End of row
-		</div>
-		End of container
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+			</c:if>
+		</ul>
 	</div>
-	End of control area -->
+	<!-- 스터디 리스트 페이징 끝 -->
+
+
+
 
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 

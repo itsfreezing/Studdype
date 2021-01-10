@@ -15,20 +15,32 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-
-	<select id="studyList" resultMap="studyMap">
-		SELECT *
-		FROM STUDY
-		LIMIT #{startList}, #{listSize}
-		ORDER BY S_NO
-		DESC
+	<select id="studyList" resultType="studyDto" parameterType="com.studdype.test.common.SearchPagination">
+      SELECT *
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE 1=1
+      				<include refid="search"></include>
+      				) ST
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      ORDER BY S_NO DESC
 	</select>
 	
-	<select id="studyListCnt" resultType="int">
-		SELECT
-			count(*) as listCnt
-		FROM STUDY
-	</select>
+	<sql id="search">
+			<if test="keyword != null">AND S_NAME LIKE '%' || #{keyword} || '%'</if>
+	</sql>
+
+
+<!-- 총 게시글 수 -->
+<select id="selectTotalStudyListNum" resultType="int">
+      SELECT count(S_NO)
+      FROM STUDY
+      WHERE 1=1
+      <include refid="search"></include>
+      AND S_NO > 0
+</select>
+
 
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">
@@ -47,5 +59,4 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
-
 </mapper>

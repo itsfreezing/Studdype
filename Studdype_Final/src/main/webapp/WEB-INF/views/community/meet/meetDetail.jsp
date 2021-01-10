@@ -94,10 +94,17 @@ $(function(){
 			</div>
 			<div id="contentDiv">
 				<div id="contentDiv-left">
-					<div class="meetDetailDiv"><img src="./resources/assets/img/meetDate.png">&nbsp;&nbsp;<fmt:formatDate value="${dto.meet_date }" pattern="YYYY'년'MM'월'dd'일'"/></div>
-					<div class="meetDetailDiv"><img src="./resources/assets/img/meetTime.png">&nbsp;&nbsp;<fmt:formatDate value="${dto.meet_time }" pattern="HH:mm"/></div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetDate.png">&nbsp;&nbsp;<fmt:setLocale value="en_US" scope="session"/>
+																										  <fmt:parseDate value='${ dto.meet_date }' var='meet_date' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ meet_date }" pattern="YYYY'년'MM'월'dd'일'"/></div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetTime.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.meet_time }' var='meet_time' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ meet_time }" pattern="HH:mm"/></div>
 					<div class="meetDetailDiv"><img src="./resources/assets/img/meetAddr.png">&nbsp;&nbsp;${dto.meet_addr }&nbsp;${dto.meet_addr_detail }</div>
-					<div class="meetDetailDiv"><img src="./resources/assets/img/meetVote.png">&nbsp;&nbsp;<fmt:formatDate value="${dto.vote_startdate }" pattern="YYYY'년'MM'월'dd'일'"/> ~ <fmt:formatDate value="${dto.vote_enddate }" pattern="YYYY'년'MM'월'dd'일'"/></div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetVote.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.vote_startdate }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
+																										  <fmt:parseDate value='${ dto.vote_enddate }' var='vote_enddate' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ vote_enddate }" pattern="yyyy.MM.dd"/>
+					</div>
 					<div id="meetContentDiv">${dto.meet_content }</div>
 				</div>
 				<div id="contentDiv-right"> 
@@ -109,7 +116,7 @@ $(function(){
 				</div> 
 			</div>
 			<div>
-				<button class="submitBtn" id="detailBtn_updateform">수정</button>&nbsp;&nbsp; 
+				<button class="submitBtn" id="detailBtn_updateform" type="submit">수정</button>&nbsp;&nbsp; 
 				<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetlist.do'">
 			</div>
 		</form>
