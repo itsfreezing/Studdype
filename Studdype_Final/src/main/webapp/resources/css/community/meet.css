@@ -179,6 +179,37 @@
 
 /* --------------------------------- meetList */
 
+/* meetList - Search 버튼 css */
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+}
+
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 1;
+    
+    /* 변경가능 */
+    background: #6434ef;
+    margin-top: 98px;
+    margin-left: 2px;    
+}
+
+/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
+tooltip-persistent 요소 추가 할 것 */
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}
+
 /* 모임등록버튼 */
 #listBtnDiv{
 	display: inline-block; 

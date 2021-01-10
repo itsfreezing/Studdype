@@ -73,14 +73,14 @@ $(function(){
 
 // 모임 삭제 전 확인 알림창
 function deleteBtn(){
-	if (confirm("모임을 정말 삭제 하시겠습니까??") == true){    //확인
+	if (confirm("모임을 정말 삭제 하시겠습니까??") == true){ //확인
 		alert("모임이 삭제 되었습니다!");
 		document.meetDetailForm.submit();
-	}else{   //취소
+	}else{   										//취소
 	    alert("모임 삭제가 취소되었습니다!")
 		return;
 	}
-	}
+}
 
 
 </script>	
