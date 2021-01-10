@@ -195,11 +195,7 @@ public class StudyController {
 		int studyRes = studyBiz.insertStudy(studydto);
 		
 		if(studyRes > 0) {
-<<<<<<< HEAD
-			return "redirect:studdype/studdypeHome";
-=======
-			return "redirect:studyList.do";
->>>>>>> 9feb8b538276c1a3f960f63c7728890e190d87ad
+
 		}else {
 			return "redirect:createStuddypeform.do";
 		}
