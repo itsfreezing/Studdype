@@ -54,7 +54,6 @@ public class StudyController {
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
 
-		List<StudyDto> studyList = null;
 		Map<Integer, String> studyMainLeaderNameMap = null; //리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null;	//스터디 리스트 담을 곳
 		Map<Integer, String> selectSiForMainMap = null;	//시 리스트 담을 곳
@@ -196,6 +195,7 @@ public class StudyController {
 		
 		if(studyRes > 0) {
 
+			return "redirect:studyList.do";
 		}else {
 			return "redirect:createStuddypeform.do";
 		}
