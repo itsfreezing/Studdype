@@ -14,9 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.MeetDto;
@@ -38,27 +41,47 @@ public class MeetController {
 	
 	// 모임게시판 리스트 이동
 	@RequestMapping("/meetlist.do")
-	public String meetList(HttpSession session, String pagenum, Model model) {
+	public String meetList(HttpSession session, String pagenum, Model model, HttpServletRequest request) {
 		StudyDto study = (StudyDto)session.getAttribute("study"); 	   // 현재 클릭 된 스터디
 		List<MeetDto> list = null; 									   // 5개 페이징 담을 리스트
 		Map<String,Integer> pageMap = new HashMap<String, Integer>();  // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, String> writerNameMap = null; 					   // 게시글 작성자 이름 담을 MAP
+		int totalMeetBoardNum = 0;
+		Map<String, Object> keywordNumMap = new HashMap<String, Object>();
+		Map<String, Object> keywordMap = new HashMap<String, Object>();
+		String keyword = request.getParameter("keyword");
 		logger.info("[MEET BOARD SELECT LIST]");
 		
-		int totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum(study.getS_no()); // 모임 게시판 게시글 총 개수
+		keywordNumMap.put("study.getS_no()",study.getS_no());
+		keywordNumMap.put("keyword", keyword);
+		totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum(keywordNumMap); // 모임 게시판 게시글 총 개수
+		System.out.println("study.getS_no(): "+study.getS_no());
+		System.out.println("keywordNumMap: "+keywordNumMap);
+		System.out.println("keyword: "+keyword);
+		
 		
 		paging(pageMap, pagenum, totalMeetBoardNum); 	   // 페이징 함수
 		pageMap.put("studyno", study.getS_no()); 	 	   // 스터디 번호 put
 		
-		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
-		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
+		keywordMap.put("pageMap", pageMap);
+		keywordMap.put("keyword", keyword);
+		list = meetBiz.selectPagingMeetBoardList(keywordMap); // 5개 게시물만 가져오기
+		
+		System.out.println("list: "+list);
 
+		System.out.println("keywordMap: "+keywordMap);
+		System.out.println("keyword: "+keyword);
+		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
+		System.out.println("writerNameMap: "+writerNameMap);
+		
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
 		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
 		model.addAttribute("writerMap", writerNameMap);
+		model.addAttribute("keywordNumMap", keywordNumMap);
+		model.addAttribute("keywordmap", keywordMap);
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetList";
 	}
@@ -81,14 +104,14 @@ public class MeetController {
 		if (endPage > totalPageNum) {
 			endPage = totalPageNum;
 		}
-
+		
 		pagingMap.put("currentPage", currentPage);
 		pagingMap.put("startRow", startRow);
 		pagingMap.put("endRow", endRow);
 		pagingMap.put("startPage", startPage);
 		pagingMap.put("endPage", endPage);
 		pagingMap.put("totalPageNum", totalPageNum);
-
+		
 	}
 	
 	//	모임게시판 보드디테일

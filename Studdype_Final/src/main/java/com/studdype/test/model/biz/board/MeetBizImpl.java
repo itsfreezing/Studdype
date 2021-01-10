@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
@@ -20,23 +21,17 @@ public class MeetBizImpl implements MeetBiz {
 	private MeetBoardDao meetBoardDao;
 	@Autowired
 	private MemberDao memberDao;
-	
-	// 모임게시판 리스트
-	@Override
-	public List<MeetDto> selectList() {
-		return meetBoardDao.meetBoardSelectList();
-	}
-	
+
 	// 모임 게시판 총 게시글 갯수
 	@Override
-	public int selectTotalMeetBoardNum(int s_no) {		
-		return meetBoardDao.selectTotalMeetBoardNum(s_no);
+	public int selectTotalMeetBoardNum(Map keywordNumMap) {		
+		return meetBoardDao.selectTotalMeetBoardNum(keywordNumMap);
 	}
 
 	// 페이징(5개 게시글만 가져오기)
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
-		return meetBoardDao.selectPagingMeetBoardList(pageMap);
+	public List<MeetDto> selectPagingMeetBoardList(Map keywordMap) {
+		return meetBoardDao.selectPagingMeetBoardList(keywordMap);
 	}
 	
 	// 리스트로 작성자 이름 가져오기
@@ -74,4 +69,5 @@ public class MeetBizImpl implements MeetBiz {
 		return meetBoardDao.deleteMeetBoard(meet_no);
 	}
 
+	
 }

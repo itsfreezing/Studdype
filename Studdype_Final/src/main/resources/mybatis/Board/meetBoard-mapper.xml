@@ -5,14 +5,17 @@
 	<mapper namespace="meetboard">
 		
 		<!-- 모임 게시글 총 개수 -->		
-		<select id="totalMeetBoardNum" parameterType="int"	resultType="_int">
-			SELECT COUNT(*)
-			FROM MEET_BOARD
-			WHERE S_NO = #{s_no}
+		<select id="totalMeetBoardNum" parameterType="hashMap" resultType="_int">
+			<![CDATA[
+				SELECT COUNT(*)
+				FROM MEET_BOARD
+				WHERE S_NO = #{s_no}
+			]]>
+				<include refid="search"></include>
 		</select>
 		
 		<!-- paging -->
-		<select id="pagingMeetBoardList" parameterType="hashMap" resultType="meetDto">
+		<select id="pagingMeetBoardList" parameterType="hashMap" resultType="_int">
 			<![CDATA[
 				SELECT MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
 				FROM
@@ -20,11 +23,24 @@
 					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
 					FROM MEET_BOARD
 					WHERE S_NO = #{studyno}
-					ORDER BY MEET_NO DESC
+			]]>
+					<include refid="search"></include>
+			<![CDATA[
 				)
 				WHERE N >= #{startRow} AND N <= #{endRow}
 			]]>
 		</select>
+		
+		<sql id="search">
+			<if test="keyword != null">
+				 AND
+               ( 
+                  MEET_TITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%' OR
+                  MEET_CONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%' OR
+                  MEET_WRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%'
+               )
+			</if>
+		</sql>
 		
 		<!-- 모임 게시판 디테일 -->
 		<select id="meetBoardSelectOne" parameterType="int" resultType="meetDto">

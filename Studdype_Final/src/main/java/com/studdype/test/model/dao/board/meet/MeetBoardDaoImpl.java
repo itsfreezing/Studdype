@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
 
 @Repository
@@ -16,26 +17,12 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 모임게시판 리스트
 	@Override
-	public List<MeetDto> meetBoardSelectList() {
-		List<MeetDto> list = new ArrayList<MeetDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"meetBoardSelectList"); // NAMESPACE: dao의 nameSpace
-		} catch (Exception e) {
-			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	@Override
-	public int selectTotalMeetBoardNum(int s_no) {
+	public int selectTotalMeetBoardNum(Map keywordNumMap) {
 		int totalNum = 0;
 		
 		try {
-			totalNum = sqlSession.selectOne(NAMESPACE+"totalMeetBoardNum", s_no);
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalMeetBoardNum", keywordNumMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectTotalMeetBoardNum ---------- [ERROR]");
 			e.printStackTrace();
@@ -45,11 +32,11 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 	
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
+	public List<MeetDto> selectPagingMeetBoardList(Map keywordMap) {
 		List<MeetDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", pageMap);
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", keywordMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
 			e.printStackTrace();
@@ -117,7 +104,5 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
-
-
 
 }
