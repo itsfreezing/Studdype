@@ -70,6 +70,19 @@ $(function(){
 	    } 
 	});    
 });
+
+// 모임 삭제 전 확인 알림창
+function deleteBtn(){
+	if (confirm("모임을 정말 삭제 하시겠습니까??") == true){    //확인
+		alert("모임이 삭제 되었습니다!");
+		document.meetDetailForm.submit();
+	}else{   //취소
+	    alert("모임 삭제가 취소되었습니다!")
+		return;
+	}
+	}
+
+
 </script>	
 
 </head>
@@ -83,7 +96,7 @@ $(function(){
 
 		<!-- 모임 상세페이지 -->
 		<!-- form의 action은 updateform으로 넘어가는 용도 -->
-		<form action="meetupdateform.do" method="post">
+		<form action="meetdelete.do?meet_no=${dto.meet_no}" method="post" name="meetDetailForm">
 			<div id="topDiv">
 				<div id="topDiv-left">
 					<div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${writer } </div>
@@ -120,7 +133,7 @@ $(function(){
 				<c:choose>
 					<c:when test="${ dto.meet_writer == login.mem_no }">
 						<button class="submitBtn" id="detailBtn_updateform" type="submit" onclick="href='meetUpdateForm.do?meet_no=${dto.meet_no}'">수정</button>&nbsp;&nbsp; 
-						<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetdelete.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp;
+						<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="deleteBtn();">&nbsp;&nbsp;
 						<input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
 					</c:when>
 					<c:otherwise>						

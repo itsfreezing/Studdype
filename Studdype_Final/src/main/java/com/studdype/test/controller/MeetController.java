@@ -167,7 +167,7 @@ public class MeetController {
 		return "community/meet/meetUpdate";
 	}
 	
-	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.POST)
 	public String meetDelete(HttpServletRequest request, Model model) {
 		int meet_no = Integer.parseInt(request.getParameter("meet_no"));
 		
