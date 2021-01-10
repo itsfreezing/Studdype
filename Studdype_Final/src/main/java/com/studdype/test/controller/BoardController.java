@@ -21,6 +21,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -111,7 +112,9 @@ public class BoardController {
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = RequestMethod.GET)
 	public String calendar(Model model) {
+		Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
 		
+		/* calendarMap.put("putInCalendarTest", ); */
 		return "community/schedule/Calendar";
 	}
 
