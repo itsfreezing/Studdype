@@ -122,7 +122,7 @@
 		<!-- 슬라이더 끝 -->        
        
 		<c:choose>
-			<c:when test="${list == null}">
+			<c:when test="${empty list}">
 				<tr>
 					<td colspan="2">---- 모임이 존재하지 않습니다. ---- </td>
 				</tr>
@@ -131,7 +131,7 @@
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
 			        <table id="meetList" onclick="location.href='meetdetail.do?meetno=${list.get(i).getMeet_no() }'">
 						<tr>
-							<td id="date"><fmt:formatDate value="${list.get(i).getMeet_regdate()}" pattern="yy.MM.dd"/></td>
+							<td id="date"> <fmt:formatDate value="${list.get(i).getMeet_regdate()}" pattern="yyyy.MM.dd"/> </td>
 							<td id="location"><img src="./resources/assets/img/profile_placeholder.png">${ list.get(i).getMeet_addr() }&nbsp;${ list.get(i).getMeet_addr_detail() }</td>
 						</tr>
 						<tr>
@@ -139,7 +139,12 @@
 						</tr>
 						<tr>
 							<td id="writer">${writerMap.get( list.get(i).getMeet_no() ) }</td>
-							<td id="recruitment">모집기간 <fmt:formatDate value="${ list.get(i).getVote_startdate() }" pattern="yy.MM.dd"/> ~ <fmt:formatDate value="${ list.get(i).getVote_enddate() }" pattern="yy.MM.dd"/></td>
+							<td id="recruitment">모집기간 <fmt:setLocale value="en_US" scope="session"/>
+														<fmt:parseDate value='${ list.get(i).getVote_startdate() }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
+														<fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
+														<fmt:parseDate value='${ list.get(i).getVote_enddate() }' var='vote_enddate' pattern="yyyy-MM-dd HH:mm:ss"/>
+														<fmt:formatDate value="${ vote_enddate }" pattern="yyyy.MM.dd"/>
+							</td>
 						</tr>
 					</table>
 				</c:forEach>

@@ -27,7 +27,11 @@
 	
 		<insert id="insert" parameterType="MemberDto">
 			INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL,#{mem_id},#{mem_pw},#{mem_name},#{mem_rno},#{mem_gender},#{mem_phone},#{mem_email})
-
 		</insert>
+
+		<select id="login" parameterType="memberDto" resultType="memberDto">
+			SELECT * FROM MEMBER 
+			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+		</select>
 	
 	</mapper>
