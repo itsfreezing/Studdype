@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Study Update!</title>
+
+
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
@@ -55,12 +57,12 @@
 	#studyimage{
 		width:300px;
 		height:195px;
-		border:1px solid black; 
 		position:absolute; 
 		left:1100px; 
 		top:600px;
 	
 	}
+	
 	#studyimagep{
 		color:purple; 
 		font:bold; 
@@ -69,7 +71,7 @@
 		left:1100px; 
 		top:560px;
 	}
-	#Fileupdatebtn{
+	#imgAttach{
 		position:absolute; 
 		left: 1420px; 
 		top:760px;
@@ -190,13 +192,26 @@
 	#mainbook{
 		color:black;
 	}
+	#imgAttach{
+		position:absolute;
+		left:1100px;
+		top:800px;
+	}
 
 	</style>
 	<script type="text/javascript">
-	$(function (){
-		
-	});
+	function LoadImg(value){
+		if(value.files && value.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$('#LoadImg').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(value.files[0]);
+			
+		}
+	}
 	
+
 	</script>
 </head>
 <body>
@@ -227,7 +242,10 @@
 				<td>${status.count }</td>
 				<td>${bookList.book_title }</td>
 				<c:if test="${bookList.book_ismain eq 'N' }">
-				<td id="mainbook">대표</td>
+				<td id="mainbook" ><input id="bookmain" type="radio" name="bookmain">대표</td>
+				</c:if>
+				<c:if test="${bookList.book_ismain eq 'Y' }">
+				<td id="mainbook" ><input id="bookmain" type="radio" name="bookmain" checked="checked" onclick="change()">대표</td>
 				</c:if>
 			</tr>
 		</c:forEach>
@@ -250,27 +268,27 @@
 			<tr>
 				<td>ajsdva</td>
 				<td>chosuk0000@gmail.com</td>
-				<td>추방</td>
+				<td><input type="checkbox">추방</td>
 			</tr>
 			<tr>
 				<td>amwlva</td>
 				<td>chosuk0000@nate.com</td>
-				<td>추방</td>
+				<td><input type="checkbox">추방</td>
 			</tr>
 			<tr>
 				<td>krnvns</td>
 				<td>chosuk0000@naver.com</td>
-				<td>추방</td>
+				<td><input type="checkbox">추방</td>
 			</tr>
 			<tr>
 				<td>ajevoqm</td>
 				<td>chosuk0000@daum.com</td>
-				<td>추방</td>
+				<td><input type="checkbox">추방</td>
 			</tr>
 			<tr>
 				<td>riovciz</td>
 				<td>chosuk0000@kh.co.kr</td>
-				<td>추방</td>
+				<td><input type="checkbox">추방</td>
 			</tr>
 		</tbody>
 	</table>
@@ -279,20 +297,22 @@
 	
 	<!-- 대표 사진  -->
 	<p id="studyimagep">대표 사진</p>
-	<button id="Fileupdatebtn" type="button" class="btn btn-purple">File Update</button>
+	<pre class="brush:html"></pre><input type="file" id="imgAttach" name="imgAttach" onchange="LoadImg(this);">
 	
+
 	<div id="studyimage" class="image-container"> 
 	
-		<img alt="" src="./resources/assets/img/img_study7.png">
+		<img id="LoadImg" style="width:300px;height:195px;" >
 		
 	</div>
 	<!-- 대표 사진 끝 -->
 	
 	<!-- 스터디 정보 수정  -->
+	
 	<p id="creater">생성자</p>
-	<input id="createrarea" readonly="readonly">
+	<input id="createrarea" readonly="readonly" value="${login.mem_name }">
 	<p id="studyname">스터디 이름</p>
-	<input id="studynameupdate">
+	<input id="studynameupdate" value="${study.s_name }">
 	<button id="samename" type="button" class="btn btn-purple">스터디 이름 중복 Check!</button>
 	<p id="category">카테고리</p>
 	<select id="cate">
@@ -323,7 +343,7 @@
 		</c:forEach>
 	</select>
 	<p id="studyinfo">스터디 소개</p>
-	<input id="studyinfot">
+	<input id="studyinfot" value="${study.s_info }">
 	<button id="update" type="button" class="btn btn-purple">Update!</button>
 	
 	
