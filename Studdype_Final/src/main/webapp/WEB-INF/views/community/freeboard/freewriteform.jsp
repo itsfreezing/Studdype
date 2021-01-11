@@ -96,6 +96,17 @@
 	
  };
  
+function test(){
+	var html = "<input type='file' class='uptest'></input>"
+
+
+	var div = $("#testDiv");
+	div.append(html);
+	
+	var input = div.children(".uptest");
+	
+	input[(input.length)-1].click();
+}
 
  
 </script>
@@ -115,11 +126,15 @@
 			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요"></td>
 		</tr>
 		<tr>
-			<td>파일 첨부<input type="file" class="uploadFile"></td>
+			<td>파일 첨부<input type="button" onclick="test();" class="uploadFile"></td>
 			
 		</tr>
 		<tr>
-			<td><div>공간</div></td>
+			<td>
+				<div id="testDiv">
+					
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
