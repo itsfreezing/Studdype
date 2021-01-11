@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%request.setCharacterEncoding("UTF-8"); %>
-<%response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -130,7 +128,7 @@ function prePageGroup(){
        	<!-- searchDiv -->
        	<div id="bigBox">
 	       	<div class="divBox" tooltip="검색어를 입력한후 Enter 버튼을 눌러주세요!"  tooltip-persistent>
-        		<form action="meetlist.do?keyword=${keyword } " method="get" name="meetSearchForm" >
+        		<form action="meetlist.do?" method="post" name="meetSearchForm" role="from">
 			       	<div class="searchDiv" >
 					    <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
 					        <path class="right" fill="none" stroke="#6434ef" stroke-width="4" stroke-miterlimit="10" d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75"/>
@@ -138,7 +136,6 @@ function prePageGroup(){
 					    </svg>
 			   			<p></p>
 			    		<input type="text" id="keyword" name="keyword" value="${ keyword }" autocomplete="off"/>
-			
 			    		<span >Search</span>
 					</div>
 				</form>

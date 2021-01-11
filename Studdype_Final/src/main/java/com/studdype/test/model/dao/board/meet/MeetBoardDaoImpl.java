@@ -18,11 +18,11 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int selectTotalMeetBoardNum(Map keywordNumMap) {
+	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
 		
 		try {
-			totalNum = sqlSession.selectOne(NAMESPACE+"totalMeetBoardNum", keywordNumMap);
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalMeetBoardNum", s_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectTotalMeetBoardNum ---------- [ERROR]");
 			e.printStackTrace();
@@ -32,11 +32,11 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 	
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map keywordMap) {
+	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
 		List<MeetDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", keywordMap);
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", searchMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
 			e.printStackTrace();

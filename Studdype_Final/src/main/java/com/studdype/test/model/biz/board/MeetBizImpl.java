@@ -24,14 +24,14 @@ public class MeetBizImpl implements MeetBiz {
 
 	// 모임 게시판 총 게시글 갯수
 	@Override
-	public int selectTotalMeetBoardNum(Map keywordNumMap) {		
-		return meetBoardDao.selectTotalMeetBoardNum(keywordNumMap);
+	public int selectTotalMeetBoardNum(int s_no) {		
+		return meetBoardDao.selectTotalMeetBoardNum(s_no);
 	}
 
 	// 페이징(5개 게시글만 가져오기)
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map keywordMap) {
-		return meetBoardDao.selectPagingMeetBoardList(keywordMap);
+	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
+		return meetBoardDao.selectPagingMeetBoardList(searchMap);
 	}
 	
 	// 리스트로 작성자 이름 가져오기

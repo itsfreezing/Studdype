@@ -177,7 +177,6 @@ public class BoardController {
 		if (endPage > totalPageNum) {
 			endPage = totalPageNum;
 		}
-
 		pagingMap.put("currentPage", currentPage);
 		pagingMap.put("startRow", startRow);
 		pagingMap.put("endRow", endRow);
