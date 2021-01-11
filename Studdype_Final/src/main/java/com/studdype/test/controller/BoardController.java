@@ -40,7 +40,7 @@ public class BoardController {
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 	
-	private final static int bookPageSize = 8; // 도서 한 페이지에서 보여줄 도서 개수
+	private final static int bookPageSize = 4; // 도서 한 페이지에서 보여줄 도서 개수
 
 	// 자유게시판 리스트 이동
 	@RequestMapping("/freeboard.do")
@@ -202,31 +202,17 @@ public class BoardController {
 	public String searchBook(HttpSession session, Model model, String pagenum) {
 		StudyDto study = (StudyDto) session.getAttribute("study");
 		List<BookDto> list = null; // 4개 페이징 담을 리스트 
-		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-		
-		
-		int totalBookNum = bookBiz.selectTotalRegisterBookNum(study.getS_no()); // 해당 스터디에 등록된 총 도수 개수
-		System.out.println(totalBookNum);
-
-		System.out.println(bookPageSize);
-		paging(pageMap, pagenum, totalBookNum, bookPageSize); //페이징 함수
-	
-		pageMap.put("studyno", study.getS_no()); //스터디 번호 put
 
 		// 4개 게시물만 가져오기
-		list = bookBiz.selectPageBookList(pageMap);
+		list = bookBiz.selectSearchBookList(study.getS_no());
 		// 멤버번호로 작성자 이름/아이디 받아오기
 		writerNameMap = bookBiz.getWriterNameByList(list);
 		
 		for(int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
-		
-//		model.addAttribute("startPage", pageMap.get("startPage"));
-//		model.addAttribute("endPage", pageMap.get("endPage"));
-//		model.addAttribute("currentPage", pageMap.get("currentPage"));
-//		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
+
 		model.addAttribute("list", list);
 		model.addAttribute("writerMap", writerNameMap);
 		session.setAttribute("leftnavi", "book");
@@ -237,6 +223,24 @@ public class BoardController {
 	@RequestMapping("/searchBookList.do")
 	public String searchBookList(HttpSession session, Model model, String book_title) {
 		return "community/book/searchBook";
+	}
+	
+	@RequestMapping(value="/bookDetailform.do", method=RequestMethod.GET)
+	public String bookDetailForm(HttpSession session, Model model, int b_no) {
+		StudyDto study = (StudyDto) session.getAttribute("study"); 
+		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
+		
+		BookDto dto = new BookDto();
+		dto.setS_no(study.getS_no());
+		dto.setB_no(b_no);
+		
+		BookDto detailBookDto = bookBiz.selectOneBook(dto);
+		
+		// 멤버번호로 작성자 이름/아이디 받아오기
+//		writerNameMap = bookBiz.getWriterNameByList(detailBookDto);
+		
+		model.addAttribute("b_no", b_no);
+		return "";
 	}
 	
 	//페이징 함수 

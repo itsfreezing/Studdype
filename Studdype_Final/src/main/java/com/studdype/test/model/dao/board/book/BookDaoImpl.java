@@ -31,18 +31,31 @@ public class BookDaoImpl implements BookDao {
 		return totalRegisterBookNum;
 	}
 
-	// 화면에 보여줄 해당 페이지 도서 리스트(4개)
+	// 화면에 보여줄 해당 페이지 도서 리스트
 	@Override
-	public List<BookDto> selectPageBookList(Map pageMap) {
-		List<BookDto> pageBookList = new ArrayList<BookDto>();
+	public List<BookDto> selectSearchBookList(int s_no) {
+		List<BookDto> selectSearchBookList = new ArrayList<BookDto>();
 		
 		try {
-			pageBookList = sqlSession.selectList(NAMESPACE+"selectPageBookList", pageMap);
+			selectSearchBookList = sqlSession.selectList(NAMESPACE+"selectSearchBookList", s_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR] : selectPageBookList");
+			System.out.println("[ERROR] : selectSearchBookList");
 			e.printStackTrace();
 		}
-		return pageBookList;
+		return selectSearchBookList;
+	}
+
+	@Override
+	public BookDto selectOneBook(BookDto dto) {
+		BookDto selectOneBook = null;
+		
+		try {
+			selectOneBook = sqlSession.selectOne(NAMESPACE+"selectOneBook", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectOneBook");
+			e.printStackTrace();
+		}
+		return selectOneBook;
 	}
 	
 	

@@ -22,8 +22,8 @@ public class BookBizImpl implements BookBiz{
 	
 	// 스터디에 등록한 도서 리스트 검색
 	@Override
-	public List<BookDto> selectPageBookList(Map pageMap) {
-		return bookDao.selectPageBookList(pageMap);
+	public List<BookDto> selectSearchBookList(int s_no) {
+		return bookDao.selectSearchBookList(s_no);
 	}
 
 	@Override
@@ -34,6 +34,11 @@ public class BookBizImpl implements BookBiz{
 	@Override
 	public Map<Integer, MemberDto> getWriterNameByList(List<BookDto> bookList) {
 		return memberDao.selectWriterByBookList(bookList);
+	}
+
+	@Override
+	public BookDto selectOneBook(BookDto dto) {
+		return bookDao.selectOneBook(dto);
 	}
 
 	
