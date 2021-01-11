@@ -27,7 +27,6 @@ DROP SEQUENCE DATAREPLYSEQ;
 DROP SEQUENCE DATAFILESEQ;
 DROP SEQUENCE MEETBOARDSEQ;
 DROP SEQUENCE MEETREPLYSEQ;
-
 -------------------------------------------------------------
 SELECT * FROM ALL_TABLES WHERE OWNER = 'STUDDYPE'; --전체 테이블 확인
 -------------------------------------------------------------
