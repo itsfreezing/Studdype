@@ -56,9 +56,9 @@ public class MeetController {
 		keywordNumMap.put("keyword", keyword);
 		totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum(keywordNumMap); // 모임 게시판 게시글 총 개수
 		System.out.println("study.getS_no(): "+study.getS_no());
-		System.out.println("keywordNumMap: "+keywordNumMap);
 		System.out.println("keyword: "+keyword);
-		
+		System.out.println("keywordNumMap: "+keywordNumMap);
+		System.out.println("totalMeetBoardNum: "+totalMeetBoardNum);
 		
 		paging(pageMap, pagenum, totalMeetBoardNum); 	   // 페이징 함수
 		pageMap.put("studyno", study.getS_no()); 	 	   // 스터디 번호 put
@@ -67,10 +67,11 @@ public class MeetController {
 		keywordMap.put("keyword", keyword);
 		list = meetBiz.selectPagingMeetBoardList(keywordMap); // 5개 게시물만 가져오기
 		
-		System.out.println("list: "+list);
-
-		System.out.println("keywordMap: "+keywordMap);
+		System.out.println("pageMap: "+pageMap);
 		System.out.println("keyword: "+keyword);
+		System.out.println("keywordMap: "+keywordMap);
+		System.out.println("list: "+list);
+	
 		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
 		System.out.println("writerNameMap: "+writerNameMap);
 		
