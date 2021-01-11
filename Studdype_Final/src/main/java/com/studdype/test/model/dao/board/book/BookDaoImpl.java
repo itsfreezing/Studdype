@@ -24,7 +24,6 @@ public class BookDaoImpl implements BookDao {
 		try {
 			totalRegisterBookNum = sqlSession.selectOne(NAMESPACE+"selectTotalRegisterBookNum", s_no);
 			System.out.println("쿼리 이후 : "+totalRegisterBookNum);
-			System.out.println("쿼리 이후 : "+s_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] : selectTotalRegisterBookNum");
 			e.printStackTrace();

@@ -40,7 +40,7 @@ public class BoardController {
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 	
-	private final static int bookPageSize = 4; // 도서 한 페이지에서 보여줄 도서 개수
+	private final static int bookPageSize = 8; // 도서 한 페이지에서 보여줄 도서 개수
 
 	// 자유게시판 리스트 이동
 	@RequestMapping("/freeboard.do")
@@ -203,32 +203,30 @@ public class BoardController {
 		StudyDto study = (StudyDto) session.getAttribute("study");
 		List<BookDto> list = null; // 4개 페이징 담을 리스트 
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
-		Map<Integer, Map<String, String>> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
+		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
 		
 		
 		int totalBookNum = bookBiz.selectTotalRegisterBookNum(study.getS_no()); // 해당 스터디에 등록된 총 도수 개수
 		System.out.println(totalBookNum);
 
+		System.out.println(bookPageSize);
 		paging(pageMap, pagenum, totalBookNum, bookPageSize); //페이징 함수
 	
 		pageMap.put("studyno", study.getS_no()); //스터디 번호 put
 
-		// 15개 게시물만 가져오기
+		// 4개 게시물만 가져오기
 		list = bookBiz.selectPageBookList(pageMap);
 		// 멤버번호로 작성자 이름/아이디 받아오기
 		writerNameMap = bookBiz.getWriterNameByList(list);
 		
-		System.out.println("test");
 		for(int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
 		
-		System.out.println(writerNameMap);
-
-		model.addAttribute("startPage", pageMap.get("startPage"));
-		model.addAttribute("endPage", pageMap.get("endPage"));
-		model.addAttribute("currentPage", pageMap.get("currentPage"));
-		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
+//		model.addAttribute("startPage", pageMap.get("startPage"));
+//		model.addAttribute("endPage", pageMap.get("endPage"));
+//		model.addAttribute("currentPage", pageMap.get("currentPage"));
+//		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
 		model.addAttribute("writerMap", writerNameMap);
 		session.setAttribute("leftnavi", "book");
@@ -267,5 +265,10 @@ public class BoardController {
 		pagingMap.put("endPage", endPage);
 		pagingMap.put("totalPageNum", totalPageNum);
 
+	}
+	
+	@RequestMapping("/test.do")
+	public String test() {
+		return "community/book/example";
 	}
 }

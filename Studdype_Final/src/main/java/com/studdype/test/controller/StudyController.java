@@ -47,6 +47,7 @@ public class StudyController {
 	
 	@Autowired
 	private StudyBiz studyBiz;		
+	@Autowired
 	private MemberBiz memberBiz;
 
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)

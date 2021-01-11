@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.studdype.test.model.dao.board.book.BookDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BookDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
 public class BookBizImpl implements BookBiz{
@@ -31,7 +32,7 @@ public class BookBizImpl implements BookBiz{
 	}
 
 	@Override
-	public Map<Integer, Map<String, String>> getWriterNameByList(List<BookDto> bookList) {
+	public Map<Integer, MemberDto> getWriterNameByList(List<BookDto> bookList) {
 		return memberDao.selectWriterByBookList(bookList);
 	}
 
