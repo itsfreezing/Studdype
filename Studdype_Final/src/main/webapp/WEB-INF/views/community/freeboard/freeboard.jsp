@@ -110,6 +110,7 @@
 							<td class="tdcnt">${list.get(i).getB_cnt() }</td>
 						</tr>
 					</c:forEach>
+					
 				</c:otherwise>
 			</c:choose>
 			
