@@ -78,4 +78,10 @@ public class FreeBizImpl implements FreeBiz {
 		return freeBoardDao.selectOne(b_no);
 	}
 
+	//자유게시판 디테일 최근글 뽑아오기
+	@Override
+	public List<BoardDto> getRecentList(int s_no, int b_no) {
+		return freeBoardDao.selectRecentList(s_no, b_no);
+	}
+
 }
