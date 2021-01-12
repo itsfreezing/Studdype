@@ -432,3 +432,8 @@
 		border-bottom: 1px solid black;
 		padding-bottom: 3px;
 	}
+.reply_cnt{
+	color: red;
+	font-weight: bold;
+	font-size: 14px;
+}

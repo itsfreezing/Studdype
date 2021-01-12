@@ -483,7 +483,13 @@ $(document).ready( getReplyList() );
 							<c:when test="${status.count == 3 }">
 								<tr class="recent_board_tr current_board">
 							
-								<td class="tdtitle"><a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }</a></td>
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>							
+									</a>
+								</td>
 								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
 								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
 								
@@ -492,7 +498,13 @@ $(document).ready( getReplyList() );
 							<c:otherwise>
 								<tr class="recent_board_tr">
 							
-								<td class="tdtitle"><a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }</a></td>
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>					
+									</a>
+								</td>
 								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
 								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
 								

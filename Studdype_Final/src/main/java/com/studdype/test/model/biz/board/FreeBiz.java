@@ -18,5 +18,6 @@ public interface FreeBiz {
 	public int updateBoard(BoardDto board); // 자유게시판 글 수정
 	public BoardDto selectOne(int b_no); //자유게시판 글 하나 가져오기
 	public List<BoardDto> getRecentList(int s_no, int b_no); //자유게시판 디테일페이지 최근글 가져오기
+	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list); //댓글 갯수 가져오기
 
 }
