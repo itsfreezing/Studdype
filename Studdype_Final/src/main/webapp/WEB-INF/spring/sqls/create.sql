@@ -226,6 +226,7 @@ CREATE TABLE STUDY_MEMBER(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)    
 );
+select * from study_member where mem_no=1;
 
 --스터디 가입신청 현황
 CREATE TABLE STUDY_APPLYING(

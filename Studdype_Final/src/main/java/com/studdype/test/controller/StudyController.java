@@ -213,14 +213,16 @@ public class StudyController {
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
 		List<BookDto> bookList = bookBiz.bookList(1);
 		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
+		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
 		
 		System.out.println(LeaderList);
 		
 		
 		System.out.println(bookList);
 		
-	
-	
+		System.out.println(memberlist);
+		
+		session.setAttribute("memberlist",memberlist);
 		model.addAttribute("login", login);
 		session.setAttribute("bookList", bookList);
 		session.setAttribute("gudto", gudto);

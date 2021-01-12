@@ -262,6 +262,7 @@
 				<th>아이디</th>
 				<th>이메일</th>
 				<th>추방하기</th>
+				<th>대표설정</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -269,26 +270,31 @@
 				<td>ajsdva</td>
 				<td>chosuk0000@gmail.com</td>
 				<td><input type="checkbox">추방</td>
+				<td><input type="radio">대표</td>
 			</tr>
 			<tr>
 				<td>amwlva</td>
 				<td>chosuk0000@nate.com</td>
 				<td><input type="checkbox">추방</td>
+				<td><input type="radio">대표</td>
 			</tr>
 			<tr>
 				<td>krnvns</td>
 				<td>chosuk0000@naver.com</td>
 				<td><input type="checkbox">추방</td>
+				<td><input type="radio">대표</td>
 			</tr>
 			<tr>
 				<td>ajevoqm</td>
 				<td>chosuk0000@daum.com</td>
 				<td><input type="checkbox">추방</td>
+				<td><input type="radio">대표</td>
 			</tr>
 			<tr>
 				<td>riovciz</td>
 				<td>chosuk0000@kh.co.kr</td>
 				<td><input type="checkbox">추방</td>
+				<td><input type="radio">대표</td>
 			</tr>
 		</tbody>
 	</table>
