@@ -146,7 +146,7 @@
 	<div id="studylistdiv" >
 	
 		<c:forEach var="studylist" items="${studylist }" varStatus="status">
-			<a href="communityhome.do?s_no=${studylist.s_no }">${studylist.s_name }</a>
+			<a href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a>
 			<c:if test="${status.count%3 == 0 }"><br></c:if>
 		</c:forEach>
 		

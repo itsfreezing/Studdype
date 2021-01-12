@@ -57,7 +57,7 @@ public class HomeController {
 	
 	//마이페이지로 이동
 	@RequestMapping("/myPage.do")
-	public String myPage(HttpSession session,Model model) {
+	public String myPage(HttpSession session) {
 		MemberDto login = memberBiz.selectOne(1);
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(1);
 		List<StudyDto> studylist = new ArrayList<StudyDto>();
@@ -66,8 +66,8 @@ public class HomeController {
 			StudyDto dto = studyBiz.selectOneBySno(joinedstudy.get(i).getS_no());
 			studylist.add(dto);
 		}
-		System.out.println("join"+joinedstudy);
-		System.out.println("study"+studylist);
+		
+	
 		session.setAttribute("studylist", studylist);
 		session.setAttribute("login", login);
 		
@@ -78,18 +78,29 @@ public class HomeController {
 	//커뮤니티 홈으로
 
 	@RequestMapping("/communityhome.do")
-	public String communityHome(HttpSession session,Model model,int s_no) {
+	public String communityHome(HttpSession session,Model model) {
 		
 
 		/////////////////////// 테스트용 세션
 		MemberDto login = memberBiz.selectOne(2);
-		StudyDto study = studyBiz.selectOneBySno(s_no);
+		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		session.setAttribute("study", study); //스터디 세션
 		session.setAttribute("login", login); //스터디 세션
 		//////////////////화상회의 테스트를 위한 session login, study커뮤니티접근 세션 구현후 삭제
 		session.setAttribute("leftnavi", "studyhome");
 	
+		return "community/communityHome";
+	}
+	@RequestMapping("studycommunity.do")
+	public String studycommunity(HttpSession session,int s_no) {
+		MemberDto login = memberBiz.selectOne(1);
+		StudyDto study = studyBiz.selectOneBySno(s_no);
+		
+		session.setAttribute("study", study);
+		session.setAttribute("login", login);
+		session.setAttribute("leftnavi", "studyhome");
+		
 		return "community/communityHome";
 	}
 	
