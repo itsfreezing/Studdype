@@ -34,8 +34,8 @@
 	<select id="selectOneBook" parameterType="bookDto" resultType="bookDto">
 		SELECT *
 		FROM BOOK
-		WHERE S_NO = #{dto.s_no} 
-			AND B_NO = #{dto.b_no}
+		WHERE S_NO = #{s_no} 
+			AND B_NO = #{b_no}
 	</select>
 
 </mapper>	

@@ -209,4 +209,20 @@ public class MemberDaoImpl implements MemberDao{
 		return bookMap;
 	}
 
+	@Override
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
+		Map<Integer, MemberDto> getBookWriterName = new HashMap<Integer, MemberDto>();
+		MemberDto dto = new MemberDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			getBookWriterName.put(mem_no, dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : getBookWriterName");
+			e.printStackTrace();
+		}
+		
+		return getBookWriterName;
+	}
+
 }

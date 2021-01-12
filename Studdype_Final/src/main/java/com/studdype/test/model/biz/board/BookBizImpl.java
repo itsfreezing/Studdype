@@ -41,5 +41,10 @@ public class BookBizImpl implements BookBiz{
 		return bookDao.selectOneBook(dto);
 	}
 
+	@Override
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
+		return memberDao.getBookWriterName(mem_no);
+	}
+
 	
 }

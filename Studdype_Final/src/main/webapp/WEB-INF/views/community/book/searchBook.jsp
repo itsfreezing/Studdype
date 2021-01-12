@@ -224,7 +224,7 @@ table {
 		
 		$(document).on("click", ".append",  function() {
 			var b_no = $(".append").children().first().val();
-			location.href="bookDetailform.do?b_no"+b_no;
+			location.href="bookDetailform.do?b_no="+b_no;
 		});
 
 	});
