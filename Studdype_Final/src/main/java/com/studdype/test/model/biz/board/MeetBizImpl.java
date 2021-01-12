@@ -12,6 +12,7 @@ import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.member.MemberDto;
 
 @Validated
 @Service
@@ -30,14 +31,14 @@ public class MeetBizImpl implements MeetBiz {
 
 	// 페이징(5개 게시글만 가져오기)
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
-		return meetBoardDao.selectPagingMeetBoardList(searchMap);
+	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
+		return meetBoardDao.selectPagingMeetBoardList(pageMap);
 	}
 	
 	// 리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, String> getWriterNameByList(List<MeetDto> list) {
-		return memberDao.selectWriterByMeetBoardList(list);
+	public Map<Integer, MemberDto> getMemberMap(List<MeetDto> list) {
+		return memberDao.selectMemberByMeetList(list);
 	}
 	
 	// 모임게시판 디테일
