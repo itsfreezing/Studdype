@@ -49,7 +49,8 @@ public class BoardController {
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트 
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, MemberDto> memberMap = null; //게시글 멤버정보 담을 MAP
-	
+		Map<Integer, Integer> replyCntMap = null;//댓글 갯수 담을 MAP
+
 		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 
 		paging(pageMap, pagenum, totalBoardNum); //페이징 함수
@@ -60,6 +61,9 @@ public class BoardController {
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
 		memberMap = freeBiz.getMemberMap(list);
+		
+		//댓글 갯수 가져오기
+		replyCntMap = freeBiz.getReplyCnt(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
@@ -68,6 +72,7 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("memberMap", memberMap);
 		session.setAttribute("leftnavi", "freeboard");
+		model.addAttribute("replyCntMap", replyCntMap);
 		return "community/freeboard/freeboard";
 	}
 
@@ -143,79 +148,33 @@ public class BoardController {
 
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
-	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
+		Map<Integer, MemberDto> memberMap = null; //최근게시글 멤버정보 담을 MAP
+		Map<Integer, Integer> replyCntMap = null;//댓글 갯수 담을 MAP
+		
 		//조회수 함수  isVisitPage = 1 -> 방문한 적있음  0 -> 없음
 		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		
 		
 		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
 		MemberDto member = memberBiz.selectOne( board.getB_writer() ); //작성자 이름 가져오기
-
+		
+		List<BoardDto> recentList = freeBiz.getRecentList(s_no, b_no);
+		memberMap = freeBiz.getMemberMap(recentList); // 최근게시글 memberMap
+		
+		//댓글 갯수 가져오기
+		replyCntMap = freeBiz.getReplyCnt(recentList);
+		
+		model.addAttribute("replyCntMap", replyCntMap);
+		model.addAttribute("memberMap", memberMap);
+		model.addAttribute("recentList", recentList);
 		model.addAttribute("dto", board);
 		model.addAttribute("member", member);
 		return "community/freeboard/freeDetail";
 	}
 
-
-	//페이징 함수 
-	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
-
-		int currentPage = (pageNum == null || pageNum.trim() == "") ? 1 : Integer.parseInt(pageNum); // 현재 페이지
-		int startRow = (currentPage - 1) * pageSize + 1; // 페이지 첫번째 글
-		int endRow = currentPage * pageSize; // 페이지 마지막 글
-		int numPageGroup = (int) Math.ceil((double) currentPage / pageGroupSize); // 페이지 그룹
-		/*
-		 * [1][2][3][4][5] -> 1 ( numPageGroup ) [6][7][8][9][10] -> 2
-		 */
-		int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
-		int endPage = numPageGroup * pageGroupSize; // 끝 페이지
-		int totalPageNum = totalBoardNum / pageSize + 1; // 총페이지 개수
-
-		// 마지막 페이지가 총 페이지 갯수보다 많으면
-		if (endPage > totalPageNum) {
-			endPage = totalPageNum;
-		}
-		pagingMap.put("currentPage", currentPage);
-		pagingMap.put("startRow", startRow);
-		pagingMap.put("endRow", endRow);
-		pagingMap.put("startPage", startPage);
-		pagingMap.put("endPage", endPage);
-		pagingMap.put("totalPageNum", totalPageNum);
-
-	}
-	
-	
-	//한게시글에 하루에 1번만 조회수 함수
-	private int chkVisited(HttpServletRequest request, HttpServletResponse response, String cookieName, String b_no) {
-		int isVisit = 0; // 온 게시판?
-		int isVisitPage = 0; // 온 게시글?
-		Cookie[] cookies = request.getCookies(); // 모든 쿠키
-
-		for (Cookie cookie : cookies) { // 모든 쿠키 조회
-
-			if (cookie.getName().equals(cookieName)) { // 자유게시판에 온적이 있으면
-				isVisit = 1;
-
-				// freeboardvisit 쿠키에 글번호가 있으면
-				if (cookie.getValue().contains(b_no)) {
-					isVisitPage = 1; // 온적있음 -> 1
-				} else { // 없으면
-					cookie.setValue(cookie.getValue() + "_" + b_no); // 쿠키값 + '_게시글번호' 업데이트해줌
-					response.addCookie(cookie); // 쿠키 추가
-				}
-			}
-		}
-
-		if (isVisit == 0) { // 자유게시판 첫 접근이면 쿠키 생성
-			Cookie cookie = new Cookie(cookieName, b_no);
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 하루생존
-			response.addCookie(cookie); //쿠키 추가
-		}
-		
-		return isVisitPage;
-	}
 	
 	// 도서 검색 페이지 전환
 	@RequestMapping("/bookboardform.do")
@@ -294,5 +253,64 @@ public class BoardController {
 		pagingMap.put("endPage", endPage);
 		pagingMap.put("totalPageNum", totalPageNum);
 
+	}
+	
+	//페이징 함수 
+	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
+		
+		int currentPage = (pageNum == null || pageNum.trim() == "") ? 1 : Integer.parseInt(pageNum); // 현재 페이지
+		int startRow = (currentPage - 1) * pageSize + 1; // 페이지 첫번째 글
+		int endRow = currentPage * pageSize; // 페이지 마지막 글
+		int numPageGroup = (int) Math.ceil((double) currentPage / pageGroupSize); // 페이지 그룹
+		/*
+		 * [1][2][3][4][5] -> 1 ( numPageGroup ) [6][7][8][9][10] -> 2
+		 */
+		int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
+		int endPage = numPageGroup * pageGroupSize; // 끝 페이지
+		int totalPageNum = totalBoardNum / pageSize + 1; // 총페이지 개수
+		
+		// 마지막 페이지가 총 페이지 갯수보다 많으면
+		if (endPage > totalPageNum) {
+			endPage = totalPageNum;
+		}
+		
+		pagingMap.put("currentPage", currentPage);
+		pagingMap.put("startRow", startRow);
+		pagingMap.put("endRow", endRow);
+		pagingMap.put("startPage", startPage);
+		pagingMap.put("endPage", endPage);
+		pagingMap.put("totalPageNum", totalPageNum);
+		
+	}
+	
+	
+	//한게시글에 하루에 1번만 조회수 함수
+	private int chkVisited(HttpServletRequest request, HttpServletResponse response, String cookieName, String b_no) {
+		int isVisit = 0; // 온 게시판?
+		int isVisitPage = 0; // 온 게시글?
+		Cookie[] cookies = request.getCookies(); // 모든 쿠키
+		
+		for (Cookie cookie : cookies) { // 모든 쿠키 조회
+			
+			if (cookie.getName().equals(cookieName)) { // 자유게시판에 온적이 있으면
+				isVisit = 1;
+				
+				// freeboardvisit 쿠키에 글번호가 있으면
+				if (cookie.getValue().contains(b_no)) {
+					isVisitPage = 1; // 온적있음 -> 1
+				} else { // 없으면
+					cookie.setValue(cookie.getValue() + "_" + b_no); // 쿠키값 + '_게시글번호' 업데이트해줌
+					response.addCookie(cookie); // 쿠키 추가
+				}
+			}
+		}
+		
+		if (isVisit == 0) { // 자유게시판 첫 접근이면 쿠키 생성
+			Cookie cookie = new Cookie(cookieName, b_no);
+			cookie.setMaxAge(60 * 60 * 24); // 쿠키 하루생존
+			response.addCookie(cookie); //쿠키 추가
+		}
+		
+		return isVisitPage;
 	}
 }

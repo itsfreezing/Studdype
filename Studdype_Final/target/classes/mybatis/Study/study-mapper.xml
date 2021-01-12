@@ -58,5 +58,8 @@
 		SELECT S_NO
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
-	
+	<select id="studyLeader" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
+	</select>
+
 </mapper>
