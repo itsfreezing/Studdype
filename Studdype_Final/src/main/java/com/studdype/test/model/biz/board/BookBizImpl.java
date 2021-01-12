@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.board;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class BookBizImpl implements BookBiz{
 	public Map<Integer, Map<String, String>> getWriterNameByList(List<BookDto> bookList) {
 		return memberDao.selectWriterByBookList(bookList);
 	}
+
+	@Override
+	public List<BookDto> bookList(int s_no) {
+		
+		return bookDao.bookList(s_no);
+	}
+
 
 	
 }

@@ -45,6 +45,20 @@ public class BookDaoImpl implements BookDao {
 		}
 		return pageBookList;
 	}
+
+	@Override
+	public List<BookDto> bookList(int s_no) {
+		List<BookDto> bookList = new ArrayList<BookDto>();
+		
+		try {
+			bookList = sqlSession.selectList(NAMESPACE+"bookList",s_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : bookList");
+			e.printStackTrace();
+		}
+		
+		return bookList;
+	}
 	
 	
 
