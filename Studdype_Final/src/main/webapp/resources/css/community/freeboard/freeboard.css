@@ -405,3 +405,35 @@
 	transition: 0.3s;
 
 }
+/* 
+<!-- 최근 게시판 글 --> */
+.recent_board_box{
+	margin-top: 50px;
+}
+.recent_table{
+	width: 100%;
+	font-size: 13px;
+}
+.recent_table tr{
+		border-bottom: 1px solid rgb(240, 240, 240);
+		
+		
+}
+.current_board{
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+.recent_table td{
+		
+		padding: 15px;
+}
+.recent_table td a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid black;
+		padding-bottom: 3px;
+	}
+.reply_cnt{
+	color: red;
+	font-weight: bold;
+	font-size: 14px;
+}
