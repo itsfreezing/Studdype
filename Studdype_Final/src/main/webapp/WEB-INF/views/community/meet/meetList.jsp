@@ -98,6 +98,12 @@ function prePageGroup(){
 	};
 }
 
+$(function(){
+	$('#SSearch').click(function(){
+		self.location = "meetlist.do"
+			+"&keyword="+encodeURIComponent($('#Kkeyword').val());
+	});
+});
 </script>
 </head>
 <body>
@@ -128,14 +134,14 @@ function prePageGroup(){
        	<!-- searchDiv -->
        	<div id="bigBox">
 	       	<div class="divBox" tooltip="검색어를 입력한후 Enter 버튼을 눌러주세요!"  tooltip-persistent>
-        		<form action="meetlist.do?" method="post" name="meetSearchForm" role="from">
+        		<form action="meetlist.do" method="post" name="meetSearchForm" role="from">
 			       	<div class="searchDiv" >
 					    <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
 					        <path class="right" fill="none" stroke="#6434ef" stroke-width="4" stroke-miterlimit="10" d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75"/>
 					        <path class="left" fill="none" stroke="#6434ef" stroke-width="4" stroke-miterlimit="10" d="M177.75 85.99H44.25C20.916 85.99 2 67.074 2 43.74 2.556 20.528 21.533 2 44.752 2H177.75"/>
 					    </svg>
 			   			<p></p>
-			    		<input type="text" id="keyword" name="keyword" value="${ keyword }" autocomplete="off"/>
+			    		<input type="text" id="keyword" name="keyword" autocomplete="off"/>
 			    		<span >Search</span>
 					</div>
 				</form>
@@ -163,7 +169,7 @@ function prePageGroup(){
 							<td id="title" colspan="2">${ list.get(i).getMeet_title() }</td>
 						</tr>
 						<tr>
-							<td id="writer">${writerMap.get( list.get(i).getMeet_no() ) }</td>
+							<td id="writer">${memberMap.get( list.get(i).getMeet_no()).getMem_id() }</td>
 							<td id="recruitment">모집기간 <fmt:setLocale value="en_US" scope="session"/>
 														<fmt:parseDate value='${ list.get(i).getVote_startdate() }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
 														<fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 

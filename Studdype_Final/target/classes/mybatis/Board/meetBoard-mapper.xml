@@ -5,14 +5,10 @@
 	<mapper namespace="meetboard">
 		
 		<!-- 모임 게시글 총 개수 -->		
-		<select id="totalMeetBoardNum" parameterType="int" resultType="_int">
-			<![CDATA[
+		<select id="totalMeetBoardNum" parameterType="map" resultType="_int">
 				SELECT COUNT(*)
 				FROM MEET_BOARD
-				WHERE 1=1
-				AND S_NO = #{s_no}
-			]]>
-				<include refid="search"></include>
+				WHERE S_NO = #{s_no}
 		</select>
 		
 		<!-- paging -->
@@ -23,11 +19,7 @@
 				(
 					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_CONTENT, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
 					FROM MEET_BOARD
-					WHERE 1=1
-					AND S_NO = #{studyno}
-			]]>
-					<include refid="search"></include>
-			<![CDATA[
+					WHERE S_NO = #{studyno}
 					ORDER BY MEET_NO DESC 
 				)
 				WHERE N >= #{startRow} AND N <= #{endRow} 
@@ -38,8 +30,8 @@
 			<if test="keyword != null">
 				 AND
                ( 
-                  (MEET_TITLE LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%') OR
-                  (MEET_WRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%')
+                  (MEET_TITLE LIKE '%' || #{keyword} || '%') OR
+                  (MEET_WRITER LIKE '%' || #{keyword} || '%')
                )
 			</if>
 		</sql>

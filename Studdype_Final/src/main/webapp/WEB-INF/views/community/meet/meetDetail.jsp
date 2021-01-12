@@ -99,7 +99,7 @@ function deleteBtn(){
 		<form action="meetdelete.do?meet_no=${dto.meet_no}" method="post" name="meetDetailForm">
 			<div id="topDiv">
 				<div id="topDiv-left">
-					<div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${writer } </div>
+					<div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${member.mem_id } </div>
 					<div id="cntDiv"><img src="./resources/assets/img/meetCnt.png">&nbsp;&nbsp; ${dto.meet_cnt } </div>
 				</div>
 				<div id="topDiv-right">
