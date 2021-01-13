@@ -5,13 +5,24 @@
 	<mapper namespace="meetboard">
 		
 		<!-- 모임 게시글 총 개수 -->		
-		<select id="totalMeetBoardNum" parameterType="map" resultType="_int">
+		<select id="totalMeetBoardNum" parameterType="int" resultType="_int">
 				SELECT COUNT(*)
 				FROM MEET_BOARD
 				WHERE S_NO = #{s_no}
 		</select>
 		
-		<!-- paging -->
+		<!-- 모임 검색 게시글 총 개수 -->		
+		<select id="totalSearchMeetBoardNum" parameterType="map" resultType="_int">
+				<![CDATA[
+					SELECT COUNT(*)
+					FROM MEET_BOARD
+					WHERE 1=1
+					AND S_NO = #{s_no}
+				]]>
+					<include refid="search"></include>
+		</select>
+		
+		<!-- 모임 게시글 리스트 -->
 		<select id="pagingMeetBoardList" parameterType="map" resultType="meetDto">
 			<![CDATA[
 				SELECT *
@@ -26,12 +37,33 @@
 			]]>
 		</select>
 		
+		<!-- 모임 검색 게시글 리스트 -->
+		<select id="pagingSearchMeetList" parameterType="map" resultType="meetDto">
+			<![CDATA[
+				SELECT *
+				FROM
+				(
+					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_CONTENT, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
+					FROM MEET_BOARD
+					WHERE 1=1
+					AND S_NO = #{studyno}
+			]]>
+					<include refid="search"></include>
+			<![CDATA[
+					ORDER BY MEET_NO DESC 
+				)
+				WHERE N >= #{startRow} AND N <= #{endRow} 
+			]]>
+		</select>
+		
 		<sql id="search">
 			<if test="keyword != null">
 				 AND
                ( 
                   (MEET_TITLE LIKE '%' || #{keyword} || '%') OR
-                  (MEET_WRITER LIKE '%' || #{keyword} || '%')
+                  (MEET_WRITER LIKE '%' || #{keyword} || '%') OR
+                  (MEET_ADDR LIKE '%' || #{keyword} || '%') OR
+                  (MEET_ADDR_DETAIL LIKE '%' || #{keyword} || '%')
                )
 			</if>
 		</sql>
@@ -57,6 +89,13 @@
 			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE ,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
 		</insert>
 		
+		<!-- meet DB 켈린더로 꺼내오기 -->
+		<select id="selectMeetIntoCalendar" resultType="meetDto" parameterType="int">
+			SELECT MEET_TITLE, MEET_DATE, VOTE_STARTDATE, VOTE_ENDDATE
+			FROM MEET_BOARD
+			WHERE S_NO = ${s_no}
+		</select>
+
 		<!-- 모임 삭제 -->
 		<delete id="deleteMeetBoard" parameterType="int">
 			DELETE FROM MEET_BOARD WHERE MEET_NO = #{meet_no}

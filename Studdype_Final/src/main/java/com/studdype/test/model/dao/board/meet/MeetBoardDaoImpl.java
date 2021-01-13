@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MeetBoardDaoImpl implements MeetBoardDao{
@@ -17,6 +18,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	// 모임게시판 게시물 총 개수
 	@Override
 	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
@@ -31,18 +33,49 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return totalNum;
 	}
 	
+	// 모임게시판 페이징
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
+	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
 		List<MeetDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", searchMap);
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", pageMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
 			e.printStackTrace();
 		}
 		return resList;
 	}
+	
+	// 모임게시판 검색 게시물 총 개수
+	@Override
+	public int selectSearchMeetBoardNum(Map searchNumMap) {
+		int totalNum = 0;
+		
+		try {
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalSearchMeetBoardNum", searchNumMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectTotalSearchMeetBoardNum ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return totalNum;
+	}
+	
+	// 모임게시판 검색 페이징
+	@Override
+	public List<MeetDto> selectPagingSearchMeetList(Map searchPageMap) {
+		List<MeetDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"pagingSearchMeetList", searchPageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectPagingSearchMeetList ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return resList;
+	}
+
 	
 	// 모임게시판 디테일
 	@Override
@@ -88,7 +121,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Override
 	public int updateMeetBoard(MeetDto dto) {
 		return 0;
-	}
+	}	
 	
 	// 모임 게시판 모임삭제
 	@Override
@@ -103,6 +136,20 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 		
 		return res;
+	}
+  //meetBoard DB 캘린더로 가져오기
+	@Override
+	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
+		List<MeetDto> meetDBForCalendar = null;
+		
+		try {
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar");
+			
+		}catch (Exception e) {
+		System.out.println("에러: getDB for calendar");
+		e.printStackTrace();
+		}
+		return meetDBForCalendar;
 	}
 
 }
