@@ -118,7 +118,7 @@ public class StudyController {
 		String name = ""; // 파일 이름
 		
 		// 파일을 객체에 담기
-		MultipartFile file = filedto.getMyfile();
+		MultipartFile file = null;
 		if(file.getOriginalFilename().equals("")) {
 			name = "noImage"; // 
 		}else {

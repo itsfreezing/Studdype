@@ -6,11 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.studdype.test.common.FileWriter;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
+import com.studdype.test.model.dao.board.free.FreeFileDao;
 import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
@@ -21,6 +25,10 @@ public class FreeBizImpl implements FreeBiz {
 	private MemberDao memberDao;
 	@Autowired
 	private FreeReplyDao freeReplyDao;
+	@Autowired
+	private FreeFileDao freeFileDao;
+	
+	private FileWriter fileWriter = new FileWriter(); //파일 저장하는 클래스
 	
 	//자유게시판 총 게시글 갯수
 	@Override
@@ -41,9 +49,24 @@ public class FreeBizImpl implements FreeBiz {
 	}
 
 	//자유게시판 글 작성
+	@Transactional
 	@Override
-	public int writeBoard(BoardDto board) {
-		return freeBoardDao.insertBoard(board);
+	public int writeBoard(BoardDto board, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
+		int res = 0; //writeBoard 결과
+		int insertRes = 0; //글삽입 결과
+		
+		insertRes = freeBoardDao.insertBoard(board); //자유게시판에 글 삽입
+		int resCnt = freeFileDao.insertFile(fileList); // 자유게시판 파일 테이블에 파일 삽입
+		
+		//둘다 성공하면 실제 파일 저장시킴.
+		if(resCnt == fileList.size() && insertRes ==1) {
+			res = 1;
+			for(int i = 0 ; i < mfileList.length ; i++) {
+				fileWriter.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
+			}
+		}
+		
+		return res;
 	}
 
 	//자유게시판 글 가져오기(오류 무시하고 진행 가능) 디테일가져오기(조회수)
@@ -92,5 +115,7 @@ public class FreeBizImpl implements FreeBiz {
 	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list) {
 		return freeReplyDao.selectReplyCnt(list);
 	}
+
+	
 
 }

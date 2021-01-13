@@ -142,12 +142,13 @@
 	
 }
 
-
 .upload_file_box{
 	padding: 2%;
 	border-top: 1px solid  rgb(180,180,180);
 	height: 60px;
 }
+
+
 .upload_file{
 	display: none;
 }
@@ -275,6 +276,45 @@
 	
 }
 
+
+.attach_Btn{
+	float: right;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 25px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.attach_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
+.upload_box_detail{
+	border-top: 1px solid #ccc;
+	width: 100%;
+}
+
+.upload_file_box_detail{
+	padding: 2%;
+	height: 60px;
+}
+.attach_box_title{
+	padding-top: 3%;
+	padding-margin: 3%;
+	text-align: right;
+	height: 100px;
+}
 /* 댓글 */
 .replyItem{
 		list-style: none;

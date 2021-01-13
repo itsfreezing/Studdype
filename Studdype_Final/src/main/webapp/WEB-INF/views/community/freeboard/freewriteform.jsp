@@ -97,7 +97,7 @@
  };
  
 function attachFile(){
-	var html = "<div class='upload_file_box'><input type='file' class='upload_file' onchange='create_file_info(this);'></input></div>";
+	var html = "<div class='upload_file_box'><input type='file' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
 	
 	
 	//만약 전파일이 업로드안됬으면 지워버리기
@@ -132,7 +132,7 @@ function create_file_info(file){
 	console.log( fileNameList );
 	console.log( fileFormat );
 	
-	fileSize /= 1024 * 1024; //MB로 변환
+	fileSize /= 1024 ; //KB로 변환
 	fileSize = fileSize.toFixed(2); //반올림
 	
 	fileFormat = fileFormat.trim(); // 공백 제거
@@ -152,7 +152,7 @@ function create_file_info(file){
 			 	fileName+
 			 	"</span><input type='button' class='remove_file_btn'  onclick='clickFileBtn(this);'><span class='file_size'>"
 			 	+fileSize+
-			 	"MB</span>");
+			 	"KB</span>");
 	 
 	 
 }
@@ -175,7 +175,7 @@ function clickFileBtn(fileName){
 
 
  	<div class="main-section2">
-	<form action="freewrite.do" method="post" id="writeForm" >
+	<form action="freewrite.do" method="post" id="writeForm" enctype="multipart/form-data">
  		<table class="maintable">
 
 		<tr>
