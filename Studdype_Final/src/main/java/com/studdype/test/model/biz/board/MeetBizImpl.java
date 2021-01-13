@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Validated
@@ -87,6 +88,11 @@ public class MeetBizImpl implements MeetBiz {
 	@Override
 	public int delete(int meet_no) {
 		return meetBoardDao.deleteMeetBoard(meet_no);
+	}
+
+	@Override
+	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
+		return meetBoardDao.selectMeetDBForCalendar(s_no);
 	}
 
 }
