@@ -423,7 +423,7 @@ $(document).ready( getReplyList() );
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
-	<
+	<!-- 게시글 부분 -->
  	<div class="main-section3">
 		<div class="titleDiv" aria-label="${dto.b_title }" data-pop="bottom"  data-pop-delay="short"  >
 			<span class="title" >${dto.b_title }</span>
@@ -438,6 +438,7 @@ $(document).ready( getReplyList() );
 			</span>
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
+		<!-- 게시글 버튼 부분 (수정,삭제,목록) -->
 		<div class="btnDiv">
 			<c:choose>
 				<c:when test="${dto.b_writer == login.mem_no }">
@@ -452,10 +453,12 @@ $(document).ready( getReplyList() );
 		
 		</div>
 		
+		<!-- 댓글 리스트 부분 -->
 		<div class="replyBox" >
 			
 		</div>	
-			
+		
+		<!-- 댓글 작성 부분 -->	
 		<div class="replyWrite"  >
 			<table >
 				<tr>
@@ -468,6 +471,7 @@ $(document).ready( getReplyList() );
 			</table>
 		</div>
 		
+		<!-- 게시글 위 아래 근처글 부분 -->
 		<div class="recent_board_box">
 			<h4>자유게시판 글</h4>
 			<table class="recent_table">	
@@ -514,6 +518,9 @@ $(document).ready( getReplyList() );
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+					<tr style="border:none;">
+						<td colspan="3" class="look_all_td"><a href="freeboard.do">전체보기</a></td>
+					</tr>					
 				</tbody>
 			</table>
 		</div>
