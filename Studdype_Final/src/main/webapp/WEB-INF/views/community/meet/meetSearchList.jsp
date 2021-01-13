@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meet List Page</title>
+<title>Meet Search List Page</title>
 
 <!-- owl.carousel오류로 인해 최상단에 script 추가해야 함 -->
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -61,7 +61,7 @@
 	});
 })(jQuery);
 
-// 부모 선택 후 흰색변경 script 
+//부모 선택 후 흰색변경 script 
 $(function(){
 	$(".current_page").parent().css('color','white');
 	$(".current_page").css('border','1px solid #6434ef');
@@ -120,7 +120,7 @@ function prePageGroup(){
 				<img src="./resources/assets/img/banner_meetingPage4.png">
 			</div>
 		</div>
-		<!-- ---------------------------------- -->      
+		<!-- ---------------------------------- -->       
         
        	<!-- 검색 창 -->
        	<div id="bigBox">
@@ -144,17 +144,17 @@ function prePageGroup(){
 			
 			<!-- 모임등록 버튼 -->
 			<div id="listBtnDiv">
-				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>   
+				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="float: right; margin-top: 0;">모임 등록</button>   
 			</div> 
 	       	<!-- ---------------------------------- -->
 	       	
        	</div>
-
-       	<!-- 모임 리스트 -->
+       	
+       	<!-- meetList -->
        	<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
 		<c:choose>
 			<c:when test="${empty list}">
-					<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
+				<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
@@ -202,7 +202,8 @@ function prePageGroup(){
 			</ul>
 			
 			<!-- 페이징 폼 -->
-			<form action="meetlist.do" method="post" id="pageform" name="pageform">
+			<form action="meetsearchlist.do" method="post" id="pageform" name="pageform">
+				<input type="hidden" name="keyword" id="keyword" value="${keyword }">
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
 			<!-- ---------------------------------- -->
@@ -212,8 +213,8 @@ function prePageGroup(){
    
     
 <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
-	
-<!-- 검색창 script -->
+
+<!-- search Box script -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
 <script src="./resources/assets/js/searchScript.js"></script>
 

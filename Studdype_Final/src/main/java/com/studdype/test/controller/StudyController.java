@@ -66,8 +66,6 @@ public class StudyController {
 		//로그
 		logger.info("STUDY - SELECTLIST");
 		
-
-		
 		
 		studyList = studyBiz.studyList(searchPagination);	//스터디 리스트
 		PageMaker pageMaker = new PageMaker();
