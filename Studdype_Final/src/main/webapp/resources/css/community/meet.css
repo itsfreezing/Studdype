@@ -1,4 +1,245 @@
+/* searchDiv css */
+#bigBox{
+	width: 80%; 
+	display: inline-block; 
+	margin-left: 15%;
+}
+
+.divBox {
+  width: 35%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.searchDiv {
+  position: relative;
+  overflow: hidden;
+  height: 88px;
+}
+.searchDiv.active::before {
+  top: 14px;
+  bottom: 14px;
+  opacity: 0;
+}
+.searchDiv.active path {
+  stroke-dashoffset: -400;
+}
+.searchDiv.active p {
+  pointer-events: all;
+}
+.searchDiv.active p::before, .searchDiv.active p::after {
+  opacity: 1;
+}
+.searchDiv.active span {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+}
+.searchDiv.active.remove::before {
+  transition: all 200ms linear 200ms, opacity 0ms linear 0ms;
+  top: 88px;
+  bottom: 2px;
+  opacity: 1;
+}
+.searchDiv.active.remove p::before, .searchDiv.active.remove p::after {
+  transition: all 0ms;
+  opacity: 0;
+}
+.searchDiv.active.remove path {
+  stroke-dashoffset: -800;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove span {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove.done::before {
+  top: 0;
+  bottom: 88px;
+  opacity: 1;
+  transition: none;
+}
+.searchDiv.active.remove.done path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: none;
+}
+.searchDiv::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
+  width: 4px;
+  background: #6434ef;
+  bottom: 88px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: all 400ms ease-in-out 500ms, opacity 200ms linear 1000ms;
+}
+.searchDiv path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: all 500ms ease-in-out;
+}
+.searchDiv span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 80px;
+  line-height: 80px;
+  width: 100%;
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 34px;
+  letter-spacing: 2px;
+  color: #6434ef;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 400ms ease-in-out;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  text-transform: uppercase;
+}
+.searchDiv input,
+.searchDiv p {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  height: 40px;
+  line-height: 80px;
+  width: 90%; 
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+}
+.searchDiv input {
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.searchDiv p {
+  color: #6434ef;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.searchDiv p:after, .search p:before {
+  content: '';
+  opacity: 0;
+  width: 4px;
+  height: 60px;
+  vertical-align: middle;
+  border-radius: 20px;
+  margin-top: 8px;
+  transition: all .2s ease-in-out;
+  transition-delay: 1000ms;
+  display: inline-block;
+}
+.searchDiv p:after {
+  position: relative;
+  bottom: 8px;
+  left: 8px;
+  background: #6434ef;
+  -webkit-animation: blinky 450ms linear infinite alternate;
+          animation: blinky 450ms linear infinite alternate;
+}
+
+@-webkit-keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: #6434ef;
+  }
+}
+
+@keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: F;
+  }
+}
+
 /* --------------------------------- meetList */
+
+/* meetList - Search 버튼 css */
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+}
+
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 1;
+    
+    /* 변경가능 */
+    background: #6434ef;
+    margin-top: 98px;
+    margin-left: 2px;    
+}
+
+/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
+tooltip-persistent 요소 추가 할 것 */
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}
+
+/* 모임등록버튼 */
+#listBtnDiv{
+	display: inline-block; 
+	width: 52%;
+	position: relative;
+}
+
+#listBtn_insertform{
+	background: #fff;
+	color: #6434ef;
+	border: 5px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	height: 85px;
+	font-size: 30px;
+	font-weight: bold;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	width: 250px;
+	float: right; 
+	margin-top: 0;
+}
+
+/* 모임이 존재하지 않을 때 */
+div#notingMeet{
+	text-align: center; 
+	margin: 100px; 
+	color: #6434ef; 
+	font-size: 40px;
+}
 
 /* banner css */
 .hero-slider-info {
@@ -61,11 +302,6 @@
 	color: #7f7f81;
 }
 
-/* 모임등록버튼 */
-#listBtn_insertform{
-	position: relative;
-	right: -72%;  
-}
 /* --------------------------------- */
 
 /* --------------------------------- paging */
@@ -222,13 +458,24 @@ div#map{
 /* 수정버튼 */
 #detailBtn_updateform{
 	position: relative;
-	right: -75%;  
+	right: -63%;  
 }
   
 /* 삭제버튼 */
 #detailBtn_delete{
 	position: relative;
-	right: -75%;  
+	right: -63%;  
+}
+
+/* 목록버튼1 */
+#detailBtn_list1{
+	position: relative;
+	right: -63%;
+}
+
+#detailBtn_list2{
+	position: relative;
+	right: -88%;
 }
 
 #detailHR{
@@ -463,12 +710,6 @@ div#fifthRow-right{
 	position: relative;
 	right: -69%; 
 }
-
-
-
-
-
-
 
 /* 흰색 버튼 css(submit) */
 input.submitBtn,

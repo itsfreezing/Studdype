@@ -423,7 +423,7 @@ $(document).ready( getReplyList() );
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
-	
+	<!-- 게시글 부분 -->
  	<div class="main-section3">
 		<div class="titleDiv" aria-label="${dto.b_title }" data-pop="bottom"  data-pop-delay="short"  >
 			<span class="title" >${dto.b_title }</span>
@@ -438,6 +438,7 @@ $(document).ready( getReplyList() );
 			</span>
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
+		<!-- 게시글 버튼 부분 (수정,삭제,목록) -->
 		<div class="btnDiv">
 			<c:choose>
 				<c:when test="${dto.b_writer == login.mem_no }">
@@ -452,12 +453,14 @@ $(document).ready( getReplyList() );
 		
 		</div>
 		
+		<!-- 댓글 리스트 부분 -->
 		<div class="replyBox" >
 			
-			</div>
-			
-			<div class="replyWrite"  >
-				<table >
+		</div>	
+		
+		<!-- 댓글 작성 부분 -->	
+		<div class="replyWrite"  >
+			<table >
 				<tr>
 					<td colspan="2"><p class="writerId">${login.mem_id } (${login.mem_name })</p></td>
 				</tr>
@@ -465,8 +468,62 @@ $(document).ready( getReplyList() );
 					<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
 					<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
 				</tr>				
-				</table>
-			</div>
+			</table>
+		</div>
+		
+		<!-- 게시글 위 아래 근처글 부분 -->
+		<div class="recent_board_box">
+			<h4>자유게시판 글</h4>
+			<table class="recent_table">	
+				<col width="60%"><col width="25%"><col width="15%">
+				
+				<c:choose>
+					<c:when test="${empty recentList }">
+						<td colspan="3">게 시 글 이 없 습 니 다</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" varStatus="status">
+							<c:choose>
+							<c:when test="${status.count == 3 }">
+								<tr class="recent_board_tr current_board">
+							
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>							
+									</a>
+								</td>
+								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
+								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+								
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr class="recent_board_tr">
+							
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>					
+									</a>
+								</td>
+								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
+								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+								
+								</tr>
+							</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+					<tr style="border:none;">
+						<td colspan="3" class="look_all_td"><a href="freeboard.do">전체보기</a></td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
 			
  	</div>
  	

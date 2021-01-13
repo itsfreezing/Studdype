@@ -92,4 +92,21 @@ public class StudyDaoImpl implements StudyDao {
 		return totalListNum;
 	}
 
+	@Override
+	public List<StudyDto> studyLeader(int leader_no) {
+		List<StudyDto> list = new ArrayList<StudyDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"studyLeader",leader_no);
+		} catch (Exception e) {
+			System.out.println("ERROR:studyLeader");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+
+	
+
 }

@@ -111,4 +111,12 @@ public class StudyBizImpl implements StudyBiz{
 	public int selectTotalStudyListNum(SearchPagination searchPagination) {
 		return study_Dao.selectTotalStudyListNum(searchPagination);
 	}
+
+	@Override
+	public List<StudyDto> studyLeader(int leader_no) {
+		
+		return study_Dao.studyLeader(leader_no);
+	}
+
+	
 }

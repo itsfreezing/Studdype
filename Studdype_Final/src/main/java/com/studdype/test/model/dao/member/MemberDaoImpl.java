@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.HttpSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.ReplyDto;
@@ -18,9 +18,28 @@ import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
-
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	//로그인
+	@Override
+	public MemberDto login(MemberDto dto) {
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"login",dto);
+		}catch (Exception e) {
+			System.out.println("[ERROR]:login");
+		}
+		return res;
+	}
+
+	//로그아웃
+	@Override
+	public String logout(HttpSession session) {
+		return null;
+	}
 	
 	//멤버번호로 하나 셀렉트
 	@Override
@@ -78,19 +97,19 @@ public class MemberDaoImpl implements MemberDao{
 	
 	// [모임 게시판]리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list) {
-		Map<Integer, String> resMap = new HashMap<Integer, String>();
-		String writer = null;
-		int writerNo = 0;
+	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int meet_no = 0;
 		for(int i = 0; i < list.size(); i++) {
-			writerNo = list.get(i).getMeet_writer();
+			meet_no = list.get(i).getMeet_writer();
 			try {
-				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectWriterByMeetBoardList ---------- [ERROR]");
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetList ---------- [ERROR]");
 				e.printStackTrace();
 			}
-			resMap.put(list.get(i).getMeet_no(), writer);
+			resMap.put(list.get(i).getMeet_no(), dto);
 		}
 		
 		return resMap;

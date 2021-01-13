@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%request.setCharacterEncoding("UTF-8"); %>
-<%response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:svg="http://www.w3.org/2000/svg">
 <head>
 <meta charset="UTF-8">
 <title>Meet List Page</title>
@@ -35,11 +34,15 @@
 <!-- meetboard css -->
 <link rel="stylesheet" href="./resources/css/community/meet.css">
 
+<!-- searchBox font -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
+
 
 <script type="text/javascript">
 
 (function ($) {
 	 $ (document) .ready (function () {
+		 
 		 /* 슬라이더 */
 		 $('.owl-carousel').owlCarousel({
 		        items:1,                 	// 한번에 보여줄 아이템 수
@@ -57,44 +60,45 @@
 		    $('.customPrevBtn').click(function() {
 		    	$('.owl-carousel').trigger('prev.owl.carousel', [300]);
 		    })
-		 });
-	 })(jQuery);
+	});
+	 
+})(jQuery);
 
-	$(function(){
-		/* 부모 선택 후 흰색변경 JS */
-		$(".current_page").parent().css('color','white');
-		$(".current_page").css('border','1px solid #6434ef');
-		$(".current_page").css('cursor','default');
-		
-	});	
+$(function(){
+	/* 부모 선택 후 흰색변경 JS */
+	$(".current_page").parent().css('color','white');
+	$(".current_page").css('border','1px solid #6434ef');
+	$(".current_page").css('cursor','default');
 	
-	// 페이징---------------------- 
-	// 페이지 이동 
-	function movePage(pagenum){
-		$("#pagenum").val(pagenum.text);
+});	
+
+// 페이징---------------------- 
+// 페이지 이동 
+function movePage(pagenum){
+	$("#pagenum").val(pagenum.text);
+	var pageform = document.getElementById('pageform');
+	pageform.submit();
+}
+
+// 다음 페이지그룹 
+function nextPageGroup(){
+	if( ${endPage < totalPageNum}){
+		$("#pagenum").val(${endPage+1});
 		var pageform = document.getElementById('pageform');
 		pageform.submit();
-	}
-	
-	// 다음 페이지그룹 
-	function nextPageGroup(){
-		if( ${endPage < totalPageNum}){
-			$("#pagenum").val(${endPage+1});
-			var pageform = document.getElementById('pageform');
-			pageform.submit();
-		};
-	}
-	
-	// 이전 페이지 그룹 
-	function prePageGroup(){
-		if( ${startPage - 1 > 0}){
-			$("#pagenum").val(${startPage-1});
-			var pageform = document.getElementById('pageform');
-			pageform.submit();
-		};
-	}
-</script>
+	};
+}
 
+// 이전 페이지 그룹 
+function prePageGroup(){
+	if( ${startPage - 1 > 0}){
+		$("#pagenum").val(${startPage-1});
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+	};
+}
+
+</script>
 </head>
 <body>
 
@@ -111,7 +115,7 @@
 			</div>
 			<div class="hero-slider-info">
 				<img src="./resources/assets/img/banner_meetingPage2.png">
-			</div>
+			</div> 
 			<div class="hero-slider-info">
 				<img src="./resources/assets/img/banner_meetingPage3.png">
 			</div>
@@ -119,13 +123,38 @@
 				<img src="./resources/assets/img/banner_meetingPage4.png">
 			</div>
 		</div>
-		<!-- 슬라이더 끝 -->        
-       
+		<!-- ---------------------------------- -->      
+        
+       	<!-- 검색 창 -->
+       	<div id="bigBox">
+	       	<div class="divBox" tooltip="검색어를 입력한후 Enter 버튼을 눌러주세요!"  tooltip-persistent>
+        		
+        		<!-- 검색 폼 -->
+        		<form action="meetsearchlist.do" method="post" name="meetSearchForm" role="from">
+			       	<div class="searchDiv" >
+					    <svg xmlns="http://www.w3.org/2000/svg" width="355.5" height="87.99">
+					        <path class="right" fill="none" stroke="#6434ef" stroke-width="4" stroke-miterlimit="10" d="M177.75 85.99h133.5c23.334 0 42.25-18.916 42.25-42.25C352.944 20.528 333.967 2 310.748 2H177.75"/>
+					        <path class="left" fill="none" stroke="#6434ef" stroke-width="4" stroke-miterlimit="10" d="M177.75 85.99H44.25C20.916 85.99 2 67.074 2 43.74 2.556 20.528 21.533 2 44.752 2H177.75"/>
+					    </svg>
+			   			<p></p>
+			    		<input type="text" id="keyword" name="keyword" autocomplete="off"/>
+			    		<span >Search</span>
+					</div>
+				</form>
+				
+			</div>
+			
+			<!-- 모임등록 버튼 -->
+			<div id="listBtnDiv">
+				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="">모임 등록</button>   
+			</div> 
+       	</div>
+       	<!-- ---------------------------------- -->
+
+       	<!-- meetList -->
 		<c:choose>
 			<c:when test="${empty list}">
-				<tr>
-					<td colspan="2">---- 모임이 존재하지 않습니다. ---- </td>
-				</tr>
+					<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
@@ -138,7 +167,7 @@
 							<td id="title" colspan="2">${ list.get(i).getMeet_title() }</td>
 						</tr>
 						<tr>
-							<td id="writer">${writerMap.get( list.get(i).getMeet_no() ) }</td>
+							<td id="writer">${memberMap.get( list.get(i).getMeet_no()).getMem_id() }</td>
 							<td id="recruitment">모집기간 <fmt:setLocale value="en_US" scope="session"/>
 														<fmt:parseDate value='${ list.get(i).getVote_startdate() }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
 														<fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
@@ -150,16 +179,13 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<div>
-			<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>
-		</div>
+		<!-- ---------------------------------- -->
 		
 		<!-- 페이징 -->
 		<div class="pagin_div">
 			<ul class="pagin">
 				<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
 			
-				<!-- ----------------------------------- -->
 				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"	varStatus="status">
 					<c:choose>
 						<c:when test="${currentPage == startPage + status.count -1 }">
@@ -174,15 +200,22 @@
 				<li class="page_li"><a class="next_page"
 					onclick="nextPageGroup();">></a></li>
 			</ul>
-
+			
+			<!-- 페이징 폼 -->
 			<form action="meetlist.do" method="post" id="pageform" name="pageform">
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
 		</div>
+		<!-- ---------------------------------- -->
     </div>
    
     
     <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	
+	<!-- search Box script -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
+    <script src="./resources/assets/js/searchScript.js"></script>
+    
     <script src="./resources/assets/js/popper.min.js"></script>
     <script src="./resources/assets/js/bootstrap.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
