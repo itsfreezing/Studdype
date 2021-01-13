@@ -23,7 +23,7 @@ public interface MemberDao {
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기
 	Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList); 	//스터디 메인페이지 리스트에 작성자이름 가져오기
 	Map<Integer, String> selectWriterByFreeList(List<BoardDto> list); 	  		// 자유 게시판 리스트로 작성자이름 가져오기
-	Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list); 		// 모임 게시판 리스트로 작성자이름 가져오기
+	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list); 		// 모임 게시판 리스트로 작성자이름 가져오기
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); //자유게시판 리스트로 memberMap 가져오기
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); //[자유게시판 댓글]  리스트로 member 정보 가져오기 
 	

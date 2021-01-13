@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,28 +14,28 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.PageMaker;
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
+import com.studdype.test.model.biz.study.StudyMemberBiz;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
+import com.studdype.test.model.dto.study.StudyMemberDto;
 
 @Controller
 public class StudyController {
@@ -51,7 +48,11 @@ public class StudyController {
 	private StudyBiz studyBiz;		
 	@Autowired
 	private MemberBiz memberBiz;
-
+	@Autowired
+	private BookBiz bookBiz;
+	@Autowired
+	private StudyMemberBiz StudyMemberBiz;
+	
 	@RequestMapping(value="/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
 
@@ -104,6 +105,7 @@ public class StudyController {
 		
 		return "studdype/createStuddype";
 	}
+	
 	
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
@@ -202,5 +204,34 @@ public class StudyController {
 		}
 	}
 	
+	//스터디 관리 페이지 이동
+	@RequestMapping("/updateStudy.do")
+	public String updateStudy(HttpSession session,Model model) {
+		MemberDto login = memberBiz.selectOne(1);
+		List<StudyCategoryDto> category = studyBiz.categoryList();
+		List<LocationGuDto> gudto = studyBiz.locationGuList();
+		List<LocationSiDto> sidto = studyBiz.locationSiList();
+		List<BookDto> bookList = bookBiz.bookList(1);
+		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
+		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
+		
+		System.out.println(LeaderList);
+		
+		
+		System.out.println(bookList);
+		
+		System.out.println(memberlist);
+		
+		session.setAttribute("memberlist",memberlist);
+		model.addAttribute("login", login);
+		session.setAttribute("bookList", bookList);
+		session.setAttribute("gudto", gudto);
+		session.setAttribute("sidto", sidto);
+		session.setAttribute("category", category);
+		session.setAttribute("leftnavi", "updateStudy");
+		
+		return "studdype/updateStudy";
+	}
+
 }
 

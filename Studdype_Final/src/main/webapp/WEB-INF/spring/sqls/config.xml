@@ -16,6 +16,7 @@
   		<typeAlias type="com.studdype.test.model.dto.board.ReplyDto" alias="replyDto"/>
 		<typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
 		<typeAlias type="com.studdype.test.model.dto.board.BookDto" alias="bookDto"/>
+		<typeAlias type="com.studdype.test.model.dto.study.StudyMemberDto" alias="studyMemberDto"/>
       </typeAliases>
   
   	  		
@@ -30,6 +31,7 @@
       	<mapper resource="./mybatis/File/file-mapper.xml"/>
 		<mapper resource="mybatis/reply/freeReply-mapper.xml"/>
 		<mapper resource="./mybatis/Board/book-mapper.xml"/>
+		<mapper resource="./mybatis/Study/studyMember-mapper.xml"/>
 
   	</mappers>  
   

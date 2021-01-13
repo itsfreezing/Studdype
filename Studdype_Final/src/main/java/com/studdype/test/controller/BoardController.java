@@ -49,9 +49,10 @@ public class BoardController {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
-		Map<Integer, MemberDto> memberMap = null; // 게시글 멤버정보 담을 MAP
+		Map<Integer, MemberDto> memberMap = null; //게시글 멤버정보 담을 MAP
+		Map<Integer, Integer> replyCntMap = null;//댓글 갯수 담을 MAP
 
-		int totalBoardNum = freeBiz.selectTotalBoardNum(study.getS_no()); // 총 자유게시판 글 갯수
+		int totalBoardNum = freeBiz.selectTotalBoardNum( study.getS_no() ); //총 자유게시판 글 갯수
 
 		paging(pageMap, pagenum, totalBoardNum); // 페이징 함수
 
@@ -61,6 +62,9 @@ public class BoardController {
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
 		memberMap = freeBiz.getMemberMap(list);
+		
+		//댓글 갯수 가져오기
+		replyCntMap = freeBiz.getReplyCnt(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
@@ -69,6 +73,7 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("memberMap", memberMap);
 		session.setAttribute("leftnavi", "freeboard");
+		model.addAttribute("replyCntMap", replyCntMap);
 		return "community/freeboard/freeboard";
 	}
 
@@ -142,15 +147,28 @@ public class BoardController {
 
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
-	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-
-		// 조회수 함수 isVisitPage = 1 -> 방문한 적있음 0 -> 없음
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
+		Map<Integer, MemberDto> memberMap = null; //최근게시글 멤버정보 담을 MAP
+		Map<Integer, Integer> replyCntMap = null;//댓글 갯수 담을 MAP
+		
+		//조회수 함수  isVisitPage = 1 -> 방문한 적있음  0 -> 없음
 		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
-
-		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); // 게시글 가져오기 / 조회수 증가
-		MemberDto member = memberBiz.selectOne(board.getB_writer()); // 작성자 이름 가져오기
-
+		
+		
+		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); //게시글 가져오기 / 조회수 증가
+		MemberDto member = memberBiz.selectOne( board.getB_writer() ); //작성자 이름 가져오기
+		
+		List<BoardDto> recentList = freeBiz.getRecentList(s_no, b_no);
+		memberMap = freeBiz.getMemberMap(recentList); // 최근게시글 memberMap
+		
+		//댓글 갯수 가져오기
+		replyCntMap = freeBiz.getReplyCnt(recentList);
+		
+		model.addAttribute("replyCntMap", replyCntMap);
+		model.addAttribute("memberMap", memberMap);
+		model.addAttribute("recentList", recentList);
 		model.addAttribute("dto", board);
 		model.addAttribute("member", member);
 		return "community/freeboard/freeDetail";
@@ -166,6 +184,7 @@ public class BoardController {
 		return "community/book/bookboardform";
 	}
 
+	
 	// 도서 검색 페이지
 	@RequestMapping("/searchBook.do")
 	public String searchBook(HttpSession session, Model model, String pagenum) {

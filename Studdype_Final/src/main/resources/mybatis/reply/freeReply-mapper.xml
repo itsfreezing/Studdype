@@ -59,4 +59,10 @@
     		SYSDATE)
 
 	</insert>
+	
+	<select id="selectReplyCnt" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM FREE_REPLY
+		WHERE B_NO = #{b_no}
+	</select>
 </mapper>

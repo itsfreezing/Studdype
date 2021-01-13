@@ -37,5 +37,8 @@
 		WHERE S_NO = #{s_no} 
 			AND B_NO = #{b_no}
 	</select>
+	<select id="bookList" parameterType="int" resultType="bookDto">
+		SELECT * FROM BOOK WHERE S_NO = #{s_no}
+	</select>
 
 </mapper>	

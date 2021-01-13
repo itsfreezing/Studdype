@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
+import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -18,6 +19,8 @@ public class FreeBizImpl implements FreeBiz {
 	private FreeBoardDao freeBoardDao; 
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private FreeReplyDao freeReplyDao;
 	
 	//자유게시판 총 게시글 갯수
 	@Override
@@ -76,6 +79,18 @@ public class FreeBizImpl implements FreeBiz {
 	@Override
 	public BoardDto selectOne(int b_no) {
 		return freeBoardDao.selectOne(b_no);
+	}
+
+	//자유게시판 디테일 최근글 뽑아오기
+	@Override
+	public List<BoardDto> getRecentList(int s_no, int b_no) {
+		return freeBoardDao.selectRecentList(s_no, b_no);
+	}
+
+	//댓글 갯수 가져오기
+	@Override
+	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list) {
+		return freeReplyDao.selectReplyCnt(list);
 	}
 
 }
