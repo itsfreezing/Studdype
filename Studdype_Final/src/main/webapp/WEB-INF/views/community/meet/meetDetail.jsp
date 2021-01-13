@@ -179,7 +179,8 @@ function deleteBtn(){
 		</div>
 		
 	</div>
-
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<input type="hidden" name="meet_title" value="${dto.meet_title }">
+<input type="hidden" name="meet_date" value="${dto.meet_date }">
+<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

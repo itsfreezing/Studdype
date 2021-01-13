@@ -34,7 +34,7 @@
 
 <script type="text/javascript">
 	
-// 도로명주소 검색 버튼 함수 
+<!-- 도로명주소 검색 버튼 함수 --> 
 function execPostcode(){ 
 	daum.postcode.load(function(){ 
 		new daum.Postcode({
@@ -61,37 +61,32 @@ function execPostcode(){
 	});
 }
 
+<!-- 입력 폼이 비어있는지 체크 -->
 function chkForm(){
-	var form = $("#meetWriteForm");
-	var meetDate = $("#meetDate");
-	var meetTime = $("#meetTime");
-	var meetStartDate = $("#voteStartDate");
-	var meetEndDate = $("#voteEndDate");
+	var form = document.meetUpdateForm;
 	var title = $("#meetTitle");
-	var address = $("#address");
 	var detailAddress = $("#detailAddress");
 	var content = $("#contentArea");
 	
-	if( meetDate.val() == null || meetDate.val().trim() == ''){
-		alert("모임날짜를 입력 해주세요.")
-	}else if( meetTime.val() == null || meetTime.val().trim() == ''){
-		alert("모임시간을 입력 해주세요.")
-	}else if( meetStartDate.val() == null || meetStartDate.val().trim() == ''){
-		alert("모집 시작일을 입력 해주세요.")
-	}else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
-		alert("모집 마감일을 입력 해주세요.")
-	}else if( title.val() == null || title.val().trim() == ''){
+	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
-	}else if( address.val() == null || address.val().trim() == ''){
-		alert("도로명 주소를 입력 해주세요.")
 	}else if( detailAddress.val() == null || detailAddress.val().trim() == ''){
 		alert("상세주소를 작성해주세요")
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("모임 상세내용을 작성해주세요.")
 	}else{
-		form.submit();
+		window.location.href = "meetupdate.do?meet_no=${dto.meet_no}";
 	}
 };
+
+<!-- 모임 수정 중 취소 버튼 눌렀을 때 -->
+function cancleBtn() {
+    var ask = window.confirm("모임 수정 중 입니다. 정말 중단 하시겠습니까?");
+    if (ask) { // 확인
+        window.alert("모임 수정이 취소 되었습니다!");
+        window.location.href = "meetdetail.do?meetno=${dto.meet_no}";
+    } 
+}
 </script>
 	
 </head>
@@ -110,9 +105,7 @@ function chkForm(){
 	
      <!--main conternt 섹션-->
      <div class="main-section">
-     
-     	<!-- form의 action은 모임생성을 submit 하는 용도 -->
-        <form action="meetinsert.do" method="post" id="meetWriteForm">
+       	<form action="meetupdate.do" method="post" name="meetUpdateForm">
         	<div id="firstRow">
         		<div class="insertText">모임날짜</div>
         		<div class="dateCol1"><input type="date" name="meet_date" id="meetDate" value="<fmt:formatDate value="${ meet_date }" pattern="yyyy-MM-dd"/>"></div>
@@ -140,7 +133,8 @@ function chkForm(){
         		<div id="fifthRow-right"><textarea id="contentArea" name="meet_content" placeholder="2000자 내로 입력하세요.">${dto.meet_content }</textarea></div>
         	</div>
 	        <div id="sixthRow">
-        		<input type="button" class="submitBtn" id="insertBtn_insert" onclick="chkForm();" value="등록하기">
+        		<input type="button" class="submitBtn" id="updateBtn_update" onclick="chkForm();" value="완료">&nbsp;&nbsp;
+        		<input type="button" class="submitBtn" id="updateBtn_cancle" onclick="cancleBtn();" value="취소">
         	</div>
         </form>
     </div>

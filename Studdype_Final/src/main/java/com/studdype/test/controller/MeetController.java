@@ -226,16 +226,37 @@ public class MeetController {
 	
 	// 모임게시판 모임 [수정 폼] 이동
 	@RequestMapping(value="/meetupdateform.do", method = RequestMethod.GET)
-	public String meetUpdate(Model model, HttpServletRequest request) {
+	public String meetUpdateFrom(Model model, HttpServletRequest request) {
 		int meet_no = Integer.parseInt( request.getParameter("meet_no") );
 		
 		MeetDto dto = meetBiz.selectOneMeetBoard(meet_no);
+		System.out.println("Dddddsdfsf"+dto.getMeet_title());
 		System.out.println("-----------------------------------------------------------------------\n"
 				  +"<<모임 게시판>> ["+meet_no+"]번 모임 수정 폼으로 이동합니다.\n"
 				  +"-----------------------------------------------------------------------"); 
 		
 		model.addAttribute("dto", dto);
 		return "community/meet/meetUpdate";
+	}
+	
+	// 모임게시판 모임 [수정]
+	@RequestMapping("/meetupdate.do")
+	public String updateMeetBoard(MeetDto dto, Model model) {
+		int res = meetBiz.update(dto);
+		System.out.println("dddddddd"+dto.getMeet_no());
+		System.out.println("dddddddd"+dto.getMeet_title());
+		System.out.println("dddddddd"+dto.getMeet_date());
+		
+		if(res>0) {
+			System.out.println("-----------------------------------------------------------------------\n"
+							  +"<<모임 게시판>> ["+dto.getMeet_no()+"]번 째 모임이 수정 되었습니다.\n"
+							  +"-----------------------------------------------------------------------"); 
+			return "redirect:meetdetail.do?meetno="+dto.getMeet_no();
+		} else {
+			model.addAttribute("msg", "모임 수정을 실패하였습니다.");
+			model.addAttribute("url", "meetupdateform.do?meet_no="+dto.getMeet_no());
+			return "commond/alert";
+		}
 	}
 	
 	// 모임게시판 모임 [삭제]

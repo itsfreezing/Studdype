@@ -104,10 +104,10 @@
 			MEET_CONTENT = #{meet_content},
 			MEET_ADDR = #{meet_addr},
 			MEET_ADDR_DETAIL = #{meet_addr_detail},
-			MEET_DATE = #{meet_date},
-			MEET_TIME = #{meet_time},
-			VOTE_STARTDATE = #{vote_startdate},
-			VOTE_ENDDATE = #{vote_enddate}
+			MEET_DATE = TO_DATE(#{meet_date},'YYYY-MM-DD'),
+			MEET_TIME = TO_DATE(#{meet_time},'HH24:MI'),
+			VOTE_STARTDATE = TO_DATE(#{vote_startdate},'YYYY-MM-DD'),
+			VOTE_ENDDATE = TO_DATE(#{vote_enddate},'YYYY-MM-DD')
 			WHERE MEET_NO = #{meet_no}
 		</update>
 		

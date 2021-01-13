@@ -712,6 +712,15 @@ div#fifthRow-right{
 	right: -69%; 
 }
 
+
+
+#updateBtn_cancle{
+	position: relative;
+	right: -69%; 
+}
+
+
+
 /* 흰색 버튼 css(submit) */
 input.submitBtn,
 button.submitBtn{
@@ -744,13 +753,13 @@ button.submitBtn:hover{
 /* meetUpdate의 완료버튼 위치 */
 #updateBtn_update{
 	position: relative;
-	right: -71%;  
+	right: -55%;  
 }
 
 /* meetUpdate의 취소버튼 위치 */
 #updateBtn_cancle{
 	position: relative;
-	right: -71%;  
+	right: -55%;  
 }
 
 
