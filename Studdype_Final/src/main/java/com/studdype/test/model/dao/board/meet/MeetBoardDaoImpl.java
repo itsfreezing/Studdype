@@ -1,6 +1,5 @@
 package com.studdype.test.model.dao.board.meet;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -18,7 +16,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 모임게시판 게시물 총 개수
+	// 모임게시판 모임 [총 개수]
 	@Override
 	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
@@ -33,7 +31,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return totalNum;
 	}
 	
-	// 모임게시판 페이징
+	// 모임게시판 [페이징]
 	@Override
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
 		List<MeetDto> resList = null;
@@ -47,7 +45,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return resList;
 	}
 	
-	// 모임게시판 검색 게시물 총 개수
+	// 모임게시판 '검색' 모임 [총 개수]
 	@Override
 	public int selectSearchMeetBoardNum(Map searchNumMap) {
 		int totalNum = 0;
@@ -62,7 +60,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return totalNum;
 	}
 	
-	// 모임게시판 검색 페이징
+	// 모임게시판 '검색' [페이징]
 	@Override
 	public List<MeetDto> selectPagingSearchMeetList(Map searchPageMap) {
 		List<MeetDto> resList = null;
@@ -77,20 +75,21 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 
 	
-	// 모임게시판 디테일
+	// 모임게시판 모임 [상세보기]
 	@Override
-	public MeetDto meetBoardSelectOne(int meet_no) {
+	public MeetDto selectMeetBoardDetail(int meet_no) {
 		MeetDto dto = null;
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE+"meetBoardSelectOne", meet_no);
+			dto = sqlSession.selectOne(NAMESPACE+"meetBoardDetail", meet_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR] ---------- MEET DAO meetBoardSelectOne ---------- [ERROR]");
+			System.out.println("[ERROR] ---------- MEET DAO selectMeetBoardDetail ---------- [ERROR]");
 			e.printStackTrace();
 		}
 		return dto;
 	}
-
+	
+	// 모임게시판 '조회수' [증가]
 	@Override
 	public void updateMeetCnt(int meet_no) {
 		int res = 0;
@@ -103,7 +102,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 	}
 
-	// 모임 게시판 모임생성
+	// 모임게시판 모임 [생성]
 	@Override
 	public int insertMeetBoard(MeetDto dto) {
 		int res = 0;
@@ -117,13 +116,37 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
- 
+	
+	// 모임게시판 모임 '1개' [가져오기]
+	@Override
+	public MeetDto selectOneMeetBoard(int meet_no) {
+		MeetDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectOneMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	// 모임게시판 모임 [수정]
 	@Override
 	public int updateMeetBoard(MeetDto dto) {
-		return 0;
-	}	
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMeetBoard", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO updateMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
-	// 모임 게시판 모임삭제
+	// 모임게시판 모임 [삭제]
 	@Override
 	public int deleteMeetBoard(int meet_no) {
 		int res = 0;
@@ -137,7 +160,8 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
-  //meetBoard DB 캘린더로 가져오기
+
+	// meetBoard DB 캘린더로 가져오기
 	@Override
 	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
 		List<MeetDto> meetDBForCalendar = null;
@@ -151,5 +175,6 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 		return meetDBForCalendar;
 	}
+
 
 }
