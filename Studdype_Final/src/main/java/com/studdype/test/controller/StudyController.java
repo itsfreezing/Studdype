@@ -215,6 +215,7 @@ public class StudyController {
 		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
 		
+		
 		System.out.println(LeaderList);
 		
 		
@@ -222,13 +223,13 @@ public class StudyController {
 		
 		System.out.println(memberlist);
 		
-		session.setAttribute("memberlist",memberlist);
-		model.addAttribute("login", login);
-		session.setAttribute("bookList", bookList);
-		session.setAttribute("gudto", gudto);
-		session.setAttribute("sidto", sidto);
-		session.setAttribute("category", category);
-		session.setAttribute("leftnavi", "updateStudy");
+		model.addAttribute("memberlist",memberlist);
+		session.setAttribute("login", login);
+		model.addAttribute("bookList", bookList);
+		model.addAttribute("gudto", gudto);
+		model.addAttribute("sidto", sidto);
+		model.addAttribute("category", category);
+		model.addAttribute("leftnavi", "updateStudy");
 		
 		return "studdype/updateStudy";
 	}

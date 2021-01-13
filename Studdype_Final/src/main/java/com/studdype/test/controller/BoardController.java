@@ -62,7 +62,7 @@ public class BoardController {
 		// 멤버번호로 작성자 이름 받아오기
 		memberMap = freeBiz.getMemberMap(list);
 		
-		//댓글 갯수 가져오기
+		//댓글 갯수 가져오기 
 		replyCntMap = freeBiz.getReplyCnt(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));

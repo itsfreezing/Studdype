@@ -1,7 +1,9 @@
 package com.studdype.test.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,6 +39,7 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	
 	@RequestMapping("/studdypehome.do")
 	public String studdypeHeader() {
 		
@@ -57,7 +60,7 @@ public class HomeController {
 	
 	//마이페이지로 이동
 	@RequestMapping("/myPage.do")
-	public String myPage(HttpSession session) {
+	public String myPage(HttpSession session,Model model) {
 		MemberDto login = memberBiz.selectOne(1);
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(1);
 		List<StudyDto> studylist = new ArrayList<StudyDto>();
@@ -67,9 +70,12 @@ public class HomeController {
 			studylist.add(dto);
 		}
 		
+		
+		
+		
+		session.setAttribute("login",login);
+		model.addAttribute("studylist", studylist);
 	
-		session.setAttribute("studylist", studylist);
-		session.setAttribute("login", login);
 		
 		
 		return "studdype/myPage";
@@ -92,6 +98,7 @@ public class HomeController {
 	
 		return "community/communityHome";
 	}
+	//마이페이지에서 studycommunity 접근시
 	@RequestMapping("studycommunity.do")
 	public String studycommunity(HttpSession session,int s_no) {
 		MemberDto login = memberBiz.selectOne(1);
