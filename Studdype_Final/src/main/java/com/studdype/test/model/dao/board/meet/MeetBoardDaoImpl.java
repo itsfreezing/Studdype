@@ -18,6 +18,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	// 모임게시판 게시물 총 개수
 	@Override
 	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
@@ -32,18 +33,49 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return totalNum;
 	}
 	
+	// 모임게시판 페이징
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
+	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
 		List<MeetDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", searchMap);
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", pageMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
 			e.printStackTrace();
 		}
 		return resList;
 	}
+	
+	// 모임게시판 검색 게시물 총 개수
+	@Override
+	public int selectSearchMeetBoardNum(Map searchNumMap) {
+		int totalNum = 0;
+		
+		try {
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalSearchMeetBoardNum", searchNumMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectTotalSearchMeetBoardNum ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return totalNum;
+	}
+	
+	// 모임게시판 검색 페이징
+	@Override
+	public List<MeetDto> selectPagingSearchMeetList(Map searchPageMap) {
+		List<MeetDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"pagingSearchMeetList", searchPageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectPagingSearchMeetList ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return resList;
+	}
+
 	
 	// 모임게시판 디테일
 	@Override
