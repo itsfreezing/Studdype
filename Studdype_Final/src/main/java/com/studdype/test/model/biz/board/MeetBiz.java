@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.member.MemberDto;
+
 
 public interface MeetBiz {
 	
@@ -17,5 +19,8 @@ public interface MeetBiz {
 	public MeetDto selectOne(int meet_no, int isVisitPage);				 // 모임게시판 디테일
 	public int insert(MeetDto dto); 									 // 모임게시판 모임생성
 	public int update(MeetDto dto);
+	public int delete(int meet_no);
+	public List<MeetDto> selectMeetDBForCalendar(int s_no);
 	public int delete(int meet_no);										 // 모임게시판 모임삭제
+
 }

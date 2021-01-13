@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MeetBoardDaoImpl implements MeetBoardDao{
@@ -120,7 +121,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Override
 	public int updateMeetBoard(MeetDto dto) {
 		return 0;
-	}
+	}	
 	
 	// 모임 게시판 모임삭제
 	@Override
@@ -135,6 +136,20 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 		
 		return res;
+	}
+  //meetBoard DB 캘린더로 가져오기
+	@Override
+	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
+		List<MeetDto> meetDBForCalendar = null;
+		
+		try {
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar");
+			
+		}catch (Exception e) {
+		System.out.println("에러: getDB for calendar");
+		e.printStackTrace();
+		}
+		return meetDBForCalendar;
 	}
 
 }
