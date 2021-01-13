@@ -189,8 +189,9 @@
     /* 변경가능 */
     transition: all 0.15s ease;
     padding: 10px;
-    color: #fff;
+    color: #6434ef;
     border-radius: 10px;
+    border: 1px solid #6434ef;
     box-shadow: 2px 2px 1px silver;    
 }
 
@@ -199,7 +200,7 @@
     opacity: 1;
     
     /* 변경가능 */
-    background: #6434ef;
+    background: #fff;
     margin-top: 98px;
     margin-left: 2px;    
 }
@@ -711,6 +712,15 @@ div#fifthRow-right{
 	right: -69%; 
 }
 
+
+
+#updateBtn_cancle{
+	position: relative;
+	right: -69%; 
+}
+
+
+
 /* 흰색 버튼 css(submit) */
 input.submitBtn,
 button.submitBtn{
@@ -743,13 +753,13 @@ button.submitBtn:hover{
 /* meetUpdate의 완료버튼 위치 */
 #updateBtn_update{
 	position: relative;
-	right: -71%;  
+	right: -55%;  
 }
 
 /* meetUpdate의 취소버튼 위치 */
 #updateBtn_cancle{
 	position: relative;
-	right: -71%;  
+	right: -55%;  
 }
 
 
