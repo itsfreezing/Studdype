@@ -89,8 +89,7 @@ function chkForm(){
 	}else{
 		form.submit();
 	}
-	
- };
+};
 </script>
 	
 </head>

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.board.MeetDto;
 
 @Repository
@@ -16,20 +17,6 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 모임게시판 리스트
-	@Override
-	public List<MeetDto> meetBoardSelectList() {
-		List<MeetDto> list = new ArrayList<MeetDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"meetBoardSelectList"); // NAMESPACE: dao의 nameSpace
-		} catch (Exception e) {
-			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
-			e.printStackTrace();
-		}
-		return list;
-	}
-
 	@Override
 	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
@@ -45,11 +32,11 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 	
 	@Override
-	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
+	public List<MeetDto> selectPagingMeetBoardList(Map searchMap) {
 		List<MeetDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", pageMap);
+			resList = sqlSession.selectList(NAMESPACE+"pagingMeetBoardList", searchMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectPagingMeetBoardList ---------- [ERROR]");
 			e.printStackTrace();
@@ -83,6 +70,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 	}
 
+	// 모임 게시판 모임생성
 	@Override
 	public int insertMeetBoard(MeetDto dto) {
 		int res = 0;
@@ -101,12 +89,20 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	public int updateMeetBoard(MeetDto dto) {
 		return 0;
 	}
-
+	
+	// 모임 게시판 모임삭제
 	@Override
 	public int deleteMeetBoard(int meet_no) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteMeetBoard", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO deleteMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
-
-
 
 }

@@ -3,6 +3,7 @@ package com.studdype.test.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.MeetDto;
@@ -41,30 +46,36 @@ public class MeetController {
 		StudyDto study = (StudyDto)session.getAttribute("study"); 	   // 현재 클릭 된 스터디
 		List<MeetDto> list = null; 									   // 5개 페이징 담을 리스트
 		Map<String,Integer> pageMap = new HashMap<String, Integer>();  // 시작페이지, 끝페이지 정보 담을 MAP
-		Map<Integer, String> writerNameMap = null; 					   // 게시글 작성자 이름 담을 MAP
-		logger.info("[MEET BOARD SELECT LIST]");
+		Map<Integer, MemberDto> memberMap = null; 					   // 게시글 작성자 이름 담을 MAP
 		
-		int totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum(study.getS_no()); // 모임 게시판 게시글 총 개수
+		int totalMeetBoardNum = meetBiz.selectTotalMeetBoardNum( study.getS_no() ); // 모임 게시판 게시글 총 개수
 		
 		paging(pageMap, pagenum, totalMeetBoardNum); 	   // 페이징 함수
+		
 		pageMap.put("studyno", study.getS_no()); 	 	   // 스터디 번호 put
+		System.out.println("meetList pageMap_스터디 번호["+study.getS_no()+"]번");
+		System.out.println("totalMeetBoardNum_게시물 개수: ["+totalMeetBoardNum+"]개"); 
+		 
+		logger.info("[MEET BOARD SELECT LIST]");
 		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
-		writerNameMap = meetBiz.getWriterNameByList(list); // 멤버번호로 작성자 이름 받아오기
+		memberMap = meetBiz.getMemberMap(list); // 멤버번호로 작성자 이름 받아오기 
+		System.out.println("memberMap_작성자 이름 리스트: "+memberMap);
+
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
 		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
 		model.addAttribute("list", list);
-		model.addAttribute("writerMap", writerNameMap);
+		model.addAttribute("memberMap", memberMap);
 		session.setAttribute("leftnavi", "meet");
+		
 		return "community/meet/meetList";
 	}
 	
 	//페이징 함수 
 	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
-
 		int currentPage = (pageNum == null || pageNum.trim() == "") ? 1 : Integer.parseInt(pageNum); // 현재 페이지
 		int startRow = (currentPage - 1) * pageSize + 1; 		// 페이지 첫번째 글
 		int endRow = currentPage * pageSize; 					// 페이지 마지막 글
@@ -87,7 +98,7 @@ public class MeetController {
 		pagingMap.put("startPage", startPage);
 		pagingMap.put("endPage", endPage);
 		pagingMap.put("totalPageNum", totalPageNum);
-
+		
 	}
 	
 	//	모임게시판 보드디테일
@@ -99,10 +110,10 @@ public class MeetController {
 		int isVisitPage = chkVisited(request, response, "meetboardvisit", request.getParameter("meetno"));
 		
 		MeetDto dto = meetBiz.selectOne(meet_no, isVisitPage);			// 모임게시판 디테일 & 모임게시판 조회수 증가
-		String writer = memberBiz.getNameByNo(dto.getMeet_writer());	// 작성자 이름 회원번호로 가져오기
+		MemberDto member = memberBiz.selectOne(dto.getMeet_writer());	// 작성자 이름 회원번호로 가져오기
 		
 		model.addAttribute("dto", dto);
-		model.addAttribute("writer", writer);
+		model.addAttribute("member", member);
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetDetail";
 	}
@@ -164,5 +175,20 @@ public class MeetController {
 	public String meetUpdate(HttpSession session) {
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetUpdate";
+	}
+	
+	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.POST)
+	public String meetDelete(HttpServletRequest request, Model model) {
+		int meet_no = Integer.parseInt(request.getParameter("meet_no"));
+		
+		int res = meetBiz.delete(meet_no);
+		
+		if(res > 0) {
+			return "redirect:meetlist.do";
+		} else {
+			model.addAttribute("msg", "글 삭제 실패!!");
+			model.addAttribute("url", "meetdetail.do?meet_no"+meet_no);
+			return "commond/alert";
+		}
 	}
 }

@@ -17,6 +17,7 @@ public class MeetDto {
 	private String vote_startdate; 		// 투표 시작일
 	private String vote_enddate; 		// 투표 마감일
 	private int meet_cnt;				// 모임 게시판 조회수
+	private String keyword;
 
 	public MeetDto() {
 		super();
@@ -24,7 +25,7 @@ public class MeetDto {
 
 	public MeetDto(int meet_no, int s_no, String meet_title, int meet_writer, String meet_content, String meet_addr,
 			String meet_addr_detail, String meet_date, String meet_time, Date meet_regdate, String vote_startdate,
-			String vote_enddate, int meet_cnt) {
+			String vote_enddate, int meet_cnt, String keyword) {
 		super();
 		this.meet_no = meet_no;
 		this.s_no = s_no;
@@ -39,6 +40,15 @@ public class MeetDto {
 		this.vote_startdate = vote_startdate;
 		this.vote_enddate = vote_enddate;
 		this.meet_cnt = meet_cnt;
+		this.keyword = keyword;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) { 
+		this.keyword = keyword;
 	}
 
 	public int getMeet_no() {
