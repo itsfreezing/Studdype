@@ -97,19 +97,19 @@ public class MemberDaoImpl implements MemberDao{
 	
 	// [모임 게시판]리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list) {
-		Map<Integer, String> resMap = new HashMap<Integer, String>();
-		String writer = null;
-		int writerNo = 0;
+	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int meet_no = 0;
 		for(int i = 0; i < list.size(); i++) {
-			writerNo = list.get(i).getMeet_writer();
+			meet_no = list.get(i).getMeet_writer();
 			try {
-				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectWriterByMeetBoardList ---------- [ERROR]");
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetList ---------- [ERROR]");
 				e.printStackTrace();
 			}
-			resMap.put(list.get(i).getMeet_no(), writer);
+			resMap.put(list.get(i).getMeet_no(), dto);
 		}
 		
 		return resMap;
