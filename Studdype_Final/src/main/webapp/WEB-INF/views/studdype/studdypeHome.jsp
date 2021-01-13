@@ -76,6 +76,9 @@ input#search:focus {
 	border-bottom: 3px solid #6610F2;
 }
 
+.feature-page.header-area {
+	height: 80px;
+}
 </style>
 
 </head>

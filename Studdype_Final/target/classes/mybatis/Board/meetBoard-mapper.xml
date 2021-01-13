@@ -46,5 +46,12 @@
 			VALUES( MEETBOARDSEQ.NEXTVAL, #{s_no}, #{meet_title}, #{meet_writer},  #{meet_content}, #{meet_addr}, #{meet_addr_detail},
 			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE ,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
 		</insert>
+		
+		<!-- meet DB 켈린더로 꺼내오기 -->
+		<select id="selectMeetIntoCalendar" resultType="meetDto" parameterType="int">
+			SELECT MEET_TITLE, MEET_DATE, VOTE_STARTDATE, VOTE_ENDDATE
+			FROM MEET_BOARD
+			WHERE S_NO = ${s_no}
+		</select>
 	
 	</mapper>

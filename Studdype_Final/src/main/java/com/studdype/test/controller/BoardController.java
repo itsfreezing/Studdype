@@ -14,12 +14,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
 
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
+import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.MeetDto;
@@ -37,6 +40,9 @@ public class BoardController {
 	
 	@Autowired
 	private BookBiz bookBiz;
+	
+	@Autowired
+	private MeetBiz meetBiz;
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
@@ -161,13 +167,30 @@ public class BoardController {
 	}
 	
 	//켈린더
-	@RequestMapping(value="/calendar.do", method = RequestMethod.GET)
-	public String calendar(Model model) {
-		Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
+	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
+		logger.info("calendar");
+		Map calendarMap = new HashMap();
+		List<MeetDto> meetList = null;
 		
-		/* calendarMap.put("putInCalendarTest", ); */
-		return "community/schedule/Calendar";
+		meetList = meetBiz.selectMeetDBForCalendar(dto.getS_no());
+		
+		calendarMap.put("meetList", meetList);
+		
+		
+		
+		return calendarMap;
 	}
+	/*
+	 * public String calendar(Model model, HttpSession session, HttpServletResponse
+	 * response) { StudyDto study = (StudyDto)session.getAttribute("study"); // 현재
+	 * 클릭 된 스터디 Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
+	 * calendarMap.put("evt1", new
+	 * MeetDto(1,1,"test","2021-01-22","2021-01-11","2021-01-20"));
+	 * System.out.println(calendarMap); model.addAttribute("meetList",calendarMap);
+	 * 
+	 * return "community/schedule/calendar"; }
+	 */
 
 
 	//페이징 함수 

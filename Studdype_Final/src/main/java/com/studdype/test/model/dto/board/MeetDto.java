@@ -21,6 +21,21 @@ public class MeetDto {
 	public MeetDto() {
 		super();
 	}
+	
+	
+	
+	public MeetDto(int meet_no, int s_no, String meet_title, String meet_date, String vote_startdate,
+			String vote_enddate) {
+		super();
+		this.meet_no = meet_no;
+		this.s_no = s_no;
+		this.meet_title = meet_title;
+		this.meet_date = meet_date;
+		this.vote_startdate = vote_startdate;
+		this.vote_enddate = vote_enddate;
+	}
+
+
 
 	public MeetDto(int meet_no, int s_no, String meet_title, int meet_writer, String meet_content, String meet_addr,
 			String meet_addr_detail, String meet_date, String meet_time, Date meet_regdate, String vote_startdate,

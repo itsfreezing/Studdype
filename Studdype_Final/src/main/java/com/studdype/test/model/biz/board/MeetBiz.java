@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 public interface MeetBiz {
 	
@@ -15,4 +16,5 @@ public interface MeetBiz {
 	public int insert(MeetDto dto); 									 // 모임게시판 모임생성
 	public int update(MeetDto dto);
 	public int delete(int meet_no);
+	public List<MeetDto> selectMeetDBForCalendar(int s_no);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 
 public interface MeetBoardDao {
@@ -19,5 +20,5 @@ public interface MeetBoardDao {
 	public int insertMeetBoard(MeetDto dto); 					 // 모임게시판 모임생성
 	public int updateMeetBoard(MeetDto dto);
 	public int deleteMeetBoard(int meet_no);
-	
+	public List<MeetDto> selectMeetDBForCalendar(int s_no);	//캘린더에 meet DB값 가져오기
 }
