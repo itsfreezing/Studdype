@@ -121,6 +121,13 @@ public class HomeController {
 	public String notetest() {
 		return "notetest";
 	}
+	
+	@RequestMapping("/fileupload.do")
+	public String uploadTest() {
+		return "community/freeboard/uploadtest";
+	}
+		
+	
 }
 
 
