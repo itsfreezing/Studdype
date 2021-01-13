@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +44,7 @@
 	margin-top:10%;
 }
 
-form {
+.search-container form {
 	transition: all 0.5s;
 	position: absolute;
 	top: 10%;
@@ -88,7 +88,7 @@ form {
 	width: 100%;
 	background-color: transparent;
 	outline: none;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	letter-spacing: 0.75px;
 }
 
@@ -179,9 +179,122 @@ rotateZ(
 	width:100%;
 	border:1px solid red;
 }
+
+#main-section-mid {
+	position:relative;
+	width:100%;
+	border:1px solid blue;
+}
+
+#main-section-bottom {
+	position:relative;
+	width:100%;
+	border:1px solid gray;
+}
+
+#paging-section {
+	position:relative;
+	width:100%;
+	margin:1%;
+	text-align:center;
+}
+
+#paging-section a {
+	font-size:40px;
+	margin:1%;
+	background:#fff;
+	color:#868e96;
+	border:3px solid #fff;
+	border-radius:10px;
+	padding-bottom:0.5%;
+}
+
+#paging-section a:hover {
+	cursor:pointer;
+	background:rgb(115, 98, 222);
+	color:#fff;
+	transition:0.3s ease all;
+}
+
+.bookList-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+	margin:1%;
+	border:1px solid gold;
+}
+
+.bookList-img-section {
+	position:relative;
+	float:left;
+	margin-right:1%;
+	width:15%;
+	height:250px;
+	border:1px solid red;
+}
+
+.bookList-img-section img {
+	width:100%;
+	margin:1%;
+	height:248px;
+}
+
+.bookList-content-section {
+	position:relative;
+	float:left;
+	margin-right:1%;
+	width:70%;
+	height:250px;
+	border:1px solid blue;
+}
+
+.bookList-section form{
+	position:relative;
+	width:100%;
+}
+
+.bookList-content-section table {
+	width:100%;
+	border-collapse: separate;
+	border-spacing: 0 10px;	
+	table-layout:fixed;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+#link-icon {
+	width:20px;
+	height:20px;
+}
+
+.button-section {
+	position:relative;
+	float:left;
+	margin-right:1%;
+	width:10%;
+	height:250px;
+	border:2px solid rgb(115, 98, 222);
+	text-align:center;
+	color:#868e96;
+}
+
+.button-section span {
+	position:relative;
+	top:40%;
+	font-size:25px;
+	font-weight:bolder;
+}
+
+.button-section:hover {
+	color:#fff;
+	background:rgb(115, 98, 222);
+	transition:0.3s ease all;
+	cursor:pointer;
+}
 </style>
 
 <script type="text/javascript">
+	var bookList = [];
 	$(function() {
 	///////////////////////////////////////////////////////////////////////
 		//검색창 영역
@@ -213,7 +326,91 @@ rotateZ(
 		  }, 1000);
 		});
 		//////////////////검색창 JS 종료
+		
+		// 카카오 도서 검색 api
+		$("#searchForm").submit(function() {
+			$("#main-section-mid").empty();
+			$.ajax({
+				method:"GET",
+				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=1&size=40&query="+$("#bookName").val()+"&target=title&target=person",
+				data:{ query: $("#bookName").val() },
+				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" }
+			})
+			
+			// 데이터 정제
+			.done(function(msg) {
+				/* console.log(msg);
+				console.log(msg.documents[4].authors[0]); 	// 첫번째 작가 가져오기
+				console.log(msg.documents[4].publisher);	// 출판사
+				console.log(msg.documents[4].thumbnail);	// 이미지 url
+				console.log(msg.documents[4].title);		// 도서 제목
+				console.log(msg.documents[4].url);			// 도서 상세 url
+				console.log(msg.documents.length);			// 배열 길이 */
+				
+				bookList = [];
+				var book_title = "";
+				var book_author ="";
+				var book_publish = "";
+				var book_img = "";
+				var book_url = "";
+				
+				for(var i = 0; i < msg.documents.length; i++) {
+					var bookDto = [];
+					bookDto.push(msg.documents[i].title);		// 0
+					bookDto.push(msg.documents[i].authors[0]);	// 1
+					bookDto.push(msg.documents[i].publisher);	// 2
+					bookDto.push(msg.documents[i].thumbnail);	// 3
+					bookDto.push(msg.documents[i].url);			// 4
+					bookList.push(bookDto);
+				}
+				
+				console.log(bookList[0]);
+				console.log(bookList[0][0]);
+				
+				appendBookList(bookList);
+				
+			});
+		});
 	});
+	
+	// 도서 리스트 영역별로 정보 append
+	function appendBookList(bookList) {
+		for(var i = 0; i < bookList.length; i++) {
+			$("#main-section-mid").append(
+					"<div class='bookList-section'>"+
+						"<form>"+
+							"<div class='bookList-img-section'>"+
+								"<img class='bookList-img'src='"+bookList[i][3]+"'>"+
+							"</div>"+
+							"<div class='bookList-content-section'>"+
+								"<table>"+
+									"<colgroup>"+
+										"<col width='20%'/><col width='80%'/>"+
+									"</colgroup>"+
+									"<tr>"+
+										"<th>도서 이름</th>"+
+										"<th>"+bookList[i][0]+"</th>"+
+									"</tr>"+
+									"<tr>"+
+										"<th>저자</th>"+
+										"<th>"+bookList[i][1]+"</th>"+
+									"</tr>"+
+									"<tr>"+
+										"<th>출판사</th>"+
+										"<th>"+bookList[i][2]+"</th>"+
+									"</tr>"+
+									"<tr>"+
+										"<th>도서 상세 정보</th>"+
+										"<th><div style=''display', 'inline-block''><a href='"+bookList[i][4]+"' target='_blank'><img id='link-icon' src='resources/img/link-icon.png'></a><div></th>"+
+									"</tr>"+
+								"</table>"+
+							"</div>"+
+						"</form>"+
+						"<div class='button-section'><span>등록</span></div>"+
+					"</div>"
+			);
+		}
+	}
 </script>
 
 </head>
@@ -224,24 +421,84 @@ rotateZ(
 	
 	<!-- 메인 섹션 시작 -->
 	<div class="main-section">
+	
+		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">
-			<!-- 검색창 영역 -->
+		
+			<!-- 검색창 영역 시작 -->
 			<div class="search-container">
-				<!-- 검색창 form----------------------------------------------------------------- -->
-				<form autocomplete="off" action="regitsterSearchBookList.do">
+			
+				<!-- 검색창 form 시작 -->
+				<form autocomplete="off" id="searchForm">
 					<div class="finder">
 						<div class="finder_outer">
 							<div class="finder_inner">
 								<div class="finder_icon" ref="icon"></div>
-								<input class="finder_input" type="text" name="book_title" />
+								<input class="finder_input" id="bookName" type="text" placeholder="검색할 도서 이름을 작성해주세요." name="book_title" />
 							</div>
 						</div>
 					</div>
 				</form>
-				<!-- ----------------------------------------------------------------- -->
+				<!-- 검색창 form 종료 -->
+				
 			</div>
 			<!--검색창 영역 종료 -->
+			
 		</div>
+		<!-- 메인 섹션 상단 종료 -->
+		
+		<!-- 메인 섹션 중앙 시작 -->
+		<div id="main-section-mid">
+		
+<%-- 			<!-- 도서 리스트 영역 시작 -->
+			<div class="bookList-section">
+				<form>
+					<div class="bookList-img-section">
+						<img class="bookList-img" src="">
+					</div>
+					<div class="bookList-content-section">
+						<table>
+							<col width="100">
+							<tr>
+								<th>도서 이름</th>
+								<th>~~~~~~</th>
+							</tr>
+							<tr>
+								<th>저자</th>
+								<th>~~~~~~</th>
+							</tr>
+							<tr>
+								<th>출판사</th>
+								<th>~~~~~~</th>
+							</tr>
+							<tr>
+								<th>상세 URL</th>
+								<th>~~~~~~</th>
+							</tr>
+						</table>
+					</div>
+				</form>
+				<!-- 등록 버튼 영역 시작 -->
+				<div class="button-section"><span>등록</span></div>
+				<!-- 등록 버튼 영역 종료 -->				
+			</div>
+			<!-- 도서 리스트 영역 종료 --> --%>
+			
+		</div>
+		<!-- 메인 섹션 중앙 종료 -->
+		
+		<!-- 메인 섹션 하단 시작 -->
+		<div id="main-section-bottom">
+			<!-- 페이징 영역 시작 -->
+			<div id="paging-section">
+				<a href=""><</a>
+				<div class="pageNum" style="display:inline-block;"></div>
+				<a href="">></a>
+			</div>
+			<!-- 페이징 영역 종료 -->
+		</div>
+		<!-- 메인 섹션 하단 종료 -->
+		
 	</div>
 	<!-- 메인 섹션 종료 -->
 	

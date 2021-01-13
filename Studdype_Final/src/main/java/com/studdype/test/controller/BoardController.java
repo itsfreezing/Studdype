@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
@@ -214,6 +215,13 @@ public class BoardController {
 	
 	@RequestMapping(value="/regitsterSearchBookList.do", method=RequestMethod.POST)
 	public String registerSearchBookList() {
+		
+		return "community/book/registerBook";
+	}
+	
+	@RequestMapping(value="/bookList.do", method=RequestMethod.POST)
+	public String bookList(@RequestParam(value="bookList[]") List<List<String>> bookList) {
+		
 		return "community/book/registerBook";
 	}
 
