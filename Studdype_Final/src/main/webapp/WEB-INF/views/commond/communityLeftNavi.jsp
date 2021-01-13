@@ -35,6 +35,7 @@
        
         function openWebMeeting(){    		
         	window.open("https://192.168.219.109:9001/webmeeting.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
+    		//172.30.1.38  -> localhost
     		//우선 테스트를 위해 아이피주소로 변경해놈
     	};
     </script>
@@ -53,8 +54,10 @@
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_schedule.png"><input type="button" value="일정관리" onclick="location.href='calendar.do'" class="navBtn"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_meet.png"><input type="button" value="모임관리" onclick="location.href='meetlist.do'" class="navBtn" id="meet"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_webcam.png"><input type="button" value="화상회의" onclick="openWebMeeting();" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="location.href='updateStudy.do'" class="navBtn"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_searchBook.png"><input type="button" value="도서검색" onclick="location.href='bookboardform.do'" class="navBtn" id="book"></li>
-            <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="" class="navBtn"></li>
+
+
 
         </ul>
         </div>

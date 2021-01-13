@@ -16,4 +16,5 @@ public interface FreeBoardDao {
 	public void updateCnt(int b_no); //자유게시판 조회수 증가
 	public int deleteBoard(int b_no); //자유게시판 글 삭제
 	public int updateBoard(BoardDto board); //자유게시판 글 수정
+	public List<BoardDto> selectRecentList(int s_no, int b_no); //자유게시판 최근글 5개 가져오기
 }

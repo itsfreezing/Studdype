@@ -5,26 +5,36 @@
 	<mapper namespace="meetboard">
 		
 		<!-- 모임 게시글 총 개수 -->		
-		<select id="totalMeetBoardNum" parameterType="int"	resultType="_int">
-			SELECT COUNT(*)
-			FROM MEET_BOARD
-			WHERE S_NO = #{s_no}
+		<select id="totalMeetBoardNum" parameterType="map" resultType="_int">
+				SELECT COUNT(*)
+				FROM MEET_BOARD
+				WHERE S_NO = #{s_no}
 		</select>
 		
 		<!-- paging -->
-		<select id="pagingMeetBoardList" parameterType="hashMap" resultType="meetDto">
+		<select id="pagingMeetBoardList" parameterType="map" resultType="meetDto">
 			<![CDATA[
-				SELECT MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
+				SELECT *
 				FROM
 				(
-					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
+					SELECT ROWNUM N, MEET_NO, MEET_REGDATE, MEET_ADDR, MEET_ADDR_DETAIL, MEET_TITLE, MEET_CONTENT, MEET_WRITER, VOTE_STARTDATE, VOTE_ENDDATE
 					FROM MEET_BOARD
 					WHERE S_NO = #{studyno}
-					ORDER BY MEET_NO DESC
+					ORDER BY MEET_NO DESC 
 				)
-				WHERE N >= #{startRow} AND N <= #{endRow}
+				WHERE N >= #{startRow} AND N <= #{endRow} 
 			]]>
 		</select>
+		
+		<sql id="search">
+			<if test="keyword != null">
+				 AND
+               ( 
+                  (MEET_TITLE LIKE '%' || #{keyword} || '%') OR
+                  (MEET_WRITER LIKE '%' || #{keyword} || '%')
+               )
+			</if>
+		</sql>
 		
 		<!-- 모임 게시판 디테일 -->
 		<select id="meetBoardSelectOne" parameterType="int" resultType="meetDto">
@@ -53,5 +63,10 @@
 			FROM MEET_BOARD
 			WHERE S_NO = ${s_no}
 		</select>
+
+		<!-- 모임 삭제 -->
+		<delete id="deleteMeetBoard" parameterType="int">
+			DELETE FROM MEET_BOARD WHERE MEET_NO = #{meet_no}
+		</delete>
 	
 	</mapper>

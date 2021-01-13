@@ -1,7 +1,9 @@
 package com.studdype.test.model.dao.board.free;
 
 import java.util.List;
+import java.util.Map;
 
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 
 public interface FreeReplyDao {
@@ -16,4 +18,5 @@ public interface FreeReplyDao {
 	int insertReply(ReplyDto dto); //댓글 쓰기
 	int updateReply(ReplyDto dto); //댓글 업데이트
 	int insertRecomment(ReplyDto dto); //댓글 답글 쓰기
+	Map<Integer, Integer> selectReplyCnt(List<BoardDto> list); //게시글리스트로 댓글 갯수 가져오기
 }
