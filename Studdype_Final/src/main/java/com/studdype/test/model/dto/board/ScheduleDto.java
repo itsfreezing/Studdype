@@ -3,17 +3,16 @@ package com.studdype.test.model.dto.board;
 import java.util.Date;
 
 public class ScheduleDto {
-	private int sche_no; 			// ���� ��ȣ
-	private int s_no; 				// ���͵� ��ȣ
-	private String sche_title; 		// ���� �̸�
-	private int sche_writer; 		// ���� �����
-	private String sche_content; 	// ���� ����
-	private Date sche_startdate; 	// ���� ������
-	private Date sche_enddate; 		// ���� ������
+	private int sche_no; 			// schedule no
+	private int s_no; 				// study no
+	private String sche_title; 		// meetDto title
+	private int sche_writer; 		// meetDto writer
+	private String sche_content; 	// meetDto content
+	private Date sche_startdate; 	// meetDto vote startDate
+	private Date sche_enddate; 		// meetDto vote endDate
 
 	public ScheduleDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ScheduleDto(int sche_no, int s_no, String sche_title, int sche_writer, String sche_content,
