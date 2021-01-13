@@ -11,6 +11,8 @@ public interface MeetBiz {
 	
 	public int selectTotalMeetBoardNum(int s_no);					 	 // 모임 게시판 게시글 총 개수
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap); 		 // 페이징(5개 게시글만 가져오기)
+	public int selectSearchMeetBoardNum(Map searchNumMap);			 	// 모임게시판 검색 게시글 총 개수
+	public List<MeetDto> selectPagingSearchMeetList(Map searchPageMap); // 모임게시판 검색 페이징
 	public Map<Integer, MemberDto> getMemberMap(List<MeetDto> list); // 리스트로 작성자 이름 가져오기
 	public MeetDto selectOne(int meet_no, int isVisitPage);				 // 모임게시판 디테일
 	public int insert(MeetDto dto); 									 // 모임게시판 모임생성

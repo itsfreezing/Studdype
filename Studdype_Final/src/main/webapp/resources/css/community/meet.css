@@ -229,6 +229,16 @@ tooltip-persistent 요소 추가 할 것 */
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
 	width: 250px;
+	float: right; 
+	margin-top: 0;
+}
+
+/* 모임이 존재하지 않을 때 */
+div#notingMeet{
+	text-align: center; 
+	margin: 100px; 
+	color: #6434ef; 
+	font-size: 40px;
 }
 
 /* banner css */
