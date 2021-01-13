@@ -32,165 +32,28 @@
 
 <style type="text/css">
 .main-section {
-	
+	width:72%;
+}
+
+h3 {
+	color:#6f42c1;
+}
+
+h2 {
+	color:#6f42c1;
+	position:relative;
+	left:35%;
 }
 
 #main-section-top {
 	display: block;
 	position: relative;
 	width: 100%;
-	border: 1px solid black;
-}
-
-.main-section-bottom {
-	display: block;
-	position: relative;
-	width: 100%;
-	border: 1px solid red;
-	display:none;
+	height:600px;
 }
 
 #register-section {
-	border:1px solid red;
-}
-
-/* 검색창 영역 */
-.search-container {
-	text-align: center;
-	color: #2c3e50;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-top:10%;
-}
-
-form {
-	transition: all 0.5s;
-	position: absolute;
-	top: 20%;
-	margin-top: 2%;
-	transform: translateY(-50%);
-}
-
-.finder {
-	border: 1px solid #fff;
-	background-color: #f6f5f0;
-	border-radius: 15px;
-	padding: 8px;
-	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px
-		rgba(255, 255, 255, 0.5);
-}
-
-.finder_outer {
-	display: flex;
-	width: 500px;
-	padding: 1.5rem 2rem;
-	border-radius: 10px;
-	box-shadow: inset 10px 10px 15px -10px #c3c3c3, inset -10px -10px 15px
-		-10px #ffffff;
-}
-
-.finder_inner {
-	display: flex;
-	align-items: center;
-	position: relative;
-	flex: 1;
-}
-
-.finder_form {
-	flex: 1;
-	height: calc(50% + 3rem);
-}
-
-.finder_input {
-	height: calc(100% + 3rem);
-	border: none;
-	width: 100%;
-	background-color: transparent;
-	outline: none;
-	font-size: 1.5rem;
-	letter-spacing: 0.75px;
-}
-
-.finder_icon {
-	width: 40px;
-	height: 40px;
-	margin-right: 1rem;
-	transition: all 0.2s;
-	box-shadow: inset 0 0 0 20px #292929;
-	border-radius: 50%;
-	position: relative;
-}
-
-.finder_icon:after, .finder_icon:before {
-	display: block;
-	content: "";
-	position: absolute;
-	transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.finder_icon:after {
-	width: 10px;
-	height: 10px;
-	background-color: #292929;
-	border: 3px solid #f6f5f0;
-	top: 50%;
-	position: absolute;
-	transform: translateY(-50%);
-	left: 0px;
-	right: 0;
-	margin: auto;
-	border-radius: 50%;
-}
-
-.active .finder_icon:after {
-	border-width: 10px;
-	background-color: #f6f5f0;
-}
-
-.finder_icon:before {
-	width: 4px;
-	height: 13px;
-	background-color: #f6f5f0;
-	top: 50%;
-	left: 20px;
-	transform: rotateZ(45deg) translate(-50%, 0);
-	transform-origin: 0 0;
-	border-radius: 4px;
-}
-
-.active .finder_icon:before {
-	background-color: #292929;
-	width: 6px;
-	transform: rotateZ(45deg) translate(-50%, 25px);
-}
-
-.processing .finder_icon {
-	transform-origin: 50%;
-	animation: spinner 0.3s linear infinite;
-	animation-delay: 0.5s;
-}
-
-.active .finder_icon {
-	transform: translateY(-5px);
-}
-
-@
-keyframes spinner { 0% {
-	transform: rotateZ(45deg);
-}
-100
-%
-{
-transform
-:
-rotateZ(
-405deg
-);
-}
+	display:inline-block;
 }
 
 #no-list {
@@ -214,123 +77,173 @@ rotateZ(
 
 .book-info {
 	position:relative;
-	width:45%;
+	display:inline-block;
+	width:15%;
 	margin:1%;
-	border:1px solid black;
+	left:1.5%;
+	border:5px solid #f9f9f0;
+	border-radius:10px;
+	cursor:pointer;
+	background:#f6f5f0;
+	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
 }
 
-.book-info-left {
+.book-info-top {
 	position:relative;
-	width:45%;
+	display:inline-block;
+	/* float:left; */
+	width:98%;
 	margin:1%;
-	border:1px solid blue;
-	height:600px;
+	height:250px;
 }
 
-
-
-.book-info-right {
-	position:relative;
-	width:45%;
-	margin:1%;
-	border:1px solid red;
-	height:600px;
+.book-info-top img {
+	height:250px;
 }
 
-.book-info-height {
+.book-info-bottom {
 	position:relative;
-	width:90%;
+	/* display:inline-block; */
+	display:none;
+	width:98%;
 	margin:1%;
-	border:1px solid green;
-	height:200px;
+	border-top:1px solid black;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 0 15px;
+}
+
+/* 화살표 css */
+#left-allow {
+	position:relative;
+	float:left;
+	width:3%;
+	height:5px;
+}
+
+#right-allow {
+	position:relative;
+	float:right;
+	width:3%;
+	height:5px;
+}
+
+.allow {
+	margin:8% 1% 0% 1%;
+}
+
+.allow img {
+	cursor:pointer;
+	opacity:0.7;
+}
+
+.thisBook {
+	transition: 0.7s ease all;
+	border:4px solid #6f42c1;
+	opacity:0.7;
+}
+
+.append {
+	position:relative;
+	left:23%;
+	width:30%;
+	height:560px;
+	opacity:1;
+	z-index:2;
+}
+
+.append .book-info-bottom {
+	display:inline-block;
+}
+
+.append img{
+	height:400px;
+}
+
+.append .book-info-top {
+	height:400px;
+}
+
+.append:hover {
+	opacity:0.2;
+}
+
+#detailBook {
+	display:inline-block;
+	position:relative;
+	float:left;
+	top:40%;
+	left:44%;
+	width:10%;
+	height:30px;
+	text-align:center;
+	font-weight:bolder;
+	z-index:1;
+	border:3px solid black;
+	border-radius:10px;
 }
 /* ************************************************************ */
 </style>
 <script type="text/javascript">
-	$(function() {
+	
+	$(function() {	
+		// 전달받은 도서 리스트 6번째부터 숨기기
+		$(".book-info:gt(5)").hide();
 		
-		$("#register-search").click(function() {
-			$("#new-section").hide();
-			$("#register-section").show();
-		});
-
-		$("#new-search").click(function() {
-			$("#register-section").hide();
-			$("#new-section").show();
-		});
-		
-		///////////////////////////////////////////////////////////////////////
-		
-		// 검색창 영역
-		///////////////////////////////////////////////////////////////////////
-		const input = document.querySelector(".finder_input");
-		const finder = document.querySelector(".finder");
-		const form = document.querySelector("form");
-
-		input.addEventListener("focus", () => {
-		  finder.classList.add("active");
-		});
-
-		input.addEventListener("blur", () => {
-		  if (input.value.length === 0) {
-		    finder.classList.remove("active");
-		  }
-		});
-
-		form.addEventListener("submit", (ev) => {
-		  ev.preventDefault();
-		  finder.classList.add("processing");
-		  finder.classList.remove("active");
-		  input.disabled = true;
-		  setTimeout(() => {
-		    finder.classList.remove("processing");
-		    input.disabled = false;
-		    if (input.value.length > 0) {
-		      finder.classList.add("active");
-		    }
-		  }, 1000);
-		});
-
-		$("form").on("submit", function() {	
-			$("")
+		// 왼쪽 페이징 클릭 이벤트
+		$("#left-allow").click(function() {
+			$("#register-section .book-info:eq(5)").show();
+			$("#register-section .book-info:first").insertAfter("#register-section .book-info:last");
+			$("#register-section .book-info:gt(4)").hide();
 		});
 		
+		// 오른쪽 페이징 클릭 이벤트
+		$("#right-allow").click(function() {
+			$("#register-section .book-info:last").show();
+			$("#register-section .book-info:last").insertBefore("#register-section .book-info:first");
+			$("#register-section .book-info:gt(4)").hide();
+		});
+		
+		// 도서 리스트 중 해당 도서 클릭 이벤트
+		$(".book-info").click(function() {
+			$("#main-section-top").children().eq(1).remove();
+			$(".thisBook").removeClass("thisBook");
+			$(this).addClass("thisBook");
+			var appendBook = $(this).clone();
+			appendBook.appendTo("#main-section-top");
+			appendBook.addClass("append");
+			$(".append .book-info-bottom").css("display", "inline-block");
+		});
+		
+		// 등록 여부 
+		if($("#isMain").children().eq(1)) {
+			$("#isMain").children().first().remove();
+		}
+		
+		$(document).on("click", ".append",  function() {
+			var b_no = $(".append").children().first().val();
+			location.href="bookDetailform.do?b_no="+b_no;
+		});
+
 	});
-
+	
 </script>
 </head>
 <body>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
+	
 	<!-- 메인 섹션----------------------------------------------------------------------------- -->
 	<div class="main-section">
 	<h3>스터디 도서 검색</h3>
 		<!--메인 상단 세션 --------------------------------------------------------------------- -->
 		<div id="main-section-top">
-		
-			<!-- 검색창 영역 ----------------------------------------------------------------- -->
-			<div class="search-container">
-				<!-- 검색창 form----------------------------------------------------------------- -->
-				<form autocomplete="off" action="searchBookList.do">
-					<div class="finder">
-						<div class="finder_outer">
-							<div class="finder_inner">
-								<div class="finder_icon" ref="icon"></div>
-								<input class="finder_input" type="text" name="book_title" />
-							</div>
-						</div>
-					</div>
-				</form>
-				<!-- ----------------------------------------------------------------- -->
+			<div id="detailBook">
+				<span>자세히 보기</span>
 			</div>
-			<!--검색창 영역 종료 -------------------------------------------------------------------- -->
-
-		</div>
-		<!-- 메인 상단 영역 종료 ----------------------------------------------------------------------------------------- -->
-		
-		<!-- 리스트 영역 시작 ------------------------------------------------------------------------------------------------- -->
-		<div id="register-section">
 			<c:choose>
 				<c:when test="${empty list }">
 					<div id="no-list">
@@ -340,47 +253,77 @@ rotateZ(
 						<p>등록된 도서가 없습니다.</p>
 					</div>
 				</c:when>
-				<c:otherwise>
-					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
-						<div class="book-info">
-							<div class="book-info-left">
-								<img src="${list.get(i).getBook_url }">
-							</div>
-							<div class="book-info-right">
-								<table>
-									<tr>
-										<th>도서 이름  </th>
-										<th>${list.get(i).getBook_title }</th>
-									</tr>
-									<tr>
-										<th>작가  </th>
-										<th>${list.get(i).getBook_author }</th>
-									</tr>
-									<tr>
-										<th>출판사  </th>
-										<th>${list.get(i).getBook_publish }</th>
-									</tr>
-									<tr>
-										<th>도서 상세정보  </th>
-										<th>${list.get(i).getBook_url }</th>
-									</tr>
-								</table>
+			</c:choose>
+			<div id="isMain">
+				<h2>스터디 대표도서가 없습니다.</h2>
+				<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
+					<c:if test="${list.get(i).getBook_ismain() eq 'Y' }">
+						<div class="book-info thisBook append">
+							<input type="hidden" name="b_no" value="${list.get(i).getB_no() }">
+							<div class="book-info-top">
+								<c:choose>
+									<c:when test="${list.get(i).getBook_img() eq 'noImage'}">
+										<img src="./resources/assets/img/icon_photoUpload.png">
+									</c:when>
+									<c:otherwise>
+										<img src="${list.get(i).getBook_img() }" />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="book-info-bottom">
 								<table>
 									<tr>
-										<th>제목  </th>
-										<th>${list.get(i).getB_title }</th>
+										<th>제목&nbsp;</th>
+										<th>${list.get(i).getB_title() }</th>
 									</tr>
 									<tr>
-										<th>${list.get(i).getB_writer }</th>
+										<th>작성자&nbsp;</th>
+										<th>${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</th>
+										<th style="color:#6f42c1;">&nbsp;대표도서</th>
 									</tr>
 								</table>
 							</div>
 						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+		<!-- 메인 상단 영역 종료 ----------------------------------------------------------------------------------------- -->
+		
+		<!-- 리스트 영역 시작 ------------------------------------------------------------------------------------------------- -->
+		<div id="register-section">
+			<div class="allow" id="left-allow"><img src="./resources/img/left-allow.png"></div>
+			<div class="allow" id="right-allow"><img src="./resources/img/right-allow.png"></div>
+				<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
+					<div class="book-info">
+						<input type="hidden" name="b_no" value="${list.get(i).getB_no() }">
+						<div class="book-info-top">
+							<c:choose>
+								<c:when test="${list.get(i).getBook_img() eq 'noImage'}">
+									<img src="./resources/assets/img/icon_photoUpload.png">
+								</c:when>
+								<c:otherwise>
+									<img src="${list.get(i).getBook_img() }" />
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="book-info-bottom">
+						<table>
+							<tr>
+								<th>제목&nbsp;</th>
+								<th>${list.get(i).getB_title() }</th>
+							</tr>
+							<tr>
+								<th>작성자&nbsp;</th>
+								<th>${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</th>
+								<c:if test="${list.get(i).getBook_ismain() eq 'Y' }">
+								<th style="color:#6f42c1;">&nbsp;대표도서</th>
+								</c:if>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 		<!-- 리스트 영역 종료 ------------------------------------------------------------------------------------------------- -->
 	</div>
