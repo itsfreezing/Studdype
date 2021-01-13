@@ -9,8 +9,7 @@
       xmlns:svg="http://www.w3.org/2000/svg">
 <head>
 <meta charset="UTF-8">
-<title>Meet List Page</title>
-<meta charset="UTF-8">
+<title>Meet Search List Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- owl.carousel오류로 인해 최상단에 script 추가해야 함 -->
@@ -123,7 +122,7 @@ function prePageGroup(){
 				<img src="./resources/assets/img/banner_meetingPage4.png">
 			</div>
 		</div>
-		<!-- ---------------------------------- -->      
+		<!-- ---------------------------------- -->       
         
        	<!-- 검색 창 -->
        	<div id="bigBox">
@@ -141,20 +140,19 @@ function prePageGroup(){
 			    		<span >Search</span>
 					</div>
 				</form>
-				
 			</div>
 			
 			<!-- 모임등록 버튼 -->
 			<div id="listBtnDiv">
-				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="">모임 등록</button>   
+				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="float: right; margin-top: 0;">모임 등록</button>   
 			</div> 
        	</div>
        	<!-- ---------------------------------- -->
-
+       	
        	<!-- meetList -->
 		<c:choose>
 			<c:when test="${empty list}">
-					<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
+				<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
@@ -202,7 +200,8 @@ function prePageGroup(){
 			</ul>
 			
 			<!-- 페이징 폼 -->
-			<form action="meetlist.do" method="post" id="pageform" name="pageform">
+			<form action="meetsearchlist.do" method="post" id="pageform" name="pageform">
+				<input type="hidden" name="keyword" id="keyword" value="${keyword }">
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
 		</div>
