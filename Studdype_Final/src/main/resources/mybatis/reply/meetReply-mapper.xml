@@ -36,7 +36,7 @@
 	</delete>
 	
 	<!-- 모임 댓글 '그룹번호'로 [리스트] 뽑기 -->
-	<select id="selectGroupMeetReplyList" parameterType="int" resultMap="replyDto">
+	<select id="selectGroupMeetReplyList" parameterType="int" resultType="replyDto">
 		SELECT *
 		FROM MEET_REPLY
 		WHERE R_GROUPNO = #{r_no}

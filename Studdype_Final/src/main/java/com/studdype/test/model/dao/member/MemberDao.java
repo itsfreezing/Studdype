@@ -30,7 +30,7 @@ public interface MemberDao {
 	
 	// 게시판 댓글 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); // [자유게시판 댓글]
-//	Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList); // [모임게시판 댓글] --- 보류
+	Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList); // [모임게시판 댓글] 
 	
 	// 도서 관련 메소드
 	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
