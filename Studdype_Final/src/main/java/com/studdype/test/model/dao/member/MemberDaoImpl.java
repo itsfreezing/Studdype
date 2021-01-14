@@ -45,10 +45,8 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberDto selectOne(int mem_no) {
 		MemberDto res = null;
-		System.out.println(mem_no);
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
-			System.out.println(res);
 		} catch (Exception e) {
 			System.out.println("[ERROR]: selectOne");
 			e.printStackTrace();

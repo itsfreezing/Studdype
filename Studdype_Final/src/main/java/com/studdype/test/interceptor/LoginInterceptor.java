@@ -14,7 +14,6 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-			logger.info("[Interceptor]:prehandle");
 			
 			if(request.getRequestURI().contains("/signform.do")|| 
 					request.getRequestURI().contains("/signup.do")||request.getRequestURI().contains("/loginform.do")) {
@@ -29,14 +28,12 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 
-			logger.info("[Interceptor]:postHandle");
 			
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-			logger.info("[Interceptor]:aftercompletion");
 	}
 	
 	

@@ -9,8 +9,8 @@
       xmlns:svg="http://www.w3.org/2000/svg">
 <head>
 <meta charset="UTF-8">
-<title>Meet Search List Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Search List Page</title>
 
 <!-- owl.carousel오류로 인해 최상단에 script 추가해야 함 -->
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -39,10 +39,9 @@
 
 <script type="text/javascript">
 
+<!-- 모임 페이지 슬라이더 -->
 (function ($) {
 	 $ (document) .ready (function () {
-		 
-		 /* 슬라이더 */
 		 $('.owl-carousel').owlCarousel({
 		        items:1,                 	// 한번에 보여줄 아이템 수
 		        loop:true,               	// 반복여부
@@ -60,18 +59,17 @@
 		    	$('.owl-carousel').trigger('prev.owl.carousel', [300]);
 		    })
 	});
-	 
 })(jQuery);
 
+//부모 선택 후 흰색변경 script 
 $(function(){
-	/* 부모 선택 후 흰색변경 JS */
 	$(".current_page").parent().css('color','white');
 	$(".current_page").css('border','1px solid #6434ef');
 	$(".current_page").css('cursor','default');
 	
 });	
 
-// 페이징---------------------- 
+<!-- 페이징 --> 
 // 페이지 이동 
 function movePage(pagenum){
 	$("#pagenum").val(pagenum.text);
@@ -97,6 +95,8 @@ function prePageGroup(){
 	};
 }
 
+$("#nothingMeet.val(${keyword})").css("color","red");
+
 </script>
 </head>
 <body>
@@ -104,7 +104,7 @@ function prePageGroup(){
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
-     <!--main conternt 섹션-->
+     <!--main content 섹션-->
      <div class="main-section">
         
 		<!-- 모임관리 페이지 슬라이더 영역 -->
@@ -140,19 +140,27 @@ function prePageGroup(){
 			    		<span >Search</span>
 					</div>
 				</form>
+				<!-- ---------------------------------- -->
+				
 			</div>
 			
 			<!-- 모임등록 버튼 -->
 			<div id="listBtnDiv">
 				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="float: right; margin-top: 0;">모임 등록</button>   
 			</div> 
+	       	<!-- ---------------------------------- -->
+	       	
        	</div>
-       	<!-- ---------------------------------- -->
        	
        	<!-- meetList -->
+       	<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
 		<c:choose>
 			<c:when test="${empty list}">
-				<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
+				<div id ="nothingImg"><img src="./resources/assets/img/searchNothing_keyword.png"></div>
+				<div id="nothingMeet"> 
+					<span id="nothingKeyword">' ${ keyword } '</span> 에 대한 검색 결과가 없습니다.
+					<p id="nothingTXT">모든 단어의 철자가 올바른지 확인하거나<br>다른 키워드로 검색해보세요!</p>
+				</div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
@@ -204,22 +212,23 @@ function prePageGroup(){
 				<input type="hidden" name="keyword" id="keyword" value="${keyword }">
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
+			<!-- ---------------------------------- -->
+			
 		</div>
-		<!-- ---------------------------------- -->
     </div>
    
     
-    <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
-	
-	<!-- search Box script -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
-    <script src="./resources/assets/js/searchScript.js"></script>
-    
-    <script src="./resources/assets/js/popper.min.js"></script>
-    <script src="./resources/assets/js/bootstrap.min.js"></script>
-    <script src="./resources/assets/js/modal-video.js"></script>
-    <script src="./resources/assets/js/loadmore.js"></script>
-    <script src="./resources/assets/js/prefixfree.min.js"></script>
-    <script src="./resources/assets/js/main.js"></script>
+<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+
+<!-- search Box script -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
+<script src="./resources/assets/js/searchScript.js"></script>
+
+<script src="./resources/assets/js/popper.min.js"></script>
+<script src="./resources/assets/js/bootstrap.min.js"></script>
+<script src="./resources/assets/js/modal-video.js"></script>
+<script src="./resources/assets/js/loadmore.js"></script>
+<script src="./resources/assets/js/prefixfree.min.js"></script>
+<script src="./resources/assets/js/main.js"></script>
 </body>
 </html>
