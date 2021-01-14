@@ -96,7 +96,76 @@
 	
  };
  
+function attachFile(){
+	var html = "<div class='upload_file_box'><input type='file' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
+	
+	
+	//만약 전파일이 업로드안됬으면 지워버리기
+	var chkFalse = $(".upload_file_box");
 
+	if( chkFalse.last().children("input").val() == null || chkFalse.last().children("input").val().trim()=="" ){
+		chkFalse.last().remove();
+	}
+	
+	
+	//업로드 전체박스		
+	var div = $(".upload_box");
+	div.append(html);
+	
+	//업로드 파일 박스
+	var upload_div = $(".upload_file_box");
+	
+	var file = upload_div.children(".upload_file");
+	file[(file.length)-1].click();
+	
+	
+	
+}
+function create_file_info(file){ 
+	//업로드 파일 박스
+	var upload_div = $(".upload_file_box");
+	var fileSize = $(file)[0].files[0].size; //파일사이즈
+	var fileName = $(file)[0].files[0].name; //파일이름
+	var fileNameList = fileName.split(".");
+	var fileFormat = fileNameList[(fileNameList.length)-1];
+	
+	console.log( fileNameList );
+	console.log( fileFormat );
+	
+	fileSize /= 1024 ; //KB로 변환
+	fileSize = fileSize.toFixed(2); //반올림
+	
+	fileFormat = fileFormat.trim(); // 공백 제거
+	fileFormat = fileFormat.toLowerCase(); //소문자로
+	//파일 포멧검사
+	if( fileFormat != "apk" && fileFormat != "app" && fileFormat != "avi" && fileFormat != "csv" && fileFormat != "elf" && fileFormat != "html" && fileFormat != "jpg" &&
+			 fileFormat != "js" && fileFormat != "mp3" && fileFormat != "mpa" && fileFormat != "obj" && fileFormat != "pdf" && fileFormat != "png" && fileFormat != "ppt" &&
+			 fileFormat != "py" && fileFormat != "sql" && fileFormat != "wav" && fileFormat != "wma" && fileFormat != "xls" && fileFormat != "xlsx" && fileFormat != "xml" &&
+			 fileFormat != "zip" && fileFormat != "css" ){
+		fileFormat = "nomal";
+	}
+			
+	
+	
+	
+	 upload_div.last().append("<img class='file_format_img' src='./resources/img/fileFormat/"+fileFormat+".png'><span class='file_name' >"+
+			 	fileName+
+			 	"</span><input type='button' class='remove_file_btn'  onclick='clickFileBtn(this);'><span class='file_size'>"
+			 	+fileSize+
+			 	"KB</span>");
+	 
+	 
+}
+
+function clickFileBtn(fileName){
+	
+	fileName.className += ' change_file';  //update_btn 클래스 추가
+	var upload_file_box = $(".change_file").parent();
+	
+	upload_file_box.remove();
+	
+	fileName.className = 'upload_file'; //추가한 클래스 원상복구
+}
  
 </script>
 </head>
@@ -106,25 +175,31 @@
 
 
  	<div class="main-section2">
-	<form action="freewrite.do" method="post" id="writeForm" >
+	<form action="freewrite.do" method="post" id="writeForm" enctype="multipart/form-data">
  		<table class="maintable">
+
 		<tr>
 			<td><h1>자유게시판 글 쓰기</h1></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요"></td>
+			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요"></td>
+		</tr>
+		
+			<td ><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
 		</tr>
 		<tr>
-			<td>파일 첨부<input type="file" class="uploadFile"></td>
+			<td>
+				
+				<div class="upload_box">
+					<div class="upload_btn_box">
+						<input type="button" onclick="attachFile();" class="uploadFile" value="파일 첨부..." >
+					</div>
+					
+				</div>
 			
+			</td>
 		</tr>
-		<tr>
-			<td><div>공간</div></td>
-		</tr>
-		<tr>
-			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
-		</tr>
-		<tr>
+		<tr>			
 			<td ><input type="button" onclick="chkForm();" value="완료" class="free_Btn"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="free_Btn"></td>			
 		</tr>
 	</table>

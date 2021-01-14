@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Meet Insert Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Insert Page</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -32,7 +32,7 @@
 
 <script type="text/javascript">
 	
-// 도로명주소 검색 버튼 함수 
+<!-- 도로명주소 검색 버튼 함수 --> 
 function execPostcode(){ 
 	daum.postcode.load(function(){ 
 		new daum.Postcode({
@@ -55,10 +55,10 @@ function execPostcode(){
 				document.getElementById("detailAddress").focus(); 
 			}
 		}).open();
-		
 	});
 }
 
+<!-- insert 하기전에 비어있는 input 태그가 없는지 확인 -->
 function chkForm(){
 	var form = $("#meetWriteForm");
 	var meetDate = $("#meetDate");
@@ -89,8 +89,8 @@ function chkForm(){
 	}else{
 		form.submit();
 	}
-	
- };
+};
+
 </script>
 	
 </head>
@@ -100,10 +100,9 @@ function chkForm(){
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
 	
-     <!--main conternt 섹션-->
+     <!--main content 섹션-->
      <div class="main-section">
      
-     	<!-- form의 action은 모임생성을 submit 하는 용도 -->
      	<img src="./resources/assets/img/banner_meetInsert.png" id="meetInsertBanner">
         <form action="meetinsert.do" method="post" id="meetWriteForm">
         	<div id="firstRow">
@@ -138,6 +137,6 @@ function chkForm(){
         </form>
     </div>
     
-    <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

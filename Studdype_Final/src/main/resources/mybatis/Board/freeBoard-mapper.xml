@@ -61,6 +61,46 @@
 	<update id="updateBoard" parameterType="boardDto">
 		UPDATE FREE_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
 	</update>
+	
+	<select id="selectRecentList" parameterType="hashMap" resultMap="boardMap">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT 
+			FROM
+			(
+    			SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+    			FROM FREE_BOARD
+    			WHERE S_NO = #{s_no}
+    			ORDER BY B_NO DESC
+			)
+			WHERE R < 
+                	(
+                 	   SELECT R
+                	   FROM 
+              	       (
+              	       SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                	   FROM FREE_BOARD
+                	   WHERE S_NO =#{s_no}
+               	       ORDER BY B_NO DESC
+               	       )
+               	       WHERE B_NO = #{b_no}
+            	    ) +3 
+            AND
+                 R >
+                   (
+                     SELECT R
+                     FROM 
+                     (
+                     SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                     FROM FREE_BOARD
+                     WHERE S_NO =#{s_no}
+                     ORDER BY B_NO DESC
+                     )
+                     WHERE B_NO = #{b_no}
+                    ) -3
+		]]>
+	</select>
+	
+
 </mapper>
 
   

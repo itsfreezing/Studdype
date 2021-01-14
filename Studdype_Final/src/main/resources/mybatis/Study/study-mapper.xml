@@ -15,7 +15,6 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-
 	<select id="studyList" resultType="studyDto" parameterType="com.studdype.test.common.SearchPagination">
       SELECT *
       FROM (
@@ -43,20 +42,13 @@
 </select>
 
 
-
-
-
-
-
-
-
-
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">
 		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
 	</select>
+	
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
@@ -67,5 +59,8 @@
 		SELECT S_NO
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
-	
+	<select id="studyLeader" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
+	</select>
+
 </mapper>
