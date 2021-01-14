@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.model.biz.reply.FreeReplyBiz;
+import com.studdype.test.model.biz.reply.MeetReplyBiz;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -23,6 +24,9 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 
 	@Autowired
 	private FreeReplyBiz freeReplyBiz;
+	
+	@Autowired
+	private MeetReplyBiz meetReplyBiz;
 		
 	//자유게시판 리플리스트 반환 메소드
 	@RequestMapping(value="/freeReplyList.do", method=RequestMethod.POST)
@@ -82,6 +86,31 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		int res = freeReplyBiz.writeRecomment(dto);
 		
 		return res;
+	}
+	
+	// --------------------------------------------------------------------------------------------------------------------------------------//
+	
+	// [모임게시판] 댓글 '리스트' [반환] 메소드
+	@RequestMapping(value="/meetReplyList.do", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> meetReplyList(@RequestBody ReplyDto dto) {
+		logger.info("[Meet Reply List]");
+		Map<String, Object> meetReplyMap = new HashMap<String, Object>(); // 리플리스트dto 및 작성자이름 담을 MAP (반환 할거임)
+		List<ReplyDto> meetReplyList = null;  // 댓글 LIST
+		//Map<Integer,MemberDto> meetReplyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자dto 담을 맵
+		
+		meetReplyList = meetReplyBiz.selectMeetReplyList(dto.getB_no());
+		System.out.println("컨트롤러_dto.getB_no(): "+dto.getB_no());
+		//meetReplyMember = meetReplyBiz.getMemberByList(meetReplyList);
+		
+	
+		meetReplyMap.put("meetReplyList", meetReplyList);
+		System.out.println("컨트롤러_meetReplyList: "+meetReplyList);
+		System.out.println("컨트롤러_meetReplyMap: "+meetReplyMap);
+		//replyMap.put("meetReplyMember", meetReplyMember);
+		
+	
+		
+		return meetReplyMap;
 	}
 		
 		

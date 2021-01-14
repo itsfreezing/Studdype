@@ -150,8 +150,55 @@ TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임16', 1, '모임16의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
 TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
-
 SELECT * FROM MEET_BOARD;
+
+-- 모임 댓글
+INSERT INTO MEET_REPLY VALUES(
+MEETREPLYSEQ.NEXTVAL,1,MEETGROUPSEQ.NEXTVAL,0,0,1,'첫번째댓글입니다.',SYSDATE);
+INSERT INTO MEET_REPLY VALUES(
+MEETREPLYSEQ.NEXTVAL,1,MEETGROUPSEQ.NEXTVAL,0,0,2,'두번째댓글입니다.',SYSDATE);
+INSERT INTO MEET_REPLY VALUES(
+MEETREPLYSEQ.NEXTVAL,1,MEETGROUPSEQ.NEXTVAL,0,0,1,'세번째댓글입니다.',SYSDATE);
+INSERT INTO MEET_REPLY VALUES(
+MEETREPLYSEQ.NEXTVAL,1,MEETGROUPSEQ.NEXTVAL,0,0,2,'네번째댓글입니다.',SYSDATE);
+INSERT INTO MEET_REPLY VALUES(
+MEETREPLYSEQ.NEXTVAL,1,MEETGROUPSEQ.NEXTVAL,0,0,2,'다섯번째댓글입니다.',SYSDATE);
+
+-- 모임 대댓글 
+INSERT INTO MEET_REPLY
+VALUES(MEETREPLYSEQ.NEXTVAL, 1,
+                            (
+                            SELECT R_GROUPNO 
+                            FROM MEET_REPLY 
+                            WHERE R_NO = 1
+                            ),
+                            1,
+                            (
+                            SELECT MAX(R_ORDER)
+                            FROM MEET_REPLY
+                            WHERE R_GROUPNO = (
+                                              SELECT R_GROUPNO
+                                              FROM MEET_REPLY
+                                              WHERE R_NO = 1
+                                              )
+                            ) + 1, 1, '첫번째 대댓글입니다.', SYSDATE);
+INSERT INTO MEET_REPLY
+VALUES(MEETREPLYSEQ.NEXTVAL, 2,
+                            (
+                            SELECT R_GROUPNO 
+                            FROM MEET_REPLY 
+                            WHERE R_NO = 1
+                            ),
+                            1,
+                            (
+                            SELECT MAX(R_ORDER)
+                            FROM MEET_REPLY
+                            WHERE R_GROUPNO = (
+                                              SELECT R_GROUPNO
+                                              FROM MEET_REPLY
+                                              WHERE R_NO = 1
+                                              )
+                            ) + 1, 1, '두번째 대댓글입니다.', SYSDATE);  
 
 SELECT * FROM MEMBER;
 
