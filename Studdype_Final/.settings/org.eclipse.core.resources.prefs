@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/studdype/common/LogAop.java=UTF-8
 encoding//src/main/java/com/studdype/test/model/dao/board/meet/MeetBoardDao.java=UTF-8
+encoding//src/main/webapp/WEB-INF/spring/sqls/insert.sql=UTF-8
 encoding//src/main/webapp/home.jsp=UTF-8
 encoding//src/main/webapp/resources/css/style.css=UTF-8
