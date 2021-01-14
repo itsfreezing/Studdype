@@ -95,6 +95,8 @@ function prePageGroup(){
 	};
 }
 
+$("#nothingMeet.val(${keyword})").css("color","red");
+
 </script>
 </head>
 <body>
@@ -154,7 +156,11 @@ function prePageGroup(){
        	<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
 		<c:choose>
 			<c:when test="${empty list}">
-				<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
+				<div id ="nothingImg"><img src="./resources/assets/img/searchNothing_keyword.png"></div>
+				<div id="nothingMeet"> 
+					<span id="nothingKeyword">' ${ keyword } '</span> 에 대한 검색 결과가 없습니다.
+					<p id="nothingTXT">모든 단어의 철자가 올바른지 확인하거나<br>다른 키워드로 검색해보세요!</p>
+				</div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
