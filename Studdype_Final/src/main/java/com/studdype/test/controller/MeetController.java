@@ -41,6 +41,8 @@ public class MeetController {
 	// 모임게시판 [리스트] 이동
 	@RequestMapping("/meetlist.do")
 	public String meetList(HttpSession session, String pagenum, Model model) {
+		logger.info("[MEET BOARD SELECT LIST]");
+		
 		StudyDto study = (StudyDto)session.getAttribute("study"); 	 // 현재 클릭 된 스터디
 		List<MeetDto> list = null; 									 // 5개 페이징 담을 리스트
 		Map<String,Object> pageMap = new HashMap<String, Object>();  // 시작페이지, 끝페이지 정보 담을 MAP
@@ -55,8 +57,6 @@ public class MeetController {
 						  +"<<모임 게시판>> ["+study.getS_no()+"]번 스터디의 모임은 총 ["+totalMeetBoardNum+"]개 입니다.\n"
 						  +"-----------------------------------------------------------------------");
 		 
-		logger.info("[MEET BOARD SELECT LIST]");
-		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기
 		memberMap = meetBiz.getMemberMap(list); // 멤버번호로 작성자 이름 받아오기 
 
@@ -74,6 +74,8 @@ public class MeetController {
 	// 모임게시판 '검색' [리스트] 이동
 	@RequestMapping("/meetsearchlist.do")
 	public String meetSearchList(HttpSession session, String pagenum, Model model, HttpServletRequest request) {
+		logger.info("[MEET BOARD SELECT SEARCH LIST]");
+
 		StudyDto study = (StudyDto)session.getAttribute("study"); 	 // 현재 클릭 된 스터디
 		List<MeetDto> list = null; 									 // 5개 페이징 담을 리스트
 		Map<String,Object> searchPageMap = new HashMap<String, Object>();  // 시작페이지, 끝페이지 정보 담을 MAP
@@ -81,8 +83,6 @@ public class MeetController {
 		Map<Integer, MemberDto> memberMap = null; 					 // 게시글 작성자 이름 담을 MAP
 		String keyword = request.getParameter("keyword");
 
-		logger.info("[MEET BOARD SELECT SEARCH LIST]");
-		
 		searchNumMap.put("s_no", study.getS_no()); // 스터디 번호 put
 		searchNumMap.put("keyword", keyword);	   // 검색 키워드 put
 		System.out.println("searchNumMap: "+searchNumMap);
@@ -147,6 +147,8 @@ public class MeetController {
 	//	모임게시판 모임 [상세보기] 이동
 	@RequestMapping("/meetdetail.do")
 	public String meetDetail(HttpSession session,HttpServletRequest request, HttpServletResponse response, Model model) {
+		logger.info("[MEET BOARD DETAIL]");
+		
 		int meet_no = Integer.parseInt(request.getParameter("meetno"));
 		
 		// 조회수 함수 isVisitPage = [1: 방문] / [0: 미방문]
@@ -199,6 +201,8 @@ public class MeetController {
 	// 모임게시판 모임 [생성 폼] 이동
 	@RequestMapping("/meetinsertform.do")
 	public String meetInsertFrom(HttpSession session) {
+		logger.info("[MEET BOARD INSERT FORM]");
+		
 		session.setAttribute("leftnavi", "meet");
 		return "community/meet/meetInsert";
 	}
@@ -206,6 +210,8 @@ public class MeetController {
 	// 모임게시판 모임 [생성]
 	@RequestMapping("/meetinsert.do")
 	public String meetInsert(MeetDto dto,HttpSession session) {
+		logger.info("[MEET BOARD INSERT]");
+		
 		int writer = ( (MemberDto)session.getAttribute("login") ).getMem_no(); // 작성자 번호
 		int s_no = ( (StudyDto)session.getAttribute("study") ).getS_no();	   // 스터디 번호
 		
@@ -227,6 +233,8 @@ public class MeetController {
 	// 모임게시판 모임 [수정 폼] 이동
 	@RequestMapping("/meetupdateform.do")
 	public String meetUpdateFrom(Model model, HttpServletRequest request) {
+		logger.info("[MEET BOARD UPDATE FORM]");
+		
 		int meet_no = Integer.parseInt( request.getParameter("meet_no") );
 		
 		MeetDto dto = meetBiz.selectOneMeetBoard(meet_no);
@@ -241,6 +249,8 @@ public class MeetController {
 	// 모임게시판 모임 [수정]
 	@RequestMapping("/meetupdate.do")
 	public String meetUpdate(MeetDto dto, Model model) {
+		logger.info("[MEET BOARD UPDATE]");
+		
 		int res = meetBiz.updateMeetBoard(dto);
 		
 		if(res>0) {
@@ -258,6 +268,8 @@ public class MeetController {
 	// 모임게시판 모임 [삭제]
 	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.POST)
 	public String meetDelete(HttpServletRequest request, Model model) {
+		logger.info("[MEET BOARD DELETE]");
+		
 		int meet_no = Integer.parseInt(request.getParameter("meet_no"));
 		
 		int res = meetBiz.delete(meet_no);

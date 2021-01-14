@@ -78,7 +78,7 @@ public class MeetReplyBizImpl implements MeetReplyBiz{
 	// 모임 댓글 '리스트'로 [member 정보] 받기
 	@Override
 	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList) {
-		return memberDao.selectMemberByFreeReply(replyList);
+		return memberDao.selectMemberByMeetReply(replyList);
 	}
 	
 	// 모임 댓글 [작성]

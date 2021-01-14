@@ -188,25 +188,25 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 	
-//	// [모임게시판 댓글] 리스트로 member 정보 가져오기
-//	@Override
-//	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
-//		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
-//		MemberDto dto = null;
-//		int mem_no = 0;
-//		for(int i = 0; i < replyList.size(); i++) {
-//			mem_no = replyList.get(i).getR_writer();
-//			try {
-//				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
-//			} catch (Exception e) {
-//				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetReply ---------- [ERROR]");
-//				e.printStackTrace();
-//			}
-//			resMap.put(replyList.get(i).getR_no(), dto);
-//		}
-//		
-//		return resMap;
-//	}
+	// [모임게시판 댓글] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetReply ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
 
 	// [도서 게시판] 리스트로 작성자 이름 가져오기
 	@Override
