@@ -86,6 +86,10 @@ function chkForm(){
 		alert("상세주소를 작성해주세요")
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("모임 상세내용을 작성해주세요.")
+	}else if( meetStartDate.val() > meetEndDate.val() ){
+		alert("모집 마감일이 모집 시작일보다 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.")
+	}else if( meetDate.val() < meetStartDate.val() || meetDate.val() < meetEndDate.val() || meetDate.val() == meetEndDate.val() ){
+		alert("모임날짜가 모집기간과 같거나 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.")
 	}else{
 		form.submit();
 	}
