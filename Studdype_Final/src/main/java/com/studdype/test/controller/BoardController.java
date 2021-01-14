@@ -116,42 +116,23 @@ public class BoardController {
 	public String freewrite(BoardDto board, HttpSession session, HttpServletRequest request, UploadFile uploadFile) {
 		int writer = ((MemberDto) session.getAttribute("login")).getMem_no(); // 작성자 번호
 		int s_no = ((StudyDto) session.getAttribute("study")).getS_no(); /// 스터디 번호
-
+		int res = 0;
 		board.setB_writer(writer);
 		board.setS_no(s_no);
 		
-		////////////////////////////////////////////////////////// 파일업로드를 해보자아아아아아아아아////
-		// f_no , b_no, f_name ,f_size, f_url 
-		
-		List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성		
+		//파일 업로드
 		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
-		String path = null;
-		try {
-			path = WebUtils.getRealPath(request.getSession().getServletContext() , "");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//파일요소들 뽑아서 fileList에 저장
-		for(int i = 0 ;  i < mfileList.length  ; i++) {
-			String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
-			double f_size = mfileList[i].getSize(); // 파일 실제크기
-			f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
-			
-			String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
-			String f_url = null;
-			try {
-				f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			FileDto fileDto = new FileDto(f_name, f_size, f_url);
-			fileList.add(fileDto);
-		}		
-		///////////////////////////////////////////////////////////////////////////////리팩토링 되려나
-			
 		
-		int res = freeBiz.writeBoard(board, mfileList, path, fileList);
+		//파일이있으면
+		if(mfileList != null) {
+			//	파일요소들 뽑아서 fileList에 저장
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성		
+			String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
+			//글 작성
+			res = freeBiz.writeBoard(board, mfileList, path, fileList);
+		}else { //파일이 없으면
+			res = freeBiz.writeBoard(board);
+		}
 
 		if (res > 0) {
 			return "redirect:freeboard.do";
@@ -160,9 +141,6 @@ public class BoardController {
 		}
 
 	}
-
-	
-	 
 		
 	// 자유게시판 글 삭제
 	@RequestMapping(value = "/freeBoardDelete.do", method = RequestMethod.GET)
@@ -215,47 +193,22 @@ public class BoardController {
 	public String freeBoardUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
 		int res = 0;
-		////////////////////////////////////////////////////////// 파일업로드를 해보자아아아아아아아아////
-		// f_no , b_no, f_name ,f_size, f_url
+
+		//파일 업로드
 		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
 		//사진이 있으면
 		if(mfileList != null) {
-			List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성		
+			String path = fileHandler.getPath(request);
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성 파일요소들 뽑아서 fileList에 저장		
 			
-			String path = null;
-			try {
-				path = WebUtils.getRealPath(request.getSession().getServletContext() , "");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//파일요소들 뽑아서 fileList에 저장
-			for(int i = 0 ;  i < mfileList.length  ; i++) {
-				String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
-				double f_size = mfileList[i].getSize(); // 파일 실제크기
-				f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
-				
-				String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
-				String f_url = null;
-				try {
-					f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				FileDto fileDto = new FileDto(f_name, f_size, f_url);
-				fileList.add(fileDto);
-			}		
+			//사진이 담겨잇는 게시글 번호 넣어주기
 			for(int i = 0 ; i < fileList.size(); i++) {
 				fileList.get(i).setB_no(dto.getB_no());
 			}
 			res = freeBiz.updateBoard(dto, mfileList, path, fileList);
-			///////////////////////////////////////////////////////////////////////////////리팩토링 되려나
 		}else { //사진이 없으면
 			res = freeBiz.updateBoard(dto);
 		}
-		
-		
-		
 		
 		if (res > 0) {
 			return "redirect:freeboard.do?b_no=" + dto.getB_no();
@@ -264,7 +217,6 @@ public class BoardController {
 			model.addAttribute("url", "freeBoardUpdateForm.do?b_no=" + dto.getB_no());
 			return "commond/alert";
 		}
-
 	}
 
 	//자유게시판 글 수정 파일삭제 AJAX

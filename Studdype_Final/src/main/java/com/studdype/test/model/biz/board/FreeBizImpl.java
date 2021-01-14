@@ -69,6 +69,12 @@ public class FreeBizImpl implements FreeBiz {
 		
 		return res;
 	}
+	
+	//자유게시판 글작성 파일 없을떄
+	@Override
+	public int writeBoard(BoardDto board) {
+		return freeBoardDao.insertBoard(board);
+	}
 
 	//자유게시판 글 가져오기(오류 무시하고 진행 가능) 디테일가져오기(조회수)
 	@Transactional

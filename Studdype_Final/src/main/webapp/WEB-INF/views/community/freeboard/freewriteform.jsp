@@ -106,8 +106,6 @@ function attachFile(){
 	if( chkFalse.last().children("input").val() == null || chkFalse.last().children("input").val().trim()=="" ){
 		chkFalse.last().remove();
 	}
-	
-	
 	//업로드 전체박스		
 	var div = $(".upload_box");
 	div.append(html);
@@ -129,12 +127,15 @@ function create_file_info(file){
 	var fileName = $(file)[0].files[0].name; //파일이름
 	var fileNameList = fileName.split(".");
 	var fileFormat = fileNameList[(fileNameList.length)-1];
-	
-	console.log( fileNameList );
-	console.log( fileFormat );
-	
+		
 	fileSize /= 1024 ; //KB로 변환
 	fileSize = fileSize.toFixed(2); //반올림
+	
+	if(fileSize >= 10000){ //10MB초과
+		alert("파일최대크기 10MB를 초과합니다!!");
+		upload_div.last().remove();
+		return false;
+	}
 	
 	fileFormat = fileFormat.trim(); // 공백 제거
 	fileFormat = fileFormat.toLowerCase(); //소문자로
@@ -145,10 +146,6 @@ function create_file_info(file){
 			 fileFormat != "zip" && fileFormat != "css" ){
 		fileFormat = "nomal";
 	}
-			
-	
-	
-	
 	 upload_div.last().append("<img class='file_format_img' src='./resources/img/fileFormat/"+fileFormat+".png'><span class='file_name' >"+
 			 	fileName+
 			 	"</span><input type='button' class='remove_file_btn'  onclick='clickFileBtn(this);'><span class='file_size'>"

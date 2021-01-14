@@ -133,11 +133,15 @@
  	var fileNameList = fileName.split(".");
  	var fileFormat = fileNameList[(fileNameList.length)-1];
  	
- 	console.log( fileNameList );
- 	console.log( fileFormat );
  	
  	fileSize /= 1024 ; //KB로 변환
  	fileSize = fileSize.toFixed(2); //반올림
+ 	
+ 	if(fileSize >= 10000){ //10MB초과
+		alert("파일최대크기 10MB를 초과합니다!!");
+		upload_div.last().remove();
+		return false;
+	}
  	
  	fileFormat = fileFormat.trim(); // 공백 제거
  	fileFormat = fileFormat.toLowerCase(); //소문자로
