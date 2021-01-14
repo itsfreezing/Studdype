@@ -17,6 +17,11 @@
 				VALUES ( FREEFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM FREE_BOARD ), #{f_name}, #{f_size}, #{f_url} )
 	 		</insert>
 	 		
+	 		<insert id="insertAddFile" parameterType="fileDto">
+	 			INSERT INTO FREE_FILE
+	 			VALUES ( FREEFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+	 		</insert>
+	 		
 	 		<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
 	 			SELECT * FROM FREE_FILE WHERE B_NO = #{b_no}
 	 		</select>
@@ -24,4 +29,9 @@
 	 		<select id="selectFile" parameterType="int" resultMap="fileMap">
 	 			SELECT * FROM FREE_FILE WHERE F_NO = #{f_no}
 	 		</select>
+	 		
+	 		<delete id="deleteFile" parameterType="int">
+	 			DELETE FROM FREE_FILE WHERE F_NO = #{f_no}
+	 		</delete>
+	 		
 	 </mapper>

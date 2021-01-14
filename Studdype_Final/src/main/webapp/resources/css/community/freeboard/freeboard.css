@@ -315,6 +315,17 @@
 	text-align: right;
 	height: 100px;
 }
+.download_file_btn{
+	background-image: url("../../../img/download.png");
+	background-size:25px;
+	border:none;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	cursor: pointer;
+	margin-left:10px;
+	float: right;
+}
 /* 댓글 */
 .replyItem{
 		list-style: none;

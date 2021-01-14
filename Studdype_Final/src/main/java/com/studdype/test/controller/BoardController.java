@@ -36,6 +36,7 @@ import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -116,6 +117,9 @@ public class BoardController {
 		int writer = ((MemberDto) session.getAttribute("login")).getMem_no(); // 작성자 번호
 		int s_no = ((StudyDto) session.getAttribute("study")).getS_no(); /// 스터디 번호
 
+		board.setB_writer(writer);
+		board.setS_no(s_no);
+		
 		////////////////////////////////////////////////////////// 파일업로드를 해보자아아아아아아아아////
 		// f_no , b_no, f_name ,f_size, f_url 
 		
@@ -147,8 +151,6 @@ public class BoardController {
 		///////////////////////////////////////////////////////////////////////////////리팩토링 되려나
 			
 		
-		board.setB_writer(writer);
-		board.setS_no(s_no);
 		int res = freeBiz.writeBoard(board, mfileList, path, fileList);
 
 		if (res > 0) {
@@ -185,17 +187,76 @@ public class BoardController {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 
 		BoardDto dto = freeBiz.selectOne(b_no);
-		model.addAttribute("dto", dto);
+		
+		//첨부파일 가져오기
+		List<FileDto> fileList = freeFileBiz.getAttachFileList(b_no);
+				
+		//첨부파일 파일 확장자 구하기
+		Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
+		for(int i = 0 ; i < fileList.size(); i++) {
+			String[] fileNameList = fileList.get(i).getF_name().split("\\.");
+			String fileFormat = fileNameList[fileNameList.length-1];
+					
+			fileFormat = fileFormat.toLowerCase();
+					
+			fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
+		}
+
+		model.addAttribute("fileFormatMap", fileFormatMap);
+		model.addAttribute("fileList",fileList);
+		model.addAttribute("dto", dto);	
+				
 		return "community/freeboard/freeupdateform";
 
 	}
 
 	// 자유게시판 글 수정
 	@RequestMapping("/freeBoardUpdate.do")
-	public String freeBoardUpdate(BoardDto dto, Model model) {
+	public String freeBoardUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
-		int res = freeBiz.updateBoard(dto);
-
+		int res = 0;
+		////////////////////////////////////////////////////////// 파일업로드를 해보자아아아아아아아아////
+		// f_no , b_no, f_name ,f_size, f_url
+		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		//사진이 있으면
+		if(mfileList != null) {
+			List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성		
+			
+			String path = null;
+			try {
+				path = WebUtils.getRealPath(request.getSession().getServletContext() , "");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//파일요소들 뽑아서 fileList에 저장
+			for(int i = 0 ;  i < mfileList.length  ; i++) {
+				String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
+				double f_size = mfileList[i].getSize(); // 파일 실제크기
+				f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
+				
+				String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
+				String f_url = null;
+				try {
+					f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				FileDto fileDto = new FileDto(f_name, f_size, f_url);
+				fileList.add(fileDto);
+			}		
+			for(int i = 0 ; i < fileList.size(); i++) {
+				fileList.get(i).setB_no(dto.getB_no());
+			}
+			res = freeBiz.updateBoard(dto, mfileList, path, fileList);
+			///////////////////////////////////////////////////////////////////////////////리팩토링 되려나
+		}else { //사진이 없으면
+			res = freeBiz.updateBoard(dto);
+		}
+		
+		
+		
+		
 		if (res > 0) {
 			return "redirect:freeboard.do?b_no=" + dto.getB_no();
 		} else {
@@ -206,6 +267,17 @@ public class BoardController {
 
 	}
 
+	//자유게시판 글 수정 파일삭제 AJAX
+	@RequestMapping(value="/freeFileDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int freeFileDelete(@RequestBody FileDto dto) {
+		logger.info("[freeFileDelete]");
+		
+		int res = freeFileBiz.deleteFile(dto.getF_no());
+		
+		return res;
+		
+	}
+	
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
 	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model,

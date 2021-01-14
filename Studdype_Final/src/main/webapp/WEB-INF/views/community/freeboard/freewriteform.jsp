@@ -95,7 +95,7 @@
 	}
 	
  };
- 
+ //파일첨부 함수
 function attachFile(){
 	var html = "<div class='upload_file_box'><input type='file' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
 	
@@ -121,6 +121,7 @@ function attachFile(){
 	
 	
 }
+ //파일첨부시 파일정보 div추가 함수
 function create_file_info(file){ 
 	//업로드 파일 박스
 	var upload_div = $(".upload_file_box");
@@ -156,7 +157,7 @@ function create_file_info(file){
 	 
 	 
 }
-
+//파일삭제 함수
 function clickFileBtn(fileName){
 	
 	fileName.className += ' change_file';  //update_btn 클래스 추가
