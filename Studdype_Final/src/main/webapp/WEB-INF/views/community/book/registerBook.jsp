@@ -474,22 +474,21 @@ tooltip-persistent 요소 추가 할 것 */
 	text-align:center;
 }
 
-.pageNum {
+.pageNumber {
 	width:30px;
 	height:50px;
 	font-size:40px;
 	border:2px solid rgb(115, 98, 222);
 	border-radius:5px;
-}
-.allow {
-	background:rgb(115, 98, 222);
-	color:#fff;
-	font-weight:bolder;
-	padding-bottom:1%;
+	cursor:pointer;
 }
 </style>
 <script type="text/javascript">
-	var bookList = [];
+	var bookList = [];		// 전달받은 도서 정보 리스트
+	var pageSize = 12; 		// 한 페이지 수 
+	var pageGroupSize = 5; 	// 페이징 당 페이지 수 
+	var listLength = 0;		// 전달받은 도서 수
+	
 	$(function() {
 	///////////////////////////////////////////////////////////////////////
 		search();
@@ -499,7 +498,7 @@ tooltip-persistent 요소 추가 할 것 */
 			$("#book-img-section").empty();
 			$.ajax({
 				method:"GET",
-				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=1&size=50&query="+$("#bookName").val()+"&target=title&target=person",
+				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=3&size=50&query="+$("#bookName").val()+"&target=title&target=person",
 				data:{ query: $("#bookName").val() },
 				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" }
 			})
@@ -522,6 +521,7 @@ tooltip-persistent 요소 추가 할 것 */
 					bookList.push(bookDto);
 				}
 				
+				console.log(msg);
 				console.log(bookList);
 				
 				appendBookList(bookList);
@@ -550,11 +550,23 @@ tooltip-persistent 요소 추가 할 것 */
 			$('.modal').removeClass('hidden');
 		})
 		
+		$(document).on("click", ".pageNumber", function() {
+			var pageOrder = $(this).text();
+			
+			if(pageOrder == 1) {
+				$(".divBox:gt(11)").hide();
+				$(".divBox:lt(11)").show();
+			}else if(pageOrder == 2) {
+				$(".divBox")
+			}
+		});
+		
 	}); // 즉시 실행 종료
 
 	// 도서 리스트 영역별로 정보 append
 	function appendBookList(bookList) {
-		var listLength = bookList.length;
+		listLength = bookList.length; // 전달받은 도서 수
+		$("#paging-section").empty();
 		if(listLength == 0) {
 			$("#book-img-section").append(
 				"<div id='no-list'>"+
@@ -564,6 +576,8 @@ tooltip-persistent 요소 추가 할 것 */
 			return;
 		}
 		
+		paging(listLength);
+		
 		for(var i = 0; i < bookList.length; i++) {
 			$("#book-img-section").append(
 					"<div class='divBox' tooltip='도서 상세 정보 보기' tooltip-persistent data-backdrop='static'>"+
@@ -572,6 +586,25 @@ tooltip-persistent 요소 추가 할 것 */
 					"</div>"
 			);
 		}
+		$(".divBox:gt(11)").hide();
+	}
+	
+	function paging(listLength) {
+		var startBook = (1 - 1) * pageSize;			// 첫번째 도서
+		var endBook = (1 * pageSize) - 1;				// 마지막 도서
+		var pageGroup = Math.ceil(1 / pageGroupSize);	// 페이지 그룹
+		var startPage = (pageGroup - 1) * pageGroupSize + 1;	// 첫페이지
+		var endPage = pageGroup * pageGroupSize;				// 끝페이지
+		var totalPageNum = (listLength / pageSize) + 1;			// 총페이지
+		
+		if(endPage > totalPageNum) {
+			endPage = totalPageNum;
+		}
+		
+		for(var i = startPage; i <= endPage; i++) {
+			$("#paging-section").append("<a class='pageNumber' id="+i+">"+i+"</a>");
+		}
+		
 	}
 	
 	// 검색창 함수
@@ -690,10 +723,6 @@ tooltip-persistent 요소 추가 할 것 */
 		<div id="main-section-bottom">
 			<div id='book-img-section'></div>
 			<div id="paging-section">
-				<a class="allow pageNum" href=""><</a>
-				<a class="pageNum" href="">1</a>
-				<a class="pageNum" href="">2</a>
-				<a class="allow pageNum" href="">></a>
 			</div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->
