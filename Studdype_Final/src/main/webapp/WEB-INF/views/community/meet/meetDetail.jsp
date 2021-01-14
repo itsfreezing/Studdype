@@ -80,6 +80,10 @@ function deleteBtn(){
 	}
 }
 
+function updateForm(){
+	var form = document.updateForm;
+	
+}
 
 </script>	
 
@@ -91,7 +95,7 @@ function deleteBtn(){
 
 	<!--main content 섹션-->
 	<div class="main-section">
-
+		
 		<!-- 모임 상세보기 -->
 		<div id="topDiv">
 			<div id="topDiv-left">
@@ -177,10 +181,8 @@ function deleteBtn(){
 			<!-- ---------------------------------- -->
 			
 		</div>
-		
 	</div>
-<input type="hidden" name="meet_title" value="${dto.meet_title }">
-<input type="hidden" name="meet_date" value="${dto.meet_date }">
+
 <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

@@ -80,7 +80,7 @@ public class MeetBizImpl implements MeetBiz {
 	
 	// 모임게시판 모임 [수정]
 	@Override
-	public int update(MeetDto dto) {
+	public int updateMeetBoard(MeetDto dto) {
 		return meetBoardDao.updateMeetBoard(dto);
 	}
 	

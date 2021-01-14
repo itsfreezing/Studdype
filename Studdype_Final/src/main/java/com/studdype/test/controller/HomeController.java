@@ -25,7 +25,7 @@ import jdk.nashorn.internal.ir.RuntimeNode.Request;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@Controller 
 public class HomeController {
 	
 	@Autowired

@@ -137,6 +137,6 @@ function chkForm(){
         </form>
     </div>
     
-    <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

@@ -63,7 +63,7 @@ function execPostcode(){
 
 <!-- 입력 폼이 비어있는지 체크 -->
 function chkForm(){
-	var form = document.meetUpdateForm;
+	var form = $("#meetUpdateForm")
 	var title = $("#meetTitle");
 	var detailAddress = $("#detailAddress");
 	var content = $("#contentArea");
@@ -75,7 +75,8 @@ function chkForm(){
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("모임 상세내용을 작성해주세요.")
 	}else{
-		window.location.href = "meetupdate.do?meet_no=${dto.meet_no}";
+		alert("모임 수정이 완료되었습니다!");
+		form.submit();
 	}
 };
 
@@ -105,7 +106,8 @@ function cancleBtn() {
 	
      <!--main conternt 섹션-->
      <div class="main-section">
-       	<form action="meetupdate.do" method="post" name="meetUpdateForm">
+       	<form method="post" id="meetUpdateForm" action="meetupdate.do">
+       	<input type="hidden" name="meet_no" value="${dto.meet_no }">
         	<div id="firstRow">
         		<div class="insertText">모임날짜</div>
         		<div class="dateCol1"><input type="date" name="meet_date" id="meetDate" value="<fmt:formatDate value="${ meet_date }" pattern="yyyy-MM-dd"/>"></div>

@@ -123,7 +123,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		MeetDto dto = null;
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
+			dto = sqlSession.selectOne(NAMESPACE+"selectOneMeetBoard", meet_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] ---------- MEET DAO selectOneMeetBoard ---------- [ERROR]");
 			e.printStackTrace();
