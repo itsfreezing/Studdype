@@ -47,5 +47,10 @@ public class BookBizImpl implements BookBiz{
 		return memberDao.getBookWriterName(mem_no);
 	}
 
+	@Override
+	public List<BookDto> bookList(int s_no) {
+		return bookDao.bookList(s_no);
+	}
+
 	
 }

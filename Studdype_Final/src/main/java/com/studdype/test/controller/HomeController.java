@@ -121,6 +121,7 @@ public class HomeController {
 	public String notetest() {
 		return "notetest";
 	}
+	
 }
 
 
