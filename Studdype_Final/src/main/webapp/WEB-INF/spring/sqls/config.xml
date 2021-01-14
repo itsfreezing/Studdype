@@ -30,6 +30,7 @@
 		<mapper resource="./mybatis/Board/meetBoard-mapper.xml"/>
       	<mapper resource="./mybatis/File/file-mapper.xml"/>
 		<mapper resource="mybatis/reply/freeReply-mapper.xml"/>
+		<mapper resource="./mybatis/reply/meetReply-mapper.xml"/>
 		<mapper resource="./mybatis/Board/book-mapper.xml"/>
 		<mapper resource="./mybatis/Study/studyMember-mapper.xml"/>
 		<mapper resource="./mybatis/File/freeFile-mapper.xml"/>
