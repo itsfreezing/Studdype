@@ -80,11 +80,6 @@ function deleteBtn(){
 	}
 }
 
-function updateForm(){
-	var form = document.updateForm;
-	
-}
-
 </script>	
 
 </head>
@@ -96,91 +91,95 @@ function updateForm(){
 	<!--main content 섹션-->
 	<div class="main-section">
 		
-		<!-- 모임 상세보기 -->
-		<div id="topDiv">
-			<div id="topDiv-left">
-				<div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${member.mem_id } </div>
-				<div id="cntDiv"><img src="./resources/assets/img/meetCnt.png">&nbsp;&nbsp; ${dto.meet_cnt } </div>
+		<form name="meetDetailForm" action="meetdelete.do" method="post">
+		<input type="hidden" name="meet_no" value="${dto.meet_no }">		
+		
+			<!-- 모임 상세보기 -->
+			<div id="topDiv">
+				<div id="topDiv-left">
+					<div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${member.mem_id } </div>
+					<div id="cntDiv"><img src="./resources/assets/img/meetCnt.png">&nbsp;&nbsp; ${dto.meet_cnt } </div>
+				</div>
+				<div id="topDiv-right">
+					<div id="titleDiv"> ${ dto.meet_title } </div>
+				</div>
 			</div>
-			<div id="topDiv-right">
-				<div id="titleDiv"> ${ dto.meet_title } </div>
+			<div id="contentDiv">
+				<div id="contentDiv-left">
+					
+					<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetDate.png">&nbsp;&nbsp;<fmt:setLocale value="en_US" scope="session"/>
+																										  <fmt:parseDate value='${ dto.meet_date }' var='meet_date' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ meet_date }" pattern="YYYY'년'MM'월'dd'일'"/></div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetTime.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.meet_time }' var='meet_time' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ meet_time }" pattern="HH:mm"/></div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetAddr.png">&nbsp;&nbsp;${dto.meet_addr }&nbsp;${dto.meet_addr_detail }</div>
+					<div class="meetDetailDiv"><img src="./resources/assets/img/meetVote.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.vote_startdate }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
+																										  <fmt:parseDate value='${ dto.vote_enddate }' var='vote_enddate' pattern="yyyy-MM-dd HH:mm:ss"/>
+																										  <fmt:formatDate value="${ vote_enddate }" pattern="yyyy.MM.dd"/>
+					</div>
+					<!-- ---------------------------------- -->
+					
+					<div id="meetContentDiv">${dto.meet_content }</div>
+				</div>
+				<div id="contentDiv-right"> 
+					
+					<!-- br 태그를 추가하지 않으면 지도가 화면에 보이지 않음 -->
+					<div id="map" >
+						<br><br><br><br><br><br><br><br><br><br><br><br><br>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br>
+						<br><br><br><br><br><br>
+					</div> 
+				</div> 
 			</div>
-		</div>
-		<div id="contentDiv">
-			<div id="contentDiv-left">
+			
+			<!-- 자신이 생성한 모임일때만 수정/삭제 버튼 보이게 -->
+			<div>
+			<c:choose>
+				<c:when test="${ dto.meet_writer == login.mem_no }">
+					<input type="button" value="수정" class="submitBtn" id="detailBtn_updateform" onclick="location.href='meetupdateform.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp; 
+					<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="deleteBtn();">&nbsp;&nbsp;
+					<input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
+				</c:when>
+				<c:otherwise>						
+					<input type="button" value="목록" class="submitBtn" id="detailBtn_list2" onclick="location.href='meetlist.do'">
+				</c:otherwise> 
+			</c:choose>
+			</div>
+			<!-- ---------------------------------- -->
 				
-				<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
-				<div class="meetDetailDiv"><img src="./resources/assets/img/meetDate.png">&nbsp;&nbsp;<fmt:setLocale value="en_US" scope="session"/>
-																									  <fmt:parseDate value='${ dto.meet_date }' var='meet_date' pattern="yyyy-MM-dd HH:mm:ss"/>
-																									  <fmt:formatDate value="${ meet_date }" pattern="YYYY'년'MM'월'dd'일'"/></div>
-				<div class="meetDetailDiv"><img src="./resources/assets/img/meetTime.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.meet_time }' var='meet_time' pattern="yyyy-MM-dd HH:mm:ss"/>
-																									  <fmt:formatDate value="${ meet_time }" pattern="HH:mm"/></div>
-				<div class="meetDetailDiv"><img src="./resources/assets/img/meetAddr.png">&nbsp;&nbsp;${dto.meet_addr }&nbsp;${dto.meet_addr_detail }</div>
-				<div class="meetDetailDiv"><img src="./resources/assets/img/meetVote.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.vote_startdate }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
-																									  <fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
-																									  <fmt:parseDate value='${ dto.vote_enddate }' var='vote_enddate' pattern="yyyy-MM-dd HH:mm:ss"/>
-																									  <fmt:formatDate value="${ vote_enddate }" pattern="yyyy.MM.dd"/>
+			
+			<!-- 투표 영역 -->
+			<div id="vote">
+				
+				<!--투표_참가여부 -->
+				<div id="voteDiv">참가여부<br><br>
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-success">
+							<input type="radio" name="options" id="option2" autocomplete="off">
+							<span class="glyphicon glyphicon-ok"></span>
+						</label>
+						<label class="btn btn-danger">
+							<input type="radio" name="options" id="option2" autocomplete="off">
+							<span class="glyphicon glyphicon-ok"></span>
+						</label>
+					</div>
+					<br>
+					<input type="button" value="투표하기" class="submitBtn vote" onclick="">
 				</div>
 				<!-- ---------------------------------- -->
 				
-				<div id="meetContentDiv">${dto.meet_content }</div>
-			</div>
-			<div id="contentDiv-right"> 
-				
-				<!-- br 태그를 추가하지 않으면 지도가 화면에 보이지 않음 -->
-				<div id="map" >
-					<br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<br><br><br><br><br><br>
-				</div> 
-			</div> 
-		</div>
-		
-		<!-- 자신이 생성한 모임일때만 수정/삭제 버튼 보이게 -->
-		<div>
-		<c:choose>
-			<c:when test="${ dto.meet_writer == login.mem_no }">
-				<input type="button" value="수정" class="submitBtn" id="detailBtn_updateform" onclick="location.href='meetupdateform.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp; 
-				<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="deleteBtn();">&nbsp;&nbsp;
-				<input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
-			</c:when>
-			<c:otherwise>						
-				<input type="button" value="목록" class="submitBtn" id="detailBtn_list2" onclick="location.href='meetlist.do'">
-			</c:otherwise> 
-		</c:choose>
-		</div>
-		<!-- ---------------------------------- -->
-			
-		
-		<!-- 투표 영역 -->
-		<div id="vote">
-			
-			<!--투표_참가여부 -->
-			<div id="voteDiv">참가여부<br><br>
-				<div class="btn-group" data-toggle="buttons">
-					<label class="btn btn-success">
-						<input type="radio" name="options" id="option2" autocomplete="off">
-						<span class="glyphicon glyphicon-ok"></span>
-					</label>
-					<label class="btn btn-danger">
-						<input type="radio" name="options" id="option2" autocomplete="off">
-						<span class="glyphicon glyphicon-ok"></span>
-					</label>
+				<!-- 투표_투표현황 -->
+				<div id="voteList">
+					<div id="div1"><div class="attend">참석</div><div class="graph">---------</div><div class="percentage">82%</div></div>
+					<div id="div2"><div class="attend">불참석</div><div class="graph">---------</div><div class="percentage">18%</div></div>
+					<div id="member_count">참여인원: 13명&nbsp;<img src="./resources/assets/img/icon_questionMark.png"></div>
 				</div>
-				<br>
-				<input type="button" value="투표하기" class="submitBtn vote" onclick="">
+				<!-- ---------------------------------- -->
+				
 			</div>
-			<!-- ---------------------------------- -->
-			
-			<!-- 투표_투표현황 -->
-			<div id="voteList">
-				<div id="div1"><div class="attend">참석</div><div class="graph">---------</div><div class="percentage">82%</div></div>
-				<div id="div2"><div class="attend">불참석</div><div class="graph">---------</div><div class="percentage">18%</div></div>
-				<div id="member_count">참여인원: 13명&nbsp;<img src="./resources/assets/img/icon_questionMark.png"></div>
-			</div>
-			<!-- ---------------------------------- -->
-			
-		</div>
+		</form>		
 	</div>
 
 <jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
