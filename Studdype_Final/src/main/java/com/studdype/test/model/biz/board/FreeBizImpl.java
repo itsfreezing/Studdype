@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.studdype.test.common.FileWriter;
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.board.free.FreeFileDao;
 import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
@@ -28,7 +29,7 @@ public class FreeBizImpl implements FreeBiz {
 	@Autowired
 	private FreeFileDao freeFileDao;
 	
-	private FileWriter fileWriter = new FileWriter(); //파일 저장하는 클래스
+	private FileHandler fileHandler = new FileHandler(); //파일 저장하는 클래스
 	
 	//자유게시판 총 게시글 갯수
 	@Override
@@ -62,7 +63,7 @@ public class FreeBizImpl implements FreeBiz {
 		if(resCnt == fileList.size() && insertRes ==1) {
 			res = 1;
 			for(int i = 0 ; i < mfileList.length ; i++) {
-				fileWriter.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
+				fileHandler.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
 			}
 		}
 		
@@ -87,9 +88,19 @@ public class FreeBizImpl implements FreeBiz {
 	}
 
 	//자유게시판 글 삭제
+	@Transactional
 	@Override
 	public int deleteBoard(int b_no) {
-		return freeBoardDao.deleteBoard(b_no);
+		int res = 0;
+		
+		List<FileDto> fileList = freeFileDao.selectAttachFileList(b_no); //파일리스트 가져오기
+		res = fileHandler.deleteFile(fileList);
+		
+		if( res > 0 ) {
+			res = freeBoardDao.deleteBoard(b_no);
+		}
+		
+		return res;
 	}
 
 	//자유게시판 글 수정

@@ -91,7 +91,7 @@
 		</insert>
 		
 		<!-- 모임게시판 모임 '1개' [가져오기] -->
-		<select id="selectOne" parameterType="int" resultType="meetDto">
+		<select id="selectOneMeetBoard" parameterType="int" resultType="meetDto">
 			SELECT *
 			FROM MEET_BOARD
 			WHERE MEET_NO = #{meet_no}
