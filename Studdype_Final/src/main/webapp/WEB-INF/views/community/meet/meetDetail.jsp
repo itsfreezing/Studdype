@@ -179,6 +179,20 @@ function deleteBtn(){
 				<!-- ---------------------------------- -->
 				
 			</div>
+			
+			<!-- 댓글 영역 -->
+			<c:choose>
+				<c:when test="${ dto.meet_writer == login.mem_no }">
+				<div style="width: 100%; height: 300px; border: 1px solid;">
+					<img src="./resources/assets/img/icon_crown.png">
+				</div>
+				</c:when>
+				<c:otherwise>
+				<div style="width: 100%; height: 300px; border: 1px solid;">
+				
+				</div>
+				</c:otherwise> 
+			</c:choose>	
 		</form>		
 	</div>
 
