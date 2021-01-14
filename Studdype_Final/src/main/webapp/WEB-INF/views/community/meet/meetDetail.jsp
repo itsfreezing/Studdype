@@ -80,11 +80,13 @@ function deleteBtn(){
 	}
 }
 
+
 </script>	
 
 </head>
 <body>
-
+	<!-- 모임 댓글 관련 스크립트 -->
+	<jsp:include page="../../community/meet/meetReplyScript.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
@@ -181,6 +183,8 @@ function deleteBtn(){
 			</div>
 			
 			<!-- 댓글 영역 -->
+			<div class="replyBox"></div>
+			
 			<c:choose>
 				<c:when test="${ dto.meet_writer == login.mem_no }">
 				<div style="width: 100%; height: 300px; border: 1px solid;">
