@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
+import com.studdype.test.model.dao.board.meet.MeetReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -22,6 +23,8 @@ public class MeetBizImpl implements MeetBiz {
 	private MeetBoardDao meetBoardDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private MeetReplyDao meetReplyDao;
 
 	// 모임게시판 모임 [총 개수]
 	@Override
@@ -80,7 +83,7 @@ public class MeetBizImpl implements MeetBiz {
 	
 	// 모임게시판 모임 [수정]
 	@Override
-	public int update(MeetDto dto) {
+	public int updateMeetBoard(MeetDto dto) {
 		return meetBoardDao.updateMeetBoard(dto);
 	}
 	
