@@ -202,55 +202,6 @@ tooltip-persistent 요소 추가 할 것 */
     pointer-events: none;
 }
 
-.main-section {
-
-}
-
-#main-section-top {
-	position:relative;
-	width:100%;
-	border:1px solid #fff;
-}
-
-#main-section-bottom {
-	position:relative;
-	width:100%;
-	border:1px solid #fff;
-}
-
-#book-img-section {
-	position:relative;
-	display:inline-block;
-	width:100%;
-}
-
-.divBox {
-	position:relative;
-	float:left;
-	margin:2%;
-	width:20%;
-	border:5px solid #f9f9f0;
-	border-radius:10px;
-	background:#f6f5f0;
-	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
-}
-
-#book-img-section img {
-	width:100%;
-	height:340px;
-}
-
-#book-img-section img:hover {
-	cursor:pointer;
-}
-
-#no-list {
-	position:relative;
-	width:30%;
-	height:auto;
-	left:35%;
-}
-
 /* 모달 CSS */
 *,
 :before,
@@ -464,44 +415,84 @@ tooltip-persistent 요소 추가 할 것 */
 .close:after {
   transform: translate(-50%, -50%) rotate(45deg);
 }
-
 /* 모달 CSS 종료 */
 
-</style>
 
+.main-section {
+
+}
+
+#main-section-top {
+	position:relative;
+	width:100%;
+	border:1px solid #fff;
+}
+
+#main-section-bottom {
+	position:relative;
+	width:100%;
+	border:1px solid #fff;
+}
+
+#book-img-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+}
+
+.divBox {
+	position:relative;
+	float:left;
+	margin:2%;
+	width:20%;
+	border:5px solid #f9f9f0;
+	border-radius:10px;
+	background:#f6f5f0;
+	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+#book-img-section img {
+	width:100%;
+	height:340px;
+}
+
+#book-img-section img:hover {
+	cursor:pointer;
+}
+
+#no-list {
+	position:relative;
+	width:30%;
+	height:auto;
+	left:35%;
+}
+
+#paging-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+	text-align:center;
+}
+
+.pageNum {
+	width:30px;
+	height:50px;
+	font-size:40px;
+	border:2px solid rgb(115, 98, 222);
+	border-radius:5px;
+}
+.allow {
+	background:rgb(115, 98, 222);
+	color:#fff;
+	font-weight:bolder;
+	padding-bottom:1%;
+}
+</style>
 <script type="text/javascript">
 	var bookList = [];
 	$(function() {
 	///////////////////////////////////////////////////////////////////////
-		//검색창 영역
-		const input = document.querySelector(".finder_input");
-		const finder = document.querySelector(".finder");
-		const form = document.querySelector("#searchForm");
-
-		input.addEventListener("focus", () => {
-		  finder.classList.add("active");
-		});
-
-		input.addEventListener("blur", () => {
-		  if (input.value.length === 0) {
-		    finder.classList.remove("active");
-		  }
-		});
-
-		form.addEventListener("submit", (ev) => {
-		  ev.preventDefault();
-		  finder.classList.add("processing");
-		  finder.classList.remove("active");
-		  input.disabled = true;
-		  setTimeout(() => {
-		    finder.classList.remove("processing");
-		    input.disabled = false;
-		    if (input.value.length > 0) {
-		      finder.classList.add("active");
-		    }
-		  }, 1000);
-		});
-		//////////////////검색창 JS 종료
+		search();
 		
 		// 카카오 도서 검색 api
 		$("#searchForm").submit(function() {
@@ -531,7 +522,6 @@ tooltip-persistent 요소 추가 할 것 */
 					bookList.push(bookDto);
 				}
 				
-			console.log(msg.documents);
 				console.log(bookList);
 				
 				appendBookList(bookList);
@@ -539,13 +529,9 @@ tooltip-persistent 요소 추가 할 것 */
 			});
 		});	
 		
-	///////////////////////////////////////////////
-	// 모달 기본 설정 이벤트
-		
 		// 모달 창 닫기 이벤트
 		$(".close, .nope").on('click', function () {
 			$('.modal').addClass('hidden');
-			$('.open').addClass('active');
 		});
 		
 		// 도서 이미지 클릭 이벤트 (모달 띄우는 함수)
@@ -561,18 +547,15 @@ tooltip-persistent 요소 추가 할 것 */
 			$("#b_title").val("");
 			$("#content").val("");
 			
-			$(".open").removeClass('active');
 			$('.modal').removeClass('hidden');
 		})
-		
-	//////////////////////////////////////////////
-	
 		
 	}); // 즉시 실행 종료
 
 	// 도서 리스트 영역별로 정보 append
 	function appendBookList(bookList) {
-		if(bookList.length == 0) {
+		var listLength = bookList.length;
+		if(listLength == 0) {
 			$("#book-img-section").append(
 				"<div id='no-list'>"+
 					"<img src='resources/img/no-list.png'>"+
@@ -591,7 +574,37 @@ tooltip-persistent 요소 추가 할 것 */
 		}
 	}
 	
-	function search
+	// 검색창 함수
+	function search() {
+		//검색창 영역
+		const input = document.querySelector(".finder_input");
+		const finder = document.querySelector(".finder");
+		const form = document.querySelector("#searchForm");
+
+		input.addEventListener("focus", () => {
+		  finder.classList.add("active");
+		});
+
+		input.addEventListener("blur", () => {
+		  if (input.value.length === 0) {
+		    finder.classList.remove("active");
+		  }
+		});
+
+		form.addEventListener("submit", (ev) => {
+		  ev.preventDefault();
+		  finder.classList.add("processing");
+		  finder.classList.remove("active");
+		  input.disabled = true;
+		  setTimeout(() => {
+		    finder.classList.remove("processing");
+		    input.disabled = false;
+		    if (input.value.length > 0) {
+		      finder.classList.add("active");
+		    }
+		  }, 1000);
+		});
+	}
 	
 </script>
 
@@ -677,8 +690,10 @@ tooltip-persistent 요소 추가 할 것 */
 		<div id="main-section-bottom">
 			<div id='book-img-section'></div>
 			<div id="paging-section">
-				<a href=""><</a>
-				<a href="">></a>
+				<a class="allow pageNum" href=""><</a>
+				<a class="pageNum" href="">1</a>
+				<a class="pageNum" href="">2</a>
+				<a class="allow pageNum" href="">></a>
 			</div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->
