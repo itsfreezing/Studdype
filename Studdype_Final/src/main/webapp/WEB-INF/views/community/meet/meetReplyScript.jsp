@@ -104,8 +104,37 @@ $(document).ready(
 										+"</div>"
 									+"</li>"
 									+"<hr>";
-									}
 									// ---------------------------- 로그인 아이디와 댓글 작성자가 같을 때
+									
+									// 로그인 아이디와 댓글 작성자가 다를 때
+									} else {
+										reply += "<button class='write_recomment_btn' onclick='writeRecommentForm(this);'>"
+													+"<img src='./resources/assets/img/icon_recomment.png'>"
+												+"</button>"
+											+"</div>"
+										+"</div>"
+										
+										// 댓글 답글달기 html 추가부분
+										+"<div class='hideDiv write_recomment' style='margin-left: 35px;'>"
+											+"<table>"
+												+"<tr>"
+													+"<td class='update_reply_writer'>"
+														+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + $("mem_id").val()
+													+"</td>"
+												+"</tr>"
+												+"<tr>"
+													+"<td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td>"
+												+"</tr>"
+											+"</table>"
+											+"<div class='update_reply_btnDiv'>"
+												+"<button class='update_reply_btn' onclick='getReplyList();'>취소</button>"
+												+"<button class='update_reply_btn' onclick='writeRecomment(this); value=" + map.replyList[i].r_no + "'>작성</button>"
+											+"</div>"
+										+"</div>"
+									+"</li>"
+									+"<hr>";
+										
+									}
 					
 					
 					var reply = "<li class='replyItem'>"+"<div class='replyarea showDiv'>"

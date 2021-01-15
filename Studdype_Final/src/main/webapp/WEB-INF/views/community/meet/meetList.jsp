@@ -211,7 +211,7 @@ function prePageGroup(){
     </div>
    
     
-<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 	
 <!-- 검색창 script -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
