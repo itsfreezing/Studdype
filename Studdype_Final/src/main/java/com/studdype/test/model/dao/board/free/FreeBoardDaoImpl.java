@@ -1,5 +1,6 @@
 package com.studdype.test.model.dao.board.free;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,5 +111,25 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		}
 		return res;
 	}
+
+	//자유게시판 디테일 최근글 5개 가져오기
+	@Override
+	public List<BoardDto> selectRecentList(int s_no, int b_no) {
+		List<BoardDto> resList = null;
+		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+		paramMap.put("s_no", s_no);
+		paramMap.put("b_no", b_no);
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
+		} catch (Exception e) {
+			System.out.println("{ERROR}: selectRecentList!!");
+			e.printStackTrace();
+		}
+		
+		return resList;
+	}
+
+	
 
 }

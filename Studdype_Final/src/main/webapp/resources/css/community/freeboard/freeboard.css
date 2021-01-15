@@ -98,6 +98,7 @@
 
 .writeBtns {
 	float: right;
+	
 }
 
 #boardtitle {
@@ -105,9 +106,86 @@
 	height: 50px;
 }
 
+/* 파일 업로드 */
 .uploadFile {
+	width: 150px;
+	height: 50px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 1%;
+	margin-bottom: 2%;
+	color: 6434ef;
 	float: right;
 }
+.uploadFile:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.upload_btn_box{
+	clear: both;
+	height: 80px;
+}
+.upload_box{
+	border:1px solid  rgb(180,180,180);
+	padding: 2%;
+	width: 100%;
+	float: right;
+	
+}
+
+.upload_file_box{
+	padding: 2%;
+	border-top: 1px solid  rgb(180,180,180);
+	height: 60px;
+}
+
+
+.upload_file{
+	display: none;
+}
+.file_name{
+	font-size: 18px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 700px;
+	float: left;
+}
+.file_size{
+	font-size: 14px;
+	color: rgb(130,130,130);
+	float: right;
+}
+
+.remove_file_btn{
+	background-image: url("../../../img/remove_file.png");
+	background-size:25px;
+	border:none;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	cursor: pointer;
+	margin-left:10px;
+	float: right;
+}
+.file_format_img{
+	width: 25px;
+	height: 25px;
+	margin-right: 3px;
+	margin-bottom: 5px;
+	float: left;
+}
+
 
 /*  보드 디테일 */
 .main-section3 {
@@ -198,6 +276,45 @@
 	
 }
 
+
+.attach_Btn{
+	float: right;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 25px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.attach_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
+.upload_box_detail{
+	border-top: 1px solid #ccc;
+	width: 100%;
+}
+
+.upload_file_box_detail{
+	padding: 2%;
+	height: 60px;
+}
+.attach_box_title{
+	padding-top: 3%;
+	padding-margin: 3%;
+	text-align: right;
+	height: 100px;
+}
 /* 댓글 */
 .replyItem{
 		list-style: none;
@@ -398,10 +515,52 @@
 	margin-left: 1%;
 }
 .free_Btn:hover{
-	background-color: #6434ef;
+	background-color: white;
 	border: 1px solid #6434ef;
-	color: white;
+	font-weight:bold;
+	color: #6434ef;
 	cursor: pointer;
-	transition: 0.3s;
+	transition: 0.5s;
 
+}
+/* 
+<!-- 최근 게시판 글 --> */
+.recent_board_box{
+	margin-top: 50px;
+}
+.recent_table{
+	width: 100%;
+	font-size: 13px;
+}
+.recent_table tr{
+		border-bottom: 1px solid rgb(240, 240, 240);
+		
+		
+}
+.current_board{
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+.recent_table td{
+		
+		padding: 15px;
+}
+.recent_table td a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid black;
+		padding-bottom: 3px;
+	}
+.reply_cnt{
+	color: red;
+	font-weight: bold;
+	font-size: 14px;
+}
+.look_all_td {
+	text-align:right; 
+	font-size: 14px; 
+	text-decoration: none;
+}
+.recent_table .look_all_td a:hover{
+	font-weight: bold;
+	border:none;	
 }

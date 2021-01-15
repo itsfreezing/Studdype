@@ -27,11 +27,30 @@ private static final Logger logger = LoggerFactory.getLogger(ImageBoardControlle
 		model.addAttribute("serverTime",formattedDate);
 		return "ImageBoard";
 		
-		
-		
-		
-		
-		
+
 		
 	}
+		@RequestMapping("/gallery.do")
+		public String list(Model model) {
+			
+			
+			
+			return "community/gallery/gallery";
+		}
+		
+		@RequestMapping("/galleryDetail.do")
+		public String detail(Model model) {
+			
+			
+			
+			return "community/gallery/galleryDetail";
+		}
+		
+		@RequestMapping("/gallerywriteform.do")
+		public String galleryWriteForm(Model model) {
+			
+			
+			return "community/gallery/galleryWriteForm";
+		}
+	
 }

@@ -33,11 +33,5 @@
 			SELECT * FROM MEMBER 
 			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 		</select>
-
-		<select id="selectWriterByBookList" parameterType="int" resultType="memberDto">
-			SELECT *
-			FROM MEMBER
-			WHERE MEM_NO = #{mem_no}
-		</select>
 	
 	</mapper>

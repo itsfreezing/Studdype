@@ -49,6 +49,7 @@
 		WHERE S_NO = #{s_no}
 	</select>
 	
+	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
 		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, 1)
@@ -58,5 +59,8 @@
 		SELECT S_NO
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
-	
+	<select id="studyLeader" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
+	</select>
+
 </mapper>

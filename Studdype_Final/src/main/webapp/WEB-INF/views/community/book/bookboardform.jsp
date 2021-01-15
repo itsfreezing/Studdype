@@ -84,7 +84,7 @@
 	<!-- a태그 영역 시작--------------------------------------------------------- -->
 		<div id="find-section">
 			<div id="btn-group">
-				<button class="search-Book" id="registerBookSearch" onclick="location.href='searchBook.do'">스터디 도서 검색</button>
+				<button class="search-Book" id="registerBookSearch" onclick="location.href='searchBook.do'">스터디 도서목록</button>
 				<button class="search-Book" id="newBookSearch" onclick="location.href='registerBook.do'">도서 등록</button>
 			</div>
 		</div>
