@@ -81,7 +81,7 @@
  });
  function chkForm(){
 	var form = $("#writeForm");
-	var title = $("#boardtitle");
+	var title = $("#boardtitale");
 	var content = $("#summernote");
 	
 	if( title.val() == null || title.val().trim() == ''){

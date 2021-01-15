@@ -7,7 +7,16 @@
 
 <head>
 <script>
-
+function logout_btn(){
+	var form = $("#logoutForm");
+	var logout = $("#logout");
+	
+	if ( logout.val() == null || logout.val().trim() == ''){
+		alert("로그아웃 되었습니다.");
+	}else {
+		form.submit();
+	}
+};
 </script>
 	
 </head>
@@ -15,6 +24,7 @@
 <body>
 
 	<!-- 헤더 시작 -->
+	<form id="logoutForm" action="logout.do" method="POST">
 	<div class="feature-page get-start header-area">
 		<div class="container">
 			<div class="header-top">
@@ -56,7 +66,7 @@
 									<a class="nav-lick" href="#">${login.mem_id }님 </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="studyList.do">로그아웃</a>
+									<a class="nav-link" href="logout.do" input type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
 								</li>
 								</c:otherwise>
 								</c:choose>
@@ -65,11 +75,13 @@
 							</ul>
 						</div>
 					</div>
+					</form>
 				</nav>
 				<!-- 네비 끝 -->
 			</div>
-			
+
 			<div class="row justify-content-center">
+			
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
