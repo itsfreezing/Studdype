@@ -154,7 +154,11 @@ function prePageGroup(){
        	<!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
 		<c:choose>
 			<c:when test="${empty list}">
-					<div id="notingMeet"> 모임이 존재하지 않습니다. </div>
+				<div id ="nothingImg"><img src="./resources/assets/img/searchNothing_keyword.png"></div>
+				<div id="nothingMeet"> 
+					<br>
+					더 이상모임이 존재하지 않습니다.
+				</div>
 			</c:when>
 			 <c:otherwise>
 				<c:forEach var ="i" begin="0" end="${list.size()-1 }" step="1">
