@@ -871,6 +871,8 @@ button.submitBtn:hover{
 	background: white;
 	border: none;
 	cursor: pointer;
+	width: 30px;
+	margin-left: 0.5%;
 }
 
 .write_recomeent_btn:hover{

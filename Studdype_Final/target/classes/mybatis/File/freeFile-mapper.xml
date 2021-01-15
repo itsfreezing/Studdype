@@ -20,4 +20,8 @@
 	 		<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
 	 			SELECT * FROM FREE_FILE WHERE B_NO = #{b_no}
 	 		</select>
+	 		
+	 		<select id="selectFile" parameterType="int" resultMap="fileMap">
+	 			SELECT * FROM FREE_FILE WHERE F_NO = #{f_no}
+	 		</select>
 	 </mapper>

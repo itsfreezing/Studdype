@@ -114,7 +114,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	@RequestMapping(value="/meetReplyDelete.do", method=RequestMethod.POST)
 	public @ResponseBody int meetReplyDelete(@RequestBody ReplyDto dto) {
 		logger.info("[Meet Reply Delete]");
-		
+		System.out.println("qweqweqweqwe");
 		int res = meetReplyBiz.deleteMeetReply(dto.getR_no());
 		System.out.println("-----------------------------------------------------------------------\n"
 						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임댓글이 삭제 되었습니다.\n"
