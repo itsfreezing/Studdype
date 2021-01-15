@@ -1,5 +1,7 @@
 package com.studdype.test.model.biz.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.studdype.test.model.dto.member.MemberDto;
@@ -10,6 +12,7 @@ public interface MemberBiz {
 	public int memberInsert(MemberDto dto); //회원가입
 	public MemberDto login(MemberDto dto); //로그인
 	public String logout(HttpSession session); //로그아웃
-
+	public int updateMember(MemberDto dto); // 마이페이지 정보수정
+	public MemberDto idchk(String mem_id); 	// 마이페이지 아이디 중복체크
 
 }

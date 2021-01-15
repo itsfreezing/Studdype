@@ -171,6 +171,7 @@ CREATE TABLE MEMBER(
     MEM_PHONE VARCHAR2(13) NOT NULL, --핸드폰 번호
     MEM_EMAIL VARCHAR2(100) NOT NULL -- 이메일    
 );
+
 select * from member;
 delete from member;
 ------지역 카테고리 
@@ -215,6 +216,7 @@ CREATE TABLE STUDY_CATEGORY(
     FOREIGN KEY (CATE_NO) REFERENCES STUDY_CATEGORY(CATE_NO) ON DELETE SET NULL,
     FOREIGN KEY (SI_NO) REFERENCES LOCATION_SI(SI_NO) ON DELETE SET NULL,
     FOREIGN KEY (GU_NO) REFERENCES LOCATION_GU(GU_NO) ON DELETE SET NULL
+    
  );
 
  
@@ -238,6 +240,7 @@ CREATE TABLE STUDY_APPLYING(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)        
 );
+         본인이 팀장인때 
 -------------------------------------------------------------
 
 ------------------ CREATE BOARD -----------------------------

@@ -203,7 +203,7 @@ public class StudyController {
 			return "redirect:createStuddypeform.do";
 		}
 	}
-	
+
 	//스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session,Model model) {
@@ -216,12 +216,7 @@ public class StudyController {
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
 		
 		
-		System.out.println(LeaderList);
 		
-		
-		System.out.println(bookList);
-		
-		System.out.println(memberlist);
 		
 		model.addAttribute("memberlist",memberlist);
 		session.setAttribute("login", login);
@@ -229,7 +224,8 @@ public class StudyController {
 		model.addAttribute("gudto", gudto);
 		model.addAttribute("sidto", sidto);
 		model.addAttribute("category", category);
-		model.addAttribute("leftnavi", "updateStudy");
+		
+		session.setAttribute("leftnavi", "updateStudy");
 		
 		return "studdype/updateStudy";
 	}

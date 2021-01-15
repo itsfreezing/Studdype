@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <link rel="stylesheet"
-	href="./resources/assets/css/owl.carousel.min.css">
+	href="./resources/assets/css/owl.carousel.min2.css">
   
     
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -105,13 +105,40 @@
   
      
 	  #studylistdiv{
-      border:1px solid black;
-      margin-top:480px;
-      width:100%;
-      height:100px;
-      }
+    
       
-
+      width:100%;
+      height:170px !important;
+      }
+   	#mystudyl{
+   		font-size:30px;
+   		color:#CC66FF;
+   		font-weight:bold;
+   		text-align:center;
+   	}
+   	.hero-slider-info{
+   	margin-top:65px !important;
+   	}
+  	#applystatus{
+  		position : relative;
+  		left: 300px;
+  		bottom: 40px;
+  	}
+  	#applyname{
+  		margin-left:15px;
+  	}
+  	#receive{
+  		margin-left:15px;
+  	
+  	}
+  	#receivebtn{
+  		position : relative;
+  		left: 260px;
+  		bottom: 47px;
+  		margin:5px;
+  		
+  	}
+   	
    </style>
 
 
@@ -150,24 +177,44 @@
       <p id="gender">성별</p><p id="gender2"><c:if test="${login.mem_gender == 'M' }">: 남</c:if>
                                    <c:if test="${login.mem_gender == 'F' }">: 여</c:if></p>
       <p id="phone">전화번호</p><p id="phone2">: ${login.mem_phone }</p>
-      <button id="updateinfo" type="button" class="btn btn-purple">정보 수정</button>
-      <button id="getout" type="button" class="btn btn-purple">회원 탈퇴</button>
+      <button id="updateinfo" type="button" class="btn btn-outline-secondary" onclick="location.href='UpdateMember.do'">정보 수정</button>
+      <button id="getout" type="button" class="btn btn-outline-secondary">회원 탈퇴</button>
    </div>
    <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Request Sent</p>
+      <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;" >새로 신청한 스터디 내역</p>
+      <c:forEach var="applylist" items="${applylist }"><p id="applyname">${applylist.s_name }</p></c:forEach> 
+      <c:forEach var="studyApplylist" items="${studyApplylist }">
+      <c:if test="${studyApplylist.agree == 'D' }"><p id="applystatus">진행중</p></c:if>
+      <c:if test="${studyApplylist.agree == 'Y' }"><p id="applystatus">수락됨</p></c:if>
+      <c:if test="${studyApplylist.agree == 'N' }"><p id="applystatus">거절됨</p></c:if>
+      </c:forEach>
+    
    </div>
    <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Received Request</p>
+      <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">가입 신청받은 내역</p>
+      <c:forEach var="receiveapplyname" items="${receiveapplyname }">
+      <p id="receive">${receiveapplyname.s_name }</p>
+      </c:forEach>
+      <c:forEach var="Receiveapply" items="${Receiveapply }">
+       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" class="btn btn-outline-secondary btn-sm">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm">거절</button></c:if>
+     
+      </c:forEach>
+      
    </div>
    <div style="border:1px solid black; width:400px; height:400px; float:left ;margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Meeting Management</p>
+      <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">내가 가입한 스터디 모임 관리</p>
+      <c:forEach var="meetlist" items="${meetlist }"><a href="meetdetail.do?meetno=${meetlist.meet_no }">${meetlist.meet_title }</a></c:forEach>
    </div>
+   <p id="mystudyl">My Study List</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
-     	<div class="hero-slider-info"><a style="color:black; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>
+     	<div class="hero-slider-info"><a style="color:black; font-weight:bold; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>
      
      </c:forEach>
    </div>

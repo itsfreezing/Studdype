@@ -104,5 +104,19 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
+	// 해당 스터디 번호 모임 리스트 뽑아오기 
+	@Override
+	public List<MeetDto> selectMeetList(int s_no) {
+		List<MeetDto> list = new ArrayList<MeetDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectMeetList",s_no);
+		} catch (Exception e) {
+			System.out.println("ERROR: selectMeetList!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }

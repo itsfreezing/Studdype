@@ -16,4 +16,6 @@ public interface MeetBiz {
 	public int insert(MeetDto dto); 									 // 모임게시판 모임생성
 	public int update(MeetDto dto);
 	public int delete(int meet_no);										 // 모임게시판 모임삭제
+	public List<MeetDto> selectMeetList(int s_no); 					     //스터디 번호로 모임 리스트 뽑아오기
+	
 }

@@ -70,5 +70,11 @@ public class MeetBizImpl implements MeetBiz {
 		return meetBoardDao.deleteMeetBoard(meet_no);
 	}
 
+	@Override
+	public List<MeetDto> selectMeetList(int s_no) {
+		
+		return meetBoardDao.selectMeetList(s_no);
+	}
+
 	
 }

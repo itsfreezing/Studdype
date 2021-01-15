@@ -18,5 +18,5 @@ public interface MeetBoardDao {
 	public int insertMeetBoard(MeetDto dto); 					 // 모임게시판 모임생성
 	public int updateMeetBoard(MeetDto dto);
 	public int deleteMeetBoard(int meet_no);					 // 모임 게시판 모임삭제
-	
+	public List<MeetDto> selectMeetList(int s_no);               // 스터디 번호로 모임게시판 리스트 가져오기
 }

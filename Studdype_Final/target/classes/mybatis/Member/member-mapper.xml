@@ -39,5 +39,11 @@
 			FROM MEMBER
 			WHERE MEM_NO = #{mem_no}
 		</select>
+		<update id="updateMember" parameterType="memberDto" >
+			UPDATE MEMBER SET MEM_ID = #{mem_id}, MEM_PW = #{mem_pw}, MEM_EMAIL = #{mem_email}, MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
+		</update>
+		<select id="idchk" parameterType="String" resultType="memberDto">
+			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id}
+		</select>
 	
 	</mapper>
