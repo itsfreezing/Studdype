@@ -38,7 +38,7 @@
 		<beans:property name="maxUploadSize" value="10485760"/> <!-- 10Mb 제한 -->
 	</beans:bean>
 	
-	<resources mapping="/img/**" location="C:\Users\bin90\Desktop\seungbin\Java\Final\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Studdype_Final\resources\summernoteImg" />
+	
 	
 	
 	<!-- 트랜잭션 (오류 무시하고 진행 가능)--> 

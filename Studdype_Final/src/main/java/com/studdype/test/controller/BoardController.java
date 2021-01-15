@@ -243,7 +243,6 @@ public class BoardController {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(url);
 		try {
 			byte fileData[] = file.getBytes();
 			
