@@ -415,7 +415,20 @@ function writeRecomment(btn){
 //페이지 로드 후에
 $(document).ready( getReplyList() );
 
+function showAttach(){
+	var uploadFileDiv = $(".upload_file_box_detail");
+	
+	for(var i = 0 ; i < uploadFileDiv.length ; i++){
+		uploadFileDiv.eq(i).toggle();
+	}
+}
 
+//파일 다운로드 함수
+function downloadFile(btn){
+	
+	location.href="freeFileDown.do?f_no="+btn.title;
+	
+}
  
 </script>
 </head>
@@ -438,6 +451,34 @@ $(document).ready( getReplyList() );
 			</span>
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
+		
+		
+		<!-- 첨부파일 부분 -->
+		<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
+			<div class="upload_box_detail">
+				<div class="attach_box_title">
+					<span style="font-size:25px; font-weight: bold">첨부파일 </span>
+					<span style="font-size: 20px;">${fileList.size() } 개</span>
+					<input type="button" value="↓" onclick="showAttach();" class="attach_Btn">			
+				</div>
+
+				<c:forEach var = "fileList" items="${fileList }">
+				
+					<div class='upload_file_box_detail hideDiv'>
+						<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
+						<span class='file_name' >${fileList.f_name }</span>
+						<input type='button' class='remove_file_btn'  onclick='downloadFile(this);' title='${fileList.f_no}'><!-- 다운로드 버튼으로 바꿔야돼... -->
+						<span class='file_size'>${fileList.f_size }KB</span>
+					</div>
+				</c:forEach>		
+			</div>
+		
+		</c:if>
+		
+		
+		
+		
+		
 		<!-- 게시글 버튼 부분 (수정,삭제,목록) -->
 		<div class="btnDiv">
 			<c:choose>
@@ -482,9 +523,9 @@ $(document).ready( getReplyList() );
 						<td colspan="3">게 시 글 이 없 습 니 다</td>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" varStatus="status">
+						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" >
 							<c:choose>
-							<c:when test="${status.count == 3 }">
+							<c:when test="${dto.b_no == recentList.get(i).getB_no() }">
 								<tr class="recent_board_tr current_board">
 							
 								<td class="tdtitle">

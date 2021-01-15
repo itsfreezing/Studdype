@@ -130,4 +130,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		return resList;
 	}
 
+	
+
 }

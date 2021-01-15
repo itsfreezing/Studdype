@@ -144,6 +144,7 @@
 
 
    <script type="text/javascript">
+
    $(document).ready(function() {
 		var owl = $('.owl-carousel');
 
@@ -200,7 +201,7 @@
       <p id="receive">${receiveapplyname.s_name }</p>
       </c:forEach>
       <c:forEach var="Receiveapply" items="${Receiveapply }">
-       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" class="btn btn-outline-secondary btn-sm">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm">거절</button></c:if>
+       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" class="btn btn-outline-secondary btn-sm" onclick="window.open('agree.do','가입 신청 수락/거절','width=300px,height=200px,scrollbars=no,left=800px,top=400px');">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm">거절</button></c:if>
      
       </c:forEach>
       

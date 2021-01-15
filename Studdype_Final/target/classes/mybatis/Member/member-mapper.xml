@@ -34,6 +34,7 @@
 			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 		</select>
 
+
 		<select id="selectWriterByBookList" parameterType="int" resultType="memberDto">
 			SELECT *
 			FROM MEMBER
@@ -45,5 +46,6 @@
 		<select id="idchk" parameterType="String" resultType="memberDto">
 			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id}
 		</select>
+
 	
 	</mapper>

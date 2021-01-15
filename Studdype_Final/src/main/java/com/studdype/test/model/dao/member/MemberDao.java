@@ -26,10 +26,16 @@ public interface MemberDao {
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list); 		// 모임 게시판 리스트로 작성자이름 가져오기
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); //자유게시판 리스트로 memberMap 가져오기
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); //[자유게시판 댓글]  리스트로 member 정보 가져오기 
-	// 도서 관련 메소드
-	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
+	
+	
+	//마이페이지 관련 메소드
 	public int updateMember(MemberDto dto); // 마이페이지 내정보 수정
 	public MemberDto idchk(String mem_id); //마이페이지 아이디 중복체크
+	
+	// 도서 관련 메소드
+	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no); // 해당 도서 아이디, 이름 찾아오기
+
 	
 	
 	

@@ -308,7 +308,7 @@
 
 	<div id="studyimage" class="image-container"> 
 	
-		<img id="LoadImg" style="width:300px;height:195px;" onError="this.src='/resources/img/no_image.png"  >
+		<img id="LoadImg" style="width:300px;height:195px;" onError="this.src='resources/img/no_image.png'"  >
 		
 	</div>
 	<!-- 대표 사진 끝 -->

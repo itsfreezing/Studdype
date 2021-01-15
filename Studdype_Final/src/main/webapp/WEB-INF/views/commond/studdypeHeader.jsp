@@ -69,6 +69,7 @@
 				<!-- 네비 끝 -->
 			</div>
 			
+
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
@@ -80,6 +81,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!-- 헤더 텍스트 끝 -->
 		</div>
 	</div>

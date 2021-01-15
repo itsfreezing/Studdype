@@ -45,7 +45,6 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberDto selectOne(int mem_no) {
 		MemberDto res = null;
-		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 		} catch (Exception e) {
@@ -189,22 +188,20 @@ public class MemberDaoImpl implements MemberDao{
 
 	// [도서 게시판] 리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList) {
-		Map<Integer, Map<String, String>> bookMap = new HashMap<Integer, Map<String, String>>();
-		Map<String, String> memberInfo = new HashMap<String, String>();
+	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList) {
+		Map<Integer, MemberDto> bookMap = new HashMap<Integer, MemberDto>();
 		int mem_no;
 		
 		for(int i = 0; i <bookList.size(); i++) {
 			mem_no = bookList.get(i).getB_writer();
 			MemberDto dto = new MemberDto();
 			try {
-				dto = sqlSession.selectOne(NAMESPACE+"selectWriterByBookList", mem_no);
-				memberInfo.put(dto.getMem_id(), dto.getMem_name());
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
 				System.out.println("[ERROR] : selectWriterByBookList"+i+"번째 실행");
 				e.printStackTrace();
 			}
-			bookMap.put(mem_no, memberInfo);
+			bookMap.put(mem_no, dto);
 		}
 		
 		return bookMap;
@@ -243,5 +240,21 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	
+
+	@Override
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
+		Map<Integer, MemberDto> getBookWriterName = new HashMap<Integer, MemberDto>();
+		MemberDto dto = new MemberDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			getBookWriterName.put(mem_no, dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : getBookWriterName");
+			e.printStackTrace();
+		}
+		
+		return getBookWriterName;
+	}
 
 }

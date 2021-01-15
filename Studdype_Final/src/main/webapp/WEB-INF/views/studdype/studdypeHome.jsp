@@ -76,6 +76,9 @@ input#search:focus {
 	border-bottom: 3px solid #6610F2;
 }
 
+.feature-page.header-area {
+	height: 80px;
+}
 </style>
 
 </head>
@@ -105,7 +108,7 @@ input#search:focus {
 	<!-- 스터디 영역 -->
 	<div class="blogpost-area">
 		<!-- 검색창 -->
-		<form action="/.do" method="get" role="form">
+		<form action="studyList.do" method="get" role="form">
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
 				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 

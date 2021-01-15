@@ -30,7 +30,7 @@ import com.studdype.test.model.dto.study.StudyMemberDto;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@Controller 
 public class HomeController {
 	
 	@Autowired
@@ -111,10 +111,7 @@ public class HomeController {
 			StudyDto dto4 = studyBiz.selectOneBySno(Receiveapply.get(i).getS_no());
 			receiveapplyname.add(dto4);
 		}
-		for(int i=0;i<joinedstudy.size();i++) {
-			List<MeetDto> list = meetBiz.selectMeetList(joinedstudy.get(i).getS_no());
-			meetlist.addAll(list);
-		}
+		
 	
 		
 		model.addAttribute("meetlist",meetlist);
@@ -129,6 +126,7 @@ public class HomeController {
 		
 		return "studdype/myPage";
 	}
+	//마이페이지 회원 정보수정 폼으로 이동
 	@RequestMapping("/UpdateMember.do")
 	public String UpdateMember(HttpSession session, Model model,HttpServletRequest request) {
 		MemberDto login = memberBiz.selectOne(1);
@@ -142,7 +140,7 @@ public class HomeController {
 		session.setAttribute("login",login);
 		return "studdype/UpdateMember";
 	}
-	//정보 수정 아이디 중복체크
+	//마이페이지 회원 정보 수정 아이디 중복체크
 	@RequestMapping(value="/idchk.do",method = RequestMethod.GET)
 	public String idchk(HttpServletRequest request, Model model) {
 		
@@ -163,6 +161,13 @@ public class HomeController {
 		return "commond/alert";
 	}
 	}
+	@RequestMapping(value="/agree.do",method = RequestMethod.GET)
+	public String joinAgree() {
+		
+		
+		return "studdype/StudyJoinRequest";
+	}
+	//마이페이지 회원정보 수정 버튼 클릭시
 	@RequestMapping(value="/memberupdate.do",method = RequestMethod.GET)
 	public String memberUpdate(HttpServletRequest request, Model model) {
 		MemberDto dto = new MemberDto(Integer.parseInt(request.getParameter("mem_no")),request.getParameter("mem_id"),request.getParameter("mem_pw"),request.getParameter("mem_phone"),request.getParameter("mem_email"));
@@ -254,6 +259,13 @@ public class HomeController {
 	public String notetest() {
 		return "notetest";
 	}
+	
+	@RequestMapping("/fileupload.do")
+	public String uploadTest() {
+		return "community/freeboard/uploadtest";
+	}
+		
+	
 }
 
 
