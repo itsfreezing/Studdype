@@ -113,7 +113,7 @@ public class HomeController {
 		}
 		
 	
-		
+		model.addAttribute("LeaderList",LeaderList);
 		model.addAttribute("meetlist",meetlist);
 		model.addAttribute("Receiveapply",Receiveapply);
 		model.addAttribute("receiveapplyname",receiveapplyname);
@@ -161,12 +161,7 @@ public class HomeController {
 		return "commond/alert";
 	}
 	}
-	@RequestMapping(value="/agree.do",method = RequestMethod.GET)
-	public String joinAgree() {
-		
-		
-		return "studdype/StudyJoinRequest";
-	}
+	
 	//마이페이지 회원정보 수정 버튼 클릭시
 	@RequestMapping(value="/memberupdate.do",method = RequestMethod.GET)
 	public String memberUpdate(HttpServletRequest request, Model model) {

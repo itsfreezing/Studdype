@@ -144,7 +144,8 @@
 
 
    <script type="text/javascript">
-
+	
+   //스터디 리스트 배너 
    $(document).ready(function() {
 		var owl = $('.owl-carousel');
 
@@ -160,6 +161,34 @@
 
 	
 	});
+   //팀장일 경우 스터디 신청 수락 버튼클릭시 
+   function agree(){
+	   var a = '${Appli}'
+	   if (confirm("정말 수락하시겠습니까?") == true){    //확인
+		    alert('수락 하였습니다.');
+	   }else{   
+		    return;
+		}
+		
+   }
+	//팀장일 경우 스터디 신청 수락 거절 버튼 클릭시
+	function cancle(){
+		 var a = '${Appli}'
+			   if (confirm("정말 거절하시겠습니까?") == true){    //확인
+				    alert('거절 하였습니다.');
+			   }else{   
+				    return;
+				}
+	}   
+  
+	function getout(){
+		if('{LeaderList}'!=null){
+			alert('본인이 팀장인 스터디가 존재합니다. 스터디 대표를 양도해주세요.');
+		}else{
+			alert('회원탈퇴 성공!');
+		}
+	}
+
    
    </script>
 </head>
@@ -179,7 +208,7 @@
                                    <c:if test="${login.mem_gender == 'F' }">: 여</c:if></p>
       <p id="phone">전화번호</p><p id="phone2">: ${login.mem_phone }</p>
       <button id="updateinfo" type="button" class="btn btn-outline-secondary" onclick="location.href='UpdateMember.do'">정보 수정</button>
-      <button id="getout" type="button" class="btn btn-outline-secondary">회원 탈퇴</button>
+      <button id="getout" type="button" class="btn btn-outline-secondary" onclick="getout();">회원 탈퇴</button>
    </div>
    <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
@@ -201,7 +230,7 @@
       <p id="receive">${receiveapplyname.s_name }</p>
       </c:forEach>
       <c:forEach var="Receiveapply" items="${Receiveapply }">
-       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" class="btn btn-outline-secondary btn-sm" onclick="window.open('agree.do','가입 신청 수락/거절','width=300px,height=200px,scrollbars=no,left=800px,top=400px');">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm">거절</button></c:if>
+       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" value="${Receiveapply.mem_no }" class="btn btn-outline-secondary btn-sm" onclick="agree();">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm" onclick="cancle();">거절</button></c:if>
      
       </c:forEach>
       
@@ -227,6 +256,6 @@
 </body>
 
 <footer>
-   <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+   <jsp:include page="../commond/communityFooter.jsp"></jsp:include>
 </footer>
 </html>

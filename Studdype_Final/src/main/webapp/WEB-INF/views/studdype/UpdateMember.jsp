@@ -174,7 +174,7 @@
      							<c:if test="${mem_phone != null }"><input id="phone2" name="newphone" value="${mem_phone }" autocomplete="off"></c:if>
       <button id="updatemember" type="button" class="btn btn-outline-secondary" onclick="complete()">수정 완료</button>
       <button id="cancle" type="button" class="btn btn-outline-secondary" onclick="location.href='myPage.do'">취소</button>
-   </div>
+  	 </div>
 	</form>
 	
 	

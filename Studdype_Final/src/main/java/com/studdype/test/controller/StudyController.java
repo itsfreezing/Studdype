@@ -216,6 +216,7 @@ public class StudyController {
 		
 		
 		
+		
 		model.addAttribute("memberlist",memberlist);
 		session.setAttribute("login", login);
 		model.addAttribute("bookList", bookList);
