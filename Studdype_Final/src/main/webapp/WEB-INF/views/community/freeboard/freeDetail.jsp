@@ -423,6 +423,12 @@ function showAttach(){
 	}
 }
 
+//파일 다운로드 함수
+function downloadFile(btn){
+	
+	location.href="freeFileDown.do?f_no="+btn.title;
+	
+}
  
 </script>
 </head>
@@ -461,7 +467,7 @@ function showAttach(){
 					<div class='upload_file_box_detail hideDiv'>
 						<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
 						<span class='file_name' >${fileList.f_name }</span>
-						<input type='button' class='remove_file_btn'  onclick=''><!-- 다운로드 버튼으로 바꿔야돼... -->
+						<input type='button' class='download_file_btn'  onclick='downloadFile(this);' title='${fileList.f_no}'>
 						<span class='file_size'>${fileList.f_size }KB</span>
 					</div>
 				</c:forEach>		

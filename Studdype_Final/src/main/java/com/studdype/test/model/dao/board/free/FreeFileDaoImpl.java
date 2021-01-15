@@ -51,4 +51,55 @@ public class FreeFileDaoImpl implements FreeFileDao{
 		return resList;
 	}
 
+	//자유게시판 첨부파일 가져오기
+	@Override
+	public FileDto selectFile(int f_no) {
+		FileDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectFile", f_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectFile");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	//자유게시판 글 수정시 추가 파일 삽입
+	@Override
+	public int insertAddFile(List<FileDto> fileList) {
+		int res = 0;
+		int resCnt = 0;
+		
+		try {
+			for(int i = 0 ; i < fileList.size() ; i++) {
+				res = sqlSession.insert(NAMESPACE+"insertAddFile", fileList.get(i));
+				//성공하면
+				if(res == 1) {
+					resCnt++;
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resCnt;
+	}
+
+	//파일 삭제
+	@Override
+	public int deleteFile(int f_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteFile", f_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeFileDaoImpl] deleteFile method");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.studdype.test.common.FileWriter;
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.dao.board.free.FreeBoardDao;
 import com.studdype.test.model.dao.board.free.FreeFileDao;
 import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
@@ -28,7 +29,7 @@ public class FreeBizImpl implements FreeBiz {
 	@Autowired
 	private FreeFileDao freeFileDao;
 	
-	private FileWriter fileWriter = new FileWriter(); //파일 저장하는 클래스
+	private FileHandler fileHandler = new FileHandler(); //파일 저장하는 클래스
 	
 	//자유게시판 총 게시글 갯수
 	@Override
@@ -62,11 +63,17 @@ public class FreeBizImpl implements FreeBiz {
 		if(resCnt == fileList.size() && insertRes ==1) {
 			res = 1;
 			for(int i = 0 ; i < mfileList.length ; i++) {
-				fileWriter.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
+				fileHandler.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
 			}
 		}
 		
 		return res;
+	}
+	
+	//자유게시판 글작성 파일 없을떄
+	@Override
+	public int writeBoard(BoardDto board) {
+		return freeBoardDao.insertBoard(board);
 	}
 
 	//자유게시판 글 가져오기(오류 무시하고 진행 가능) 디테일가져오기(조회수)
@@ -87,17 +94,50 @@ public class FreeBizImpl implements FreeBiz {
 	}
 
 	//자유게시판 글 삭제
+	@Transactional
 	@Override
 	public int deleteBoard(int b_no) {
-		return freeBoardDao.deleteBoard(b_no);
+		int res = 0;
+		
+		List<FileDto> fileList = freeFileDao.selectAttachFileList(b_no); //파일리스트 가져오기
+		res = fileHandler.deleteFile(fileList);
+		
+		if( res > 0 ) {
+			res = freeBoardDao.deleteBoard(b_no);
+		}
+		
+		return res;
 	}
 
-	//자유게시판 글 수정
+	//자유게시판 글 수정 파일있을떄
+	@Transactional
+	@Override
+	public int updateBoard(BoardDto board, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
+		
+		int res = 0; //updateBoard 결과
+		int updateRes = 0; //글 수정 결과
+		
+		updateRes = freeBoardDao.updateBoard(board); //자유게시판에 글 삽입
+		int resCnt = freeFileDao.insertAddFile(fileList); // 자유게시판 파일 테이블에 파일 삽입
+		
+		//둘다 성공하면 실제 파일 저장시킴.
+		if(resCnt == fileList.size() && updateRes ==1) {
+			res = 1;
+			for(int i = 0 ; i < mfileList.length ; i++) {
+				fileHandler.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
+			}
+		}
+		
+		
+		return res;
+	}
+	
+	//자유게시판 글수정 파일 없을떄
 	@Override
 	public int updateBoard(BoardDto board) {
 		return freeBoardDao.updateBoard(board);
 	}
-
+	
 	//자유게시판 글 가져오기
 	@Override
 	public BoardDto selectOne(int b_no) {
@@ -115,6 +155,8 @@ public class FreeBizImpl implements FreeBiz {
 	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list) {
 		return freeReplyDao.selectReplyCnt(list);
 	}
+
+	
 
 	
 
