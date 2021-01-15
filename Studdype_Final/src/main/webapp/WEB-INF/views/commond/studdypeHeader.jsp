@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +42,24 @@
 								<li class="nav-item">
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 								</li>
+								<c:choose>
+								<c:when test="${login == null }">
 								<li class="nav-item">
 									<a class="nav-link" href="loginform.do">로그인</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="signform.do">회원가입</a>
 								</li>
+								</c:when>
+								<c:otherwise>
+								<li class="nav-item">
+									<a class="nav-lick" href="#">${login.mem_id }님 </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="studyList.do">로그아웃</a>
+								</li>
+								</c:otherwise>
+								</c:choose>
 								<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 								<li class="nav-item"></li>
 							</ul>
@@ -55,17 +69,6 @@
 				<!-- 네비 끝 -->
 			</div>
 			
-			<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="hero-text-wrapper">
-						<div class="hero-text-inner">
-							<div class="hero-text">
-								<h1>네비 메뉴 이름</h1><br><br><br>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- 헤더 텍스트 끝 -->
 		</div>
 	</div>

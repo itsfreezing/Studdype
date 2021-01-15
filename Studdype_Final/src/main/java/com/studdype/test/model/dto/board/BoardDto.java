@@ -42,6 +42,17 @@ public class BoardDto {
 		this.b_important = b_important;
 		this.b_cnt = b_cnt;
 	}
+	
+
+	public BoardDto(int b_no, int s_no, String b_title, int b_writer, String b_content, Date b_regdate) {
+		super();
+		this.b_no = b_no;
+		this.s_no = s_no;
+		this.b_title = b_title;
+		this.b_writer = b_writer;
+		this.b_content = b_content;
+		this.b_regdate = b_regdate;
+	}
 
 
 	public int getB_important() {

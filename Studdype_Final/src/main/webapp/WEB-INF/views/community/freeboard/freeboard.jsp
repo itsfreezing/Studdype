@@ -90,7 +90,7 @@
 
 		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
 		<table class="boardlist">
-			<col width="600px"><col width="200px"><col width="200px"><col width="150px">
+			<col width="600px"><col width="250px"><col width="200px"><col width="150px">
 			<tr class="headtr">
 				<th>게시글 제목</th>
 				<th>작성자</th>
@@ -104,12 +104,19 @@
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
 						<tr>
-							<td class="tdtitle"><a href="freedetail.do?boardno=${list.get(i).getB_no() }">${list.get(i).getB_title() }</a></td>
-							<td class="tdwriter">${writerMap.get( list.get(i).getB_no() ) }</td>
+							<td class="tdtitle">
+								<a href="freedetail.do?b_no=${list.get(i).getB_no() }">${list.get(i).getB_title() }
+								<c:if test="${replyCntMap.get(list.get(i).getB_no())!=0}">
+									<span class="reply_cnt">[${replyCntMap.get(list.get(i).getB_no())}]</span>
+								</c:if>								
+								</a>
+							</td>
+							<td class="tdwriter">${memberMap.get( list.get(i).getB_no()).getMem_id() }(${memberMap.get( list.get(i).getB_no()).getMem_name()})</td>
 							<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
 							<td class="tdcnt">${list.get(i).getB_cnt() }</td>
 						</tr>
 					</c:forEach>
+					
 				</c:otherwise>
 			</c:choose>
 			

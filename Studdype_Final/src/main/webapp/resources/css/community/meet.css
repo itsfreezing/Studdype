@@ -1,142 +1,284 @@
-/* table 속성 */
-#meetInsertTable{
-	text-align: center;
-	border: 1px solid #e3ddfd;
-	width: 100%;
-	height: 80%;
+/* searchDiv css */
+#bigBox{
+	width: 80%; 
+	display: inline-block; 
+	margin-left: 15%;
 }
 
-#tableList{
-	width: 100%;
+.divBox {
+  width: 35%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* 입력란 꽉 채우기 & textarea에 크기조절 바 없애기 */
-.meetInsertInput{
-	width: 100%;
-	border: 0;
-	resize: none;
-	wrap: hard;
+.searchDiv {
+  position: relative;
+  overflow: hidden;
+  height: 88px;
+}
+.searchDiv.active::before {
+  top: 14px;
+  bottom: 14px;
+  opacity: 0;
+}
+.searchDiv.active path {
+  stroke-dashoffset: -400;
+}
+.searchDiv.active p {
+  pointer-events: all;
+}
+.searchDiv.active p::before, .searchDiv.active p::after {
+  opacity: 1;
+}
+.searchDiv.active span {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+}
+.searchDiv.active.remove::before {
+  transition: all 200ms linear 200ms, opacity 0ms linear 0ms;
+  top: 88px;
+  bottom: 2px;
+  opacity: 1;
+}
+.searchDiv.active.remove p::before, .searchDiv.active.remove p::after {
+  transition: all 0ms;
+  opacity: 0;
+}
+.searchDiv.active.remove path {
+  stroke-dashoffset: -800;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove span {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove.done::before {
+  top: 0;
+  bottom: 88px;
+  opacity: 1;
+  transition: none;
+}
+.searchDiv.active.remove.done path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: none;
+}
+.searchDiv::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
+  width: 4px;
+  background: #6434ef;
+  bottom: 88px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: all 400ms ease-in-out 500ms, opacity 200ms linear 1000ms;
+}
+.searchDiv path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: all 500ms ease-in-out;
+}
+.searchDiv span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 80px;
+  line-height: 80px;
+  width: 100%;
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 34px;
+  letter-spacing: 2px;
+  color: #6434ef;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 400ms ease-in-out;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  text-transform: uppercase;
+}
+.searchDiv input,
+.searchDiv p {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  height: 40px;
+  line-height: 80px;
+  width: 90%; 
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+}
+.searchDiv input {
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.searchDiv p {
+  color: #6434ef;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.searchDiv p:after, .search p:before {
+  content: '';
+  opacity: 0;
+  width: 4px;
+  height: 60px;
+  vertical-align: middle;
+  border-radius: 20px;
+  margin-top: 8px;
+  transition: all .2s ease-in-out;
+  transition-delay: 1000ms;
+  display: inline-block;
+}
+.searchDiv p:after {
+  position: relative;
+  bottom: 8px;
+  left: 8px;
+  background: #6434ef;
+  -webkit-animation: blinky 450ms linear infinite alternate;
+          animation: blinky 450ms linear infinite alternate;
 }
 
-/* 입력란 선택 시 border에 focus */
-.meetInsertInput:focus{
-	border: 1px solid #6610F2;
-	height: 100%;
+@-webkit-keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: #6434ef;
+  }
 }
 
-.meetInsertAddr:focus{
-	border: 1px solid #6610F2;
+@keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: F;
+  }
 }
 
-/* 주소 입력란에 버튼 추가를 위해 width 값 조정 */
-.meetInsertAddr{
-	width: 80%;
-	border: 0;
-	margin-top: 9px;
-	float: left;
+/* --------------------------------- meetList */
+
+/* meetList - Search 버튼 css */
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #6434ef;
+    border-radius: 10px;
+    border: 1px solid #6434ef;
+    box-shadow: 2px 2px 1px silver;    
 }
 
-/* select option 선택 시 border에 focus */
-#meetInsertTable select:focus{
-	border: 1px solid #6610F2;
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 1;
+    
+    /* 변경가능 */
+    background: #fff;
+    margin-top: 98px;
+    margin-left: 2px;    
 }
 
-/* 흰색 버튼 css(submit) */
-input.submitBtn,
-button.submitBtn{
-	background: #fff;
-	color: #c2c9db;
-	border: 1px solid #d7dbe8;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	margin-top: 40px;
-	padding-bottom: 50px;
-	width: 150px;
-	height: 50px;
-	line-height: 52px;
-	padding: 0;
-	font-size: 12px;
-	font-weight: 600;
-	border-radius: 50px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
+/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
+tooltip-persistent 요소 추가 할 것 */
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
 }
 
-/* 흰색 버튼에서 hover 시 보라색으로 변경 */
-input.submitBtn:hover,
-button.submitBtn:hover{
-	background: #7362DE;
-	color: #fff;
+/* 모임등록버튼 */
+#listBtnDiv{
+	display: inline-block; 
+	width: 52%;
+	position: relative;
 }
 
-/* 흰색 버튼 크기 조절(search) */
-input.searchBtn{
-	background: #fff;
-	color: #c2c9db;
-	border: 1px solid #d7dbe8;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	width: 130px;
-	height: 50px;
-	padding: 5px;
-	font-size: 12px;
-	font-weight: 600;
-	border-radius: 50px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-	float: right;
-	margin: 5px;
-}
-
-input.searchBtn:hover{
-	background: #7362DE;
-	color: #fff;
-}
-
-/* meetList의 모임등록버튼 위치 */
 #listBtn_insertform{
-	position: relative;
-	right: -86%;  
+	background: #fff;
+	color: #6434ef;
+	border: 5px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	height: 85px;
+	font-size: 30px;
+	font-weight: bold;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	width: 250px;
+	float: right; 
+	margin-top: 0;
 }
 
-/* meetInsert의 등록하기버튼 위치 */
-#insertBtn_insert{
-	position: relative;
-	right: -86%; 
+/* 모임이 존재하지 않을 때 */
+div#nothingImg img{
+	width: 25%;
+	display:block;
+    margin-left:auto;
+    margin-right:auto;
 }
 
-/* meetDetail의 수정버튼 위치 */
-#detailBtn_updateform{
-	position: relative;
-	right: -71%;  
+div#nothingMeet{
+	text-align: center; 
+	font-size: 40px;
+	font-weight: bold;
 }
 
-/* meetDetail의 삭제버튼 위치 */
-#detailBtn_delete{
-	position: relative;
-	right: -71%;  
+span#nothingKeyword{
+	color: red;
 }
 
-/* meetUpdate의 완료버튼 위치 */
-#updateBtn_update{
-	position: relative;
-	right: -71%;  
+p#nothingTXT{
+	text-align: center; 
+	margin: 100px; 
+	font-size: 20px;
+	color: gray;
+	margin-top: 1%;
 }
 
-/* meetUpdate의 취소버튼 위치 */
-#updateBtn_cancle{
-	position: relative;
-	right: -71%;  
+/* banner css */
+.hero-slider-info {
+	color: #fff;
+	margin-top: 0!important;
+	margin-bottom: 30px;
 }
 
-/* meetList의 table css */
+/* table css */
 #meetList{
-	border: 0;
-	border-radius: 3em;
+	border: 1px solid #bababa;
 	box-shadow: 8px 8px 8px gray;
 	cursor: pointer;
-	width: 98%;
-	margin: 1%;
+	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 4%;
 }
 
+/* td css */
 #date{
 	width: 30%;
 	padding: 15px 25px;
@@ -144,23 +286,7 @@ input.searchBtn:hover{
 	color: #7f7f81;
 }
 
-#writer{
-	width: 30%;
-	padding: 15px 25px;
-	text-align: left;
-	font-size: 20px;
-	font-weight: bold;
-	color: #686869;
-}
-
 #location{
-	width: 70%;
-	padding: 15px 25px;
-	text-align: right;
-	color: #7f7f81;
-}
-
-#recruitment{
 	width: 70%;
 	padding: 15px 25px;
 	text-align: right;
@@ -172,7 +298,6 @@ input.searchBtn:hover{
 	height: 20px;
 }
 
-
 #title{
 	padding: 10px;
 	text-align: center;
@@ -180,66 +305,28 @@ input.searchBtn:hover{
 	font-size: 30px;
 }
 
-td#map{
-	height: 350px;
-}
-
-/* 모임관리 페이지의 슬라이더 box-shadow 제거하기 */
-div.owl-carousel{
-	box-shadow: none!important;
-}
-
-/* 투표 */
-#vote_text{
-	font-size: 30px;
-}
-
-/* voteList의 table css */
-#voteList{
-	border: 0;
-	border-radius: 3em;
-	box-shadow: 8px 8px 8px gray;
-	cursor: pointer;
-	width: 98%;
-	margin: 2%;
-}
-
-#attend_y{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#attend_n{
-	padding: 15px 25px;
-	text-align: right;
-}
-
-#member_count{
-	padding: 21px 25px;
-	text-align: right;
-}
-
-td.attend{
+#writer{
 	width: 30%;
+	padding: 15px 25px;
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: #686869;
 }
 
-td.graph{
-	width: 50%;
+#recruitment{
+	width: 70%;
+	padding: 15px 25px;
+	text-align: right;
+	color: #7f7f81;
 }
 
-td.percentage{
-	width: 20%;
-}
+/* --------------------------------- */
 
-/*----------------------- 페이징 css  */
-.pagination {
-	margin-left: 35%;
-}
-
+/* --------------------------------- paging */
 .pagin {
 	list-style: none;
-	display: inline;
-	clear: right;
+	display: table;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -266,7 +353,6 @@ td.percentage{
 .page_a:hover {
 	transition: 0.3s;
 	border: 2px solid #6434ef;
-	/* background-color: #6434ef; */
 	cursor: pointer;
 }
 
@@ -296,4 +382,406 @@ td.percentage{
 	color: white;
 	background-color: #6434ef;
 }
+/* --------------------------------- */
+
+
+/* --------------------------------- meetDetail */
+
+/* 조회수 & 작성자 & 제목 DIV */
+div#topDiv{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+	padding: 2% 0;
+}
+
+div#topDiv-left{
+	float: left;
+	width: 10%;
+	border: none;
+} 
+
+div#topDiv-right{
+	float: right;
+	width: 90%;
+	border: none;
+}
+
+div#writerDiv{
+	font-size: 100%;
+	color: #949495;
+	border: none;
+	margin: 9% 0; 
+	padding: 2% 8%;
+}
+
+div#cntDiv{ 
+	font-size: 100%;
+	color: #949495;
+	border: none;
+	margin: 9% 0;
+	padding: 2% 8%;
+}
+
+div#titleDiv{
+	font-size: 300%; 
+	font-weight: bold;
+	color: #baabfb;
+	text-align: center;
+	margin: 0;
+	padding: 1% 5% 1% 0;
+}
+
+/* 모임날짜 & 모임시간 & 모집기간 DIV */
+div#contentDiv{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+}
+
+div#contentDiv-left{
+	float: left;
+	width: 40%;
+	border-left: none;
+}
+
+div#contentDiv-right{
+	float: right;
+	width: 60%;
+	height: auto;
+	border-left: 3px solid #e3ddfd;
+}
+
+div.meetDetailDiv{
+	font-size: 130%;
+	font-weight: bold;
+	padding: 5% 2%;
+	border-bottom: 2px solid #e3ddfd;
+}
+
+
+div#meetContentDiv{
+	font-size: 120%;
+	padding: 5% 2%;
+}
+
+div#map{
+	width: 100%;
+}
+
+
+/* 수정버튼 */
+#detailBtn_updateform{
+	position: relative;
+	right: -63%;  
+}
+  
+/* 삭제버튼 */
+#detailBtn_delete{
+	position: relative;
+	right: -63%;  
+}
+
+/* 목록버튼1 */
+#detailBtn_list1{
+	position: relative;
+	right: -63%;
+}
+
+#detailBtn_list2{
+	position: relative;
+	right: -88%;
+}
+
+#detailHR{
+	width: 98%;
+	border: 1px solid #6610F2;
+}
+/* --------------------------------- */
+
+/* --------------------------------- vote */
+
+/* vote 전체 DIV */
+div#vote{
+	display: inline-block;
+	border: 3px solid #e3ddfd;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+	margin-top: 3%;
+}
+
+/* 참가여부 */
+#voteDiv{
+	text-align: center;
+	display: inline-block;
+	width: 40%;
+	padding: 2%;
+}
+
+label.btn.btn-danger,
+label.btn.btn-success{
+	width: 80px;
+	height: 50px;
+}
+
+/* radio button */
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+
+/* radio button active */
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+
+/* 투표현황 */
+div#voteList{
+	display: inline-block;
+	width: 56%;
+	padding: 2%;
+}
+
+div.attend{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+div.graph{
+	display: inline-block;
+	width: 60%;
+	padding: 3% 5%;
+}
+
+div.percentage{
+	display: inline-block;
+	width: 20%;
+	padding: 3% 5%;
+	text-align: right;
+	margin: 0;
+}
+
+#member_count{
+	width: 100%;
+	padding: 3% 5%;
+	text-align: right;
+}
+
+#member_count img{
+	width: 24px;
+	height: 24px; 
+}
+
+/* --------------------------------- */
+
+/* --------------------------------- meetInsert */
+
+#meetInsertBanner{
+	margin-left: 14%;
+	margin-bottom: 2%;
+}
+
+div#firstRow,
+div#secondRow,
+div#thirdRow,
+div#fourthRow,
+div#fifthRow,
+div#sixthRow{
+	border: 0;
+	width: 80%;
+	margin-bottom: 4%;
+	margin-left: 4%;
+}
+
+div#firstRow input,
+div#secondRow input,
+div#thirdRow input,
+div#fourthRow input[type=text]{
+	border: 0;
+	width: 100%;
+}
+
+div#firstRow div.insertText{
+	display: inline-block;
+	border-bottom: 3px solid #e3ddfd;
+	padding: 1.7px;
+	margin-right: 6.5%;
+	font-weight: bold;
+}
+
+div#secondRow div.insertText{
+	display: inline-block;
+	border-bottom: 3px solid #e3ddfd;
+	padding: 1.7px;
+	margin-right: 5%;
+	font-weight: bold;
+}
+
+div#thirdRow div.insertText,
+div#fourthRow div.insertText{
+	display: inline-block;
+	border-bottom: 3px solid #e3ddfd;
+	padding: 1.7px;
+	margin-right: 9.6%;
+	font-weight: bold;
+}
+
+div#firstRow div.dateCol1,
+div#secondRow div.dateCol1{
+	display: inline-block;
+	border: 4px solid #e3ddfd;
+	padding: 0.3px;
+	margin-right: 25%;
+}
+
+div#firstRow div.dateCol2,
+div#secondRow div.dateCol2{
+	display: inline-block;
+	border: 4px solid #e3ddfd;
+	padding: 0.3px;
+}
+
+div.longDiv{
+	display: inline-block;
+	border-bottom: 4px solid #e3ddfd;
+	width: 49%;
+	padding: 0.3px;
+	margin-right: 2%; 
+}
+
+div#addrDiv{
+	display: inline-block;
+	border-bottom: 4px solid #e3ddfd;
+	width: 30%;
+	margin-top: 2%;
+	margin-left: 13.3%;
+	margin-bottom: 2%;
+}
+
+div#addrBtn{
+	display: inline-block;
+}
+
+input#addrBtn{
+	background: #fff;
+	color: #7362DE;
+	border: 1px solid #7362DE;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 120%;
+	font-size: 80%;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	padding: 8%;
+}
+
+input#addrBtn:hover{
+	background: #7362DE;
+	color: #fff;
+}
+
+div.insertText{
+	display: inline-block;
+	border-bottom: 3px solid #e3ddfd;
+	padding: 1.7px;
+	margin-right: 5%;
+	font-weight: bold;
+}
+
+div#fifthRow-left{
+	display: inline-block;
+	width: 10%; 
+	margin-right: 2.7%;
+}
+
+div#fifthRow-left div.insertText{
+	display: inline-block;
+	border-bottom: 3px solid #e3ddfd;
+	padding: 1.7px;
+	margin-right: 6.5%;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+div#fifthRow-right{
+	display: inline-block;
+	width: 70%;
+	border: 4px solid #e3ddfd;
+	height: 300px;
+}
+
+#contentArea{
+	border: 0;
+	width: 100%;
+	height: 100%;
+	resize: none;
+}
+
+/* meetInsert의 등록하기버튼 위치 */
+#insertBtn_insert{
+	position: relative;
+	right: -69%; 
+}
+
+
+
+#updateBtn_cancle{
+	position: relative;
+	right: -69%; 
+}
+
+
+
+/* 흰색 버튼 css(submit) */
+input.submitBtn,
+button.submitBtn{
+	background: #fff;
+	color: #7362DE;
+	border: 1px solid #7362DE;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin-top: 40px;
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	line-height: 52px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+input.submitBtn:hover,
+button.submitBtn:hover{
+	background: #7362DE;
+	color: #fff;
+}
+
+
+
+/* meetUpdate의 완료버튼 위치 */
+#updateBtn_update{
+	position: relative;
+	right: -55%;  
+}
+
+/* meetUpdate의 취소버튼 위치 */
+#updateBtn_cancle{
+	position: relative;
+	right: -55%;  
+}
+
+
+
+
+
 

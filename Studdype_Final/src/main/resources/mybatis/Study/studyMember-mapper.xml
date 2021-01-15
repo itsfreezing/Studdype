@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="studymember">
+	<resultMap type="studyMemberDto"  id="studyMemberMap">
+	<result property="s_no" column="S_NO"/>
+	<result property="mem_no" column="MEM_NO"/>
+	</resultMap>
+	
+	<select id="StudyMemberList" parameterType="int" resultType="studyMemberDto">
+		SELECT * FROM STUDY_MEMBER
+		WHERE S_NO = #{s_no}
+	</select>
+	<select id="StudyList" parameterType="int" resultType="studyMemberDto">
+		SELECT * FROM STUDY_MEMBER
+		WHERE MEM_NO = #{mem_no}
+	</select>
+</mapper>

@@ -13,9 +13,13 @@
       	<typeAlias type="com.studdype.test.model.dto.location.LocationSiDto" alias="locationSiDto"/>
   		<typeAlias type="com.studdype.test.model.dto.location.LocationGuDto" alias="locationGuDto"/>
   		<typeAlias type="com.studdype.test.model.dto.study.StudyCategoryDto" alias="studyCategoryDto"/>
-  		<typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
+  		<typeAlias type="com.studdype.test.model.dto.board.ReplyDto" alias="replyDto"/>
+		<typeAlias type="com.studdype.test.model.dto.board.FileDto" alias="fileDto"/>
+		<typeAlias type="com.studdype.test.model.dto.board.BookDto" alias="bookDto"/>
+		<typeAlias type="com.studdype.test.model.dto.study.StudyMemberDto" alias="studyMemberDto"/>
       </typeAliases>
   
+  	  		
   	<mappers>
   	  	<mapper resource="./mybatis/Board/freeBoard-mapper.xml"/>
     	<mapper resource="./mybatis/Member/member-mapper.xml"/>
@@ -23,9 +27,14 @@
      	<mapper resource="./mybatis/Location/locationSi-mapper.xml"/>
 	  	<mapper resource="./mybatis/Location/locationGu-mapper.xml"/>
 	  	<mapper resource="./mybatis/Category/category-mapper.xml"/>
-		<mapper resource="./mybatis/Meet/meet-mapper.xml"/>
+		<mapper resource="./mybatis/Board/meetBoard-mapper.xml"/>
       	<mapper resource="./mybatis/File/file-mapper.xml"/>
-
+		<mapper resource="mybatis/reply/freeReply-mapper.xml"/>
+		<mapper resource="./mybatis/reply/meetReply-mapper.xml"/>
+		<mapper resource="./mybatis/Board/book-mapper.xml"/>
+		<mapper resource="./mybatis/Study/studyMember-mapper.xml"/>
+		<mapper resource="./mybatis/File/freeFile-mapper.xml"/>
+		
   	</mappers>  
   
   

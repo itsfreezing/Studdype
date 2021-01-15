@@ -3,39 +3,28 @@ package com.studdype.test.model.dto.board;
 import java.util.Date;
 
 public class ReplyDto {
-	private int r_no; 			// ��� ��ȣ
-	private int b_no; 			// �Խñ� ��ȣ
+	private int r_no; 			// 댓글 번호
+	private int b_no; 			// 게시글 번호(모임 번호)
 	private int r_groupno; 		// ��� �׷� ��ȣ
 	private int r_class; 		// ��� ����
-	private int order; 			// ��,��� ����
-	private int r_writer; 		// �ۼ���
-	private String r_comment; 	// ��� ����
-	private Date r_regdate; 	// ��� �ۼ� �ð�
+	private int r_order; 			// ��,��� ����
+	private int r_writer; 		// 댓글 작성자(회원번호)
+	private String r_comment; 	// 댓글 내용
+	private Date r_regdate; 	// 댓글 작성 시간
 
 	public ReplyDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// �Ϲ� �Խ��� ��� ������
-	public ReplyDto(int r_no, int b_no, int r_groupno, int r_class, int order, int r_writer, String r_comment,
+	public ReplyDto(int r_no, int b_no, int r_groupno, int r_class, int r_order, int r_writer, String r_comment,
 			Date r_regdate) {
 		super();
 		this.r_no = r_no;
 		this.b_no = b_no;
 		this.r_groupno = r_groupno;
 		this.r_class = r_class;
-		this.order = order;
-		this.r_writer = r_writer;
-		this.r_comment = r_comment;
-		this.r_regdate = r_regdate;
-	}
-
-	// ���� ��� ������
-	public ReplyDto(int r_no, int b_no, int r_writer, String r_comment, Date r_regdate) {
-		super();
-		this.r_no = r_no;
-		this.b_no = b_no;
+		this.r_order = r_order;
 		this.r_writer = r_writer;
 		this.r_comment = r_comment;
 		this.r_regdate = r_regdate;
@@ -73,12 +62,12 @@ public class ReplyDto {
 		this.r_class = r_class;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getR_order() {
+		return r_order;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setR_order(int r_order) {
+		this.r_order = r_order;
 	}
 
 	public int getR_writer() {
@@ -104,4 +93,6 @@ public class ReplyDto {
 	public void setR_regdate(Date r_regdate) {
 		this.r_regdate = r_regdate;
 	}
+
+	
 }

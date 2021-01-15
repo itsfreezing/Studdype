@@ -13,12 +13,26 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '대입/수능');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '어학/회화');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '취업스터디');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
+SELECT * FROM STUDY_CATEGORY;
+
+SELECT * FROM LOCATION_SI;
+SELECT * FROM LOCATION_GU;
 
 --멤버 테이블
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader1', 'leader1', '테스트팀장', '960308-1010101', 'M', '010-8801-9068', 'bin3005@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin3005', 'bin3005', '이승빈', '960308-1110101', 'M', '010-8201-9068', 'bin2205@naver.com');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin','1234','관리자','950111-1112123','M','010-1234-1234','admin12@naver.com');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'user', 'user', 'user', '960308-1310101', 'M', '010-8221-9068', 'bin2205@nxver.com');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr2', 'user2', 'uesr2', '950201-1230134', 'M', '010-5501-9068', 'binzz205@naver.com');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-1110101', 'M', '030-8201-9068', 'bin3205@naver.com');
 select * from member;
+select * from STUDY_MEMBER;
+insert into study_member values(1,2);
+
 --자유 게시판
+select * from study;
+SELECT * FROM STUDY WHERE S_NO =1;
+select * from FREE_BOARD;
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '2번째 글입니다.', 1,  '2번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '3번째 글입니다.', 1,  '3번째 글 내용 입니다', SYSDATE, 0);
@@ -41,7 +55,7 @@ INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '19번째 글입니다.',
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '20번째 글입니다.', 1,  '20번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '24번째 글입니다.', 2,  '24번째 글 내용 입니다', SYSDATE, 0);
 
-
+SELECT * FROM FREE_BOARD;
 --스터디 생성
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름1', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
@@ -62,6 +76,23 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름15', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름16', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름17', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '안녕하세요', '스터디할사람', '우리 스터디는 재밋어요', NULL, 2, 2, 2, 15, 0);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름18', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름19', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름20', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름21', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름22', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름23', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름24', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름25', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름26', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름27', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름28', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름29', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름30', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름31', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름32', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름33', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
@@ -73,60 +104,99 @@ SELECT * FROM STUDY;
 -- 모임 게시판
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임1', 1, '모임1의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임2', 1, '모임2의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임3', 1, '모임3의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임4', 1, '모임4의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임5', 1, '모임5의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임6', 1, '모임6의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임7', 1, '모임7의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임8', 1, '모임8의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임9', 1, '모임9의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임10', 1, '모임10의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임11', 1, '모임11의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임12', 1, '모임12의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임13', 1, '모임13의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임14', 1, '모임14의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임15', 1, '모임15의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임16', 1, '모임16의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
-TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'));
+TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
 
 SELECT * FROM MEET_BOARD;
 
 SELECT * FROM MEMBER;
 
 
+-------자유게시판 댓글
+--댓글 순서 편하게 보기
+SELECT * FROM FREE_REPLY WHERE B_NO = 132 ORDER BY R_GROUPNO, R_ORDER;
+--자유게시판 댓글 삭제 확인용 insert
+INSERT INTO FREE_REPLY VALUES (5, 132,3, 0, 1, 1, '삭제 수정테스트중', SYSDATE  );
+INSERT INTO FREE_REPLY VALUES (6, 132,3, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
+INSERT INTO FREE_REPLY VALUES (7, 132,3, 1, 3, 1, '삭제 수정테스트중', SYSDATE  );
 
+--자유게시판 일반 insert
+INSERT INTO FREE_REPLY VALUES (FREEREPLYSEQ.NEXTVAL, 132, FREEGROUPSEQ.NEXTVAL, 1, 2, 1, '삭제 수정테스트중', SYSDATE  );
 
+-- 도서 게시판 insert
+INSERT INTO BOOK_BOARD VALUES(BOOKBOARDSEQ.NEXTVAL, 5, '도서 추천', 1, '추천드립니다.', SYSDATE);
 
+-- 학습 도서
+INSERT INTO BOOK VALUES(1, 1, '자바', '자바', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+INSERT INTO BOOK VALUES(2, 1, '스프링', '라면', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+INSERT INTO BOOK VALUES(3, 1, '자바스크립트', '짜장면', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+INSERT INTO BOOK VALUES(4, 1, '넥사크로', '짬뽕', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+INSERT INTO BOOK VALUES(5, 1, '마이쿼리', '탕수육', '이클립스', 'NOIMAGE', 'NODATA', 'N');
+update BOOK set BOOK_ISMAIN = 'Y' where B_NO=2;
+--자유게시판 댓글 답글 insert
+INSERT INTO FREE_REPLY 
+VALUES(
+    FREEREPLYSEQ.NEXTVAL,
+    132,
+    ( SELECT R_GROUPNO FROM FREE_REPLY WHERE R_NO = 1 ),
+    1,
+    (SELECT MAX(R_ORDER)  FROM FREE_REPLY  WHERE R_GROUPNO =(SELECT R_GROUPNO FROM FREE_REPLY WHERE R_NO = 1) ) +1,
+    1,
+    '답글 INSERT 연습',
+    SYSDATE
+) ;
+
+--자유게시판 제약조건확인
+ALTER TABLE FREE_BOARD MODIFY B_CONTENT LONG;
+SELECT * FROM ALL_CONSTRAINTS
+WHERE TABLE_NAME = 'FREE_BOARD';
+
+ALTER TABLE FREE_BOARD DROP CONSTRAINT SYS_C009669;
+UPDATE FREE_BOARD SET B_CONTENT = NULL;
+ALTER TABLE FREE_BOARD MODIFY B_CONTENT LONG;
 
 COMMIT;

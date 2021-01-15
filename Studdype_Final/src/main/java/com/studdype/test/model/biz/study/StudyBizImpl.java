@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.studdype.test.common.Pagination;
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.dataFile.DataFileDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;
@@ -40,8 +42,8 @@ public class StudyBizImpl implements StudyBiz{
 	
 	//메인페이지 스터디 list
 	@Override
-	public List<StudyDto> studyList() {
-		return study_Dao.studyList();
+	public List<StudyDto> studyList(SearchPagination searchPagination) {
+		return study_Dao.studyList(searchPagination);
 	}
 
 	//스터디 번호로 selectOne
@@ -103,4 +105,18 @@ public class StudyBizImpl implements StudyBiz{
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList) {
 		return studyCatedao.categoryListForHome(studyList);
 	}
+	
+	//메인페이지 리스트 갯수
+	@Override
+	public int selectTotalStudyListNum(SearchPagination searchPagination) {
+		return study_Dao.selectTotalStudyListNum(searchPagination);
+	}
+
+	@Override
+	public List<StudyDto> studyLeader(int leader_no) {
+		
+		return study_Dao.studyLeader(leader_no);
+	}
+
+	
 }

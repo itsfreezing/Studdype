@@ -2,11 +2,14 @@ package com.studdype.test.model.dao.study;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.common.Pagination;
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -17,12 +20,13 @@ public class StudyDaoImpl implements StudyDao {
 	
 	//스터디 list 전체 가져오기
 	@Override
-	public List<StudyDto> studyList() {
+	public List<StudyDto> studyList(SearchPagination searchPagination) {
 
-		List<StudyDto> studyList = new ArrayList<StudyDto>();
+		List<StudyDto> studyList = null;
 
 		try {
-			studyList = sqlSession.selectList(NAMESPACE + "studyList");
+			studyList = sqlSession.selectList(NAMESPACE + "studyList", searchPagination);
+			System.out.println(searchPagination.getKeyword());
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
@@ -73,5 +77,36 @@ public class StudyDaoImpl implements StudyDao {
 		}
 		return res;
 	}
+	
+	//스터디 리스트 총 갯수
+	@Override
+	public int selectTotalStudyListNum(SearchPagination searchPagination) {
+		int totalListNum = 0;
+		try {
+			totalListNum = sqlSession.selectOne(NAMESPACE+"selectTotalStudyListNum", searchPagination);
+		}catch(Exception e) {
+			System.out.println("에러: 스터디 리스트 총 갯수");
+			e.printStackTrace();
+		}
+		
+		return totalListNum;
+	}
+
+	@Override
+	public List<StudyDto> studyLeader(int leader_no) {
+		List<StudyDto> list = new ArrayList<StudyDto>();
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"studyLeader",leader_no);
+		} catch (Exception e) {
+			System.out.println("ERROR:studyLeader");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+
+	
 
 }

@@ -1,5 +1,6 @@
 package com.studdype.test.model.dao.board.free;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,5 +83,53 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 			e.printStackTrace();
 		}
 	}
+
+	//자유게시판 글 삭제
+	@Override
+	public int deleteBoard(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: deleteBoard!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//자유게시판 글 수정
+	@Override
+	public int updateBoard(BoardDto board) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateBoard", board);
+		} catch (Exception e) {
+			System.out.println("[ERROR}: updateBoard");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//자유게시판 디테일 최근글 5개 가져오기
+	@Override
+	public List<BoardDto> selectRecentList(int s_no, int b_no) {
+		List<BoardDto> resList = null;
+		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+		paramMap.put("s_no", s_no);
+		paramMap.put("b_no", b_no);
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
+		} catch (Exception e) {
+			System.out.println("{ERROR}: selectRecentList!!");
+			e.printStackTrace();
+		}
+		
+		return resList;
+	}
+
+	
 
 }
