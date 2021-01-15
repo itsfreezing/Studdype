@@ -1,8 +1,11 @@
 package com.studdype.test.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,23 +24,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.WebUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
-import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
-import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -65,7 +68,6 @@ public class BoardController {
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
-	private final static int bookPageSize = 4; // 도서 한 페이지에서 보여줄 도서 개수
 	private FileHandler fileHandler = new FileHandler();
 
 	// 자유게시판 리스트 이동
@@ -112,41 +114,23 @@ public class BoardController {
 	public String freewrite(BoardDto board, HttpSession session, HttpServletRequest request, UploadFile uploadFile) {
 		int writer = ((MemberDto) session.getAttribute("login")).getMem_no(); // 작성자 번호
 		int s_no = ((StudyDto) session.getAttribute("study")).getS_no(); /// 스터디 번호
-
-		////////////////////////////////////////////////////////// 파일업로드를 해보자아아아아아아아아////
-		// f_no , b_no, f_name ,f_size, f_url 
-		
-		List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성		
-		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
-		String path = null;
-		try {
-			path = WebUtils.getRealPath(request.getSession().getServletContext() , "");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//파일요소들 뽑아서 fileList에 저장
-		for(int i = 0 ;  i < mfileList.length  ; i++) {
-			String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
-			double f_size = mfileList[i].getSize(); // 파일 실제크기
-			f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
-			
-			String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
-			String f_url = null;
-			try {
-				f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			FileDto fileDto = new FileDto(f_name, f_size, f_url);
-			fileList.add(fileDto);
-		}		
-		///////////////////////////////////////////////////////////////////////////////리팩토링 되려나
-			
-		
+		int res = 0;
 		board.setB_writer(writer);
 		board.setS_no(s_no);
-		int res = freeBiz.writeBoard(board, mfileList, path, fileList);
+		
+		//파일 업로드
+		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		
+		//파일이있으면
+		if(mfileList != null) {
+			//	파일요소들 뽑아서 fileList에 저장
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성		
+			String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
+			//글 작성
+			res = freeBiz.writeBoard(board, mfileList, path, fileList);
+		}else { //파일이 없으면
+			res = freeBiz.writeBoard(board);
+		}
 
 		if (res > 0) {
 			return "redirect:freeboard.do";
@@ -155,9 +139,6 @@ public class BoardController {
 		}
 
 	}
-
-	
-	 
 		
 	// 자유게시판 글 삭제
 	@RequestMapping(value = "/freeBoardDelete.do", method = RequestMethod.GET)
@@ -182,17 +163,51 @@ public class BoardController {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 
 		BoardDto dto = freeBiz.selectOne(b_no);
-		model.addAttribute("dto", dto);
+		
+		//첨부파일 가져오기
+		List<FileDto> fileList = freeFileBiz.getAttachFileList(b_no);
+				
+		//첨부파일 파일 확장자 구하기
+		Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
+		for(int i = 0 ; i < fileList.size(); i++) {
+			String[] fileNameList = fileList.get(i).getF_name().split("\\.");
+			String fileFormat = fileNameList[fileNameList.length-1];
+					
+			fileFormat = fileFormat.toLowerCase();
+					
+			fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
+		}
+
+		model.addAttribute("fileFormatMap", fileFormatMap);
+		model.addAttribute("fileList",fileList);
+		model.addAttribute("dto", dto);	
+				
 		return "community/freeboard/freeupdateform";
 
 	}
 
 	// 자유게시판 글 수정
 	@RequestMapping("/freeBoardUpdate.do")
-	public String freeBoardUpdate(BoardDto dto, Model model) {
+	public String freeBoardUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
-		int res = freeBiz.updateBoard(dto);
+		int res = 0;
 
+		//파일 업로드
+		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		//사진이 있으면
+		if(mfileList != null) {
+			String path = fileHandler.getPath(request);
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성 파일요소들 뽑아서 fileList에 저장		
+			
+			//사진이 담겨잇는 게시글 번호 넣어주기
+			for(int i = 0 ; i < fileList.size(); i++) {
+				fileList.get(i).setB_no(dto.getB_no());
+			}
+			res = freeBiz.updateBoard(dto, mfileList, path, fileList);
+		}else { //사진이 없으면
+			res = freeBiz.updateBoard(dto);
+		}
+		
 		if (res > 0) {
 			return "redirect:freeboard.do?b_no=" + dto.getB_no();
 		} else {
@@ -200,9 +215,61 @@ public class BoardController {
 			model.addAttribute("url", "freeBoardUpdateForm.do?b_no=" + dto.getB_no());
 			return "commond/alert";
 		}
-
 	}
 
+	//자유게시판 글 수정 파일삭제 AJAX
+	@RequestMapping(value="/freeFileDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int freeFileDelete(@RequestBody FileDto dto) {
+		logger.info("[freeFileDelete]");
+		
+		int res = freeFileBiz.deleteFile(dto.getF_no());
+		
+		return res;
+		
+	}
+	
+	//서머노트 이미지 첨부 AJAX
+	@RequestMapping(value="/summernoteImgUpload.do", method=RequestMethod.POST)
+	public @ResponseBody String summernoteImgUpload(MultipartHttpServletRequest mreq, HttpServletRequest request) {
+		FileOutputStream fos = null;
+		Map resMap = new HashMap();
+		
+		MultipartFile file = mreq.getFile("file");
+		String fileName = file.getOriginalFilename().replace(" ", ""); //공백제거
+		String fakeName = System.currentTimeMillis()+ fileName;
+		String url=null;
+		try {
+			url = WebUtils.getRealPath(request.getSession().getServletContext() ,"resources\\summernoteImg\\"+fakeName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println(url);
+		try {
+			byte fileData[] = file.getBytes();
+			
+		
+			fos = new FileOutputStream(url);
+			fos.write(fileData);
+			
+		} catch (IOException e) {
+			System.out.println("[ERROR] [BoardController] summernoteImgUpload method");
+			e.printStackTrace();
+		}finally {
+			if(fos != null) {
+				 try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			 }
+		}
+		url = "/img/"+fakeName;
+		 try { url = URLEncoder.encode(url,"UTF-8"); } catch
+		 (UnsupportedEncodingException e) { e.printStackTrace(); }
+		 
+		return url;
+	}
+	
 	// 자유게시판 보드디테일
 	@RequestMapping(value = "/freedetail.do", method = RequestMethod.GET)
 	public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model,
@@ -343,18 +410,6 @@ public class BoardController {
 		return "community/book/registerBook";
 	}
 	
-	@RequestMapping(value="/regitsterSearchBookList.do", method=RequestMethod.POST)
-	public String registerSearchBookList() {
-		
-		return "community/book/registerBook";
-	}
-	
-	@RequestMapping(value="/bookList.do", method=RequestMethod.POST)
-	public String bookList(@RequestParam(value="bookList[]") List<List<String>> bookList) {
-		
-		return "community/book/registerBook";
-	}
-
 	// 페이징 함수
 	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
 
