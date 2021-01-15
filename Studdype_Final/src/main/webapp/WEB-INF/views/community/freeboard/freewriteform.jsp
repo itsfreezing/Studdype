@@ -47,6 +47,20 @@
 <script type="text/javascript" >
  $(document).ready(function() {
  $('#summernote').summernote({
+	 toolbar: [
+		    // [groupName, [list of button]]
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    ['color', ['forecolor','color']],
+		    ['table', ['table']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    ['insert',['picture','link','video']],
+		    ['view', ['fullscreen', 'help']]
+		  ],
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 		height: 450,
 		width : 1000,
 		minHeight: null,
@@ -64,17 +78,21 @@
 	function sendFile(file, editor){
 		var data = new FormData();
 		data.append("file", file);
-		console.log(file);
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "SummerNoteImageFile",
+			url : "summernoteImgUpload.do",
+			enctype: 'multipart/form-data',
 			contentType : false,
 			processData : false,
 			success : function(data){
+				var url = decodeURIComponent(data);
 				console.log(data);
-				console.log(editor);
-				$(editor).summernote("insertImage",data.url);
+				console.log(url);
+				$(editor).summernote('editor.insertImage',url);
+			},
+			error: function(){
+				alert("서머노트 이미지 업로드 실패");
 			}
 		});
 	}
@@ -177,6 +195,7 @@ function clickFileBtn(fileName){
  		<table class="maintable">
 
 		<tr>
+		<img src='./resources/summernoteImg/1610702153935휴가원.JPG'>
 			<td><h1>자유게시판 글 쓰기</h1></td>
 		</tr>
 		<tr>

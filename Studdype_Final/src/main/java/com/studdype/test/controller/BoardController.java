@@ -1,8 +1,11 @@
 package com.studdype.test.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,24 +24,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.WebUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
-import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
-import com.studdype.test.model.dto.board.MeetDto;
-import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -228,6 +230,48 @@ public class BoardController {
 		
 		return res;
 		
+	}
+	
+	//서머노트 이미지 첨부 AJAX
+	@RequestMapping(value="/summernoteImgUpload.do", method=RequestMethod.POST)
+	public @ResponseBody String summernoteImgUpload(MultipartHttpServletRequest mreq, HttpServletRequest request) {
+		FileOutputStream fos = null;
+		Map resMap = new HashMap();
+		
+		MultipartFile file = mreq.getFile("file");
+		String fileName = file.getOriginalFilename().replace(" ", ""); //공백제거
+		String fakeName = System.currentTimeMillis()+ fileName;
+		String url=null;
+		try {
+			url = WebUtils.getRealPath(request.getSession().getServletContext() ,"resources\\summernoteImg\\"+fakeName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println(url);
+		try {
+			byte fileData[] = file.getBytes();
+			
+		
+			fos = new FileOutputStream(url);
+			fos.write(fileData);
+			
+		} catch (IOException e) {
+			System.out.println("[ERROR] [BoardController] summernoteImgUpload method");
+			e.printStackTrace();
+		}finally {
+			if(fos != null) {
+				 try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			 }
+		}
+		url = "/img/"+fakeName;
+		 try { url = URLEncoder.encode(url,"UTF-8"); } catch
+		 (UnsupportedEncodingException e) { e.printStackTrace(); }
+		 
+		return url;
 	}
 	
 	// 자유게시판 보드디테일
