@@ -6,8 +6,7 @@ GRANT CONNECT, RESOURCE TO STUDDYPE;
 
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
-DROP SEQUENCE MEMBERSEQ;
-DROP SEQUENCE SISEQ;
+ DROP SEQUENCE SISEQ;
 DROP SEQUENCE GUSEQ;
 DROP SEQUENCE CATEGORYSEQ;
 DROP SEQUENCE STUDYSEQ;
