@@ -68,7 +68,9 @@ $(function(){
 	    } 
 	});    
 });
-
+function test(){
+	alert(qweqweqwe);
+}
 $(document).ready(
 		
 		<!-- 모임게시판 댓글 목록 가져오기 ajax -->
@@ -121,7 +123,7 @@ $(document).ready(
 													+"<button class='write_recomment_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
 														+"<img src='./resources/assets/img/icon_update.png'>"
 													+"</button>"
-													+"<button class='write_recomment_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
+													+"<button class='write_recomment_btn' value=" + list[i].r_no + " onclick='test();'>"
 														+"<img src='./resources/img/remove_file.png'>"								
 													+"</button>"
 												+"</div>"
