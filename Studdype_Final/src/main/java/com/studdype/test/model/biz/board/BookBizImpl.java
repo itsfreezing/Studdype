@@ -49,8 +49,7 @@ public class BookBizImpl implements BookBiz{
 
 	@Override
 	public List<BookDto> bookList(int s_no) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookDao.bookList(s_no);
 	}
 
 	
