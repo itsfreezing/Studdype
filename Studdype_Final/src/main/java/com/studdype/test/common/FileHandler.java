@@ -1,17 +1,21 @@
 package com.studdype.test.common;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.model.dto.board.FileDto;
 
@@ -59,7 +63,7 @@ public class FileHandler {
 		
 		
 	}
-	
+	//파일 한개 삭제
 	public int deleteFile(FileDto dto) {
 		
 		String path = dto.getF_url();
@@ -81,7 +85,7 @@ public class FileHandler {
 		return res;
 	}
 		
-	
+	//파일 여러개삭제
 	@Transactional
 	public int deleteFile(List<FileDto> fileList) {
 		int listSize = fileList.size();
@@ -110,7 +114,7 @@ public class FileHandler {
 		
 		return res;
 	}
-	
+	//파일 다운로드
 	public void downloadFile(FileDto dto, HttpServletResponse response)  {
 		
 		try {
@@ -132,4 +136,41 @@ public class FileHandler {
 		}
 	}
 	
+	//기본 path 반환
+	public String getPath(HttpServletRequest request) {
+		String path = null;
+		
+		try {
+			path = WebUtils.getRealPath(request.getSession().getServletContext() , "");
+		} catch (FileNotFoundException e) {
+			System.out.println("[ERROR][FileHandler] getPath method");
+			e.printStackTrace();
+		}
+		
+		return path;
+	}
+	
+	//파일 dto반환 파일요소들 뽑아서 fileList에 저장
+	public List<FileDto> getFileList(MultipartFile[] mfileList, HttpServletRequest request) {
+		List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성
+		
+		for(int i = 0 ;  i < mfileList.length  ; i++) {
+			String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
+			double f_size = mfileList[i].getSize(); // 파일 실제크기
+			f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
+			
+			String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
+			String f_url = null;
+			try {
+				f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			FileDto fileDto = new FileDto(f_name, f_size, f_url);
+			fileList.add(fileDto);
+		}		
+		
+		
+		return fileList;
+	}
 }
