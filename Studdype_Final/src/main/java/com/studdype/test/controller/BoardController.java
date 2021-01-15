@@ -70,7 +70,6 @@ public class BoardController {
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
-	private final static int bookPageSize = 4; // 도서 한 페이지에서 보여줄 도서 개수
 	private FileHandler fileHandler = new FileHandler();
 
 	// 자유게시판 리스트 이동
@@ -414,18 +413,6 @@ public class BoardController {
 		return "community/book/registerBook";
 	}
 	
-	@RequestMapping(value="/regitsterSearchBookList.do", method=RequestMethod.POST)
-	public String registerSearchBookList() {
-		
-		return "community/book/registerBook";
-	}
-	
-	@RequestMapping(value="/bookList.do", method=RequestMethod.POST)
-	public String bookList(@RequestParam(value="bookList[]") List<List<String>> bookList) {
-		
-		return "community/book/registerBook";
-	}
-
 	// 페이징 함수
 	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
 
