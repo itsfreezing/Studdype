@@ -71,6 +71,20 @@ public class BookDaoImpl implements BookDao {
 		
 		return bookList;
 	}
+
+	@Override
+	public int insertRegisterBook(BookDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertRegisterBook", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : insertRegisterBook");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 	
 	
 

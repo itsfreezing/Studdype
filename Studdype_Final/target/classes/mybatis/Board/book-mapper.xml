@@ -31,12 +31,20 @@
 		ORDER BY B_REGDATE DESC
 	</select>
 	
+	<!-- 등록된 도서 게시글 한개 가져오기 -->
 	<select id="selectOneBook" parameterType="bookDto" resultType="bookDto">
 		SELECT *
 		FROM BOOK
 		WHERE S_NO = #{s_no} 
 			AND B_NO = #{b_no}
 	</select>
+	
+	<insert id="insertRegisterBook" parameterType="bookDto">
+		INSERT INTO BOOK
+		VALUES(BOOKSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE,
+		 #{book_title}, #{book_author}, #{book_publish}, #{book_img}, #{book_url}, DEFAULT)
+	</insert>
+	
 	<select id="bookList" parameterType="int" resultType="bookDto">
 		SELECT * FROM BOOK WHERE S_NO = #{s_no}
 	</select>

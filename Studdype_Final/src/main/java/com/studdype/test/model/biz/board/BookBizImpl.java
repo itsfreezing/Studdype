@@ -52,5 +52,10 @@ public class BookBizImpl implements BookBiz{
 		return bookDao.bookList(s_no);
 	}
 
+	@Override
+	public int insertRegisterBook(BookDto dto) {
+		return bookDao.insertRegisterBook(dto);
+	}
+
 	
 }
