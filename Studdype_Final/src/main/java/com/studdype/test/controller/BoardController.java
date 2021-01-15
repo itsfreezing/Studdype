@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpServerErrorException;
 
-import com.studdype.test.common.FileWriter;
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
@@ -68,8 +68,7 @@ public class BoardController {
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
 	private final static int bookPageSize = 4; // 도서 한 페이지에서 보여줄 도서 개수
-
-	private FileOutputStream fos;
+	private FileHandler fileHandler = new FileHandler();
 
 	// 자유게시판 리스트 이동
 	@RequestMapping("/freeboard.do")
@@ -252,6 +251,17 @@ public class BoardController {
 		return "community/freeboard/freeDetail";
 	}
 	
+	//자유게시판 파일 다운로드
+	@RequestMapping(value="/freeFileDown.do", method = RequestMethod.GET)
+	public void freeFileDownload(HttpServletResponse response, HttpServletRequest request) {
+		int f_no = Integer.parseInt( request.getParameter("f_no") );
+		
+		FileDto dto = freeFileBiz.getFileByFno(f_no);
+		
+		if(dto != null) {
+			fileHandler.downloadFile(dto,response);
+		}
+	}
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
