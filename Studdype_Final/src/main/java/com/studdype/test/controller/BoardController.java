@@ -377,10 +377,6 @@ public class BoardController {
 		// 멤버번호로 작성자 이름/아이디 받아오기
 		writerNameMap = bookBiz.getWriterNameByList(list);
 
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-
 		model.addAttribute("list", list);
 		model.addAttribute("writerMap", writerNameMap);
 
