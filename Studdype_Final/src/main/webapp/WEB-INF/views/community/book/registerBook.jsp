@@ -482,6 +482,10 @@ tooltip-persistent 요소 추가 할 것 */
 	border-radius:5px;
 	cursor:pointer;
 }
+
+.show {
+	background:rgb(115, 98, 222);
+}
 </style>
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
@@ -543,6 +547,8 @@ tooltip-persistent 요소 추가 할 것 */
 			$("#publish").val(bookList[bookNum][2]);
 			$("#link").attr("href", bookList[bookNum][4]);
 			$("#book_img").attr("src", bookList[bookNum][3]);
+			$("#input_book_img").val(bookList[bookNum][3]);
+			$("#book_url").val(bookList[bookNum][4]);
 			
 			$("#b_title").val("");
 			$("#content").val("");
@@ -553,12 +559,7 @@ tooltip-persistent 요소 추가 할 것 */
 		$(document).on("click", ".pageNumber", function() {
 			var pageOrder = $(this).text();
 			
-			if(pageOrder == 1) {
-				$(".divBox:gt(11)").hide();
-				$(".divBox:lt(11)").show();
-			}else if(pageOrder == 2) {
-				$(".divBox")
-			}
+			paging(listLength, pageOrder);
 		});
 		
 	}); // 즉시 실행 종료
@@ -576,7 +577,7 @@ tooltip-persistent 요소 추가 할 것 */
 			return;
 		}
 		
-		paging(listLength);
+		paging(listLength, 0);
 		
 		for(var i = 0; i < bookList.length; i++) {
 			$("#book-img-section").append(
@@ -589,10 +590,16 @@ tooltip-persistent 요소 추가 할 것 */
 		$(".divBox:gt(11)").hide();
 	}
 	
-	function paging(listLength) {
-		var startBook = (1 - 1) * pageSize;			// 첫번째 도서
-		var endBook = (1 * pageSize) - 1;				// 마지막 도서
-		var pageGroup = Math.ceil(1 / pageGroupSize);	// 페이지 그룹
+	// 페이징 계산 및 append 함수
+	function paging(listLength, clickPage) {
+		
+		if(clickPage == 0) {
+			clickPage = 1;
+		}
+		
+		var startBook = (clickPage - 1) * pageSize;			// 첫번째 도서
+		var endBook = (clickPage * pageSize) - 1;				// 마지막 도서
+		var pageGroup = Math.ceil(clickPage / pageGroupSize);	// 페이지 그룹
 		var startPage = (pageGroup - 1) * pageGroupSize + 1;	// 첫페이지
 		var endPage = pageGroup * pageGroupSize;				// 끝페이지
 		var totalPageNum = (listLength / pageSize) + 1;			// 총페이지
@@ -601,10 +608,25 @@ tooltip-persistent 요소 추가 할 것 */
 			endPage = totalPageNum;
 		}
 		
+		// 페이지 조건 처리
+		if($("#paging-section").children().hasClass("pageNumber") == true) {
+			$(".show").removeClass("show");
+			$("#"+clickPage).addClass("show");
+			$(".divBox").hide();
+			for(var i = startBook; i <= endBook; i++) {
+				$(".divBox").eq(i).show();
+			}
+		}else {
+			appendPage(startPage, endPage);
+		}
+		
+	}
+	
+	// 페이지 버튼 append 함수
+	function appendPage(startPage, endPage) {
 		for(var i = startPage; i <= endPage; i++) {
 			$("#paging-section").append("<a class='pageNumber' id="+i+">"+i+"</a>");
 		}
-		
 	}
 	
 	// 검색창 함수
@@ -647,17 +669,18 @@ tooltip-persistent 요소 추가 할 것 */
 	<!-- 모달 영역 시작 -->
 		<div class="modal hidden">
 			<div class="form">
-    			<form action="bookRegister.do" autocomplete="off">
+    			<form action="insertRegisterBook.do" autocomplete="off" accept-charset="utf-8">
     				<input type="hidden" name="s_no" value="${study.s_no }">
     				<input type="hidden" name="b_writer" value="${login.mem_no }">
+    				<input type="hidden" id="input_book_img" name="book_img" value="">
     				<div id="modal-top">
-    					<label for="b_title" required="required">글 제목</label>
-     					<input id="b_title" name="b_title" type="text" />
+    					<label for="b_title">글 제목</label>
+     					<input id="b_title" name="b_title" type="text" required="required"/>
     				</div>
     				<div id="modal-bottom">
     					<div id="modal-textarea">
-    						<label for="content" required="required">도서 설명글</label>
-							<textarea id="content" rows="12" name="b_content"></textarea>
+    						<label for="content" >도서 설명글</label>
+							<textarea id="content" rows="12" name="b_content" required="required"></textarea>
     					</div>
     					<div id="modal-content">
     						<label for="title">도서 이름</label>
@@ -670,8 +693,8 @@ tooltip-persistent 요소 추가 할 것 */
       						<input id="publish" type="text" name="book_publish" value="" readonly="readonly">
       				
       						<label for="link">링크</label>
-      						<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input type="hidden" name="book_url" value=""></a>
-      						<button type="button">등록</button>
+      						<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
+      						<button type="submit">등록</button>
     					</div>
     				</div>
       				
@@ -722,8 +745,7 @@ tooltip-persistent 요소 추가 할 것 */
 		<!-- 메인 섹션 중앙 시작 -->
 		<div id="main-section-bottom">
 			<div id='book-img-section'></div>
-			<div id="paging-section">
-			</div>
+			<div id="paging-section"></div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->
 		

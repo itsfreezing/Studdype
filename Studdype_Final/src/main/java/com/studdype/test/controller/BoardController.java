@@ -363,7 +363,6 @@ public class BoardController {
 		session.setAttribute("leftnavi", "book");
 		return "community/book/bookboardform";
 	}
-
 	
 	// 도서 검색 페이지
 	@RequestMapping("/searchBook.do")
@@ -384,9 +383,10 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/bookDetailform.do", method = RequestMethod.GET)
-	public String bookDetailForm(HttpSession session, Model model, int b_no) {
+	public String bookDetailForm(HttpSession session, Model model, @RequestParam int b_no) {
 		StudyDto study = (StudyDto) session.getAttribute("study");
 		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
+		System.out.println(b_no);
 
 		BookDto dto = new BookDto();
 		dto.setS_no(study.getS_no());
@@ -406,6 +406,19 @@ public class BoardController {
 	@RequestMapping("/registerBook.do")
 	public String registerBook() {
 		return "community/book/registerBook";
+	}
+	
+	@RequestMapping("/insertRegisterBook.do")
+	public String insertRegisterBook(Model model, BookDto dto) {
+		int res = 0; 
+		System.out.println(dto);
+		res = bookBiz.insertRegisterBook(dto);
+		
+		if(res > 0) {
+			return "redirect:bookDetailform.do?b_no="+dto.getB_no();
+		}else {
+			return "redirect:registerBook.do";
+		}
 	}
 	
 	// 페이징 함수
