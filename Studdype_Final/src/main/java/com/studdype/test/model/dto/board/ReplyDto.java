@@ -5,9 +5,9 @@ import java.util.Date;
 public class ReplyDto {
 	private int r_no; 			// 댓글 번호
 	private int b_no; 			// 게시글 번호(모임 번호)
-	private int r_groupno; 		// ��� �׷� ��ȣ
-	private int r_class; 		// ��� ����
-	private int r_order; 			// ��,��� ����
+	private int r_groupno; 		// 댓글 그룹 번호
+	private int r_class; 		// 댓글 계층
+	private int r_order; 		// 댓글, 답글 순서
 	private int r_writer; 		// 댓글 작성자(회원번호)
 	private String r_comment; 	// 댓글 내용
 	private Date r_regdate; 	// 댓글 작성 시간

@@ -93,26 +93,6 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		return studyMainMap;
 	}
-	
-	// [모임 게시판]리스트로 작성자 이름 가져오기
-	@Override
-	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
-		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
-		MemberDto dto = null;
-		int meet_no = 0;
-		for(int i = 0; i < list.size(); i++) {
-			meet_no = list.get(i).getMeet_writer();
-			try {
-				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
-			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetList ---------- [ERROR]");
-				e.printStackTrace();
-			}
-			resMap.put(list.get(i).getMeet_no(), dto);
-		}
-		
-		return resMap;
-	}
 
 	//멤버번호로 이름 가져오기
 	@Override
@@ -178,6 +158,46 @@ public class MemberDaoImpl implements MemberDao{
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
 				System.out.println("[ERROR]: selectMemberByFreeReply !!!!!!");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	// [모임게시판] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int meet_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			meet_no = list.get(i).getMeet_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberByMeetList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMeet_no(), dto);
+		}
+		
+		return resMap;
+	}
+	
+	// [모임게시판 댓글] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetReply ---------- [ERROR]");
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);

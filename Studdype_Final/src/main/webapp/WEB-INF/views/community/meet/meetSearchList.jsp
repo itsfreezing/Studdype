@@ -218,7 +218,7 @@ $("#nothingMeet.val(${keyword})").css("color","red");
     </div>
    
     
-<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 
 <!-- search Box script -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
