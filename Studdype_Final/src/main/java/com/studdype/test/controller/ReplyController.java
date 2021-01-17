@@ -93,14 +93,14 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [모임게시판] 댓글 '리스트' [반환]
 	@RequestMapping(value="/meetReplyList.do", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> meetReplyList(@RequestBody ReplyDto dto) {
-		logger.info("[Meet Reply List]");
+		logger.info("[MEET REPLY LIST]");
 		List<ReplyDto> meetReplyList = null; // 댓글 리스트
 		Map<Integer,MemberDto> meetReplyMember = new HashMap<Integer, MemberDto>(); // 멤버정보를 담을 맵
 		Map<String, Object> meetReplyMap = new HashMap<String, Object>(); // 댓글리스트와 멤버정보를 담을 맵
 		
 		meetReplyList = meetReplyBiz.selectMeetReplyList(dto.getB_no());
 		System.out.println("-----------------------------------------------------------------------\n"
-						  +"<<모임 댓글>> ["+dto.getB_no()+"]번째 모임 입니다.\n"
+						  +"<<모임 댓글>> ["+dto.getB_no()+"]번째 모임의 댓글 리스트 입니다.\n"
 						  +"-----------------------------------------------------------------------"); 
 		meetReplyMember = meetReplyBiz.getMemberByList(meetReplyList);
 		
@@ -113,9 +113,10 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [모임게시판] 댓글 [삭제]
 	@RequestMapping(value="/meetReplyDelete.do", method=RequestMethod.POST)
 	public @ResponseBody int meetReplyDelete(@RequestBody ReplyDto dto) {
-		logger.info("[Meet Reply Delete]");
-		System.out.println("qweqweqweqwe");
+		logger.info("[MEET REPLY DELETE]");
+		
 		int res = meetReplyBiz.deleteMeetReply(dto.getR_no());
+		
 		System.out.println("-----------------------------------------------------------------------\n"
 						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임댓글이 삭제 되었습니다.\n"
 						  +"-----------------------------------------------------------------------"); 
@@ -126,9 +127,13 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [모임게시판] 댓글 [작성]
 	@RequestMapping(value="/meetReplyWrite.do", method=RequestMethod.POST)
 	public @ResponseBody int meetReplyWrite(@RequestBody ReplyDto dto) {
-		logger.info("[Meet Reply Write]");
+		logger.info("[MEET REPLY WRITE]");
 		
 		int res = meetReplyBiz.writeMeetReply(dto);
+		
+		System.out.println("-----------------------------------------------------------------------\n"
+						  +"<<모임 댓글>> ["+dto.getB_no()+"]번째 모임에 댓글이 추가 되었습니다.\n"
+						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
 	}	
@@ -136,9 +141,13 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [모임게시판] 댓글 [수정]
 	@RequestMapping(value="/meetReplyUpdate.do", method=RequestMethod.POST)
 	public @ResponseBody int meetReplyUpdate(@RequestBody ReplyDto dto) {
-		logger.info("[Meet Reply Update]");
+		logger.info("[MEET REPLY UPDATE]");
 		
 		int res = meetReplyBiz.updateMeetReply(dto);
+		
+		System.out.println("-----------------------------------------------------------------------\n"
+						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임에 댓글이 수정 되었습니다.\n"
+						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
 	}
@@ -146,7 +155,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [모임게시판] 댓글 '답글' [작성]
 	@RequestMapping(value="/meetRecommentWrite.do", method=RequestMethod.POST)
 	public @ResponseBody int meetRecommentWrite(@RequestBody ReplyDto dto) {
-		logger.info("[Meet Recomment Write]");
+		logger.info("[MEET RECOMMENT WRITE]");
 		
 		int res = meetReplyBiz.writeMeetRecomment(dto);
 		
