@@ -35,7 +35,6 @@ public class MeetReplyBizImpl implements MeetReplyBiz{
 		
 		// 1. 댓글 가져오기
 		ReplyDto reply = meetReplyDao.selectOneMeetReply(r_no);
-		
 		// 2. 넘어온 댓글이 부모 댓글이면 값 수정 / 아니면 삭제
 		if( reply.getR_class() == 0 ) {
 			
