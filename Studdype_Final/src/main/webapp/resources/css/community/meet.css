@@ -474,27 +474,19 @@ div#map{
 }
 
 
-/* 수정버튼 */
-#detailBtn_updateform{
-	position: relative;
-	right: -63%;  
-}
-  
-/* 삭제버튼 */
-#detailBtn_delete{
-	position: relative;
-	right: -63%;  
-}
-
-/* 목록버튼1 */
+/* 수정, 삭제, 목록, 댓글 버튼 */
+#detailBtn_updateform,
+#detailBtn_delete,
+#detailBtn_writeReply1,
 #detailBtn_list1{
 	position: relative;
-	right: -63%;
+	right: -51%;
 }
 
+#detailBtn_writeReply2,
 #detailBtn_list2{
 	position: relative;
-	right: -88%;
+	right: -76%;
 }
 
 #detailHR{
@@ -855,6 +847,12 @@ button.submitBtn:hover{
 	font-weight: bold;
 }
 
+.reply_writer_box > img{
+	width: 30px;
+	padding-bottom: 5px;
+	margin-right: 1%;
+}
+
 .reply_comment_box{
 	padding-bottom: 15px;
 	word-break:break-all;
@@ -864,8 +862,7 @@ button.submitBtn:hover{
 	color:rgb(170,170,170);
 	
 }
-
-.write_recomment_btn{
+.write_recomeent_btn{
 	font-size: 15px;
 	color:rgb(170,170,170);
 	background: white;

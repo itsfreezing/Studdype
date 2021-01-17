@@ -32,7 +32,6 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
-
 </head>
 <body>
 	<!-- 모임 댓글 관련 스크립트 -->
@@ -90,9 +89,11 @@
 				<c:when test="${ dto.meet_writer == login.mem_no }">
 					<input type="button" value="수정" class="submitBtn" id="detailBtn_updateform" onclick="location.href='meetupdateform.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp; 
 					<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetdelete.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp;
+					<input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply1" onclick="location.href='#write_content'">&nbsp;&nbsp; 
 					<input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
 				</c:when>
 				<c:otherwise>						
+					<input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply2" onclick="location.href='#write_content'">&nbsp;&nbsp; 
 					<input type="button" value="목록" class="submitBtn" id="detailBtn_list2" onclick="location.href='meetlist.do'">
 				</c:otherwise> 
 			</c:choose>
@@ -130,8 +131,23 @@
 				
 			</div>
 			
-			<!-- 댓글 영역 -->
+			<!-- 댓글 리스트 영역 -->
 			<div class="replyBox"></div>
+			
+			<!-- 댓글 작성 영역 -->	
+			<div class="replyWrite"  >
+				<table >
+					<tr>
+						<td colspan="2"><p class="writerId">${login.mem_id }</p></td>
+					</tr>
+					<tr>
+						<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
+						<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
+					</tr>				
+				</table>
+			</div>
+			
+			
 	</div>
 <input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
 <input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">

@@ -52,7 +52,7 @@
 	<update id="updateMeetReply" parameterType="replyDto">
 		UPDATE MEET_REPLY
 		SET R_COMMENT = #{r_comment}
-		WHERE R_NO #{r_np}
+		WHERE R_NO = #{r_no}
 	</update>
 	
 	
