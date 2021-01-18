@@ -310,13 +310,13 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    		<select id="phone1" name="mem_phone">
+                    		<select id="phone" name="mem_phone">
                     			<option value="010" selected>010</option>
                     			<option value="011">011</option>
                     			<option value="016">016</option>
                     			<option value="018">018</option>
-							</select>-<input type="tel"name="mem_phone" id="phone2"size="4" maxlength="4"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"  autocomplete="off">-
-							<input type="tel" name="mem_phone" id="phone3" size="4" maxlength="4" autocomplete="off">
+							</select>-<input type="text"name="phone2" id="phone"size="4" maxlength="4" autocomplete="off">-
+							<input type="text" name="phone3" id="phone" size="4" maxlength="4" autocomplete="off">
                     	</td>
                     </tr>
                    

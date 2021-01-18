@@ -158,6 +158,9 @@
 		</div>
 	</div>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<footer>
+<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
+</footer>
+
 </body>
 </html>

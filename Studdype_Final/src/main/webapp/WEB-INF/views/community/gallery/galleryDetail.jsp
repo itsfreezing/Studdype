@@ -470,7 +470,10 @@ $('#myCarousel').carousel({
 	
 
 	</div>
+	
+	<footer>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
+	</footer>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
 </body>
 </html>

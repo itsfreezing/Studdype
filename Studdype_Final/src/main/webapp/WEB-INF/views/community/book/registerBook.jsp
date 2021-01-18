@@ -732,7 +732,8 @@ tooltip-persistent 요소 추가 할 것 */
 	</div>
 	<!-- 메인 섹션 종료 -->
 	
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
-
+<footer>
+<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
+</footer>
 </body>
 </html>

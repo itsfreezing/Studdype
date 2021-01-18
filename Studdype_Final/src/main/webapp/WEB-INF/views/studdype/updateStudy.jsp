@@ -367,9 +367,9 @@
 	<!--  메인 세션 끝 -->
 
 
+<footer>
+<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+</footer>
 
 </body>
-<footer>
-	<jsp:include page="../commond/communityFooter.jsp"></jsp:include>
-</footer>
 </html>
