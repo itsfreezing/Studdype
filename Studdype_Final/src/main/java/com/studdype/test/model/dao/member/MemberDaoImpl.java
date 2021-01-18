@@ -222,13 +222,13 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return getBookWriterName;
 	}
+	
 	//아이디 중복체크 
 	@Override
-	public MemberDto IdChk(String mem_id) {
-		MemberDto res =null; 
-				
+	public String IdChk(String mem_id) {
+		String res =null; 
 		try {
-			res=sqlSession.selectOne(NAMESPACE+"CheckID",mem_id);
+			res=sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
 		} catch (Exception e) {
 			System.out.println("[error]:IdChk FAIL");
 			e.printStackTrace();

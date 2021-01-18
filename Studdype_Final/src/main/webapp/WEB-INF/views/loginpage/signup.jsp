@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-   request.setCharacterEncoding("UTF-8");
-%>
-<%
-   response.setContentType("text/html;charset=UTF-8");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +20,10 @@
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
-function checkpwd() {   //비밀번호, 비밀번호 확인 비교 함수
+function checkpwd(){   //비밀번호, 비밀번호 확인 비교 함수
 	  var pwchk = document.forms[0];
 	  var pw= pwchk.pw.value;
-	  var pw2=pwchk.mem_pw.value;
+	  var pw2=pwchk.mempw.value;
 		if(pw==pw2){
 			document.getElementById('checkpw').style.color="blue";
 			document.getElementById('checkpw').innerHTML="확인되었습니다";
@@ -54,7 +48,7 @@ $(document).ready(function(){
 	$("#check").click(function(){
 		var mem_id=$("#memberId").val();
 		var memberVal = {
-						"mem_id":mem_id
+				"mem_id":mem_id
 		};
 
 		$.ajax({
@@ -63,7 +57,7 @@ $(document).ready(function(){
 			type:"POST",
 			success:function(data){
 				console.log("0=사용가능 /1=사용불가"+data);
-				if(data==0&&$.trim($('#memberId').val())!=''){
+				if(data==0){
 					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
 						$('#IdCheck').empty();
 						$('#IdCheck').append(html);
@@ -77,9 +71,8 @@ $(document).ready(function(){
 					alert("FAIL");
 			}		
 		});
-	});	
-
-});
+	});
+});	
 function sign(){
 	var memberId=document.getElementById("memberId").title;
 	var memberpw=document.getElementById("memberpw").title;
@@ -90,7 +83,7 @@ function sign(){
 		if(memberId=="n"){
 			alert("아이디 중복확인해주세요");
 			return false;
-		}else if(memberpw=="n"){
+		}else if(memberpw=="y"){
 			alert("비밀번호를 입력해주세요");
 			$("#memberpw").focus();
 			return false;
@@ -259,7 +252,7 @@ input{
                     </tr>   
                     <tr>           
                         <td>
-                            <input type="password" id="memberpw"  title="y"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}"required />
+                            <input type="password" id="memberpw"  title="y"name="pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}"required />
                         </td>
                     </tr>
                     <tr>
@@ -269,7 +262,7 @@ input{
                     </tr> 
                     <tr>
                         <td colspan="5">
-                            <input type="password" name="mempw" onclick="checkpwd();"style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" id="memberpwd">
+                            <input type="password" name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="checkpwd();" id="mempw" >
                         	<div id="checkpw">동일한 암호를 입력</div>
                         </td>
                     </tr>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Controller
@@ -67,7 +68,7 @@ public class MemberController {
 	@RequestMapping("/idcheck.do")
 	public @ResponseBody int IdChk(@RequestBody String mem_id) {
 		logger.info("ID CHECK");
-		MemberDto res= null;
+		String res=null;
 		int isUsed=0;
 		System.out.println(mem_id);
 		res=memberbiz.IdChk(mem_id);

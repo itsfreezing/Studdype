@@ -10,7 +10,7 @@ public interface MemberBiz {
 	public int memberInsert(MemberDto dto); //회원가입
 	public MemberDto login(MemberDto dto); //로그인
 	public String logout(HttpSession session); //로그아웃
-	public MemberDto IdChk(String mem_id);//아이디 중복체크
+	public String IdChk(String mem_id);//아이디 중복체크
 
 
 }
