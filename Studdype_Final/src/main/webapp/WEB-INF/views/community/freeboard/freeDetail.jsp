@@ -572,6 +572,6 @@ function downloadFile(btn){
 
 	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
 	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
