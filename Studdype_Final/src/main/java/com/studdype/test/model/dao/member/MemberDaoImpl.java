@@ -45,7 +45,6 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberDto selectOne(int mem_no) {
 		MemberDto res = null;
-		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 		} catch (Exception e) {
@@ -93,26 +92,6 @@ public class MemberDaoImpl implements MemberDao{
 				studyMainMap.put(studyList.get(i).getLeader_no(), leaderName);
 			}
 		return studyMainMap;
-	}
-	
-	// [모임 게시판]리스트로 작성자 이름 가져오기
-	@Override
-	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
-		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
-		MemberDto dto = null;
-		int meet_no = 0;
-		for(int i = 0; i < list.size(); i++) {
-			meet_no = list.get(i).getMeet_writer();
-			try {
-				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
-			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetList ---------- [ERROR]");
-				e.printStackTrace();
-			}
-			resMap.put(list.get(i).getMeet_no(), dto);
-		}
-		
-		return resMap;
 	}
 
 	//멤버번호로 이름 가져오기
@@ -187,27 +166,81 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 
+	// [모임게시판] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int meet_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			meet_no = list.get(i).getMeet_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberByMeetList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMeet_no(), dto);
+		}
+		
+		return resMap;
+	}
+	
+	// [모임게시판 댓글] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetReply ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+
 	// [도서 게시판] 리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList) {
-		Map<Integer, Map<String, String>> bookMap = new HashMap<Integer, Map<String, String>>();
-		Map<String, String> memberInfo = new HashMap<String, String>();
+	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList) {
+		Map<Integer, MemberDto> bookMap = new HashMap<Integer, MemberDto>();
 		int mem_no;
 		
 		for(int i = 0; i <bookList.size(); i++) {
 			mem_no = bookList.get(i).getB_writer();
 			MemberDto dto = new MemberDto();
 			try {
-				dto = sqlSession.selectOne(NAMESPACE+"selectWriterByBookList", mem_no);
-				memberInfo.put(dto.getMem_id(), dto.getMem_name());
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
 				System.out.println("[ERROR] : selectWriterByBookList"+i+"번째 실행");
 				e.printStackTrace();
 			}
-			bookMap.put(mem_no, memberInfo);
+			bookMap.put(mem_no, dto);
 		}
 		
 		return bookMap;
+	}
+
+	@Override
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
+		Map<Integer, MemberDto> getBookWriterName = new HashMap<Integer, MemberDto>();
+		MemberDto dto = new MemberDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			getBookWriterName.put(mem_no, dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : getBookWriterName");
+			e.printStackTrace();
+		}
+		
+		return getBookWriterName;
 	}
 
 }

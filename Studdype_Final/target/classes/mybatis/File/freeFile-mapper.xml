@@ -7,10 +7,31 @@
 		 		<result property="f_no" column="F_NO"></result>
 		 		<result property="b_no" column="B_NO"></result>
 		 		<result property="f_name" column="F_NAME"></result>
-		 		<result property="photo_ismain" column="Photo_IsMain"></result>
+		 		<result property="f_size" column="F_SIZE"></result>
+		 		<result property="f_url" column="F_URL"></result>
 		 	</resultMap>
 	 		
 	 			
+	 		<insert id="insertFile" parameterType="fileDto">
+	 			INSERT INTO FREE_FILE 
+				VALUES ( FREEFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM FREE_BOARD ), #{f_name}, #{f_size}, #{f_url} )
+	 		</insert>
 	 		
+	 		<insert id="insertAddFile" parameterType="fileDto">
+	 			INSERT INTO FREE_FILE
+	 			VALUES ( FREEFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+	 		</insert>
+	 		
+	 		<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
+	 			SELECT * FROM FREE_FILE WHERE B_NO = #{b_no}
+	 		</select>
+	 		
+	 		<select id="selectFile" parameterType="int" resultMap="fileMap">
+	 			SELECT * FROM FREE_FILE WHERE F_NO = #{f_no}
+	 		</select>
+	 		
+	 		<delete id="deleteFile" parameterType="int">
+	 			DELETE FROM FREE_FILE WHERE F_NO = #{f_no}
+	 		</delete>
 	 		
 	 </mapper>

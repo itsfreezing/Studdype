@@ -4,14 +4,14 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="meetboard">
 		
-		<!-- 모임 게시글 총 개수 -->		
+		<!-- 모임게시판 모임 [총 개수] -->		
 		<select id="totalMeetBoardNum" parameterType="int" resultType="_int">
 				SELECT COUNT(*)
 				FROM MEET_BOARD
 				WHERE S_NO = #{s_no}
 		</select>
 		
-		<!-- 모임 검색 게시글 총 개수 -->		
+		<!-- 모임게시판 '검색' 모임 [총 개수] -->		
 		<select id="totalSearchMeetBoardNum" parameterType="map" resultType="_int">
 				<![CDATA[
 					SELECT COUNT(*)
@@ -22,7 +22,7 @@
 					<include refid="search"></include>
 		</select>
 		
-		<!-- 모임 게시글 리스트 -->
+		<!-- 모임게시판 모임 [리스트] -->
 		<select id="pagingMeetBoardList" parameterType="map" resultType="meetDto">
 			<![CDATA[
 				SELECT *
@@ -37,7 +37,7 @@
 			]]>
 		</select>
 		
-		<!-- 모임 검색 게시글 리스트 -->
+		<!-- 모임게시판 '검색' 모임 [리스트] -->
 		<select id="pagingSearchMeetList" parameterType="map" resultType="meetDto">
 			<![CDATA[
 				SELECT *
@@ -56,6 +56,7 @@
 			]]>
 		</select>
 		
+		<!-- '검색' 쿼리문 -->
 		<sql id="search">
 			<if test="keyword != null">
 				 AND
@@ -68,26 +69,47 @@
 			</if>
 		</sql>
 		
-		<!-- 모임 게시판 디테일 -->
-		<select id="meetBoardSelectOne" parameterType="int" resultType="meetDto">
+		<!-- 모임게시판 모임 [상세보기] -->
+		<select id="meetBoardDetail" parameterType="int" resultType="meetDto">
 			SELECT * 
 			FROM MEET_BOARD
 			WHERE MEET_NO = #{meet_no}
 		</select>
 	
-		<!-- 모임 게시판 조회수 -->
+		<!-- 모임게시판 '조회수' [증가] -->
 		<update id="updateMeetCnt" parameterType="int">
 			UPDATE MEET_BOARD
 			SET MEET_CNT = MEET_CNT + 1
 			WHERE MEET_NO = #{meet_no}
 		</update>
 		
-		<!-- 모임 생성 -->
+		<!-- 모임게시판 모임 [생성] -->
 		<insert id="insertMeetBoard" parameterType="meetDto">
 			INSERT INTO MEET_BOARD
 			VALUES( MEETBOARDSEQ.NEXTVAL, #{s_no}, #{meet_title}, #{meet_writer},  #{meet_content}, #{meet_addr}, #{meet_addr_detail},
 			TO_DATE(#{meet_date},'YYYY-MM-DD'),TO_DATE(#{meet_time},'HH24:MI'),SYSDATE ,TO_DATE(#{vote_startdate},'YYYY-MM-DD'),TO_DATE(#{vote_enddate},'YYYY-MM-DD'), DEFAULT )
 		</insert>
+		
+		<!-- 모임게시판 모임 '1개' [가져오기] -->
+		<select id="selectOneMeetBoard" parameterType="int" resultType="meetDto">
+			SELECT *
+			FROM MEET_BOARD
+			WHERE MEET_NO = #{meet_no}
+		</select>
+		
+		<!-- 모임게시판 모임 [수정] -->
+		<update id="updateMeetBoard" parameterType="meetDto">
+			UPDATE MEET_BOARD SET
+			MEET_TITLE = #{meet_title},
+			MEET_CONTENT = #{meet_content},
+			MEET_ADDR = #{meet_addr},
+			MEET_ADDR_DETAIL = #{meet_addr_detail},
+			MEET_DATE = TO_DATE(#{meet_date},'YYYY-MM-DD'),
+			MEET_TIME = TO_DATE(#{meet_time},'HH24:MI'),
+			VOTE_STARTDATE = TO_DATE(#{vote_startdate},'YYYY-MM-DD'),
+			VOTE_ENDDATE = TO_DATE(#{vote_enddate},'YYYY-MM-DD')
+			WHERE MEET_NO = #{meet_no}
+		</update>
 		
 		<!-- meet DB 켈린더로 꺼내오기 -->
 		<select id="selectMeetIntoCalendar" resultType="meetDto" parameterType="int">
@@ -96,7 +118,7 @@
 			WHERE S_NO = ${s_no}
 		</select>
 
-		<!-- 모임 삭제 -->
+		<!-- 모임게시판 모임 [삭제] -->
 		<delete id="deleteMeetBoard" parameterType="int">
 			DELETE FROM MEET_BOARD WHERE MEET_NO = #{meet_no}
 		</delete>

@@ -47,6 +47,20 @@
 <script type="text/javascript" >
  $(document).ready(function() {
  $('#summernote').summernote({
+	 toolbar: [
+		    // [groupName, [list of button]]
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    ['color', ['forecolor','color']],
+		    ['table', ['table']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    ['insert',['picture','link','video']],
+		    ['view', ['fullscreen', 'help']]
+		  ],
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 		height: 450,
 		width : 1000,
 		minHeight: null,
@@ -64,17 +78,21 @@
 	function sendFile(file, editor){
 		var data = new FormData();
 		data.append("file", file);
-		console.log(file);
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "SummerNoteImageFile",
+			url : "summernoteImgUpload.do",
+			enctype: 'multipart/form-data',
 			contentType : false,
 			processData : false,
 			success : function(data){
+				var url = decodeURIComponent(data);
 				console.log(data);
-				console.log(editor);
-				$(editor).summernote("insertImage",data.url);
+				console.log(url);
+				$(editor).summernote('editor.insertImage',url);
+			},
+			error: function(){
+				alert("서머노트 이미지 업로드 실패");
 			}
 		});
 	}
@@ -95,9 +113,9 @@
 	}
 	
  };
- 
+ //파일첨부 함수
 function attachFile(){
-	var html = "<div class='upload_file_box'><input type='file' class='upload_file' onchange='create_file_info(this);'></input></div>";
+	var html = "<div class='upload_file_box'><input type='file' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
 	
 	
 	//만약 전파일이 업로드안됬으면 지워버리기
@@ -106,8 +124,6 @@ function attachFile(){
 	if( chkFalse.last().children("input").val() == null || chkFalse.last().children("input").val().trim()=="" ){
 		chkFalse.last().remove();
 	}
-	
-	
 	//업로드 전체박스		
 	var div = $(".upload_box");
 	div.append(html);
@@ -121,6 +137,7 @@ function attachFile(){
 	
 	
 }
+ //파일첨부시 파일정보 div추가 함수
 function create_file_info(file){ 
 	//업로드 파일 박스
 	var upload_div = $(".upload_file_box");
@@ -128,12 +145,15 @@ function create_file_info(file){
 	var fileName = $(file)[0].files[0].name; //파일이름
 	var fileNameList = fileName.split(".");
 	var fileFormat = fileNameList[(fileNameList.length)-1];
-	
-	console.log( fileNameList );
-	console.log( fileFormat );
-	
-	fileSize /= 1024 * 1024; //MB로 변환
+		
+	fileSize /= 1024 ; //KB로 변환
 	fileSize = fileSize.toFixed(2); //반올림
+	
+	if(fileSize >= 10000){ //10MB초과
+		alert("파일최대크기 10MB를 초과합니다!!");
+		upload_div.last().remove();
+		return false;
+	}
 	
 	fileFormat = fileFormat.trim(); // 공백 제거
 	fileFormat = fileFormat.toLowerCase(); //소문자로
@@ -144,19 +164,15 @@ function create_file_info(file){
 			 fileFormat != "zip" && fileFormat != "css" ){
 		fileFormat = "nomal";
 	}
-			
-	
-	
-	
 	 upload_div.last().append("<img class='file_format_img' src='./resources/img/fileFormat/"+fileFormat+".png'><span class='file_name' >"+
 			 	fileName+
 			 	"</span><input type='button' class='remove_file_btn'  onclick='clickFileBtn(this);'><span class='file_size'>"
 			 	+fileSize+
-			 	"MB</span>");
+			 	"KB</span>");
 	 
 	 
 }
-
+//파일삭제 함수
 function clickFileBtn(fileName){
 	
 	fileName.className += ' change_file';  //update_btn 클래스 추가
@@ -175,10 +191,11 @@ function clickFileBtn(fileName){
 
 
  	<div class="main-section2">
-	<form action="freewrite.do" method="post" id="writeForm" >
+	<form action="freewrite.do" method="post" id="writeForm" enctype="multipart/form-data">
  		<table class="maintable">
 
 		<tr>
+		<img src='./resources/summernoteImg/1610702153935휴가원.JPG'>
 			<td><h1>자유게시판 글 쓰기</h1></td>
 		</tr>
 		<tr>
