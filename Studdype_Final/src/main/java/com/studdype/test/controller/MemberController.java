@@ -70,7 +70,7 @@ public class MemberController {
 		logger.info("ID CHECK");
 		String res=null;
 		int isUsed=0;
-		System.out.println(mem_id);
+		System.out.println(memberbiz.IdChk(mem_id));
 		res=memberbiz.IdChk(mem_id);
 		if(res!=null) { //중복된 아이디인경우 
 			isUsed=1;
