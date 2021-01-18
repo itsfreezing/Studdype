@@ -39,11 +39,6 @@ function checkpwd() {   //비밀번호, 비밀번호 확인 비교 함수
 		}
 }
 
-
-	
-	
-
-
 function ChkConfirm(){
 	var chk=document.getElementsByName("mem_id")[0].title;
 	if(chk=="y"){
@@ -74,9 +69,9 @@ $(document).ready(function(){
 						$('#IdCheck').append(html);
 						
 				}else {
-					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
-					$('#IdCheck').empty();
-					$('#IdCheck').append(html);
+						var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
+						$('#IdCheck').empty();
+						$('#IdCheck').append(html);
 					}
 				},error:function(){
 					alert("FAIL");
@@ -121,6 +116,7 @@ function sign(){
 		
 		sign.submit();
 	}
+
 </script>		
 <style type="text/css">
 h1{
@@ -321,13 +317,13 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    		<select id="phone" name="mem_phone">
+                    		<select id="phone1" name="mem_phone">
                     			<option value="010" selected>010</option>
                     			<option value="011">011</option>
                     			<option value="016">016</option>
                     			<option value="018">018</option>
-							</select>-<input type="text"name="mem_phone" id="phone"size="4" maxlength="4" autocomplete="off">-
-							<input type="text" name="mem_phone" id="phone" size="4" maxlength="4" autocomplete="off">
+							</select>-<input type="tel"name="mem_phone" id="phone2"size="4" maxlength="4"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"  autocomplete="off">-
+							<input type="tel" name="mem_phone" id="phone3" size="4" maxlength="4" autocomplete="off">
                     	</td>
                     </tr>
                    

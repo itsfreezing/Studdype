@@ -76,7 +76,9 @@ public class MemberDto {
 	}
 
 	public String getMem_phone() {
+		
 		return mem_phone;
+		
 	}
 
 	public void setMem_phone(String mem_phone) {
