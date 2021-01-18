@@ -4,17 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.reply.FreeReplyBiz;
 import com.studdype.test.model.biz.reply.MeetReplyBiz;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -27,6 +33,12 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	
 	@Autowired
 	private MeetReplyBiz meetReplyBiz;
+	
+	@Autowired
+	private MemberBiz memberBiz;
+	
+	@Autowired
+	private MeetBiz meetBiz;
 		
 	//자유게시판 리플리스트 반환 메소드
 	@RequestMapping(value="/freeReplyList.do", method=RequestMethod.POST)
@@ -92,13 +104,16 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	
 	// [모임게시판] 댓글 '리스트' [반환]
 	@RequestMapping(value="/meetReplyList.do", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> meetReplyList(@RequestBody ReplyDto dto) {
+	public @ResponseBody Map<String, Object> meetReplyList(@RequestBody ReplyDto dto, MeetDto meetDto) {
 		logger.info("[MEET REPLY LIST]");
 		List<ReplyDto> meetReplyList = null; // 댓글 리스트
 		Map<Integer,MemberDto> meetReplyMember = new HashMap<Integer, MemberDto>(); // 멤버정보를 담을 맵
 		Map<String, Object> meetReplyMap = new HashMap<String, Object>(); // 댓글리스트와 멤버정보를 담을 맵
-		
 		meetReplyList = meetReplyBiz.selectMeetReplyList(dto.getB_no());
+		meetDto = meetBiz.selectOneMeetBoard(dto.getB_no());
+		
+		int meetWriter = meetDto.getMeet_writer(); // 모임 작성자 번호 가져오기
+		
 		System.out.println("-----------------------------------------------------------------------\n"
 						  +"<<모임 댓글>> ["+dto.getB_no()+"]번째 모임의 댓글 리스트 입니다.\n"
 						  +"-----------------------------------------------------------------------"); 
@@ -106,6 +121,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		
 		meetReplyMap.put("meetReplyList", meetReplyList);
 		meetReplyMap.put("meetReplyMember", meetReplyMember);
+		meetReplyMap.put("meetWriter", meetWriter);
 		
 		return meetReplyMap;
 	}
@@ -158,6 +174,10 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		logger.info("[MEET RECOMMENT WRITE]");
 		
 		int res = meetReplyBiz.writeMeetRecomment(dto);
+		
+		System.out.println("-----------------------------------------------------------------------\n"
+						  +"<<모임 댓글>> ["+dto.getR_no()+"]dddddd\n"
+						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
 	}

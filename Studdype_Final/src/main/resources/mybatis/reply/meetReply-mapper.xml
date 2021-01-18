@@ -58,23 +58,17 @@
 	
 	<!-- 모임 댓글 '답글' [작성] -->
 	<insert id="insertMeetRecomment" parameterType="replyDto">
-		INSERT INTO MEET_REPLY
-		VALUES(MEETREPLYSEQ.NEXTVAL, #{b_no},
-		                            (
-		                            SELECT R_GROUPNO 
-		                            FROM MEET_REPLY 
-		                            WHERE R_NO = #{r_no}
-		                            ),
-		                            1,
-		                            (
-		                            SELECT MAX(R_ORDER)
-		                            FROM MEET_REPLY
-		                            WHERE R_GROUPNO = (
-		                                              SELECT R_GROUPNO
-		                                              FROM MEET_REPLY
-		                                              WHERE R_NO = #{r_no}
-		                                              )
-		                            ) + 1, #{r_writer}, #{r_comment}, SYSDATE)
+		INSERT INTO MEET_REPLY 
+		VALUES(
+    		MEETREPLYSEQ.NEXTVAL,
+    		#{b_no},
+    		( SELECT R_GROUPNO FROM MEET_REPLY WHERE R_NO = #{r_no} ),
+    		1,
+    		(SELECT MAX(R_ORDER)  FROM MEET_REPLY  WHERE R_GROUPNO =(SELECT R_GROUPNO FROM MEET_REPLY WHERE R_NO = #{r_no}) ) +1,
+    		#{r_writer},
+    		#{r_comment},
+    		SYSDATE)
+		
 	</insert>
 	
 	<!-- 모임게시판 '모임리스트'로 '댓글개수' [가져오기] -->
