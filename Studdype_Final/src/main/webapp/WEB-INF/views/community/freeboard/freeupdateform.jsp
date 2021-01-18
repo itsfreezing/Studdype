@@ -246,7 +246,7 @@
 		</tr>
 		<!-- 제목 부분 -->
 		<tr>
-			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" value="${dto.b_title }"></td>
+			<td><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" value="${dto.b_title }" autocomplete="off"></td>
 		</tr>
 		
 		<!-- 글 content부분 -->

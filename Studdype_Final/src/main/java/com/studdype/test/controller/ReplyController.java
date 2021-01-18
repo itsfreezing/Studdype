@@ -43,7 +43,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		
 		return replyMap;
 	}
-	
+		
 	//자유게시판 댓글 삭제 메소드
 	@RequestMapping(value="/freeReplyDelete.do", method=RequestMethod.POST)
 	public @ResponseBody int freeReplyDelete(@RequestBody ReplyDto dto) {
