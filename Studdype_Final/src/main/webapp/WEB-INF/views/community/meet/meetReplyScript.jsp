@@ -43,9 +43,8 @@ $(function(){
 
 <!-- 모임게시판 댓글 목록 가져오기 ajax -->
 function getMeetReplyList() {
-	
 	var boardVal = { "b_no":${dto.meet_no}}; // b_no에 모임번호 넣기
-	
+
 	$.ajax({
 		type:"post",
 		url:"meetReplyList.do",
@@ -53,6 +52,7 @@ function getMeetReplyList() {
 		contentType:"application/json",
 		dataType:"json",
 		success:function(map){
+			var meetWriter = map.meetWriter;
 			var list = map.meetReplyList;	  // 댓글 리스트
 			var member = map.meetReplyMember; // 멤버 정보
 			var html = "<div class='replyTitle'>"
@@ -72,108 +72,113 @@ function getMeetReplyList() {
 				// 댓글이 부모댓글 일 때
 				if( list[i].r_class == 0 ) {
 					var reply = "<li class='replyItem'>"
+									+"<div class='reply_area showDiv'>"
+										+"<div class='reply_writer_box' style='padding-bottom: 15px;'>"
+								
+								// 모임 작성자와 댓글 작성자가 같을 때(닉네임 좌측에 왕관 아이콘이 추가된다.)
+								if( meetWriter == list[i].r_writer ){
+									reply += "<img src='./resources/assets/img/icon_crown.png'>" + member[list[i].r_no].mem_id
+									  	+"</div>"
+									  	+"<div class='reply_comment_box'>"
+										  	+ list[i].r_comment
+									  	+"</div>"
+									  	+"<div class='reply_info_box'>" + dateFormat;
+								// ---------------------------- 모임 작성자와 댓글 작성자가 같을 때
+										
+								// 모임 작성자와 댓글 작성자가 다를 때(왕관 아이콘을 제외한 닉네임만 표기된다.)
+								} else {
+									reply += member[list[i].r_no].mem_id
+							  			+"</div>"
+									  	+"<div class='reply_comment_box'>"
+										  	+ list[i].r_comment
+									  	+"</div>"
+									  	+"<div class='reply_info_box'>" + dateFormat;
+								}
+								// ---------------------------- 모임 작성자와 댓글 작성자가 다를 때
+								
+								// 로그인 아이디와 댓글 작성자가 같을 때(답글/수정/삭제 버튼이 추가 된다.)
+								if( ${login.mem_no} == list[i].r_writer ){
+									reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
+										  		+"<img src='./resources/assets/img/icon_recomment.png'>"
+										   	+"</button>"
+										  	+"<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
+											  	+"<img src='./resources/assets/img/icon_update.png'>"
+										  	+"</button>"
+										  	+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
+											  	+"<img src='./resources/img/remove_file.png'>"								
+										  	+"</button>"
+									  	+"</div>"
+								  	+"</div>"
+								
+								 	// 댓글 수정 html 추가부분
+								  	+"<div class='update_reply_div hideDiv recomment_div'>"
+										+"<table>"
+											+"<tr>"
+											  	+"<td class='update_reply_writer'>" + member[list[i].r_no].mem_id + "</td>"
+										  	+"</tr>"
+										  	+"<tr>"
+											  	+"<td><textarea class='update_reply_comment'>" + list[i].r_comment + "</textarea></td>"
+										  	+"</tr>"
+									  	+"</table>"
+									  	+"<div class='update_reply_btnDiv'>"
+										  	+"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
+										  	+"<button class='update_reply_btn' onclick='updateReply(this);' value=" + list[i].r_no + ">수정</button>"
+									  	+"</div>"
+								  	+"</div>"
+								  	// ---------------------------- 댓글 수정 html 추가부분
 									
-					// 로그인 아이디와 댓글 작성자가 같을 때
-					if( ${login.mem_no} == list[i].r_writer ){
-						  reply += "<div class='reply_area showDiv'>"
-									  +"<div class='reply_writer_box' style='padding-bottom: 15px;'>"
-										  +"<img src='./resources/assets/img/icon_crown.png'>" + member[list[i].r_no].mem_id
-									  +"</div>"
-									  +"<div class='reply_comment_box'>"
-										  + list[i].r_comment
-									  +"</div>"
-									  +"<div class='reply_info_box'>" + dateFormat
-										  +"<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
-											  +"<img src='./resources/assets/img/icon_recomment.png'>"
-										  +"</button>"
-										  +"<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
-											  +"<img src='./resources/assets/img/icon_update.png'>"
-										  +"</button>"
-										  +"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
-											  +"<img src='./resources/img/remove_file.png'>"								
-										  +"</button>"
-									  +"</div>"
-								  +"</div>"
+								  	// 댓글 답글달기 html 추가부분
+								  	+"<div class='hideDiv write_recomment_div recomment_div' style='margin-left: 35px;'>"
+									  	+"<table>"
+										  	+"<tr>"
+											  	+"<td class='update_reply_writer'>"
+												  	+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + $("#mem_id").val()
+											  	+"</td>"
+										  	+"</tr>"
+										  	+"<tr>"
+											  	+"<td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요.'></textarea></td>"
+										  	+"</tr>"
+									  	+"</table>"
+									  	+"<div class='update_reply_btnDiv'>"
+										  	+"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
+										  	+"<button class='update_reply_btn' onclick='writeRecomment(this);' value=" + list[i].r_no + ">작성</button>"
+									  	+"</div>"
+								  	+"</div>"
+							  	+"</li>"
+							  	+"<hr>";
+							  		// ---------------------------- 댓글 답글달기 html 추가부분
+								// ---------------------------- 로그인 아이디와 댓글 작성자가 같을 때
 								
-								  // 댓글 수정 html 추가부분
-								  +"<div class='update_reply_div hideDiv recomment_div'>"
-									  +"<table>"
-										  +"<tr>"
-											  +"<td class='update_reply_writer'>" + member[list[i].r_no].mem_id + "</td>"
-										  +"</tr>"
-										  +"<tr>"
-											  +"<td><textarea class='update_reply_comment'>" + list[i].r_comment + "</textarea></td>"
-										  +"</tr>"
-									  +"</table>"
-									  +"<div class='update_reply_btnDiv'>"
-										  +"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
-										  +"<button class='update_reply_btn' onclick='updateReply(this);' value=" + list[i].r_no + ">수정</button>"
-									  +"</div>"
-								  +"</div>"
-								  // ---------------------------- 댓글 수정 html 추가부분
-									
-								  // 댓글 답글달기 html 추가부분
-								  +"<div class='hideDiv write_recomment_div recomment_div' style='margin-left: 35px;'>"
-									  +"<table>"
-										  +"<tr>"
-											  +"<td class='update_reply_writer'>"
-												  +"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + $("#mem_id").val()
-											  +"</td>"
-										  +"</tr>"
-										  +"<tr>"
-											  +"<td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요.'></textarea></td>"
-										  +"</tr>"
-									  +"</table>"
-									  +"<div class='update_reply_btnDiv'>"
-										  +"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
-										  +"<button class='update_reply_btn' onclick='writeRecomment(this);' value=" + list[i].r_no + ">작성</button>"
-									  +"</div>"
-								  +"</div>"
-							  +"</li>"
-							  +"<hr>";
-							  // ---------------------------- 댓글 답글달기 html 추가부분
-								
-					// ---------------------------- 로그인 아이디와 댓글 작성자가 같을 때
-								
-					// 로그인 아이디와 댓글 작성자가 다를 때
-					} else {
-						  reply += "<div class='reply_area showDiv'>"
-								  	  +"<div class='reply_writer_box' style='padding-bottom: 15px;'>"
-									  	  + member[list[i].r_no].mem_id
-								  	  +"</div>"
-									  +"<div class='reply_comment_box'>"
-										  + list[i].r_comment
-									  +"</div>"
-									  +"<div class='reply_info_box'>" + dateFormat
-										  +"<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
-											  +"<img src='./resources/assets/img/icon_recomment.png'>"
-										  +"</button>"
-									  +"</div>"
-								  +"</div>"
+								// 로그인 아이디와 댓글 작성자가 다를 때(답글 버튼만 추가된다.)
+								} else {
+						 		 	reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
+											  	+"<img src='./resources/assets/img/icon_recomment.png'>"
+										  	+"</button>"
+									  	+"</div>"
+								  	+"</div>"
 						
-								  // 댓글 답글달기 html 추가부분
-								  +"<div class='hideDiv write_recomment_div recomment_div' style='margin-left: 35px;'>"
-									  +"<table>"
-										  +"<tr>"
-											  +"<td class='update_reply_writer'>"
-												  +"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + $("#mem_id").val()
-											  +"</td>"
-										  +"</tr>"
-										  +"<tr>"
-										      +"<td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td>"
-										  +"</tr>"
-									  +"</table>"
-									  +"<div class='update_reply_btnDiv'>"
-										  +"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
-										  +"<button class='update_reply_btn' onclick='writeRecomment(this); value=" + list[i].r_no + "'>작성</button>"
-									  +"</div>"
-								  +"</div>"
-							  +"</li>"
-							  +"<hr>";
-							  // ---------------------------- 댓글 답글달기 html 추가부분
-					}
-					// ---------------------------- 로그인 아이디와 댓글 작성자가 다를 때
-								
+								  	// 댓글 답글달기 html 추가부분
+								  	+"<div class='hideDiv write_recomment_div recomment_div' style='margin-left: 35px;'>"
+									  	+"<table>"
+										  	+"<tr>"
+											  	+"<td class='update_reply_writer'>"
+												 	+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + $("#mem_id").val()
+											  	+"</td>"
+										 	+"</tr>"
+										  	+"<tr>"
+										      	+"<td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td>"
+										 	+"</tr>"
+									  	+"</table>"
+									  	+"<div class='update_reply_btnDiv'>"
+										  	+"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
+										  	+"<button class='update_reply_btn' onclick='writeRecomment(this);' value=" + list[i].r_no + ">작성</button>"
+									  	+"</div>"
+								  	+"</div>"
+							  	+"</li>"
+							  	+"<hr>";
+							  		// ---------------------------- 댓글 답글달기 html 추가부분
+								}
+								// ---------------------------- 로그인 아이디와 댓글 작성자가 다를 때
 				// ---------------------------- 댓글이 부모댓글 일 때
 				
 				// 댓글이 부모댓글인데 삭제 된 댓글일 때
@@ -187,18 +192,33 @@ function getMeetReplyList() {
 				// 댓글이 부모댓글이 아닐 때
 				} else {
 					 var reply = "<li class='replyItem'>"
-					 			  	  
+									 "<div class='reply_area showDiv' style='margin-left: 35px;'>";
+					 						
+					 			// 모임 작성자와 댓글 작성자가 같을 때(닉네임 좌측에 왕관 아이콘이 추가된다.)
+			 			  	 	if( meetWriter == list[i].r_writer ) {
+			 			  			reply += "<div class='reply_writer_box' style='padding-bottom: 15px;'>"
+			 			  					+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"
+			 			  					+"<img src='./resources/assets/img/icon_crown.png'>"+ member[list[i].r_no].mem_id
+					 			  			+"</div>"
+					 						+"<div class='reply_comment_box' style='margin-left: 40px;'>" + list[i].r_comment + "</div>"
+												+"<div class='reply_info_box' style='margin-left: 40px;'>" + dateFormat;
+								// ---------------------------- 모임 작성자와 댓글 작성자가 같을 때
+												
+								// 모임 작성자와 댓글 작성자가 다를 때(왕관 아이콘을 제외한 닉네임만 표기된다.)
+			 			  	  	} else {
+			 			  	  		reply += "<div class='reply_writer_box' style='padding-bottom: 15px;'>"
+			 			  	  				+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"
+			 			  	  				+member[list[i].r_no].mem_id
+				 			  				+"</div>"
+				 							+"<div class='reply_comment_box' style='margin-left: 40px;'>" + list[i].r_comment + "</div>"
+												+"<div class='reply_info_box' style='margin-left: 40px;'>" + dateFormat;
+			 			  	  	}
+		 						// ---------------------------- 모임 작성자와 댓글 작성자가 다를 때	
+					 						
 					 					
-					// 로그인 된 아이디와 댓글 작성자가 같을 때
-					if( ${login.mem_no} == list[i].r_writer ) {
-							reply += "<div class='reply_area showDiv' style='margin-left: 35px;'>"
-	 									+"<div class='reply_writer_box'>"
-					 						+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>"
-					 						+"<img src='./resources/assets/img/icon_crown.png'>"+ member[list[i].r_no].mem_id
-				 						+"</div>"
-				 						+"<div class='reply_comment_box' style='margin-left: 30px;'>" + list[i].r_comment + "</div>"
- 										+"<div class='reply_info_box' style='margin-left: 30px;'>" + dateFormat
-											+"<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
+							// 로그인 된 아이디와 댓글 작성자가 같을 때(수정/삭제 버튼이 추가된다.)
+							if( ${login.mem_no} == list[i].r_writer ) {
+									reply += "<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
 												+"<img src='./resources/assets/img/icon_update.png'>"
 											+"</button>"
 											+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
@@ -222,28 +242,21 @@ function getMeetReplyList() {
 											+"<button class='update_reply_btn' onclick='updateReply(this);' value=" + list[i].r_no + ">수정</button>"
 										+"</div>"
 									+"</div>"
-									+"</li>"
-									+"<hr>";
+								+"</li>"
+								+"<hr>";
 									// ---------------------------- 댓글 수정 html 추가부분
-									
-					// ---------------------------- 로그인 된 아이디와 댓글 작성자가 같을 때
+						// ---------------------------- 로그인 된 아이디와 댓글 작성자가 같을 때
 						
-					// 로그인 된 아이디와 댓글 작성자가 다를 때
-					} else {
-							reply += "<div class='reply_area showDiv' style='margin-left: 35px;'>"
-		 								+"<div class='reply_writer_box'>"
-					 						+"<img class='reply_arrow' src='./resources/img/reply_arrow_gray.png'>" + member[list[i].r_no].mem_id
-					 					+"</div>"
-					 					+"<div class='reply_comment_box' style='margin-left: 30px;'>" + list[i].r_comment + "</div>"
-					 					+"<div class='reply_info_box' style='margin-left: 30px;'>" + dateFormat +"</div>"
+						// 로그인 된 아이디와 댓글 작성자가 다를 때
+						} else {
+							reply += "</div>"
 									+"</div>"
 								+"</li>"
 								+"<hr>";
-					}
-					// ---------------------------- 로그인 된 아이디와 댓글 작성자가 다를 때
+						}
+						// ---------------------------- 로그인 된 아이디와 댓글 작성자가 다를 때
 				}
 				// ---------------------------- 댓글이 부모댓글이 아닐 때
-				
 				html += reply;
 			}
 			html += "</ul>";
@@ -472,10 +485,6 @@ function writeRecomment(btn){
 			"r_writer":r_writer , //댓글 작성자
 			"r_comment" : r_comment //댓글 내용
 	};
-	alert(r_no);
-	alert(b_no);
-	alert(r_writer);
-	alert(r_comment);
 
 	//댓글 답글 쓰기
 	$.ajax({

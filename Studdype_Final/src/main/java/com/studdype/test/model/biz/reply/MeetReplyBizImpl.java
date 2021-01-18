@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.studdype.test.model.dao.board.meet.MeetBoardDao;
 import com.studdype.test.model.dao.board.meet.MeetReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -20,6 +22,9 @@ public class MeetReplyBizImpl implements MeetReplyBiz{
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private MeetBoardDao meetBoardDao;
 	
 	// 모임 번호로 댓글 [리스트] 받기
 	@Override
@@ -96,6 +101,11 @@ public class MeetReplyBizImpl implements MeetReplyBiz{
 	@Override
 	public int writeMeetRecomment(ReplyDto dto) {
 		return meetReplyDao.insertMeetRecomment(dto);
+	}
+
+	@Override
+	public Map<Integer, MemberDto> getMemberMap(List<MeetDto> list) {
+		return memberDao.selectMemberByMeetList(list);
 	}
 
 }
