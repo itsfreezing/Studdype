@@ -52,13 +52,13 @@
       border-radius:60%;
       margin-left:5%;
    }
-   #chk{
+   #id{
       margin-left:220%;
       margin-top:10%;
       width:280px;
       height:50px;
    }
-   #chk1{
+   #pw{
       margin-left:220%;
       width:280px;
       margin-top:10%;
@@ -83,32 +83,47 @@
 </style>
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
-<script type="text/javascript">
+ <script type="text/javascript">
+ 
+function login_btn(){
+	var form = $("#loginForm");
+	var mem_id = $("#id");
+	var mem_pw = $("#pw");
+	
+	if ( mem_id.val() == null || mem_id.val().trim() == ''){
+		alert("아이디를 확인해 주세요.");
+	}else if ( mem_pw.val() == null || mem_pw.val().trim() == '' ){
+		alert("비밀번호를 확인해 주세요.");
+	}else {
+		form.submit();
+	}
+};
+
 
 </script>
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-    <form action="login.do" method="POST">
+    <form id="loginForm" action="login.do" method="POST">
        <table>
           <tr>
              <td>
-                <input type="text" name="mem_id" id="chk"placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
+                <input type="text" name="mem_id" id="id" placeholder="아이디를 입력해주세요" style="border:2px solid #F5A9F2">
              </td>
           </tr>
           <br>
           <tr>
              <td>
 
-                <input type="password" name="mem_pw" id="chk1" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
+                <input type="password" name="mem_pw" id="pw" placeholder="비밀번호를 입력해주세요" style="border:2px solid #F5A9F2">
 
              </td>
           </tr>
        
        </table>
     
-       <button id="login" type="submit" style="border:0">LOGIN</button>
+       <input type="submit" onclick="login_btn();" value="LOGIN" id="login" style="border:0">
 
     
     
@@ -117,9 +132,9 @@
     
    <br>
    <br>
-   <a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">이메일 계정찾기</a>
-   |<a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
-   |<a href="signform.do" id="">회원가입</a>
+   <a href="email.do" id="email" onClick="window.open(this.href,'','width=700, height=430'); return false;">아이디 계정찾기</a>
+   <a href="pwd.do" id="pwd1" onClick="window.open(this.href,'','width=700, height=430'); return false;">비밀번호 찾기</a>
+   <a href="signform.do" id="">회원가입</a>
    
 	
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>

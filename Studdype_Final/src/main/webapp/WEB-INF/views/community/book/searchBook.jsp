@@ -329,6 +329,6 @@ table {
 	</div>
 	<!-- 메인 섹션 종료 --------------------------------------------------------------------------------------------- -->
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
