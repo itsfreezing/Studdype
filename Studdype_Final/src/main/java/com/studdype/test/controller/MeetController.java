@@ -266,7 +266,7 @@ public class MeetController {
 	}
 	
 	// 모임게시판 모임 [삭제]
-	@RequestMapping(value = "/meetdelete.do", method = RequestMethod.POST)
+	@RequestMapping("/meetdelete.do")
 	public String meetDelete(HttpServletRequest request, Model model) {
 		logger.info("[MEET BOARD DELETE]");
 		

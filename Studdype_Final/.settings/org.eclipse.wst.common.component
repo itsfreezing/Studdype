@@ -1,45 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                         	
+=======
+                                	
+    
+    
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
     
     
     
     
     
     <wb-module deploy-name="test-1.0.0-BUILD-SNAPSHOT">
+<<<<<<< HEAD
                                                         
+=======
+                                                                        
+        
+        
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
         
         
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                 		
+=======
+                                                                		
+        
+        
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
         
         
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+=======
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                                                                        
+        
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
                                                         
         
         
         
         
         
+        
         <property name="context-root" value="test"/>
+<<<<<<< HEAD
                         
         
         <property name="java-output-path" value="/Studdype_Final/target/classes"/>
                                                 	
+=======
+                                        
+        
+        
+        
+        <property name="java-output-path" value="/Studdype_Final/target/classes"/>
+                                                                	
+    
+    
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
     
     
     
     
     
     </wb-module>
+<<<<<<< HEAD
                         
+=======
+                                
+
+
+>>>>>>> 5a5e8d2bd67952c139a9e316c7f00b16966f7614
 
 
 

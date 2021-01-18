@@ -12,7 +12,7 @@ public interface MeetReplyDao {
 	String NAMESPACE="meetreply.";
 	
 	List<ReplyDto> selectMeetReplyList(int b_no); 				  // 모임 번호로 댓글 [리스트] 받기
-	ReplyDto selectOneMeetReply(int r_no);								  // 모임 댓글 '1개' [가져오기]
+	ReplyDto selectOneMeetReply(int r_no);						  // 모임 댓글 '1개' [가져오기]
 	int deleteMeetParentReply(int r_no);						  // 모임 댓글이 '부모댓글'이면 [r_class: -1로 번경]
 	int deleteMeetReply(int r_no);				  				  // 모임 댓글 [삭제]
 	List<ReplyDto> selectGroupMeetReplyList(int r_groupno);		  // 모임 댓글 '그룹번호'로 [리스트] 뽑기
