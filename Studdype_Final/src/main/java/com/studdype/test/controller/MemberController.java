@@ -75,9 +75,10 @@ public class MemberController {
 		if(loginDto != null) {
 			session.setAttribute("login", loginDto);
 			session.setMaxInactiveInterval(1);
-			return "studdype/studdypeHome";
-		}
-		return "loginpage/login";
+			return "redirect:/studyList.do";
+			}else {
+				return "loginpage/login";
+			}
 }		
 	
 	//로그아웃
@@ -86,7 +87,7 @@ public class MemberController {
 		logger.info("logout");
 		
 		session.invalidate();
-		return "studdype/studdypeHome";		
+		return "redirect:/studdypehome.do";		
 	}
 }
 	
