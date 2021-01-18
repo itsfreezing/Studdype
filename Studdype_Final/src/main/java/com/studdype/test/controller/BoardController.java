@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpServerErrorException;
 
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
@@ -183,32 +182,29 @@ public class BoardController {
 		return "community/freeboard/freeDetail";
 	}
 	
-	//켈린더
-	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
-		logger.info("calendar");
-		Map calendarMap = new HashMap();
-		List<MeetDto> meetList = null;
+	@RequestMapping(value="/calendarView.do", method=RequestMethod.GET)
+	public String calendarView(HttpSession session, Model model ) {
 		
-		meetList = meetBiz.selectMeetDBForCalendar(dto.getS_no());
+		
+		
+		return "community/schedule/test";
+	}
+	
+	//캘린더
+	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session, MeetDto dto) {
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
+		logger.info("calendar");
+
+		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
+		Map<String, Object> calendarMap = new HashMap<String, Object>();
+		
 		
 		calendarMap.put("meetList", meetList);
 		
-		
-		
 		return calendarMap;
 	}
-	/*
-	 * public String calendar(Model model, HttpSession session, HttpServletResponse
-	 * response) { StudyDto study = (StudyDto)session.getAttribute("study"); // 현재
-	 * 클릭 된 스터디 Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
-	 * calendarMap.put("evt1", new
-	 * MeetDto(1,1,"test","2021-01-22","2021-01-11","2021-01-20"));
-	 * System.out.println(calendarMap); model.addAttribute("meetList",calendarMap);
-	 * 
-	 * return "community/schedule/calendar"; }
-	 */
-
 	
 	// 도서 검색 페이지 전환
 	@RequestMapping("/bookboardform.do")

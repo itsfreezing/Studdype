@@ -59,7 +59,7 @@ DROP TABLE MEET_BOARD;
 DROP TABLE MEET_VOTE;
 DROP TABLE MEET_REPLY;
 -------------------------------------------------------------
-
+select * from MEET_BOARD;
 ------------------ SEQUENCE_NOCACHE -------------------------
 -------------------------------------------------------------
 CREATE SEQUENCE MEMBERSEQ NOCACHE;  --회원 시퀀스
@@ -367,12 +367,13 @@ CREATE TABLE PHOTO_REPLY(
     FOREIGN KEY(B_NO) REFERENCES PHOTO_BOARD(B_NO) ON DELETE CASCADE    
 );
 
-
 --사진 게시판 사진
 CREATE TABLE PHOTO_FILE(
     F_NO NUMBER PRIMARY KEY, --파일 번호
     B_NO NUMBER NOT NULL, --게시글번호
     F_NAME VARCHAR2(1000) NOT NULL, --파일 실제이름
+    F_SIZE NUMBER NOT NULL, --파일 크기 KB
+    F_URL VARCHAR2(4000) NOT NULL, --파일 가상이름
     PHOTO_ISMAIN VARCHAR2(1) DEFAULT 'N' CHECK (PHOTO_ISMAIN IN ('Y','N')) NOT NULL, -- 대표사진 Y,N
     FOREIGN KEY(B_NO) REFERENCES FREE_BOARD(B_NO) ON DELETE CASCADE    
 );
