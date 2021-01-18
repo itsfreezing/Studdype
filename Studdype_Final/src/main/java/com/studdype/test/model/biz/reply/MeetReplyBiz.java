@@ -3,6 +3,7 @@ package com.studdype.test.model.biz.reply;
 import java.util.List;
 import java.util.Map;
 
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -14,4 +15,5 @@ public interface MeetReplyBiz {
 	int writeMeetReply(ReplyDto dto);									// 모임 댓글 [작성]
 	int updateMeetReply(ReplyDto dto);									// 모임 댓글 [수정]
 	int writeMeetRecomment(ReplyDto dto);								// 모임 댓글 '답글' [작성]
+	public Map<Integer, MemberDto> getMemberMap(List<MeetDto> list); 	// 리스트로 '작성자 정보' [가져오기]
 }
