@@ -202,6 +202,12 @@ public class StudyController {
 		}
 	}
 	
+	@RequestMapping("/studdypeDetail.do")
+	public String studdypeDetail() {
+		logger.info("Detail Page");
+		return "studdype/studdypeDetail";
+	}
+	
 	//스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session,Model model) {

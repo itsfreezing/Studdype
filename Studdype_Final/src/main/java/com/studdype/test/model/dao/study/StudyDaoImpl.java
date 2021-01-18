@@ -105,6 +105,19 @@ public class StudyDaoImpl implements StudyDao {
 		return list;
 	}
 
+	@Override
+	public StudyDto selectOne(int s_no) {
+		StudyDto dto = null;
+		
+		try {
+			dto=sqlSession.selectOne(NAMESPACE+"selectOne",s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]:Select One FAIL");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 
 
 	

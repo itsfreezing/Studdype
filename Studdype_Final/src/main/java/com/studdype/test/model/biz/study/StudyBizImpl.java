@@ -117,6 +117,10 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return study_Dao.studyLeader(leader_no);
 	}
+	@Override
+	public StudyDto selectOne(int s_no) {
+		return study_Dao.selectOne(s_no);
+	}
 
 	
 }

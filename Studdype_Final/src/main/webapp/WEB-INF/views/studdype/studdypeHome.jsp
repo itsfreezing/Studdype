@@ -135,7 +135,7 @@ input#search:focus {
 				<!-- list 시작 -->
 				<c:forEach items="${studyList }" var="studyDto">
 					<div class="col-lg-4 blogs-load"
-						onclick="location.href='index.jsp'" style="cursor: pointer">
+						onclick="location.href='studdypeDetail.do'" style="cursor: pointer">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
