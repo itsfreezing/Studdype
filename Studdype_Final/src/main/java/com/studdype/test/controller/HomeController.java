@@ -25,7 +25,7 @@ import jdk.nashorn.internal.ir.RuntimeNode.Request;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@Controller 
 public class HomeController {
 	
 	@Autowired
@@ -121,6 +121,13 @@ public class HomeController {
 	public String notetest() {
 		return "notetest";
 	}
+	
+	@RequestMapping("/fileupload.do")
+	public String uploadTest() {
+		return "community/freeboard/uploadtest";
+	}
+		
+	
 }
 
 
