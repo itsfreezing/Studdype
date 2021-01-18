@@ -44,7 +44,7 @@ public class MemberBizImpl implements MemberBiz {
 
 	//아이디 중복체크
 	@Override
-	public String IdChk(String mem_id) {
+	public MemberDto IdChk(String mem_id) {
 		return memberDao.IdChk(mem_id);
 	}
 	

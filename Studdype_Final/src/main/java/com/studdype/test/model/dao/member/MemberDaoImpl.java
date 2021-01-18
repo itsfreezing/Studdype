@@ -1,18 +1,19 @@
 package com.studdype.test.model.dao.member;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.studdype.test.model.dto.member.MemberDto;
+
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
-import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -21,7 +22,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	//로그인
 	@Override
 	public MemberDto login(MemberDto dto) {
@@ -245,8 +246,8 @@ public class MemberDaoImpl implements MemberDao{
 	
 	//아이디 중복체크 
 	@Override
-	public String IdChk(String mem_id) {
-		String res =null; 
+	public MemberDto IdChk(String mem_id) {
+		MemberDto res =null; 
 		try {
 			res=sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
 		} catch (Exception e) {

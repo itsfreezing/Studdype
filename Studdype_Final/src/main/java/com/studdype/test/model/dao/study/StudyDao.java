@@ -18,6 +18,6 @@ public interface StudyDao {
 	public int selectStudyFinalNumber(); // 등록된 스터디 마지막 번호
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //리스트 총 갯수
 	public List<StudyDto> studyLeader(int leader_no); //스터디 리더 
-	public StudyDto selectOne(int s_no);
+	public StudyDto selectOne(int s_no);//스터디 상세페이지
 
 }

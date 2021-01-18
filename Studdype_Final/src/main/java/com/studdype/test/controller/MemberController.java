@@ -65,17 +65,17 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping("/idcheck.do")
+	@RequestMapping(value="/idcheck.do", method=RequestMethod.POST)
 	public @ResponseBody int IdChk(@RequestBody String mem_id) {
 		logger.info("ID CHECK");
-		String res=null;
+		MemberDto res=null;
 		int isUsed=0;
 		System.out.println(memberbiz.IdChk(mem_id));
 		res=memberbiz.IdChk(mem_id);
-		if(res!=null) { //중복된 아이디인경우 
-			isUsed=1;
+		if(res!=null) { //중복되지 않는 아이디일경우 
+			 isUsed=1;
 		}else {
-			isUsed=0;
+			 isUsed=0;
 		}
 		return isUsed;
 	}

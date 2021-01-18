@@ -105,10 +105,11 @@ public class StudyDaoImpl implements StudyDao {
 		return list;
 	}
 
+	//스터디 상세페이지
 	@Override
 	public StudyDto selectOne(int s_no) {
 		StudyDto dto = null;
-		
+		System.out.println(dto.getS_no());
 		try {
 			dto=sqlSession.selectOne(NAMESPACE+"selectOne",s_no);
 		} catch (Exception e) {
