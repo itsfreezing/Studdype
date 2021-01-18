@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -358,20 +359,21 @@ public class BoardController {
 	// [도서 게시판] Controller
 	
 	// 도서 검색 페이지 전환
-	@RequestMapping("/bookboardform.do")
+	@RequestMapping(value="/bookboardform.do")
 	public String bookBoardForm(HttpSession session) {
+		logger.info("[bookBoardForm]");
 		session.setAttribute("leftnavi", "book");
 		return "community/book/bookboardform";
 	}
 	
 	// 도서 검색 페이지
-	@RequestMapping("/searchBook.do")
-	public String searchBook(HttpSession session, Model model, String pagenum) {
+	@RequestMapping(value="/searchBook.do")
+	public String searchBook(HttpSession session, Model model) {
+		logger.info("[searchBook]");
 		StudyDto study = (StudyDto) session.getAttribute("study");
-		List<BookDto> list = null; // 4개 페이징 담을 리스트
+		List<BookDto> list = null;
 		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-
-		// 4개 게시물만 가져오기
+		
 		list = bookBiz.selectSearchBookList(study.getS_no());
 		// 멤버번호로 작성자 이름/아이디 받아오기
 		writerNameMap = bookBiz.getWriterNameByList(list);
@@ -381,13 +383,15 @@ public class BoardController {
 
 		return "community/book/searchBook";
 	}
-
+	
+	// 도서 디테일 페이지
 	@RequestMapping(value = "/bookDetailform.do", method = RequestMethod.GET)
-	public String bookDetailForm(HttpSession session, Model model, @RequestParam int b_no) {
+	public String bookDetailForm(HttpSession session, Model model, HttpServletRequest request) {
+		logger.info("[bookDetailForm]");
 		StudyDto study = (StudyDto) session.getAttribute("study");
 		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-		System.out.println(b_no);
-
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
 		BookDto dto = new BookDto();
 		dto.setS_no(study.getS_no());
 		dto.setB_no(b_no);
@@ -403,23 +407,76 @@ public class BoardController {
 		return "community/book/bookDetailform";
 	}
 	
+	// 도서 검색 및 등록 페이지
 	@RequestMapping("/registerBook.do")
 	public String registerBook() {
+		logger.info("[registerBook]");
 		return "community/book/registerBook";
 	}
 	
+	// 도서글 등록 
 	@RequestMapping("/insertRegisterBook.do")
 	public String insertRegisterBook(Model model, BookDto dto) {
+		logger.info("[insertRegisterBook]");
 		int res = 0; 
-		System.out.println(dto);
 		res = bookBiz.insertRegisterBook(dto);
 		
 		if(res > 0) {
 			return "redirect:bookDetailform.do?b_no="+dto.getB_no();
 		}else {
-			return "redirect:registerBook.do";
+			model.addAttribute("msg", "도서 등록에 실패하셨습니다.");
+			model.addAttribute("url", "registerBook.do");
+			return "commond/alert";
 		}
 	}
+	
+	// 도서글 삭제
+	@RequestMapping("/deleteBook.do")
+	public String deleteBook(HttpSession session, Model model, HttpServletRequest request) {
+		logger.info("[deleteBook]");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		StudyDto studyDto = (StudyDto)session.getAttribute("study");
+		BookDto dto = new BookDto();
+		dto.setB_no(b_no);
+		dto.setS_no(studyDto.getS_no());
+		
+		BookDto res = bookBiz.deleteBook(dto);
+		
+		// null -> 삭제 성공
+		if(res != null) {
+			model.addAttribute("msg", "해당 도서 게시글이 삭제되었습니다.");
+			model.addAttribute("url", "searchBook.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg", "해당 도서 게시글 삭제에 실패했습니다.");
+			model.addAttribute("url", "bookDetailform.do?b_no="+dto.getB_no());
+			return "commond/alert";
+		}
+	}
+	
+	// 도서글 수정 페이지 전환
+	@RequestMapping("/updateBookForm.do")
+	public String updateBookForm(Model model, HttpServletRequest request, HttpSession session) {
+		StudyDto studyDto = (StudyDto)session.getAttribute("study");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
+		
+		BookDto tmp = new BookDto();
+		tmp.setS_no(studyDto.getS_no());
+		tmp.setB_no(b_no);
+		
+		BookDto dto = bookBiz.selectOneBook(tmp);
+		
+		// 멤버번호로 작성자 이름/아이디 받아오기
+		writerNameMap = bookBiz.getBookWriterName(dto.getB_writer());
+		
+		model.addAttribute("bookDto", dto);
+		model.addAttribute("writerNameMap", writerNameMap);
+		return "community/book/updateBookForm";
+	}
+	
+	// [도서 게시판]
+	/////////////////////////////////////////////////////////////////////////////
 	
 	// 페이징 함수
 	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
@@ -477,34 +534,6 @@ public class BoardController {
 		}
 
 		return isVisitPage;
-	}
-
-	// 페이징 함수
-	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum, int bookPageSize) {
-
-		int currentPage = (pageNum == null || pageNum.trim() == "") ? 1 : Integer.parseInt(pageNum); // 현재 페이지
-		int startRow = (currentPage - 1) * bookPageSize + 1; // 페이지 첫번째 글
-		int endRow = currentPage * bookPageSize; // 페이지 마지막 글
-		int numPageGroup = (int) Math.ceil((double) currentPage / pageGroupSize); // 페이지 그룹
-		/*
-		 * [1][2][3][4][5] -> 1 ( numPageGroup ) [6][7][8][9][10] -> 2
-		 */
-		int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
-		int endPage = numPageGroup * pageGroupSize; // 끝 페이지
-		int totalPageNum = totalBoardNum / bookPageSize + 1; // 총페이지 개수
-
-		// 마지막 페이지가 총 페이지 갯수보다 많으면
-		if (endPage > totalPageNum) {
-			endPage = totalPageNum;
-		}
-
-		pagingMap.put("currentPage", currentPage);
-		pagingMap.put("startRow", startRow);
-		pagingMap.put("endRow", endRow);
-		pagingMap.put("startPage", startPage);
-		pagingMap.put("endPage", endPage);
-		pagingMap.put("totalPageNum", totalPageNum);
-
 	}
 
 }

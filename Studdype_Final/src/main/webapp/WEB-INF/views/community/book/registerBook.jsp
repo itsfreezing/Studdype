@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스터띱 도서 검색 페이지</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -627,6 +627,7 @@ tooltip-persistent 요소 추가 할 것 */
 		for(var i = startPage; i <= endPage; i++) {
 			$("#paging-section").append("<a class='pageNumber' id="+i+">"+i+"</a>");
 		}
+		$(".pageNumber:first").addClass("show");
 	}
 	
 	// 검색창 함수
@@ -692,7 +693,7 @@ tooltip-persistent 요소 추가 할 것 */
       						<label for="publish">출판사</label>
       						<input id="publish" type="text" name="book_publish" value="" readonly="readonly">
       				
-      						<label for="link">링크</label>
+      						<label for="link">링크&nbsp;</label>
       						<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
       						<button type="submit">등록</button>
     					</div>
@@ -754,7 +755,7 @@ tooltip-persistent 요소 추가 할 것 */
 	</div>
 	<!-- 메인 섹션 종료 -->
 	
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 
 </body>
 </html>

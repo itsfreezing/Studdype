@@ -85,6 +85,20 @@ public class BookDaoImpl implements BookDao {
 		
 		return res;
 	}
+
+	@Override
+	public int deleteBook(BookDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBook", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : deleteBook");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 	
 	
 

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스터띱 도서 게시판</title>
+<title>스터띱 도서 게시글 수정페이지</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -96,8 +96,9 @@
 }
 
 input {
-	border: none;
+	border: 1px solid black;
 	font-weight: bolder;
+	width:100%;
 }
 
 textarea {
@@ -113,6 +114,7 @@ table button {
 	color: #868e96;
 	font-weight: bolder;
 	background: #fff;
+	margin-top:0;
 }
 
 table button:hover {
@@ -126,30 +128,23 @@ table button:hover {
 	width: 20px;
 	height: 20px;
 }
-#isMain {
-	color:#6f42c1;
-	font-size:20px;
-	font-weight:bolder;
+#writer {
+	border:none;
 }
 </style>
-
 <script type="text/javascript">
 	var b_no = 0;
+	
 	$(function() {
-		b_no = $("#b_no").val();	
+		b_no = $("#b_no").val();
 	});
 	
-	// 도서 게시글 삭제 함수
-	function deleteBook() {
-		location.href="deleteBook.do?b_no="+b_no;
+	function returnDetailPage() {
+		location.href = "bookDetailForm.do?b_no" + b_no;
 	}
 	
-	function updateBookForm() {
-		location.href="updateBookForm.do?b_no="+b_no;
-	}
-	
-	function returnList() {
-		location.href="searchBook.do";
+	function validateSubmit() {
+		
 	}
 </script>
 </head>
@@ -161,98 +156,83 @@ table button:hover {
 	<!-- 메인섹션 시작 -->
 	<div class="main-section">
 		<c:choose>
-			<c:when test="${empty detailBookDto }">
+			<c:when test="${empty bookDto }">
 				<p>페이지 오류</p>
-				<button onclick="returnList()">돌아가기</button>
+				<button onclick="returnDetailPage();">돌아가기</button>
 			</c:when>
 			<c:otherwise>
 				<!-- 메인 섹션 상단(글제목영역) -->
-				<div id="main-section-top">
+				<form action="updateBook.do" autocomplete="off" onsubmit="return validateSubmit();">
+					<div id="main-section-top">
 
-					<table>
-						<col width="800">
-						<col width="200">
-						<col width="100">
-						<tr>
-							<th>글제목</th>
-							<th>작성자</th>
-							<th>작성시간</th>
-						</tr>
-						<tr>
-							<th><input type="text"
-								value="${detailBookDto.getB_title() }"></th>
-							<th><input type="text"
-								value="${writerNameMap.get(detailBookDto.getB_writer()).getMem_id()}(${writerNameMap.get(detailBookDto.getB_writer()).getMem_name() })"></th>
-							<th><fmt:formatDate value="${detailBookDto.getB_regdate() }"
-									timeStyle="YYYY-MM-DD" /></th>
-						</tr>
-					</table>
-				</div>
-
-				<!-- 메인 섹션 중앙(도서 정보) -->
-				<div id="main-section-mid">
-
-					<div id="book-img">
-						<img src="${detailBookDto.getBook_img() }">
-					</div>
-					<div id="book-content">
-						<input type="hidden" id="b_no" value="${detailBookDto.getB_no() }">
 						<table>
+							<col width="800">
+							<col width="200">
+							<col width="100">
 							<tr>
-								<th>도서 이름&nbsp;</th>
-								<th><input type="text"
-									readonly="readonly" value="${detailBookDto.getBook_title()}">
-									<c:if test="${detailBookDto.getBook_ismain() eq 'Y' }">
-										<span id="isMain">&nbsp;대표도서</span>
-									</c:if>
-								</th>
+								<th>글제목</th>
+								<th>작성자</th>
+								<th>작성시간</th>
 							</tr>
 							<tr>
-								<th>저자&nbsp;</th>
-								<th><input type="text"
-									readonly="readonly" value="${detailBookDto.getBook_author() }"></th>
-							</tr>
-							<tr>
-								<th>출판사&nbsp;</th>
-								<th><input type="text"
-									readonly="readonly" value="${detailBookDto.getBook_publish() }"></th>
-							</tr>
-							<tr>
-								<th>링크&nbsp;</th>
-								<th><a href="${detailBookDto.getBook_url() }"
-									target="_blank"><img id="link"
-										src='resources/img/link-icon.png' /></a><input type="hidden"
-									value="${detailBookDto.getBook_url() }"></th>
-							</tr>
-							<tr>
-								<th style="vertical-align: top;">도서 설명</th>
-								<th><textarea style="width: 100%;" rows="10"
-										readonly="readonly">${detailBookDto.getB_content() }</textarea></th>
-							</tr>
-							<tr style="text-align: right;">
-								<c:choose>
-									<c:when
-										test="${login.getMem_no() eq detailBookDto.getB_writer() }">
-										<td colspan="3">
-											<button onclick="updateBookForm();">수정</button>
-											<button onclick="deleteBook();">삭제</button>
-											<button onclick="location.href='searchBook.do'">목록</button>
-										</td>
-									</c:when>
-									<c:otherwise>
-										<td colspan="3">
-											<button onclick="location.href='searchBook.do'">목록</button>
-										</td>
-									</c:otherwise>
-								</c:choose>
+								<th><input type="text" id="title"
+									value="${bookDto.getB_title() }"></th>
+								<th><input type="text" readonly="readonly" id="writer"
+									value="${writerNameMap.get(bookDto.getB_writer()).getMem_id()}(${writerNameMap.get(bookDto.getB_writer()).getMem_name() })"></th>
+								<th><fmt:formatDate value="${bookDto.getB_regdate() }"
+										timeStyle="YYYY-MM-DD" /></th>
 							</tr>
 						</table>
 					</div>
 
-				</div>
+					<!-- 메인 섹션 중앙(도서 정보) -->
+					<div id="main-section-mid">
 
+						<div id="book-img">
+							<img src="${bookDto.getBook_img() }">
+						</div>
+						<div id="book-content">
+							<input type="hidden" id="b_no" value="${bookDto.getB_no() }">
+							<table>
+								<tr>
+									<th>도서 이름&nbsp;</th>
+									<th><input type="text" readonly="readonly"
+										value="${bookDto.getBook_title()}"></th>
+								</tr>
+								<tr>
+									<th>저자&nbsp;</th>
+									<th><input type="text" readonly="readonly"
+										value="${bookDto.getBook_author() }"></th>
+								</tr>
+								<tr>
+									<th>출판사&nbsp;</th>
+									<th><input type="text" readonly="readonly"
+										value="${bookDto.getBook_publish() }"></th>
+								</tr>
+								<tr>
+									<th>링크&nbsp;</th>
+									<th><a href="${bookDto.getBook_url() }" target="_blank">
+											<img id="link" src='resources/img/link-icon.png' />
+									</a> <input type="hidden" value="${bookDto.getBook_url() }">
+									</th>
+								</tr>
+								<tr>
+									<th style="vertical-align: top;">도서 설명</th>
+									<th><textarea style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
+								</tr>
+								<tr style="text-align: right;">
+									<td colspan="3">
+										<button type="submit">완료</button>
+										<button onclick="">취소</button>
+									</td>
+
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</form>
 			</c:otherwise>
-
 		</c:choose>
 	</div>
 	<!-- 메인섹션 종료 -->

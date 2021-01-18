@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.book.BookDao;
 import com.studdype.test.model.dao.member.MemberDao;
@@ -55,6 +56,22 @@ public class BookBizImpl implements BookBiz{
 	@Override
 	public int insertRegisterBook(BookDto dto) {
 		return bookDao.insertRegisterBook(dto);
+	}
+
+	@Override
+	@Transactional
+	public BookDto deleteBook(BookDto dto) {
+		BookDto resDto = new BookDto();
+		
+		int res = bookDao.deleteBook(dto);
+		
+		if(res > 0) {
+			resDto = null;
+		}else {
+			resDto = bookDao.selectOneBook(dto);
+		}
+		
+		return resDto;
 	}
 
 	

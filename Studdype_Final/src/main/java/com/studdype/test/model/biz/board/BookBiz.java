@@ -16,4 +16,5 @@ public interface BookBiz {
 	public BookDto selectOneBook(BookDto dto);	// 해당 도서 선택
 	public Map<Integer, MemberDto> getBookWriterName(int mem_no); // 해당 도서 아이디, 이름 찾아오기
 	public int insertRegisterBook(BookDto dto);	// 작성한 도서 정보 insert
+	public BookDto deleteBook(BookDto dto); // 도서 게시글 삭제
 }

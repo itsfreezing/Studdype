@@ -40,10 +40,18 @@
 	</select>
 	
 	<insert id="insertRegisterBook" parameterType="bookDto">
+		<!-- 가상 테이블로 SEQ 값 반환 -->
+		<selectKey keyProperty="b_no" resultType="int" order="BEFORE">
+			SELECT BOOKSEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO BOOK
-		VALUES(BOOKSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE,
+		VALUES(#{b_no}, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE,
 		 #{book_title}, #{book_author}, #{book_publish}, #{book_img}, #{book_url}, DEFAULT)
 	</insert>
+	
+	<delete id="deleteBook" parameterType="bookDto">
+		DELETE FROM BOOK WHERE B_NO = #{b_no} AND S_NO #{s_no}
+	</delete>
 	
 	<select id="bookList" parameterType="int" resultType="bookDto">
 		SELECT * FROM BOOK WHERE S_NO = #{s_no}
