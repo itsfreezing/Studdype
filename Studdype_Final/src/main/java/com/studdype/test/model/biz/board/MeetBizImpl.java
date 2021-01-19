@@ -92,10 +92,12 @@ public class MeetBizImpl implements MeetBiz {
 	public int delete(int meet_no) {
 		return meetBoardDao.deleteMeetBoard(meet_no);
 	}
-
+	
+	// 
 	@Override
 	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
 		return meetBoardDao.selectMeetDBForCalendar(s_no);
 	}
+
 
 }

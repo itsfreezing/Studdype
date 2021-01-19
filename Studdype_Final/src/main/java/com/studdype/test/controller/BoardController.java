@@ -66,8 +66,6 @@ public class BoardController {
 	@Autowired
 	ServletContext context;
 	
-	
-	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
@@ -93,8 +91,7 @@ public class BoardController {
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
 		memberMap = freeBiz.getMemberMap(list);
-
-		// 댓글 갯수 가져오기
+		//댓글 갯수 가져오기 
 		replyCntMap = freeBiz.getReplyCnt(list);
 
 		model.addAttribute("startPage", pageMap.get("startPage"));
