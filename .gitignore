@@ -26,5 +26,8 @@ hs_err_pid*
 pom.properties
 MANIFEST.MF
 bin/
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0682ccfec7377f5ae6b8069293aceb11662aa332
 
