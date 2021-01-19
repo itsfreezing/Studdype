@@ -124,10 +124,10 @@ function takeVote(btn){
 		dataType:"json",
 		success:function(res){
 			if( res > 0 ) {
-				getVoteResultForWriter();
+				getVoteResult();
 			} else {
 				alert("[ERROR]: 투표하기에 실패하였습니다.");
-				getVoteResultForWriter();
+				getVoteResult();
 			}
 		},
 		error:function(request,status,error){ // 통신 실패 
