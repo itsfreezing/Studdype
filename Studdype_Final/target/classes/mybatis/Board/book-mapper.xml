@@ -50,11 +50,18 @@
 	</insert>
 	
 	<delete id="deleteBook" parameterType="bookDto">
-		DELETE FROM BOOK WHERE B_NO = #{b_no} AND S_NO #{s_no}
+		DELETE FROM BOOK WHERE B_NO = #{b_no} AND S_NO = #{s_no}
 	</delete>
+	
+	<update id="bookBoardUpdateBook" parameterType="bookDto">
+		UPDATE BOOK SET B_TITLE = #{b_title}, B_CONTENT = #{b_content}, B_REGDATE = SYSDATE 
+		WHERE S_NO = #{s_no} AND b_no = #{b_no}
+	</update>
 	
 	<select id="bookList" parameterType="int" resultType="bookDto">
 		SELECT * FROM BOOK WHERE S_NO = #{s_no}
 	</select>
+	
+	
 
 </mapper>	

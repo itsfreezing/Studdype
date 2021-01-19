@@ -95,14 +95,23 @@
 		rgba(255, 255, 255, 0.5);
 }
 
-input {
-	border: 1px solid black;
+.main-section input {
 	font-weight: bolder;
-	width:100%;
 }
 
-textarea {
+#title {
+	border: 2px solid gray;
+	height:35px;
+	width:90%;
+}
+
+#content:focus, #title:focus {
+	border:3px solid rgb(115, 98, 222);
+}
+
+#content {
 	border: 2px solid #868e96;
+	font-weight:bolder;
 }
 
 table button {
@@ -114,10 +123,21 @@ table button {
 	color: #868e96;
 	font-weight: bolder;
 	background: #fff;
-	margin-top:0;
+	margin-top:0px;
 }
 
-table button:hover {
+button[type=submit] {
+	margin-top:0px;
+	padding:0px;
+	background:#fff;
+	border: 2px solid #868e96;
+	border-radius: 20px;
+	font-size: 20px;
+	color: #868e96;
+	font-weight: bolder;
+}
+
+button[type=submit]:hover, table button:hover {
 	cursor: pointer;
 	background: rgb(115, 98, 222);
 	color: #fff;
@@ -128,9 +148,10 @@ table button:hover {
 	width: 20px;
 	height: 20px;
 }
-#writer {
+.input_none {
 	border:none;
 }
+
 </style>
 <script type="text/javascript">
 	var b_no = 0;
@@ -140,11 +161,25 @@ table button:hover {
 	});
 	
 	function returnDetailPage() {
-		location.href = "bookDetailForm.do?b_no" + b_no;
+		location.href = "bookDetailform.do?b_no="+b_no;
 	}
 	
 	function validateSubmit() {
+		var title = $("#title").val();
+		var content = $("#content").val();
 		
+		if( (title.trim().length==0) || (title==null) || (title.trim()=='') ) {
+			alert("글제목을 작성해주세요.");
+			return false;
+		}else if(title.trim() > 500) {
+			alert("글제목은 500자 이내로 작성해주세요.");
+			return false;
+		}else if( (content.trim().length==0) || (content.trim()=='') || (conetnt==null) ) {
+			alert("도서 설명을 작성해주세요.");
+			return false;
+		}else {
+			return true;
+		}
 	}
 </script>
 </head>
@@ -162,9 +197,10 @@ table button:hover {
 			</c:when>
 			<c:otherwise>
 				<!-- 메인 섹션 상단(글제목영역) -->
-				<form action="updateBook.do" autocomplete="off" onsubmit="return validateSubmit();">
+				<form action="bookBoardUpdateBook.do" autocomplete="off" onsubmit="return validateSubmit();" accept-charset="utf-8">
+					<input type="hidden" name="s_no" value="${study.s_no }">
+					<input type="hidden" name="b_writer" value="${login.mem_no }">
 					<div id="main-section-top">
-
 						<table>
 							<col width="800">
 							<col width="200">
@@ -175,9 +211,9 @@ table button:hover {
 								<th>작성시간</th>
 							</tr>
 							<tr>
-								<th><input type="text" id="title"
+								<th><input type="text" id="title" name="b_title"
 									value="${bookDto.getB_title() }"></th>
-								<th><input type="text" readonly="readonly" id="writer"
+								<th><input type="text" readonly="readonly" class="input_none"
 									value="${writerNameMap.get(bookDto.getB_writer()).getMem_id()}(${writerNameMap.get(bookDto.getB_writer()).getMem_name() })"></th>
 								<th><fmt:formatDate value="${bookDto.getB_regdate() }"
 										timeStyle="YYYY-MM-DD" /></th>
@@ -190,23 +226,24 @@ table button:hover {
 
 						<div id="book-img">
 							<img src="${bookDto.getBook_img() }">
+							<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
 						</div>
 						<div id="book-content">
-							<input type="hidden" id="b_no" value="${bookDto.getB_no() }">
+							<input type="hidden" id="b_no" name="b_no" value="${bookDto.getB_no() }">
 							<table>
 								<tr>
 									<th>도서 이름&nbsp;</th>
-									<th><input type="text" readonly="readonly"
+									<th><input type="text" readonly="readonly" class="input_none" name="book_title"
 										value="${bookDto.getBook_title()}"></th>
 								</tr>
 								<tr>
 									<th>저자&nbsp;</th>
-									<th><input type="text" readonly="readonly"
+									<th><input type="text" readonly="readonly" class="input_none" name="book_author"
 										value="${bookDto.getBook_author() }"></th>
 								</tr>
 								<tr>
-									<th>출판사&nbsp;</th>
-									<th><input type="text" readonly="readonly"
+									<th>출판사&nbsp;</th> 
+									<th><input type="text" readonly="readonly" class="input_none" name="book_publish"
 										value="${bookDto.getBook_publish() }"></th>
 								</tr>
 								<tr>
@@ -218,12 +255,12 @@ table button:hover {
 								</tr>
 								<tr>
 									<th style="vertical-align: top;">도서 설명</th>
-									<th><textarea style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
+									<th><textarea id="content" name="b_content" style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
 								</tr>
 								<tr style="text-align: right;">
 									<td colspan="3">
 										<button type="submit">완료</button>
-										<button onclick="">취소</button>
+										<button type="button" onclick="returnDetailPage();">취소</button>
 									</td>
 
 								</tr>

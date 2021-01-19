@@ -662,6 +662,23 @@ tooltip-persistent 요소 추가 할 것 */
 		});
 	}
 	
+	function validateSubmit() {
+		var title = $("#b_title").val();
+		var content = $("#content").val();
+		
+		if( (title.trim().length==0) || (title==null) || (title.trim()=='') ) {
+			alert("글제목을 작성해주세요.");
+			return false;
+		}else if(title.trim() > 500) {
+			alert("글제목은 500자 이내로 작성해주세요.");
+			return false;
+		}else if( (content.trim().length==0) || (content.trim()=='') || (conetnt==null) ) {
+			alert("도서 설명을 작성해주세요.");
+			return false;
+		}else {
+			return true;
+		}
+	}
 </script>
 
 </head>
@@ -670,18 +687,18 @@ tooltip-persistent 요소 추가 할 것 */
 	<!-- 모달 영역 시작 -->
 		<div class="modal hidden">
 			<div class="form">
-    			<form action="insertRegisterBook.do" autocomplete="off" accept-charset="utf-8">
+    			<form action="insertRegisterBook.do" onsubmit="return validateSubmit();" autocomplete="off" accept-charset="utf-8">
     				<input type="hidden" name="s_no" value="${study.s_no }">
     				<input type="hidden" name="b_writer" value="${login.mem_no }">
     				<input type="hidden" id="input_book_img" name="book_img" value="">
     				<div id="modal-top">
     					<label for="b_title">글 제목</label>
-     					<input id="b_title" name="b_title" type="text" required="required"/>
+     					<input id="b_title" name="b_title" type="text"/>
     				</div>
     				<div id="modal-bottom">
     					<div id="modal-textarea">
     						<label for="content" >도서 설명글</label>
-							<textarea id="content" rows="12" name="b_content" required="required"></textarea>
+							<textarea id="content" rows="12" name="b_content"></textarea>
     					</div>
     					<div id="modal-content">
     						<label for="title">도서 이름</label>

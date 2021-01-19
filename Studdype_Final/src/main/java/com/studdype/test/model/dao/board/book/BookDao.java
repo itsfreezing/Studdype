@@ -14,4 +14,5 @@ public interface BookDao {
 	public List<BookDto> bookList(int s_no);
 	public int insertRegisterBook(BookDto dto);	// 작성한 도서 정보 insert
 	public int deleteBook(BookDto dto); // 도서 게시글 삭제
+	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
 }

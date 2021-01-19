@@ -99,6 +99,20 @@ public class BookDaoImpl implements BookDao {
 		
 		return res;
 	}
+
+	@Override
+	public int bookBoardUpdateBook(BookDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"bookBoardUpdateBook", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : bookBoardUpdateBook");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 	
 	
 

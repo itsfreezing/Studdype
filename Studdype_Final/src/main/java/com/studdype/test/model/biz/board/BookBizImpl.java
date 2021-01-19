@@ -74,5 +74,10 @@ public class BookBizImpl implements BookBiz{
 		return resDto;
 	}
 
+	@Override
+	public int bookBoardUpdateBook(BookDto dto) {
+		return bookDao.bookBoardUpdateBook(dto);
+	}
+
 	
 }

@@ -95,12 +95,13 @@
 		rgba(255, 255, 255, 0.5);
 }
 
-input {
+.main-section input {
 	border: none;
 	font-weight: bolder;
+	width:100%;
 }
 
-textarea {
+.main-section textarea {
 	border: 2px solid #868e96;
 }
 
