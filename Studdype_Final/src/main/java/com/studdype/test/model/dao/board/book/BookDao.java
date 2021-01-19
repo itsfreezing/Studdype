@@ -12,4 +12,7 @@ public interface BookDao {
 	public List<BookDto> selectSearchBookList(int s_no);	// 화면에 보여줄 해당 페이지 도서 리스트
 	public BookDto selectOneBook(BookDto dto);	// 해당 도서 선택
 	public List<BookDto> bookList(int s_no);
+	public int insertRegisterBook(BookDto dto);	// 작성한 도서 정보 insert
+	public int deleteBook(BookDto dto); // 도서 게시글 삭제
+	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
 }
