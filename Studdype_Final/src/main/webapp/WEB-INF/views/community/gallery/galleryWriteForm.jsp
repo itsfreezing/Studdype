@@ -134,12 +134,9 @@
 				</div>
 				<br>
 				<div id='divHabilitSelectors' class="input-file-container">
-					<input class="input-file" id="fileupload" name="file" type="file"
-						multiple> <label for="fileupload"
-						class="input-file-trigger" id='labelFU' tabindex="0">사진을
-						업로드 해주세요</label>
+					<input class="input-file" id="fileupload" name="file" type="file" multiple>
+					<label for="fileupload" class="input-file-trigger" id='labelFU' tabindex="0">사진을 업로드 해주세요</label>
 					<div id="testDiv"></div>
-
 				</div>
 				<br>
 				<div class="mb-3">
