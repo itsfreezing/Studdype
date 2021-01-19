@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-<link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css">
+<!-- <link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css"> -->
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -31,6 +31,92 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
+
+<style type="text/css">
+@charset "UTF-8";
+.main-section {
+	display: block;
+	position: relative;
+	width: 60%;
+	margin: 0px auto;
+}
+
+#main-contrainer {
+	position: relative;
+	width: 100%;
+	hight: 100%;
+	margin: 0px auto;
+	margin-top: 5%;
+}
+
+#mainleft {
+	position: relative;
+	float: left;
+	width: 50%;
+}
+
+#mainright {
+	position: relative;
+	float: right;
+	width: 50%;
+	padding-left: 5%;
+}
+
+#image-section {
+	width: 100%;
+	height: 400px;
+	text-align:center;
+	border: 2px solid #f8f9fa;
+}
+
+#studyMainPhoto {
+	width:100%;
+	height:400px;
+}
+
+#mainbottom {
+	clear: both;
+}
+
+#btndiv {
+	text-align: center;
+}
+
+input#fileinput {
+	margin-top: 6.5%;
+}
+
+button.submitBtn {
+	background: #fff;
+	color: #7362DE;
+	border: 1px solid #7362DE;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin-top: 40px;
+	padding-bottom: 50px;
+	width: 300px;
+	height: 50px;
+	line-height: 52px;
+	padding: 0;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+input.submitBtn:hover, button.submitBtn:hover {
+	background: #7362DE;
+	color: #fff;
+}
+
+
+label {
+	color: #7362DE;
+	font-weight: bold;
+}
+
+</style>
 
 <script type="text/javascript">
 	var sel_files = [];
@@ -134,9 +220,20 @@
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
-				$('#image_section').attr('src', e.target.result);
+				
+				if(e.target.result.substring(5,10) == 'image') {
+					$("#image-section").empty();
+					$("#image-section").append("<img id='studyMainPhoto' src='"+e.target.result+"' />");
+				}else {
+					alert("이미지 확장자만 업로드 가능합니다.");
+					$("#fileinput").val("");	// 보통 브라우저에서 file 값 초기화 방법
+					$("#fileinput").replaceWith($("#fileinput").clone(true));	// IE version 초기화방법
+					$("#image-section").empty();
+					return false;
+				}
+				
 			}
-
+			
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
@@ -262,8 +359,10 @@
 				<div id="mainright">
 					<div class="form-group" id="file">
 						<label>스터디 대표사진</label>
-						<img id="image_section" src="./resources/assets/img/icon_photoUpload.png" />
-						<input type="file" name="myfile" id="fileinput">
+						<div id="image-section">
+							<img style="position:relative; top:20%; width:200px; height:200px;" id="image_section" src="./resources/assets/img/icon_photoUpload.png" />
+						</div>
+						<input type="file" name="file" id="fileinput">
 					</div>
 				</div>
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->

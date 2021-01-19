@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
@@ -14,6 +15,7 @@ import com.studdype.test.model.dao.location.LocationGuDao;
 import com.studdype.test.model.dao.location.LocationSiDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dao.study.StudyDao;
+import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
@@ -69,8 +71,15 @@ public class StudyBizImpl implements StudyBiz{
 		return studyCatedao.categoryList();
 
 	}
+	
+	// 스터디 insert (파일 등록 시)
+	@Override
+	public int insertStudy(StudyDto studyDto, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-	// 스터디 insert
+	// 스터디 insert (파일 미등록 시)
 	@Override
 	public int insertStudy(StudyDto dto) {
 		return study_Dao.insertStudy(dto);
@@ -123,6 +132,8 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return study_Dao.selectTotalStudyNum(mem_no);
 	}
+
+
 
 
 	

@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
@@ -19,7 +22,8 @@ public interface StudyBiz {
 	public List<LocationSiDto> locationSiList(); // 지역 (시) selectList
 	public List<LocationGuDto> locationGuList(); // 지역(구/군) selectList
 	public List<StudyCategoryDto> categoryList(); // 카테고리 selectList
-	public int insertStudy(StudyDto dto); //스터디 insert
+	public int insertStudy(StudyDto studyDto, MultipartFile[] mfileList, String path, List<FileDto> fileList); //스터디 insert (파일 등록 시)
+	public int insertStudy(StudyDto studyDto); //스터디 insert(파일 미등록 시)
 	public int selectStudyFinalNumber();	// 등록된 스터디 마지막 번호
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList); //리더이름 가져오기
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //구이름 가져오기

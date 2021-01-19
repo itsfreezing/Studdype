@@ -24,6 +24,9 @@
 	href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
+
+<link rel="stylesheet" href="./resources/css/community/book/bookDetailform.css">
+
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
@@ -32,106 +35,7 @@
 <script src="./resources/assets/js/main.js"></script>
 
 <style type="text/css">
-.main-section {
-	width: 60%;
-	margin-right: 10%;
-}
 
-#main-section-top {
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	padding: 1%;
-	border-top: 2px solid #868e96;
-	border-radius: 5px;
-}
-
-#main-section-mid {
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	border-top: 2px solid #868e96;
-	border-bottom: 2px solid #868e96;
-	padding: 1%;
-}
-
-#book-content {
-	position: relative;
-	float: right;
-	width: 60%;
-	height: 500px;
-	padding: 1%;
-	margin: 1%;
-}
-
-#main-section-mid table {
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 0 20px;
-}
-
-#book-content table th, td {
-	padding: 1%;
-}
-
-#book-content a {
-	color: #1a0dab;
-}
-
-#book-img {
-	position: relative;
-	float: left;
-	width: 35%;
-	height: 500px;
-	margin: 1%;
-}
-
-#book-img img {
-	height: 498px;
-	border: 5px solid #f9f9f0;
-	border-radius: 10px;
-	background: #f6f5f0;
-	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px
-		rgba(255, 255, 255, 0.5);
-}
-
-.main-section input {
-	border: none;
-	font-weight: bolder;
-	width:100%;
-}
-
-.main-section textarea {
-	border: 2px solid #868e96;
-}
-
-table button {
-	width: 20%;
-	height: 30px;
-	border: 2px solid #868e96;
-	border-radius: 20px;
-	font-size: 20px;
-	color: #868e96;
-	font-weight: bolder;
-	background: #fff;
-}
-
-table button:hover {
-	cursor: pointer;
-	background: rgb(115, 98, 222);
-	color: #fff;
-	transition: 0.5s ease all;
-}
-
-#link {
-	width: 20px;
-	height: 20px;
-}
-#isMain {
-	color:#6f42c1;
-	font-size:20px;
-	font-weight:bolder;
-}
 </style>
 
 <script type="text/javascript">
