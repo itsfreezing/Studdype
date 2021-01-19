@@ -118,7 +118,7 @@ public class HomeController {
 		model.addAttribute("totalPageNum",pageMap.get("totalPageNum"));
 		model.addAttribute("pageList",pageList);
 		model.addAttribute("LeaderList",LeaderList);
-		
+	
 		model.addAttribute("Receiveapply",Receiveapply);
 		model.addAttribute("receiveapplyname",receiveapplyname);
 		model.addAttribute("studyApplylist",studyApplylist);

@@ -252,7 +252,7 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>등록된 책 리스트</th>
+					<th>등록된 책 제목</th>
 					<th>대표설정</th>
 				</tr>
 			</thead>
