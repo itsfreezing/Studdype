@@ -81,7 +81,7 @@ public class FreeBizImpl implements FreeBiz {
 	@Transactional
 	@Override
 	public BoardDto selectDetail(int b_no, int isVisitPage) {		
-		int res = 0 ;
+		int res = 1;
 		if(isVisitPage == 0) {
 			res = freeBoardDao.updateCnt(b_no);
 		}

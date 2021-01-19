@@ -10,5 +10,6 @@ public interface NoticeFileDao {
 					  
 	int insertFile(List<FileDto> fileList); //파일 디비에 저장
 	List<FileDto> selectAttachFileList(int b_no); //게시판 번호로 첨부파일 가져오기
+	FileDto selectFile(int f_no); //파일 가져오기
 	
 }

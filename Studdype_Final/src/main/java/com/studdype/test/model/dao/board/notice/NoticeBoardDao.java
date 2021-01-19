@@ -8,10 +8,11 @@ public interface NoticeBoardDao {
 	//공지사항 게시글 
 	String NAMESPACE="noticeboard.";
 
-	List<BoardDto> selectNoticeBoard(); //공지사항 게시글 리스트가져오기
+	List<BoardDto> selectNoticeBoard(int s_no); //공지사항 게시글 리스트가져오기
 	int insertBoard(BoardDto board); //공지사항 게시글 작성
-	int selectNoticeNum(); //공지사항 게시글 갯수 가져오기
+	int selectNoticeNum(int s_no); //공지사항 게시글 갯수 가져오기
 	int updateCnt(int b_no); //공지사항 게시글 조회수 증가
 	BoardDto selectOne(int b_no); //공지사항 게시글 하나 가져오기
 	List<BoardDto> selectRecentList(int s_no, int b_no); //공지사항 주변글 가져오기
+	List<BoardDto> selectNoticeBoardList(int s_no); // 공지사항 게시글 리스트 역순 가져오기
 }

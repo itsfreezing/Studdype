@@ -95,7 +95,7 @@ public class BoardController {
 		
 		//공지사항 게시글 가져오기
 		if(pagenum == null || Integer.parseInt(pagenum) == 1) {
-			noticeList = noticeBiz.selectNoticeBoard();
+			noticeList = noticeBiz.selectNoticeBoard(study.getS_no());
 			noticeReplyCntMap = noticeBiz.getReplyCnt(noticeList); //공지사항 댓글 갯수 가져오기
 			noticeMemberMap = noticeBiz.getMemberMap(noticeList); //공지사항 게시글 작성자 가져오기
 			
@@ -337,7 +337,7 @@ public class BoardController {
 		return "community/schedule/test";
 	}
 	
-	//캘린더
+	
 	//자유게시판 파일 다운로드
 	@RequestMapping(value="/freeFileDown.do", method = RequestMethod.GET)
 	public void freeFileDownload(HttpServletResponse response, HttpServletRequest request) {
