@@ -21,7 +21,7 @@ public class MeetReplyDaoImpl implements MeetReplyDao{
 	@Override
 	public List<ReplyDto> selectMeetReplyList(int b_no) {
 		List<ReplyDto> list = null;
-		//주석고쳐야함System.out.println("reply"+b_no);
+
 		try {
 			list = sqlSession.selectList(NAMESPACE+"selectMeetReplyList", b_no);
 		} catch (Exception e) {
