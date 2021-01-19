@@ -69,7 +69,7 @@ public class HomeController {
 	public String myPage(HttpSession session,String pagenum, Model model) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
 
-		MemberDto mypage = memberBiz.selectOne(login.getMem_no());
+		
 		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
 
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(login.getMem_no()); //해당 회원번호로 가입되있는 스터디 번호 가져오기
@@ -81,7 +81,7 @@ public class HomeController {
 		List<StudyApplyingDto> studyApplylist = studyapplyingBiz.studyApplyingList(login.getMem_no()); //멤버 번호로 studyapply 리스트 가져오기
 		List<StudyDto> receiveapplyname = new ArrayList<StudyDto>();
 		List<StudyMemberDto> pageList = null;
-		int totalStudyListNum = studymemberBiz.StudyTotalNum(mypage.getMem_no()); //5개씩 스터디 번호 가져오기
+		int totalStudyListNum = studymemberBiz.StudyTotalNum(login.getMem_no()); //5개씩 스터디 번호 가져오기
 		
 		
 		Map<String,Integer> pageMap = new HashMap<String,Integer>();
@@ -212,7 +212,8 @@ public class HomeController {
 	//마이페이지 회원 정보수정 폼으로 이동
 	@RequestMapping("/UpdateMember.do")
 	public String UpdateMember(HttpSession session, Model model,HttpServletRequest request) {
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto login2 = memberBiz.selectOne(login.getMem_no());
 		
 	
 		model.addAttribute("mem_id",request.getParameter("mem_id"));
@@ -220,13 +221,14 @@ public class HomeController {
 		model.addAttribute("mem_email",request.getParameter("mem_email"));
 		model.addAttribute("mem_phone",request.getParameter("mem_phone"));
 		
-		session.setAttribute("login",login);
+		session.setAttribute("login",login2);
 		return "studdype/UpdateMember";
 	}
 	//마이페이지 회원 정보 수정 아이디 중복체크
 	@RequestMapping(value="/idchk.do",method = RequestMethod.GET)
-	public String idchk(HttpServletRequest request, Model model) {
-		MemberDto login = memberBiz.selectOne(1);
+	public String idchk(HttpServletRequest request, Model model,HttpSession session) {
+		MemberDto login = (MemberDto)session.getAttribute("login");
+	
 		
 		MemberDto dto = memberBiz.idchk(request.getParameter("mem_id"));
 		

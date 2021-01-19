@@ -87,11 +87,11 @@ public class StudyController {
 
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
-	public String createStuddypeForm(Model model) {
+	public String createStuddypeForm(Model model,HttpSession session) {
 		List<LocationSiDto> sidtos = studyBiz.locationSiList();
 		List<LocationGuDto> gudtos = studyBiz.locationGuList();
 		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
 
 		model.addAttribute("login", login);
 		model.addAttribute("sidtos", sidtos);
@@ -201,24 +201,25 @@ public class StudyController {
 	// 스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session, Model model,HttpServletRequest request) {
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto dto = memberBiz.selectOne(login.getMem_no());
 		List<StudyCategoryDto> category = studyBiz.categoryList();
 		List<LocationGuDto> gudto = studyBiz.locationGuList();
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
 		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
-		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
+		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
-			MemberDto dto = memberBiz.selectOne(memberlist.get(i).getMem_no());
-			membername.add(dto);
+			MemberDto dto2 = memberBiz.selectOne(memberlist.get(i).getMem_no());
+			membername.add(dto2);
 		}
 
 		System.out.println(membername);
 
 		model.addAttribute("membername", membername);
 		model.addAttribute("memberlist", memberlist);
-		session.setAttribute("login", login);
+		session.setAttribute("login", dto);
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("gudto", gudto);
 		model.addAttribute("sidto", sidto);
