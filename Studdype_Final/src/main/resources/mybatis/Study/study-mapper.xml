@@ -33,7 +33,7 @@
 
 
 <!-- 총 게시글 수 -->
-<select id="selectTotalStudyNum" resultType="int">
+<select id="selectTotalStudyListNum" resultType="int">
       SELECT count(S_NO)
       FROM STUDY
       WHERE 1=1
