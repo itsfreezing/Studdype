@@ -29,6 +29,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-
 select * from member;
 select * from STUDY_MEMBER;
 select * from STUDY_APPLYING;
+
 select * from study;
 insert into study_member values(1,2);
 insert into study_applying values(39,1,'D','13f51');
