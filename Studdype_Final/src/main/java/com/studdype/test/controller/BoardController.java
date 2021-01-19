@@ -318,6 +318,15 @@ public class BoardController {
 		return "community/freeboard/freeDetail";
 	}
 	
+	@RequestMapping(value="/calendarView.do", method=RequestMethod.GET)
+	public String calendarView(HttpSession session, Model model ) {
+		
+		
+		
+		return "community/schedule/test";
+	}
+	
+	//캘린더
 	//자유게시판 파일 다운로드
 	@RequestMapping(value="/freeFileDown.do", method = RequestMethod.GET)
 	public void freeFileDownload(HttpServletResponse response, HttpServletRequest request) {
@@ -387,30 +396,19 @@ public class BoardController {
 	
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
+	@ResponseBody
+	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session, MeetDto dto) {
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
 		logger.info("calendar");
-		Map calendarMap = new HashMap();
-		List<MeetDto> meetList = null;
+
+		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
+		Map<String, Object> calendarMap = new HashMap<String, Object>();
 		
-		meetList = meetBiz.selectMeetDBForCalendar(dto.getS_no());
 		
 		calendarMap.put("meetList", meetList);
 		
-		
-		
 		return calendarMap;
 	}
-	/*
-	 * public String calendar(Model model, HttpSession session, HttpServletResponse
-	 * response) { StudyDto study = (StudyDto)session.getAttribute("study"); // 현재
-	 * 클릭 된 스터디 Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
-	 * calendarMap.put("evt1", new
-	 * MeetDto(1,1,"test","2021-01-22","2021-01-11","2021-01-20"));
-	 * System.out.println(calendarMap); model.addAttribute("meetList",calendarMap);
-	 * 
-	 * return "community/schedule/calendar"; }
-	 */
-
 		
 	// 페이징 함수
 	public void paging(Map pagingMap, String pageNum, int totalBoardNum) {

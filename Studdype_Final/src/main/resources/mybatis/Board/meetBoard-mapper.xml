@@ -113,9 +113,9 @@
 		
 		<!-- meet DB 켈린더로 꺼내오기 -->
 		<select id="selectMeetIntoCalendar" resultType="meetDto" parameterType="int">
-			SELECT MEET_TITLE, MEET_DATE, VOTE_STARTDATE, VOTE_ENDDATE
+			SELECT *
 			FROM MEET_BOARD
-			WHERE S_NO = ${s_no}
+			WHERE S_NO = #{s_no}
 		</select>
 
 		<!-- 모임게시판 모임 [삭제] -->
