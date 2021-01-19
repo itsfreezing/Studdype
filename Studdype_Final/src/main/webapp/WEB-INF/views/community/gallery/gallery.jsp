@@ -164,12 +164,10 @@
 
 			</div>
 		</div>
-	</div>
-	<button class="btn-sm-btn-primary"
-		onclick="location.href='gallerywriteform.do'">글쓰기</button>
+	<button onclick="location.href='gallerywriteform.do'" style="float: right;">글쓰기</button>
 	</div>
 
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

@@ -9,8 +9,10 @@
 <script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="./resources/assets/calendar/main.js"></script>
 <link rel="stylesheet" href="./resources/assets/calendar/main.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
+
+ 	document.addEventListener("DOMContentLoaded", function() {
 		var calendarEl = document.getElementById("calendar");
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : "dayGridMonth",
@@ -21,12 +23,6 @@
 		        right: "dayGridMonth,timeGridWeek,timeGridDay"
 		      },
 		      dayMaxEvents: true,
-			 eventClick: function(){
-		    	  var url = "studdypehome.do";
-		            var name = "popup test";
-		            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-		            window.open(url, name, option);
-		      },
 			events: function(data, successCallback, failureCallback){
 				$.ajax({
 					type: "post",
@@ -54,7 +50,7 @@
 						successCallback(events);
 					}
 				});
-			},
+			}
 		});
 		calendar.render();
 	});
