@@ -99,7 +99,7 @@
  });
  function chkForm(){
 	var form = $("#writeForm");
-	var title = $("#boardtitale");
+	var title = $("#boardtitle");
 	var content = $("#summernote");
 	
 	if( title.val() == null || title.val().trim() == ''){

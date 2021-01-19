@@ -176,7 +176,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		int res = meetReplyBiz.writeMeetRecomment(dto);
 		
 		System.out.println("-----------------------------------------------------------------------\n"
-						  +"<<모임 댓글>> ["+dto.getR_no()+"]dddddd\n"
+						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임댓글이 추가 되었습니다.\n"
 						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
