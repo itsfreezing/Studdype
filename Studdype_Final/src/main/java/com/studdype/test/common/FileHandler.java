@@ -120,10 +120,11 @@ public class FileHandler {
 		try {
 			File file = new File(dto.getF_url());
 			byte fileByte[] =  FileCopyUtils.copyToByteArray(file);
+			String fileName = dto.getF_name().replace(" ", ""); //공백제거
 			
 			response.setContentType("application/octet-stream");
 			response.setContentLength(fileByte.length);
-			response.setHeader("Content-Disposition", "attachment; fileName=\""+ URLEncoder.encode(dto.getF_name(),"UTF-8") +"\"");
+			response.setHeader("Content-Disposition", "attachment; fileName=\""+ URLEncoder.encode(fileName,"UTF-8") +"\"");
 			response.getOutputStream().write(fileByte);
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
