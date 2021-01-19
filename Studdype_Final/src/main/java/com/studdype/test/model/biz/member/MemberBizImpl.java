@@ -1,5 +1,7 @@
 package com.studdype.test.model.biz.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +49,23 @@ public class MemberBizImpl implements MemberBiz {
 	public MemberDto IdChk(String mem_id) {
 		return memberDao.IdChk(mem_id);
 	}
+	@Override
+	public int updateMember(MemberDto dto) {
+		
+		return memberDao.updateMember(dto);
+	}
+
+	@Override
+	public MemberDto idchk(String mem_id) {
+		
+		return memberDao.idchk(mem_id);
+	}
+
+	@Override
+	public int memberDelete(int mem_no) {
+		
+		return memberDao.memberDelete(mem_no);
+	}
+
 	
 }

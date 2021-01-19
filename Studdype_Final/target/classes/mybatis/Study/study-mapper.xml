@@ -33,15 +33,19 @@
 	</sql>
 
 
-	<!-- 총 게시글 수 -->
-	<select id="selectTotalStudyListNum" resultType="int">
-	      SELECT count(S_NO)
-	      FROM STUDY
-	      WHERE 1=1
-	      <include refid="search"></include>
-	      AND S_NO > 0
-	</select>
-
+<!-- 총 게시글 수 -->
+<select id="selectTotalStudyListNum" resultType="int">
+      SELECT count(S_NO)
+      FROM STUDY
+      WHERE 1=1
+      <include refid="search"></include>
+      AND S_NO > 0
+</select>
+<select id="totalstudyNum" parameterType="int" resultType="_int">
+	SELECT COUNT(*)
+	FROM STUDY
+	WHERE MEM_NO = ${mem_no}
+</select>
 
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">
@@ -68,5 +72,6 @@
 	<select id="studyLeader" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
 	</select>
+	
 
 </mapper>

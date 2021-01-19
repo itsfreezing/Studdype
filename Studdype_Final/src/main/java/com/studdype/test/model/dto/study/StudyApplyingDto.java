@@ -19,6 +19,12 @@ public class StudyApplyingDto {
 		this.info = info;
 	}
 
+	public StudyApplyingDto(int s_no, int mem_no) {
+		super();
+		this.s_no = s_no;
+		this.mem_no = mem_no;
+	}
+
 	public int getS_no() {
 		return s_no;
 	}

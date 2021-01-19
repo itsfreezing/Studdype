@@ -65,6 +65,7 @@
 	}
 	
 	}
+	
 	// 이전 페이지 그룹 
 	function prePageGroup(){
 		if( ${startPage - 1 > 0}){
@@ -83,6 +84,7 @@ function search_chk(){
 	
 }
 
+
 </script>
 </head>
 <body>
@@ -92,7 +94,23 @@ function search_chk(){
 
 	<!--main conternt 섹션-->
 	<div class="main-section">
-		<h1 >자유게시판</h1>
+		<h1 style="font-size:20px;" ><span class="text1">'${search.keyword }' </span>	
+		<c:choose>
+			<c:when test="${search.searchType eq 'title_content' }">
+				제목 + 내용 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'title' }">
+				제목 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'content' }">
+				내용 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'writer' }">
+				작성자 검색결과입니다.
+			</c:when>
+		</c:choose>
+		
+		</h1>
 
 
 		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
@@ -106,13 +124,13 @@ function search_chk(){
 			</tr>
 			<c:choose>
 				<c:when test="${empty list }">
-					<td colspan="4">게 시 글 이 없 습 니 다</td>
+					<td colspan="4">검 색 결 과 가 없 습 니 다</td>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
 						<tr>
 							<td class="tdtitle">
-								<a href="freedetail.do?b_no=${list.get(i).getB_no() }">${list.get(i).getB_title() }
+								<a href="freedetail.do?b_no=${list.get(i).getB_no() }">${list.get(i).getB_title() }								
 								<c:if test="${replyCntMap.get(list.get(i).getB_no())!=0}">
 									<span class="reply_cnt">[${replyCntMap.get(list.get(i).getB_no())}]</span>
 								</c:if>								
@@ -150,6 +168,7 @@ function search_chk(){
 		</div>
 
 		<!-- 페이징 -->
+		
 				<div class="pagin_div">
 					<ul class="pagin">
 						<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
@@ -169,21 +188,16 @@ function search_chk(){
 						<li class="page_li"><a class="next_page" onclick="nextPageGroup();">></a></li>
 					</ul>
 
-					<form action="freeboard.do" method="post" id="pageform" name="pageform">
+					<form action="free_search.do" method="post" id="pageform" name="pageform">
 						<input type="hidden" name="pagenum" id="pagenum">
+						<input type="hidden" name="keyword" value="${search.keyword }" >
+						<input type="hidden" name="searchType" value="${search.searchType }" >
 					</form>
 
 				</div>
 
 	</div>
 
-<<<<<<< HEAD
-<footer>
-<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
-</footer>
-
-=======
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
->>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 </body>
 </html>

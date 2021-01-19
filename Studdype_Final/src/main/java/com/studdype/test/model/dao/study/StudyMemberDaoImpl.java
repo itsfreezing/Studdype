@@ -1,6 +1,7 @@
 package com.studdype.test.model.dao.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,33 @@ public class StudyMemberDaoImpl implements StudyMemberDao {
 		
 		
 		return list;
+	}
+
+	@Override
+	public int StudyTotalNum(int mem_no) {
+		int StudyTotalNum = 0;
+		
+		try {
+			StudyTotalNum = sqlSession.selectOne(NAMESPACE+"StudyTotalNum",mem_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : StudyTotalNum!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return StudyTotalNum;
+	}
+
+	@Override
+	public List<StudyMemberDto> pagingstudylist(Map pageMap) {
+		List<StudyMemberDto> List = null;
+		
+		try {
+			List = sqlSession.selectList(NAMESPACE+"pagingstudylist",pageMap);
+		} catch (Exception e) {
+			System.out.println("ERROR : pagingstudylist!!!!!!!");
+			e.printStackTrace();
+		}
+		
+		return List;
 	}
 	
 }

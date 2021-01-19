@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,14 @@ import com.studdype.test.model.dto.member.MemberDto;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
 	
 	@Autowired 
+<<<<<<< HEAD
 	private MemberBiz memberbiz;
+=======
+	private MemberBiz memberBiz;
+>>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 	
 	@RequestMapping(value = "/Member.do",method = RequestMethod.GET)
 	public String Member(Locale locale,Model model) {
@@ -55,7 +61,11 @@ public class MemberController {
 		System.out.println(dto.getMem_id());
 		System.out.println(dto.getMem_pw());
 
+<<<<<<< HEAD
 		res=memberbiz.memberInsert(dto);
+=======
+		res=memberBiz.memberInsert(dto);
+>>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 		if(res>0) {
 			System.out.println("성공");
 			return "loginpage/login";
@@ -65,6 +75,7 @@ public class MemberController {
 		}
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="/idcheck.do", method=RequestMethod.POST)
 	public @ResponseBody int IdChk(@RequestBody MemberDto dto) {
 		logger.info("ID CHECK");
@@ -80,40 +91,45 @@ public class MemberController {
 		return isUsed;
 	}
 	
+=======
+	//로그인 폼
+>>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
 		logger.info("login page");
 		return "loginpage/login";
 	}
 	
+	//로그인
 	@RequestMapping("/login.do")
 	public String login(HttpSession session, MemberDto dto) {
 		logger.info("login");
+<<<<<<< HEAD
 		MemberDto loginDto = memberbiz.login(dto);
 		if(loginDto == null) {
 			session.setAttribute("login", null);
 		}else {
+=======
+		MemberDto loginDto = memberBiz.login(dto);
+		if(loginDto != null) {
+>>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 			session.setAttribute("login", loginDto);
-		}
-		if(session.getAttribute("login") == null)
-		{
-			//TODO: 세션설정이 안된 경우
-			return "";
-		}
-		else			
-		{
-			//TODO: 세션설정이 된 경우
 			session.setMaxInactiveInterval(1);
-			return "studdype/studdypeHome";
-		}		
-	}
+			return "redirect:/studyList.do";
+			}else {
+				return "loginpage/login";
+			}
+}		
 	
+	//로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		logger.info("logout");
+		
 		session.invalidate();
-		return "studyList.do";
+		return "redirect:/studdypehome.do";		
 	}
-	
-	
 }
+	
+
+	

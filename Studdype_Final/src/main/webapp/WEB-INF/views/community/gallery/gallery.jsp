@@ -260,9 +260,9 @@
 		
 		<button class="btn-sm-btn-primary" onclick="location.href='gallerywriteform.do'">글쓰기</button>
 	</div>
-	<footer>
-	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
-	</footer>
 
+
+
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

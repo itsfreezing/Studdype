@@ -192,8 +192,7 @@ function test(){
 		<br> <br> <br> <br> <br> <br> <br>
 		<br>
 	</div>
-	<footer>
+
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
-	</footer>
 </body>
 </html>
