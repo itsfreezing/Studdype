@@ -3,6 +3,13 @@
 
 -- location_si/location_gu
 -- LocationProject_location.jsp실행 시 insert 됨.
+--SELECT
+SELECT * FROM FREE_BOARD;
+select * from study;
+select * from MEMBER;
+select * from study_applying;
+select * from study_member;
+SELECT * FROM MEET_BOARD;
 
 --스터디 카테고리 
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, 'IT');
@@ -24,7 +31,9 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr2', 'user2', 'uesr2', '950201-
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-1110101', 'M', '030-8201-9068', 'bin3205@naver.com');
 
 
+
 --자유 게시판
+
 
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '2번째 글입니다.', 1,  '2번째 글 내용 입니다', SYSDATE, 0);
@@ -88,8 +97,9 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '찐막ㅋ', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
-
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고싶은  스터디 모임', '취직연습','사진',1,1,1,6,1 );
+
+
 
 
 
@@ -191,8 +201,6 @@ VALUES(MEETREPLYSEQ.NEXTVAL, 2,
                                               WHERE R_NO = 1
                                               )
                             ) + 1, 1, '두번째 대댓글입니다.', SYSDATE);  
-
-SELECT * FROM MEMBER;
 
 
 -------자유게시판 댓글
