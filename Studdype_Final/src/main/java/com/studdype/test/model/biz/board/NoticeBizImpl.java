@@ -31,8 +31,14 @@ public class NoticeBizImpl implements NoticeBiz {
 	
 	//공지사항 게시글 리스트가져오기
 	@Override
-	public List<BoardDto> selectNoticeBoard() {
-		return noticeBoardDao.selectNoticeBoard();
+	public List<BoardDto> selectNoticeBoard(int s_no) {
+		return noticeBoardDao.selectNoticeBoard(s_no);
+	}
+	
+	//공지사항 게시글 리스트 역순 가져오기
+	@Override
+	public List<BoardDto> selectNoticeBoardList(int s_no) {
+		return noticeBoardDao.selectNoticeBoardList(s_no);
 	}
 
 	//공지사항 댓글 갯수 가져오기
@@ -78,8 +84,8 @@ public class NoticeBizImpl implements NoticeBiz {
 
 	//공지사항 게시글 수 가져오기
 	@Override
-	public int getNoticeNum() {
-		return noticeBoardDao.selectNoticeNum();
+	public int getNoticeNum(int s_no) {
+		return noticeBoardDao.selectNoticeNum(s_no);
 	}
 
 	//공지사항 디테일 글 가져오기

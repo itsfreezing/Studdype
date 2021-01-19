@@ -15,7 +15,49 @@
 		<result property="r_comment" column="R_COMMENT"></result>
 		<result property="r_regdate" column="R_REGDATE"></result>
 	</resultMap>
+	<select id="selectReplyList" parameterType="int" resultMap="replyMap">
+		SELECT * FROM NOTICE_REPLY WHERE B_NO = #{b_no} ORDER BY R_GROUPNO, R_ORDER
+	</select>
 
+	<select id="selectOne" parameterType="int" resultMap="replyMap">
+		SELECT * FROM NOTICE_REPLY WHERE R_NO = #{r_no}
+	</select>
+	
+	<update id="deleteParentReply" parameterType="int">
+		UPDATE NOTICE_REPLY SET R_CLASS = -1 WHERE R_NO = #{r_no}
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM NOTICE_REPLY WHERE R_NO = #{r_no}
+	</delete>
+	
+	<select id="selectGroupReplyList" parameterType="int" resultMap="replyMap">
+		SELECT * FROM NOTICE_REPLY WHERE R_GROUPNO = #{r_groupno}
+	</select>
+	
+	<insert id="insertReply" parameterType="replyDto">
+		INSERT INTO NOTICE_REPLY 
+		VALUES ( NOTICEREPLYSEQ.NEXTVAL, #{b_no}, NOTICEGROUPSEQ.NEXTVAL, 0, 0, #{r_writer}, #{r_comment}, SYSDATE   )		
+	</insert>
+	
+	<update id="updateReply" parameterType="replyDto">
+		UPDATE NOTICE_REPLY SET R_COMMENT = #{r_comment} WHERE R_NO = #{r_no}
+	</update>
+	
+	<insert id="insertRecomment" parameterType="replyDto">
+		INSERT INTO NOTICE_REPLY 
+		VALUES(
+    		NOTICEREPLYSEQ.NEXTVAL,
+    		#{b_no},
+    		( SELECT R_GROUPNO FROM NOTICE_REPLY WHERE R_NO = #{r_no} ),
+    		1,
+    		(SELECT MAX(R_ORDER)  FROM NOTICE_REPLY  WHERE R_GROUPNO =(SELECT R_GROUPNO FROM NOTICE_REPLY WHERE R_NO = #{r_no}) ) +1,
+    		#{r_writer},
+    		#{r_comment},
+    		SYSDATE)
+
+	</insert>
+	
 	<select id="selectReplyCnt" parameterType="int" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE_REPLY

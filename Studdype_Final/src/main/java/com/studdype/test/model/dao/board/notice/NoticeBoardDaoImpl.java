@@ -18,11 +18,11 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 	
 	//공지사항 글 목록 가져오기
 	@Override
-	public List<BoardDto> selectNoticeBoard() {
+	public List<BoardDto> selectNoticeBoard(int s_no) {
 		List<BoardDto> resList = null;
 		
 		try {
-			resList = sqlSession.selectList(NAMESPACE+"selectNoticeBoard");
+			resList = sqlSession.selectList(NAMESPACE+"selectNoticeBoard",s_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] [NoticeBoardDaoImpl] selectNoticeBoard method");
 			e.printStackTrace();
@@ -47,11 +47,11 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 
 	//공지사항 게시글 갯수 가져오기
 	@Override
-	public int selectNoticeNum() {
+	public int selectNoticeNum(int s_no) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.selectOne(NAMESPACE+"selectNoticeNum");
+			res = sqlSession.selectOne(NAMESPACE+"selectNoticeNum",s_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] [NoticeBoardDaoImpl] selectNoticeNum method");
 			e.printStackTrace();
@@ -100,6 +100,21 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
 		} catch (Exception e) {
 			System.out.println("[ERROR][NoticeBoardDaoImpl] selectRecentList method");
+			e.printStackTrace();
+		}
+		
+		return resList;
+	}
+
+	//공지사항 리스트 게시글 역순 가져오기
+	@Override
+	public List<BoardDto> selectNoticeBoardList(int s_no) {
+		List<BoardDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectNoticeBoardList",s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [NoticeBoardDaoImpl] selectNoticeBoardList method");
 			e.printStackTrace();
 		}
 		

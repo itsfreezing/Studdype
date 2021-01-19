@@ -51,5 +51,19 @@ public class NoticeFileDaoImpl implements NoticeFileDao{
 		
 		return resList;
 	}
+	//파일 번호로 파일 가져오기
+	@Override
+	public FileDto selectFile(int f_no) {
+		FileDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectFile", f_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectFile");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 
 }

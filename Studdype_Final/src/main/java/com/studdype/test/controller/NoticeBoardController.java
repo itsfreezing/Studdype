@@ -42,11 +42,12 @@ public class NoticeBoardController {
 	//공지사항 게시판 이동
 	@RequestMapping("/notice.do")
 	public String notice(HttpSession session, Model model) {
+		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null;// 공지사항 담을 리스트
 		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
 		Map<Integer, MemberDto> memberMap = null; // 게시글 멤버정보 담을 MAP
 		
-		list=noticeBiz.selectNoticeBoard(); //공지사항 게시글
+		list=noticeBiz.selectNoticeBoardList(study.getS_no()); //공지사항 게시글
 		replyCntMap = noticeBiz.getReplyCnt(list);
 		memberMap = noticeBiz.getMemberMap(list);
 		
@@ -59,8 +60,10 @@ public class NoticeBoardController {
 	
 	// 공지사항 글 작성 form 이동
 	@RequestMapping("/noticewriteform.do")
-	public String freewriteform(Model model) {
-		int noticeNum = noticeBiz.getNoticeNum();
+	public String freewriteform(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
+		int noticeNum = noticeBiz.getNoticeNum(study.getS_no());
 		if(noticeNum > 9) {
 			model.addAttribute("msg", "공지사항은 10개까지 작성 할 수 있습니다.");
 			model.addAttribute("url", "notice.do");
@@ -104,6 +107,7 @@ public class NoticeBoardController {
 		@RequestMapping(value = "/noticedetail.do", method = RequestMethod.GET)
 		public String freeDetail(HttpServletRequest request, HttpServletResponse response, Model model,
 				HttpSession session) {
+			
 			int b_no = Integer.parseInt(request.getParameter("b_no"));
 			int s_no = ((StudyDto) session.getAttribute("study")).getS_no(); // 스터디 번호
 			Map<Integer, MemberDto> memberMap = null; // 최근게시글 멤버정보 담을 MAP
@@ -115,11 +119,11 @@ public class NoticeBoardController {
 			BoardDto board = noticeBiz.selectDetail(b_no, isVisitPage); // 게시글 가져오기 / 조회수 증가
 			MemberDto member = memberBiz.selectOne(board.getB_writer()); // 작성자 이름 가져오기
 
-			List<BoardDto> recentList = noticeBiz.getRecentList(s_no, b_no);
-			memberMap = noticeBiz.getMemberMap(recentList); // 최근게시글 memberMap
+			//List<BoardDto> recentList = noticeBiz.getRecentList(s_no, b_no);
+			//memberMap = noticeBiz.getMemberMap(recentList); // 최근게시글 memberMap
 
 			// 댓글 갯수 가져오기
-			replyCntMap = noticeBiz.getReplyCnt(recentList);
+			//replyCntMap = noticeBiz.getReplyCnt(recentList);
 			
 			//첨부파일 가져오기
 			List<FileDto> fileList = noticeFileBiz.getAttachFileList(b_no);
@@ -137,12 +141,25 @@ public class NoticeBoardController {
 
 			model.addAttribute("fileFormatMap", fileFormatMap);
 			model.addAttribute("fileList",fileList);
-			model.addAttribute("replyCntMap", replyCntMap);
-			model.addAttribute("memberMap", memberMap);
-			model.addAttribute("recentList", recentList);
+			//model.addAttribute("replyCntMap", replyCntMap);
+			//model.addAttribute("memberMap", memberMap);
+			//model.addAttribute("recentList", recentList);
 			model.addAttribute("dto", board);
 			model.addAttribute("member", member);
 			return "community/notice/noticeDetail";
 		}
+		
+		//공지게시판 파일 다운로드
+		@RequestMapping(value="/noticeFileDown.do", method = RequestMethod.GET)
+		public void freeFileDownload(HttpServletResponse response, HttpServletRequest request) {
+			int f_no = Integer.parseInt( request.getParameter("f_no") );
+			
+			FileDto dto = noticeFileBiz.getFileByFno(f_no);
+			
+			if(dto != null) {
+				fileHandler.downloadFile(dto,response);
+			}
+		}
+		
 	
 }
