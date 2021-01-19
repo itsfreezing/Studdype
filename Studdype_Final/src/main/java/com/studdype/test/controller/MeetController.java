@@ -51,10 +51,11 @@ public class MeetController {
 		paging(pageMap, pagenum, totalMeetBoardNum); // 페이징 함수
 		
 		pageMap.put("studyno", study.getS_no());  // 스터디 번호 put
+		
 		System.out.println("-----------------------------------------------------------------------\n"
 						  +"<<모임 게시판>> ["+study.getS_no()+"]번 스터디의 모임은 총 ["+totalMeetBoardNum+"]개 입니다.\n"
 						  +"-----------------------------------------------------------------------");
-		 
+	
 		logger.info("[MEET BOARD SELECT LIST]");
 		
 		list = meetBiz.selectPagingMeetBoardList(pageMap); // 5개 게시물만 가져오기

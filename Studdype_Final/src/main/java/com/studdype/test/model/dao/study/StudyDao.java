@@ -19,6 +19,6 @@ public interface StudyDao {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //리스트 총 갯수
 	public List<StudyDto> studyLeader(int leader_no); //스터디 리더 
 	public int selectTotalStudyNum(int mem_no); //스터디 리스트 총개수
-	public List<StudyDto> pagingstudylist(Map pageMap); // 페이징 6개 가져오기
+
 
 }

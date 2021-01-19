@@ -118,20 +118,6 @@ public class StudyDaoImpl implements StudyDao {
 		return totalNum;
 	}
 
-	@Override
-	public List<StudyDto> pagingstudylist(Map pageMap) {
-		List<StudyDto> list = null;
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"pagingstudylist", pageMap);
-		} catch (Exception e) {
-			System.out.println("error: pagingstudylist");
-			e.printStackTrace();
-		}
-		
-		
-		return list;
-	}
 
 	
 

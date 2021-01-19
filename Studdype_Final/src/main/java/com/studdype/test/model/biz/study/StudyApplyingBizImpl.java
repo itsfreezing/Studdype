@@ -24,6 +24,30 @@ public class StudyApplyingBizImpl implements StudyApplyingBiz {
 	
 		return studyapplyingDao.selectOneByMno(mem_no);
 	}
+
+	@Override
+	public int receiveagree(StudyApplyingDto dto) {
+		
+		return studyapplyingDao.receiveagree(dto);
+	}
+
+	@Override
+	public List<StudyApplyingDto> snoList(int s_no) {
+		// TODO Auto-generated method stub
+		return studyapplyingDao.snoList(s_no);
+	}
+
+	@Override
+	public int receivereject(StudyApplyingDto dto) {
+		
+		return studyapplyingDao.receivereject(dto);
+	}
+
+	@Override
+	public int receivedelete(StudyApplyingDto dto) {
+		
+		return studyapplyingDao.receivedelete(dto);
+	}
 	
 	
 }

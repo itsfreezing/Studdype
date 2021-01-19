@@ -124,13 +124,6 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.selectTotalStudyNum(mem_no);
 	}
 
-	@Override
-	public List<StudyDto> pagingstudylist(Map pageMap) {
-		// TODO Auto-generated method stub
-		return study_Dao.pagingstudylist(pageMap);
-	}
-
-	
 
 	
 }

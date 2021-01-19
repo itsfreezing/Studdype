@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <link rel="stylesheet"
 	href="./resources/assets/css/owl.carousel.min2.css">
-  
+ 
     
     <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
     <script src="./resources/assets/js/popper.min.js"></script>
@@ -34,6 +34,7 @@
     <script src="./resources/assets/js/owl.carousel.min.js"></script>
     <script src="./resources/assets/js/modal-video.js"></script>
     <script src="./resources/assets/js/main.js"></script>
+    
    <style type="text/css">
       #name{
       font-size: 20px;
@@ -122,7 +123,9 @@
   	#applystatus{
   		position : relative;
   		left: 300px;
-  		bottom: 40px;
+  		bottom: 80px;
+  		display: inline-block;
+  	
   	}
   	#applyname{
   		margin-left:15px;
@@ -138,6 +141,7 @@
   		margin:5px;
   		
   	}
+  	
    	
    </style>
 
@@ -161,35 +165,76 @@
 
 	
 	});
-   //팀장일 경우 스터디 신청 수락 버튼클릭시 
-   function agree(){
-	   var a = '${Appli}'
-	   if (confirm("정말 수락하시겠습니까?") == true){    //확인
-		    alert('수락 하였습니다.');
-	   }else{   
-		    return;
-		}
-		
-   }
-	//팀장일 경우 스터디 신청 수락 거절 버튼 클릭시
-	function cancle(){
-		 var a = '${Appli}'
-			   if (confirm("정말 거절하시겠습니까?") == true){    //확인
-				    alert('거절 하였습니다.');
-			   }else{   
-				    return;
-				}
-	}   
-  
+
+ 
+	 
+  	//회원 탈퇴 버튼 클릭시 
 	function getout(){
-		if('{LeaderList}'!=null){
+  		var no = '${login.mem_no}';
+		if('${LeaderList}'!="[]"){
 			alert('본인이 팀장인 스터디가 존재합니다. 스터디 대표를 양도해주세요.');
 		}else{
-			alert('회원탈퇴 성공!');
+			if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
+				location.href="memberDelete.do?mem_no="+no;
+			}else{
+				return;
+			}
 		}
 	}
+  	//팀장일 경우 가입신청 수락버튼
+	function agree(){
+		   var a = '${Appli}'
+		   var e = window.event,
+		   btn = e.target || e.srcElement;
+		   var c = (btn.id);
+		   var d = document.getElementById(c).value;
+		   var f = document.getElementById(c).name;
+		   
+		 
+		   if (confirm("정말 수락하시겠습니까?") == true){    //확인
+			  	
+		   		location.href="receiveagree.do?mem_no="+d+"&s_no="+f;
+		   }else{   
+			    return;
+			}
+			
+	   }
+  	//팀장일 경우 가입 신청 거절버튼
+  	function reject(){
+  		 var a = '${Appli}'
+  		   var e = window.event,
+  		   btn = e.target || e.srcElement;
+  		   var c = (btn.id);
+  		   var d = document.getElementById(c).value;
+  		   var f = document.getElementById(c).name;
+  		   
+  		   if(confirm("정말 거절하시겠습니까?") == true){
+  			   location.href="receivereject.do?mem_no="+d+"&s_no="+f;
+  		   }else{
+  			   return;
+  		   }
+  	} 
+  	//가입 신청 삭제 버튼 
+  	function receivedelete(){
+  		var a = '${Appli}'
+  		var e = window.event,
+  		btn = e.target || e.srcElement;
+  		var c= (btn.id);
+  		var d = document.getElementById(c).value;
+  		var f = document.getElementById(c).name;
+  		
+  		
+  		if(confirm("정말 삭제하시겠습니까?")==true){
+  			location.href="receivedelete.do?mem_no="+d+"&s_no="+f;
+  		}else{
+  			return;
+  		}
+  		
+  		
+  	}
+  
+ 
 
-   
    </script>
 </head>
 
@@ -210,27 +255,36 @@
       <button id="updateinfo" type="button" class="btn btn-outline-secondary" onclick="location.href='UpdateMember.do'">정보 수정</button>
       <button id="getout" type="button" class="btn btn-outline-secondary" onclick="getout();">회원 탈퇴</button>
    </div>
-   <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
+   <div class="newjoin" style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Request Sent</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;" >새로 신청한 스터디 내역</p>
+
       <c:forEach var="applylist" items="${applylist }"><p id="applyname">${applylist.s_name }</p></c:forEach> 
-      <c:forEach var="studyApplylist" items="${studyApplylist }">
-      <c:if test="${studyApplylist.agree == 'D' }"><p id="applystatus">진행중</p></c:if>
-      <c:if test="${studyApplylist.agree == 'Y' }"><p id="applystatus">수락됨</p></c:if>
-      <c:if test="${studyApplylist.agree == 'N' }"><p id="applystatus">거절됨</p></c:if>
+      <c:forEach var="studyApplylist" items="${studyApplylist }" varStatus="status">
+      <c:if test="${studyApplylist.agree == 'D' }"><p id="applystatus">진행중</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
+      <c:if test="${studyApplylist.agree == 'Y' }"><p id="applystatus">수락됨</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
+      <c:if test="${studyApplylist.agree == 'N' }"><p id="applystatus">거절됨</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
       </c:forEach>
-    
+  
    </div>
    <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Received Request</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">가입 신청받은 내역</p>
       <c:forEach var="receiveapplyname" items="${receiveapplyname }">
-      <p id="receive">${receiveapplyname.s_name }</p>
-      </c:forEach>
       <c:forEach var="Receiveapply" items="${Receiveapply }">
-       <c:if test="${Receiveapply.agree == 'D' }"><button id="receivebtn" value="${Receiveapply.mem_no }" class="btn btn-outline-secondary btn-sm" onclick="agree();">수락</button><button id="receivebtn" class="btn btn-outline-secondary btn-sm" onclick="cancle();">거절</button></c:if>
+      <c:if test="${Receiveapply.agree == 'D' }"><p id="receive">${receiveapplyname.s_name }</p></c:if>
+      </c:forEach>
+      </c:forEach>
+      <c:forEach var="Receiveapply" items="${Receiveapply }" varStatus="status">
+       <c:if test="${Receiveapply.agree == 'D' }">
+       <button id="agree${status.count }" value="${Receiveapply.mem_no }" name="${Receiveapply.s_no }"class="btn btn-outline-secondary btn-sm" onclick="agree();">수락</button>
+    
+       <button  class="btn btn-outline-secondary btn-sm" id="reject${status.count }" value="${Receiveapply.mem_no}" name="${Receiveapply.s_no }"onclick="reject();">거절</button></c:if>
      
       </c:forEach>
       
@@ -239,7 +293,15 @@
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Meeting Management</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">내가 가입한 스터디 모임 관리</p>
-      <c:forEach var="meetlist" items="${meetlist }"><a href="meetdetail.do?meetno=${meetlist.meet_no }">${meetlist.meet_title }</a></c:forEach>
+      
+      
+     <c:forEach var="i" begin="0" end="${pageList.size()-1 }" step="1">
+     		<p>${pageList.get(i).getS_no() }</p>
+     </c:forEach>
+     
+     
+     
+    
    </div>
    <p id="mystudyl">My Study List</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;">
@@ -247,6 +309,7 @@
      	<div class="hero-slider-info"><a style="color:black; font-weight:bold; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>
      
      </c:forEach>
+ 
    </div>
       
 

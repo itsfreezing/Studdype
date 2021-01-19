@@ -66,19 +66,6 @@
 	<select id="studyLeader" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
 	</select>
-	<select id="pagingstudylist" parameterType="map" resultType="studyDto">
-		<![CDATA[
-			SELECT*
-			FROM
-			(
-				SELECT ROWNUM N,S_NO,LEADER_NO,S_NAME,S_INFO,S_CONTENT,PHOTO,CATE_NO,SI_NO,GU_NO,S_MAXCNT,S_CURRENTCNT
-				FROM STUDY
-				WHERE MEM_NO = #{mem_no}
-				ORDER  BY S_NO DESC
-			)
-			WHERE N >= ${startRow} AND N<= ${endRow}	
-			
-		]]>
-	</select>
+	
 
 </mapper>

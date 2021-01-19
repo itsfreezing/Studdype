@@ -46,6 +46,9 @@
 		<select id="idchk" parameterType="String" resultType="memberDto">
 			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id}
 		</select>
-
+		<delete id="memberDelete" parameterType="int">
+			DELETE FROM MEMBER
+			WHERE MEM_NO = #{mem_no}
+		</delete>
 	
 	</mapper>

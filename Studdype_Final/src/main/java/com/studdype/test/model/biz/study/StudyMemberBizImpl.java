@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,20 @@ public class StudyMemberBizImpl implements StudyMemberBiz{
 	public List<StudyMemberDto> StudyList(int mem_no) {
 		
 		return studyMemberDao.StudyList(mem_no);
+	}
+
+
+	@Override
+	public int StudyTotalNum(int mem_no) {
+		
+		return studyMemberDao.StudyTotalNum(mem_no);
+	}
+
+
+	@Override
+	public List<StudyMemberDto> pagingstudylist(Map pageMap) {
+		
+		return studyMemberDao.pagingstudylist(pageMap);
 	}
 
 }

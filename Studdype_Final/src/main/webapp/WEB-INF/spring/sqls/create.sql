@@ -237,7 +237,12 @@ CREATE TABLE STUDY_APPLYING(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)        
 );
+select *from study_member;
          본인이 팀장인때 
+UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO =38 AND MEM_NO = 1;
+delete STUDY_APPLYING WHERE S_NO=38;
+select *from study_applying;
+select * from study;
 -------------------------------------------------------------
 
 ------------------ CREATE BOARD -----------------------------

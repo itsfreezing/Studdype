@@ -256,5 +256,18 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return getBookWriterName;
 	}
+	//마이페이지 회원탈퇴 클릭시
+	@Override
+	public int memberDelete(int mem_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"memberDelete",mem_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : memberDelete !!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }

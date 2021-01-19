@@ -14,10 +14,10 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '어학/회화');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '취업스터디');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
 SELECT * FROM STUDY_CATEGORY;
-
+select * from STUDY_APPLYING where s_no =1;
 SELECT * FROM LOCATION_SI;
 SELECT * FROM LOCATION_GU;
-
+select * from member;
 --멤버 테이블
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader1', 'leader1', '테스트팀장', '960308-1010101', 'M', '010-8801-9068', 'bin3005@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin3005', 'bin3005', '이승빈', '960308-1110101', 'M', '010-8201-9068', 'bin2205@naver.com');
@@ -28,7 +28,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-
 select * from member;
 select * from STUDY_MEMBER;
 insert into study_member values(1,2);
-
+insert into study_applying values(38,2,'D','13451');
 --자유 게시판
 select * from study;
 SELECT * FROM STUDY WHERE S_NO =1;
@@ -93,10 +93,14 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름31', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름32', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름33', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
-INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름35', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
+INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '찐막ㅋ', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 select * from STUDY;
-insert into STUDY_APPLYING values(1,2,'D','ff');
-insert into STUDY_APPLYING values(2,2,'D','ff');
+insert into STUDY_APPLYING values(40,1,'D','ff');
+insert into STUDY_APPLYING values(2,2,'D','ffff');
+UPDATE STUDY_APPLYING SET AGREE = 'D' WHERE S_NO =2  AND MEM_NO =2;
+select * from study_applying;
+select * from study_member;
+select * from MEMBER;
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고싶은  스터디 모임', '취직연습','사진',1,1,1,6,1 );

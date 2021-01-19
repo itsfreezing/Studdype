@@ -56,5 +56,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.idchk(mem_id);
 	}
 
+	@Override
+	public int memberDelete(int mem_no) {
+		
+		return memberDao.memberDelete(mem_no);
+	}
+
 	
 }

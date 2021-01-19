@@ -21,5 +21,17 @@
 		STUDY_APPLYING
 		WHERE MEM_NO = ${mem_no}
 	</select>
-	
+	<update id="receiveagree" parameterType="studyApplyingDto">
+		UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</update>
+	<select id="snoList" parameterType="int" resultType="studyApplyingDto">
+		SELECT * FROM STUDY_APPLYING
+		WHERE S_NO = ${s_no}
+	</select>
+	<update id="receivereject" parameterType="studyApplyingDto">
+		UPDATE STUDY_APPLYING SET AGREE = 'N' WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</update>
+	<delete id="receivedelete" parameterType="studyApplyingDto">
+		DELETE FROM STUDY_APPLYING WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</delete>
 	</mapper>

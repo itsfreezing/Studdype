@@ -41,7 +41,58 @@ public class StudyApplyingDaoImpl implements StudyApplyingDao{
 		}
 		return dto;
 	}
-	
-	
+
+	@Override
+	public int receiveagree(StudyApplyingDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"receiveagree",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: receiveagree!!!!!!!!");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public List<StudyApplyingDto> snoList(int s_no) {
+		List<StudyApplyingDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"snoList",s_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : snoList!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int receivereject(StudyApplyingDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"receivereject",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: receivereject!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int receivedelete(StudyApplyingDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"receivedelete",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: receivedelete !!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	
 }

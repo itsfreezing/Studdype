@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -212,9 +213,13 @@ public class StudyController {
 		List<BookDto> bookList = bookBiz.bookList(1);
 		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
+		List<MemberDto> memberInfo = new ArrayList<MemberDto>();
+		for(int i=0; i<memberlist.size();i++) {
+			MemberDto dto = memberBiz.selectOne(memberlist.get(i).getMem_no());
+			memberInfo.add(dto);
+		}
 		
-		
-		
+		System.out.println(memberInfo);
 		
 		
 		model.addAttribute("memberlist",memberlist);
