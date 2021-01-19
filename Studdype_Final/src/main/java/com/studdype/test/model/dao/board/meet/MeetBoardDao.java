@@ -12,6 +12,7 @@ public interface MeetBoardDao {
 	//모임 게시판 게시글 
 	String NAMESPACE="meetboard.";
 	
+
 	public int selectTotalMeetBoardNum(int s_no);				 		// 모임게시판 모임 [총 개수] 
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap); 		// 모임게시판 모임 [페이징]
 	public int selectSearchMeetBoardNum(Map searchNumMap);			 	// 모임게시판 '검색' 게시글 [총 개수]
@@ -23,4 +24,5 @@ public interface MeetBoardDao {
 	public int updateMeetBoard(MeetDto dto);							// 모임게시판 모임 [수정]
 	public int deleteMeetBoard(int meet_no);					 		// 모임게시판 모임 [삭제]
 	public List<MeetDto> selectMeetDBForCalendar(int s_no);				// 캘린더에 meet DB값 가져오기
+
 }
