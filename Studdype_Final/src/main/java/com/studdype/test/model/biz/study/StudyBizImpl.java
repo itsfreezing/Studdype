@@ -111,12 +111,13 @@ public class StudyBizImpl implements StudyBiz{
 	public int selectTotalStudyListNum(SearchPagination searchPagination) {
 		return study_Dao.selectTotalStudyListNum(searchPagination);
 	}
-
+	//스터디 팀장 번호로 스터디 리스트 가지고오기 
 	@Override
 	public List<StudyDto> studyLeader(int leader_no) {
 		
 		return study_Dao.studyLeader(leader_no);
 	}
+
 
 	
 }

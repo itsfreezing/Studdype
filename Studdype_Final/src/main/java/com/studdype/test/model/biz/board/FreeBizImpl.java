@@ -15,7 +15,6 @@ import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
-import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
@@ -154,6 +153,18 @@ public class FreeBizImpl implements FreeBiz {
 	@Override
 	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list) {
 		return freeReplyDao.selectReplyCnt(list);
+	}
+
+	//자유게시판 검색시 총 게시글 수
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		return freeBoardDao.selectTotalBoardNumOfSearch(searchMap);
+	}
+
+	//검색 한 것 페이징
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		return freeBoardDao.selectPagingSearchBoardList(pageMap);
 	}
 
 	

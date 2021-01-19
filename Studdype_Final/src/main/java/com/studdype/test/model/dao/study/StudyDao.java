@@ -19,5 +19,6 @@ public interface StudyDao {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //리스트 총 갯수
 	public List<StudyDto> studyLeader(int leader_no); //스터디 리더 
 	
-	
+
+
 }

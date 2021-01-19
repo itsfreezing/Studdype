@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
@@ -29,4 +28,7 @@ public interface StudyBiz {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
 
+
+
+	
 }

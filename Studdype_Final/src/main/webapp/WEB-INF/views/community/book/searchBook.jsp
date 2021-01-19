@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Book</title>
+<title>스터띱 도서 목록 페이지</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -99,6 +99,7 @@ h2 {
 
 .book-info-top img {
 	height:250px;
+	width:100%;
 }
 
 .book-info-bottom {
@@ -329,6 +330,6 @@ table {
 	</div>
 	<!-- 메인 섹션 종료 --------------------------------------------------------------------------------------------- -->
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
