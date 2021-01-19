@@ -33,7 +33,7 @@
 			SELECT * FROM MEMBER 
 			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 		</select>
-		<select id="idchk" parameterType="string" resultType="string">
+		<select id="idchk" parameterType="string" resultType="memberDto">
 			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
 		</select>
 	</mapper>
