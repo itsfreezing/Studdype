@@ -52,7 +52,7 @@
 		text-align: center;
 	}
 	
-	.boardlist td a:hover{
+	.boardlist .tdtitle a:hover{
 		font-weight: bold;
 		border-bottom: 1px solid black;
 		padding-bottom: 3px;

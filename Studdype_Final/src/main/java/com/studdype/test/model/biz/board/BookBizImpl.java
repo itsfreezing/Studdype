@@ -53,6 +53,7 @@ public class BookBizImpl implements BookBiz{
 	}
 
 	@Override
+
 	public int deletebookmain() {
 		
 		return bookDao.deletebookmain();
@@ -68,6 +69,31 @@ public class BookBizImpl implements BookBiz{
 			return bookDao.bookmain(b_no);
 		}
 		
+	}
+	public int insertRegisterBook(BookDto dto) {
+		return bookDao.insertRegisterBook(dto);
+	}
+
+	@Override
+	@Transactional
+	public BookDto deleteBook(BookDto dto) {
+		BookDto resDto = new BookDto();
+		
+		int res = bookDao.deleteBook(dto);
+		
+		if(res > 0) {
+			resDto = null;
+		}else {
+			resDto = bookDao.selectOneBook(dto);
+		}
+		
+		return resDto;
+	}
+
+	@Override
+	public int bookBoardUpdateBook(BookDto dto) {
+		return bookDao.bookBoardUpdateBook(dto);
+
 	}
 
 	

@@ -73,7 +73,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public void updateCnt(int b_no) {
+	public int updateCnt(int b_no) {
 		int res = 0;
 		
 		try {
@@ -82,6 +82,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 			System.out.println("[ERROR]: UpdateCnt");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	//자유게시판 글 삭제

@@ -33,6 +33,7 @@
 
 
 <!-- 총 게시글 수 -->
+
 	<select id="selectTotalStudyListNum" resultType="int">
 	      SELECT count(S_NO)
 	      FROM STUDY
@@ -46,6 +47,7 @@
 		FROM STUDY
 		WHERE MEM_NO = ${mem_no}
 	</select>
+
 
 	<select id="selectOneBySno" parameterType="int"
 		resultMap="studyMap">

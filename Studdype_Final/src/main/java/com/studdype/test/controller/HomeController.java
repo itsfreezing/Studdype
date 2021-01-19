@@ -68,13 +68,17 @@ public class HomeController {
 	@RequestMapping("/myPage.do")
 	public String myPage(HttpSession session,String pagenum, Model model) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
+
 		MemberDto mypage = memberBiz.selectOne(login.getMem_no());
-		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(1); //해당 회원번호로 가입되있는 스터디 번호 가져오기
+		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
+
+		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(login.getMem_no()); //해당 회원번호로 가입되있는 스터디 번호 가져오기
+
 		List<StudyDto> studylist = new ArrayList<StudyDto>();
 		List<StudyDto> applylist = new ArrayList<StudyDto>();
-		List<StudyDto> LeaderList = studyBiz.studyLeader(1);    //본인이 리더인 스터디 리스트 
+		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());    //본인이 리더인 스터디 리스트 
 		List<StudyApplyingDto> Receiveapply = new ArrayList<StudyApplyingDto>(); //내가 받은 가입 신청
-		List<StudyApplyingDto> studyApplylist = studyapplyingBiz.studyApplyingList(1); //멤버 번호로 studyapply 리스트 가져오기
+		List<StudyApplyingDto> studyApplylist = studyapplyingBiz.studyApplyingList(login.getMem_no()); //멤버 번호로 studyapply 리스트 가져오기
 		List<StudyDto> receiveapplyname = new ArrayList<StudyDto>();
 		List<StudyMemberDto> pageList = null;
 		int totalStudyListNum = studymemberBiz.StudyTotalNum(mypage.getMem_no()); //5개씩 스터디 번호 가져오기
@@ -301,6 +305,17 @@ public class HomeController {
 	public String communityHome(HttpSession session,Model model) {
 		
 
+		session.setAttribute("leftnavi", "studyhome");
+	
+		return "community/communityHome";
+	}
+	
+		//커뮤니티 홈으로 테테테테테스트트트ㅡ트ㅡㅡ용
+
+		@RequestMapping("/communityhome1.do")
+		public String communityHome1(HttpSession session,Model model) {
+		
+
 		/////////////////////// 테스트용 세션
 		MemberDto login = memberBiz.selectOne(1);
 		StudyDto study = studyBiz.selectOneBySno(1);
@@ -325,12 +340,7 @@ public class HomeController {
 		return "community/communityHome";
 	}
 	
-	@RequestMapping("/notice.do")
-	public String notice(HttpSession session) {
-		session.setAttribute("leftnavi", "notice");
-		return "community/notice";
-	}
-	
+
 
 	
 	@RequestMapping("/signupform.do")
