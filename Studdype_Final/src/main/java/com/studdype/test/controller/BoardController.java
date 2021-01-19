@@ -1,6 +1,5 @@
 package com.studdype.test.controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -37,6 +34,7 @@ import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.board.NoticeBiz;
 import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
@@ -50,21 +48,17 @@ import com.studdype.test.model.dto.study.StudyDto;
 public class BoardController {
 	@Autowired
 	private FreeBiz freeBiz;
-
 	@Autowired
 	private MemberBiz memberBiz;
-
 	@Autowired
-	private BookBiz bookBiz;
-	
+	private BookBiz bookBiz;	
 	@Autowired
 	private MeetBiz meetBiz;
-
 	@Autowired
 	private FreeFileBiz freeFileBiz;
-	
 	@Autowired
-	ServletContext context;
+	private NoticeBiz noticeBiz;
+	
 	
 	
 	
@@ -79,9 +73,12 @@ public class BoardController {
 	public String freeBoard(HttpSession session, String pagenum, Model model) {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트
+		List<BoardDto> noticeList = null;// 공지사항 담을 리스트
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, MemberDto> memberMap = null; // 게시글 멤버정보 담을 MAP
+		Map<Integer, MemberDto> noticeMemberMap = null; // 게시글 멤버정보 담을 MAP
 		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
+		Map<Integer, Integer> noticeReplyCntMap = null;// 공지사항 댓글 갯수 담을 MAP
 
 		int totalBoardNum = freeBiz.selectTotalBoardNum(study.getS_no()); // 총 자유게시판 글 갯수
 
@@ -96,7 +93,21 @@ public class BoardController {
 
 		// 댓글 갯수 가져오기
 		replyCntMap = freeBiz.getReplyCnt(list);
-
+		
+		//공지사항 게시글 가져오기
+		if(pagenum == null || Integer.parseInt(pagenum) == 1) {
+			noticeList = noticeBiz.selectNoticeBoard();
+			noticeReplyCntMap = noticeBiz.getReplyCnt(noticeList); //공지사항 댓글 갯수 가져오기
+			noticeMemberMap = noticeBiz.getMemberMap(noticeList); //공지사항 게시글 작성자 가져오기
+			
+		}
+				
+		
+		if(pagenum == null || Integer.parseInt(pagenum) == 1) {
+			model.addAttribute("noticeList", noticeList);
+			model.addAttribute("noticeReplyCntMap", noticeReplyCntMap);
+			model.addAttribute("noticeMemberMap", noticeMemberMap);
+		}
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));

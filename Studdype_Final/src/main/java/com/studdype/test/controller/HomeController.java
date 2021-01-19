@@ -104,12 +104,7 @@ public class HomeController {
 		return "community/communityHome";
 	}
 	
-	@RequestMapping("/notice.do")
-	public String notice(HttpSession session) {
-		session.setAttribute("leftnavi", "notice");
-		return "community/notice";
-	}
-	
+
 
 	
 	@RequestMapping("/signupform.do")

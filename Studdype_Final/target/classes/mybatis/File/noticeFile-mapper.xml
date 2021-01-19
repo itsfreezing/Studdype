@@ -10,8 +10,12 @@
   			<result property="f_name" column="F_NAME"></result>
   			<result property="photo_ismain" column="Photo_IsMain"></result>
   		</resultMap>
-  		
-  		
-  		
+  		<insert id="insertFile" parameterType="fileDto">
+  			INSERT INTO NOTICE_FILE
+  			VALUES ( NOTICEFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM NOTICE_BOARD ), #{f_name}, #{f_size}, #{f_url} )
+  		</insert>
+  		<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
+	 			SELECT * FROM NOTICE_FILE WHERE B_NO = #{b_no}
+	 	</select>
   		
   	</mapper>

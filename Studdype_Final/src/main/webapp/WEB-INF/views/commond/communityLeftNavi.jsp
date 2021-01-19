@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +50,9 @@
         <div class="real-left">
         <ul class="leftnavi-ul">
             <li class="leftnavi-item" > <img src="./resources/assets/img/category_home_gray.png"><input type="button" value="스터디홈" onclick="location.href='communityhome.do'"  class="navBtn" id="studyhome"></li>
-            <li class="leftnavi-item" > <img src="./resources/assets/img/category_notice.png"><input type="button" value="공지사항" onclick="location.href='notice.do'"  class="navBtn" id="notice"></li>
+  			<c:if test="${study.leader_no == login.mem_no }">
+  				<li class="leftnavi-item" > <img src="./resources/assets/img/category_notice.png"><input type="button" value="공지사항" onclick="location.href='notice.do'"  class="navBtn" id="notice"></li>
+  			</c:if>          	
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_freeBoard.png"><input type="button" value="자유게시판" onclick="location.href='freeboard.do'" class="navBtn" id="freeboard"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_dataRoom.png"><input type="button" value="학습자료실" onclick="" class="navBtn"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_gallery.png"><input type="button" value="갤러리" onclick="location.href='gallery.do'" class="navBtn" id="imageBoard"></li>

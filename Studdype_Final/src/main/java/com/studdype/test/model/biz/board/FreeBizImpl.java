@@ -3,6 +3,8 @@ package com.studdype.test.model.biz.board;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,10 +82,14 @@ public class FreeBizImpl implements FreeBiz {
 	@Transactional
 	@Override
 	public BoardDto selectDetail(int b_no, int isVisitPage) {		
+		int res = 0 ;
 		if(isVisitPage == 0) {
-			freeBoardDao.updateCnt(b_no);
+			res = freeBoardDao.updateCnt(b_no);
 		}
 		BoardDto dto = freeBoardDao.selectOne(b_no);
+		if(dto == null || res < 1) {
+			throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+		}
 		return dto;
 	}
 

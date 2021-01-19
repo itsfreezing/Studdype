@@ -190,11 +190,11 @@ function clickFileBtn(fileName){
 
 
  	<div class="main-section2">
-	<form action="freewrite.do" method="post" id="writeForm" enctype="multipart/form-data">
+	<form action="noticewrite.do" method="post" id="writeForm" enctype="multipart/form-data">
  		<table class="maintable">
 
 		<tr>
-			<td><h1>자유게시판 글 쓰기</h1></td>
+			<td><h1>공지사항 게시판 글 쓰기</h1></td>
 		</tr>
 		<tr>
 			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" autocomplete="off"></td>
@@ -215,7 +215,7 @@ function clickFileBtn(fileName){
 			</td>
 		</tr>
 		<tr>			
-			<td ><input type="button" onclick="chkForm();" value="완료" class="free_Btn"><input type="button" onclick="location.href='freeboard.do'" value="취소" class="free_Btn"></td>			
+			<td ><input type="button" onclick="chkForm();" value="완료" class="free_Btn"><input type="button" onclick="location.href='notice.do'" value="취소" class="free_Btn"></td>			
 		</tr>
 	</table>
 	</form>
