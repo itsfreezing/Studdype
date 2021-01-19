@@ -26,4 +26,5 @@ hs_err_pid*
 pom.properties
 MANIFEST.MF
 bin/
+.classpath
 
