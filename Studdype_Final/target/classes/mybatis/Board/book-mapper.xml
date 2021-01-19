@@ -61,16 +61,12 @@
 	<select id="bookList" parameterType="int" resultType="bookDto">
 		SELECT * FROM BOOK WHERE S_NO = #{s_no}
 	</select>
-<<<<<<< HEAD
+
 	<update id="deletebookmain" >
 		UPDATE BOOK SET BOOK_ISMAIN = 'N' WHERE BOOK_ISMAIN = 'Y'
 	</update>
 	<update id="bookmain" parameterType="int" >
 	 	UPDATE BOOK SET BOOK_ISMAIN = 'Y' WHERE B_NO = #{b_no}
 	</update>
-=======
-	
-	
 
->>>>>>> 3f84b51f5a7c97f292e8a7375216896190958836
 </mapper>	
