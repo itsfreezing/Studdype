@@ -62,39 +62,55 @@ function logout_btn(){
 								</li>
 								</c:when>
 								<c:otherwise>
-								<li class="nav-item">
+						<!-- 		<li class="nav-item">
 									<a class="nav-lick" href="#">${login.mem_id }님 </a>
 								</li>
+						-->		<li class="nav_item">
+									<a class="nav-link" href="myPage.do" >마이 페이지</a>
+								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="logout.do" input type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
+									<a class="nav-link" href="logout.do" type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
 								</li>
 								</c:otherwise>
 								</c:choose>
 								<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 								<li class="nav-item"></li>
 							</ul>
+						
+							</div>
+							</div>
+							</nav>
+							</div>
+							
 						</div>
+						
 					</div>
 					</form>
-				</nav>
+			
 				<!-- 네비 끝 -->
-			</div>
+		
 
 			<div class="row justify-content-center">
 			
+
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
+
+								<h1><c:if test="${studylist != null}">My Page</c:if></h1>
+
 								<h1></h1>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<!-- 헤더 텍스트 끝 -->
-		</div>
-	</div>
+	
+
 	<!-- 헤더 끝 -->
  
 
