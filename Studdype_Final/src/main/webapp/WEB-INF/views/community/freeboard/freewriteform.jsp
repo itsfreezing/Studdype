@@ -99,7 +99,7 @@
  });
  function chkForm(){
 	var form = $("#writeForm");
-	var title = $("#boardtitle");
+	var title = $("#boardtitale");
 	var content = $("#summernote");
 	
 	if( title.val() == null || title.val().trim() == ''){
@@ -222,6 +222,6 @@ function clickFileBtn(fileName){
 	</form>
  	</div>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
