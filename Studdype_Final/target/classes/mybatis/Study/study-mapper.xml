@@ -71,5 +71,8 @@
 		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
 	</select>
 	
+	<update id="newLeader" parameterType="int" >
+		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
+	</update>
 
 </mapper>
