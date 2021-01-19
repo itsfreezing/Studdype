@@ -105,6 +105,18 @@ public class StudyDaoImpl implements StudyDao {
 		return list;
 	}
 
+	@Override
+	public int newLeader(StudyDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"newLeader",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: newLeader!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 	
 
