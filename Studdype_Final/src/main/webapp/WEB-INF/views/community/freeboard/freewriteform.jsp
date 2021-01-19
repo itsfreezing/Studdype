@@ -195,11 +195,10 @@ function clickFileBtn(fileName){
  		<table class="maintable">
 
 		<tr>
-		<img src='./resources/summernoteImg/1610702153935휴가원.JPG'>
 			<td><h1>자유게시판 글 쓰기</h1></td>
 		</tr>
 		<tr>
-			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요"></td>
+			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" autocomplete="off"></td>
 		</tr>
 		
 			<td ><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
@@ -223,6 +222,6 @@ function clickFileBtn(fileName){
 	</form>
  	</div>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

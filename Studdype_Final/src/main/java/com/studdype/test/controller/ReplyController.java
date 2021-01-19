@@ -59,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		
 		return replyMap;
 	}
-	
+		
 	//자유게시판 댓글 삭제 메소드
 	@RequestMapping(value="/freeReplyDelete.do", method=RequestMethod.POST)
 	public @ResponseBody int freeReplyDelete(@RequestBody ReplyDto dto) {
@@ -176,7 +176,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		int res = meetReplyBiz.writeMeetRecomment(dto);
 		
 		System.out.println("-----------------------------------------------------------------------\n"
-						  +"<<모임 댓글>> ["+dto.getR_no()+"]dddddd\n"
+						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임댓글이 추가 되었습니다.\n"
 						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
