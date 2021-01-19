@@ -161,6 +161,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
+	
 
 	// meetBoard DB 캘린더로 가져오기
 	@Override
@@ -168,7 +169,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		List<MeetDto> meetDBForCalendar = null;
 		
 		try {
-			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar");
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar",s_no);
 			
 		}catch (Exception e) {
 		System.out.println("에러: getDB for calendar");

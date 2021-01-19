@@ -13,6 +13,7 @@ public interface MeetBoardDao {
 	//모임 게시판 게시글 
 	String NAMESPACE="meetboard.";
 	
+
 	public int selectTotalMeetBoardNum(int s_no);				 		// 모임게시판 모임 [총 개수] 
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap); 		// 모임게시판 모임 [페이징]
 	public int selectSearchMeetBoardNum(Map searchNumMap);			 	// 모임게시판 '검색' 게시글 [총 개수]
@@ -29,4 +30,5 @@ public interface MeetBoardDao {
 	public int insertMeetVote(VoteDto dto);								// 모임게시판_투표 [투표하기]
 	public int selectVoteMemberCnt(VoteDto dto);						// 모임게시판_투표 [중복체크]
 	public List<MeetDto> selectMeetDBForCalendar(int s_no);				// 캘린더에 meet DB값 가져오기
+
 }

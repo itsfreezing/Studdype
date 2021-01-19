@@ -9,6 +9,7 @@ import com.studdype.test.model.dto.member.MemberDto;
 
 public interface MeetBiz {
 	
+
 	public int selectTotalMeetBoardNum(int s_no);					 	// 모임게시판 모임 [총 개수]
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap); 		// 모임게시판 [페이징]
 	public int selectSearchMeetBoardNum(Map searchNumMap);			 	// 모임게시판 '검색' 모임 [총 개수]
@@ -25,4 +26,5 @@ public interface MeetBiz {
 	public int selectVoteMemberCnt(VoteDto dto);						// 모임게시판_투표 [중복체크]
 	public int insertMeetVote(VoteDto dto);								// 모임게시판_투표 [투표하기]
 	public List<MeetDto> selectMeetDBForCalendar(int s_no);				// 캘린더에 meet DB값 가져오기
+
 }

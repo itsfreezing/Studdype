@@ -31,7 +31,7 @@
 								<a class="nav-link" href="#">스터띱 홈<span class="sr-only">(current)</span></a>
 							</li>								
 	                              <li class="nav-item">
-								<a class="nav-link" href="#">로그아웃</a>
+								<a class="nav-link" href="logout.do">로그아웃</a>
 	                              </li>
 	                              <li class="nav-item">
 								<a class="nav-link" href="myPage.do">마이페이지</a>
@@ -51,7 +51,7 @@
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-								<c:if test="${study.s_name == null }"><h1>마이 페이지</h1></c:if>
+								
 								<c:if test="${study.s_name != null }"><h1>${study.s_name }</h1></c:if>
 								
 							</div>

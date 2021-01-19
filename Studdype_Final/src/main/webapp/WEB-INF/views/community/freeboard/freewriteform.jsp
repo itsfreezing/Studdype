@@ -101,7 +101,6 @@
 	var form = $("#writeForm");
 	var title = $("#boardtitle");
 	var content = $("#summernote");
-	
 	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
 	}else if( title.val().length  > 50  ){
@@ -222,6 +221,6 @@ function clickFileBtn(fileName){
 	</form>
  	</div>
 
-	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
+		<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
