@@ -67,7 +67,8 @@ public class HomeController {
 	//마이페이지로 이동
 	@RequestMapping("/myPage.do")
 	public String myPage(HttpSession session,String pagenum, Model model) {
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto mypage = memberBiz.selectOne(login.getMem_no());
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(1); //해당 회원번호로 가입되있는 스터디 번호 가져오기
 		List<StudyDto> studylist = new ArrayList<StudyDto>();
 		List<StudyDto> applylist = new ArrayList<StudyDto>();
@@ -76,7 +77,7 @@ public class HomeController {
 		List<StudyApplyingDto> studyApplylist = studyapplyingBiz.studyApplyingList(1); //멤버 번호로 studyapply 리스트 가져오기
 		List<StudyDto> receiveapplyname = new ArrayList<StudyDto>();
 		List<StudyMemberDto> pageList = null;
-		int totalStudyListNum = studymemberBiz.StudyTotalNum(login.getMem_no()); //5개씩 스터디 번호 가져오기
+		int totalStudyListNum = studymemberBiz.StudyTotalNum(mypage.getMem_no()); //5개씩 스터디 번호 가져오기
 		
 		
 		Map<String,Integer> pageMap = new HashMap<String,Integer>();

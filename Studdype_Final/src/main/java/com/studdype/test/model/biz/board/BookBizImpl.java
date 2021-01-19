@@ -1,11 +1,11 @@
 package com.studdype.test.model.biz.board;
 
 import java.util.List;
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.book.BookDao;
 import com.studdype.test.model.dao.member.MemberDao;
@@ -50,6 +50,24 @@ public class BookBizImpl implements BookBiz{
 	@Override
 	public List<BookDto> bookList(int s_no) {
 		return bookDao.bookList(s_no);
+	}
+
+	@Override
+	public int deletebookmain() {
+		
+		return bookDao.deletebookmain();
+	}
+	
+	
+	@Override
+	public int bookmain(int b_no) {
+		int a = bookDao.deletebookmain();
+		if(a>0) {
+			return bookDao.bookmain(b_no);
+		}else {
+			return bookDao.bookmain(b_no);
+		}
+		
 	}
 
 	

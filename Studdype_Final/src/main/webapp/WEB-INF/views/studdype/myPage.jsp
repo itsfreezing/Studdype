@@ -312,8 +312,8 @@
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">내가 가입한 스터디 모임 관리</p>
       
       
-     <c:forEach var="i" begin="0" end="${pageList.size()-1 }" step="1">
-     		<p>${pageList.get(i).getS_no() }</p>
+     <c:forEach var="i" begin="0" end="${studylist }" step="1">
+     		<p>${pageList.get(i).getS_no()}</p>
      </c:forEach>
      
      

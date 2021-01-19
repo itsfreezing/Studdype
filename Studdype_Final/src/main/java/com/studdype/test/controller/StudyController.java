@@ -228,5 +228,40 @@ public class StudyController {
 
 		return "studdype/updateStudy";
 	}
+	// 스터디 관리 페이지 update버튼 클릭시
+	@RequestMapping(value="/studyupdate.do",method = RequestMethod.GET)
+	public String studyupdate(HttpServletRequest request,Model model) {
+		System.out.println("들어오긴함");
+		System.out.println(request.getParameter("mem_no"));
+		int dto = bookBiz.bookmain(Integer.parseInt(request.getParameter("b_no")));
+		System.out.println("s_no : "+request.getParameter("s_no"));
+		StudyDto dto3 = new StudyDto(Integer.parseInt(request.getParameter("mem_no")),Integer.parseInt(request.getParameter("s_no")) );
+		int dto2 = studyBiz.newLeader(dto3);
+		
+		System.out.println("dto3 :"+dto3);
+		if(dto>0) {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표수정 실패 !");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+			}
+			}else {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정 성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표 수정 실패!");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+				
+			}
+	
+	}
 
+	}
 }

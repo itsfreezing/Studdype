@@ -224,7 +224,7 @@ CREATE TABLE STUDY_CATEGORY(
     
  );
 
- 
+select * from member;
 -- 스터디 팀원목록
 CREATE TABLE STUDY_MEMBER(
     S_NO NUMBER,
