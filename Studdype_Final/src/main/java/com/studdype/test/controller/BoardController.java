@@ -409,50 +409,6 @@ public class BoardController {
 		
 		return calendarMap;
 	}
-	
-	// 도서 검색 페이지 전환
-	@RequestMapping("/bookboardform.do")
-	public String bookBoardForm(HttpSession session) {
-		session.setAttribute("leftnavi", "book");
-		return "community/book/bookboardform";
-	}
-
-	
-	// 도서 검색 페이지
-	@RequestMapping("/searchBook.do")
-	public String searchBook(HttpSession session, Model model, String pagenum) {
-		StudyDto study = (StudyDto) session.getAttribute("study");
-		List<BookDto> list = null; // 4개 페이징 담을 리스트
-		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-
-		// 4개 게시물만 가져오기
-		list = bookBiz.selectSearchBookList(study.getS_no());
-		// 멤버번호로 작성자 이름/아이디 받아오기
-		writerNameMap = bookBiz.getWriterNameByList(list);
-
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-
-		model.addAttribute("list", list);
-		model.addAttribute("writerMap", writerNameMap);
-
-		return "community/book/searchBook";
-	}
-
-	@RequestMapping(value = "/bookDetailform.do", method = RequestMethod.GET)
-	public String bookDetailForm(HttpSession session, Model model, int b_no) {
-		StudyDto study = (StudyDto) session.getAttribute("study");
-		Map<Integer, MemberDto> writerNameMap = null;// 게시글 작성자 이름 담을 MAP
-
-		BookDto dto = new BookDto();
-		dto.setS_no(study.getS_no());
-		dto.setB_no(b_no);
-
-		BookDto detailBookDto = bookBiz.selectOneBook(dto);
-
-		// 멤버번호로 작성자 이름/아이디 받아오기
-		writerNameMap = bookBiz.getBookWriterName(detailBookDto.getB_writer());
 		
 	// 페이징 함수
 	public void paging(Map pagingMap, String pageNum, int totalBoardNum) {
