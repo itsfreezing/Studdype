@@ -49,7 +49,7 @@ function getReplyList() {
 	
 	$.ajax({
 		type:"post",
-		url:"freeReplyList.do",
+		url:"noticeReplyList.do",
 		data:JSON.stringify(boardVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -150,7 +150,7 @@ function deleteReply(btn){
 	//댓글 삭제 
 	$.ajax({
 		type:"post",
-		url:"freeReplyDelete.do",
+		url:"noticeReplyDelete.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -193,7 +193,7 @@ function insertReply(){
 	//댓글 쓰기
 	$.ajax({
 		type:"post",
-		url:"freeReplyWrite.do",
+		url:"noticeReplyWrite.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -284,7 +284,7 @@ function updateReply(btn){
 	//댓글 수정
 	$.ajax({
 		type:"post",
-		url:"freeReplyUpdate.do",
+		url:"noticeReplyUpdate.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -375,7 +375,7 @@ function writeRecomment(btn){
 	//댓글 답글 쓰기
 	$.ajax({
 		type:"post",
-		url:"freeRecommentWrite.do",
+		url:"noticeRecommentWrite.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -413,7 +413,7 @@ function showAttach(){
 //파일 다운로드 함수
 function downloadFile(btn){
 	
-	location.href="freeFileDown.do?f_no="+btn.title;
+	location.href="noticeFileDown.do?f_no="+btn.title;
 	
 }
  
@@ -470,12 +470,12 @@ function downloadFile(btn){
 		<div class="btnDiv">
 			<c:choose>
 				<c:when test="${dto.b_writer == login.mem_no }">
-					<input type="button" class="free_Btn" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
-					<input type="button" class="free_Btn"  value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
-					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+					<input type="button" class="free_Btn" value="삭제" onclick="location.href='noticeBoardDelete.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn"  value="수정" onclick="location.href='noticeBoardUpdateForm.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn" value="홈" onclick="location.href='communityhome.do'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+					<input type="button" class="free_Btn" value="홈" onclick="location.href='communityhome.do'">
 				</c:otherwise>
 			</c:choose>
 		
@@ -499,49 +499,7 @@ function downloadFile(btn){
 			</table>
 		</div>
 		
-		<!-- 게시글 위 아래 근처글 부분 -->
-		<c:if test="${not empty recentList }">
-					<div class="recent_board_box">
-						<h4>자유게시판 글</h4>
-						<table class="recent_table">	
-							<col width="60%"><col width="25%"><col width="15%">
-							<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" >
-								<c:choose>
-									<c:when test="${dto.b_no == recentList.get(i).getB_no() }">
-										<tr class="recent_board_tr current_board">
-											<td class="tdtitle">
-												<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-													<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-														<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-													</c:if>							
-												</a>
-											</td>
-											<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-											<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-										</tr>
-									</c:when>
-									<c:otherwise>
-										<tr class="recent_board_tr">
-											<td class="tdtitle">
-												<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-													<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-														<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-													</c:if>					
-												</a>
-											</td>
-											<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-											<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-										</tr>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<tr style="border:none;">
-								<td colspan="3" class="look_all_td"><a href="freeboard.do">전체보기</a></td>
-							</tr>					
-							</tbody>
-					</table>
-					</div>		
-		</c:if>
+		
 
 			
  	</div>

@@ -19,5 +19,10 @@ public class NoticeFileBizImpl implements NoticeFileBiz {
 	public List<FileDto> getAttachFileList(int b_no) {
 		return noticeFileDao.selectAttachFileList(b_no);
 	}
+	//파일 가져오기
+	@Override
+	public FileDto getFileByFno(int f_no) {
+		return noticeFileDao.selectFile(f_no);
+	}
 
 }

@@ -15,18 +15,21 @@
 	</resultMap>
 
 
-	<select id="selectNoticeBoard" resultMap="boardMap">
-		SELECT * FROM NOTICE_BOARD 
+	<select id="selectNoticeBoard" parameterType="int" resultMap="boardMap">
+		SELECT * FROM NOTICE_BOARD WHERE S_NO = #{s_no}
 	</select>
-	
+	<select id="selectNoticeBoardList" parameterType="int" resultMap="boardMap">
+		SELECT * FROM NOTICE_BOARD WHERE S_NO =#{s_no} ORDER BY B_NO DESC
+	</select>
 	<insert id="insertBoard" parameterType="boardDto">
 		INSERT INTO NOTICE_BOARD
 		VALUES ( NOTICEBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT   ) 		
 	</insert>
 	
-	<select id="selectNoticeNum" resultType="_int">
+	<select id="selectNoticeNum" parameterType="int" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE_BOARD		
+		WHERE S_NO = #{s_no}
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultMap="boardMap">
