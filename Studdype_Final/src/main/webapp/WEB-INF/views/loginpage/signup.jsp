@@ -51,13 +51,12 @@ $(document).ready(function(){
 				console.log("0=사용가능 /1=사용불가"+data);
 				if(data==0){
 					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
-						$('#IdCheck').empty();
-						$('#IdCheck').append(html);
-						
-				}else {
-						var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
-						$('#IdCheck').empty();
-						$('#IdCheck').append(html);
+					$('#IdCheck').empty();
+					$('#IdCheck').append(html);
+				}else{
+					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다. </td></tr>";
+					$('#IdCheck').empty();
+					$('#IdCheck').append(html);	
 					}
 				},error:function(){
 					alert("FAIL");
@@ -66,6 +65,60 @@ $(document).ready(function(){
 	});
 });	
 
+function signup(){
+	var memberId=document.getElementById("memberId").title;
+	var memberpw=document.getElementById("memberpw").title;
+	var memberName=$("#memberName").val();
+	var email=document.getElementById("memberemail").title;
+	var mem_rrn=$("#rno1")+"-"+$("#rno2");
+
+		if(memberId=="n"){
+			alert("아이디 중복확인해주세요");
+			return false;
+		}else if(memberpw=="n"){
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		else if(email=="n"){
+			alert("이메일을 입력해주세요");
+			$("#mememail").focus();
+			return false;
+		}
+		
+		else if(!memberName){
+			alert("이름을 입력해주세요");
+			$("#memberName").focus();
+			return false;
+		}
+		
+		else if(mem_rrn=="n"){
+			alert("주민번호를 입력해주세요");
+			$("#rno1"+"#rno2").focus();
+			return false;
+		}
+		
+		sign.submit();
+	}
+	function chkId(){
+		var doc=document.getElementsByName("mem_id")[0];
+		if(doc.value.trim()==""||doc.value==null){
+			alert("아이디를입력해주세요");
+			return false;
+		}
+	}
+
+function ChkConfirm2(){
+	var chkpw=document.getElementById("memberpw").title;
+	var chkId=document.getElementsByName("mem_id")[0].title;
+	if(chkpw=="n"){
+		alert("비밀번호확인해주세요");
+		document.getElementsByName("mem_pw")[0].focus();
+	}
+	if(chkId=="n"){
+		document.getElementsByName("mem_id")[0].focus();
+	}
+}
+/*
 function signup(){
 	if(document.register.mem_id.value==""){
 		alert("아이디를 입력해주세요");
@@ -91,17 +144,13 @@ function signup(){
 		document.register.mem_name.focus();
 		return false;
 	}
-	else if(document.register.mem_rno.title==""){
-		alert("주민등록번호를 입력해주세요");
-		document.register.mem_rno.focus();
-		return false;
-	}
 	else if(document.register.mem_phone==""){
 		alert("핸드폰 번호를 입력해주세요");
 		document.register.mem_phone.focus();
 	}
 	document.register.submit();
 }
+*/
 </script>		
 <style type="text/css">
 h1{
@@ -235,7 +284,7 @@ input{
                     <tr>
                       <td> 
                            <input type="text" title="n" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
-                     		<input type="button" value="중복확인" id="check">
+                     		<input type="button" value="중복확인" id="check" onclick="chkId();">
                      </td>
                     </tr>
                     <tr>
@@ -286,7 +335,7 @@ input{
                         </td>
                     </tr> 
                     <tr>
-                        <td><input type="text" name="mem_name" id="memberName"style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요"></td>
+                        <td><input type="text" name="mem_name" onclick="ChkConfirm(),ChkConfirm2()" id="memberName"style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요"></td>
                     </tr>
                     <tr>
                     	<td>

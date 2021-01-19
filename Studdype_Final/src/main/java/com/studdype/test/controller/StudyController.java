@@ -229,9 +229,4 @@ public class StudyController {
 		return "studdype/updateStudy";
 	}
 
-	@RequestMapping(value="/studdypeDetail.do",method = RequestMethod.GET)
-	public String studdypeDetail(Model model) {
-		logger.info("Detail Page");
-		return "studdype/studdypeDetail";
-	}
 }

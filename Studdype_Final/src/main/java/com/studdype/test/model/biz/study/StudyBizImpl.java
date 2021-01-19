@@ -125,12 +125,5 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 
-	
-	//스터디 상세페이지
-	@Override
-	public StudyDto selectOne(int s_no) {
-		return study_Dao.selectOne(s_no);
-	}
-
 
 }

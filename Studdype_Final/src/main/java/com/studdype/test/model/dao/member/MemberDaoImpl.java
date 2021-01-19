@@ -252,7 +252,7 @@ public class MemberDaoImpl implements MemberDao{
 		
 			
 		} catch (Exception e) {
-			System.out.println("ERROR: idchk!!!!!!!!!!!!!!!!");
+			System.out.println("ERROR: idchk FAIL!!!!!!!!!!!!!!!!");
 			
 			e.printStackTrace();
 		}
@@ -278,18 +278,7 @@ public class MemberDaoImpl implements MemberDao{
 		return getBookWriterName;
 	}
 	
-	//아이디 중복체크 
-	@Override
-	public MemberDto IdChk(String mem_id) {
-		MemberDto res =null; 
-		try {
-			res=sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
-		} catch (Exception e) {
-			System.out.println("[error]:IdChk FAIL");
-			e.printStackTrace();
-		}
-			return res;
-	}
+
 		
 	//마이페이지 회원탈퇴 클릭시
 	@Override
