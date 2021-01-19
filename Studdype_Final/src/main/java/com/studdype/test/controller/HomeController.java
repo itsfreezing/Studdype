@@ -314,11 +314,11 @@ public class HomeController {
 	//마이페이지에서 studycommunity 접근시
 	@RequestMapping("studycommunity.do")
 	public String studycommunity(HttpSession session,int s_no) {
-		MemberDto login = memberBiz.selectOne(1);
+	
 		StudyDto study = studyBiz.selectOneBySno(s_no);
 		
 		session.setAttribute("study", study);
-		session.setAttribute("login", login);
+		
 		session.setAttribute("leftnavi", "studyhome");
 		
 		return "community/communityHome";
