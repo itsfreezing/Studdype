@@ -51,7 +51,7 @@
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-								<c:if test="${study.s_name == null }"><h1>마이 페이지</h1></c:if>
+								
 								<c:if test="${study.s_name != null }"><h1>${study.s_name }</h1></c:if>
 								
 							</div>
