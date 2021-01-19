@@ -17,4 +17,6 @@ public interface FreeBoardDao {
 	public int deleteBoard(int b_no); //자유게시판 글 삭제
 	public int updateBoard(BoardDto board); //자유게시판 글 수정
 	public List<BoardDto> selectRecentList(int s_no, int b_no); //자유게시판 최근글 5개 가져오기
+	public int selectTotalBoardNumOfSearch(Map searchMap); //자유게시판 검색 총 게시글 수 
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap); //자유게시판 검색한글 15개 페이징
 }

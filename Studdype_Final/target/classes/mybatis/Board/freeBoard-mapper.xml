@@ -21,7 +21,49 @@
 		FROM FREE_BOARD
 		WHERE S_NO = #{s_no}
 	</select>
-
+	<!-- 검색 -->
+	<select id="selectTotalBoardNumOfSearch" parameterType="hashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM FREE_BOARD
+		WHERE S_NO = #{s_no}
+		<include refid="search_all"></include>
+	</select>
+	
+	<select id="selectPagingSearchBoardList" parameterType="hashMap" resultMap="boardMap">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+			FROM
+			(
+				SELECT ROWNUM N, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+				FROM FREE_BOARD
+				WHERE S_NO = #{s_no} ]]> <include refid="search_all"></include> <![CDATA[
+				ORDER BY B_NO DESC
+			)
+			WHERE N >= #{startRow} AND N <= #{endRow}
+		]]>
+		
+	</select>
+	
+	<sql id="search_all">
+		<if test="searchType eq 'title_content' ">
+			AND (B_TITLE LIKE '%' || #{keyword} || '%'  OR CONTAINS(B_CONTENT, '%'|| #{keyword} ||'%') > 0)
+		</if>
+		<if test="searchType eq 'title' ">
+			AND B_TITLE LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="searchType eq 'content' ">
+			 AND CONTAINS(B_CONTENT, '%'|| #{keyword} ||'%') > 0
+		</if>
+		<if test="searchType eq 'writer' ">
+			AND B_WRITER =
+			(
+				SELECT MEM_NO FROM MEMBER WHERE MEM_ID LIKE '%'||#{keyword}||'%' OR MEM_NAME LIKE '%'|| #{keyword} ||'%'
+			)
+			
+		</if>		
+	</sql>
+	<!-- 검색 -->
+	
 	<select id="pagingBoardList" parameterType="hashMap" resultMap="boardMap">
 		
 		<![CDATA[
@@ -37,7 +79,7 @@
 		]]>
 	</select>
 
-	<insert id="insertBoard" parameterType="boardDto">
+	<insert id="insertBoard" parameterType="boardDto" >
 	
 		INSERT INTO FREE_BOARD 
 		VALUES( FREEBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
