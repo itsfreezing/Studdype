@@ -4,6 +4,78 @@
   		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="meetrepl">
+<mapper namespace="meetreply">
+	
+	<!-- 모임 번호로 댓글 [리스트] 받기 -->
+	<select id="selectMeetReplyList" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM MEET_REPLY
+		WHERE B_NO = #{b_no}
+		ORDER BY R_GROUPNO, R_ORDER
+	</select>
+	
+	<!-- 모임 댓글 '1개' [가져오기] -->
+	<select id="selectOneMeetReply" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM MEET_REPLY
+		WHERE R_NO = #{r_no}
+	</select>
+	
+	<!-- 모임 댓글이 '부모댓글'이면 [r_class: -1로 변경] -->
+	<update id="deleteMeetParentReply" parameterType="int">
+		UPDATE MEET_REPLY 
+		SET R_CLASS = -1 
+		WHERE R_NO = #{r_no}
+	</update>
+	
+	<!-- 모임 댓글 [삭제] -->
+	<delete id="deleteMeetReply">
+		DELETE
+		FROM MEET_REPLY
+		WHERE R_NO = #{r_no}
+	</delete>
+	
+	<!-- 모임 댓글 '그룹번호'로 [리스트] 뽑기 -->
+	<select id="selectGroupMeetReplyList" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM MEET_REPLY
+		WHERE R_GROUPNO = #{r_no}
+	</select>
+	
+	<!-- 모임 댓글 [작성] -->
+	<insert id="insertMeetReply" parameterType="replyDto">
+		INSERT INTO MEET_REPLY
+		VALUES( MEETREPLYSEQ.NEXTVAL, #{b_no}, MEETGROUPSEQ.NEXTVAL, 0, 0, #{r_writer}, #{r_comment}, SYSDATE )
+	</insert>
+	
+	<!-- 모임 댓글 [수정] -->
+	<update id="updateMeetReply" parameterType="replyDto">
+		UPDATE MEET_REPLY
+		SET R_COMMENT = #{r_comment}
+		WHERE R_NO = #{r_no}
+	</update>
+	
+	
+	<!-- 모임 댓글 '답글' [작성] -->
+	<insert id="insertMeetRecomment" parameterType="replyDto">
+		INSERT INTO MEET_REPLY 
+		VALUES(
+    		MEETREPLYSEQ.NEXTVAL,
+    		#{b_no},
+    		( SELECT R_GROUPNO FROM MEET_REPLY WHERE R_NO = #{r_no} ),
+    		1,
+    		(SELECT MAX(R_ORDER)  FROM MEET_REPLY  WHERE R_GROUPNO =(SELECT R_GROUPNO FROM MEET_REPLY WHERE R_NO = #{r_no}) ) +1,
+    		#{r_writer},
+    		#{r_comment},
+    		SYSDATE)
+		
+	</insert>
+	
+	<!-- 모임게시판 '모임리스트'로 '댓글개수' [가져오기] -->
+	<select id="selectMeetReplyCnt" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEET_REPLY
+		WHERE B_NO = #{b_no}
+	</select>
 	
 </mapper>

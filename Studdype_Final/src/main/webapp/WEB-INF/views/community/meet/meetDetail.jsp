@@ -32,67 +32,16 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
-
-<script>
-
-<!-- kakao map API script -->
-$(function(){
-	var mapContainer = document.getElementById('map'), 	  // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
-
-	// 지도 생성  
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	// 주소-좌표 변환 객체를 생성
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색
-	geocoder.addressSearch('${dto.meet_addr}', function(result, status) {
-	
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-			
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});    
-});
-
-<!-- 모임 삭제 전 확인 알림창 -->
-function deleteBtn(){
-	if (confirm("모임을 정말 삭제 하시겠습니까??") == true){ //확인
-		alert("모임이 삭제 되었습니다!");
-		document.meetDetailForm.submit();
-	}else{   										//취소
-	    alert("모임 삭제가 취소되었습니다!")
-		return;
-	}
-}
-
-</script>	
-
 </head>
 <body>
-
+	<!-- 모임 댓글 관련 스크립트 -->
+	<jsp:include page="../../community/meet/meetReplyScript.jsp"></jsp:include>
+	
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
 	<!--main content 섹션-->
 	<div class="main-section">
-		
-		<form name="meetDetailForm" action="meetdelete.do" method="post">
-		<input type="hidden" name="meet_no" value="${dto.meet_no }">		
 		
 			<!-- 모임 상세보기 -->
 			<div id="topDiv">
@@ -139,10 +88,12 @@ function deleteBtn(){
 			<c:choose>
 				<c:when test="${ dto.meet_writer == login.mem_no }">
 					<input type="button" value="수정" class="submitBtn" id="detailBtn_updateform" onclick="location.href='meetupdateform.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp; 
-					<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="deleteBtn();">&nbsp;&nbsp;
+					<input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetdelete.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp;
+					<input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply1" onclick="location.href='#write_content'">&nbsp;&nbsp; 
 					<input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
 				</c:when>
 				<c:otherwise>						
+					<input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply2" onclick="location.href='#write_content'">&nbsp;&nbsp; 
 					<input type="button" value="목록" class="submitBtn" id="detailBtn_list2" onclick="location.href='meetlist.do'">
 				</c:otherwise> 
 			</c:choose>
@@ -180,22 +131,26 @@ function deleteBtn(){
 				
 			</div>
 			
-			<!-- 댓글 영역 -->
-			<c:choose>
-				<c:when test="${ dto.meet_writer == login.mem_no }">
-				<div style="width: 100%; height: 300px; border: 1px solid;">
-					<img src="./resources/assets/img/icon_crown.png">
-				</div>
-				</c:when>
-				<c:otherwise>
-				<div style="width: 100%; height: 300px; border: 1px solid;">
-				
-				</div>
-				</c:otherwise> 
-			</c:choose>	
-		</form>		
+			<!-- 댓글 리스트 영역 -->
+			<div class="replyBox"></div>
+			
+			<!-- 댓글 작성 영역 -->	
+			<div class="replyWrite"  >
+				<table >
+					<tr>
+						<td colspan="2"><p class="writerId">${login.mem_id }</p></td>
+					</tr>
+					<tr>
+						<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
+						<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
+					</tr>				
+				</table>
+			</div>
+			
+			
 	</div>
-
-<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
+<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
+<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

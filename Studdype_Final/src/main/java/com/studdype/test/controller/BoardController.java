@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
@@ -243,6 +245,7 @@ public class BoardController {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
+		System.out.println(url);
 		try {
 			byte fileData[] = file.getBytes();
 			
@@ -325,6 +328,62 @@ public class BoardController {
 			fileHandler.downloadFile(dto,response);
 		}
 	}
+	
+	//자유 게시판 검색
+	@RequestMapping(value="/free_search.do", method= RequestMethod.POST)
+	public String freeSearch(SearchPagination search, Model model,HttpServletRequest request, String pagenum) {
+		
+		/*
+		  			title_content:제목+내용
+					title:제목
+					content:내용
+					writer:작성자
+		 
+		 */
+		System.out.println(search.getKeyword());
+		System.out.println(search.getSearchType());
+		
+		HttpSession session = request.getSession();
+		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
+		List<BoardDto> list = null; // 15개 페이징 담을 리스트
+		Map<String, Object> pageMap = new HashMap<String, Object>(); // 시작페이지, 끝페이지 정보 담을 MAP
+		Map<Integer, MemberDto> memberMap = null; // 게시글 멤버정보 담을 MAP
+		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
+		Map searchMap = new HashMap(); //검색 정보 담은 Map
+		
+		searchMap.put("s_no",study.getS_no());
+		searchMap.put("searchType", search.getSearchType());
+		searchMap.put("keyword", search.getKeyword());
+		
+		int totalBoardNum = freeBiz.selectTotalBoardNumOfSearch(searchMap); // 검색내용 총 게시글 갯수
+		System.out.println("qwe 글개수: " + totalBoardNum);
+		paging(pageMap, pagenum, totalBoardNum); // 페이징 함수
+
+		pageMap.put("s_no", study.getS_no()); // 스터디 번호 put
+		pageMap.put("searchType", search.getSearchType()); //검색 타입
+		pageMap.put("keyword", search.getKeyword()); //검색 키워드
+		
+		// 15개 게시물만 가져오기
+		list = freeBiz.selectPagingSearchBoardList(pageMap);
+		// 멤버번호로 작성자 이름 받아오기
+		memberMap = freeBiz.getMemberMap(list);
+
+		// 댓글 갯수 가져오기
+		replyCntMap = freeBiz.getReplyCnt(list);
+
+		model.addAttribute("startPage", pageMap.get("startPage"));
+		model.addAttribute("endPage", pageMap.get("endPage"));
+		model.addAttribute("currentPage", pageMap.get("currentPage"));
+		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
+		model.addAttribute("list", list);
+		model.addAttribute("memberMap", memberMap);
+		session.setAttribute("leftnavi", "freeboard");
+		model.addAttribute("replyCntMap", replyCntMap);
+		
+		model.addAttribute("search", search);
+		return "community/freeboard/freeboardsearch";
+	}
+	
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
@@ -410,7 +469,7 @@ public class BoardController {
 	}
 	
 	// 페이징 함수
-	public void paging(Map<String, Integer> pagingMap, String pageNum, int totalBoardNum) {
+	public void paging(Map pagingMap, String pageNum, int totalBoardNum) {
 
 		int currentPage = (pageNum == null || pageNum.trim() == "") ? 1 : Integer.parseInt(pageNum); // 현재 페이지
 		int startRow = (currentPage - 1) * pageSize + 1; // 페이지 첫번째 글

@@ -155,6 +155,18 @@ public class FreeBizImpl implements FreeBiz {
 		return freeReplyDao.selectReplyCnt(list);
 	}
 
+	//자유게시판 검색시 총 게시글 수
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		return freeBoardDao.selectTotalBoardNumOfSearch(searchMap);
+	}
+
+	//검색 한 것 페이징
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		return freeBoardDao.selectPagingSearchBoardList(pageMap);
+	}
+
 	
 
 	
