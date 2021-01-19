@@ -133,14 +133,23 @@
       }
 	</style>
 	<script type="text/javascript">
+		var z;
 		function idchk(){
 			 var i = $('input[name=newid]').val();
 			 var p = $('input[name=newpw]').val();
 			 var e = $('input[name=newemail]').val();
 			 var h = $('input[name=newphone]').val();
-			location.href="idchk.do?mem_id="+i+"&mem_pw="+p+"&mem_email="+e+"&mem_phone="+h;
+			 
+			 location.href="idchk.do?mem_id="+i+"&mem_pw="+p+"&mem_email="+e+"&mem_phone="+h;
+			
+			
 		}
 		function complete(){
+		alert(z);
+			if(z!=true){
+				alert("아이디 중복체크를 해주세요.");
+			}else{
+			
 			var i = $('input[name=newid]').val();
 			var p = $('input[name=newpw]').val();
 			var e = $('input[name=newemail]').val();
@@ -149,7 +158,7 @@
 			var l = '${login.mem_no}';
 			
 			location.href="memberupdate.do?mem_id="+i+"&mem_pw="+p+"&mem_email="+e+"&mem_phone="+h+"&mem_no="+l;
-			
+			}
 		}
 		
 	</script>

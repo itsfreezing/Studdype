@@ -120,16 +120,8 @@
    	.hero-slider-info{
    	margin-top:65px !important;
    	}
-  	#applystatus{
-  		position : relative;
-  		left: 300px;
-  		bottom: 80px;
-  		display: inline-block;
+  
   	
-  	}
-  	#applyname{
-  		margin-left:15px;
-  	}
   	#receive{
   		margin-left:15px;
   	
@@ -140,6 +132,20 @@
   		bottom: 47px;
   		margin:5px;
   		
+  	}
+  	#applystatusagree{
+  		position : relative;
+  		left: 300px;
+  		bottom: 80px;
+  		display: inline-block;
+  		color: green;
+  	}
+  	#applystatusreject{
+  		position : relative;
+  		left: 300px;
+  		bottom: 80px;
+  		display: inline-block;
+  		color: red;
   	}
   	
    	
@@ -243,6 +249,7 @@
    
    
    <!-- body -->
+   <!--  회원 정보          -->
    <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">My Studdype Profile</p>
@@ -255,40 +262,50 @@
       <button id="updateinfo" type="button" class="btn btn-outline-secondary" onclick="location.href='UpdateMember.do'">정보 수정</button>
       <button id="getout" type="button" class="btn btn-outline-secondary" onclick="getout();">회원 탈퇴</button>
    </div>
+   
+   
+   
+   <!--  내가 가입 신청한 내역                     -->
    <div class="newjoin" style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Request Sent</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;" >새로 신청한 스터디 내역</p>
 
-      <c:forEach var="applylist" items="${applylist }"><p id="applyname">${applylist.s_name }</p></c:forEach> 
+      <c:forEach var="applylist" items="${applylist }"><p id="applyname" style="position:relative; display:inline-block; margin-left:15px;">${applylist.s_name }</p></c:forEach> 
       <c:forEach var="studyApplylist" items="${studyApplylist }" varStatus="status">
-      <c:if test="${studyApplylist.agree == 'D' }"><p id="applystatus">진행중</p>
-      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
-      <c:if test="${studyApplylist.agree == 'Y' }"><p id="applystatus">수락됨</p>
-      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
-      <c:if test="${studyApplylist.agree == 'N' }"><p id="applystatus">거절됨</p>
-      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();">삭제</button><br></c:if>
+      <c:if test="${studyApplylist.agree == 'D' }"><p id="applystatus" style="position : relative; display: inline-block; margin-left:120px;">진행중</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();" style="position : relative; display: inline-block; margin-left:40px;">삭제</button><br></c:if>
+      <c:if test="${studyApplylist.agree == 'Y' }"><p id="applystatusagree" style="position : relative; display: inline-block;  margin-left:120px; color:green;">수락됨</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();" style="position : relative; display: inline-block; margin-left:40px;">삭제</button><br></c:if>
+      <c:if test="${studyApplylist.agree == 'N' }"><p id="applystatusreject" style="position : relative; display: inline-block;  margin-left:120px; color:red;">거절됨</p>
+      <button id="delete${status.count }" value="${studyApplylist.mem_no }" name="${studyApplylist.s_no }" class="btn btn-outline-secondary btn-sm" onclick="receivedelete();" style="position : relative; display: inline-block; margin-left:40px;">삭제</button><br></c:if>
       </c:forEach>
   
    </div>
-   <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px;
-   box-shadow: 1px 1px 2px 6px #e9e9e9;">
+   
+   
+   
+   <!-- 가입 신청 받은 내역                -->
+   <div style="border:1px solid black; width:400px; height:400px; float:left; margin:37px; border-radius: 15px; position: relative;, display:inline-block;
+   box-shadow: 1px 1px 2px 6px #e9e9e9;" >
       <p style="text-align:center; font-weight:bold; font-size:28px;">Received Request</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">가입 신청받은 내역</p>
       <c:forEach var="receiveapplyname" items="${receiveapplyname }">
       <c:forEach var="Receiveapply" items="${Receiveapply }">
-      <c:if test="${Receiveapply.agree == 'D' }"><p id="receive">${receiveapplyname.s_name }</p></c:if>
+      <c:if test="${Receiveapply.agree == 'D' }"><p id="receive" style="position:relative; display:inline-block; margin-left:15px;">${receiveapplyname.s_name }</p></c:if>
       </c:forEach>
       </c:forEach>
       <c:forEach var="Receiveapply" items="${Receiveapply }" varStatus="status">
        <c:if test="${Receiveapply.agree == 'D' }">
-       <button id="agree${status.count }" value="${Receiveapply.mem_no }" name="${Receiveapply.s_no }"class="btn btn-outline-secondary btn-sm" onclick="agree();">수락</button>
+       <button id="agree${status.count }" value="${Receiveapply.mem_no }" name="${Receiveapply.s_no }"class="btn btn-outline-secondary btn-sm" onclick="agree();" style="position:relative; display:inline-block; margin-left:150px;">수락</button>
     
-       <button  class="btn btn-outline-secondary btn-sm" id="reject${status.count }" value="${Receiveapply.mem_no}" name="${Receiveapply.s_no }"onclick="reject();">거절</button></c:if>
+       <button  class="btn btn-outline-secondary btn-sm" id="reject${status.count }" value="${Receiveapply.mem_no}" name="${Receiveapply.s_no }"onclick="reject();" >거절</button>
+       </c:if>
      
       </c:forEach>
       
    </div>
+   <!--  모임 관리    -->
    <div style="border:1px solid black; width:400px; height:400px; float:left ;margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Meeting Management</p>
@@ -303,6 +320,7 @@
      
     
    </div>
+   <!--  내가 가입한 스터디 리스트     -->
    <p id="mystudyl">My Study List</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">

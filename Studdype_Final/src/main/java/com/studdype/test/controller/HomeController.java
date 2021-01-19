@@ -221,24 +221,32 @@ public class HomeController {
 	//마이페이지 회원 정보 수정 아이디 중복체크
 	@RequestMapping(value="/idchk.do",method = RequestMethod.GET)
 	public String idchk(HttpServletRequest request, Model model) {
-		
+		MemberDto login = memberBiz.selectOne(1);
 		
 		MemberDto dto = memberBiz.idchk(request.getParameter("mem_id"));
-	
-	
+		
+		
 		if(dto == null) {
 		
 		model.addAttribute("msg", "사용 가능한 아이디입니다!");
 		model.addAttribute("url", "UpdateMember.do?mem_id="+request.getParameter("mem_id")+"&mem_pw="+request.getParameter("mem_pw")+"&mem_email="+request.getParameter("mem_email")+"&mem_phone="+request.getParameter("mem_phone")+"&mem_no="+request.getParameter("mem_no"));
-		
+		System.out.println("dto null일때 실행");
+		return "commond/alert";
+		}else if(request.getParameter("mem_id").equals(login.getMem_id())){
+			System.out.println("mem_id가 login.getMem_id랑 같을때 실행");
+		model.addAttribute("msg", "사용 가능한 아이디입니다!");
+		model.addAttribute("url", "UpdateMember.do?mem_id="+request.getParameter("mem_id")+"&mem_pw="+request.getParameter("mem_pw")+"&mem_email="+request.getParameter("mem_email")+"&mem_phone="+request.getParameter("mem_phone")+"&mem_no="+request.getParameter("mem_no"));
+			
 		return "commond/alert";
 		}else {
-		
+			System.out.println("dto 널아닐때 실행 ");
 		model.addAttribute("msg", "중복된 아이디가있습니다,아이디를 변경해주세요!");
 		model.addAttribute("url", "UpdateMember.do");
 		return "commond/alert";
+		}
+		
 	}
-	}
+	
 	
 	//마이페이지 회원정보 수정 버튼 클릭시
 	@RequestMapping(value="/memberupdate.do",method = RequestMethod.GET)

@@ -18,6 +18,7 @@ select * from STUDY_APPLYING where s_no =1;
 SELECT * FROM LOCATION_SI;
 SELECT * FROM LOCATION_GU;
 select * from member;
+
 --멤버 테이블
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader1', 'leader1', '테스트팀장', '960308-1010101', 'M', '010-8801-9068', 'bin3005@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin3005', 'bin3005', '이승빈', '960308-1110101', 'M', '010-8201-9068', 'bin2205@naver.com');
@@ -27,8 +28,12 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr2', 'user2', 'uesr2', '950201-
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-1110101', 'M', '030-8201-9068', 'bin3205@naver.com');
 select * from member;
 select * from STUDY_MEMBER;
+select * from STUDY_APPLYING;
+select * from study;
 insert into study_member values(1,2);
-insert into study_applying values(38,2,'D','13451');
+insert into study_applying values(39,1,'D','13f51');
+insert into member values(memberseq.nextval, 'user7','user7','user7','960103-1111112','M','010-2315-2564','fhavja@nfbs.com');
+insert into study_applying values(1,7,'D','4266');
 --자유 게시판
 select * from study;
 SELECT * FROM STUDY WHERE S_NO =1;
