@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
+import com.studdype.test.common.PageChecker;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
@@ -66,7 +67,7 @@ public class BoardController {
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
 	private FileHandler fileHandler = new FileHandler();
-
+	private PageChecker pageChecker = new PageChecker(); 
 	// 자유게시판 리스트 이동
 	@RequestMapping("/freeboard.do")
 	public String freeBoard(HttpSession session, String pagenum, Model model) {
@@ -294,8 +295,7 @@ public class BoardController {
 		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
 
 		// 조회수 함수 isVisitPage = 1 -> 방문한 적있음 0 -> 없음
-		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
-
+		int isVisitPage = pageChecker.chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); // 게시글 가져오기 / 조회수 증가
 		MemberDto member = memberBiz.selectOne(board.getB_writer()); // 작성자 이름 가져오기
 
@@ -449,34 +449,6 @@ public class BoardController {
 
 	}
 
-	// 한게시글에 하루에 1번만 조회수 함수
-	private int chkVisited(HttpServletRequest request, HttpServletResponse response, String cookieName, String b_no) {
-		int isVisit = 0; // 온 게시판?
-		int isVisitPage = 0; // 온 게시글?
-		Cookie[] cookies = request.getCookies(); // 모든 쿠키
 
-		for (Cookie cookie : cookies) { // 모든 쿠키 조회
-
-			if (cookie.getName().equals(cookieName)) { // 자유게시판에 온적이 있으면
-				isVisit = 1;
-
-				// freeboardvisit 쿠키에 글번호가 있으면
-				if (cookie.getValue().contains(b_no)) {
-					isVisitPage = 1; // 온적있음 -> 1
-				} else { // 없으면
-					cookie.setValue(cookie.getValue() + "_" + b_no); // 쿠키값 + '_게시글번호' 업데이트해줌
-					response.addCookie(cookie); // 쿠키 추가
-				}
-			}
-		}
-
-		if (isVisit == 0) { // 자유게시판 첫 접근이면 쿠키 생성
-			Cookie cookie = new Cookie(cookieName, b_no);
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 하루생존
-			response.addCookie(cookie); // 쿠키 추가
-		}
-
-		return isVisitPage;
-	}
 
 }
