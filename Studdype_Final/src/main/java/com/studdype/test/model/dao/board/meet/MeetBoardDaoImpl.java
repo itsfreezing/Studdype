@@ -168,7 +168,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		List<MeetDto> meetDBForCalendar = null;
 		
 		try {
-			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar");
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar",s_no);
 			
 		}catch (Exception e) {
 		System.out.println("에러: getDB for calendar");
