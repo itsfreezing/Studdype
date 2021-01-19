@@ -117,12 +117,6 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return study_Dao.studyLeader(leader_no);
 	}
-	//마이페이지 스터디 리스트 개수 
-	@Override
-	public int selectTotalStudyNum(int mem_no) {
-		
-		return study_Dao.selectTotalStudyNum(mem_no);
-	}
 
 
 	

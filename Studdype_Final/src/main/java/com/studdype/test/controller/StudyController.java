@@ -200,14 +200,14 @@ public class StudyController {
 
 	// 스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
-	public String updateStudy(HttpSession session, Model model) {
+	public String updateStudy(HttpSession session, Model model,HttpServletRequest request) {
 		MemberDto login = memberBiz.selectOne(1);
 		List<StudyCategoryDto> category = studyBiz.categoryList();
 		List<LocationGuDto> gudto = studyBiz.locationGuList();
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
-		List<BookDto> bookList = bookBiz.bookList(1);
+		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
 		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
-		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
+		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
 			MemberDto dto = memberBiz.selectOne(memberlist.get(i).getMem_no());

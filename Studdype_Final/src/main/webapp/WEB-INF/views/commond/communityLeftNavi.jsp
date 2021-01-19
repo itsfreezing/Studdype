@@ -57,7 +57,7 @@
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_meet.png"><input type="button" value="모임관리" onclick="location.href='meetlist.do'" class="navBtn" id="meet"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_webcam.png"><input type="button" value="화상회의" onclick="openWebMeeting();" class="navBtn"></li>
            <c:if test="${study.leader_no == login.mem_no }">
-            <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="location.href='updateStudy.do'" class="navBtn" id="updateStudy"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="location.href='updateStudy.do?s_no=${study.s_no}'" class="navBtn" id="updateStudy"></li>
          	</c:if>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_searchBook.png"><input type="button" value="도서검색" onclick="location.href='bookboardform.do'" class="navBtn" id="book"></li>
 

@@ -62,8 +62,11 @@ function logout_btn(){
 								</li>
 								</c:when>
 								<c:otherwise>
-								<li class="nav-item">
+						<!-- 		<li class="nav-item">
 									<a class="nav-lick" href="#">${login.mem_id }님 </a>
+								</li>
+						-->		<li class="nav_item">
+									<a class="nav-link" href="myPage.do" >마이 페이지</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="logout.do" type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>

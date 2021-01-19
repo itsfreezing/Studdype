@@ -13,11 +13,7 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '대입/수능');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '어학/회화');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '취업스터디');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
-SELECT * FROM STUDY_CATEGORY;
-select * from STUDY_APPLYING where s_no =1;
-SELECT * FROM LOCATION_SI;
-SELECT * FROM LOCATION_GU;
-select * from member;
+
 
 --멤버 테이블
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader1', 'leader1', '테스트팀장', '960308-1010101', 'M', '010-8801-9068', 'bin3005@naver.com');
@@ -26,19 +22,10 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin','1234','관리자','950111-
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'user', 'user', 'user', '960308-1310101', 'M', '010-8221-9068', 'bin2205@nxver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr2', 'user2', 'uesr2', '950201-1230134', 'M', '010-5501-9068', 'binzz205@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-1110101', 'M', '030-8201-9068', 'bin3205@naver.com');
-select * from member;
-select * from STUDY_MEMBER;
-select * from STUDY_APPLYING;
 
-select * from study;
-insert into study_member values(1,2);
-insert into study_applying values(39,1,'D','13f51');
-insert into member values(memberseq.nextval, 'user7','user7','user7','960103-1111112','M','010-2315-2564','fhavja@nfbs.com');
-insert into study_applying values(1,7,'D','4266');
+
 --자유 게시판
-select * from study;
-SELECT * FROM STUDY WHERE S_NO =1;
-select * from FREE_BOARD;
+
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '2번째 글입니다.', 1,  '2번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '3번째 글입니다.', 1,  '3번째 글 내용 입니다', SYSDATE, 0);
@@ -61,7 +48,6 @@ INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '19번째 글입니다.',
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '20번째 글입니다.', 1,  '20번째 글 내용 입니다', SYSDATE, 0);
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '24번째 글입니다.', 2,  '24번째 글 내용 입니다', SYSDATE, 0);
 
-SELECT * FROM FREE_BOARD;
 --스터디 생성
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름1', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
@@ -100,18 +86,12 @@ INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름32', '스터디 �
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름33', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '스터디 이름34', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, '찐막ㅋ', '스터디 한줄 소개2', '스터디 자세한 소개1', NULL, 1, 1, 1, 10, 5);
-select * from STUDY;
-insert into STUDY_APPLYING values(40,1,'D','ff');
-insert into STUDY_APPLYING values(2,2,'D','ffff');
-UPDATE STUDY_APPLYING SET AGREE = 'D' WHERE S_NO =2  AND MEM_NO =2;
-select * from study_applying;
-select * from study_member;
-select * from MEMBER;
+
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 1, 'JAVA를 잡아', '프로그래밍언어 JAVA를 배우는 스터디 모임', '프로그래밍언어 JAVA를 배우는 스터디 모임 \n 주로 대학생으로 이루어져있음!! ','사진',1,1,1,6,1 );
 
 INSERT INTO STUDY VALUES(STUDYSEQ.NEXTVAL, 2, '취직하자', '취직이 하고싶은  스터디 모임', '취직연습','사진',1,1,1,6,1 );
 
-SELECT * FROM STUDY;
+
 
 -- 모임 게시판
 INSERT INTO MEET_BOARD VALUES(
@@ -162,7 +142,7 @@ TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2
 INSERT INTO MEET_BOARD VALUES(
 MEETBOARDSEQ.NEXTVAL, 1, '모임16', 1, '모임16의 상세내용 입니다.', '서울특별시 강남구 선릉로157길 33', '1층',
 TO_DATE('2021.01.01','YYYY.MM.DD'),TO_DATE('14:00','HH24:MI'),SYSDATE,TO_DATE('2021.12.20','YYYY.MM.DD'),TO_DATE('2021.12.31','YYYY.MM.DD'), 0);
-SELECT * FROM MEET_BOARD;
+
 
 -- 모임 댓글
 INSERT INTO MEET_REPLY VALUES(
@@ -229,13 +209,9 @@ INSERT INTO FREE_REPLY VALUES (FREEREPLYSEQ.NEXTVAL, 132, FREEGROUPSEQ.NEXTVAL, 
 -- 도서 게시판 insert
 INSERT INTO BOOK_BOARD VALUES(BOOKBOARDSEQ.NEXTVAL, 5, '도서 추천', 1, '추천드립니다.', SYSDATE);
 
--- 학습 도서
-INSERT INTO BOOK VALUES(1, 1, '자바', '자바', '이클립스', 'NOIMAGE', 'NODATA', 'N');
-INSERT INTO BOOK VALUES(2, 1, '스프링', '라면', '이클립스', 'NOIMAGE', 'NODATA', 'N');
-INSERT INTO BOOK VALUES(3, 1, '자바스크립트', '짜장면', '이클립스', 'NOIMAGE', 'NODATA', 'N');
-INSERT INTO BOOK VALUES(4, 1, '넥사크로', '짬뽕', '이클립스', 'NOIMAGE', 'NODATA', 'N');
-INSERT INTO BOOK VALUES(5, 1, '마이쿼리', '탕수육', '이클립스', 'NOIMAGE', 'NODATA', 'N');
-update BOOK set BOOK_ISMAIN = 'Y' where B_NO=2;
+INSERT INTO BOOK VALUES(BOOKSEQ.NEXTVAL, 1, 'jstl언어 추천해드립니다.', 4, 'java추천해드려요~', SYSDATE,
+'탕수육', '탕수육', '탕수육', 'nodata', 'nodata', 'N');
+select * from BOOK;
 --자유게시판 댓글 답글 insert
 INSERT INTO FREE_REPLY 
 VALUES(
