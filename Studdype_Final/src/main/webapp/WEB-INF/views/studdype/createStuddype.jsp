@@ -209,8 +209,8 @@ label {
 		///////////////////////////////////////////////////////////////
 		
 		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		var menuName = $(".active").text().trim();
-		$(".hero-text h1").text(menuName);
+		/* var menuName = $(".active").text().trim();
+		$(".hero-text h1").text(menuName); */
 		
 	});
 	

@@ -6,7 +6,7 @@ public class StudyDto {
 	private String s_name; 		// ���͵� �̸�
 	private String s_info; 		// ���͵� ���� �Ұ�
 	private String s_content; 	// ���͵� �ڼ��� �Ұ�
-	private String photo; 		// ���͵� ��ǥ���� �����̸�
+	private String photo;		// 스터디 대표사진 경로
 	private int cate_no; 		// ���͵� ī�װ�
 	private int si_no; 			// ���͵� ����(��)
 	private int gu_no; 			// ���͵� ����(��)
@@ -128,7 +128,5 @@ public class StudyDto {
 				+ ", s_content=" + s_content + ", photo=" + photo + ", cate_no=" + cate_no + ", si_no=" + si_no
 				+ ", gu_no=" + gu_no + ", s_maxcnt=" + s_maxcnt + ", s_currentcnt=" + s_currentcnt + "]";
 	}
-	
-	
-	
+
 }

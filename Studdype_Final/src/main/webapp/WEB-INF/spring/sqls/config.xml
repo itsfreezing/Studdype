@@ -34,9 +34,7 @@
 		<mapper resource="./mybatis/reply/meetReply-mapper.xml"/>
 		<mapper resource="./mybatis/Board/book-mapper.xml"/>
 		<mapper resource="./mybatis/Study/studyMember-mapper.xml"/>
-
 		<mapper resource="./mybatis/Study/studyApplying-mapper.xml"/>
-
 		<mapper resource="./mybatis/File/freeFile-mapper.xml"/>
 
   	</mappers>  

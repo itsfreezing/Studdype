@@ -5,9 +5,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.studdype.test.common.Pagination;
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.dataFile.DataFileDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
@@ -42,6 +43,8 @@ public class StudyBizImpl implements StudyBiz{
 	@Autowired
 	private MemberDao memberDao;
 	
+	private FileHandler fileHandler = new FileHandler();
+	
 	//메인페이지 스터디 list
 	@Override
 	public List<StudyDto> studyList(SearchPagination searchPagination) {
@@ -72,17 +75,22 @@ public class StudyBizImpl implements StudyBiz{
 
 	}
 	
-	// 스터디 insert (파일 등록 시)
-	@Override
-	public int insertStudy(StudyDto studyDto, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	// 스터디 insert (파일 미등록 시)
 	@Override
-	public int insertStudy(StudyDto dto) {
-		return study_Dao.insertStudy(dto);
+	@Transactional
+	public int insertStudy(StudyDto dto, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
+		int res = 0; // 스터디생성 후 파일 저장 결과 
+		int insertRes = 0; // 스터디 생성 결과 
+		
+		insertRes = study_Dao.insertStudy(dto);
+		
+		// 두 실행 성공 시 실제 파일 저장
+		if(insertRes == 1 && dto.getPhoto().equals("noImage")) {
+			res = 1;
+			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+		}
+		
+		return res;
 	}
 
 	// 등록된 스터디 마지막 번호

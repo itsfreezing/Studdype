@@ -56,7 +56,7 @@ public class StudyController {
 	@Autowired
 	private StudyMemberBiz StudyMemberBiz;
 	
-	private FileHandler fileHandler = new FileHandler();
+	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
 	@RequestMapping(value = "/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
@@ -117,23 +117,28 @@ public class StudyController {
 		//파일 업로드
 		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
 		
+		// 파일요소들 뽑아서 fileList에 저장
+		List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
+		
+		String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
+		
 		//파일이있으면
 		if(mfileList != null) {
-			//	파일요소들 뽑아서 fileList에 저장
-			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성		
-			String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
 			studyDto.setPhoto(fileList.get(0).getF_url());
-			//글 작성
-			res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
-		}else { //파일이 없으면
-			res = studyBiz.insertStudy(studyDto);
-			studyDto.setPhoto("");
+		}else {
+			studyDto.setPhoto("noImage");
 		}
+		
+		System.out.println(studyDto);
+		
+		res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
 
+		// 성공 시 -> 스터디 커뮤니티 홈
+		// 실패 시 -> 스터디 생성 폼
 		if (res > 0) {
-			return "redirect:freeboard.do";
+			return "redirect:studyList.do";
 		} else {
-			return "redirect:freewriteform.do";
+			return "redirect:createStuddypeform.do";
 		}
 	}
 
