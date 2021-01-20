@@ -91,11 +91,11 @@ public class StudyController {
 
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
-	public String createStuddypeForm(Model model) {
+	public String createStuddypeForm(Model model,HttpSession session) {
 		List<LocationSiDto> sidtos = studyBiz.locationSiList();
 		List<LocationGuDto> gudtos = studyBiz.locationGuList();
 		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
 
 		model.addAttribute("login", login);
 		model.addAttribute("sidtos", sidtos);
@@ -144,25 +144,26 @@ public class StudyController {
 
 	// 스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
-	public String updateStudy(HttpSession session, Model model) {
-		MemberDto login = memberBiz.selectOne(1);
+	public String updateStudy(HttpSession session, Model model,HttpServletRequest request) {
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto dto = memberBiz.selectOne(login.getMem_no());
 		List<StudyCategoryDto> category = studyBiz.categoryList();
 		List<LocationGuDto> gudto = studyBiz.locationGuList();
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
-		List<BookDto> bookList = bookBiz.bookList(1);
-		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
-		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(1);
+		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
+		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());
+		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
-			MemberDto dto = memberBiz.selectOne(memberlist.get(i).getMem_no());
-			membername.add(dto);
+			MemberDto dto2 = memberBiz.selectOne(memberlist.get(i).getMem_no());
+			membername.add(dto2);
 		}
 
 		System.out.println(membername);
 
 		model.addAttribute("membername", membername);
 		model.addAttribute("memberlist", memberlist);
-		session.setAttribute("login", login);
+		session.setAttribute("login", dto);
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("gudto", gudto);
 		model.addAttribute("sidto", sidto);
@@ -172,5 +173,40 @@ public class StudyController {
 
 		return "studdype/updateStudy";
 	}
+	// 스터디 관리 페이지 update버튼 클릭시
+	@RequestMapping(value="/studyupdate.do",method = RequestMethod.GET)
+	public String studyupdate(HttpServletRequest request,Model model) {
+		System.out.println("들어오긴함");
+		System.out.println(request.getParameter("mem_no"));
+		int dto = bookBiz.bookmain(Integer.parseInt(request.getParameter("b_no")));
+		System.out.println("s_no : "+request.getParameter("s_no"));
+		StudyDto dto3 = new StudyDto(Integer.parseInt(request.getParameter("mem_no")),Integer.parseInt(request.getParameter("s_no")) );
+		int dto2 = studyBiz.newLeader(dto3);
+		
+		System.out.println("dto3 :"+dto3);
+		if(dto>0) {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표수정 실패 !");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+			}
+			}else {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정 성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표 수정 실패!");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+				
+			}
+	
+	}
 
+	}
 }

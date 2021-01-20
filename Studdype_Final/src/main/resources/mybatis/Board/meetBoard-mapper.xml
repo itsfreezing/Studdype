@@ -113,15 +113,53 @@
 		
 		<!-- meet DB 켈린더로 꺼내오기 -->
 		<select id="selectMeetIntoCalendar" resultType="meetDto" parameterType="int">
-			SELECT MEET_TITLE, MEET_DATE, VOTE_STARTDATE, VOTE_ENDDATE
+			SELECT *
 			FROM MEET_BOARD
-			WHERE S_NO = ${s_no}
+			WHERE S_NO = #{s_no}
 		</select>
 
 		<!-- 모임게시판 모임 [삭제] -->
 		<delete id="deleteMeetBoard" parameterType="int">
 			DELETE FROM MEET_BOARD WHERE MEET_NO = #{meet_no}
 		</delete>
+		
+		<!-- 투표 '총' [투표 수] -->
+		<select id="selectVoteTotalResult" parameterType="int" resultType="_int">
+			SELECT COUNT(VOTE_ATTEND)
+			FROM MEET_VOTE 
+			WHERE MEET_NO = #{meet_no}
+		</select>
+		
+		<!-- 투표 '참가' [투표 수] -->
+		<select id="selectVoteResult_Y" parameterType="int" resultType="_int">
+			SELECT COUNT(VOTE_ATTEND)
+			FROM MEET_VOTE 
+			WHERE MEET_NO = #{meet_no}
+			AND VOTE_ATTEND = 'Y'
+		</select>
+		
+		<!-- 투표 '불참가' [투표 수] -->
+		<select id="selectVoteResult_N" parameterType="int" resultType="_int">
+			SELECT COUNT(VOTE_ATTEND)
+			FROM MEET_VOTE 
+			WHERE MEET_NO = #{meet_no}
+			AND VOTE_ATTEND = 'N'
+		</select>
+		
+		<!-- [투표하기] -->
+		<insert id="takeVote" parameterType="voteDto">
+			INSERT INTO MEET_VOTE
+			VALUES( #{meet_no}, #{mem_no}, #{vote_attend} )
+		</insert>
+		
+		<!-- 투표 [중복체크] -->
+		<select id="selectVoteMemberCnt" parameterType="voteDto" resultType="_int">
+			SELECT COUNT(MEM_NO)
+			FROM MEET_VOTE
+			WHERE MEET_NO = #{meet_no}
+			AND MEM_NO = #{mem_no}
+    </select>
+    
 		<select id="selectMeetList" parameterType="int" resultType="meetDto">
 			SELECT * FROM
 			MEET_BOARD

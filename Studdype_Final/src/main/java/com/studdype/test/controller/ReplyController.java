@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +17,7 @@ import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.reply.FreeReplyBiz;
 import com.studdype.test.model.biz.reply.MeetReplyBiz;
+import com.studdype.test.model.biz.reply.NoticeReplyBiz;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -30,15 +28,14 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 
 	@Autowired
 	private FreeReplyBiz freeReplyBiz;
-	
 	@Autowired
 	private MeetReplyBiz meetReplyBiz;
-	
 	@Autowired
 	private MemberBiz memberBiz;
-	
 	@Autowired
 	private MeetBiz meetBiz;
+	@Autowired
+	private NoticeReplyBiz noticeReplyBiz;
 		
 	//자유게시판 리플리스트 반환 메소드
 	@RequestMapping(value="/freeReplyList.do", method=RequestMethod.POST)
@@ -99,6 +96,66 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		
 		return res;
 	}
+	// --------------------------------------------------------------------------------------------------------------------------------------//
+	//공지게시판 리플리스트 반환 메소드
+		@RequestMapping(value="/noticeReplyList.do", method=RequestMethod.POST)
+		public @ResponseBody Map noticeReplyList(@RequestBody ReplyDto dto) {
+			logger.info("[NoticeReplyList]");
+			Map replyMap = new HashMap(); // 리플리스트dto 및 작성자이름 담을 MAP (반환 할거임)
+			List<ReplyDto> replyList = null;  // 댓글 LIST
+			Map<Integer,MemberDto> replyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자dto 담을 맵
+			
+			replyList = noticeReplyBiz.selectReplyList(dto.getB_no());
+			replyMember = noticeReplyBiz.getMemberByList(replyList);
+			
+		
+			replyMap.put("replyList", replyList);
+			replyMap.put("replyMember", replyMember);
+			
+
+			
+			return replyMap;
+		}
+			
+		//공지게시판 댓글 삭제 메소드
+		@RequestMapping(value="/noticeReplyDelete.do", method=RequestMethod.POST)
+		public @ResponseBody int noticeReplyDelete(@RequestBody ReplyDto dto) {
+			logger.info("[NoticeReplyDelete]");
+			
+			int res = noticeReplyBiz.deleteReply(dto.getR_no());
+			
+			return res;
+		}
+			
+		//공지게시판 댓글 쓰기 메소드
+		@RequestMapping(value="/noticeReplyWrite.do", method=RequestMethod.POST)
+		public @ResponseBody int noticeReplyWrite(@RequestBody ReplyDto dto) {
+			logger.info("[NoticeReplyWrite]");
+			
+			int res = noticeReplyBiz.writeReply(dto);
+			
+			return res;
+		}
+		
+		//공지게시판 댓글 수정 메소드
+		@RequestMapping(value="/noticeReplyUpdate.do", method=RequestMethod.POST)
+		public @ResponseBody int noticeReplyUpdate(@RequestBody ReplyDto dto) {
+			logger.info("[NoticeReplyUpdate]");
+			
+			int res = noticeReplyBiz.updateReply(dto);
+			
+			return res;
+		}
+			
+		//공지게시판 댓글 답글 작성 메소드
+		@RequestMapping(value="/noticeRecommentWrite.do", method=RequestMethod.POST)
+		public @ResponseBody int noticeRecommentWrite(@RequestBody ReplyDto dto) {
+			logger.info("[NoticeRecommentWrite]");
+			
+			int res = noticeReplyBiz.writeRecomment(dto);
+			
+			return res;
+		}
 	
 	// --------------------------------------------------------------------------------------------------------------------------------------//
 	
@@ -176,10 +233,11 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		int res = meetReplyBiz.writeMeetRecomment(dto);
 		
 		System.out.println("-----------------------------------------------------------------------\n"
-						  +"<<모임 댓글>> ["+dto.getR_no()+"]dddddd\n"
+						  +"<<모임 댓글>> ["+dto.getR_no()+"]번째 모임댓글이 추가 되었습니다.\n"
 						  +"-----------------------------------------------------------------------"); 
 		
 		return res;
 	}
+	
 	
 }

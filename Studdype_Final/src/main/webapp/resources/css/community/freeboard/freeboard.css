@@ -624,3 +624,26 @@
 .highlight{
 	color:#6434ef;
 }
+.notice_title{
+	color: #ff4e59;
+	font-weight: bold;
+}
+.notice_title a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid #ff4e59;
+		padding-bottom: 3px;
+	}
+.notice_tr{
+	background-color: rgb(245,245,245);
+}	
+.notice_tag{
+	padding: 3px 5px;
+	width: 200px;
+	border: 0.5px solid #ffc6c9;
+	background-color: #ffe3e4;
+	color: #ff4e59;
+	height: 35px;
+	display: inline;
+	border-radius: 2px 2px;
+	margin-right: 20px;
+}

@@ -30,7 +30,7 @@ public interface StudyBiz {
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); //카테고리 가져오기 
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
-	public int selectTotalStudyNum(int mem_no); // 마이페이지 스터디 총 계수 
+	public int newLeader(StudyDto dto); 
 
 
 	
