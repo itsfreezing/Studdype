@@ -4,9 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.model.biz.member.MemberBiz;
-import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Controller
@@ -49,14 +48,16 @@ public class MemberController {
 		return "loginpage/signup";
 	}
 	
-	@RequestMapping("/signup.do")
-	public String memberInsert(MemberDto dto) {
+	@RequestMapping(value="/signup.do",method=RequestMethod.POST)
+	public String memberInsert(HttpServletRequest request,MemberDto dto) {
 		logger.info("signup page");
 		int res=0;
-	System.out.println(dto);
 		System.out.println(dto.getMem_id());
 		System.out.println(dto.getMem_pw());
-
+		String memberrrn=request.getParameter("mem_rno")+"-"+request.getParameter("memrno");
+		System.out.println(memberrrn);
+		String mem_phone=request.getParameter("mem_phone")+"-";
+		System.out.println(dto);
 		res=memberBiz.memberInsert(dto);
 		if(res>0) {
 			System.out.println("성공");
