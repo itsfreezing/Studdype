@@ -106,20 +106,17 @@ public class StudyDaoImpl implements StudyDao {
 	}
 
 	@Override
-	public int selectTotalStudyNum(int mem_no) {
-		int totalNum = 0;
-		
+	public int newLeader(StudyDto dto) {
+		int res = 0;
 		try {
-			totalNum = sqlSession.selectOne(NAMESPACE+"selectTotalStudyNum",mem_no);
+			res = sqlSession.update(NAMESPACE+"newLeader",dto);
 		} catch (Exception e) {
-			System.out.println("ERROR:selectTotalStudyNum");
+			System.out.println("ERROR: newLeader!!!!!!!!!!!!!!");
 			e.printStackTrace();
 		}
-		return totalNum;
+		return res;
 	}
 
-
-	
 
 	
 

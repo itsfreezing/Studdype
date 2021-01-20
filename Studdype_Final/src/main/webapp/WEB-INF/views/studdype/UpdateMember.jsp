@@ -158,6 +158,7 @@
 			var l = '${login.mem_no}';
 			
 			location.href="memberupdate.do?mem_id="+i+"&mem_pw="+p+"&mem_email="+e+"&mem_phone="+h+"&mem_no="+l;
+			
 			}
 		}
 		

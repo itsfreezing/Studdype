@@ -1,6 +1,5 @@
 package com.studdype.test.controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,18 +24,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
+import com.studdype.test.common.PageChecker;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.board.FreeBiz;
 import com.studdype.test.model.biz.board.MeetBiz;
+import com.studdype.test.model.biz.board.NoticeBiz;
 import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
@@ -51,36 +50,35 @@ import com.studdype.test.model.dto.study.StudyDto;
 public class BoardController {
 	@Autowired
 	private FreeBiz freeBiz;
-
 	@Autowired
 	private MemberBiz memberBiz;
-
 	@Autowired
-	private BookBiz bookBiz;
-	
+	private BookBiz bookBiz;	
 	@Autowired
 	private MeetBiz meetBiz;
-
 	@Autowired
 	private FreeFileBiz freeFileBiz;
-	
 	@Autowired
-	ServletContext context;
+	private NoticeBiz noticeBiz;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
 	private FileHandler fileHandler = new FileHandler();
-
+	private PageChecker pageChecker = new PageChecker(); 
 	// 자유게시판 리스트 이동
 	@RequestMapping("/freeboard.do")
 	public String freeBoard(HttpSession session, String pagenum, Model model) {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		List<BoardDto> list = null; // 15개 페이징 담을 리스트
+		List<BoardDto> noticeList = null;// 공지사항 담을 리스트
 		Map<String, Integer> pageMap = new HashMap<String, Integer>(); // 시작페이지, 끝페이지 정보 담을 MAP
 		Map<Integer, MemberDto> memberMap = null; // 게시글 멤버정보 담을 MAP
+		Map<Integer, MemberDto> noticeMemberMap = null; // 게시글 멤버정보 담을 MAP
 		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
+		Map<Integer, Integer> noticeReplyCntMap = null;// 공지사항 댓글 갯수 담을 MAP
 
 		int totalBoardNum = freeBiz.selectTotalBoardNum(study.getS_no()); // 총 자유게시판 글 갯수
 
@@ -94,7 +92,21 @@ public class BoardController {
 		memberMap = freeBiz.getMemberMap(list);
 		//댓글 갯수 가져오기 
 		replyCntMap = freeBiz.getReplyCnt(list);
-
+		
+		//공지사항 게시글 가져오기
+		if(pagenum == null || Integer.parseInt(pagenum) == 1) {
+			noticeList = noticeBiz.selectNoticeBoard(study.getS_no());
+			noticeReplyCntMap = noticeBiz.getReplyCnt(noticeList); //공지사항 댓글 갯수 가져오기
+			noticeMemberMap = noticeBiz.getMemberMap(noticeList); //공지사항 게시글 작성자 가져오기
+			
+		}
+				
+		
+		if(pagenum == null || Integer.parseInt(pagenum) == 1) {
+			model.addAttribute("noticeList", noticeList);
+			model.addAttribute("noticeReplyCntMap", noticeReplyCntMap);
+			model.addAttribute("noticeMemberMap", noticeMemberMap);
+		}
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage", pageMap.get("endPage"));
 		model.addAttribute("currentPage", pageMap.get("currentPage"));
@@ -283,8 +295,7 @@ public class BoardController {
 		Map<Integer, Integer> replyCntMap = null;// 댓글 갯수 담을 MAP
 
 		// 조회수 함수 isVisitPage = 1 -> 방문한 적있음 0 -> 없음
-		int isVisitPage = chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
-
+		int isVisitPage = pageChecker.chkVisited(request, response, "freeboardvisit", request.getParameter("b_no"));
 		BoardDto board = freeBiz.selectDetail(b_no, isVisitPage); // 게시글 가져오기 / 조회수 증가
 		MemberDto member = memberBiz.selectOne(board.getB_writer()); // 작성자 이름 가져오기
 
@@ -317,6 +328,15 @@ public class BoardController {
 		model.addAttribute("member", member);
 		return "community/freeboard/freeDetail";
 	}
+	
+	@RequestMapping(value="/calendarView.do", method=RequestMethod.GET)
+	public String calendarView(HttpSession session, Model model ) {
+		
+		
+		
+		return "community/schedule/test";
+	}
+	
 	
 	//자유게시판 파일 다운로드
 	@RequestMapping(value="/freeFileDown.do", method = RequestMethod.GET)
@@ -387,30 +407,19 @@ public class BoardController {
 	
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody Map calendar(@RequestBody MeetDto dto) {
+	@ResponseBody
+	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session, MeetDto dto) {
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
 		logger.info("calendar");
-		Map calendarMap = new HashMap();
-		List<MeetDto> meetList = null;
+
+		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
+		Map<String, Object> calendarMap = new HashMap<String, Object>();
 		
-		meetList = meetBiz.selectMeetDBForCalendar(dto.getS_no());
 		
 		calendarMap.put("meetList", meetList);
 		
-		
-		
 		return calendarMap;
 	}
-	/*
-	 * public String calendar(Model model, HttpSession session, HttpServletResponse
-	 * response) { StudyDto study = (StudyDto)session.getAttribute("study"); // 현재
-	 * 클릭 된 스터디 Map<String, MeetDto> calendarMap = new HashMap<String, MeetDto>();
-	 * calendarMap.put("evt1", new
-	 * MeetDto(1,1,"test","2021-01-22","2021-01-11","2021-01-20"));
-	 * System.out.println(calendarMap); model.addAttribute("meetList",calendarMap);
-	 * 
-	 * return "community/schedule/calendar"; }
-	 */
-
 		
 	// 페이징 함수
 	public void paging(Map pagingMap, String pageNum, int totalBoardNum) {
@@ -440,34 +449,6 @@ public class BoardController {
 
 	}
 
-	// 한게시글에 하루에 1번만 조회수 함수
-	private int chkVisited(HttpServletRequest request, HttpServletResponse response, String cookieName, String b_no) {
-		int isVisit = 0; // 온 게시판?
-		int isVisitPage = 0; // 온 게시글?
-		Cookie[] cookies = request.getCookies(); // 모든 쿠키
 
-		for (Cookie cookie : cookies) { // 모든 쿠키 조회
-
-			if (cookie.getName().equals(cookieName)) { // 자유게시판에 온적이 있으면
-				isVisit = 1;
-
-				// freeboardvisit 쿠키에 글번호가 있으면
-				if (cookie.getValue().contains(b_no)) {
-					isVisitPage = 1; // 온적있음 -> 1
-				} else { // 없으면
-					cookie.setValue(cookie.getValue() + "_" + b_no); // 쿠키값 + '_게시글번호' 업데이트해줌
-					response.addCookie(cookie); // 쿠키 추가
-				}
-			}
-		}
-
-		if (isVisit == 0) { // 자유게시판 첫 접근이면 쿠키 생성
-			Cookie cookie = new Cookie(cookieName, b_no);
-			cookie.setMaxAge(60 * 60 * 24); // 쿠키 하루생존
-			response.addCookie(cookie); // 쿠키 추가
-		}
-
-		return isVisitPage;
-	}
 
 }

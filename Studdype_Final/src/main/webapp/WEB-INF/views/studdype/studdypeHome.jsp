@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">

@@ -14,6 +14,7 @@ import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
+
 public interface MemberDao { 
 	String NAMESPACE="member.";
 	

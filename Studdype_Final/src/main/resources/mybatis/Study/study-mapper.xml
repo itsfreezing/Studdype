@@ -32,8 +32,9 @@
 			<if test="keyword != null">AND S_NAME LIKE '%' || #{keyword} || '%'</if>
 	</sql>
 
-	
-	<!-- 총 게시글 수 -->
+
+<!-- 총 게시글 수 -->
+
 	<select id="selectTotalStudyListNum" resultType="int">
 	      SELECT count(S_NO)
 	      FROM STUDY
@@ -69,9 +70,13 @@
 		SELECT S_NO
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
+	
 	<select id="studyLeader" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
 	</select>
 	
+	<update id="newLeader" parameterType="int" >
+		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
+	</update>
 
 </mapper>

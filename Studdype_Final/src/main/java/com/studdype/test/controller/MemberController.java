@@ -91,18 +91,23 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping("/login.do")
-	public String login(HttpSession session, MemberDto dto) {
+	public String login(HttpSession session, MemberDto dto,Model model) {
 		logger.info("login");
 
 		MemberDto loginDto = memberBiz.login(dto);
+		
+		System.out.println(loginDto);
+		
 		if(loginDto != null) {
 			session.setAttribute("login", loginDto);
-			session.setMaxInactiveInterval(1);
+			session.setMaxInactiveInterval(-1);
 			return "redirect:/studyList.do";
-			}else {
-				return "loginpage/login";
-			}
-}		
+		}else {
+			model.addAttribute("msg","로그인 실패!");
+			model.addAttribute("url","loginform.do");
+			return "commond/alert";
+		}
+	}		
 	
 	//로그아웃
 	@RequestMapping("/logout.do")
@@ -110,7 +115,7 @@ public class MemberController {
 		logger.info("logout");
 		
 		session.invalidate();
-		return "redirect:/studdypehome.do";		
+		return "redirect:/studyList.do";		
 	}
 }
 	
