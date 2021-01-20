@@ -247,6 +247,36 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
+	
+	// 모임게시판_투표 [참석자]
+	@Override
+	public List<VoteDto> selectAttendMember(int meet_no) {
+		List<VoteDto> attendList = null;
+		
+		try {
+			attendList = sqlSession.selectList(NAMESPACE+"selectAttendMember", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectAttendMember ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return attendList;
+	}
+	
+	// 모임게시판_투표 [불참석자]
+	@Override
+	public List<VoteDto> selectAbsentMember(int meet_no) {
+		List<VoteDto> absentList = null;
+		
+		try {
+			absentList = sqlSession.selectList(NAMESPACE+"selectAbsentMember", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectAbsentMember ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return absentList;
+	}
 
 
 }

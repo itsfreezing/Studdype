@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -28,6 +29,10 @@ public interface MemberDao {
 	// 게시판 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list);  // [모임게시판]
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); // [자유게시판]
+	
+	// 투표한 사람 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
+	Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list);  // [모임게시판_투표_참석]
+	Map<Integer, MemberDto> selectAbsentMemberList(List<VoteDto> list);  // [모임게시판_투표_불참석]
 	
 	// 게시판 댓글 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); // [자유게시판 댓글]
