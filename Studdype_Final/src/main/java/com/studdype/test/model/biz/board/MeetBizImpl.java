@@ -126,5 +126,27 @@ public class MeetBizImpl implements MeetBiz {
 		return meetBoardDao.selectVoteMemberCnt(dto);
 	}
 
+	@Override
+	public Map<Integer, MemberDto> getAttendMemberMap(List<VoteDto> list) {
+		System.out.println("biz: "+list.get(0).getMem_no());
+		return memberDao.selectAttendMemberList(list);
+	}
+
+	@Override
+	public Map<Integer, MemberDto> getAbsentMemberMap(List<VoteDto> list) {
+		return memberDao.selectAbsentMemberList(list);
+	}
+
+	@Override
+	public List<VoteDto> selectAttendMember(int meet_no) {
+		return meetBoardDao.selectAttendMember(meet_no);
+	}
+
+	@Override
+	public List<VoteDto> selectAbsentMember(int meet_no) {
+		return meetBoardDao.selectAbsentMember(meet_no);
+	}
+
+
 
 }
