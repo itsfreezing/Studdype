@@ -507,6 +507,11 @@ div#vote{
 	margin-top: 3%;
 }
 
+.voteResultForWriter{
+	width: 80%;
+	margin-left: 8%;
+}
+
 /* 참가여부 */
 #voteDiv{
 	text-align: center;
@@ -559,12 +564,19 @@ div.percentage{
 	margin: 0;
 }
 
-#member_count{
-	width: 100%;
-	padding: 3% 5%;
+#member_count_forWriter{
+	width: 80%;
+	padding: 3% 3.5% 3% 5%;
 	text-align: right;
+	margin-left: 8%;
 }
 
+#member_count{
+	width: 100%;
+	padding: 3% 3.5% 3% 5%;
+	text-align: right;
+}
+#member_count_forWriter img,
 #member_count img{
 	width: 24px;
 	height: 24px; 

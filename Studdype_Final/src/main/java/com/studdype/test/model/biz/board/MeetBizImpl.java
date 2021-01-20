@@ -9,10 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.studdype.test.model.dao.board.meet.MeetBoardDao;
-import com.studdype.test.model.dao.board.meet.MeetReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.MeetDto;
-import com.studdype.test.model.dto.study.StudyDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Validated
@@ -23,8 +22,6 @@ public class MeetBizImpl implements MeetBiz {
 	private MeetBoardDao meetBoardDao;
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private MeetReplyDao meetReplyDao;
 
 	// 모임게시판 모임 [총 개수]
 	@Override
@@ -97,6 +94,36 @@ public class MeetBizImpl implements MeetBiz {
 	@Override
 	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
 		return meetBoardDao.selectMeetDBForCalendar(s_no);
+	}
+	
+	// 모임게시판_투표 '총' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Total(int meet_no) {
+		return meetBoardDao.selectVoteResultCnt_Total(meet_no);
+	}
+	
+	// 모임게시판_투표 '참가' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Y(int meet_no) {
+		return meetBoardDao.selectVoteResultCnt_Y(meet_no);
+	}
+	
+	// 모임게시판_투표 '불참가' [투표 수]
+	@Override
+	public int selectVoteResultCnt_N(int meet_no) {
+		return meetBoardDao.selectVoteResultCnt_N(meet_no);
+	}
+
+	// 모임게시판_투표 [투표하기]
+	@Override
+	public int insertMeetVote(VoteDto dto) {
+		return meetBoardDao.insertMeetVote(dto);
+	}
+	
+	// 모임게시판_투표 [중복체크]
+	@Override
+	public int selectVoteMemberCnt(VoteDto dto) {
+		return meetBoardDao.selectVoteMemberCnt(dto);
 	}
 
 

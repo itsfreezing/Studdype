@@ -16,12 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -90,7 +93,6 @@ public class MeetController {
 
 		searchNumMap.put("s_no", study.getS_no()); // 스터디 번호 put
 		searchNumMap.put("keyword", keyword);	   // 검색 키워드 put
-		System.out.println("searchNumMap: "+searchNumMap);
 		
 		int totalMeetBoardNum = meetBiz.selectSearchMeetBoardNum( searchNumMap ); // 모임 게시판 게시글 총 개수
 		System.out.println("-----------------------------------------------------------------------\n"
@@ -212,6 +214,8 @@ public class MeetController {
 		return "community/meet/meetInsert";
 	}
 	
+	
+	
 	// 모임게시판 모임 [생성]
 	@RequestMapping("/meetinsert.do")
 	public String meetInsert(MeetDto dto,HttpSession session) {
@@ -289,5 +293,44 @@ public class MeetController {
 			model.addAttribute("url", "meetdetail.do?meet_no"+meet_no);
 			return "commond/alert";
 		}
+	}
+	
+	// 모임게시판_투표 [투표결과]
+	@RequestMapping(value="/voteResult.do", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> voteResult(@RequestBody MeetDto dto, VoteDto voteDto, HttpSession session) {
+		logger.info("[VOTE RESULT]");
+		Map<String, Object> voteResultMap = new HashMap<String, Object>();
+		
+		// 투표 중복체크
+		int member = ( (MemberDto)session.getAttribute("login") ).getMem_no(); // 현재 로그인 된 회원번호
+		voteDto.setMem_no(member);
+		voteDto.setMeet_no(dto.getMeet_no());
+		
+		int memberCnt = meetBiz.selectVoteMemberCnt(voteDto); // 투표 했으면: 1, 투표 안 했으면: 0
+		int totalResult = meetBiz.selectVoteResultCnt_Total(dto.getMeet_no());
+		int result_Y = meetBiz.selectVoteResultCnt_Y(dto.getMeet_no());
+		int result_N = meetBiz.selectVoteResultCnt_N(dto.getMeet_no());
+		
+		dto = meetBiz.selectOneMeetBoard(dto.getMeet_no());
+		int meetWriter = dto.getMeet_writer();
+		
+		voteResultMap.put("totalResult", totalResult);
+		voteResultMap.put("result_Y", result_Y);
+		voteResultMap.put("result_N", result_N);
+		voteResultMap.put("meetWriter", meetWriter);
+		voteResultMap.put("memberCnt", memberCnt);
+		
+		return voteResultMap;
+	}
+	
+	
+	// 모임게시판_투표 [투표하기]
+	@RequestMapping(value="/takeVote.do", method = RequestMethod.POST)
+	public @ResponseBody int takeVote(@RequestBody VoteDto dto) {
+		logger.info("[TAKE VOTE]");
+		
+		int res = meetBiz.insertMeetVote(dto);
+		
+		return res;
 	}
 }
