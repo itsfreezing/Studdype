@@ -13,7 +13,7 @@
     /* 변경가능 */
     background: #fff;
     margin-top: -70px;
-    margin-left: -100px;    
+    margin-left: -50px;     
 }
 </style>
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -43,11 +43,11 @@ function getVoteResult() {
 							 	
 				// '참석'에 투표한 사람이 없을 때
 				if( yes == 0 || total == 0 ){
-			 		result = "<div class='graph'><div style='width: 1px; background-color: #01ce90;'><br></div></div>" 
+			 		result = "<div class='graph'><div style='width: 1px; background-color: #baabfb;'><br></div></div>" 
 			 				+"<div class='percentage'>0%</div>";
 				} else {
 					result = "<div class='graph'>"
-								+"<div style='width: " + yes + "%; background-color: #01ce90;'><br></div>"
+								+"<div style='width: " + yes + "%; background-color: #baabfb;'><br></div>"
 							+"</div>" 
 							+"<div class='percentage'>" + yes + "%</div>";
 				}
@@ -59,25 +59,25 @@ function getVoteResult() {
 						 		 
 			 	// '불참석'에 투표한 사람이 없을 때
 				if( no == 0 || total == 0 ){
-					result = "<div class='graph'><div style='width: 1px; background-color: red;'><br></div></div>"
+					result = "<div class='graph'><div style='width: 1px; background-color: #b5b4bd;'><br></div></div>"
 							+"<div class='percentage'>0%</div>";
 				} else {
 					result = "<div class='graph'>"
-								+"<div style='width: " + no + "%; background-color: red;'><br></div>"
+								+"<div style='width: " + no + "%; background-color: #b5b4bd;'><br></div>"
 							+"</div>" 
 							+"<div class='percentage'>" + no + "%</div>";
 				}
 				html += result
 				
 		  	  	   html += "</div>"
-						   	+"<div id='member_count_forWriter'>참여인원: " + total + "명&nbsp;"
+						   	+"<div id='member_count_forWriter' tooltip='막대 그래프를 클릭 해보세요!' tooltip-persistent>참여인원: " + total + "명&nbsp;"
 						  			+"<img src='./resources/assets/img/icon_questionMark.png'>"
 						  	+"</div>";
 						  	
 			  	$("#vote").html(html);
 			  	
 			} else {
-				html += "<div class='btn-group' data-toggle='buttons'>"
+				html += "<div class='btn-group' data-toggle='buttons' tooltip='참석여부를 결정한후 투표하기 버튼을 눌러주세요!' tooltip-persistent>"
 					+"<label class='btn btn-success'>참석"
 					+"<input type='radio' name='y' class='attend' value='Y' autocomplete='off'>"
 					+"<span class='glyphicon glyphicon-ok'></span>"
