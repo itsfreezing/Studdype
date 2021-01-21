@@ -301,22 +301,9 @@ public class HomeController {
 		
 	}
 
-	//커뮤니티 홈으로
-
-	@RequestMapping("/communityhome.do")
-	public String communityHome(HttpSession session,Model model) {
-		
-
-		session.setAttribute("leftnavi", "studyhome");
-	
-		return "community/communityHome";
-	}
-	
-		//커뮤니티 홈으로 테테테테테스트트트ㅡ트ㅡㅡ용
-
-		@RequestMapping("/communityhome1.do")
-		public String communityHome1(HttpSession session,Model model) {
-		
+	//커뮤니티 홈으로 테테테테테스트트트ㅡ트ㅡㅡ용
+	@RequestMapping("/communityhome1.do")
+	public String communityHome1(HttpSession session,Model model) {
 
 		/////////////////////// 테스트용 세션
 		MemberDto login = memberBiz.selectOne(1);
@@ -329,16 +316,29 @@ public class HomeController {
 	
 		return "community/communityHome";
 	}
+	
 	//마이페이지에서 studycommunity 접근시
 	@RequestMapping("studycommunity.do")
-	public String studycommunity(HttpSession session,int s_no) {
+	public String studycommunity(HttpSession session, Model model,int s_no) {
 	
 		StudyDto study = studyBiz.selectOneBySno(s_no);
+		System.out.println("study: "+study.getPhoto());
+		System.out.println("s_name: "+study.getS_name());
 		
 		session.setAttribute("study", study);
-		
 		session.setAttribute("leftnavi", "studyhome");
+		model.addAttribute("study", study);
 		
+		return "community/communityHome";
+	}
+	
+	// 커뮤니티 홈
+	@RequestMapping("/communityhome.do")
+	public String communityHome(HttpSession session,Model model, int s_no) {
+		StudyDto study = studyBiz.selectOneBySno(s_no);
+		System.out.println("study: "+study.getPhoto());
+
+		session.setAttribute("leftnavi", "studyhome");
 		return "community/communityHome";
 	}
 	
