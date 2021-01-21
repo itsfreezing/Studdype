@@ -7,11 +7,13 @@
 		<result property="f_no" column="F_NO"></result>
 		<result property="b_no" column="B_NO"></result>
 		<result property="f_name" column="F_NAME"></result>
+		<result property="f_url" column="F_URL"></result>
 		<result property="photo_ismain" column="Photo_IsMain"></result>
 	</resultMap>
 	
 	<insert id="insertImage" parameterType="fileDto">
-		INSERT INTO 
+		INSERT INTO PHOTO_FILE
+		VALUES ( PHOTOFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM PHOTO_BOARD), #{f_name}, #{f_size}, #{f_url}, DEFAULT )
 	</insert>
 
 

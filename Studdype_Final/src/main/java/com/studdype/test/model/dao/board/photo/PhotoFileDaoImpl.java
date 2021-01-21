@@ -21,12 +21,17 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		
 		try {
 		for(int i=0; i<fileList.size(); i++) {
+			res = sqlSession.insert(NAMESPACE+"insertImage", fileList.get(i));
 			
+			if(res == 1) {
+				resCnt++;
+			}
 		}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
-		return 0;
+		
+		return resCnt;
 	}
 
 }

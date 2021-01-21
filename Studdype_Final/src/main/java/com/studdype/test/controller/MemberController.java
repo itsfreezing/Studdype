@@ -74,7 +74,7 @@ public class MemberController {
 		MemberDto loginDto = memberBiz.login(dto);
 		if(loginDto != null) {
 			session.setAttribute("login", loginDto);
-			session.setMaxInactiveInterval(1);
+			session.setMaxInactiveInterval(-1);
 			return "redirect:/studyList.do";
 			}else {
 				return "loginpage/login";
@@ -87,7 +87,7 @@ public class MemberController {
 		logger.info("logout");
 		
 		session.invalidate();
-		return "redirect:/studdypehome.do";		
+		return "redirect:/studyList.do";		
 	}
 }
 	

@@ -12,10 +12,34 @@
 		<result property="b_regdate" column="B_REGDATE"></result>
 		<result property="b_cnt" column="B_CNT"></result>
 	</resultMap>
-	<select id="photoList" resultType="boardDto" parameterType="int">
-		SELECT *
+	
+	<insert id="insertBoard" parameterType="boardDto">
+		INSERT INTO PHOTO_BOARD
+		VALUES(PHOTOBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="galleryList" resultType="boardDto" parameterType="searchPagination">
+	  SELECT *
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY B_NO) AS RNUM, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+      				FROM PHOTO_BOARD
+      				WHERE S_NO = #{s_no}
+      				<include refid="search"></include>
+      				) PB
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      ORDER BY B_NO DESC
+	</select>
+	
+	<sql id="search">
+			<if test="keyword != null">AND B_TITLE LIKE '%' || #{keyword} || '%'</if>
+	</sql>
+	
+	<select id="totalGalleryListNum" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
 		FROM PHOTO_BOARD
 		WHERE S_NO = #{s_no}
+		<include refid="search"></include>
+		AND B_NO > 0
 	</select>
 	
 </mapper>

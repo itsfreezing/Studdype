@@ -200,7 +200,7 @@ function clickFileBtn(fileName){
 		<tr>
 			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" autocomplete="off"></td>
 		</tr>
-		
+		<tr>
 			<td ><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
 		</tr>
 		<tr>
