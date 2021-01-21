@@ -195,7 +195,6 @@ public class MemberDaoImpl implements MemberDao{
 		int mem_no = 0;
 		for(int i = 0; i < list.size(); i++) {
 			mem_no = list.get(i).getMem_no();
-			System.out.println("ctrl: "+mem_no);
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne",mem_no);
 			} catch (Exception e) {
@@ -221,6 +220,7 @@ public class MemberDaoImpl implements MemberDao{
 				System.out.println("[ERROR] ---------- MEMBER DAO selectAttendMemberList ---------- [ERROR]");
 				e.printStackTrace();
 			}
+			resMap.put(list.get(i).getMem_no(), dto);
 		}
 		return resMap;
 	}

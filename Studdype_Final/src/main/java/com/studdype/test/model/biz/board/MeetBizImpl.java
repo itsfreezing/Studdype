@@ -126,25 +126,28 @@ public class MeetBizImpl implements MeetBiz {
 		return meetBoardDao.selectVoteMemberCnt(dto);
 	}
 
-	@Override
-	public Map<Integer, MemberDto> getAttendMemberMap(List<VoteDto> list) {
-		System.out.println("biz: "+list.get(0).getMem_no());
-		return memberDao.selectAttendMemberList(list);
-	}
-
-	@Override
-	public Map<Integer, MemberDto> getAbsentMemberMap(List<VoteDto> list) {
-		return memberDao.selectAbsentMemberList(list);
-	}
-
+	// 모임게시판_투표 '모임번호'로 [참석] 멤버 리스트
 	@Override
 	public List<VoteDto> selectAttendMember(int meet_no) {
 		return meetBoardDao.selectAttendMember(meet_no);
 	}
-
+	
+	// 모임게시판_투표 '모임번호'로 [불참석] 멤버 리스트
 	@Override
 	public List<VoteDto> selectAbsentMember(int meet_no) {
 		return meetBoardDao.selectAbsentMember(meet_no);
+	}
+	
+	// 모임게시판_투표 [참석자] 리스트로 '작성자 정보' [가져오기]
+	@Override
+	public Map<Integer, MemberDto> getAttendMemberMap(List<VoteDto> list) {
+		return memberDao.selectAttendMemberList(list);
+	}
+
+	// 모임게시판_투표 [불참석자] 리스트로 '작성자 정보' [가져오기]
+	@Override
+	public Map<Integer, MemberDto> getAbsentMemberMap(List<VoteDto> list) {
+		return memberDao.selectAbsentMemberList(list);
 	}
 
 
