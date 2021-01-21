@@ -42,6 +42,15 @@ public class FileDto {
 		this.f_size = f_size;
 		this.f_url = f_url;
 	}
+	
+
+	public FileDto(int f_no, String f_name, double f_size, String f_url) {
+		super();
+		this.f_no = f_no;
+		this.f_name = f_name;
+		this.f_size = f_size;
+		this.f_url = f_url;
+	}
 
 	public double getF_size() {
 		return f_size;
