@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
@@ -138,6 +140,9 @@ public class NoticeBoardController {
 				
 				fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
 			}
+			
+			String prevUrl = request.getHeader("Referer");
+			request.getSession().setAttribute("prevPage", prevUrl);
 
 			model.addAttribute("fileFormatMap", fileFormatMap);
 			model.addAttribute("fileList",fileList);
@@ -161,5 +166,92 @@ public class NoticeBoardController {
 			}
 		}
 		
+		// 공지게시판 글 삭제
+		@RequestMapping(value = "/noticeBoardDelete.do", method = RequestMethod.GET)
+		public String noticeBoardDelete(HttpServletRequest request, Model model) {
+			int b_no = Integer.parseInt(request.getParameter("b_no"));
+
+			int res = noticeBiz.deleteBoard(b_no);
+			
+						
+			
+			if (res > 0) {
+				return "community/communityHome";
+			} else {
+				model.addAttribute("msg", "글 삭제 실패!!");
+				model.addAttribute("url", "noticedetail.do?b_no=" + b_no);
+				return "commond/alert";
+			}
+
+		}
+		// 공지게시판 글 수정 폼으로
+		@RequestMapping(value = "/noticeBoardUpdateForm.do", method = RequestMethod.GET)
+		public String noticeBoardUpdateForm(Model model, HttpServletRequest request) {
+			int b_no = Integer.parseInt(request.getParameter("b_no"));
+
+			BoardDto dto = noticeBiz.selectOne(b_no);
+			
+			//첨부파일 가져오기
+			List<FileDto> fileList = noticeFileBiz.getAttachFileList(b_no);
+					
+			//첨부파일 파일 확장자 구하기
+			Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
+			for(int i = 0 ; i < fileList.size(); i++) {
+				String[] fileNameList = fileList.get(i).getF_name().split("\\.");
+				String fileFormat = fileNameList[fileNameList.length-1];
+						
+				fileFormat = fileFormat.toLowerCase();
+						
+				fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
+			}
+
+			model.addAttribute("fileFormatMap", fileFormatMap);
+			model.addAttribute("fileList",fileList);
+			model.addAttribute("dto", dto);	
+					
+			return "community/notice/noticeupdateform";
+
+		}
+
+		// 공지게시판 글 수정
+		@RequestMapping("/noticeBoardUpdate.do")
+		public String noticeBoardUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
+
+			int res = 0;
+
+			//파일 업로드
+			MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+			//사진이 있으면
+			if(mfileList != null) {
+				String path = fileHandler.getPath(request);
+				List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성 파일요소들 뽑아서 fileList에 저장		
+				
+				//사진이 담겨잇는 게시글 번호 넣어주기
+				for(int i = 0 ; i < fileList.size(); i++) {
+					fileList.get(i).setB_no(dto.getB_no());
+				}
+				res = noticeBiz.updateBoard(dto, mfileList, path, fileList);
+			}else { //사진이 없으면
+				res = noticeBiz.updateBoard(dto);
+			}
+			
+			if (res > 0) {
+				return "redirect:noticedetail.do?b_no=" + dto.getB_no();
+			} else {
+				model.addAttribute("msg", "글 수정 실패!!");
+				model.addAttribute("url", "noticeBoardUpdateForm.do?b_no=" + dto.getB_no());
+				return "commond/alert";
+			}
+		}		
+		
+		//자유게시판 글 수정 파일삭제 AJAX
+		@RequestMapping(value="/noticeFileDelete.do", method=RequestMethod.POST)
+		public @ResponseBody int noticeFileDelete(@RequestBody FileDto dto) {
+				
+			int res = noticeFileBiz.deleteFile(dto.getF_no());
+				
+			return res;
+				
+		}			
 	
 }

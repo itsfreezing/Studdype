@@ -20,5 +20,9 @@ public interface NoticeBiz {
 	int getNoticeNum(int s_no); //공지사항 게시글 수 가져오기
 	BoardDto selectDetail(int b_no, int isVisitPage); //공지사항 게시글 디테일페이지 내용 가져오기
 	List<BoardDto> getRecentList(int s_no, int b_no); //공지사항 주변글 가져오기
+	int deleteBoard(int b_no); //공지게시판 글삭제
+	BoardDto selectOne(int b_no); //공지게시판 글 하나 가져오기
+	int updateBoard(BoardDto dto, MultipartFile[] mfileList, String path, List<FileDto> fileList); // 자유게시판 글 수정 (파일있을떄)
+	int updateBoard(BoardDto dto); // 자유게시판 글 수정 (파일없을떄)
 
 }

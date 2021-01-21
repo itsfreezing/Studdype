@@ -87,7 +87,7 @@ public class MemberController {
 		logger.info("logout");
 		
 		session.invalidate();
-		return "redirect:/studdypehome.do";		
+		return "redirect:/studyList.do";		
 	}
 }
 	
