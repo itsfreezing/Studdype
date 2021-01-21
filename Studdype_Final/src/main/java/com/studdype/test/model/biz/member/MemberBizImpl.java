@@ -44,6 +44,7 @@ public class MemberBizImpl implements MemberBiz {
 		return null;
 	}
 
+
 	@Override
 	public int updateMember(MemberDto dto) {
 		

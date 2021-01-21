@@ -20,6 +20,16 @@
 	 	
 	 	<select id="selectFile" parameterType="int" resultMap="fileMap">
 	 		SELECT * FROM NOTICE_FILE WHERE F_NO = #{f_no}
-	 	</select>	 	
+	 	</select>	 
+	 	
+	 	<insert id="insertAddFile" parameterType="fileDto">
+	 		INSERT INTO NOTICE_FILE
+	 		VALUES ( NOTICEFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+	 	</insert>	 
+	 		
+	 	<delete id="deleteFile" parameterType="int">
+	 		DELETE FROM NOTICE_FILE WHERE F_NO = #{f_no}
+	 	</delete>
+	 		
   		
   	</mapper>

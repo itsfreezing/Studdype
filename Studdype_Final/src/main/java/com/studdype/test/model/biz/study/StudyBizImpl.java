@@ -143,6 +143,4 @@ public class StudyBizImpl implements StudyBiz{
 
 
 
-
-	
 }

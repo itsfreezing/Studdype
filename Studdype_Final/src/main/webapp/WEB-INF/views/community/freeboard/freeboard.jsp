@@ -65,7 +65,6 @@
 	}
 	
 	}
-	
 	// 이전 페이지 그룹 
 	function prePageGroup(){
 		if( ${startPage - 1 > 0}){
@@ -194,6 +193,7 @@ function search_chk(){
 				</div>
 
 	</div>
+
 
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>

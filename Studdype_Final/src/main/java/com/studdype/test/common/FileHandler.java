@@ -65,7 +65,6 @@ public class FileHandler {
 	}
 	//파일 한개 삭제
 	public int deleteFile(FileDto dto) {
-		
 		String path = dto.getF_url();
 		File file = new File(path);
 		int res = 0;
