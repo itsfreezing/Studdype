@@ -41,7 +41,7 @@ function getVoteResult() {
 			var html = "";
 
 			// 로그인 한 사람이 모임 작성자 이거나 투표했던 회원일 때
-			if( writer == ${login.mem_no} || member == 1 ){
+			if( member == 1 ){ 
 				html += "<div class='voteResultForWriter'>"
 							+"<div class='attend'>참석</div>"
 							 	
@@ -184,6 +184,7 @@ function takeVote(btn){
 		contentType:"application/json",
 		dataType:"json",
 		success:function(res){
+			$(".attend").val(""); // radio checked 값 비우기
 			if( res > 0 ) {
 				getVoteResult();
 			} else {
