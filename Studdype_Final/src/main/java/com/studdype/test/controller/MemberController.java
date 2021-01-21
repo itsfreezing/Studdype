@@ -56,7 +56,6 @@ public class MemberController {
 		System.out.println(dto.getMem_pw());
 		String memberrrn=request.getParameter("mem_rno")+"-"+request.getParameter("memrno");
 		System.out.println(memberrrn);
-		String mem_phone=request.getParameter("mem_phone")+"-";
 		System.out.println(dto);
 		res=memberBiz.memberInsert(dto);
 		if(res>0) {

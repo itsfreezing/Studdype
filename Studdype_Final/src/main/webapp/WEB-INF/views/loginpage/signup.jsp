@@ -21,28 +21,18 @@
 <script type="text/javascript">
 function chkpwd(){
 	var pw=document.getElementById('memberpw').value;
-	var pw2=document.getElementById('memberpwd').value;
+	var pw2=document.getElementById('mempwd').value;
 	if(pw!=pw2){
 		document.getElementById('checkpw').style.color="red";
 		document.getElementById('checkpw').innerHTML="동일하지 않습니다";
 	
-	}else{
+	}
+	else{
 		document.getElementById('checkpw').style.color="blue";
 		document.getElementById('checkpw').innerHTML="확인되었습니다";
 	}
 }
 
-function ChkConfirm2(){
-	var check2=document.getElementsByName("mem_pw")[0].title;
-	var check=document.getElementsByName("mem_id")[0].title;
-	if(check2=="n"){
-		alert("비밀번호를 확인해주세요");
-		document.getElementsByName("mem_pw")[0].focus();
-	}
-	if(check=="n"){
-		document.getElementsByName("mem_id")[0].focus();
-	}
-}
 
 function checkId(){
 	var id=document.getElementsByName("mem_id")[0];
@@ -96,8 +86,8 @@ function num_check(){
 	var total2=0;
 	var num1=document.getElementById("rno1").value;
 	var num2=document.getElementById("rno2").value;
-	rno1=num1;
-	rno2=num2;
+	rno1=num1;//앞자리
+	rno2=num2;//뒷자리
 	for(i=0;i<6;i++){
 		sum1+=parseInt(rno1[i])*(i+2);
 	}
@@ -119,41 +109,41 @@ function num_check(){
 		}
 	}
 }
-function signup(){
-	var memberId=document.getElementById("memberId").value;
-	var memberpw=document.getElementById("memberpw").value;
-	var memberName=document.getElementById("memberName").value;
-	var email=document.getElementById("memberemail").value;
-	var memrno=document.getElementById("rno1").value+document.getElementById("rno2");
-		
-	if(memberId==null || memberId==""){
-			alert("아이디 중복확인해주세요");
-			$("memberId").focus();
-			return false;
-	} 
-	if(memberpw==""||memberpw==null){
-			alert("비밀번호를 입력해주세요");
-			$("#memberpw").focus();
-			return false;
+function validate(){
+	
+	var form=document.register;
+	
+	if(form.memberId.value==""){
+		alert("아이디를 입력해주세요");
+		form.memberId.focus();
+		return false;
 	}
-	if(email==""||email==null){
-			alert("이메일을 입력해주세요");
-			$("#mememail").focus();
-			return false;
+	if(form.memberpw.value==""){
+		alert("비밀번호를 입력해주세요");
+		form.memberpw.focus();
+		return false;
 	}
-		
-	if(memberName==null||memberName==""){
-			alert("이름을 입력해주세요");
-			$("#memberName").focus();
-			return false;
-		}
-		
-	 if(memrno==""||memrno==null){
-			alert("주민번호를 입력해주세요");
-			return false;
-		}
-		alert("회원가입 성공");
-		signupform.submit();
+	if(form.memberemail.value==""){
+		alert("이메일을 입력해주세요");
+		form.memberemail.focus();
+		return false;
+	}
+	if(form.memberName.value==""){
+		alert("이름을 입력해주세요");
+		form.memberName.focus();
+		return false;
+	}
+	if(form.rno1.value==""){
+		alert("주민등록번호를 입력해주세요");
+		form.rno1.focus();
+		return false;
+	}
+	if(form.memberphone.value==""){
+		alert("전화번호를 입력해주세요");
+		form.memberphone.focus();
+		return false;
+	}
+	
 }
 
 </script>
@@ -276,7 +266,7 @@ input{
       <h3>--Please be our colleague--</h3>
       <br><h2 id="big">정보를 입력해주세요</h2>
    <div id="signtitle">
-      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" >
+      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" onsubmit="return validate();">
         <table>
                     <tr>
                         <td><h3 id="idtitle">아이디</h3></td>
@@ -297,7 +287,7 @@ input{
                     </tr>   
                     <tr>           
                         <td>
-                            <input type="password" id="memberpw"  title="n"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요" onclick="ChkConfirm();" >
+                            <input type="password" id="memberpw"  title="n"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요">
                         </td>
                     </tr>
                     <tr>
@@ -307,7 +297,7 @@ input{
                     </tr> 
                     <tr>
                         <td colspan="5">
-                            <input type="password" name="mempw" id="memberpwd" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="chkpwd();">
+                            <input type="password" name="mempwchk" id="mempwd" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="chkpwd();">
                         	<div id="checkpw">동일한 암호를 입력</div>
                         </td>
                     </tr>
@@ -345,7 +335,7 @@ input{
                     
                     <tr>
                     	<td colspan="5">
-                    		   <input type="text" id="rno1" name="mem_rno" title="n" maxlength="6">-<input type="password" name="memrno" id="rno2" onkeyup="num_check();" >
+                    		   <input type="text" id="rno1" name="mem_rno" title="n" maxlength="6">-<input type="password" name="memrno" id="rno2" onkeyup="num_check()" >
                     	</td>
                     </tr>
                     
@@ -356,15 +346,14 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    	<!-- <select id="phone" name="mem_phone" class="telnum">
+                    	<!--  <select id="phone" name="mem_phone" class="telnum">
                     			<option value="010" selected>010</option>
                     			<option value="011">011</option>
                     			<option value="016">016</option>
                     			<option value="018">018</option>
-							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">	
+							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="-[0-9]{4}-[0-9]{4}">	
 							 -->
-							<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">	
-													
+							<input type="tel" id="memberphone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">							
                     	 
                     	</td>
                     </tr>
@@ -390,7 +379,7 @@ input{
         </table>
         <br>
 		<center>
-          <input type="button" id="sign" name="join" onclick="signup();"value="회원가입">
+          <input type="submit" id="sign" name="join" value="회원가입">
        </form>
       </div>
 </body>
