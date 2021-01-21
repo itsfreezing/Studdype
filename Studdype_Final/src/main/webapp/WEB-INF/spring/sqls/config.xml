@@ -39,7 +39,6 @@
 
 		<mapper resource="./mybatis/File/photoFile-mapper.xml" />
 		<mapper resource="./mybatis/Study/studyApplying-mapper.xml"/>
-
 		<mapper resource="./mybatis/File/freeFile-mapper.xml"/>
 		<mapper resource="./mybatis/File/noticeFile-mapper.xml"/>
 		<mapper resource="./mybatis/Board/noticeBoard-mapper.xml"/>
