@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,46 +30,21 @@
 
 </head>
 <body>
-	<jsp:include page="../commond/communityHeader.jsp"></jsp:include>
-	<jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
+<jsp:include page="../commond/communityHeader.jsp"></jsp:include>
+<jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
 	
-	
-     <!--main conternt 섹션-->
-     <div class="main-section">
-     <!-- 상단에 공백을 넣는 이유: 왼쪽 네비로 인해서 메인섹션의 div태그 밀림현상이 있음
-     						말로 설명하기 어려우므로 잠시 br태그를 지우고 실행해보면 알 수 있음 -->
-        <br><br><br><br><br><br><br><br>
-        
-        <div id="photo-zone">
-        	<img src="./resources/assets/img/img_study7.png">
-        </div>
-        <div id="photo-zone">
-        	<img src="./resources/assets/img/profile_user.png">
-        </div>
-        <div id="photo-zone">
-        	여기에 사진 넣어도 되고
-        	다른거 넣어도되고
-        </div>
-        <div id="photo-zone">
-        	여기에 사진 넣어도 되고
-        	다른거 넣어도되고
-        </div>
-        <div id="photo-zone">
-        	여기에 사진 넣어도 되고
-        	다른거 넣어도되고
-        </div>
-        <div id="photo-zone">
-        	여기에 사진 넣어도 되고
-        	다른거 넣어도되고
-        </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </div>
+	<!--main conternt 섹션-->
+	<div class="main-section">
+			<c:choose>
+				<c:when test="${ study.getPhoto() == null }">
+					<div><img src="./resources/assets/img/meetTime.png"></div>					
+				</c:when>
+				<c:otherwise>						
+					<div>${study.getPhoto() }</div>
+				</c:otherwise> 
+			</c:choose>
+	</div>
     
-    <jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
