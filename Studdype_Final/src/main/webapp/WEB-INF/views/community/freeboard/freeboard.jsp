@@ -194,13 +194,7 @@ function search_chk(){
 
 	</div>
 
-<<<<<<< HEAD
-<footer>
-<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
-</footer>
 
-=======
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
->>>>>>> 9a1dc3043e781dc789cf80cbc071b1968f1d134b
 </body>
 </html>
