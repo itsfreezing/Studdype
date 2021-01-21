@@ -158,8 +158,24 @@
 			FROM MEET_VOTE
 			WHERE MEET_NO = #{meet_no}
 			AND MEM_NO = #{mem_no}
-    </select>
-    
+    	</select>
+    	
+    	<!-- 투표 [참석자] -->
+    	<select id="selectAttendMember" parameterType="int" resultType="voteDto">
+    		SELECT MEM_NO
+    		FROM MEET_VOTE
+    		WHERE MEET_NO = #{meet_no}
+    		AND VOTE_ATTEND = 'Y'
+    	</select>
+    	
+    	<!-- 투표 [불참석자] -->
+    	<select id="selectAbsentMember" parameterType="int" resultType="voteDto">
+    		SELECT MEM_NO
+    		FROM MEET_VOTE
+    		WHERE MEET_NO = #{meet_no}
+    		AND VOTE_ATTEND = 'N'
+    	</select>
+    	
 		<select id="selectMeetList" parameterType="int" resultType="meetDto">
 			SELECT * FROM
 			MEET_BOARD

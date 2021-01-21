@@ -224,7 +224,7 @@ public class BoardController {
 		}
 		
 		if (res > 0) {
-			return "redirect:freeboard.do?b_no=" + dto.getB_no();
+			return "redirect:freedetail.do?b_no=" + dto.getB_no();
 		} else {
 			model.addAttribute("msg", "글 수정 실패!!");
 			model.addAttribute("url", "freeBoardUpdateForm.do?b_no=" + dto.getB_no());

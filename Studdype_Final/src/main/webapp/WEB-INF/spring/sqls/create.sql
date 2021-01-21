@@ -6,8 +6,7 @@ GRANT CONNECT, RESOURCE TO STUDDYPE;
 
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
-DROP SEQUENCE MEMBERSEQ;
-DROP SEQUENCE SISEQ;
+ DROP SEQUENCE SISEQ;
 DROP SEQUENCE GUSEQ;
 DROP SEQUENCE CATEGORYSEQ;
 DROP SEQUENCE STUDYSEQ;
@@ -178,8 +177,6 @@ CREATE TABLE MEMBER(
     MEM_EMAIL VARCHAR2(100) NOT NULL -- 이메일    
 );
 
-select * from member;
-delete from member;
 ------지역 카테고리 
 ---시
 CREATE TABLE LOCATION_SI(
@@ -293,10 +290,13 @@ CREATE TABLE NOTICE_REPLY(
 );
 
 --공지사항 게시판 사진
+--공지사항 게시판 사진
 CREATE TABLE NOTICE_FILE(
-    F_NO NUMBER PRIMARY KEY, --파일 번호
+   F_NO NUMBER PRIMARY KEY, --파일 번호
     B_NO NUMBER NOT NULL, --게시글번호
     F_NAME VARCHAR2(1000) NOT NULL, --파일 실제이름
+    F_SIZE NUMBER NOT NULL, --파일 크기 KB
+    F_URL VARCHAR2(4000) NOT NULL, --파일 가상이름
     FOREIGN KEY(B_NO) REFERENCES NOTICE_BOARD(B_NO) ON DELETE CASCADE    
 );
 
