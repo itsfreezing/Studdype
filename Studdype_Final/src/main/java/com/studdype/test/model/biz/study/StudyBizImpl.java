@@ -84,8 +84,8 @@ public class StudyBizImpl implements StudyBiz{
 		
 		insertRes = study_Dao.insertStudy(dto);
 		
-		// 두 실행 성공 시 실제 파일 저장
-		if(insertRes == 1 && dto.getPhoto().equals("noImage")) {
+		// 실행 성공 시 실제 파일 저장
+		if(insertRes == 1) {
 			res = 1;
 			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
 		}

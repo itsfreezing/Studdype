@@ -21,8 +21,7 @@ function logout_btn(){
 
 $(function() {
 	$(".feature-page.header-area").css("height", "80px");
-	//$(".justify-content-center").hide(); //-> 스터디 홈 스크립트에서 실행 
-	$(".hero-text-wrapper").css("height", "400px");
+	$(".hero-text-wrapper").css("height", "500px");
 });
 
 </script>

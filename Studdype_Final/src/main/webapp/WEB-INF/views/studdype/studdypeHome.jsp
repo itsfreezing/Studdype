@@ -48,6 +48,9 @@
 		$('.customPrevBtn').click(function() {
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
+		
+		// 해더 상단 영역 숨기기 (스터디 홈에선 필요없음)
+		$(".justify-content-center").hide(); 
 	});
 	
 	$(document).on('click', '#btnSearch', function(e){
@@ -190,7 +193,7 @@ input#search:focus {
 
 
 
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

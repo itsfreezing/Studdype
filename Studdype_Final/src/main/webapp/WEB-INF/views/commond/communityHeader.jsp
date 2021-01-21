@@ -18,7 +18,7 @@
             <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             
                <!-- 헤더 좌측 로고 -->
-               <a class="navbar-brand" href="mainPage.jsp"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
+               <a class="navbar-brand" href="studyList.do"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
 			   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   					<span class="navbar-toggler-icon"></span>
 			   </button>
@@ -28,7 +28,7 @@
 					<div class="mainmenu">
 						<ul class="navbar-nav ml-auto">
 							<li class="nav-item">
-								<a class="nav-link" href="#">스터띱 홈<span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="studyList.do">스터띱 홈<span class="sr-only">(current)</span></a>
 							</li>								
 	                              <li class="nav-item">
 								<a class="nav-link" href="logout.do">로그아웃</a>
