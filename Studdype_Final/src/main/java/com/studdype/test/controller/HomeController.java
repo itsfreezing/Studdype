@@ -319,7 +319,7 @@ public class HomeController {
 		
 
 		/////////////////////// 테스트용 세션
-		MemberDto login = memberBiz.selectOne(2);
+		MemberDto login = memberBiz.selectOne(1);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		session.setAttribute("study", study); //스터디 세션

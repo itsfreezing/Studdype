@@ -15,4 +15,6 @@ public interface NoticeBoardDao {
 	BoardDto selectOne(int b_no); //공지사항 게시글 하나 가져오기
 	List<BoardDto> selectRecentList(int s_no, int b_no); //공지사항 주변글 가져오기
 	List<BoardDto> selectNoticeBoardList(int s_no); // 공지사항 게시글 리스트 역순 가져오기
+	int deleteBoard(int b_no); //글삭제
+	int updateBoard(BoardDto dto); //글 수정
 }
