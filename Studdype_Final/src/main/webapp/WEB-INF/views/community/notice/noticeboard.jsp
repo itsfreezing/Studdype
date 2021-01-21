@@ -34,14 +34,13 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-<link rel="stylesheet" href="./resources/css/summernote-lite.css">
-<script src="./resources/js/summernote-ko-KR.js"></script>
-<script src="./resources/js/summernote-lite.js"></script>
 
 
 <script type="text/javascript">
-	
 
+
+	
+}
 
 </script>
 </head>
@@ -52,14 +51,53 @@
 
 	<!--main conternt 섹션-->
 	<div class="main-section">
-		<h1>자유게시판 글 쓰기</h1>
-
-	
+		<h1 >공지사항 게시판</h1>
 
 
-	
+		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
+		<table class="boardlist">
+			<col width="600px"><col width="250px"><col width="200px"><col width="150px">
+			<tr class="headtr">
+				<th>게시글 제목</th>
+				<th>작성자</th>
+				<th>작성시간</th>
+				<th>조회수</th>
+			</tr>
+		
+			
+			<c:choose>
+				<c:when test="${empty list }">
+					<td colspan="4">공 지 사 항 이 없 습 니 다</td>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
+						<tr>
+							<td class="tdtitle">
+								<a href="noticedetail.do?b_no=${list.get(i).getB_no() }">${list.get(i).getB_title() }
+								<c:if test="${replyCntMap.get(list.get(i).getB_no())!=0}">
+									<span class="reply_cnt">[${replyCntMap.get(list.get(i).getB_no())}]</span>
+								</c:if>								
+								</a>
+							</td>
+							<td class="tdwriter">${memberMap.get( list.get(i).getB_no()).getMem_id() }(${memberMap.get( list.get(i).getB_no()).getMem_name()})</td>
+							<td class="tddate"><fmt:formatDate value="${list.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+							<td class="tdcnt">${list.get(i).getB_cnt() }</td>
+						</tr>
+					</c:forEach>
+					
+				</c:otherwise>
+			</c:choose>
+			
+			
+			
+		</table>
+
+		<div style="width: 100%; height: 100px;">
+			<button class="writeBtn" onclick="location.href='noticewriteform.do'">글 쓰기</button>
+		</div>
+		
 	</div>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

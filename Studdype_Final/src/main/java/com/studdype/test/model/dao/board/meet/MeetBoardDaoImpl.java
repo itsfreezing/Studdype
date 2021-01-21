@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -160,6 +161,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
+	
 
 	// meetBoard DB 캘린더로 가져오기
 	@Override
@@ -167,13 +169,83 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		List<MeetDto> meetDBForCalendar = null;
 		
 		try {
-			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar");
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar",s_no);
 			
 		}catch (Exception e) {
 		System.out.println("에러: getDB for calendar");
 		e.printStackTrace();
 		}
 		return meetDBForCalendar;
+	}
+	
+	// 모임게시판_투표 '총' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Total(int meet_no) {
+		int voteTotalResult = 0;
+		
+		try {
+			voteTotalResult = sqlSession.selectOne(NAMESPACE+"selectVoteTotalResult", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteTotalResult ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteTotalResult;
+	}
+	
+	// 모임게시판_투표 '참가' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Y(int meet_no) {
+		int voteResult = 0;
+		
+		try {
+			voteResult = sqlSession.selectOne(NAMESPACE+"selectVoteResult_Y", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteResult_Y ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteResult;
+	}
+	
+	// 모임게시판_투표 '불참가' [투표 수]
+	public int selectVoteResultCnt_N(int meet_no) {
+		int voteResult = 0;
+		
+		try {
+			voteResult = sqlSession.selectOne(NAMESPACE+"selectVoteResult_N", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteResult_N ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteResult;
+	}
+	
+	// 모임게시판_투표 [투표하기]
+	@Override
+	public int insertMeetVote(VoteDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"takeVote", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO insertMeetVote ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	// 모임게시판_투표 [중복체크]
+	@Override
+	public int selectVoteMemberCnt(VoteDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectVoteMemberCnt", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteMemberCnt ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 

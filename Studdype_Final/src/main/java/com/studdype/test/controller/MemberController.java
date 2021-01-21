@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,10 @@ import com.studdype.test.model.dto.member.MemberDto;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
 	
 	@Autowired 
-	private MemberBiz biz;
+	private MemberBiz memberBiz;
 	
 	@RequestMapping(value = "/Member.do",method = RequestMethod.GET)
 	public String Member(Locale locale,Model model) {
@@ -49,48 +51,49 @@ public class MemberController {
 		System.out.println(dto.getMem_id());
 		System.out.println(dto.getMem_pw());
 
-		res=biz.memberInsert(dto);
+		res=memberBiz.memberInsert(dto);
 		if(res>0) {
 			return "loginpage/login";
 		}else {
 			return "redirect:signupform.do";
 		}
 	}
-
+	
+	//로그인 폼
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
 		logger.info("login page");
 		return "loginpage/login";
 	}
 	
+	//로그인
 	@RequestMapping("/login.do")
-	public String login(HttpSession session, MemberDto dto) {
+	public String login(HttpSession session, MemberDto dto,Model model) {
 		logger.info("login");
-		MemberDto loginDto = biz.login(dto);
-		if(loginDto == null) {
-			session.setAttribute("login", null);
-		}else {
+		MemberDto loginDto = memberBiz.login(dto);
+		
+		System.out.println(loginDto);
+		
+		if(loginDto != null) {
 			session.setAttribute("login", loginDto);
+			session.setMaxInactiveInterval(-1);
+			return "redirect:/studyList.do";
+		}else {
+			model.addAttribute("msg","로그인 실패!");
+			model.addAttribute("url","loginform.do");
+			return "commond/alert";
 		}
-		if(session.getAttribute("login") == null)
-		{
-			//TODO: 세션설정이 안된 경우
-			return "";
-		}
-		else			
-		{
-			//TODO: 세션설정이 된 경우
-			session.setMaxInactiveInterval(1);
-			return "studdype/studdypeHome";
-		}		
-	}
+	}		
 	
+	//로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		logger.info("logout");
+		
 		session.invalidate();
-		return "studyList.do";
+		return "redirect:/studyList.do";		
 	}
-	
-	
 }
+	
+
+	

@@ -2084,7 +2084,7 @@ button[type=submit]:hover {
 }
 
 .dropdown-menu {
-	background: white;
+	background: #6F4DE1;
 	border: 0;
 }
 .form-control:focus{

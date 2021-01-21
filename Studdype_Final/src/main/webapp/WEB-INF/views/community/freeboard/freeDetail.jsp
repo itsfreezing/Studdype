@@ -41,12 +41,12 @@
 <script type="text/javascript" >
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
-	
-	
 	var boardVal = {
 			"b_no":${dto.b_no }
 	};
 
+	
+	
 	$.ajax({
 		type:"post",
 		url:"freeReplyList.do",
@@ -55,23 +55,17 @@ function getReplyList() {
 		dataType:"json",
 		success:function(map){
 			var list = map.replyList;
-		
 			var html = "<div class='replyTitle'><span>댓글</span> "+map.replyList.length+" 개 </div>"+
 					"<ul class='replyList'>";
-				
 				for(var i = 0 ; i < map.replyList.length; i++){
 					var replyDate = new Date(map.replyList[i].r_regdate);
-					
 					 var hour = (replyDate.getHours() / 10 < 1 ) ?  '0' + replyDate.getHours() : replyDate.getHours();
 					 var minute =  (replyDate.getMinutes() / 10 < 1 ) ?  '0' + replyDate.getMinutes() : replyDate.getMinutes();
-					
 					//데이트 포멧 맞추기
 					var dateFormat = replyDate.getFullYear() +'.'+ ( replyDate.getMonth()+1 ) +'.' + replyDate.getDate() +'  ' +
 										hour+':'+ minute;					
-					
 					//댓글이 부모댓글이면
 					if( map.replyList[i].r_class == 0){
-						
 						var reply = "<li class='replyItem'>"+
 										"<div class='reply_area showDiv'>"
 										+"<div class='reply_writer_box' style='padding-bottom: 15px;'>"+ map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name+ ")"  +"</div>"
@@ -95,8 +89,6 @@ function getReplyList() {
 										"<tr><td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td></tr></table>"+
 										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='writeRecomment(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">작성</button></div></div>"+
 										"</li><hr>";
-										
-										
 						//로그인 아이디와 댓글 작성자가 다르면
 						}else{
 							reply += "   <button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button></div></div>"+
@@ -135,20 +127,15 @@ function getReplyList() {
 							reply += "</div></div></li><hr>";
 						}
 					}
-					
 					html += reply;
 				}
 				html += "</ul>";
-				
-			
 			$(".replyBox").html(html);
 			
 		},
 		error:function(){
 			alert("댓글목록 ajax 실패 ㅠ..");
 		}
-		
-		
 	});
 };
 
@@ -572,6 +559,6 @@ function downloadFile(btn){
 
 	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
 	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

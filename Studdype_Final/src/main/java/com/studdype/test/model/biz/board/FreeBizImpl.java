@@ -3,6 +3,8 @@ package com.studdype.test.model.biz.board;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,6 @@ import com.studdype.test.model.dao.board.free.FreeReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
-import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Service
@@ -80,10 +81,14 @@ public class FreeBizImpl implements FreeBiz {
 	@Transactional
 	@Override
 	public BoardDto selectDetail(int b_no, int isVisitPage) {		
+		int res = 1;
 		if(isVisitPage == 0) {
-			freeBoardDao.updateCnt(b_no);
+			res = freeBoardDao.updateCnt(b_no);
 		}
 		BoardDto dto = freeBoardDao.selectOne(b_no);
+		if(dto == null || res < 1) {
+			throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+		}
 		return dto;
 	}
 
@@ -154,6 +159,18 @@ public class FreeBizImpl implements FreeBiz {
 	@Override
 	public Map<Integer, Integer> getReplyCnt(List<BoardDto> list) {
 		return freeReplyDao.selectReplyCnt(list);
+	}
+
+	//자유게시판 검색시 총 게시글 수
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		return freeBoardDao.selectTotalBoardNumOfSearch(searchMap);
+	}
+
+	//검색 한 것 페이징
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		return freeBoardDao.selectPagingSearchBoardList(pageMap);
 	}
 
 	

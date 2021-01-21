@@ -73,7 +73,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public void updateCnt(int b_no) {
+	public int updateCnt(int b_no) {
 		int res = 0;
 		
 		try {
@@ -82,6 +82,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 			System.out.println("[ERROR]: UpdateCnt");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	//자유게시판 글 삭제
@@ -129,6 +130,38 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		
 		return resList;
 	}
+
+	//자유게시판 검색 총 게시글 수
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		int cnt = 0;
+		
+		try {
+			cnt = sqlSession.selectOne(NAMESPACE+"selectTotalBoardNumOfSearch", searchMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectTotalBoardNumOfSearch method");
+			e.printStackTrace();
+		}
+		
+		
+		return cnt;
+	}
+
+	// 자유게시판 검색 15개 페이징
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		List<BoardDto> resList= null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectPagingSearchBoardList", pageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectPagingSearchBoardList method");
+			e.printStackTrace();
+		}
+
+		return resList;
+	}
+
 
 	
 

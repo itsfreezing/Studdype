@@ -74,7 +74,15 @@
 			pageform.submit();
 		}
 	}
-
+function search_chk(){
+	var keyword = $("#search_keyword");
+	if( keyword.val() == null || keyword.val().trim() == "" ){
+		alert("검색어를 입력해주세요.");
+	}else{
+		$("#search_form").submit();
+	}
+	
+}
 
 </script>
 </head>
@@ -97,6 +105,23 @@
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
+			<c:if test="${not empty noticeList }">
+				<c:forEach var="i" begin="0" end="${noticeList.size()-1 }" step="1">
+						<tr class="notice_tr">
+							<td class="notice_title"><div class="notice_tag">공지</div>
+								<a href="noticedetail.do?b_no=${noticeList.get(i).getB_no() }">${noticeList.get(i).getB_title() }
+								<c:if test="${noticeReplyCntMap.get(noticeList.get(i).getB_no())!=0}">
+									<span class="reply_cnt">[${noticeReplyCntMap.get(list.get(i).getB_no())}]</span>
+								</c:if>								
+								</a>
+							</td>
+							<td class="tdwriter">${noticeMemberMap.get( noticeList.get(i).getB_no()).getMem_id() }(${noticeMemberMap.get( noticeList.get(i).getB_no()).getMem_name()})</td>
+							<td class="tddate"><fmt:formatDate value="${noticeList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+							<td class="tdcnt">${noticeList.get(i).getB_cnt() }</td>
+						</tr>
+					</c:forEach>
+			</c:if>
+			
 			<c:choose>
 				<c:when test="${empty list }">
 					<td colspan="4">게 시 글 이 없 습 니 다</td>
@@ -124,40 +149,52 @@
 			
 		</table>
 
-		
-		<button class="writeBtn" onclick="location.href='freewriteform.do'">글 쓰기</button>
-	
-
+		<div style="width: 100%; height: 100px;">
+			<button class="writeBtn" onclick="location.href='freewriteform.do'">글 쓰기</button>
+		</div>
+		<!-- 검색 부분 -->
+		<div class="search_div">
+			<form action="free_search.do" method="post" id="search_form" >
+				
+				<select name="searchType"  class="search_type_box" id="searchType">
+					<option value="title_content">제목+내용</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="writer">작성자</option>
+				</select>
+				<input type="text" placeholder="검색어를 입력해주세요." class="search_content_box" id="search_keyword" name="keyword">
+				<input type="button" value="검색" onclick="search_chk();"  class="search_btn">
+			</form>
+		</div>
 
 		<!-- 페이징 -->
-		<div class="pagin_div">
-			<ul class="pagin">
-				<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
+				<div class="pagin_div">
+					<ul class="pagin">
+						<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
 				
 			
-				<!-- ----------------------------------- -->
-				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"	varStatus="status">
-					<c:choose>
-						<c:when test="${currentPage == startPage + status.count -1 }">
-							<li class="page_li li_hober"><a class="page_a current_page"
-								onclick="movePage(this);">${startPage + status.count -1 }</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page_li li_hober"><a class="page_a"	onclick="movePage(this);">${startPage + status.count -1 }</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<li class="page_li"><a class="next_page"
-					onclick="nextPageGroup();">></a></li>
-			</ul>
+						<!-- ----------------------------------- -->
+						<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1"	varStatus="status">
+							<c:choose>
+								<c:when test="${currentPage == startPage + status.count -1 }">
+									<li class="page_li li_hober"><a class="page_a current_page"	onclick="movePage(this);">${startPage + status.count -1 }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page_li li_hober"><a class="page_a"	onclick="movePage(this);">${startPage + status.count -1 }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page_li"><a class="next_page" onclick="nextPageGroup();">></a></li>
+					</ul>
 
-			<form action="freeboard.do" method="post" id="pageform" name="pageform">
-				<input type="hidden" name="pagenum" id="pagenum">
-			</form>
+					<form action="freeboard.do" method="post" id="pageform" name="pageform">
+						<input type="hidden" name="pagenum" id="pagenum">
+					</form>
 
-		</div>
+				</div>
+
 	</div>
 
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

@@ -226,6 +226,40 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return bookMap;
 	}
+	//마이페이지 정보수정
+	@Override
+	public int updateMember(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMember", dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: updateMember!!!!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+				
+		return res;
+	}
+	//마이페이지 아이디 중복체크
+	@Override
+	public MemberDto idchk(String mem_id) {
+		MemberDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
+			
+		
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: idchk!!!!!!!!!!!!!!!!");
+			
+			e.printStackTrace();
+		}
+			
+		return dto;
+	}
+
+	
 
 	@Override
 	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
@@ -241,6 +275,19 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 		return getBookWriterName;
+	}
+	//마이페이지 회원탈퇴 클릭시
+	@Override
+	public int memberDelete(int mem_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"memberDelete",mem_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : memberDelete !!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }
