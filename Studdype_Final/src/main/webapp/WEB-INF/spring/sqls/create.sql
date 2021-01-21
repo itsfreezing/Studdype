@@ -6,8 +6,7 @@ GRANT CONNECT, RESOURCE TO STUDDYPE;
 
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
-DROP SEQUENCE MEMBERSEQ;
-DROP SEQUENCE SISEQ;
+ DROP SEQUENCE SISEQ;
 DROP SEQUENCE GUSEQ;
 DROP SEQUENCE CATEGORYSEQ;
 DROP SEQUENCE STUDYSEQ;
@@ -178,8 +177,6 @@ CREATE TABLE MEMBER(
     MEM_EMAIL VARCHAR2(100) NOT NULL -- 이메일    
 );
 
-select * from member;
-delete from member;
 ------지역 카테고리 
 ---시
 CREATE TABLE LOCATION_SI(

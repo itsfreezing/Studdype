@@ -12,8 +12,7 @@ public class LocationDao {
 		PreparedStatement pstm = null;
 		int res = 0;
 		
-		String sql = " INSERT INTO LOCATION_SI VALUES(SISEQ.NEXTVAL,?) ";
-		
+		String sql = "INSERT INTO LOCATION_SI VALUES(SISEQ.NEXTVAL,?) ";		
 		try {
 			pstm = con.prepareStatement(sql);
 			
