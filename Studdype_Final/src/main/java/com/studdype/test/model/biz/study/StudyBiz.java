@@ -27,8 +27,8 @@ public interface StudyBiz {
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); //카테고리 가져오기 
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
-	public int newLeader(StudyDto dto); 
-
+	public int newLeader(StudyDto dto); //스터디관리 리더변경 
+	public int newInfo(StudyDto dto); // 스터디관리 스터디 소개변경
 
 	
 }

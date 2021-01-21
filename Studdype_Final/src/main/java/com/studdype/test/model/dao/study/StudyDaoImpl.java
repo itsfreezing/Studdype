@@ -117,6 +117,19 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	@Override
+	public int newInfo(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res= sqlSession.update(NAMESPACE+"newInfo",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: newInfo!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 	
 

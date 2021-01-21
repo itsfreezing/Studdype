@@ -252,13 +252,26 @@
 				main_check++;
 			}
 		}
-		location.href="studyupdate.do?b_no="+b+"&mem_no="+m+"&ban_no="+e+"&s_no="+'${study.s_no}';
+		var i = document.getElementById('studyinfot').value;
+		var c = document.getElementById('cate').value;
+		var s = document.getElementById('locationsi').value;
+		var g = document.getElementById('locationgu').value;
+		var m = document.getElementById('Max_member').value;
 		
-		function check(){
-			
-		}
+		
+		
+		
+		location.href="studyupdate.do?b_no="+b+"&mem_no="+m+"&ban_no="+e+"&s_no="+'${study.s_no}'+"&s_info="+i
+				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m;
+		
+		
 		
 	}
+	function onError(){
+		alert('해당 파일은 이미지가아닙니다!! 파일을 변경해주세요.');
+		document.getElementById('LoadImg').src='resources/img/no_image.png';
+	}
+	
 </script>
 </head>
 <body>
@@ -302,7 +315,7 @@
 				</c:forEach>
 
 			</tbody>
-		</table>
+		</table>              
 		<!--  대표 도서 table 끝 -->
 
 
@@ -345,12 +358,12 @@
 		<pre class="brush:html"></pre>
 		<input type="file" id="imgAttach" name="imgAttach"
 			onchange="LoadImg(this);">
-
+		
 
 		<div id="studyimage" class="image-container">
 
 			<img id="LoadImg" style="width: 300px; height: 195px;"
-				onError="this.src='resources/img/no_image.png'">
+				onError="onError();">
 
 		</div>
 		<!-- 대표 사진 끝 -->
@@ -366,36 +379,30 @@
 		<p id="category">카테고리</p>
 		<select id="cate">
 			<c:forEach var="category" items="${category }">
-				<option value="${category.cate_no }">${category.cate_name }</option>
+				<option value="${category.cate_no }" <c:if test="${category.cate_no == study.cate_no }">selected     </c:if>>${category.cate_name }</option>
 			</c:forEach>
 		</select>
 		<p id="Max">최대 인원수</p>
 		<select id="Max_member">
-			<%
-				for (int i = 1; i < 31; i++) {
-			%>
-			<option value="<%=i%>"><%=i%>명
-			</option>
-			<%
-				}
-			%>
+			<c:forEach var="i" begin="1" end="30" step="1">
+			<option value="${i }" <c:if test="${i == study.s_maxcnt }">selected </c:if>>${i } 명    </option>
+			</c:forEach>
 		</select>
 		<p id="locsi">지역(시)</p>
 		<select id="locationsi">
 			<c:forEach var="sidto" items="${sidto }">
-				<option value="${sidto.si_no }">${sidto.si_name }</option>
+				<option value="${sidto.si_no }"<c:if test="${sidto.si_no == study.si_no }">selected </c:if>>${sidto.si_name }</option>
 			</c:forEach>
 		</select>
 		<p id="locgu">지역(구)</p>
 		<select id="locationgu">
 			<c:forEach var="gudto" items="${gudto }">
-				<option value="${gudto.gu_no }">${gudto.gu_name}</option>
+				<option value="${gudto.gu_no }" <c:if test="${gudto.gu_no == study.gu_no }">selected </c:if>>${gudto.gu_name}</option>
 			</c:forEach>
 		</select>
 		<p id="studyinfo">스터디 소개</p>
 		<input id="studyinfot" value="${study.s_info }">
 		<button id="update" type="button" class="btn btn-purple" onclick="update();">Update!</button>
-
 
 
 

@@ -34,6 +34,18 @@ public class StudyDto {
 		this.s_currentcnt = s_currentcnt;
 	}
 
+	
+
+	public StudyDto(int s_no, String s_info, int cate_no, int si_no, int gu_no, int s_maxcnt) {
+		super();
+		this.s_no = s_no;
+		this.s_info = s_info;
+		this.cate_no = cate_no;
+		this.si_no = si_no;
+		this.gu_no = gu_no;
+		this.s_maxcnt = s_maxcnt;
+	}
+
 	public StudyDto(int leader_no, int s_no) {
 		super();
 		this.s_no = s_no;

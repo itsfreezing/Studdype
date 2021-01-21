@@ -3,7 +3,8 @@
 CREATE USER STUDDYPE IDENTIFIED BY STUDDYPE;
 GRANT CONNECT, RESOURCE TO STUDDYPE;
 -------------------------------------------------------------
-
+select * from study where s_no= 1;
+update study set leader_no = 1 where s_no =1;
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
 DROP SEQUENCE MEMBERSEQ;

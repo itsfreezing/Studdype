@@ -238,20 +238,28 @@ public class StudyController {
 		System.out.println("s_no : "+request.getParameter("s_no"));
 		StudyDto dto3 = new StudyDto(Integer.parseInt(request.getParameter("mem_no")),Integer.parseInt(request.getParameter("s_no")) );
 		int dto2 = studyBiz.newLeader(dto3);
-		
-		System.out.println("dto3 :"+dto3);
+		StudyDto dto4 = new StudyDto(Integer.parseInt(request.getParameter("s_no")),request.getParameter("s_info"),Integer.parseInt(request.getParameter("cate")),Integer.parseInt(request.getParameter("locationsi_no")),Integer.parseInt(request.getParameter("locationgu_no")),Integer.parseInt(request.getParameter("max")));
+		int dto5 = studyBiz.newInfo(dto4);
+		System.out.println("dto4 :"+dto4);
 		if(dto>0) {
 			if(dto2>0) {
-			model.addAttribute("msg","대표 수정성공!");
-			model.addAttribute("url","communityhome.do");
-			return "commond/alert";
+				if(dto5>0) {
+					model.addAttribute("msg","정보 수정성공!");
+					model.addAttribute("url","communityhome.do");
+					return "commond/alert";
+				}else {
+					model.addAttribute("msg","수정성공 !");
+					model.addAttribute("url","communityhome.do");
+					return "commond/alert";
+				}
 			}else {
-				model.addAttribute("msg","대표수정 실패 !");
+				model.addAttribute("msg","수정성공  !");
 				model.addAttribute("url","communityhome.do");
 				return "commond/alert";
 			}
 			}else {
 			if(dto2>0) {
+				
 			model.addAttribute("msg","대표 수정 성공!");
 			model.addAttribute("url","communityhome.do");
 			return "commond/alert";

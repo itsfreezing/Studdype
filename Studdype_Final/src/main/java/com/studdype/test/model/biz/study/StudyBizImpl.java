@@ -124,6 +124,12 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.newLeader(dto);
 	}
 
+	@Override
+	public int newInfo(StudyDto dto) {
+		
+		return study_Dao.newInfo(dto);
+	}
+
 
 	
 }
