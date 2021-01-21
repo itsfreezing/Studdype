@@ -29,6 +29,8 @@ public interface MeetBoardDao {
 	public int selectVoteResultCnt_N(int meet_no);						// 모임게시판_투표 '불참가' [투표 수]
 	public int insertMeetVote(VoteDto dto);								// 모임게시판_투표 [투표하기]
 	public int selectVoteMemberCnt(VoteDto dto);						// 모임게시판_투표 [중복체크]
+	public List<VoteDto> selectAttendMember(int meet_no);				// 모임게시판_투표 '참석' [멤버 리스트]
+	public List<VoteDto> selectAbsentMember(int meet_no);				// 모임게시판_투표 '불참석' [멤버 리스트]
 	public List<MeetDto> selectMeetDBForCalendar(int s_no);				// 캘린더에 meet DB값 가져오기
 
 }
