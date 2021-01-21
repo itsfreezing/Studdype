@@ -56,10 +56,9 @@
 		WHERE S_NO = #{s_no}
 	</select>
 	
-	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
-		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, 1)
+		VALUES(#{s_no}, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, DEFAULT)
 	</insert>
 	
 	<select id="selectStudyFinalNumber" resultType="int">
@@ -71,5 +70,8 @@
 		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
 	</select>
 	
+	<update id="newLeader" parameterType="int" >
+		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
+	</update>
 
 </mapper>
