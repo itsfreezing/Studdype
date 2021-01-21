@@ -318,12 +318,11 @@ public class MeetController {
 		dto = meetBiz.selectOneMeetBoard(dto.getMeet_no());
 		int meetWriter = dto.getMeet_writer();
 		
-		attendList = meetBiz.selectAttendMember(dto.getMeet_no());
-		attendMemberMap = meetBiz.getAttendMemberMap(attendList);
-		System.out.println("aaaaaaa: "+attendList.get(0).getMem_no());
-		System.out.println("aaaaaaa: "+attendMemberMap.get(attendList.get(0).getMem_no()).getMem_id());
-		absentList = meetBiz.selectAbsentMember(dto.getMeet_no());
-		absentMemberMap = meetBiz.getAbsentMemberMap(absentList);
+		attendList = meetBiz.selectAttendMember(dto.getMeet_no()); // [참석] 멤버 리스트
+		attendMemberMap = meetBiz.getAttendMemberMap(attendList);  // [참석] 멤버 정보
+		
+		absentList = meetBiz.selectAbsentMember(dto.getMeet_no()); // [불참석] 멤버 리스트
+		absentMemberMap = meetBiz.getAbsentMemberMap(absentList);  // [불참석] 멤버 정보
 		
 		voteResultMap.put("totalResult", totalResult);
 		voteResultMap.put("result_Y", result_Y);
@@ -331,6 +330,7 @@ public class MeetController {
 		voteResultMap.put("meetWriter", meetWriter);
 		voteResultMap.put("memberCnt", memberCnt);
 		voteResultMap.put("attendList", attendList);
+		voteResultMap.put("absentList", absentList);
 		voteResultMap.put("attendMemberMap", attendMemberMap);
 		voteResultMap.put("absentMemberMap", absentMemberMap);
 		

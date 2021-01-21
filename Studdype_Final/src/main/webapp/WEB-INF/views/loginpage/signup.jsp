@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="./resources/assets/css/font-awesome.min.css">
@@ -18,157 +17,136 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
-<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-
-/*var finish_flag = 0;  //전체 검사 flag 설정
-
-
-function pw_check() {   //비밀번호, 비밀번호 확인 비교 함수
-  var pw = document.getElementById("pw").value;
-  var repw = document.getElementById("repw").value;
-
-  if (pw == "" || repw == "") //두 입력칸 중 비어있는 것이 존재할 때
-  {
-    alert("비밀번호를 입력해주세요."); //메시지 출력
-
-  } else if (pw != repw) {
-    alert("비밀번호가 일치하지 않습니다."); //일치 메시지 출력
-  } else {
-    alert("비밀번호가 일치합니다."); //일치 메시지 출력
-    finish_flag = 1;   //전체 검사 flag 1로 set
-  }
-
-}
-
-function personal_num_check() { //주민등록번호 유효성 검사 (마지막 숫자 비교 방식)
-
-	  var flag = 0; //onkeyup 동작용
-
-	  id_num1 = [];
-	  id_num2 = []; //빈 배열 생성
-	  sum1 = 0;
-	  sum2 = 0; //sum 결과값을 받을 배열 생성
-	  var i = 0;
-	  var j = 0;
-	  var total1 = 0;
-	  var total2 = 0; //전체 더한 값 변수
-	  var num1 = document.getElementById("id_num_1").value;
-	  var num2 = document.getElementById("id_num_2").value; //데이터값 불러오기
-
-	  id_num1 = num1;
-	  id_num2 = num2; //만들어진 배열에 값을 다시 넣어줌
-
-	  for (i = 0; i < 6; i++) //앞자리 연산
-	  {
-	    sum1 += parseInt(id_num1[i]) * (i + 2);
-	  }
-	  //alert(sum1);
-	  total1 = sum1;
-
-	  for (j = 2; j < 6; j++) //뒷자리 index 2~5번 연산
-	  {
-	    sum2 += parseInt(id_num2[j]) * j;
-	  }
-	  total2 = sum2 + parseInt((id_num2[0]) * 8) + parseInt((id_num2[1]) * 9);
-	  //alert(total2);
-	  //alert(id_num2[6]);
-	  if (id_num2.length == 7) {   //뒷자리가 모두 채워지면?
-	    flag = 1;  //flag설정
-	  }
-
-	  if (flag == 1)  //flag 1로 바뀌면 유효성 검사 동작
-	  {
-	  if ((11 - ((total1 + total2) % 11) % 10) == id_num2[6]) //유효성 검사 만족
-	  {
-	    alert("유효한 주민등록번호 입니다..");
-	    flag = 0;  //flag reset
-	  }
-	  else
-	  {
-	    alert("유효하지 않은 주민등록 번호 입니다. 다시 확인해주세요.");
-	    flag = 0;  //flag reset
-	  }
+function chkpwd(){
+	var pw=document.getElementById('memberpw').value;
+	var pw2=document.getElementById('mempwd').value;
+	if(pw!=pw2){
+		document.getElementById('checkpw').style.color="red";
+		document.getElementById('checkpw').innerHTML="동일하지 않습니다";
+	
+	}
+	else{
+		document.getElementById('checkpw').style.color="blue";
+		document.getElementById('checkpw').innerHTML="확인되었습니다";
 	}
 }
 
-	
 
-function show_birth()  //주민번호 생년월일로 자동 출력 함수 
-{
-	 var birth_year = 0;
-	 var birth_month = 0;
-	 var birth_day = 0;
-
-	id_num1 = [];
-	var num1 = document.getElementById("id_num_1").value;  //주민번호 앞자리 데이터 값
-
-	id_num1 = num1;
-		  //alert(id_num1[0]);
-
-	 birth_year = (parseInt(id_num1[0])*10) + parseInt(id_num1[1]);  //생년
-	 birth_month = (parseInt(id_num1[2])*10) + parseInt(id_num1[3]);  //월
-	 birth_day = (parseInt(id_num1[4])*10) + parseInt(id_num1[5]);  //일 두자리씩 숫자로 뽑아냄
-
-		if(birth_year > 20)    //2020 기준으로 나눠줌
-		  {
-		     birth_year = 1900 + birth_year;   //앞 두 자리수가 20초과면 1900 더해줌
-		  }
-		else {
-		      
-		        birth_year = 2000 + birth_year;  //20 이하면 2000년대
-		    }
-
-		  document.getElementById("year").value=birth_year;
-		  document.getElementById("month").value=birth_month;
-		  document.getElementById("day").value=birth_day;   //id값에 따라 값 바꾸어줌
+function checkId(){
+	var id=document.getElementsByName("mem_id")[0];
+	if(id.value.trim()==""||id.value==null){
+		alert("아이디를 입력해주세요");
 	}
+}
+$(document).ready(function(){
+//아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
+	$("#check").click(function(){
+		var mem_id=$("#memberId").val();
+		var memberVal = {
+						"mem_id":mem_id
+		};
 
-	
-
-	function finish_check()
-	{
-	   if(finish_flag == 1)  //비밀번호 확인 누르면? flag 확인
-	   {
-	     return true;  //True 반환
-
-	   }
-	   else {
-	     alert("비밀번호 확인을 해주세요.");  //메시지 출력
-	     return false;  //False 반환
-	   }
-	}
-	
-	$(document).ready(function(){
-		// 취소
-		$(".cencle").on("click", function(){
-			
-			location.href = "/login";
-					    
-		})
-	
-		$("#submit").on("click", function(){
-			if($("#userId").val()==""){
-				alert("아이디를 입력해주세요.");
-				$("#userId").focus();
-				return false;
-			}
-			if($("#userPass").val()==""){
-				alert("비밀번호를 입력해주세요.");
-				$("#userPass").focus();
-				return false;
-			}
-			if($("#userName").val()==""){
-				alert("성명을 입력해주세요.");
-				$("#userName").focus();
-				return false;
-			}
+		$.ajax({
+			url:"idcheck.do",
+			data:JSON.stringify(memberVal),
+			type:"POST",
+			contentType:"application/json",
+			dataType:"json",
+			success:function(data){
+				console.log("0=사용가능 /1=사용불가"+data);
+				if(data==0){
+					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
+						$('#IdCheck').empty();
+						$('#IdCheck').append(html);
+						
+				}else {
+					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
+					$('#IdCheck').empty();
+					$('#IdCheck').append(html);
+					}
+				},error:function(){
+					alert("FAIL");
+			}		
 		});
-		
-			
-		
-	})*/
-</script>		
+	});	
+
+});
+
+function num_check(){
+	var flag=0;
+	rno1=[];
+	rno2=[];
+	sum1=0;
+	sum2=0;
+	var i=0;
+	var j=0;
+	var total=0;
+	var total2=0;
+	var num1=document.getElementById("rno1").value;
+	var num2=document.getElementById("rno2").value;
+	rno1=num1;//앞자리
+	rno2=num2;//뒷자리
+	for(i=0;i<6;i++){
+		sum1+=parseInt(rno1[i])*(i+2);
+	}
+	total1=sum1;
+	for(j=2;j<6;j++){
+		sum2+=parseInt(rno2[j])*j;
+	}
+	total2=sum2+parseInt((rno1[0])*8)+parseInt((rno1[1])*9);
+	if(rno2.length==7){
+		flag=1;
+	}
+	if(flag==1){
+		if((11-((total1+total2)%11)%10)==rno2[6]){
+			alert("유효한 주민등록번호입니다");
+			flag=0;
+		}else{
+			alert("존재하지 않는 주민등록번호 입니다 다시 확인해주세요");
+			flag=0;
+		}
+	}
+}
+function validate(){
+	
+	var form=document.register;
+	
+	if(form.memberId.value==""){
+		alert("아이디를 입력해주세요");
+		form.memberId.focus();
+		return false;
+	}
+	if(form.memberpw.value==""){
+		alert("비밀번호를 입력해주세요");
+		form.memberpw.focus();
+		return false;
+	}
+	if(form.memberemail.value==""){
+		alert("이메일을 입력해주세요");
+		form.memberemail.focus();
+		return false;
+	}
+	if(form.memberName.value==""){
+		alert("이름을 입력해주세요");
+		form.memberName.focus();
+		return false;
+	}
+	if(form.rno1.value==""){
+		alert("주민등록번호를 입력해주세요");
+		form.rno1.focus();
+		return false;
+	}
+	if(form.memberphone.value==""){
+		alert("전화번호를 입력해주세요");
+		form.memberphone.focus();
+		return false;
+	}
+	
+}
+
+</script>
 <style type="text/css">
 h1{
    margin-top:5%;
@@ -231,7 +209,7 @@ table{
    color:#F5A9F2;
 
 }
-#btn{
+#check{
    background:#7401DF;
    color:white;
    width:130px;
@@ -259,7 +237,6 @@ table{
    
 }
 input{
-  
    width:320px;
    height:30px;
 }
@@ -269,42 +246,48 @@ input{
    height:30px;
    border: 2px solid #DA81F5;
 }
-#join{
+#signUp{
 	width:150px;
 	height:30px;
 }
+
+#phone{
+	width:250px;
+	height:30px;
+}
+
 </style>
 
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-
-   <img src="" id="pic">
+ <img src="" id="pic">
    <br><br>   
       <h3>--Please be our colleague--</h3>
       <br><h2 id="big">정보를 입력해주세요</h2>
    <div id="signtitle">
-      <form action="signup.do" method="POST" onsubmit = "return finish_check()">
-         <table>
+      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" onsubmit="return validate();">
+        <table>
                     <tr>
                         <td><h3 id="idtitle">아이디</h3></td>
                     </tr>
                     <tr>
                       <td> 
-                           
-                           <input type="text" name="mem_id" value="" style="border:2px solid #DA81F5;" size="25" maxlength="12" placeholder="아이디를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}" title = "4~12자의 영문 대소문자와 숫자로만 입력" required />
+                           <input type="text" title="n" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
+                     		<input type="button" value="중복확인" id="check" onclick="checkId();">
                      </td>
                     </tr>
-
                     <tr>
+						<td colspan=3 id="IdCheck"></td>
+					</tr>
+                   <tr>
                         <td>
                             <h3 id="idtitle">비밀번호</h3>
                         </td>
                     </tr>   
                     <tr>           
                         <td>
-                            <input type="password" id="pw"name="pw" value=""  style="border:2px solid #DA81F5;" maxlength="12" size="25" placeholder="비밀번호를 입력해주세요" pattern="[a-zA-Z0-9]{4,12}"required />
-
+                            <input type="password" id="memberpw"  title="n"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요">
                         </td>
                     </tr>
                     <tr>
@@ -314,8 +297,8 @@ input{
                     </tr> 
                     <tr>
                         <td colspan="5">
-                            <input type="password" name="mem_pw"style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" id="repw" value="" size="20" maxlength="12">
-                            <input type="button" name="pwc"  id="btn"value="check" onclick="pw_check()">
+                            <input type="password" name="mempwchk" id="mempwd" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="chkpwd();">
+                        	<div id="checkpw">동일한 암호를 입력</div>
                         </td>
                     </tr>
 
@@ -326,13 +309,14 @@ input{
                     </tr> 
                     <tr>
                     	<td>
-                    		<input type="text" name="mem_email" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}" required />
+                    		<input type="text" title="n" name="mem_email" id="memberemail" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" >
+                    	    <input type="button" value="인증번호 전송 " id="check" onclick="sendemail();">  
                     	</td>
                     </tr>
                     <tr id="ssss">
                         <td>
                               <h3 id="idtitle">인증번호 </h3>
-                          </td>
+                        </td>
                         <td id="code" width="600"></td>	
                     </tr>
                     <tr>
@@ -341,18 +325,20 @@ input{
                         </td>
                     </tr> 
                     <tr>
-                        <td><input type="text" name="mem_name" style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요"></td>
+                        <td><input type="text" name="mem_name" id="memberName"style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요" onclick="ChkConfirm(),ChkConfirm2()"></td>
                     </tr>
                     <tr>
                     	<td>
                     		<h3 id="idtitle">주민등록번호 </h3>
                     	</td>
                     </tr>
+                    
                     <tr>
                     	<td colspan="5">
-                    		<input type="text" name="mem_rno" style="border: 2px solid #DA81F5;" id ="id_num_1" maxlength="6" onkeyup="show_birth()" required /> -<input type="password" name="id_num_2" style="border: 2px solid #DA81F5;" id ="id_num_2" maxlength="7" onkeyup="personal_num_check()">
+                    		   <input type="text" id="rno1" name="mem_rno" title="n" maxlength="6">-<input type="password" name="memrno" id="rno2" onkeyup="num_check()" >
                     	</td>
                     </tr>
+                    
                     <tr>
                     	<td>
                     		<h3 id="idtitle">핸드폰 번호 </h3>
@@ -360,18 +346,26 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    		<input type="text" name ="mem_phone" style="border: 2px solid #DA81F5;" placeholder="번호를 입력해주세요">
+                    	<!--  <select id="phone" name="mem_phone" class="telnum">
+                    			<option value="010" selected>010</option>
+                    			<option value="011">011</option>
+                    			<option value="016">016</option>
+                    			<option value="018">018</option>
+							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="-[0-9]{4}-[0-9]{4}">	
+							 -->
+							<input type="tel" id="memberphone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">							
+                    	 
                     	</td>
                     </tr>
-
-                    <tr>
+                   
+                       <tr>
                     	<td>
                     		<h3 id="idtitle">성별 </h3>
                     	</td>
                     </tr>
                     <tr>
                     	<td>
-		               		<select id="select" name="mem_gender" style="border: 2px solid #DA81F5;">
+		               		<select id="select" name="mem_gender" id="gender"style="border: 2px solid #DA81F5;">
 					        	<option value="M">
 					        		남자 
 					        	</option>
@@ -381,29 +375,12 @@ input{
 					        </select>
 					     </td>
                     </tr>
-                    
-                    
+                
         </table>
-		      
-		<br>
-      		  <center>
-		        <input type="submit" name="join"  id="join" value="회원 가입">
-		      </center>
-        
-      </form>
-
-   </div>
-
-	  
-	  
-		<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
-	
-		<script src="./resources/assets/js/popper.min.js"></script>
-		<script src="./resources/assets/js/bootstrap.min.js"></script>
-		<script src="./resources/assets/js/owl.carousel.min.js"></script>
-		<script src="./resources/assets/js/modal-video.js"></script>
-		<script src="./resources/assets/js/loadmore.js"></script>
-		<script src="./resources/assets/js/prefixfree.min.js"></script>
-		<script src="./resources/assets/js/main.js"></script>
-  </body>
-  </html> 
+        <br>
+		<center>
+          <input type="submit" id="sign" name="join" value="회원가입">
+       </form>
+      </div>
+</body>
+</html>

@@ -248,7 +248,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return res;
 	}
 	
-	// 모임게시판_투표 [참석자]
+	// 모임게시판_투표 '참석' [멤버 리스트]
 	@Override
 	public List<VoteDto> selectAttendMember(int meet_no) {
 		List<VoteDto> attendList = null;
@@ -263,7 +263,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return attendList;
 	}
 	
-	// 모임게시판_투표 [불참석자]
+	// 모임게시판_투표 '불참석' [멤버 리스트]
 	@Override
 	public List<VoteDto> selectAbsentMember(int meet_no) {
 		List<VoteDto> absentList = null;

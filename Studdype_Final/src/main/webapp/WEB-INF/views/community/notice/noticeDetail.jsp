@@ -472,10 +472,10 @@ function downloadFile(btn){
 				<c:when test="${dto.b_writer == login.mem_no }">
 					<input type="button" class="free_Btn" value="삭제" onclick="location.href='noticeBoardDelete.do?b_no=${dto.b_no}'" />
 					<input type="button" class="free_Btn"  value="수정" onclick="location.href='noticeBoardUpdateForm.do?b_no=${dto.b_no}'" />
-					<input type="button" class="free_Btn" value="홈" onclick="location.href='communityhome.do'">
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='${prevPage}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="free_Btn" value="홈" onclick="location.href='communityhome.do'">
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='${prevPage}'">
 				</c:otherwise>
 			</c:choose>
 		

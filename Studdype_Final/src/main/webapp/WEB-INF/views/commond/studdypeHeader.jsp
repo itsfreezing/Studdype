@@ -6,6 +6,7 @@
 <html lang="en">
 
 <head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 function logout_btn(){
 	var form = $("#logoutForm");
@@ -17,6 +18,13 @@ function logout_btn(){
 		form.submit();
 	}
 };
+
+$(function() {
+	$(".feature-page.header-area").css("height", "80px");
+	//$(".justify-content-center").hide(); //-> 스터디 홈 스크립트에서 실행 
+	$(".hero-text-wrapper").css("height", "400px");
+});
+
 </script>
 	
 </head>
@@ -31,7 +39,7 @@ function logout_btn(){
 				<nav class="navbar navbar-expand-lg navbar-light fixed-top">
 				
 					<!-- 헤더 좌측 로고 -->
-					<a class="navbar-brand" href="studdypehome.do"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
+					<a class="navbar-brand" href="studyList.do"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     					<span class="navbar-toggler-icon"></span>
  					</button>
@@ -41,7 +49,7 @@ function logout_btn(){
 						<div class="mainmenu">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item">
-								<a class="nav-link" href="studdypehome.do">스터띱 홈</a>
+								<a class="nav-link" href="studyList.do">스터띱 홈</a>
 								</li>
 								<li class="active nav-item">
 									<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
@@ -83,16 +91,12 @@ function logout_btn(){
 							</div>
 							
 						</div>
-						
+			
 					</div>
 					</form>
 			
 				<!-- 네비 끝 -->
-		
-
-			<div class="row justify-content-center">
-			
-
+				<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
@@ -100,25 +104,13 @@ function logout_btn(){
 
 								<h1><c:if test="${studylist != null}">My Page</c:if></h1>
 
-								<h1></h1>
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<!-- 헤더 텍스트 끝 -->
-	
-
 	<!-- 헤더 끝 -->
- 
-
-
-	
-
-
-	
 </body>
 
 </html>
