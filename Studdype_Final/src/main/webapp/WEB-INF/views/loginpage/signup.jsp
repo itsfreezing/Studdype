@@ -84,23 +84,6 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function(){
-	var tel;
-	var formatNum;
-	for(var i=0;i<$(".telnum").length;i++){
-		tel=$(".telnum").eq(i).text();
-		if(tel.legnth==11){
-			formatNum=tel.replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3');
-		}else if(tel.length==8){
-			formatNum=tel.replace(/(\d{4})(\d{4})/,'$1-$2');
-		}else{
-			if(tel.indexOf('010')==0){
-				formatNum=tel.replace(/\(\d{3}) (\d{4})(\d{4})/,'$1-$2-$3');
-			}
-		}
-		$(".telnum").eq(i).text(formatNum);	
-	}
-});
 function num_check(){
 	var flag=0;
 	rno1=[];
@@ -169,7 +152,7 @@ function signup(){
 			alert("주민번호를 입력해주세요");
 			return false;
 		}
-		
+		alert("회원가입 성공");
 		signupform.submit();
 }
 
@@ -373,12 +356,13 @@ input{
                     </tr>
                     <tr>
                     	<td colspan="5">
-                    	<!-- 	<select id="phone" name="mem_phone" class="telnum">
+                    	<!-- <select id="phone" name="mem_phone" class="telnum">
                     			<option value="010" selected>010</option>
                     			<option value="011">011</option>
                     			<option value="016">016</option>
                     			<option value="018">018</option>
-							</select>- -->
+							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">	
+							 -->
 							<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">	
 													
                     	 
