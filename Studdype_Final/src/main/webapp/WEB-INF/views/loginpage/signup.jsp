@@ -118,27 +118,28 @@ function validate(){
 		form.memberId.focus();
 		return false;
 	}
-	if(form.memberpw.value==""){
+	
+	else if(form.memberpw.value==""){
 		alert("비밀번호를 입력해주세요");
 		form.memberpw.focus();
 		return false;
 	}
-	if(form.memberemail.value==""){
+	else if(form.memberemail.value==""){
 		alert("이메일을 입력해주세요");
 		form.memberemail.focus();
 		return false;
 	}
-	if(form.memberName.value==""){
+	else if(form.memberName.value==""){
 		alert("이름을 입력해주세요");
 		form.memberName.focus();
 		return false;
 	}
-	if(form.rno1.value==""){
+	else if(form.rno1.value==""){
 		alert("주민등록번호를 입력해주세요");
 		form.rno1.focus();
 		return false;
 	}
-	if(form.memberphone.value==""){
+	else if(form.memberphone.value==""){
 		alert("전화번호를 입력해주세요");
 		form.memberphone.focus();
 		return false;

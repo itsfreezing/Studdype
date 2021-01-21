@@ -63,5 +63,6 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.memberDelete(mem_no);
 	}
 
+
 	
 }

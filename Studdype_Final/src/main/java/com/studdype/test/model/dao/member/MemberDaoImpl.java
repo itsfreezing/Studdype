@@ -294,4 +294,18 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
+	//아이디 찾기
+    @Override 
+    public MemberDto findId(MemberDto dto) {
+    	MemberDto res= null;
+    	
+    	try {
+    		res=sqlSession.selectOne(NAMESPACE+"findId",dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR:FindId]");
+			e.printStackTrace();
+		}
+    	return res;
+   }
+
 }

@@ -46,7 +46,7 @@ public interface MemberDao {
 
 	
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
-	
+	public MemberDto findId(MemberDto dto);
 	
 	
 	
