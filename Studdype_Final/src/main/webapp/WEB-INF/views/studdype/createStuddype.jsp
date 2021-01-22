@@ -169,44 +169,40 @@
 		var maxcnt = $("#maxcnt_id").val();
 		var content = $("#content_id").val();
 		
-		var errorMsg = "";
-		
 		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
 			$("#mem_name_id").css('border', '1.5px solid red');
-			errorMsg += "스터디 이름 / ";
-		}
-		if(info.trim() == "" || info == null || info == undefined ||
+			alert("스터디 이름 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			return false;
+		}else if(info.trim() == "" || info == null || info == undefined ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			errorMsg += "한줄 소개 / "
-		}
-		if(category == "카테고리 분류") {
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			return false;
+		}else if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
-			errorMsg += "카테고리 / ";
-		}
-		if(locationSi == "(시 단위)") {
+			alert("스터디 카테고리를 선택해주세요.");
+			return false;
+		}else if(locationSi == "(시 단위)") {
 			$("#selectLocationSi").css('border', '1.5px solid red');
-			errorMsg += "지역(시) / ";
-		}
-		if(locationGu == "(구/군 단위)") {
+			alert("스터디 지역(시)을 선택해주세요.");
+			return false;
+		}else if(locationGu == "(구/군 단위)") {
 			$("#selectLocationGu").css('border', '1.5px solid red');
-			errorMsg += "지역(구/군) / ";
-		}
-		if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
+			alert("스터디 지역(구/군)을 선택해주세요.");
+			return false;
+		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
 			$("#maxcnt_id").css('border', '1.5px solid red');
-			errorMsg += "최대 인원 / ";
-		}
-		if(content.trim() == "" || content == null || content == undefined ||
+			alert("스터디 최대 인원 작성란을 작성해주세요.");
+			return false;
+		}else if(content.trim() == "" || content == null || content == undefined ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
 			$("#content_id").css('border', '1.5px solid red');
-			errorMsg += "상세 소개글 ";
-		}
-		
-		if(!(errorMsg == null) && !(errorMsg == "")) {
-			alert(errorMsg+"항목을 모두 기입해주세요. (스터디 대표사진은 미입력 가능)");
+			alert("스터디 상세 소개글 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
 			return false;
+		}else {
+			return true;
 		}
 		
 	} // submit 종료
