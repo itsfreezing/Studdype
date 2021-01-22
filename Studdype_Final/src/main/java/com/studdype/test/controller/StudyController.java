@@ -209,4 +209,36 @@ public class StudyController {
 	}
 
 	}
+	
+	// 스터디 디테일 페이지(스터디 홈에서 리스트 클릭 시 넘어옴)
+	@RequestMapping("/studdypeDetailForm.do")
+	public String studdypeDetailForm(Model model, HttpServletRequest request) {
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
+		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
+		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
+		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
+		
+		model.addAttribute("study", studyDto);
+		model.addAttribute("leader", memberDto);
+		model.addAttribute("mainBook", bookDto);
+		
+		return "studdype/StuddypeDetailForm";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

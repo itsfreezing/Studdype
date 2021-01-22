@@ -51,6 +51,7 @@
 		
 		// 해더 상단 영역 숨기기 (스터디 홈에선 필요없음)
 		$(".justify-content-center").hide(); 
+		
 	});
 	
 	$(document).on('click', '#btnSearch', function(e){
@@ -138,7 +139,7 @@ input#search:focus {
 				<!-- list 시작 -->
 				<c:forEach items="${studyList }" var="studyDto">
 					<div class="col-lg-4 blogs-load"
-						onclick="location.href='index.jsp'" style="cursor: pointer">
+						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
