@@ -111,6 +111,9 @@ public class FreeBizImpl implements FreeBiz {
 			res = freeBoardDao.deleteBoard(b_no);
 		}
 		
+		if(fileList == null || res < 1) {
+			throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+		}		
 		return res;
 	}
 
@@ -132,6 +135,10 @@ public class FreeBizImpl implements FreeBiz {
 				fileHandler.writeFile(mfileList[i] , path, fileList.get(i).getF_url());
 			}
 		}
+		
+		if(updateRes < 1  || res < 1 || resCnt != fileList.size()) {
+			throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+		}		
 		
 		
 		return res;
