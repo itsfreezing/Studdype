@@ -49,9 +49,13 @@ public class NoticeReplyBizImpl implements NoticeReplyBiz{
 			}else { //사이즈가 1이아니면 -> 답글이 있으면
 				res = noticeReplyDao.deleteParentReply(r_no);
 			}
+			if(res < 1 || reply == null || groupReplyList == null) {
+				throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+			}
 			
 		} else {
 			res = noticeReplyDao.deleteReply(r_no);
+			
 
 			//글 삭제에 성공했으면
 			if (res > 0) {
@@ -66,6 +70,9 @@ public class NoticeReplyBizImpl implements NoticeReplyBiz{
 					// 6. 댓글 클래스가 -1이면(삭제된컬럼) 댓글 삭제
 					if (r_class == -1) {
 						res = noticeReplyDao.deleteReply(groupReplyList.get(0).getR_no());
+					}
+					if(res < 1 || reply == null || groupReplyList == null) {
+						throw new RuntimeException("[자유게시판] 글 가져오기 에러");
 					}
 				}
 			}
