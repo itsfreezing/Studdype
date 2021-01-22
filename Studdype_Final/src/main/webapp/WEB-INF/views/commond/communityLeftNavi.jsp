@@ -50,7 +50,7 @@
     <div class="left-navigation">
         <div class="real-left">
         <ul class="leftnavi-ul">
-            <li class="leftnavi-item" > <img src="./resources/assets/img/category_home_gray.png"><input type="button" value="스터디홈" onclick="location.href='communityhome.do'"  class="navBtn" id="studyhome"></li>
+            <li class="leftnavi-item" > <img src="./resources/assets/img/category_home_gray.png"><input type="button" value="스터디홈" onclick="location.href='studycommunity.do?s_no=${study.s_no}'"  class="navBtn" id="studyhome"></li>
   			<c:if test="${study.leader_no == login.mem_no }">
   				<li class="leftnavi-item" > <img src="./resources/assets/img/category_notice.png"><input type="button" value="공지사항" onclick="location.href='notice.do'"  class="navBtn" id="notice"></li>
   			</c:if>          	

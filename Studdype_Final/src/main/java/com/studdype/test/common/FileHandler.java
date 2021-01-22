@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -172,5 +174,18 @@ public class FileHandler {
 		
 		
 		return fileList;
+	}
+	
+	// 파일명만 String으로 뽑아내기
+	// ex) C:\workspace\~\wtpwebapps\Studdype_Final\resources\file\example.jpg => return fileName == example.jpg
+	// DB에 String으로 저장된 파일의 실제경로를 매개변수로 가지고 메소드를 실행하면 파일의 이름만 추출해주는 메소드
+	public String getFileName(String f_url) {
+		
+		File file = new File(f_url);
+		String fileName = null;
+		
+		fileName = file.getName();
+		
+		return fileName;
 	}
 }

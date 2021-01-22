@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
@@ -301,22 +302,9 @@ public class HomeController {
 		
 	}
 
-	//커뮤니티 홈으로
-
-	@RequestMapping("/communityhome.do")
-	public String communityHome(HttpSession session,Model model) {
-		
-
-		session.setAttribute("leftnavi", "studyhome");
-	
-		return "community/communityHome";
-	}
-	
-		//커뮤니티 홈으로 테테테테테스트트트ㅡ트ㅡㅡ용
-
-		@RequestMapping("/communityhome1.do")
-		public String communityHome1(HttpSession session,Model model) {
-		
+	//커뮤니티 홈으로 테테테테테스트트트ㅡ트ㅡㅡ용
+	@RequestMapping("/communityhome1.do")
+	public String communityHome1(HttpSession session,Model model) {
 
 		/////////////////////// 테스트용 세션
 		MemberDto login = memberBiz.selectOne(1);
@@ -329,20 +317,47 @@ public class HomeController {
 	
 		return "community/communityHome";
 	}
+	
 	//마이페이지에서 studycommunity 접근시
 	@RequestMapping("studycommunity.do")
-	public String studycommunity(HttpSession session,int s_no) {
-	
-		StudyDto study = studyBiz.selectOneBySno(s_no);
+	public String studycommunity(HttpSession session, Model model,int s_no) {
+		FileHandler filehandler = new FileHandler();	// FileHandler Class 객체 생성
+		StudyDto study = studyBiz.selectOneBySno(s_no);	// 스터디 번호로 스터디하나 선택하기
 		
+		// DB에 저장된 사진이 없을 때 
+		// null 값으로 넣으면 nullPointerException 발생
+		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력
+		// JSP의 onError 속성으로 noImage.jpg 로드
+		if(study.getPhoto() == null ) {
+			study.setPhoto("no_url_of_photo_from_studyTB"); 
+		}
+		// FileHandler의 getFilName 메소드 매개변수에 파일경로를 넣어준다.
+		filehandler.getFileName(study.getPhoto());
+		
+		System.out.println("-----------------------------------------------------------------------\n"
+						  +"<<스터디 홈>> ["+study.getS_no()+"]번 스터디 DB에 저장된 이미지의 경로가\n["+study.getPhoto()+"] 입니다.\n"
+						  +"-----------------------------------------------------------------------");
+		
+		
+		model.addAttribute("fileName", filehandler.getFileName(study.getPhoto()));
 		session.setAttribute("study", study);
-		
 		session.setAttribute("leftnavi", "studyhome");
 		
 		return "community/communityHome";
 	}
 	
+	// 커뮤니티 홈
+	@RequestMapping("/communityhome.do")
+	public String communityHome(HttpSession session,Model model, int s_no) {
+		StudyDto study = studyBiz.selectOneBySno(s_no);
+		String photo = study.getPhoto();
 
+		session.setAttribute("leftnavi", "studyhome");
+		model.addAttribute("photo", photo);
+		return "community/communityHome";
+	}
+	
+	
 
 	
 	@RequestMapping("/signupform.do")
