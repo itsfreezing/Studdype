@@ -34,4 +34,17 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		return resCnt;
 	}
 
+	@Override
+	public int updateMainPhoto(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMainPhoto", b_no);
+		} catch (Exception e) {
+			System.out.println("에러 메인사진 업데이트");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

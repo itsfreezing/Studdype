@@ -15,6 +15,12 @@
 		INSERT INTO PHOTO_FILE
 		VALUES ( PHOTOFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM PHOTO_BOARD), #{f_name}, #{f_size}, #{f_url}, DEFAULT )
 	</insert>
+	
+	<update id="updateMainPhoto" parameterType="fileDto">
+		UPDATE PHOTO_FILE
+		SET PHOTO_ISMAIN = 'Y'
+		WHERE F_NO = (SELECT MIN(F_NO) FROM PHOTO_FILE WHERE B_NO = #{b_no})
+	</update>
 
 
 

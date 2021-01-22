@@ -39,6 +39,8 @@ public class photoBoardBizImpl implements photoBoardBiz{
 				fileHandler.writeFile(mfileList[i], path, fileList.get(i).getF_url());
 			}
 		}
+		photoFileDao.updateMainPhoto(boardDto.getB_no());
+		
 		return res;
 		
 	}

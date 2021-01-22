@@ -89,15 +89,15 @@ public class ImageBoardController {
 		boardDto.setS_no(s_no);
 
 		MultipartFile[] mfileList = uploadFile.getFile(); // multipartFile 리스트 생성
-		System.out.println(mfileList);
+		
 		if (mfileList != null) {
 			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);
 			String path = fileHandler.getPath(request);
 
 			res = photoBiz.writeGallery(boardDto, mfileList, path, fileList);
+			
 		} else {
 			res = photoBiz.writeGallery(boardDto);
-			System.out.println(res);
 		}
 		if (res > 0) {
 			return "redirect:gallery.do";
