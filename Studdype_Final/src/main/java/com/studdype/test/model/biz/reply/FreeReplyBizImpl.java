@@ -45,6 +45,10 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 				res = freeReplyDao.deleteParentReply(r_no);
 			}
 			
+			if(res < 1 || reply == null || groupReplyList == null) {
+				throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+			}
+			
 		} else {
 			res = freeReplyDao.deleteReply(r_no);
 
@@ -61,6 +65,9 @@ public class FreeReplyBizImpl implements FreeReplyBiz {
 					// 6. 댓글 클래스가 -1이면(삭제된컬럼) 댓글 삭제
 					if (r_class == -1) {
 						res = freeReplyDao.deleteReply(groupReplyList.get(0).getR_no());
+					}
+					if(res < 1 || reply == null || groupReplyList == null) {
+						throw new RuntimeException("[자유게시판] 글 가져오기 에러");
 					}
 				}
 			}
