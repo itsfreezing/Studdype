@@ -34,13 +34,47 @@ function chkpwd(){
 }
 
 
-function checkId(){
-	var id=document.getElementsByName("mem_id")[0];
-	if(id.value.trim()==""||id.value==null){
-		alert("아이디를 입력해주세요");
-	}
-}
-$(document).ready(function(){
+$(document).ready(function(){ 
+	$("#signup").click(function(){	
+		if($("#memberId").val().trim()==""){
+			alert("아이디를 입력해주세요");
+			$("#memberId").focus();
+			return false;
+		}
+		else if($("#memberpw").val().trim()==""){
+			alert("password를 입력해주세요");
+			$("#memberpw").focus();
+			return false;
+		}else if($("#memberpw").val()!=$("#mempwd").val()){
+			alert("패스워드가 다릅니다");
+			$("#memberpw").focus();
+			return false;
+		}else if($("#memberemail").val()==""){
+			alert("이메일을 입력해주세요");
+			$("#memberemail").focus();
+			return false;
+		}else if($("#memberName").val()==""){
+			alert("이름을 입력해주세요");
+			$("#memberName").focus();
+			return false;
+		}else if($("#rno1").val()==""||$("#rno2").val()==""){
+			alert("주민번호를 입력해주세요");
+			$("#rno1").focus();
+			return false;
+		}
+		else if($("#memberphone").val()==""){
+			alert("핸드폰번호를 입력해주세요");
+			$("#memberphone").focus();
+			return false;
+		}else if($("#gender").val()==""){
+			alert("성별을 선택해주세요");
+			$("#gender").focus();
+			return false;
+		}else{
+			$("#signupform").submit();
+		}
+	});	
+	
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
 		var mem_id=$("#memberId").val();
@@ -60,19 +94,28 @@ $(document).ready(function(){
 					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
 						$('#IdCheck').empty();
 						$('#IdCheck').append(html);
-						
 				}else {
 					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
 					$('#IdCheck').empty();
 					$('#IdCheck').append(html);
+						
 					}
 				},error:function(){
-					alert("FAIL");
+					alert("통신 FAIL");
 			}		
 		});
-	});	
-
+	});
 });
+
+/*$("#check").click(function(){
+		var id=$("#memberId").attr("title");
+		if($("#memberId").attr("title","n")){
+			alert("사용불가능한 아이디");
+		}else{
+			alert("사용가능");
+		}
+	});
+*/
 
 function num_check(){
 	var flag=0;
@@ -109,43 +152,7 @@ function num_check(){
 		}
 	}
 }
-function validate(){
-	
-	var form=document.register;
-	
-	if(form.memberId.value==""){
-		alert("아이디를 입력해주세요");
-		form.memberId.focus();
-		return false;
-	}
-	
-	else if(form.memberpw.value==""){
-		alert("비밀번호를 입력해주세요");
-		form.memberpw.focus();
-		return false;
-	}
-	else if(form.memberemail.value==""){
-		alert("이메일을 입력해주세요");
-		form.memberemail.focus();
-		return false;
-	}
-	else if(form.memberName.value==""){
-		alert("이름을 입력해주세요");
-		form.memberName.focus();
-		return false;
-	}
-	else if(form.rno1.value==""){
-		alert("주민등록번호를 입력해주세요");
-		form.rno1.focus();
-		return false;
-	}
-	else if(form.memberphone.value==""){
-		alert("전화번호를 입력해주세요");
-		form.memberphone.focus();
-		return false;
-	}
-	
-}
+
 
 </script>
 <style type="text/css">
@@ -267,15 +274,15 @@ input{
       <h3>--Please be our colleague--</h3>
       <br><h2 id="big">정보를 입력해주세요</h2>
    <div id="signtitle">
-      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" onsubmit="return validate();">
+      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" >
         <table>
                     <tr>
                         <td><h3 id="idtitle">아이디</h3></td>
                     </tr>
                     <tr>
                       <td> 
-                           <input type="text" title="n" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
-                     		<input type="button" value="중복확인" id="check" onclick="checkId();">
+                           <input type="text" title="y" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
+                     		<input type="button" value="중복확인" id="check" >
                      </td>
                     </tr>
                     <tr>
@@ -380,7 +387,7 @@ input{
         </table>
         <br>
 		<center>
-          <input type="submit" id="sign" name="join" value="회원가입">
+          <input type="submit" id="signup" name="join" value="회원가입">
        </form>
       </div>
 </body>

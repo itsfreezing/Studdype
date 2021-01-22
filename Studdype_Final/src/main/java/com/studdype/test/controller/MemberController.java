@@ -74,7 +74,7 @@ public class MemberController {
 		int isUsed=0;
 		System.out.println(dto.getMem_id());
 		res=memberBiz.idchk(dto.getMem_id());
-		if(res!=null) { //중복되지 않는 아이디일경우 
+		if(res!=null) { //중복되는 아이디일경우 
 			 isUsed=1;
 		}else {
 			 isUsed=0;
