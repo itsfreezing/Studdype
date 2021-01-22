@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
@@ -320,14 +321,27 @@ public class HomeController {
 	//마이페이지에서 studycommunity 접근시
 	@RequestMapping("studycommunity.do")
 	public String studycommunity(HttpSession session, Model model,int s_no) {
-	
-		StudyDto study = studyBiz.selectOneBySno(s_no);
-		System.out.println("study: "+study.getPhoto());
-		System.out.println("s_name: "+study.getS_name());
+		FileHandler filehandler = new FileHandler();	// FileHandler Class 객체 생성
+		StudyDto study = studyBiz.selectOneBySno(s_no);	// 스터디 번호로 스터디하나 선택하기
 		
+		// DB에 저장된 사진이 없을 때 
+		// null 값으로 넣으면 nullPointerException 발생
+		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력
+		// JSP의 onError 속성으로 noImage.jpg 로드
+		if(study.getPhoto() == null ) {
+			study.setPhoto("no_url_of_photo_from_studyTB"); 
+		}
+		// FileHandler의 getFilName 메소드 매개변수에 파일경로를 넣어준다.
+		filehandler.getFileName(study.getPhoto());
+		
+		System.out.println("-----------------------------------------------------------------------\n"
+						  +"<<스터디 홈>> ["+study.getS_no()+"]번 스터디 DB에 저장된 이미지의 경로가\n["+study.getPhoto()+"] 입니다.\n"
+						  +"-----------------------------------------------------------------------");
+		
+		
+		model.addAttribute("fileName", filehandler.getFileName(study.getPhoto()));
 		session.setAttribute("study", study);
 		session.setAttribute("leftnavi", "studyhome");
-		model.addAttribute("study", study);
 		
 		return "community/communityHome";
 	}
@@ -336,13 +350,14 @@ public class HomeController {
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session,Model model, int s_no) {
 		StudyDto study = studyBiz.selectOneBySno(s_no);
-		System.out.println("study: "+study.getPhoto());
+		String photo = study.getPhoto();
 
 		session.setAttribute("leftnavi", "studyhome");
+		model.addAttribute("photo", photo);
 		return "community/communityHome";
 	}
 	
-
+	
 
 	
 	@RequestMapping("/signupform.do")
