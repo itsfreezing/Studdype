@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +67,6 @@ public class FileHandler {
 	}
 	//파일 한개 삭제
 	public int deleteFile(FileDto dto) {
-		
 		String path = dto.getF_url();
 		File file = new File(path);
 		int res = 0;
@@ -173,5 +174,25 @@ public class FileHandler {
 		
 		
 		return fileList;
+	}
+	
+	// 파일명만 String으로 뽑아내기
+	// ex) C:\workspace\~\wtpwebapps\Studdype_Final\resources\file\example.jpg => return fileName == example.jpg
+	// DB에 String으로 저장된 파일의 실제경로를 매개변수로 가지고 메소드를 실행하면 파일의 이름만 추출해주는 메소드
+	// DB에 저장된 경로와 접근하려는 폴더명을 매개변수로 받아 폴더 하위 경로만 받아가는 메소드
+	public String getFileName(String f_url, String folderName) {
+		String[] fileNames;
+		String fileName = "";
+		
+		try {
+			fileNames = f_url.split(folderName);
+			fileName = "."+fileNames[fileNames.length-1];
+			
+		} catch (Exception e) {
+			fileName = f_url;
+			e.printStackTrace();
+		}
+		
+		return fileName;
 	}
 }

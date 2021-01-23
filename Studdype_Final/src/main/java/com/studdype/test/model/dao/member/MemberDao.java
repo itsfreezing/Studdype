@@ -5,9 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -29,6 +32,10 @@ public interface MemberDao {
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list);  // [모임게시판]
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); // [자유게시판]
 	
+	// 투표한 사람 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
+	Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list);  // [모임게시판_투표_참석]
+	Map<Integer, MemberDto> selectAbsentMemberList(List<VoteDto> list);  // [모임게시판_투표_불참석]
+	
 	// 게시판 댓글 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); // [자유게시판 댓글]
 	Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList); // [모임게시판 댓글] 
@@ -41,6 +48,8 @@ public interface MemberDao {
 	// 도서 관련 메소드
 	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
 	public Map<Integer, MemberDto> getBookWriterName(int mem_no); // 해당 도서 아이디, 이름 찾아오기
+
+	
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
 	
 	

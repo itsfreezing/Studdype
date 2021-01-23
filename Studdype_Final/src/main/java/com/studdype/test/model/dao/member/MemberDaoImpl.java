@@ -1,18 +1,20 @@
 package com.studdype.test.model.dao.member;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.studdype.test.model.dto.member.MemberDto;
+
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
-import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
@@ -21,7 +23,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	//로그인
 	@Override
 	public MemberDto login(MemberDto dto) {
@@ -186,6 +188,44 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 	
+	// [모임게시판 투표_참가] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list) {
+		Map<Integer, MemberDto> resMap = new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getMem_no();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne",mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectAttendMemberList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMem_no(), dto);
+		}
+		return resMap;
+	}
+	
+	// [모임게시판 투표_불참가] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectAbsentMemberList(List<VoteDto> list) {
+		Map<Integer, MemberDto> resMap = new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getMem_no();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne",mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectAttendMemberList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMem_no(), dto);
+		}
+		return resMap;
+	}
+	
 	// [모임게시판 댓글] 리스트로 member 정보 가져오기
 	@Override
 	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
@@ -197,7 +237,7 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberMyMeetReply ---------- [ERROR]");
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberByMeetReply ---------- [ERROR]");
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);
@@ -251,7 +291,7 @@ public class MemberDaoImpl implements MemberDao{
 		
 			
 		} catch (Exception e) {
-			System.out.println("ERROR: idchk!!!!!!!!!!!!!!!!");
+			System.out.println("ERROR: idchk FAIL!!!!!!!!!!!!!!!!");
 			
 			e.printStackTrace();
 		}
@@ -276,6 +316,9 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return getBookWriterName;
 	}
+	
+
+		
 	//마이페이지 회원탈퇴 클릭시
 	@Override
 	public int memberDelete(int mem_no) {

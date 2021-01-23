@@ -218,6 +218,8 @@ public class StudyController {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
+		System.out.println(studyDto);
+		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
 		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no());
 		

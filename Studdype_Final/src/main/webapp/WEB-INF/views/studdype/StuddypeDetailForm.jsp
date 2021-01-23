@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/mainstyle.css">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
@@ -129,9 +129,8 @@
 	// 대표사진 src 형식에 맞추기 함수
 	function imageSetting() {
 		var imgPath = $("#img_url").val();
-		var imgRealPath = imgPath.split("Studdype_Final");
 		
-		$("#mainPhoto").attr("src", "."+imgRealPath[1]);
+		$("#mainPhoto").attr("src", imgPath);
 	}
 </script>
 </head>

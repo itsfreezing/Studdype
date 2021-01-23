@@ -121,4 +121,32 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 		return resList;
 	}
 
+	//공지 게시판 글 삭제
+	@Override
+	public int deleteBoard(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: deleteBoard!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//공지 게시판 글 수정
+	@Override
+	public int updateBoard(BoardDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateBoard", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR}: updateBoard");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

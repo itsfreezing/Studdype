@@ -38,6 +38,14 @@
 		WHERE B_NO = #{b_no}
 	</select>
 	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM NOTICE_BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE NOTICE_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
+	
 	<update id="updateCnt" parameterType="int">
 		UPDATE NOTICE_BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}	
 	</update>
