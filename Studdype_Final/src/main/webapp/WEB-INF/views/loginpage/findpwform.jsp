@@ -27,6 +27,7 @@
 
  <script type="text/javascript">
 $(function(){
+	
 	var chkNum_btn = $("#chkNum_btn");
 	
 	chkNum_btn.attr('disabled', 'disabled');
@@ -167,7 +168,7 @@ function chkSubmit(){
    
    	</form>
    	</div>
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

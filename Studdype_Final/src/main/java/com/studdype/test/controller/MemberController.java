@@ -45,8 +45,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/signform.do")
-	public String memberInsertForm() {
+	public String memberInsertForm(HttpSession session) {
 		logger.info("signup form ");
+		session.setAttribute("headerMenu", "signUpMenu");
 		
 		return "loginpage/signup";
 	}
@@ -87,8 +88,9 @@ public class MemberController {
 	
 	//로그인 폼
 	@RequestMapping("/loginform.do")
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
 		logger.info("login page");
+		session.setAttribute("headerMenu", "loginMenu");
 		return "loginpage/login";
 	}
 	

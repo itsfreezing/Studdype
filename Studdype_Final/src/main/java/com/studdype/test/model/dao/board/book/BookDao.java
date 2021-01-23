@@ -20,5 +20,6 @@ public interface BookDao {
 	public int insertRegisterBook(BookDto dto);	// 작성한 도서 정보 insert
 	public int deleteBook(BookDto dto); // 도서 게시글 삭제
 	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
+	public BookDto selectMainBookOfStudy(int s_no);	// 스터디 메인도서 가져오기
 
 }
