@@ -354,6 +354,7 @@
 
 
 		<!-- 대표 사진  -->
+		<form action="${pageContext.request.contextPath}/file/upload.do" method="post" enctype="multipart/form-data">
 		<p id="studyimagep">대표 사진</p>
 		<pre class="brush:html"></pre>
 		<input type="file" id="imgAttach" name="imgAttach"
@@ -366,6 +367,7 @@
 				onError="onError();">
 
 		</div>
+		</form>
 		<!-- 대표 사진 끝 -->
 
 		<!-- 스터디 정보 수정  -->
