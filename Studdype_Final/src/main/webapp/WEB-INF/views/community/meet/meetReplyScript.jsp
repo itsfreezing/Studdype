@@ -212,7 +212,7 @@ function getMeetReplyList() {
 							if ( ${login.mem_no} == list[i].r_writer ) {
 									reply += "<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">수정하기</button>"
 											+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>삭제하기</button>"
-										+"</div>"+member[list[i].r_no].mem_id+list[i].r_comment+list[i].r_no+ list[i].r_class
+										+"</div>"
 									+"</div>"
 						
 									// 댓글 수정 html 추가부분

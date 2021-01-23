@@ -25,6 +25,6 @@ $(window).scroll(function(){
 </script>
 </head>
 <body>
-	
+	<div id="studyRightInfo"></div>
 </body>
 </html>
