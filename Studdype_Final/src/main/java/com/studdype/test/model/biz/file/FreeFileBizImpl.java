@@ -45,6 +45,9 @@ public class FreeFileBizImpl implements FreeFileBiz {
 			
 		}
 		
+		if(dto == null || res < 1) {
+			throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+		}		
 		return res;
 	}
 }

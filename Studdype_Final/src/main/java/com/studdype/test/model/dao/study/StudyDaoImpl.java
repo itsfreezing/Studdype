@@ -7,9 +7,11 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -49,7 +51,7 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
-	// 스터디 insert
+	// 스터디 insert 
 	@Override
 	public int insertStudy(StudyDto dto) {
 		int res = 0;
@@ -117,6 +119,7 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+
 	@Override
 	public int newInfo(StudyDto dto) {
 		int res = 0;
@@ -132,5 +135,6 @@ public class StudyDaoImpl implements StudyDao {
 
 
 	
+
 
 }

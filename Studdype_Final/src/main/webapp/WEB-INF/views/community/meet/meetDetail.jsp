@@ -105,12 +105,6 @@
 			<!-- 투표 영역 -->
 			<div id="vote">
 				
-				<!--투표_참가여부 -->
-				<div id="voteDiv" tooltip="참석여부를 결정한후 투표하기 버튼을 눌러주세요!"  tooltip-persistent>
-					
-				</div>
-				
-				
 			</div>
 			
 			<!-- 댓글 리스트 영역 -->
