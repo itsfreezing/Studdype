@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/mainstyle.css">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
@@ -49,9 +49,8 @@
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
 		
-		// 해더 상단 영역 숨기기 (스터디 홈에선 필요없음)
+		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		$(".justify-content-center").hide(); 
-		
 	});
 	
 	$(document).on('click', '#btnSearch', function(e){

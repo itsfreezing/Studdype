@@ -141,6 +141,11 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.newLeader(dto);
 	}
 
+	@Override
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+		return null;
+	}
+
 
 
 

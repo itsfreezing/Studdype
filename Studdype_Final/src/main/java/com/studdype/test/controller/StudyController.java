@@ -59,7 +59,7 @@ public class StudyController {
 	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
 	@RequestMapping(value = "/studyList.do", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
+	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -85,6 +85,7 @@ public class StudyController {
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
+		session.setAttribute("headerMenu", "home");
 
 		return "studdype/studdypeHome";
 	}
@@ -101,6 +102,7 @@ public class StudyController {
 		model.addAttribute("sidtos", sidtos);
 		model.addAttribute("gudtos", gudtos);
 		model.addAttribute("catedtos", catedtos);
+		session.setAttribute("headerMenu", "create");
 
 		return "studdype/createStuddype";
 	}
@@ -217,6 +219,8 @@ public class StudyController {
 		
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
+		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no());
+		
 		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
 		
 		model.addAttribute("study", studyDto);

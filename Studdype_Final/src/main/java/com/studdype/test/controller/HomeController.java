@@ -59,8 +59,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/searchbycategory.do")
-	public String searchByCategory() {
-	
+	public String searchByCategory(HttpSession session) {
+		session.setAttribute("headerMenu", "category");
 		return "studdype/searchByCategory";
 	}
 	
@@ -130,7 +130,7 @@ public class HomeController {
 		model.addAttribute("applylist",applylist);
 		session.setAttribute("login",login);
 		model.addAttribute("studylist", studylist);
-	
+		session.setAttribute("headerMenu", "myPage");
 		
 		
 		return "studdype/myPage";

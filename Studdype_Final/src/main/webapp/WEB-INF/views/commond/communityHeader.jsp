@@ -9,6 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComunityHome</title>
 
+<style type="text/css">
+.header-area {
+	background: #88d3ce;
+	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
+}
+.mainmenu li.active:not(:last-child):after,
+.mainmenu li:not(:last-child):hover:after { 
+	background: #fff;
+}
+</style>
+
 </head>
 <body>
 	<!-- 헤더 시작 -->

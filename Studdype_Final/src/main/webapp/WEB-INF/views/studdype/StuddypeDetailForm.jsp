@@ -26,7 +26,8 @@
 	position:relative;
 	width:100%;
 	height:1000px;
-	background:rgba(114, 116, 115, 0.14);
+	background:#ebebeb;
+	font-family:Noto Sans;
 }
 
 /* 스터디 소개 전체 영역 */
@@ -43,8 +44,13 @@
 #study-photo-section {
 	position:relative;
 	width:100%;
-	height:300px;
+	height:350px;
 	border-bottom:1px solid gray;
+}
+
+#mainPhoto {
+	width:100%;
+	height:100%;
 }
 
 /* 스터디 소개 영역 */
@@ -52,13 +58,13 @@
 	position:relative;
 	width:100%;
 	height:700px;
-	padding:2%;
+	padding:4%;
 }
 
 /* 스터디 신청영역 */
 #fixed-apply-seciton {
 	position:fixed;
-	top:13%;
+	top:12%;
 	left:70%;
 	width:13%;
 	height:300px;
@@ -70,7 +76,6 @@
 #apply-top-section {
 	width:100%;
 	height:80%;
-	border-bottom:1px solid gray;
 	padding:5%;
 }
 
@@ -81,10 +86,32 @@
 	padding:5%;
 }
 
+.apply-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+	font-size:15pt;
+	font-weight:bolder;
+}
+
+#study-name {
+	height:60%;
+	border-bottom:1px solid gray; 
+}
+
+#study-cnt {
+	padding-top:10%;
+	height:40%;
+	text-align:center;
+}
+
 #apply-button {
 	width:100%;
 	height:100%;
 	background:rgba(0, 57, 255, 0.3);
+	cursor:pointer;
+	font-weight:bolder;
+	border:none;
 }
 
 </style>
@@ -92,7 +119,20 @@
 <script type="text/javascript">
 	$(function() {
 		$(".justify-content-center").hide(); 
+		
+		// 대표사진 불러오기 함수
+		imageSetting();
+		
+		
 	});
+	
+	// 대표사진 src 형식에 맞추기 함수
+	function imageSetting() {
+		var imgPath = $("#img_url").val();
+		var imgRealPath = imgPath.split("Studdype_Final");
+		
+		$("#mainPhoto").attr("src", "."+imgRealPath[1]);
+	}
 </script>
 </head>
 <body>
@@ -102,19 +142,35 @@
 	<div id="main-section">
 		<div id="main-content-section">
 			<div id="study-photo-section">
-				 <img src="${study.getPhoto() }">
+				<input type="hidden" id="img_url" value="${study.getPhoto() }">
+				 <img id="mainPhoto" src="">
 			</div>
 			<div id="study-content-section">
+				<div id="content-title">
+					<p>${study.getS_info() }</p><!-- 스터디 지역 -->
+					<!-- 스터디 이름 -->
+					<!-- 스터디 한줄 소개 -->
+				</div>
 				
+				<div id="content-detail">
+					<!-- 스터디 한 줄 소개 -->
+				</div>
+				<div id="content-book">
+					<!-- 도서 정보 -->
+				</div>
 			</div>
 		</div>
 		<div id="fixed-apply-seciton">
 			<div id="apply-top-section">
-				스터디 이름
-				현재 인원/최대인원
+				<div class="apply-section" id="study-name">
+					<span>${study.getS_name() }</span>
+				</div>
+				<div class="apply-section" id="study-cnt">
+					<label>현재 인원/최대인원</label><br><span>${study.getS_currentcnt() }/${study.getS_maxcnt() }</span>
+				</div>
 			</div>
 			<div id="apply-bottom-section">
-				<button id="apply-button" onclick="">신청버튼</button>
+				<button id="apply-button" onclick="">스터디 신청</button>
 			</div>
 		</div>
 	</div>

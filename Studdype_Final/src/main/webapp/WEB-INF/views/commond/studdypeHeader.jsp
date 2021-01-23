@@ -20,16 +20,26 @@ function logout_btn(){
 };
 
 $(function() {
+	var currentMenu = $("#currentMenu").val();
+	
+	// 해당 메뉴 페이지에 메뉴 active Class 추가
+	$("#"+currentMenu).addClass("active");
+	
 	$(".feature-page.header-area").css("height", "80px");
 	$(".hero-text-wrapper").css("height", "500px");
+	$(".nav-link").css("color", "black");
+	
 });
 
+
 </script>
-	
+<style>
+
+</style>
 </head>
 
 <body>
-
+<input type="hidden" id="currentMenu" value="${headerMenu }">
 	<!-- 헤더 시작 -->
 	<form id="logoutForm" action="logout.do" method="POST">
 	<div class="feature-page get-start header-area">
@@ -38,7 +48,7 @@ $(function() {
 				<nav class="navbar navbar-expand-lg navbar-light fixed-top">
 				
 					<!-- 헤더 좌측 로고 -->
-					<a class="navbar-brand" href="studyList.do"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
+					<a class="navbar-brand" href="studyList.do"><img src="./resources/assets/img/logo_black.png" alt="" class="logo"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     					<span class="navbar-toggler-icon"></span>
  					</button>
@@ -47,24 +57,24 @@ $(function() {
 					<div class="collapse navbar-collapse my-2 my-lg-0" id="navbarSupportedContent">
 						<div class="mainmenu">
 							<ul class="navbar-nav ml-auto">
-								<li class="nav-item">
+								<li class="nav-item" id="home">
 								<a class="nav-link" href="studyList.do">스터띱 홈</a>
 								</li>
-								<li class="active nav-item">
+								<li class="nav-item" id="create">
 									<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item" id="category">
 									<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item" id="location">
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 								</li>
 								<c:choose>
 								<c:when test="${login == null }">
-								<li class="nav-item">
+								<li class="nav-item"  id="loginMenu">
 									<a class="nav-link" href="loginform.do">로그인</a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item" id="signUpMenu">
 									<a class="nav-link" href="signform.do">회원가입</a>
 								</li>
 								</c:when>
@@ -72,10 +82,10 @@ $(function() {
 						<!-- 		<li class="nav-item">
 									<a class="nav-lick" href="#">${login.mem_id }님 </a>
 								</li>
-						-->		<li class="nav_item">
+						-->		<li class="nav_item" id="myPage">
 									<a class="nav-link" href="myPage.do" >마이 페이지</a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item" id="logout">
 									<a class="nav-link" href="logout.do" type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
 								</li>
 								</c:otherwise>
