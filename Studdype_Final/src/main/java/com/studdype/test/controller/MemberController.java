@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.studdype.test.common.MailSender;
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Controller
@@ -123,6 +125,20 @@ public class MemberController {
 	public String findPasswordForm() { 
 		
 		return "loginpage/findpwform";
+	}
+	
+	@RequestMapping("/findpw.do")
+	public String findpw() {
+		MailSender sender = new MailSender();
+		MemberDto dto = memberBiz.selectOne(1);
+		sender.sendFindPwMail("bin3005@naver.com",dto);
+		
+		return null;
+	}
+	
+	@RequestMapping("/mailtest.do")
+	public String mailtest() {
+		return "loginpage/mailtest";
 	}
 }
 	

@@ -54,7 +54,7 @@
    </div>
    
    <div>
-   		<input type="button" value="홈">
+   		<input type="button" value="홈" onclick="location.href='findpw.do'">
    		<input type="button" value="비밀번호 찾기">
    </div>
 	</form>
