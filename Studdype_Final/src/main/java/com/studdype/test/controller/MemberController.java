@@ -117,6 +117,13 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/studyList.do";		
 	}
+	
+	//비밀번호 찾기
+	@RequestMapping("/findpwform.do")
+	public String findPasswordForm() { 
+		
+		return "loginpage/findpwform";
+	}
 }
 	
 
