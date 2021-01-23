@@ -68,5 +68,11 @@
 	<update id="bookmain" parameterType="int" >
 	 	UPDATE BOOK SET BOOK_ISMAIN = 'Y' WHERE B_NO = #{b_no}
 	</update>
+	
+	<select id="selectMainBookOfStudy" parameterType="int" resultType="bookDto">
+		SELECT *
+		FROM BOOK
+		WHERE S_NO = #{s_no} AND BOOK_ISMAIN = 'Y'
+	</select>
 
 </mapper>	

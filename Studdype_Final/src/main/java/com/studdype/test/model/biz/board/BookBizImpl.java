@@ -96,5 +96,11 @@ public class BookBizImpl implements BookBiz{
 
 	}
 
+	// 스터디 메인도서 가져오기
+	@Override
+	public BookDto selectMainBookOfStudy(int s_no) {
+		return bookDao.selectMainBookOfStudy(s_no);
+	}
+
 	
 }
