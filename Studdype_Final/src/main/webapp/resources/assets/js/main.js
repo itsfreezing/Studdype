@@ -15,11 +15,17 @@ jQuery(document).ready(function ($) {
 		var pos = $(window).scrollTop();
 		if (pos > a) {
 			$(".header-top .navbar").css({
-				background: '#7362de',
+				background: '#7362de',				
 				transition: 'all 0.3s ease-in-out',
 				height: 60,
 			});
 			$(".header-top .navbar").addClass("animated slideInDown");
+			
+			$(".header-top .navbar li a").css({
+				color: 'black',				
+				transition: 'all 0.3s ease-in-out',
+			});
+			
 		} else {
 			$(".header-top .navbar").css({
 				background: 'transparent'

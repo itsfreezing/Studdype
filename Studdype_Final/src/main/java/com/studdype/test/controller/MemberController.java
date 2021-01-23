@@ -2,7 +2,9 @@ package com.studdype.test.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.common.MailSender;
 import com.studdype.test.model.biz.member.MemberBiz;
-import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.member.MemberDto;
 
 @Controller
@@ -127,19 +128,73 @@ public class MemberController {
 		return "loginpage/findpwform";
 	}
 	
-	@RequestMapping("/findpw.do")
-	public String findpw() {
+	//인증번호 보내기
+	@RequestMapping(value="/sendVerification.do", method=RequestMethod.POST)
+	public @ResponseBody Map sendVerification(@RequestBody MemberDto dto, HttpSession session) {
 		MailSender sender = new MailSender();
-		MemberDto dto = memberBiz.selectOne(1);
-		sender.sendFindPwMail("bin3005@naver.com",dto);
+		Map resMap = new HashMap();
 		
-		return null;
+		MemberDto resDto = memberBiz.selectMemberByIdAndEmail(dto);
+		
+		//아이디와 이메일이 일치하면
+		if ( resDto != null) {
+			resMap.put("isExist", "y"); //결과
+			String randNum = sender.getRandNum();
+			
+			sender.sendVerifiMail(resDto, randNum);
+			session.setAttribute("randNum", randNum);
+		}else {
+			resMap.put("isExist", "n"); //결과
+		}
+		
+		
+		return resMap;
 	}
 	
-	@RequestMapping("/mailtest.do")
-	public String mailtest() {
-		return "loginpage/mailtest";
-	}
+	//인증번호 확인
+		@RequestMapping(value="/chkVerification.do", method=RequestMethod.POST)
+		public @ResponseBody Map chkVerification(@RequestBody String chk, HttpSession session) {
+			MailSender sender = new MailSender();
+			Map resMap = new HashMap();
+			
+			String[] chkList = chk.split("\"");
+			String chkVal = chkList[chkList.length-2];
+			//인증번호와  입력인증번호가 일치하면
+			if ( chkVal.equals( session.getAttribute("randNum") ) ) {
+				resMap.put("isExist", "y"); //결과
+			}else {
+				resMap.put("isExist", "n"); //결과
+			}
+			
+			
+			return resMap;
+		}
+		
+		//임시 비밀번호 보내기
+		@RequestMapping("/sendExtraPw.do")
+		public String sendExtraPw(Model model, MemberDto member) {
+			MailSender sender = new MailSender();
+			String extraPw = ""; //임시 비밀번호
+			for(int i = 0; i < 12 ; i++) {
+				int random = (int)(Math.random()*2)+1; //영어일지 숫자일지
+				if( i  ==  0) {
+					char rand_alpabet = (char)((int)(Math.random()*26)+97 );
+					extraPw += rand_alpabet;
+				}else if(random == 1) {
+					char rand_alpabet = (char)((int)(Math.random()*26)+97 );
+					extraPw += rand_alpabet;
+				}else {
+					char rand_num =  (char)((int)(Math.random()* 10 )+48);
+					extraPw += rand_num;
+				}
+			}
+			MemberDto dto = memberBiz.selectMemberByIdAndEmail(member);
+			dto.setMem_pw(extraPw);
+			int res = memberBiz.updatePw(dto);
+			sender.sendExtraPwMail(dto);
+			model.addAttribute("member", dto);
+			return "loginpage/findpwres";
+		}		
 }
 	
 
