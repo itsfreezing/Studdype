@@ -287,9 +287,6 @@ public class MemberDaoImpl implements MemberDao{
 		
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
-			
-		
-			
 		} catch (Exception e) {
 			System.out.println("ERROR: idchk FAIL!!!!!!!!!!!!!!!!");
 			

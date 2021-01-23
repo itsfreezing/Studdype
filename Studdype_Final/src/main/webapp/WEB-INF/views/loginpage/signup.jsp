@@ -33,9 +33,9 @@ function chkpwd(){
 	}
 }
 
+$(document).ready(function(){
 
-$(document).ready(function(){ 
-	$("#signup").click(function(){	
+	$("#sign").click(function(){	
 		if($("#memberId").val().trim()==""){
 			alert("아이디를 입력해주세요");
 			$("#memberId").focus();
@@ -70,10 +70,15 @@ $(document).ready(function(){
 			alert("성별을 선택해주세요");
 			$("#gender").focus();
 			return false;
-		}else{
-			$("#signupform").submit();
 		}
 	});	
+	
+	
+	
+	
+	
+	
+	
 	
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
@@ -81,7 +86,6 @@ $(document).ready(function(){
 		var memberVal = {
 						"mem_id":mem_id
 		};
-
 		$.ajax({
 			url:"idcheck.do",
 			data:JSON.stringify(memberVal),
@@ -94,29 +98,18 @@ $(document).ready(function(){
 					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
 						$('#IdCheck').empty();
 						$('#IdCheck').append(html);
+						
 				}else {
 					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
 					$('#IdCheck').empty();
 					$('#IdCheck').append(html);
-						
 					}
 				},error:function(){
-					alert("통신 FAIL");
+					alert("FAIL");
 			}		
 		});
-	});
+	});	
 });
-
-/*$("#check").click(function(){
-		var id=$("#memberId").attr("title");
-		if($("#memberId").attr("title","n")){
-			alert("사용불가능한 아이디");
-		}else{
-			alert("사용가능");
-		}
-	});
-*/
-
 function num_check(){
 	var flag=0;
 	rno1=[];
@@ -152,242 +145,122 @@ function num_check(){
 		}
 	}
 }
-
-
+/*
+function validate(){
+	
+	var form=document.register;
+	
+	if(form.memberId.value==""){
+		alert("아이디를 입력해주세요");
+		form.memberId.focus();
+		return false;
+	}
+	if(form.memberpw.value==""){
+		alert("비밀번호를 입력해주세요");
+		form.memberpw.focus();
+		return false;
+	}
+	if(form.memberemail.value==""){
+		alert("이메일을 입력해주세요");
+		form.memberemail.focus();
+		return false;
+	}
+	if(form.memberName.value==""){
+		alert("이름을 입력해주세요");
+		form.memberName.focus();
+		return false;
+	}
+	if(form.rno1.value==""){
+		alert("주민등록번호를 입력해주세요");
+		form.rno1.focus();
+		return false;
+	}
+	if(form.memberphone.value==""){
+		alert("전화번호를 입력해주세요");
+		form.memberphone.focus();
+		return false;
+	}
+	
+}*/
 </script>
 <style type="text/css">
-h1{
-   margin-top:5%;
-   margin-left:46.5%;
-   color:white;
-}
-#header{
-   background:#D0A9F5;
-}
-#line{
-   margin-top:6.3%;
-}
-#logo{
-   width:240px;
-   height:50px;
-}
-#title{
-   color:black;
-   margin-left:46.5%;
-}
-#pic{
-   width:170px;
-   height:50px;
-   margin-left:47.5%;
-}
-
-#big{
-   margin-left:46%;
-   margin-top:-2%;
-   color:blue;
-}
-h3{
+.title{
    margin-left:45%;
 }
-table{
-    margin-left: 40%;
+.icos{
+	color:red;	
+	margin-left:45%;
 }
-#name{
-    margin-top:1%;
-    margin-left:1%;
-   margin-bottom:0.5%;
-   color:#F5A9F2;
-   font-weight:bold;
+.ico{
+   color:red;
 }
-
-#id{
-	width:100px;
-	height:30px;
+hr{
+   width:900px;
+   border:1px solid black;
 }
-
-#pw{
-	width:320px;
-	height:30px;	
-}
-
-#idtitle{
-   margin-top:1%;
-   margin-bottom:0.5%;
-   margin-left:1%;
-   color:#F5A9F2;
-
-}
-#check{
-   background:#7401DF;
-   color:white;
-   width:130px;
-   height:30px;
-   font-weight:bold;
-}
-#sub{
-   background:#7401DF;
-   color:white;
-   width:330px;
-   height:50px;
-   font-weight:bold;
-   margin-top:15%;
-   margin-left:43%;
-}
-#select{
-   margin-left:1%;
-   width:330px;
-   height:30px;
-}
-
-#chk{
-   width:100px;
-   height:30px;
-   
+#signtitle{
+	margin-left:30%;
 }
 input{
-   width:320px;
+   width:350px;
+   height:44px;
+}
+#check{
+   width:120px;
+   height:40px;
+}
+#sign{
+   width:150px;
+   height:44px;
+}
+#rno1{
+   width:120px;
    height:30px;
 }
-
-#nametitle{
-   width:280px;
+#rno2{
+   width:120px;
    height:30px;
-   border: 2px solid #DA81F5;
 }
-#signUp{
+#signup{
 	width:150px;
 	height:30px;
+	margin-left:23%;
 }
-
-#phone{
-	width:250px;
-	height:30px;
-}
-
 </style>
 
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
- <img src="" id="pic">
-   <br><br>   
-      <h3>--Please be our colleague--</h3>
-      <br><h2 id="big">정보를 입력해주세요</h2>
+<div class="head">
+		<h3 class="title">회원가입</h3>
+		<p class="sub">
+			<span class="icos">*</span>
+				필수입력사항	
+			<hr>
+		</p>
+	</div> 
    <div id="signtitle">
       <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" >
         <table>
-                    <tr>
-                        <td><h3 id="idtitle">아이디</h3></td>
-                    </tr>
-                    <tr>
-                      <td> 
-                           <input type="text" title="y" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
-                     		<input type="button" value="중복확인" id="check" >
-                     </td>
-                    </tr>
+        	<tr>
+				<th>
+				 아이디
+				 	<span class="ico">*</span>
+				</th>
+                 <td> 
+                     <input type="text" title="y" name="mem_id" id="memberId" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요" />
+                     <input type="button" value="중복확인" id="check" >
+                 </td>
+             </tr>
                     <tr>
 						<td colspan=3 id="IdCheck"></td>
 					</tr>
-                   <tr>
-                        <td>
-                            <h3 id="idtitle">비밀번호</h3>
-                        </td>
-                    </tr>   
-                    <tr>           
-                        <td>
-                            <input type="password" id="memberpw"  title="n"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">비밀번호확인</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td colspan="5">
-                            <input type="password" name="mempwchk" id="mempwd" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="chkpwd();">
-                        	<div id="checkpw">동일한 암호를 입력</div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">이메일</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                    	<td>
-                    		<input type="text" title="n" name="mem_email" id="memberemail" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" >
-                    	    <input type="button" value="인증번호 전송 " id="check" onclick="sendemail();">  
-                    	</td>
-                    </tr>
-                    <tr id="ssss">
-                        <td>
-                              <h3 id="idtitle">인증번호 </h3>
-                        </td>
-                        <td id="code" width="600"></td>	
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">이름</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td><input type="text" name="mem_name" id="memberName"style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요" onclick="ChkConfirm(),ChkConfirm2()"></td>
-                    </tr>
-                    <tr>
-                    	<td>
-                    		<h3 id="idtitle">주민등록번호 </h3>
-                    	</td>
-                    </tr>
-                    
-                    <tr>
-                    	<td colspan="5">
-                    		   <input type="text" id="rno1" name="mem_rno" title="n" maxlength="6">-<input type="password" name="memrno" id="rno2" onkeyup="num_check()" >
-                    	</td>
-                    </tr>
-                    
-                    <tr>
-                    	<td>
-                    		<h3 id="idtitle">핸드폰 번호 </h3>
-                    	</td>
-                    </tr>
-                    <tr>
-                    	<td colspan="5">
-                    	<!--  <select id="phone" name="mem_phone" class="telnum">
-                    			<option value="010" selected>010</option>
-                    			<option value="011">011</option>
-                    			<option value="016">016</option>
-                    			<option value="018">018</option>
-							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="-[0-9]{4}-[0-9]{4}">	
-							 -->
-							<input type="tel" id="memberphone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">							
-                    	 
-                    	</td>
-                    </tr>
-                   
-                       <tr>
-                    	<td>
-                    		<h3 id="idtitle">성별 </h3>
-                    	</td>
-                    </tr>
-                    <tr>
-                    	<td>
-		               		<select id="select" name="mem_gender" id="gender"style="border: 2px solid #DA81F5;">
-					        	<option value="M">
-					        		남자 
-					        	</option>
-					        	<option value="F">
-					        		여자
-					        	</option>
-					        </select>
-					     </td>
-                    </tr>
+                 
                 
         </table>
         <br>
-		<center>
-          <input type="submit" id="signup" name="join" value="회원가입">
+	
+          <input type="button" id="sign" name="join" value="회원가입">
        </form>
       </div>
 </body>
