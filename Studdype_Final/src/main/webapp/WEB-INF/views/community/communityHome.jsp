@@ -30,11 +30,20 @@
 <body>
 <jsp:include page="../commond/communityHeader.jsp"></jsp:include>
 <jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
+
 	
 	<!--main conternt 섹션-->
 	<div class="main-section">
 							
-					<div id="studyImg"><img src="/studyHomeImg//${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<div id="studyImg"><img src="${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<div id="studyRightInfo">
+			
+		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			
 			
 	</div>

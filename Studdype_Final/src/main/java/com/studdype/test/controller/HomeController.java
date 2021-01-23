@@ -307,7 +307,7 @@ public class HomeController {
 	public String communityHome1(HttpSession session,Model model) {
 
 		/////////////////////// 테스트용 세션
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = memberBiz.selectOne(2);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		session.setAttribute("study", study); //스터디 세션
