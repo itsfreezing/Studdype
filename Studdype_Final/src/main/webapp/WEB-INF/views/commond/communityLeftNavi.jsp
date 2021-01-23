@@ -38,7 +38,7 @@
        });
        
         function openWebMeeting(){    		
-        	window.open("https://192.168.219.109:9001/webmeeting.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
+        	window.open("https://172.30.1.18:9001/webmeeting.html?studyid="+ $("#studyid").val() +"&memberid="+$("#memberid").val());
     		//172.30.1.38  -> localhost
     		//우선 테스트를 위해 아이피주소로 변경해놈
     	};

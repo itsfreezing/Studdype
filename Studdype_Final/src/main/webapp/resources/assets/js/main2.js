@@ -23,24 +23,14 @@ jQuery(document).ready(function ($) {
 				height: 60,
 			});
 			$(".header-top .navbar").addClass("animated slideInDown");
-			$(".header-top .navbar li a").css({
-				color: '#fff',
-				transition: 'all 0.3s ease-in-out'
-			});
-			$(".logo").attr("src","./resources/assets/img/logo_white.png");
-			$("#"+currentMenu).removeClass("active");
+		
 			
 		} else {
 			$(".header-top .navbar").css({
 				background: 'transparent'
 			});
 			$(".header-top .navbar").removeClass("animated slideInDown");
-			$(".header-top .navbar li a").css({
-				color: 'black',
-				transition: 'all 0.3s ease-in-out'
-			});
-			$(".logo").attr("src","./resources/assets/img/logo_black.png");
-			$("#"+currentMenu).addClass("active");
+			
 		}
 	});
 
