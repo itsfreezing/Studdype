@@ -11,7 +11,10 @@ jQuery(document).ready(function ($) {
 
 	//On scroll header add background
 	$(window).scroll(function () {
-		var a = 10;
+		var currentMenu = $("#currentMenu").val();
+	
+	
+		var a = 20;
 		var pos = $(window).scrollTop();
 		if (pos > a) {
 			$(".header-top .navbar").css({
@@ -20,11 +23,24 @@ jQuery(document).ready(function ($) {
 				height: 60,
 			});
 			$(".header-top .navbar").addClass("animated slideInDown");
+			$(".header-top .navbar li a").css({
+				color: '#fff',
+				transition: 'all 0.3s ease-in-out'
+			});
+			$(".logo").attr("src","./resources/assets/img/logo_white.png");
+			$("#"+currentMenu).removeClass("active");
+			
 		} else {
 			$(".header-top .navbar").css({
 				background: 'transparent'
 			});
 			$(".header-top .navbar").removeClass("animated slideInDown");
+			$(".header-top .navbar li a").css({
+				color: 'black',
+				transition: 'all 0.3s ease-in-out'
+			});
+			$(".logo").attr("src","./resources/assets/img/logo_black.png");
+			$("#"+currentMenu).addClass("active");
 		}
 	});
 

@@ -83,8 +83,12 @@
 </style>
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
- <script type="text/javascript">
- 
+<script type="text/javascript">
+	$(function() {
+		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+		//$(".justify-content-center").hide(); 
+		$(".justify-content-center").css({"background":"black"}); 
+	})
 function login_btn(){
 	var form = $("#loginForm");
 	var mem_id = $("#id");
