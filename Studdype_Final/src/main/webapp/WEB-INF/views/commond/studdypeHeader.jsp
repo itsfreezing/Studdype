@@ -105,19 +105,23 @@ $(function() {
 					</form>
 			
 				<!-- 네비 끝 -->
-				<div class="row justify-content-center">
+				<c:if test="${studylist == null }">
+				
+				
+			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
 
-								<h1 style="color:black;"><c:if test="${studylist != null}">My Page</c:if></h1>
+								
 
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			</c:if>
 			<!-- 헤더 텍스트 끝 -->
 	<!-- 헤더 끝 -->
 </body>
