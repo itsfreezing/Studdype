@@ -32,6 +32,6 @@ public interface StudyBiz {
 	public List<StudyDto> studyLeader(int leader_no);
 	public int newLeader(StudyDto dto); //스터디관리 리더변경 
 	public int newInfo(StudyDto dto); // 스터디관리 스터디 소개변경
-
+	
 	
 }

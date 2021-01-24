@@ -45,7 +45,7 @@
       font-size: 20px;
       margin-left: 100px;
       position:absolute;
-      top:600px;
+      top:577px;
       }
       #id{
       font-size:20px;
@@ -56,7 +56,7 @@
       font-size: 20px;
       margin-left: 100px;
       position:absolute;
-      top:650px;
+      top:627px;
       }
       #email{
       font-size: 20px;
@@ -67,7 +67,7 @@
       font-size: 20px;
       margin-left: 100px;
       position:absolute;
-      top:700px;
+      top:677px;
       }
       #gender{
       font-size:20px;
@@ -78,7 +78,7 @@
       font-size: 20px;
       margin-left: 100px;
       position:absolute;
-      top:750px;
+      top:727px;
       }
       #phone{
       font-size:20px;
@@ -89,7 +89,7 @@
       font-size: 20px;
       margin-left: 100px;
       position:absolute;
-      top:800px;
+      top:777px;
       }
       #updateinfo{
       margin-left: 20px;

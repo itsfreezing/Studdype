@@ -259,14 +259,16 @@
 		var m = document.getElementById('Max_member').value;
 		
 		
-		
+		var imgname =document.getElementById('imgAttach').value;
+		alert(imgname);
 		
 		location.href="studyupdate.do?b_no="+b+"&mem_no="+m+"&ban_no="+e+"&s_no="+'${study.s_no}'+"&s_info="+i
-				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m;
+				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+imgname;
 		
 		
 		
 	}
+	
 	function onError(){
 		alert('해당 파일은 이미지가아닙니다!! 파일을 변경해주세요.');
 		document.getElementById('LoadImg').src='resources/img/no_image.png';
@@ -354,7 +356,7 @@
 
 
 		<!-- 대표 사진  -->
-		<form action="${pageContext.request.contextPath}/file/upload.do" method="post" enctype="multipart/form-data">
+	
 		<p id="studyimagep">대표 사진</p>
 		<pre class="brush:html"></pre>
 		<input type="file" id="imgAttach" name="imgAttach"
@@ -367,7 +369,7 @@
 				onError="onError();">
 
 		</div>
-		</form>
+	
 		<!-- 대표 사진 끝 -->
 
 		<!-- 스터디 정보 수정  -->

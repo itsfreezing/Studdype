@@ -102,7 +102,7 @@ $(function() {
 						<div class="hero-text-inner">
 							<div class="hero-text">
 
-								<h1><c:if test="${studylist != null}">My Page</c:if></h1>
+								<h1 style="color:black;"><c:if test="${studylist != null}">My Page</c:if></h1>
 
 							</div>
 						</div>

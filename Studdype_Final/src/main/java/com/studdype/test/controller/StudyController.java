@@ -185,6 +185,10 @@ public class StudyController {
 		StudyDto dto4 = new StudyDto(Integer.parseInt(request.getParameter("s_no")),request.getParameter("s_info"),Integer.parseInt(request.getParameter("cate")),Integer.parseInt(request.getParameter("locationsi_no")),Integer.parseInt(request.getParameter("locationgu_no")),Integer.parseInt(request.getParameter("max")));
 		int dto5 = studyBiz.newInfo(dto4);
 		System.out.println("dto4 :"+dto4);
+		
+		
+	
+		
 		if(dto>0) {
 			if(dto2>0) {
 				if(dto5>0) {
