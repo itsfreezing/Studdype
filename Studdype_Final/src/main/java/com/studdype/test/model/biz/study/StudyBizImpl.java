@@ -143,7 +143,12 @@ public class StudyBizImpl implements StudyBiz{
 
 	@Override
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
-		return null;
+		return locationSidao.selectLocationSiOfStudy(si_no);
+	}
+
+	@Override
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no) {
+		return locationGudao.selectLocationGuOfStudy(gu_no);
 	}
 
 

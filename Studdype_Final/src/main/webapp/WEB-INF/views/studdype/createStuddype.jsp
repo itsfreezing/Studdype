@@ -124,10 +124,11 @@
 		});
 		///////////////////////////////////////////////////////////////
 		
-		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		var menuName = $(".active").text().trim();
-		
 		// 네비 메뉴 이름 가져오기
+		var currentMenu = $("#currentMenu").val();
+		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
+		
+		// 헤더 메뉴 선택 시 h1태그 이름 변경
 		$(".hero-text h1").text(menuName);
 		
 		// 스터디 생성에 맞는 이미지 가져오기

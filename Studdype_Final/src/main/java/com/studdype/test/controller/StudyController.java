@@ -218,13 +218,18 @@ public class StudyController {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
-		System.out.println(studyDto);
 		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
+		
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
+		
 		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no());
+		Map<Integer, String> guDto = studyBiz.selectLocationGuOfStudy(studyDto.getGu_no());
 		
 		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
+		System.out.println(bookDto);
 		
+		model.addAttribute("studySi", siDto);
+		model.addAttribute("studyGu", guDto);
 		model.addAttribute("study", studyDto);
 		model.addAttribute("leader", memberDto);
 		model.addAttribute("mainBook", bookDto);

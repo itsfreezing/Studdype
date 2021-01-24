@@ -26,8 +26,8 @@
 	position:relative;
 	width:100%;
 	height:1000px;
-	background:#ebebeb;
 	font-family:Noto Sans;
+	background:rgba(0,0,0,0.03)
 }
 
 /* 스터디 소개 전체 영역 */
@@ -37,7 +37,6 @@
 	height:100%;
 	left:25%;
 	margin:1%;
-	background:#fff;
 }
 
 /* 스터디 대표사진 영역 */
@@ -69,7 +68,7 @@
 	width:13%;
 	height:300px;
 	border-radius:5px;
-	background:#fff;
+	border:1px solid gray;
 }
 
 /* 신청 정보 영역(상단) */
@@ -146,16 +145,29 @@
 			</div>
 			<div id="study-content-section">
 				<div id="content-title">
-					<p>${study.getS_info() }</p><!-- 스터디 지역 -->
+					<!-- 스터디 지역 -->
+					<p>${studySi.get(study.getSi_no()) } ${studyGu.get(study.getGu_no()) }</p>
 					<!-- 스터디 이름 -->
+					<p>${study.getS_name() }</p>
 					<!-- 스터디 한줄 소개 -->
+					<p>${study.getS_info() }</p>
 				</div>
 				
 				<div id="content-detail">
-					<!-- 스터디 한 줄 소개 -->
+					<!-- 스터디 상세 소개 -->
+					<textarea rows="15" >${study.getS_content() }</textarea>
 				</div>
 				<div id="content-book">
 					<!-- 도서 정보 -->
+					<table>
+						<tr>
+							<th colspan="3"><img src="${mainBook.getBook_img() }"></th>
+							<th>${mainBook.getBook_title() }</th>
+							<th>${mainBook.getBook_url() }</th>
+						</tr>
+						<tr>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
