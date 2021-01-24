@@ -1,13 +1,59 @@
 @charset "UTF-8";
+.main-section{
+	width: 50%;	
+	display: inline-block;
+}
+
+.main-section.left{
+	float: left;
+	margin-left: 25%;
+}
+
+/* info창 전체 div */
+#studyRightInfo{
+	border: 1px solid;
+	display: inline-block;
+	margin-right: 5%;
+	margin-top: 3%;
+	width: 15%;
+	height: 600px;
+	float: right;
+} 
+
+#studyRightInfo.fixed {
+	position: fixed;
+	top: 50px;
+	margin-left: 80%;
+}
+
+#studyInfo{
+	border: 1px solid;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 75%; 
+	background: #dfdfdf;
+	box-shadow: 0 0 28px 8px #ddd;
+	border-radius: 10px;
+	overflow: auto;	
+	height: auto; 
+	float: right;
+	padding: 0 20px 10px 20px;  
+}
 
 #studyImg{
 	display: inline-block;
-	width: 40%;
-	height: 300px;
+	width: 65%;
+	height: 500px;
 	text-align: center;
+	border-radius: 1em;
 	overflow: hidden;
 }
 
 #studyImg img{
 	height: 100%;
-} 
+}
+
+
+#studyTitle{
+	width: 80%;
+}
