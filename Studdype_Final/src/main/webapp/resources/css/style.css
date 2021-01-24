@@ -45,14 +45,14 @@ h6 {
 
 /* 濡쒓퀬 */
 img.logo {
-	width: 250px;
-	height: 90px;
+	width: 200px;
+	height: 80px;
 	display: inline-block;
 }
 
 img.logo2 {
-	width: 270px;
-	height: 80px;
+	width: 250px;
+	height: 50px;
 	display: inline-block;
 	margin-bottom: 5px;
 }
@@ -76,7 +76,6 @@ div.blog-meta > span > img#placeHolderIcon{
 
 .header-area {
 	background-image: url(./resources/assets/img/img_startPage.png);
-	
 	background-size: cover;
 	background-position: center;
 	height: 1080px;
@@ -145,7 +144,7 @@ div.blog-meta > span > img#placeHolderIcon{
 .mainmenu li:not(:last-child):hover:after {
 	width: 100%;
 	transition: width 0.3s ease-in-out;
-	background: #fff;
+	background: black;
 }
 
 
@@ -1242,11 +1241,7 @@ a.scroll-down:hover {
 	content: "";
 	z-index: -1;
 	opacity: 0.75;
-	background: #7156e0;
-	background: -moz-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-	background: -webkit-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-	background: linear-gradient(to right, #7156e0 0%, #86c9cf 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7156e0', endColorstr='#86c9cf', GradientType=1);
+
 }
 
 .feature-page .hero-text h6:before,
@@ -2084,7 +2079,7 @@ button[type=submit]:hover {
 }
 
 .dropdown-menu {
-	background: #6F4DE1;
+	background: white;
 	border: 0;
 }
 .form-control:focus{

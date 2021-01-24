@@ -84,11 +84,11 @@ public class StudyBizImpl implements StudyBiz{
 		
 		insertRes = study_Dao.insertStudy(dto);
 		
-		// 두 실행 성공 시 실제 파일 저장
+		// 실행 성공 시 실제 파일 저장
 		if(insertRes == 1) {
-	         res = 1;
-	         fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
-	     }
+			res = 1;
+			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+		}
 		
 		return res;
 	}
@@ -145,6 +145,10 @@ public class StudyBizImpl implements StudyBiz{
 	public int newInfo(StudyDto dto) {
 		
 		return study_Dao.newInfo(dto);
+	}
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+		return null;
+
 	}
 
 

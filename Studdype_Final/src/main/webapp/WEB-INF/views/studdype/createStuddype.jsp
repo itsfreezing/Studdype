@@ -23,7 +23,9 @@
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-<!-- <link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css"> -->
+
+<link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css">
+
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -31,92 +33,6 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
-
-<style type="text/css">
-@charset "UTF-8";
-.main-section {
-	display: block;
-	position: relative;
-	width: 60%;
-	margin: 0px auto;
-}
-
-#main-contrainer {
-	position: relative;
-	width: 100%;
-	hight: 100%;
-	margin: 0px auto;
-	margin-top: 5%;
-}
-
-#mainleft {
-	position: relative;
-	float: left;
-	width: 50%;
-}
-
-#mainright {
-	position: relative;
-	float: right;
-	width: 50%;
-	padding-left: 5%;
-}
-
-#image-section {
-	width: 100%;
-	height: 400px;
-	text-align:center;
-	border: 2px solid #f8f9fa;
-}
-
-#studyMainPhoto {
-	width:100%;
-	height:400px;
-}
-
-#mainbottom {
-	clear: both;
-}
-
-#btndiv {
-	text-align: center;
-}
-
-input#fileinput {
-	margin-top: 6.5%;
-}
-
-button.submitBtn {
-	background: #fff;
-	color: #7362DE;
-	border: 1px solid #7362DE;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	margin-top: 40px;
-	padding-bottom: 50px;
-	width: 300px;
-	height: 50px;
-	line-height: 52px;
-	padding: 0;
-	font-size: 20px;
-	font-weight: 600;
-	border-radius: 50px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-}
-
-/* 흰색 버튼에서 hover 시 보라색으로 변경 */
-input.submitBtn:hover, button.submitBtn:hover {
-	background: #7362DE;
-	color: #fff;
-}
-
-
-label {
-	color: #7362DE;
-	font-weight: bold;
-}
-
-</style>
 
 <script type="text/javascript">
 	var sel_files = [];
@@ -210,10 +126,13 @@ label {
 		
 		// 헤더 메뉴 선택 시 h1태그 이름 변경
 		var menuName = $(".active").text().trim();
-		$(".hero-text h1").text(menuName);
-		$(".justify-content-center").css({"background-image":"url('resources/assets/img/img_study2.png')"
-									,"background-size":"contain"});
 		
+		// 네비 메뉴 이름 가져오기
+		$(".hero-text h1").text(menuName);
+		
+		// 스터디 생성에 맞는 이미지 가져오기
+		$(".justify-content-center").css({"background-image":"url('resources/img/createStudy.png')"
+									,"background-size":"cover"});
 	});
 	
 	// 이미지 미리보기 함수
@@ -250,44 +169,40 @@ label {
 		var maxcnt = $("#maxcnt_id").val();
 		var content = $("#content_id").val();
 		
-		var errorMsg = "";
-		
-		if(mem_name == "" || mem_name == null || mem_name == undefined ||
+		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
 			$("#mem_name_id").css('border', '1.5px solid red');
-			errorMsg += "스터디 이름 / ";
-		}
-		if(info == "" || info == null || info == undefined ||
+			alert("스터디 이름 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			return false;
+		}else if(info.trim() == "" || info == null || info == undefined ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			errorMsg += "한줄 소개 / "
-		}
-		if(category == "카테고리 분류") {
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			return false;
+		}else if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
-			errorMsg += "카테고리 / ";
-		}
-		if(locationSi == "(시 단위)") {
+			alert("스터디 카테고리를 선택해주세요.");
+			return false;
+		}else if(locationSi == "(시 단위)") {
 			$("#selectLocationSi").css('border', '1.5px solid red');
-			errorMsg += "지역(시) / ";
-		}
-		if(locationGu == "(구/군 단위)") {
+			alert("스터디 지역(시)을 선택해주세요.");
+			return false;
+		}else if(locationGu == "(구/군 단위)") {
 			$("#selectLocationGu").css('border', '1.5px solid red');
-			errorMsg += "지역(구/군) / ";
-		}
-		if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
+			alert("스터디 지역(구/군)을 선택해주세요.");
+			return false;
+		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
 			$("#maxcnt_id").css('border', '1.5px solid red');
-			errorMsg += "최대 인원 / ";
-		}
-		if(content == "" || content == null || content == undefined ||
+			alert("스터디 최대 인원 작성란을 작성해주세요.");
+			return false;
+		}else if(content.trim() == "" || content == null || content == undefined ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
 			$("#content_id").css('border', '1.5px solid red');
-			errorMsg += "상세 소개글 ";
-		}
-		
-		if(!(errorMsg == null) && !(errorMsg == "")) {
-			alert(errorMsg+"항목을 모두 기입해주세요. (스터디 대표사진은 미입력 가능)");
+			alert("스터디 상세 소개글 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
 			return false;
+		}else {
+			return true;
 		}
 		
 	} // submit 종료
@@ -386,6 +301,6 @@ label {
 
 	</div>
 
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

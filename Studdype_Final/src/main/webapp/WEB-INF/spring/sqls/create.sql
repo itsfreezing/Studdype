@@ -210,6 +210,7 @@ CREATE TABLE STUDY_CATEGORY(
     S_NAME VARCHAR2(100) NOT NULL, --스터디 이름
     S_INFO VARCHAR2(100) NOT NULL, --스터디 한줄 소개
     S_CONTENT VARCHAR2(3000) NOT NULL, --스터디 자세한 소개
+    S_PHOTO VARCHAR2(2000) NOT NULL UNIQUE,
     CATE_NO NUMBER NOT NULL, --스터디 카테고리   [외래키]
     SI_NO NUMBER NOT NULL, --스터디 지역(시)    [외래키]
     GU_NO NUMBER NOT NULL, --스터디 지역(구)   [외래키]

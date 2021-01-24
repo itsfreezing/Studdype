@@ -60,8 +60,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/searchbycategory.do")
-	public String searchByCategory() {
-	
+	public String searchByCategory(HttpSession session) {
+		session.setAttribute("headerMenu", "category");
 		return "studdype/searchByCategory";
 	}
 	
@@ -131,7 +131,7 @@ public class HomeController {
 		model.addAttribute("applylist",applylist);
 		session.setAttribute("login",login);
 		model.addAttribute("studylist", studylist);
-	
+		session.setAttribute("headerMenu", "myPage");
 		
 		
 		return "studdype/myPage2";
@@ -332,14 +332,14 @@ public class HomeController {
 			study.setPhoto("no_url_of_photo_from_studyTB"); 
 		}
 		// FileHandler의 getFilName 메소드 매개변수에 파일경로를 넣어준다.
-		filehandler.getFileName(study.getPhoto());
+		String fileName = filehandler.getFileName(study.getPhoto(), "Studdype_Final");
 		
 		System.out.println("-----------------------------------------------------------------------\n"
 						  +"<<스터디 홈>> ["+study.getS_no()+"]번 스터디 DB에 저장된 이미지의 경로가\n["+study.getPhoto()+"] 입니다.\n"
 						  +"-----------------------------------------------------------------------");
 		
 		
-		model.addAttribute("fileName", filehandler.getFileName(study.getPhoto()));
+		model.addAttribute("fileName", fileName);
 		session.setAttribute("study", study);
 		session.setAttribute("leftnavi", "studyhome");
 		
