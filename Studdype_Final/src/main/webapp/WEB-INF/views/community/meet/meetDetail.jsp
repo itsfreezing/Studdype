@@ -77,11 +77,13 @@
 					
 					<!-- br 태그를 추가하지 않으면 지도가 화면에 보이지 않음 -->
 					<div id="map" >
-						<br><br><br><br><br><br><br><br><br><br><br><br><br>
-						<br><br><br><br><br><br><br><br><br><br><br><br><br>
-						<br><br><br><br><br><br>
 					</div> 
 				</div> 
+			</div>
+			
+			<!-- 투표 영역 -->
+			<div id="vote">
+				
 			</div>
 			
 			<!-- 자신이 생성한 모임일때만 수정/삭제 버튼 보이게 -->
@@ -100,12 +102,6 @@
 			</c:choose>
 			</div>
 			<!-- ---------------------------------- -->
-				
-			
-			<!-- 투표 영역 -->
-			<div id="vote">
-				
-			</div>
 			
 			<!-- 댓글 리스트 영역 -->
 			<div class="replyBox"></div>
