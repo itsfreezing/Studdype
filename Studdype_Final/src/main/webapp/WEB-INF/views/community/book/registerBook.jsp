@@ -31,7 +31,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
 	var pageSize = 12; 		// 한 페이지 수 

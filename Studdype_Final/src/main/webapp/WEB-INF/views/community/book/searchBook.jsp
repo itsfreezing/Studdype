@@ -31,7 +31,162 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
+
+<style type="text/css">
+.main-section {
+	width:72%;
+}
+
+h3 {
+	color:#6f42c1;
+}
+
+h2 {
+	color:#6f42c1;
+	position:relative;
+	top:25%;
+	left:35%;
+}
+
+#main-section-top {
+	display: block;
+	position: relative;
+	width: 100%;
+	height:600px;
+}
+
+#register-section {
+	display:inline-block;
+}
+
+#no-list {
+	position:relative;
+	width:60%;
+	left:20%;
+	margin-top:3%;
+	opacity:0.8;
+	text-align:center;
+	font-weight:bolder;
+	font-size:25px;
+}
+
+#no-list img{
+	width:500px;
+	height:400px
+}
+
+.book-info {
+	position:relative;
+	display:inline-block;
+	width:15%;
+	margin:1%;
+	left:1.5%;
+	border:5px solid #f9f9f0;
+	border-radius:10px;
+	cursor:pointer;
+	background:#f6f5f0;
+	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+.book-info-top {
+	position:relative;
+	display:inline-block;
+	/* float:left; */
+	width:98%;
+	margin:1%;
+	height:250px;
+}
+
+.book-info-top img {
+	height:250px;
+	width:100%;
+}
+
+.book-info-bottom {
+	position:relative;
+	/* display:inline-block; */
+	display:none;
+	width:98%;
+	margin:1%;
+	border-top:1px solid black;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 0 15px;
+}
+
+/* 화살표 css */
+#left-allow {
+	position:relative;
+	float:left;
+	width:3%;
+	height:5px;
+}
+
+#right-allow {
+	position:relative;
+	float:right;
+	width:3%;
+	height:5px;
+}
+
+.allow {
+	margin:8% 1% 0% 1%;
+}
+
+.allow img {
+	cursor:pointer;
+	opacity:0.7;
+}
+
+.thisBook {
+	transition: 0.7s ease all;
+	border:4px solid #6f42c1;
+	opacity:0.7;
+}
+
+.append {
+	position:relative;
+	left:23%;
+	width:30%;
+	height:560px;
+	opacity:1;
+	z-index:2;
+	border:none;
+}
+
+.append .book-info-bottom {
+	display:inline-block;
+}
+
+.append img{
+	height:400px;
+}
+
+.append .book-info-top {
+	height:400px;
+}
+
+.append:hover {
+	opacity:0.2;
+}
+
+#detailBook {
+	display:inline-block;
+	position:relative;
+	float:left;
+	top:40%;
+	left:44%;
+	width:10%;
+	height:30px;
+	text-align:center;
+	font-weight:bolder;
+	z-index:1;
+	border-radius:10px;
+}
+</style>
 
 <script type="text/javascript">
 	
@@ -87,15 +242,13 @@
 	
 	<!-- 메인 섹션----------------------------------------------------------------------------- -->
 	<div class="main-section">
-	<h3>스터디 도서 검색</h3>
+	<h3>스터디 도서 목록</h3>
 		<!--메인 상단 세션 --------------------------------------------------------------------- -->
 		<div id="main-section-top">
 		<c:choose>
 			<c:when test="${empty list }">
 				<div id="no-list">
-					<img src="https://image.freepik.com/free-vector/red-prohibited-sign_1284-42862.jpg">
-				</div>
-				<div id="no-list-comment">
+					<img src="./resources/img/no-exsist-book.png">
 					<p>등록된 도서가 없습니다.</p>
 				</div>
 			</c:when>
