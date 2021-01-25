@@ -81,11 +81,11 @@ public class BoardController {
 		Map<Integer, Integer> noticeReplyCntMap = null;// 공지사항 댓글 갯수 담을 MAP
 
 		int totalBoardNum = freeBiz.selectTotalBoardNum(study.getS_no()); // 총 자유게시판 글 갯수
-
+		
 		paging(pageMap, pagenum, totalBoardNum); // 페이징 함수
 
 		pageMap.put("studyno", study.getS_no()); // 스터디 번호 put
-
+		
 		// 15개 게시물만 가져오기
 		list = freeBiz.selectPagingBoardList(pageMap);
 		// 멤버번호로 작성자 이름 받아오기
