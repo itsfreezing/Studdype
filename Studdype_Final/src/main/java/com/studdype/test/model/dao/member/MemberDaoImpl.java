@@ -356,7 +356,22 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
-
+	
+	//이메일 인증
+	@Override
+	public MemberDto sendMail(MemberDto dto) {
+		MemberDto res= null;
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"sendmail",dto);
+		} catch (Exception e) {
+			System.out.println("[error]:SendMail FAIL");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
 	//[비밀번호 찾기] 비밀번호 변경
 	@Override
 	public int updatePw(MemberDto dto) {
@@ -369,5 +384,6 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
+
 
 }

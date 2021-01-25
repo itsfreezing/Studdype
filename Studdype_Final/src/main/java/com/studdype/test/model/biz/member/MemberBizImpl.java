@@ -77,5 +77,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.updatePw(dto);
 	}
 
+	//회원가입 메일 인증
+	@Override
+	public MemberDto sendmail(MemberDto dto) {
+		return memberDao.sendMail(dto);
+	}
+
 	
 }

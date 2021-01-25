@@ -153,6 +153,28 @@ public class MemberController {
 		return resMap;
 	}
 	
+	
+	
+	@RequestMapping(value="/sendmail.do", method=RequestMethod.POST)
+	public @ResponseBody Map sendmail(@RequestBody MemberDto dto, HttpSession session ) {
+		MailSender sender=new MailSender();
+		
+		Map res= new HashMap();
+		
+		MemberDto rdto = memberBiz.sendmail(dto);
+		if(rdto!=null) {
+			res.put("isExist", "y");
+			String randomNum=sender.getRandNum();
+			
+			sender.sendVerifiNum(rdto, randomNum);
+			session.setAttribute("randomNum", randomNum);
+		}else {
+			res.put("isExist", "n");
+		}
+		
+		return res;
+	}
+	
 	//인증번호 확인
 		@RequestMapping(value="/chkVerification.do", method=RequestMethod.POST)
 		public @ResponseBody Map chkVerification(@RequestBody String chk, HttpSession session) {
