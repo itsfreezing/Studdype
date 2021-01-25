@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -236,14 +238,15 @@ $('#myCarousel').carousel({
 			<div class="carousel-container position-relative row">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
-						<div class="carousel-item active" data-slide-number="0">
-							<img src="https://source.unsplash.com/Pn6iimgM-wo/1600x900/"
+						<c:forEach items="${fileDetail }" var="fileDetail" varStatus="status">
+						<div class="carousel-item active" data-slide-number="${status.index }">
+							<img src="${fileDetail.f_url}"
 								class="d-block w-100" alt="..."
-								data-remote="https://source.unsplash.com/Pn6iimgM-wo/"
 								data-type="image" data-toggle="lightbox"
 								data-gallery="example-gallery">
 						</div>
-						<div class="carousel-item" data-slide-number="1">
+						</c:forEach>
+						<!-- <div class="carousel-item" data-slide-number="1">
 							<img src="https://source.unsplash.com/tXqVe7oO-go/1600x900/"
 								class="d-block w-100" alt="..."
 								data-remote="https://source.unsplash.com/tXqVe7oO-go/"
@@ -305,7 +308,7 @@ $('#myCarousel').carousel({
 								data-remote="https://source.unsplash.com/Q1p7bh3SHj8/"
 								data-type="image" data-toggle="lightbox"
 								data-gallery="example-gallery">
-						</div>
+						</div> -->
 					</div>
 				</div>
 
@@ -402,7 +405,7 @@ $('#myCarousel').carousel({
 	<!-- 갤러리 뷰 끝 -->
 	
 	<!-- 갤러리 내용 시작 -->
-	
+	<div class="galleryContent"></div>
 	<!-- 갤러리 내용 끝 -->
 
 
