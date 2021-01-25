@@ -313,11 +313,11 @@
       
 
       
-     <c:forEach var="i" begin="0" end="${pageList.size()-1 }" step="1">
+     <c:forEach var="i" begin="0" end="${pageList.size()-1}" step="1">
      		<p>${pageList.get(i).getS_no()}</p>
 	</c:forEach>
-      <c:if test="${not empty pageList }">
-     <c:forEach var="pageList" items="${pageList }">
+      <c:if test="${not empty pageList}">
+     <c:forEach var="pageList" items="${pageList}">
      		<p>${pageList.getS_no() }</p>
 
      </c:forEach>
