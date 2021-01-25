@@ -38,5 +38,4 @@ public interface StudyBiz {
 	public String siNameForStudyHome(int si_no); // [studyHome] 시 번호로 시 이름 가져오기
 	public List<BoardDto> selectNoticeBoard(int s_no); // [studyHome] 공지사항 게시글 리스트 가져오기
 	
-	
 }

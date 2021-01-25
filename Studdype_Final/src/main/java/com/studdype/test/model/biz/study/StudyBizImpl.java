@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dao.board.book.BookDao;
 import com.studdype.test.model.dao.board.dataFile.DataFileDao;
 import com.studdype.test.model.dao.board.notice.NoticeBoardDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
@@ -47,6 +48,9 @@ public class StudyBizImpl implements StudyBiz{
 	
 	@Autowired
 	private NoticeBoardDao noticeDao;
+	
+	@Autowired
+	private BookDao bookDao;
 	
 	private FileHandler fileHandler = new FileHandler();
 	
@@ -173,11 +177,10 @@ public class StudyBizImpl implements StudyBiz{
 		return locationSidao.selectSiForStudyHome(si_no);
 	}
 
+	// [studyHome] 공지사항 게시글 리스트 가져오기
 	@Override
 	public List<BoardDto> selectNoticeBoard(int s_no) {
 		return noticeDao.selectNoticeBoard(s_no);
 	}
-
-
 
 }
