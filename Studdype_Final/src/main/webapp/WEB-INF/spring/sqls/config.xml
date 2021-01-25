@@ -18,6 +18,7 @@
 		<typeAlias type="com.studdype.test.model.dto.board.BookDto" alias="bookDto"/>
 		<typeAlias type="com.studdype.test.model.dto.study.StudyMemberDto" alias="studyMemberDto"/>
 		<typeAlias type="com.studdype.test.model.dto.study.StudyApplyingDto" alias="StudyApplyingDto"/>
+		<typeAlias type="com.studdype.test.common.SearchPagination" alias="searchPagination" />
       </typeAliases>
   
   	  		
@@ -38,6 +39,7 @@
 		
 
 		<mapper resource="./mybatis/File/photoFile-mapper.xml" />
+		<mapper resource="./mybatis/Board/photoBoard-mapper.xml" />
 		<mapper resource="./mybatis/Study/studyApplying-mapper.xml"/>
 		<mapper resource="./mybatis/File/freeFile-mapper.xml"/>
 		<mapper resource="./mybatis/File/noticeFile-mapper.xml"/>
