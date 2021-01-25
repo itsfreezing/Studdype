@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
@@ -25,16 +25,23 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 </head>
 <body>
 <jsp:include page="../commond/communityHeader.jsp"></jsp:include>
 <jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
+<jsp:include page="./rightInfo.jsp"></jsp:include>
+
 	
 	<!--main conternt 섹션-->
 	<div class="main-section">
 							
-					<div id="studyImg"><img src="/studyHomeImg//${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<div id="studyImg"><img src="${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			
 			
 	</div>

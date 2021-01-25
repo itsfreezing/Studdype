@@ -53,6 +53,10 @@ public interface MemberDao {
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
 	public MemberDto findId(MemberDto dto);
 	
+	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
+	public int updatePw(MemberDto dto); // 비밀번호 변경
+	
+	
 	
 	
 	

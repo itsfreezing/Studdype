@@ -50,4 +50,12 @@
 	         SELECT * FROM MEMBER
 	         WHERE MEM_NAME = #{mem_name} AND MEM_RNO = #{mem_rno}
 	      </select>
+		
+		<select id="selectMemberByIdAndEmail" parameterType="memberDto" resultMap="memberMap">
+			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_EMAIL = #{mem_email}
+		</select>
+		
+		<update id="updatePw" parameterType="memberDto">
+			UPDATE MEMBER SET MEM_PW = #{mem_pw} WHERE MEM_NO = #{mem_no}
+		</update>
 	</mapper>

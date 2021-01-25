@@ -138,6 +138,20 @@ public class BookDaoImpl implements BookDao {
 		
 		return res;
 	}
+
+	@Override
+	public BookDto selectMainBookOfStudy(int s_no) {
+		BookDto resDto = null;
+		
+		try {
+			resDto = sqlSession.selectOne(NAMESPACE+"selectMainBookOfStudy", s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectMainBookOfStudy");
+			e.printStackTrace();
+		}
+		
+		return resDto;
+	}
 	
 	
 

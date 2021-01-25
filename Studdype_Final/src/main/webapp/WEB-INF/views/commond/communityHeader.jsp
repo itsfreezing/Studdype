@@ -8,7 +8,19 @@
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComunityHome</title>
-
+<style type="text/css">
+.header-area {
+	background: #88d3ce;
+	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
+}
+.mainmenu li.active:not(:last-child):after,
+.mainmenu li:not(:last-child):hover:after { 
+	background: #fff;
+}
+</style>
 </head>
 <body>
 	<!-- 헤더 시작 -->
@@ -18,7 +30,7 @@
             <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             
                <!-- 헤더 좌측 로고 -->
-               <a class="navbar-brand" href="mainPage.jsp"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
+               <a class="navbar-brand" href="studyList.do"><img src="./resources/assets/img/logo_white.png" alt="" class="logo"></a>
 			   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   					<span class="navbar-toggler-icon"></span>
 			   </button>
@@ -28,7 +40,7 @@
 					<div class="mainmenu">
 						<ul class="navbar-nav ml-auto">
 							<li class="nav-item">
-								<a class="nav-link" href="#">스터띱 홈<span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="studyList.do">스터띱 홈<span class="sr-only">(current)</span></a>
 							</li>								
 	                              <li class="nav-item">
 								<a class="nav-link" href="logout.do">로그아웃</a>

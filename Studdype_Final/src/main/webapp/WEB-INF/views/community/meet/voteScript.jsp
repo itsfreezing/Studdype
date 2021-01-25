@@ -138,13 +138,13 @@ function getVoteResult() {
 				  	$("#vote").html(html);
 			  	
 			} else {
-				html += "<div class='btn-group' data-toggle='buttons' tooltip='참석여부를 결정한후 투표하기 버튼을 눌러주세요!' tooltip-persistent>"
+				html += "<div class='btn-group' data-toggle='buttons'>"
 							+"<label class='btn btn-success'>참석"
-								+"<input type='radio' name='y' class='attend' value='Y' autocomplete='off'>"
-								+"<span class='glyphicon glyphicon-ok'></span>"
+								+"<input type='radio' name='vote' class='attend' value='Y' autocomplete='off'>"
+								+"<span class='glyphicon glyphicon-ok'></span><br>"
 							+"</label>"
 							+"<label class='btn btn-danger'>불참석"
-								+"<input type='radio' name='n' class='attend' value='N' autocomplete='off'>"
+								+"<input type='radio' name='vote' class='attend' value='N' autocomplete='off'>"
 								+"<span class='glyphicon glyphicon-ok'></span>"
 							+"</label>"
 						+"</div>"
@@ -198,8 +198,8 @@ function takeVote(btn){
 	});
 }
 
-
 $(document).ready(getVoteResult());
+
 </script>
 </head>
 <body>

@@ -2,7 +2,9 @@ package com.studdype.test.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.studdype.test.common.MailSender;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.member.MemberDto;
 
@@ -42,8 +45,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/signform.do")
-	public String memberInsertForm() {
+	public String memberInsertForm(HttpSession session) {
 		logger.info("signup form ");
+		session.setAttribute("headerMenu", "signUpMenu");
 		
 		return "loginpage/signup";
 	}
@@ -84,8 +88,9 @@ public class MemberController {
 	
 	//로그인 폼
 	@RequestMapping("/loginform.do")
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
 		logger.info("login page");
+		session.setAttribute("headerMenu", "loginMenu");
 		return "loginpage/login";
 	}
 	
@@ -117,5 +122,80 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/studyList.do";		
 	}
+	
+	//비밀번호 찾기
+	@RequestMapping("/findpwform.do")
+	public String findPasswordForm() { 
+		
+		return "loginpage/findpwform";
+	}
+	
+	//인증번호 보내기
+	@RequestMapping(value="/sendVerification.do", method=RequestMethod.POST)
+	public @ResponseBody Map sendVerification(@RequestBody MemberDto dto, HttpSession session) {
+		MailSender sender = new MailSender();
+		Map resMap = new HashMap();
+		
+		MemberDto resDto = memberBiz.selectMemberByIdAndEmail(dto);
+		
+		//아이디와 이메일이 일치하면
+		if ( resDto != null) {
+			resMap.put("isExist", "y"); //결과
+			String randNum = sender.getRandNum();
+			
+			sender.sendVerifiMail(resDto, randNum);
+			session.setAttribute("randNum", randNum);
+		}else {
+			resMap.put("isExist", "n"); //결과
+		}
+		
+		
+		return resMap;
+	}
+	
+	//인증번호 확인
+		@RequestMapping(value="/chkVerification.do", method=RequestMethod.POST)
+		public @ResponseBody Map chkVerification(@RequestBody String chk, HttpSession session) {
+			MailSender sender = new MailSender();
+			Map resMap = new HashMap();
+			
+			String[] chkList = chk.split("\"");
+			String chkVal = chkList[chkList.length-2];
+			//인증번호와  입력인증번호가 일치하면
+			if ( chkVal.equals( session.getAttribute("randNum") ) ) {
+				resMap.put("isExist", "y"); //결과
+			}else {
+				resMap.put("isExist", "n"); //결과
+			}
+			
+			
+			return resMap;
+		}
+		
+		//임시 비밀번호 보내기
+		@RequestMapping("/sendExtraPw.do")
+		public String sendExtraPw(Model model, MemberDto member) {
+			MailSender sender = new MailSender();
+			String extraPw = ""; //임시 비밀번호
+			for(int i = 0; i < 12 ; i++) {
+				int random = (int)(Math.random()*2)+1; //영어일지 숫자일지
+				if( i  ==  0) {
+					char rand_alpabet = (char)((int)(Math.random()*26)+97 );
+					extraPw += rand_alpabet;
+				}else if(random == 1) {
+					char rand_alpabet = (char)((int)(Math.random()*26)+97 );
+					extraPw += rand_alpabet;
+				}else {
+					char rand_num =  (char)((int)(Math.random()* 10 )+48);
+					extraPw += rand_num;
+				}
+			}
+			MemberDto dto = memberBiz.selectMemberByIdAndEmail(member);
+			dto.setMem_pw(extraPw);
+			int res = memberBiz.updatePw(dto);
+			sender.sendExtraPwMail(dto);
+			model.addAttribute("member", dto);
+			return "loginpage/findpwres";
+		}		
 }
 	

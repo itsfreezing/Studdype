@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.main_div{
+	margin-top:200px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+.page_title{
+	width:250px;
+	margin: 0 auto;
+	margin-bottom:50px;
+}
+
+#email{
+	width: 350px;	
+}
+
+#chkNum{
+	width: 350px;
+}
+#id{
+	width: 350px;
+}
+.findform_btn{
+	margin: 0 auto;
+}

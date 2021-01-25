@@ -31,7 +31,7 @@ public interface StudyBiz {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
 	public int newLeader(StudyDto dto); 
-
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no);
 
 	
 }

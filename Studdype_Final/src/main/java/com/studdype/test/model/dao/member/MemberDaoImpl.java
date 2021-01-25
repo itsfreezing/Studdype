@@ -343,5 +343,31 @@ public class MemberDaoImpl implements MemberDao{
 		}
     	return res;
    }
+	//[비밀번호 찾기] 아이디와 이메일로 member가져오기
+	@Override
+	public MemberDto selectMemberByIdAndEmail(MemberDto dto) {
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectMemberByIdAndEmail", dto);
+		} catch (Exception e) {
+			System.out.println("[Error] [MemberDaoImpl] selectMemberByIdAndEmail method");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//[비밀번호 찾기] 비밀번호 변경
+	@Override
+	public int updatePw(MemberDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"updatePw", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [MemberDaoImpl] updatePw method");
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }
