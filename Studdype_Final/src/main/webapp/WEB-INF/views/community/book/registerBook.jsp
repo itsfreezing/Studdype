@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
-	var pageSize = 12; 		// 한 페이지 수 
+	var pageSize = 10; 		// 한 페이지 수 
 	var pageGroupSize = 5; 	// 페이징 당 페이지 수 
 	var listLength = 0;		// 전달받은 도서 수
 	
@@ -135,7 +135,7 @@
 					"</div>"
 			);
 		}
-		$(".divBox:gt(11)").hide();
+		$(".divBox:gt(9)").hide();
 	}
 	
 	// 페이징 계산 및 append 함수
@@ -182,11 +182,11 @@
 		var title = $("#b_title").val();
 		var content = $("#content").val();
 		
-		if( (title.trim().length==0) || (title==null) || (title.trim()=='') ) {
-			alert("글제목을 작성해주세요.");
+		if( (title.trim().length==0) || (title==null) || (title.trim()=='')) {
+			alert("글제목을 작성해주세요. (공백, 띄어쓰기 제외)");
 			return false;
-		}else if(title.trim() > 500) {
-			alert("글제목은 500자 이내로 작성해주세요.");
+		}else if(title.trim().length > 50) {
+			alert("글제목은 50자 이내로 작성해주세요.");
 			return false;
 		}else if( (content.trim().length==0) || (content.trim()=='') || (conetnt==null) ) {
 			alert("도서 설명을 작성해주세요.");
@@ -202,43 +202,50 @@
 
 	<!-- 모달 영역 시작 -->
 		<div class="modal hidden">
+			<form action="insertRegisterBook.do" onsubmit="return validateSubmit();" autocomplete="off" accept-charset="utf-8">
 			<div class="form">
-    			<form action="insertRegisterBook.do" onsubmit="return validateSubmit();" autocomplete="off" accept-charset="utf-8">
     				<input type="hidden" name="s_no" value="${study.s_no }">
     				<input type="hidden" name="b_writer" value="${login.mem_no }">
     				<input type="hidden" id="input_book_img" name="book_img" value="">
     				<div id="modal-top">
-    					<label for="b_title">글 제목</label>
-     					<input id="b_title" name="b_title" type="text"/>
+    					<label class="board-label" for="b_title">글 제목</label>
+     					<input class="board-input" id="b_title" name="b_title" type="text"/>
     				</div>
     				<div id="modal-bottom">
     					<div id="modal-textarea">
-    						<label for="content" >도서 설명글</label>
-							<textarea id="content" rows="12" name="b_content"></textarea>
-    					</div>
-    					<div id="modal-content">
-    						<label for="title">도서 이름</label>
-      						<input id="title" type="text" name="book_title" value="" readonly="readonly" >
-      				
-      						<label for="author">저자</label>
-      						<input id="author" type="text" name="book_author" value="" readonly="readonly">
-      				
-      						<label for="publish">출판사</label>
-      						<input id="publish" type="text" name="book_publish" value="" readonly="readonly">
-      				
-      						<label for="link">링크&nbsp;</label>
-      						<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
-      						<button type="submit">등록</button>
+    						<label class="board-label" for="content" >도서 설명글</label>
+							<textarea id="content" rows="18" name="b_content"></textarea>
     					</div>
     				</div>
-      				
-    			</form>
+      				<button type="submit">등록</button>
   			</div>
   			<div class="invite">
     			<img id="book_img" src="" onError="this.src='resources/img/no-image.png'" />
+    			<div id="modal-content">
+    				<div class="content-div">
+    					<label class="book-label" for="title">도서 이름</label>
+      					<input class="book-input" id="title" type="text" name="book_title" value="" readonly="readonly" >
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="author">저자</label>
+      					<input class="book-input" id="author" type="text" name="book_author" value="" readonly="readonly">
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="publish">출판사</label>
+      					<input class="book-input" id="publish" type="text" name="book_publish" value="" readonly="readonly">
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="link">링크&nbsp;</label>
+      					<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
+      				</div>
+    			</div>
     			<div class="nope">다른 책 보러가기</div>
     			<div class="close" title="close"></div>
   			</div>
+  			</form>
 	</div>
 	<!-- 모달 영역 종료 -->
 
@@ -247,15 +254,15 @@
 	
 	<!-- 메인 섹션 시작 -->
 	<div class="main-section">
-	
+	<h3 style="color:#6f42c1;">도서 검색</h3>
 		<!-- ----------------------------------------------------------------------------------- -->
 		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">
 			<form autocomplete="off" id="searchForm">
-				<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 100px;">
+				<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 30px;">
 					<input type="text" class="form-control" id="bookName" name="keyword" placeholder="도서이름 또는 작가로 검색" style="width:100px; height:60px; margin-top:10px;"> 
-					<span><button type="submit" id="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc; cursor:pointer">
-						<img src="./resources/assets/img/icon_search_purple.png" style="width: 55px;">
+					<span><button type="submit" id="homeSearch">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 40px;">
 					</button></span>
 				</div>
 			</form>
@@ -266,7 +273,20 @@
 		
 		<!-- 메인 섹션 중앙 시작 -->
 		<div id="main-section-bottom">
-			<div id='book-img-section'></div>
+			<div id='book-img-section'>
+				<p id="recommend-comment">스터띱 베스트 도서</p>
+				<div class="recommend-img">
+					<img src="./resources/assets/img/recommend1.jpg">
+					<img src="./resources/assets/img/recommend2.jpg">
+					<img src="./resources/assets/img/recommend3.jpg">
+					<img src="./resources/assets/img/recommend4.jpg">
+				</div>
+				<div class="recommend-img">
+					<img src="./resources/assets/img/recommend5.jpg">
+					<img src="./resources/assets/img/recommend6.jpg">
+					<img src="./resources/assets/img/recommend7.jpg">
+				</div>
+			</div>
 			<div id="paging-section"></div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->
