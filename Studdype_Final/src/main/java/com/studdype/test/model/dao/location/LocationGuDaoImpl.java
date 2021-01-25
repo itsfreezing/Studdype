@@ -51,4 +51,19 @@ public class LocationGuDaoImpl implements LocationGuDao{
 		
 	}
 
+	// [studyHome] 구 번호로 구 이름 가져오기
+	@Override
+	public String selectGuForStudyHome(int gu_no) {
+		String guName = null;
+		
+		try {
+			guName = sqlSession.selectOne(NAMESPACE+"selectGuForMainPage", gu_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectGuForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return guName;
+	}
+
 }

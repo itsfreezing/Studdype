@@ -37,6 +37,10 @@
 	<div class="main-section">
 							
 		<div id="studyImg"><img src="${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<img id="studyGif" src="./resources/assets/img/studdypeGif.gif"><span id="studyOneLineIntro"> ${ study.getS_name() } </span>
+		<div id="studyOneLineIntro">
+			"${ study.s_info }"
+		</div>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
