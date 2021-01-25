@@ -32,6 +32,7 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main2.js"></script>
+
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
 	var pageSize = 12; 		// 한 페이지 수 
@@ -39,8 +40,6 @@
 	var listLength = 0;		// 전달받은 도서 수
 	
 	$(function() {
-	///////////////////////////////////////////////////////////////////////
-		search();
 		
 		// 카카오 도서 검색 api
 		$("#searchForm").submit(function() {
@@ -49,7 +48,10 @@
 				method:"GET",
 				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=3&size=50&query="+$("#bookName").val()+"&target=title&target=person",
 				data:{ query: $("#bookName").val() },
-				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" }
+				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" },
+				error:function() {
+					alert("도서 검색 실패!");
+				},
 			})
 			// 데이터 정제
 			.done(function(msg) {
@@ -76,6 +78,7 @@
 				appendBookList(bookList);
 				
 			});
+			return false;
 		});	
 		
 		// 모달 창 닫기 이벤트
@@ -175,38 +178,6 @@
 		$(".pageNumber:first").addClass("show");
 	}
 	
-	// 검색창 함수
-	function search() {
-		//검색창 영역
-		const input = document.querySelector(".finder_input");
-		const finder = document.querySelector(".finder");
-		const form = document.querySelector("#searchForm");
-
-		input.addEventListener("focus", () => {
-		  finder.classList.add("active");
-		});
-
-		input.addEventListener("blur", () => {
-		  if (input.value.length === 0) {
-		    finder.classList.remove("active");
-		  }
-		});
-
-		form.addEventListener("submit", (ev) => {
-		  ev.preventDefault();
-		  finder.classList.add("processing");
-		  finder.classList.remove("active");
-		  input.disabled = true;
-		  setTimeout(() => {
-		    finder.classList.remove("processing");
-		    input.disabled = false;
-		    if (input.value.length > 0) {
-		      finder.classList.add("active");
-		    }
-		  }, 1000);
-		});
-	}
-	
 	function validateSubmit() {
 		var title = $("#b_title").val();
 		var content = $("#content").val();
@@ -280,26 +251,14 @@
 		<!-- ----------------------------------------------------------------------------------- -->
 		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">
-		
-			<!-- 검색창 영역 시작 -->
-			<div class="search-container">
-			
-				<!-- 검색창 form 시작 -->
-				<form autocomplete="off" id="searchForm">
-					<div class="finder">
-						<div class="finder_outer">
-							<div class="finder_inner">
-								<div class="finder_icon" ref="icon"></div>
-								<input class="finder_input" id="bookName" type="text" placeholder="도서이름 또는 작가로 검색" name="book_title" />
-							</div>
-						</div>
-					</div>
-				</form>
-				<!-- 검색창 form 종료 -->
-				
-			</div>
-			<!--검색창 영역 종료 -->
-			
+			<form autocomplete="off" id="searchForm">
+				<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 100px;">
+					<input type="text" class="form-control" id="bookName" name="keyword" placeholder="도서이름 또는 작가로 검색" style="width:100px; height:60px; margin-top:10px;"> 
+					<span><button type="submit" id="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc; cursor:pointer">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 55px;">
+					</button></span>
+				</div>
+			</form>
 		</div>
 		<!-- 메인 섹션 상단 종료 -->
 		
