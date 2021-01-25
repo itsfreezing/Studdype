@@ -189,7 +189,7 @@ console.log(url);
 				<div class="col-lg-4 col-md-8">
 					<div class=" hover-blur">
 						<a href="galleryDetail.do" title="">
-						<img src="http://placeimg.com/260/260/nature/3/" alt="" />
+						<img src="C:\Users\Kimjaehong\Desktop\Studdype_Workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Studdype_Final\resources\file\+${attachImage.get(galleryList.b_no) }" alt="" />
 							<h2>
 								<span class="text-white">${galleryList.b_title }</span>
 							</h2>
@@ -209,8 +209,8 @@ console.log(url);
 				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li><a href="galleryList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
+				<li><a href="galleryList.do${pageMaker.makeSearch(i)}">${i}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">

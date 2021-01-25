@@ -2,6 +2,7 @@ package com.studdype.test.model.dao.board.photo;
 
 import java.util.List;
 
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 
 public interface PhotoFileDao {
@@ -9,6 +10,6 @@ public interface PhotoFileDao {
 	String NAMESPACE="photofile.";
 	
 	int insertImage(List<FileDto> fileList); //file테이블에 데이터 삽입
-	int updateMainPhoto(int b_no); //제일 낮은 파일번호를 메인으로 설정
+	List<FileDto> attachImageList(int b_no);  //이미지ismain 'Y' 가져오기
 	
 }

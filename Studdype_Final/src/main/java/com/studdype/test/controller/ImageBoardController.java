@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,24 +41,27 @@ public class ImageBoardController {
 	private FileHandler fileHandler = new FileHandler();
 	private static final Logger logger = LoggerFactory.getLogger(ImageBoardController.class);
 
-	private FileHandler fileHander = new FileHandler();
 
 	@RequestMapping(value = "/gallery.do", method = RequestMethod.GET)
-	public String list(Model model, HttpSession session, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
+	public String list(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
 		StudyDto study = (StudyDto) session.getAttribute("study"); // 현재 클릭된 스터디
 		searchPagination.setS_no(study.getS_no());
 		logger.info("photo - photoList");
 		List<BoardDto> photoList = null; //갤러리리스트 담을곳
+		List<FileDto> attachImage = null;
 		
 		Map<String, Integer> pageMap = new HashMap<String, Integer>();
 		photoList = photoBiz.galleryList(searchPagination);
+		System.out.println(photoList.get(0).getB_no());
+		
+		attachImage = photoBiz.attachImageList(photoList.get(0).getB_no());
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
-		System.out.println(pageMaker.getEndPage());
+		
 		pageMaker.setTotalCount(photoBiz.totalGalleryListNum(searchPagination));
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("galleryList", photoList);
-		
+		model.addAttribute("attachImage", attachImage);
 		
 		return "community/gallery/gallery";
 	}
@@ -87,13 +91,14 @@ public class ImageBoardController {
 
 		boardDto.setB_writer(writer_no);
 		boardDto.setS_no(s_no);
-
+		
 		MultipartFile[] mfileList = uploadFile.getFile(); // multipartFile 리스트 생성
 		
 		if (mfileList != null) {
-			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);
+			List<FileDto> fileList = fileHandler.getGalleryList(mfileList, request);
+			fileList.get(0).setPhoto_ismain("Y");
 			String path = fileHandler.getPath(request);
-
+			
 			res = photoBiz.writeGallery(boardDto, mfileList, path, fileList);
 			
 		} else {

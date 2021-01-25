@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 
 @Repository
@@ -22,7 +23,7 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		try {
 		for(int i=0; i<fileList.size(); i++) {
 			res = sqlSession.insert(NAMESPACE+"insertImage", fileList.get(i));
-			
+			fileList.get(0).setPhoto_ismain("Y");
 			if(res == 1) {
 				resCnt++;
 			}
@@ -35,13 +36,14 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 	}
 
 	@Override
-	public int updateMainPhoto(int b_no) {
-		int res = 0;
+	public List<FileDto> attachImageList(int b_no) {
+		List<FileDto> res = null;
 		
 		try {
-			res = sqlSession.update(NAMESPACE+"updateMainPhoto", b_no);
+			res = sqlSession.selectList(NAMESPACE+"galleryAttachImage", b_no);
+			System.out.println(res.get(0).getF_url());
 		} catch (Exception e) {
-			System.out.println("에러 메인사진 업데이트");
+			System.out.println("에러: 이즈메인 이미지 가져오기");
 			e.printStackTrace();
 		}
 		return res;

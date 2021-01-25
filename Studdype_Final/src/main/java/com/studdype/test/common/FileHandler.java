@@ -162,6 +162,7 @@ public class FileHandler {
 			
 			String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
 			String f_url = null;
+			
 			try {
 				f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
 			} catch (FileNotFoundException e) {
@@ -174,4 +175,29 @@ public class FileHandler {
 		
 		return fileList;
 	}
+	
+	public List<FileDto> getGalleryList(MultipartFile[] mfileList, HttpServletRequest request) {
+		List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성
+		
+		for(int i = 0 ;  i < mfileList.length  ; i++) {
+			String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
+			double f_size = mfileList[i].getSize(); // 파일 실제크기
+			f_size =  Math.round( (f_size /1024)*100 ) / 100.0; //KB로 변환 
+			
+			String fakeName = System.currentTimeMillis() + f_name; //가짜이름 생성
+			String f_url = null;
+			String photo_ismain = "N";
+			try {
+				f_url = WebUtils.getRealPath(request.getSession().getServletContext(), "resources\\file\\"+fakeName);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			FileDto fileDto = new FileDto(f_name, f_size, f_url, photo_ismain);
+			fileList.add(fileDto);
+		}		
+		
+		
+		return fileList;
+	}
+	
 }

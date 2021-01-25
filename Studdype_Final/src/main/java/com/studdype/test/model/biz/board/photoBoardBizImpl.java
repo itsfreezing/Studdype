@@ -29,18 +29,16 @@ public class photoBoardBizImpl implements photoBoardBiz{
 	public int writeGallery(BoardDto boardDto, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
 		int res = 0;
 		int insertRes = 0;
-		
 		insertRes = photoDao.insertBoard(boardDto);
+		fileList.get(0).setPhoto_ismain("Y");
 		int resCnt = photoFileDao.insertImage(fileList);
-		
 		if(resCnt == fileList.size() && insertRes == 1) {
 			res = 1;
 			for(int i=0; i<mfileList.length; i++) {
 				fileHandler.writeFile(mfileList[i], path, fileList.get(i).getF_url());
 			}
+			
 		}
-		photoFileDao.updateMainPhoto(boardDto.getB_no());
-		
 		return res;
 		
 	}
@@ -58,6 +56,11 @@ public class photoBoardBizImpl implements photoBoardBiz{
 	@Override
 	public int totalGalleryListNum(SearchPagination searchPagination) {
 		return 0;
+	}
+
+	@Override
+	public List<FileDto> attachImageList(int b_no) {
+		return photoFileDao.attachImageList(b_no);
 	}
 
 
