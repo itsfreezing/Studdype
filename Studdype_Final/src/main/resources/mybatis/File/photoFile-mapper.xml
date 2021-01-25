@@ -21,6 +21,12 @@
 		FROM PHOTO_FILE
 		WHERE B_NO = #{b_no} AND PHOTO_ISMAIN = 'Y'
 	</select> 
+	
+	<select id="galleryDetail" parameterType="int" resultMap="fileMap">
+		SELECT *
+		FROM PHOTO_FILE
+		WHERE B_NO = #{b_no}
+	</select>
 
 
 

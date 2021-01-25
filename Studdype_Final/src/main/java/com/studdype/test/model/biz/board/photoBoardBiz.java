@@ -18,4 +18,5 @@ public interface photoBoardBiz {
 	public List<BoardDto> galleryList(SearchPagination searchPagination);
 	public int totalGalleryListNum(SearchPagination searchPagination);
 	public List<FileDto> attachImageList(int b_no);
+	public BoardDto galleryDetailOne(int b_no);
 }

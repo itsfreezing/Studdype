@@ -167,9 +167,9 @@ console.log(url);
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
 				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 
-					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="갤러리 제목을 검색하세요." value="${searchPagination.keyword }"> <span>
-					<button type="button" id="homeSearch" name="homeSearch">
-						<img src="./resources/assets/img/icon_search_white.png" style="width: 20px;">
+					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword }" style="width:100px; height:60px; margin-top:10px;"> <span>
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc;">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 					</button>
 				</span>
 			</div>
@@ -188,8 +188,8 @@ console.log(url);
 				<c:forEach items="${galleryList }" var="galleryList">
 				<div class="col-lg-4 col-md-8">
 					<div class=" hover-blur">
-						<a href="galleryDetail.do" title="">
-						<img src="C:\Users\Kimjaehong\Desktop\Studdype_Workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Studdype_Final\resources\file\+${attachImage.get(galleryList.b_no) }" alt="" />
+						<a href="galleryDetail.do?b_no=${galleryList.b_no }" title="">
+						<img src="${pageContext.request.contextPath}/resources/file/${attachImage }" alt="" />
 							<h2>
 								<span class="text-white">${galleryList.b_title }</span>
 							</h2>

@@ -42,4 +42,10 @@
 		AND B_NO > 0
 	</select>
 	
+	<select id="galleryDetailOne" parameterType="int" resultType="boardDto">
+		SELECT *
+		FROM PHOTO_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+	
 </mapper>

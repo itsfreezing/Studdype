@@ -41,11 +41,25 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		
 		try {
 			res = sqlSession.selectList(NAMESPACE+"galleryAttachImage", b_no);
-			System.out.println(res.get(0).getF_url());
+			
 		} catch (Exception e) {
 			System.out.println("에러: 이즈메인 이미지 가져오기");
 			e.printStackTrace();
 		}
+		return res;
+	}
+
+	@Override
+	public List<FileDto> galleryDetailFile(int b_no) {
+		List<FileDto> res = null;
+		
+		try {
+			res = sqlSession.selectList(NAMESPACE+"galleryDetail", b_no);
+		} catch (Exception e) {
+			System.out.println("에러: 갤러리 파일 디테일");
+			e.printStackTrace();
+		}
+		
 		return res;
 	}
 

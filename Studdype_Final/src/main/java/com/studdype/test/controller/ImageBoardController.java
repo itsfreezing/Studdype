@@ -52,24 +52,38 @@ public class ImageBoardController {
 		
 		Map<String, Integer> pageMap = new HashMap<String, Integer>();
 		photoList = photoBiz.galleryList(searchPagination);
-		System.out.println(photoList.get(0).getB_no());
-		
 		attachImage = photoBiz.attachImageList(photoList.get(0).getB_no());
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
-		
 		pageMaker.setTotalCount(photoBiz.totalGalleryListNum(searchPagination));
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("galleryList", photoList);
-		model.addAttribute("attachImage", attachImage);
+		model.addAttribute("attachImage", attachImage.get(0).getF_name());
 		
 		return "community/gallery/gallery";
 	}
 	
 	//갤러리 디테일페이지
-	@RequestMapping("/galleryDetail.do")
-	public String detail(Model model) {
-
+	@RequestMapping(value= "/galleryDetail.do", method = RequestMethod.GET)
+	public String detail(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		int s_no = ((StudyDto) session.getAttribute("study")).getS_no();
+		System.out.println("detail: "+b_no);
+		Map<Integer, MemberDto> memberMap = null; 
+		Map<Integer, Integer> replyCntMap = null;
+		BoardDto detail = null; 
+		List<FileDto> fileDetail = null;
+		detail = photoBiz.galleryDetailOne(b_no);
+		fileDetail = photoFileBiz.galleryDetailFile(b_no);
+		
+		System.out.println(fileDetail.get(0).getF_url());
+		
+		
+		
+		model.addAttribute("detail", detail);
+		model.addAttribute("fileDetail", fileDetail);
+		
 		return "community/gallery/galleryDetail";
 	}
 	

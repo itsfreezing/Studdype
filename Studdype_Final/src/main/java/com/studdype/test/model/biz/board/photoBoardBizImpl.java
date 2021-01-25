@@ -63,5 +63,10 @@ public class photoBoardBizImpl implements photoBoardBiz{
 		return photoFileDao.attachImageList(b_no);
 	}
 
+	@Override
+	public BoardDto galleryDetailOne(int b_no) {
+		return photoDao.galleryDetailOne(b_no);
+	}
+
 
 }

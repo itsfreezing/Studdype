@@ -18,6 +18,11 @@ public class photoFileBizImpl implements photoFileBiz{
 	public List<FileDto> attachImageList(int b_no) {
 		return null;
 	}
+
+	@Override
+	public List<FileDto> galleryDetailFile(int b_no) {
+		return photoFileDao.galleryDetailFile(b_no);
+	}
 	
 
 

@@ -52,4 +52,17 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
 		return res;
 	}
 
+	@Override
+	public BoardDto galleryDetailOne(int b_no) {
+		BoardDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"galleryDetailOne", b_no);
+		} catch (Exception e) {
+			System.out.println("에러: 갤러리 디테일");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

@@ -13,6 +13,7 @@ public interface PhotoBoardDao {
 	public int insertBoard(BoardDto boardDto);
 	public List<BoardDto> galleryList(SearchPagination searchPagination);
 	public int totalGalleryListNum(SearchPagination searchPagination);
+	public BoardDto galleryDetailOne(int b_no);
 	
 
 }

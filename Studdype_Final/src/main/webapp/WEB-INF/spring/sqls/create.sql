@@ -256,10 +256,12 @@ CREATE TABLE STUDY_APPLYING(
 );
 select *from study_member;
          본인이 팀장인때 
-UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO =38 AND MEM_NO = 1;
+UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO =1 AND MEM_NO = 1;
+INSERT INTO STUDY_APPLYING VALUES(1,1,'Y','APPLYING INFO');
 delete STUDY_APPLYING WHERE S_NO=38;
 select *from study_applying;
 select * from study;
+SELECT * FROM MEMBER;
 -------------------------------------------------------------
 
 ------------------ CREATE BOARD -----------------------------

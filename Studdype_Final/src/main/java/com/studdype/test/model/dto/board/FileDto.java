@@ -102,6 +102,8 @@ public class FileDto {
 	public void setF_name(String f_name) {
 		this.f_name = f_name;
 	}
+	
+	
 
 	public String getPhoto_ismain() {
 		return photo_ismain;
