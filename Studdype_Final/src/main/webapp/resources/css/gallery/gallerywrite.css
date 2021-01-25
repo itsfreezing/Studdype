@@ -1,0 +1,135 @@
+.js .input-file-container {
+	position: relative;
+	width: 565px;
+	text-align: center;
+}
+
+.js .input-file-trigger {
+	display: block;
+	padding: 14px 45px;
+	background: #8A94BE;
+	color: white;
+	font-size: 1em;
+	transition: all .4s;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.js .input-file {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 225px;
+	padding: 14px 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.js .input-file:hover+.input-file-trigger, .js .input-file:focus+.input-file-trigger,
+	.js .input-file-trigger:hover, .js .input-file-trigger:focus {
+	background: #962399;
+	text-decoration: none !important;
+}
+
+.file-return {
+	margin: 0;
+}
+
+.file-return:not(:empty) {
+	margin: 1em 0;
+}
+
+.js .file-return {
+	font-style: italic;
+	font-size: .9em;
+	font-weight: bold;
+}
+
+.credit {
+	border: 1px solid #ddd;
+	padding: 2px;
+	width: 410px;
+	background: #eee;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 0;
+}
+/* 파일 업로드 */
+.uploadFile {
+	width: 150px;
+	height: 50px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	font-size: 15px;
+	padding: 1%;
+	margin-bottom: 2%;
+	color: 6434ef;
+	float: right;
+}
+.uploadFile:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.upload_btn_box{
+	clear: both;
+	height: 80px;
+}
+.upload_box{
+	border:1px solid  rgb(180,180,180);
+	padding: 2%;
+	width: 100%;
+	float: right;
+	
+}
+
+.upload_file_box{
+	padding: 2%;
+	border-top: 1px solid  rgb(180,180,180);
+	height: 60px;
+}
+
+
+.upload_file{
+	display: none;
+}
+.file_name{
+	font-size: 18px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 700px;
+	float: left;
+}
+.file_size{
+	font-size: 14px;
+	color: rgb(130,130,130);
+	float: right;
+}
+
+.remove_file_btn{
+	background-image: url("../../img/remove_file.png");
+	background-size:25px;
+	border:none;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	cursor: pointer;
+	margin-left:10px;
+	float: right;
+}
+.file_format_img{
+	width: 25px;
+	height: 25px;
+	margin-right: 3px;
+	margin-bottom: 5px;
+	float: left;
+}

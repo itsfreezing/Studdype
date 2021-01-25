@@ -44,6 +44,7 @@
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
+	border-bottom: 3px double gray;
 }
 
 #studyImg img{
@@ -148,9 +149,10 @@
 div#studyOneLineIntro{
 	width: 100%;
 	height: auto;
-	border-bottom: 3px solid gray;
+	border-bottom: 3px double gray;
 	font-size: 30px;
 	text-align: center;
+	color: #625F5F;
 }
 
 #studyGif{
@@ -163,10 +165,121 @@ div#studyOneLineIntro{
 
 span#studyOneLineIntro{
 	position: relative;
-	top: -20px;
+	top: -25px;
 	padding-left: 3%;
-	font-size: 50px;
+	font-size: 250%;
 	font-weight: bold;
 }
 
+.quote{
+	width: 20px;
+	padding-bottom: 23px;
+}
 
+#subMain{
+	width: 100%;
+	background-color: #f0f0f0;
+	padding: 5%;
+}
+
+#studyContent{
+	background-color: #fff;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 25px;
+	border-radius: 0.5em;
+	margin-bottom: 10%;
+}
+
+#content{
+	background-color: #909098;
+	width: 260px;
+	font-size: 25px;
+	text-align: center;
+	color: #fff;
+	padding: 1% 2%;
+	border-radius: 1em;
+	margin-left: 10%;
+	margin-bottom: 3%;
+	margin-top: 3%;
+	opacity: 0.5;
+}
+
+#bookContent{
+	display: flex;
+	height: 450px;
+}
+
+#bookContentLeft{
+	width: 30%;
+	display: inline-block;
+	margin-left: 10%;
+	background-color: #fff;
+	border-radius: 0.5em;
+	overflow: hidden;
+	padding: 4% 0;
+}
+
+#bookImg img{
+	width: 100%;
+}
+
+#bookContentRight{
+	width: 48%;
+	display: inline-block;
+	background-color: #fff;
+	border-radius: 0.5em;
+	overflow: hidden;
+	padding: 2%;
+	height: 100%;
+	margin-left: 2%;
+}
+
+#bookTitle{
+	font-size: 20px;
+	font-weight: bold;
+	width: 100%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid gray;
+	margin-bottom: 2.5%;
+	text-align: center;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+
+#bookInfo{
+	display: flex;
+	width: 100%;
+}
+
+#bookInfoLeft{
+	display: inline-block;
+	width: 20%;
+	float: left;
+	margin-right: 0.5%;
+	border-right: 2px solid gray;
+}
+
+#bookInfoRight{
+	display: inline-block;
+	width: 78%;
+	float: right;
+	margin-left: 1.5%;
+}
+
+#link{
+	width: 20px;
+}
+
+#bookExplan{
+	border-top: 2px solid gray;
+	height: 230px;
+	padding: 0 1%;
+}
+
+#bookHR{
+	margin: 0 9px 0 0;
+	border-top: 2px solid gray;
+}

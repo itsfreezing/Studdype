@@ -14,6 +14,16 @@ public class FileDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public FileDto(String f_name, double f_size, String f_url, String photo_ismain) {
+		super();
+		this.f_name = f_name;
+		this.f_size = f_size;
+		this.f_url = f_url;
+		this.photo_ismain = photo_ismain;
+	}
+
 
 	public FileDto(int f_no, int b_no, String f_name, double f_size, String f_url) {
 		super();
@@ -92,6 +102,8 @@ public class FileDto {
 	public void setF_name(String f_name) {
 		this.f_name = f_name;
 	}
+	
+	
 
 	public String getPhoto_ismain() {
 		return photo_ismain;
@@ -100,6 +112,8 @@ public class FileDto {
 	public void setPhoto_ismain(String photo_ismain) {
 		this.photo_ismain = photo_ismain;
 	}
+	
+	
 
 	
 
