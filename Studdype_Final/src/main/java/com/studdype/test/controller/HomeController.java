@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.common.FileHandler;
+import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyApplyingDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
@@ -43,6 +45,8 @@ public class HomeController {
 	private StudyMemberBiz studymemberBiz;
 	@Autowired
 	private StudyApplyingBiz studyapplyingBiz;
+	@Autowired
+	private BookBiz bookBiz;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -330,7 +334,6 @@ public class HomeController {
 		String guName = studyBiz.guNameForStudyHome(study.getGu_no());
 		String siName = studyBiz.siNameForStudyHome(study.getSi_no());
 		List<BoardDto> noticeList = studyBiz.selectNoticeBoard(study.getS_no()); 
-		
 		// DB에 저장된 사진이 없을 때 
 		// null 값으로 넣으면 nullPointerException 발생
 		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력
@@ -341,6 +344,10 @@ public class HomeController {
 		// FileHandler의 getFilName 메소드 매개변수에 파일경로를 넣어준다.
 		String fileName = filehandler.getFileName(study.getPhoto(), "Studdype_Final");
 		
+		BookDto book = bookBiz.selectMainBookOfStudy(study.getS_no());
+
+		
+		model.addAttribute("book", book);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("siName", siName);
 		model.addAttribute("guName", guName);
