@@ -57,25 +57,142 @@ function execPostcode(){
 		}).open();
 	});
 }
+// 모임 날짜 체크
+function chkMeetDate(){
+
+	var now = new Date();
+	year = now.getFullYear();   // 현재 년도 4자리수로 가져오기
+	month = now.getMonth()+1;	// 현재 월 가져오기
+	
+	if((month+"").length < 2){  // 월이 '1'로 찍히지 않고 '01'로 찍히도록 길이를 받아온다
+		month = "0" +month;     // 길이가 1이라면 앞에 0을 붙여서 '07'형태로 나오게 한다
+	}
+	
+	date = now.getDate();       // 현재 날짜 가져오기
+	
+	if((date+"").length < 2){   // 일이 '1'로 찍히지 않고 '01'로 찍히도록 길이를 받아온다
+		date = "0" +date;       // 길이가 1이라면 앞에 0을 붙여서 '01'형태로 나오게 한다
+	}
+	
+	today = year +""+ month +""+ date ;	// 오늘 날짜 ex) 20080801
+
+	var meetDate = document.getElementById("meetDate").value;    // 입력된 모임날짜 받아오기
+	var dateSplit = meetDate.split("-");         				 //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+ 
+
+	year = dateSplit[0];  // 첫 번째 배열은 년
+	month = dateSplit[1]; // 두 번째 배열은 월
+	day = dateSplit[2];   // 세 번째 배열은 일
+
+	InputDate = year +""+ month +""+ day; //입력된 값을 더해준다.
+
+ 
+
+	if (parseInt(InputDate) < parseInt(today) ){        //int형으로 변환하여 비교한다
+		alert("오늘 날짜보다 이전 날짜입니다.");
+		document.getElementById("meetDate").value = ""; //이전 날짜라면 입력폼 리셋처리
+	}
+ 
+}
+
+// 모집시작 날짜 체크
+function chkStartDate(){
+
+	var meetDate = document.getElementById("meetDate").value;    
+	var meetDateSplit = meetDate.split("-");         			 
+	
+	year = meetDateSplit[0];  
+	month = meetDateSplit[1]; 
+	day = meetDateSplit[2];   
+
+	InputMeetDate = year +""+ month +""+ day; 
+	
+	var startDate = document.getElementById("voteStartDate").value; 
+	var startDateSplit = startDate.split("-");         				
+	
+	year = startDateSplit[0];  
+	month = startDateSplit[1]; 
+	day = startDateSplit[2];   
+
+	InputStartDate = year +""+ month +""+ day; 
+
+ 	if ( meetDate == null || meetDate.trim() == '' ) {
+ 		alert("모임날짜를 입력 해주세요.");
+ 		document.getElementById("voteStartDate").value = ""; 
+	}else if ( parseInt(InputMeetDate) == parseInt(InputStartDate) ){        
+		alert("모집시작일이 모임날짜와 같은 날짜일 수 없습니다.\n다시 입력 해주세요.");
+		document.getElementById("voteStartDate").value = ""; 
+	} else if ( parseInt(InputMeetDate) < parseInt(InputStartDate) ) {
+		alert("모집시작일이 모임날짜보다 느린 날짜일 수 없습니다.\n다시 입력 해주세요.");
+		document.getElementById("voteStartDate").value = ""; 
+	}
+ 
+}
+
+// 모집마감 날짜 체크
+function chkEndDate(){
+
+	var meetDate = document.getElementById("meetDate").value;    
+	var meetDateSplit = meetDate.split("-");         			 
+	
+	year = meetDateSplit[0];  
+	month = meetDateSplit[1]; 
+	day = meetDateSplit[2];   
+
+	InputMeetDate = year +""+ month +""+ day; 
+	
+	var startDate = document.getElementById("voteStartDate").value; 
+	var startDateSplit = startDate.split("-");         				
+	
+	year = startDateSplit[0];  
+	month = startDateSplit[1]; 
+	day = startDateSplit[2];   
+
+	InputStartDate = year +""+ month +""+ day; 
+	
+	var endDate = document.getElementById("voteEndDate").value; 
+	var endDateSplit = endDate.split("-");         				
+	
+	year = endDateSplit[0];  
+	month = endDateSplit[1]; 
+	day = endDateSplit[2];   
+
+	InputEndDate = year +""+ month +""+ day; 
+	alert(InputStartDate);
+	alert(InputEndDate);
+
+ 	if ( meetDate == null || meetDate.trim() == '' ) {
+ 		alert("모임날짜를 입력 해주세요.");
+ 		document.getElementById("voteEndDate").value = ""; 
+	}else if ( startDate == null || startDate.trim() == '' ){        
+		alert("모집시작일을 입력 해주세요.");
+		document.getElementById("voteEndDate").value = ""; 
+	}else if ( parseInt(InputEndDate) < parseInt(InputStartDate) ){        
+		alert("모집마감일이 모집시작일 보다 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.");
+		document.getElementById("voteEndDate").value = ""; 
+	}else if ( parseInt(InputEndDate) > parseInt(InputMeetDate) ){        
+		alert("모집마감일이 모임날짜 보다 느린 날짜일 수 없습니다.\n다시 입력 해주세요.");
+		document.getElementById("voteEndDate").value = ""; 
+	}else if ( parseInt(InputEndDate) == parseInt(InputMeetDate) ){        
+		alert("모집마감일이 모임날짜와 같은 날짜일 수 없습니다.\n다시 입력 해주세요.");
+		document.getElementById("voteEndDate").value = ""; 
+	}  
+}
+
 
 <!-- insert 하기전에 비어있는 input 태그가 없는지 확인 -->
 function chkForm(){
 	var form = $("#meetWriteForm");
-	var meetDate = $("#meetDate");
 	var meetTime = $("#meetTime");
-	var meetStartDate = $("#voteStartDate");
 	var meetEndDate = $("#voteEndDate");
 	var title = $("#meetTitle");
 	var address = $("#address");
 	var detailAddress = $("#detailAddress");
 	var content = $("#contentArea");
 	
-	if( meetDate.val() == null || meetDate.val().trim() == ''){
-		alert("모임날짜를 입력 해주세요.")
-	}else if( meetTime.val() == null || meetTime.val().trim() == ''){
+	if( meetTime.val() == null || meetTime.val().trim() == ''){
 		alert("모임시간을 입력 해주세요.")
-	}else if( meetStartDate.val() == null || meetStartDate.val().trim() == ''){
-		alert("모집 시작일을 입력 해주세요.")
 	}else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
 		alert("모집 마감일을 입력 해주세요.")
 	}else if( title.val() == null || title.val().trim() == ''){
@@ -86,10 +203,6 @@ function chkForm(){
 		alert("상세주소를 작성해주세요")
 	}else if( content.val() == null || content.val().trim() == ''){
 		alert("모임 상세내용을 작성해주세요.")
-	}else if( meetStartDate.val() > meetEndDate.val() ){
-		alert("모집 마감일이 모집 시작일보다 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.")
-	}else if( meetDate.val() < meetStartDate.val() || meetDate.val() < meetEndDate.val() || meetDate.val() == meetEndDate.val() ){
-		alert("모임날짜가 모집기간과 같거나 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.")
 	}else{
 		form.submit();
 	}
@@ -111,15 +224,15 @@ function chkForm(){
         <form action="meetinsert.do" method="post" id="meetWriteForm">
         	<div id="firstRow">
         		<div class="insertText">모임날짜</div>
-        		<div class="dateCol1"><input type="date" name="meet_date" id="meetDate"></div>
+        		<div class="dateCol1"><input type="date" name="meet_date" id="meetDate" onchange="chkMeetDate();"></div>
         		<div class="insertText">모임시간</div>
-        		<div class="dateCol2"><input type="time" name="meet_time" id="meetTime"></div>
+        		<div class="dateCol2"><input type="time" name="meet_time" id="meetTime" onchange=""></div>
         	</div>
         	<div id="secondRow">
         		<div class="insertText">모집시작일</div>
-        		<div class="dateCol1"><input type="date" name="vote_startdate" id="voteStartDate"></div>
+        		<div class="dateCol1"><input type="date" name="vote_startdate" id="voteStartDate" onchange="chkStartDate();"></div>
         		<div class="insertText">모집마감일</div>
-        		<div class="dateCol2"><input type="date" name="vote_enddate" id="voteEndDate"></div>
+        		<div class="dateCol2"><input type="date" name="vote_enddate" id="voteEndDate" onchange="chkEndDate();"></div>
         	</div>
         	<div id="thirdRow">
         		<div class="insertText">제목</div>

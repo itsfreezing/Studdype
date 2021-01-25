@@ -25,6 +25,7 @@
 			WHERE MEM_NO = #{writerNo}
 		</select>
 	
+	
 		<insert id="insert" parameterType="MemberDto">
 			INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL,#{mem_id},#{mem_pw},#{mem_name},#{mem_rno},#{mem_gender},#{mem_phone},#{mem_email})
 		</insert>
@@ -33,7 +34,7 @@
 			SELECT * FROM MEMBER 
 			WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 		</select>
-
+		
 		<update id="updateMember" parameterType="memberDto" >
 			UPDATE MEMBER SET MEM_ID = #{mem_id}, MEM_PW = #{mem_pw}, MEM_EMAIL = #{mem_email}, MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
 		</update>
@@ -44,5 +45,12 @@
 			DELETE FROM MEMBER
 			WHERE MEM_NO = #{mem_no}
 		</delete>
-	
+		
+		<select id="selectMemberByIdAndEmail" parameterType="memberDto" resultMap="memberMap">
+			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_EMAIL = #{mem_email}
+		</select>
+		
+		<update id="updatePw" parameterType="memberDto">
+			UPDATE MEMBER SET MEM_PW = #{mem_pw} WHERE MEM_NO = #{mem_no}
+		</update>
 	</mapper>

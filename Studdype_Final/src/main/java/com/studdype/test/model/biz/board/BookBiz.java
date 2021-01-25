@@ -15,7 +15,13 @@ public interface BookBiz {
 	public Map<Integer, MemberDto> getWriterNameByList(List<BookDto> bookList); // 회원 번호로 회원 아이디, 이름 찾아오기
 	public BookDto selectOneBook(BookDto dto);	// 해당 도서 선택
 	public Map<Integer, MemberDto> getBookWriterName(int mem_no); // 해당 도서 아이디, 이름 찾아오기
+
+	public int deletebookmain(); //대표도서 없애기
+	public int bookmain(int b_no); // 대표도서 설정
+
 	public int insertRegisterBook(BookDto dto);	// 작성한 도서 정보 insert
 	public BookDto deleteBook(BookDto dto); // 도서 게시글 삭제
 	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
+	public BookDto selectMainBookOfStudy(int s_no);	// 스터디 메인도서 가져오기
+
 }

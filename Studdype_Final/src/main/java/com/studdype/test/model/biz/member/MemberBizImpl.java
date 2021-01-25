@@ -44,6 +44,7 @@ public class MemberBizImpl implements MemberBiz {
 		return null;
 	}
 
+
 	@Override
 	public int updateMember(MemberDto dto) {
 		
@@ -60,6 +61,19 @@ public class MemberBizImpl implements MemberBiz {
 	public int memberDelete(int mem_no) {
 		
 		return memberDao.memberDelete(mem_no);
+	}
+
+	
+	//아이디와 이메일로 member가져오기
+	@Override
+	public MemberDto selectMemberByIdAndEmail(MemberDto dto) {
+		return memberDao.selectMemberByIdAndEmail(dto);
+	}
+
+	//비밀번호 변경
+	@Override
+	public int updatePw(MemberDto dto) {
+		return memberDao.updatePw(dto);
 	}
 
 	

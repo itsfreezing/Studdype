@@ -36,6 +36,7 @@
 <body>
 	<!-- 모임 댓글 관련 스크립트 -->
 	<jsp:include page="../../community/meet/meetReplyScript.jsp"></jsp:include>
+	<jsp:include page="../../community/meet/voteScript.jsp"></jsp:include>
 	
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
@@ -76,11 +77,13 @@
 					
 					<!-- br 태그를 추가하지 않으면 지도가 화면에 보이지 않음 -->
 					<div id="map" >
-						<br><br><br><br><br><br><br><br><br><br><br><br><br>
-						<br><br><br><br><br><br><br><br><br><br><br><br><br>
-						<br><br><br><br><br><br>
 					</div> 
 				</div> 
+			</div>
+			
+			<!-- 투표 영역 -->
+			<div id="vote">
+				
 			</div>
 			
 			<!-- 자신이 생성한 모임일때만 수정/삭제 버튼 보이게 -->
@@ -99,37 +102,6 @@
 			</c:choose>
 			</div>
 			<!-- ---------------------------------- -->
-				
-			
-			<!-- 투표 영역 -->
-			<div id="vote">
-				
-				<!--투표_참가여부 -->
-				<div id="voteDiv">참가여부<br><br>
-					<div class="btn-group" data-toggle="buttons">
-						<label class="btn btn-success">
-							<input type="radio" name="options" id="option2" autocomplete="off">
-							<span class="glyphicon glyphicon-ok"></span>
-						</label>
-						<label class="btn btn-danger">
-							<input type="radio" name="options" id="option2" autocomplete="off">
-							<span class="glyphicon glyphicon-ok"></span>
-						</label>
-					</div>
-					<br>
-					<input type="button" value="투표하기" class="submitBtn vote" onclick="">
-				</div>
-				<!-- ---------------------------------- -->
-				
-				<!-- 투표_투표현황 -->
-				<div id="voteList">
-					<div id="div1"><div class="attend">참석</div><div class="graph">---------</div><div class="percentage">82%</div></div>
-					<div id="div2"><div class="attend">불참석</div><div class="graph">---------</div><div class="percentage">18%</div></div>
-					<div id="member_count">참여인원: 13명&nbsp;<img src="./resources/assets/img/icon_questionMark.png"></div>
-				</div>
-				<!-- ---------------------------------- -->
-				
-			</div>
 			
 			<!-- 댓글 리스트 영역 -->
 			<div class="replyBox"></div>

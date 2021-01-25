@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.PageMaker;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
@@ -53,9 +55,11 @@ public class StudyController {
 	private BookBiz bookBiz;
 	@Autowired
 	private StudyMemberBiz StudyMemberBiz;
+	
+	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
 	@RequestMapping(value = "/studyList.do", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination) {
+	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -81,117 +85,59 @@ public class StudyController {
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
+		session.setAttribute("headerMenu", "home");
 
 		return "studdype/studdypeHome";
 	}
 
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
-	public String createStuddypeForm(Model model) {
+	public String createStuddypeForm(Model model,HttpSession session) {
 		List<LocationSiDto> sidtos = studyBiz.locationSiList();
 		List<LocationGuDto> gudtos = studyBiz.locationGuList();
 		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
 
 		model.addAttribute("login", login);
 		model.addAttribute("sidtos", sidtos);
 		model.addAttribute("gudtos", gudtos);
 		model.addAttribute("catedtos", catedtos);
+		session.setAttribute("headerMenu", "create");
 
 		return "studdype/createStuddype";
 	}
 
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
-	public String createStuddype(HttpServletRequest request, StudyDto dto, Model model, FileDto filedto) {
-
+	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile) {
+		int res = 0;
+		
 		// 스터디 마지막 번호 가져오기
-		///////////////////////////////////////////
 		int studyFinalNumber = studyBiz.selectStudyFinalNumber();
-
-		String name = ""; // 파일 이름
-
-		// 파일을 객체에 담기
-		MultipartFile file = null;
-		if (file.getOriginalFilename().equals("")) {
-			name = "noImage"; //
-		} else {
-			name = "(Representative" + (studyFinalNumber + 1) + ")" + file.getOriginalFilename(); // 대표사진 파일명 확인
+		studyDto.setS_no(studyFinalNumber + 1);
+		
+		//파일 업로드
+		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		
+		// 파일요소들 뽑아서 fileList에 저장
+		List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
+		
+		String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
+		
+		//파일이있으면
+		if(mfileList != null) {
+			studyDto.setPhoto(fileList.get(0).getF_url());
+		}else {
+			studyDto.setPhoto("noImage");
 		}
+		
+		System.out.println(studyDto);
+		
+		res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
 
-		System.out.println(name);
-		// 생성할 스터디 정보 담기
-		StudyDto studydto = new StudyDto();
-		studydto.setS_no(studyFinalNumber + 1);
-		studydto.setLeader_no(dto.getLeader_no()); // Session 회원번호 담기
-		studydto.setS_name(dto.getS_name());
-		studydto.setS_info(dto.getS_info());
-		studydto.setS_content(dto.getS_content());
-		studydto.setPhoto(name);
-		studydto.setCate_no(dto.getCate_no());
-		studydto.setSi_no(dto.getSi_no());
-		studydto.setGu_no(dto.getGu_no());
-		studydto.setS_maxcnt(dto.getS_maxcnt());
-
-		//////////////////////////////////////////////
-		// 대표사진 FileDto로 담기
-		FileDto studyFile = new FileDto();
-		studyFile.setF_name(name);
-
-		System.out.println(studyFile);
-		System.out.println(studydto);
-
-		////////////////////// 로그인 세션 구현 완료 후 Biz에서 기능 처리
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
-
-		try {
-			inputStream = file.getInputStream();
-
-			String path = WebUtils.getRealPath(request.getSession().getServletContext(), "resources/studdype");
-
-			System.out.println("업로드 실제 경로 : " + path);
-
-			File storage = new File(path);
-
-			// studdype 폴더가 없을 경우 폴더 생성 (첫 생성 시)
-			if (!storage.exists()) {
-				storage.mkdir();
-			}
-
-			File newFile = new File(path + "/" + name);
-
-			// 경로에 맞는 파일이 없을 경우 빈 파일 생성 (??)
-			if (!newFile.exists()) {
-				newFile.createNewFile();
-			}
-
-			// 출력 통로 열어주기
-			outputStream = new FileOutputStream(newFile);
-
-			int read = 0;
-			// 파일 크기와 동일한 사이즈로 byte 저장
-			byte[] b = new byte[(int) file.getSize()];
-
-			while ((read = inputStream.read(b)) != -1) {
-				outputStream.write(b, 0, read);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				inputStream.close();
-				outputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		int studyRes = studyBiz.insertStudy(studydto);
-
-		if (studyRes > 0) {
-
+		// 성공 시 -> 스터디 커뮤니티 홈
+		// 실패 시 -> 스터디 생성 폼
+		if (res > 0) {
 			return "redirect:studyList.do";
 		} else {
 			return "redirect:createStuddypeform.do";
@@ -201,24 +147,25 @@ public class StudyController {
 	// 스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session, Model model,HttpServletRequest request) {
-		MemberDto login = memberBiz.selectOne(1);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto dto = memberBiz.selectOne(login.getMem_no());
 		List<StudyCategoryDto> category = studyBiz.categoryList();
 		List<LocationGuDto> gudto = studyBiz.locationGuList();
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
 		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
-		List<StudyDto> LeaderList = studyBiz.studyLeader(1);
+		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
-			MemberDto dto = memberBiz.selectOne(memberlist.get(i).getMem_no());
-			membername.add(dto);
+			MemberDto dto2 = memberBiz.selectOne(memberlist.get(i).getMem_no());
+			membername.add(dto2);
 		}
 
 		System.out.println(membername);
 
 		model.addAttribute("membername", membername);
 		model.addAttribute("memberlist", memberlist);
-		session.setAttribute("login", login);
+		session.setAttribute("login", dto);
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("gudto", gudto);
 		model.addAttribute("sidto", sidto);
@@ -228,5 +175,76 @@ public class StudyController {
 
 		return "studdype/updateStudy";
 	}
+	// 스터디 관리 페이지 update버튼 클릭시
+	@RequestMapping(value="/studyupdate.do",method = RequestMethod.GET)
+	public String studyupdate(HttpServletRequest request,Model model) {
+		System.out.println("들어오긴함");
+		System.out.println(request.getParameter("mem_no"));
+		int dto = bookBiz.bookmain(Integer.parseInt(request.getParameter("b_no")));
+		System.out.println("s_no : "+request.getParameter("s_no"));
+		StudyDto dto3 = new StudyDto(Integer.parseInt(request.getParameter("mem_no")),Integer.parseInt(request.getParameter("s_no")) );
+		int dto2 = studyBiz.newLeader(dto3);
+		
+		System.out.println("dto3 :"+dto3);
+		if(dto>0) {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표수정 실패 !");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+			}
+			}else {
+			if(dto2>0) {
+			model.addAttribute("msg","대표 수정 성공!");
+			model.addAttribute("url","communityhome.do");
+			return "commond/alert";
+			}else {
+				model.addAttribute("msg","대표 수정 실패!");
+				model.addAttribute("url","communityhome.do");
+				return "commond/alert";
+				
+			}
+	
+	}
 
+	}
+	
+	// 스터디 디테일 페이지(스터디 홈에서 리스트 클릭 시 넘어옴)
+	@RequestMapping("/studdypeDetailForm.do")
+	public String studdypeDetailForm(Model model, HttpServletRequest request) {
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
+		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
+		System.out.println(studyDto);
+		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
+		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
+		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no());
+		
+		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
+		
+		model.addAttribute("study", studyDto);
+		model.addAttribute("leader", memberDto);
+		model.addAttribute("mainBook", bookDto);
+		
+		return "studdype/StuddypeDetailForm";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

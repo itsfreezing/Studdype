@@ -6,7 +6,7 @@ public class StudyDto {
 	private String s_name; 		// ���͵� �̸�
 	private String s_info; 		// ���͵� ���� �Ұ�
 	private String s_content; 	// ���͵� �ڼ��� �Ұ�
-	private String photo; 		// ���͵� ��ǥ���� �����̸�
+	private String photo;		// 스터디 대표사진 경로
 	private int cate_no; 		// ���͵� ī�װ�
 	private int si_no; 			// ���͵� ����(��)
 	private int gu_no; 			// ���͵� ����(��)
@@ -32,6 +32,12 @@ public class StudyDto {
 		this.gu_no = gu_no;
 		this.s_maxcnt = s_maxcnt;
 		this.s_currentcnt = s_currentcnt;
+	}
+
+	public StudyDto(int leader_no, int s_no) {
+		super();
+		this.s_no = s_no;
+		this.leader_no = leader_no;
 	}
 
 	public int getS_no() {
@@ -128,7 +134,5 @@ public class StudyDto {
 				+ ", s_content=" + s_content + ", photo=" + photo + ", cate_no=" + cate_no + ", si_no=" + si_no
 				+ ", gu_no=" + gu_no + ", s_maxcnt=" + s_maxcnt + ", s_currentcnt=" + s_currentcnt + "]";
 	}
-	
-	
-	
+
 }

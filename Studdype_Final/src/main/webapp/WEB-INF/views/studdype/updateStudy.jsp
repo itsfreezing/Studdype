@@ -230,6 +230,35 @@
 
 		}
 	}
+	function update(){
+		var main = document.getElementsByName("maker");
+		var main_check = 0;
+		var book = document.getElementsByName("bookmain");
+		var book_check = 0;
+		for(var i=0;i<book.length;i++){
+			if(book[i].checked ==true){
+				b = book[i].value;
+				book_check++;
+			
+			}
+		}
+	 	var e = [];
+		$("input[name=exile]:checked").each(function(i){
+			e.push($(this).val());
+		});
+		for(var i=0;i<main.length;i++){
+			if(main[i].checked == true){
+				m = main[i].value;
+				main_check++;
+			}
+		}
+		location.href="studyupdate.do?b_no="+b+"&mem_no="+m+"&ban_no="+e+"&s_no="+'${study.s_no}';
+		
+		function check(){
+			
+		}
+		
+	}
 </script>
 </head>
 <body>
@@ -262,12 +291,12 @@
 						<td>${status.count }</td>
 						<td>${bookList.book_title }</td>
 						<c:if test="${bookList.book_ismain eq 'N' }">
-							<td id="mainbook"><input id="bookmain" type="radio"
+							<td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
 								name="bookmain">대표</td>
 						</c:if>
 						<c:if test="${bookList.book_ismain eq 'Y' }">
-							<td id="mainbook"><input id="bookmain" type="radio"
-								name="bookmain" checked="checked" onclick="change()">대표</td>
+							<td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
+								name="bookmain" checked="checked" >대표</td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -293,7 +322,7 @@
 					<tr>
 						<td>${membername.mem_name }</td>
 						<td>${membername.mem_email }</td>
-						<td><input type="checkbox" value="${membername.mem_no }">추방</td>
+						<td><input type="checkbox" name="exile" value="${membername.mem_no }">추방</td>
 						<c:if test="${membername.mem_no == login.mem_no }">
 							<td><input name="maker" type="radio" checked="checked"
 								value="${membername.mem_no }">대표</td>
@@ -332,7 +361,7 @@
 		<input id="createrarea" readonly="readonly" value="${login.mem_name }">
 		<p id="studyname">스터디 이름</p>
 		<input id="studynameupdate" value="${study.s_name }">
-		<button id="samename" type="button" class="btn btn-purple">스터디
+		<button id="samename" type="button" class="btn btn-purple" onclick="check();">스터디
 			이름 중복 Check!</button>
 		<p id="category">카테고리</p>
 		<select id="cate">
@@ -365,7 +394,7 @@
 		</select>
 		<p id="studyinfo">스터디 소개</p>
 		<input id="studyinfot" value="${study.s_info }">
-		<button id="update" type="button" class="btn btn-purple">Update!</button>
+		<button id="update" type="button" class="btn btn-purple" onclick="update();">Update!</button>
 
 
 
@@ -405,7 +434,7 @@
 	<!--  메인 세션 끝 -->
 
 
-
+	
 </body>
 <footer>
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>

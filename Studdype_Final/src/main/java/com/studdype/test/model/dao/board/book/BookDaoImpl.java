@@ -73,6 +73,18 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
+	public int deletebookmain() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"deletebookmain");
+		} catch (Exception e) {
+			System.out.println("ERROR: deleteboomain!!!!!!!!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	@Override
 	public int insertRegisterBook(BookDto dto) {
 		int res = 0;
 		
@@ -96,10 +108,22 @@ public class BookDaoImpl implements BookDao {
 			System.out.println("[ERROR] : deleteBook");
 			e.printStackTrace();
 		}
+
 		
 		return res;
 	}
 
+	@Override
+	public int bookmain(int b_no) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"bookmain",b_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : bookmain!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+		return res ;
+	}
+	
 	@Override
 	public int bookBoardUpdateBook(BookDto dto) {
 		int res = 0;
@@ -108,10 +132,25 @@ public class BookDaoImpl implements BookDao {
 			res = sqlSession.update(NAMESPACE+"bookBoardUpdateBook", dto);
 		} catch (Exception e) {
 			System.out.println("[ERROR] : bookBoardUpdateBook");
+
 			e.printStackTrace();
 		}
 		
 		return res;
+	}
+
+	@Override
+	public BookDto selectMainBookOfStudy(int s_no) {
+		BookDto resDto = null;
+		
+		try {
+			resDto = sqlSession.selectOne(NAMESPACE+"selectMainBookOfStudy", s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectMainBookOfStudy");
+			e.printStackTrace();
+		}
+		
+		return resDto;
 	}
 	
 	

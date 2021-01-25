@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CommunityHome</title>
+<title>스터띱 자유게시판</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
@@ -32,7 +32,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
 
 
@@ -65,7 +65,6 @@
 	}
 	
 	}
-	
 	// 이전 페이지 그룹 
 	function prePageGroup(){
 		if( ${startPage - 1 > 0}){
@@ -105,6 +104,23 @@ function search_chk(){
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
+			<c:if test="${not empty noticeList }">
+				<c:forEach var="i" begin="0" end="${noticeList.size()-1 }" step="1">
+						<tr class="notice_tr">
+							<td class="notice_title"><div class="notice_tag">공지</div>
+								<a href="noticedetail.do?b_no=${noticeList.get(i).getB_no() }">${noticeList.get(i).getB_title() }
+								<c:if test="${noticeReplyCntMap.get(noticeList.get(i).getB_no())!=0}">
+									<span class="reply_cnt">[${noticeReplyCntMap.get(list.get(i).getB_no())}]</span>
+								</c:if>								
+								</a>
+							</td>
+							<td class="tdwriter">${noticeMemberMap.get( noticeList.get(i).getB_no()).getMem_id() }(${noticeMemberMap.get( noticeList.get(i).getB_no()).getMem_name()})</td>
+							<td class="tddate"><fmt:formatDate value="${noticeList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+							<td class="tdcnt">${noticeList.get(i).getB_cnt() }</td>
+						</tr>
+					</c:forEach>
+			</c:if>
+			
 			<c:choose>
 				<c:when test="${empty list }">
 					<td colspan="4">게 시 글 이 없 습 니 다</td>
@@ -177,6 +193,7 @@ function search_chk(){
 				</div>
 
 	</div>
+
 
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>

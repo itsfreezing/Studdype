@@ -3,3 +3,89 @@
 <!DOCTYPE mapper
   		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeboard">
+	<resultMap type="boardDto" id="boardMap">
+		<result property="b_no" column="B_NO"></result>
+		<result property="s_no" column="S_NO"></result>
+		<result property="b_title" column="B_TITLE"></result>
+		<result property="b_writer" column="B_WRITER"></result>
+		<result property="b_content" column="B_CONTENT"></result>
+		<result property="b_regdate" column="B_REGDATE"></result>
+		<result property="b_cnt" column="B_CNT"></result>
+	</resultMap>
+
+
+	<select id="selectNoticeBoard" parameterType="int" resultMap="boardMap">
+		SELECT * FROM NOTICE_BOARD WHERE S_NO = #{s_no}
+	</select>
+	<select id="selectNoticeBoardList" parameterType="int" resultMap="boardMap">
+		SELECT * FROM NOTICE_BOARD WHERE S_NO =#{s_no} ORDER BY B_NO DESC
+	</select>
+	<insert id="insertBoard" parameterType="boardDto">
+		INSERT INTO NOTICE_BOARD
+		VALUES ( NOTICEBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT   ) 		
+	</insert>
+	
+	<select id="selectNoticeNum" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE_BOARD		
+		WHERE S_NO = #{s_no}
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultMap="boardMap">
+		SELECT * 
+		FROM NOTICE_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM NOTICE_BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE NOTICE_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
+	
+	<update id="updateCnt" parameterType="int">
+		UPDATE NOTICE_BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}	
+	</update>
+	
+	<select id="selectRecentList" parameterType="hashMap" resultMap="boardMap">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT 
+			FROM
+			(
+    			SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+    			FROM NOTICE_BOARD
+    			WHERE S_NO = #{s_no}
+    			ORDER BY B_NO DESC
+			)
+			WHERE R < 
+                	(
+                 	   SELECT R
+                	   FROM 
+              	       (
+              	       SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                	   FROM NOTICE_BOARD
+                	   WHERE S_NO =#{s_no}
+               	       ORDER BY B_NO DESC
+               	       )
+               	       WHERE B_NO = #{b_no}
+            	    ) +3 
+            AND
+                 R >
+                   (
+                     SELECT R
+                     FROM 
+                     (
+                     SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                     FROM NOTICE_BOARD
+                     WHERE S_NO =#{s_no}
+                     ORDER BY B_NO DESC
+                     )
+                     WHERE B_NO = #{b_no}
+                    ) -3
+		]]>
+	</select>
+	
+</mapper>  		

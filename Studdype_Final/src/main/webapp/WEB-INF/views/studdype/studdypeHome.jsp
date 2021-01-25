@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/mainstyle.css">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
@@ -48,6 +48,9 @@
 		$('.customPrevBtn').click(function() {
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
+		
+		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+		$(".justify-content-center").hide(); 
 	});
 	
 	$(document).on('click', '#btnSearch', function(e){
@@ -135,7 +138,7 @@ input#search:focus {
 				<!-- list 시작 -->
 				<c:forEach items="${studyList }" var="studyDto">
 					<div class="col-lg-4 blogs-load"
-						onclick="location.href='index.jsp'" style="cursor: pointer">
+						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
@@ -190,7 +193,7 @@ input#search:focus {
 
 
 
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

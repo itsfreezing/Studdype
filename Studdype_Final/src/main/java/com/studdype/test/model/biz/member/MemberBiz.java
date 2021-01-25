@@ -12,9 +12,13 @@ public interface MemberBiz {
 	public int memberInsert(MemberDto dto); //회원가입
 	public MemberDto login(MemberDto dto); //로그인
 	public String logout(HttpSession session); //로그아웃
+
 	public int updateMember(MemberDto dto); // 마이페이지 정보수정
 	public MemberDto idchk(String mem_id); 	// 마이페이지 아이디 중복체크
-	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
+	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴
+	
+	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member 가져오기 
+	public int updatePw(MemberDto dto); //비밀 번호 변경
 	
 
 }

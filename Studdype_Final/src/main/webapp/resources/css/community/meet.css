@@ -1,12 +1,12 @@
 /* searchDiv css */
 #bigBox{
-	width: 80%; 
+	width: 40%; 
 	display: inline-block; 
-	margin-left: 15%;
+	margin-left: 37%;
 }
 
 .divBox {
-  width: 35%;
+  width: 70%;
   height: 100%;
   overflow: hidden;
   background: #fff;
@@ -212,34 +212,19 @@ tooltip-persistent 요소 추가 할 것 */
 }
 
 /* 모임등록버튼 */
-#listBtnDiv{
-	display: inline-block; 
-	width: 52%;
-	position: relative;
-}
-
 #listBtn_insertform{
-	background: #fff;
-	color: #6434ef;
-	border: 5px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	height: 85px;
-	font-size: 30px;
-	font-weight: bold;
-	border-radius: 50px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-	width: 250px;
-	float: right; 
-	margin-top: 0;
+	position: relative;
+	right: -68%;
 }
 
 /* 모임이 존재하지 않을 때 */
 div#nothingImg img{
 	width: 25%;
 	display:block;
+	margin-top: 3%;
     margin-left:auto;
     margin-right:auto;
+    margin-bottom: 2%;
 }
 
 div#nothingMeet{
@@ -272,9 +257,9 @@ p#nothingTXT{
 	border: 1px solid #bababa;
 	box-shadow: 8px 8px 8px gray;
 	cursor: pointer;
-	width: 70%;
-	margin-right: auto;
+	width: 60%;
 	margin-left: auto;
+	margin-right: auto;  
 	margin-top: 4%;
 }
 
@@ -327,6 +312,7 @@ p#nothingTXT{
 .pagin {
 	list-style: none;
 	display: table;
+	/*margin-left: 30%;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -379,7 +365,7 @@ p#nothingTXT{
 }
 
 .current_page {
-	color: white;
+	color: white!important;
 	background-color: #6434ef;
 }
 /* --------------------------------- */
@@ -428,7 +414,7 @@ div#cntDiv{
 div#titleDiv{
 	font-size: 300%; 
 	font-weight: bold;
-	color: #baabfb;
+	color: black;
 	text-align: center;
 	margin: 0;
 	padding: 1% 5% 1% 0;
@@ -445,13 +431,13 @@ div#contentDiv{
 
 div#contentDiv-left{
 	float: left;
-	width: 40%;
+	width: 50%;
 	border-left: none;
 }
 
 div#contentDiv-right{
 	float: right;
-	width: 60%;
+	width: 50%;
 	height: auto;
 	border-left: 3px solid #e3ddfd;
 }
@@ -467,10 +453,12 @@ div.meetDetailDiv{
 div#meetContentDiv{
 	font-size: 120%;
 	padding: 5% 2%;
+	height: 300px;
 }
 
 div#map{
-	width: 100%;
+	height: 409px; 
+	width: 100%; 
 }
 
 
@@ -499,26 +487,79 @@ div#map{
 
 /* vote 전체 DIV */
 div#vote{
+	padding-top: 20px;
 	display: inline-block;
 	border: 3px solid #e3ddfd;
+	border-top: none;
 	border-left: none;
 	border-right: none;
 	width: 100%;
 	margin-top: 3%;
 }
 
-/* 참가여부 */
-#voteDiv{
-	text-align: center;
-	display: inline-block;
-	width: 40%;
-	padding: 2%;
+.voteResultForWriter{
+	width: 80%;
+	margin-left: 8%;
 }
 
+/* 투표 라벨 영역 */
+.btn-group{
+	width: 50%;
+	margin: 0 0 0 25%;
+}
+
+.btn-group:before{
+	width: 50%;
+	margin: 0!important;
+}
+
+/* 투표 라벨(color) */
 label.btn.btn-danger,
 label.btn.btn-success{
-	width: 80px;
+	display: inline-block;
+	width: 100%;
 	height: 50px;
+	border: 0;
+}
+
+label.btn.btn-success{
+	background-color: #baabfb;
+	color: #6434ef; 
+	font-weight: bold;
+	font-size: 120%;
+	cursor: pointer;
+	padding-top: 15px;  
+}
+
+label.btn.btn-success:hover{
+	background-color: #6434ef;
+	color: #fff;
+}
+
+label.btn.btn-success.active{
+	background-color: #6434ef!important;
+	border-color: #6434ef!important;
+    box-shadow: 0 0 0 0.2rem #6434ef!important; 
+}
+
+label.btn.btn-danger{
+	background-color: #b5b4bd;
+	color: #8d8d92;
+	font-weight: bold;
+	font-size: 120%;
+	cursor: pointer;
+	padding-top: 15px;  
+}
+
+label.btn.btn-danger:hover{
+	background-color: #8d8d92;
+	color: #fff;
+}
+
+label.btn.btn-danger.active{
+	background-color: #8d8d92!important;
+	border-color: #8d8d92!important;
+    box-shadow: 0 0 0 0.2rem #8d8d92!important; 
 }
 
 /* radio button */
@@ -531,11 +572,22 @@ label.btn.btn-success{
 	opacity: 1;				
 }
 
-/* 투표현황 */
-div#voteList{
-	display: inline-block;
-	width: 56%;
-	padding: 2%;
+/* 투표하기 버튼 */
+input.submitBtn.vote{
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin: 3% 0 5% 43%;
+	padding-bottom: 50px;
+	width: 15%;
+	height: 50px;
+	line-height: 52px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: 600;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
 }
 
 div.attend{
@@ -549,6 +601,7 @@ div.graph{
 	display: inline-block;
 	width: 60%;
 	padding: 3% 5%;
+	cursor: pointer;
 }
 
 div.percentage{
@@ -559,17 +612,67 @@ div.percentage{
 	margin: 0;
 }
 
-#member_count{
+#member_count_forWriter{
 	width: 100%;
-	padding: 3% 5%;
+	padding: 3% 12% 3% 3.5%;
 	text-align: right;
+	margin-left: 8%;
 }
 
+#member_count{
+	width: 100%;
+	padding: 3% 3.5% 3% 5%;
+	text-align: right;
+}
+#member_count_forWriter img,
 #member_count img{
 	width: 24px;
 	height: 24px; 
 }
+/* --------------------------------- */
 
+/* --------------------------------- modal */
+.modal-dialog {
+        display: inline-block;
+        text-align: center;
+        align-content: center;
+        vertical-align: middle;
+        width: 200px;
+}
+
+.modal {
+        text-align: center;
+}
+
+.modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        content: " ";
+        height: 100%;
+}
+
+/* 모달 닫기 버튼 */
+button.modalExitBtn{
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+button.modalExitBtn:hover{
+	background: #6434ef;
+	color: #fff;
+} 
 /* --------------------------------- */
 
 /* --------------------------------- meetInsert */
@@ -662,8 +765,8 @@ div#addrBtn{
 
 input#addrBtn{
 	background: #fff;
-	color: #7362DE;
-	border: 1px solid #7362DE;
+	color: #6434ef;
+	border: 1px solid #6434ef;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	width: 120%;
 	font-size: 80%;
@@ -675,7 +778,7 @@ input#addrBtn{
 }
 
 input#addrBtn:hover{
-	background: #7362DE;
+	background: #6434ef;
 	color: #fff;
 }
 
@@ -739,8 +842,8 @@ div#fifthRow-right{
 input.submitBtn,
 button.submitBtn{
 	background: #fff;
-	color: #7362DE;
-	border: 1px solid #7362DE;
+	color: #6434ef;
+	border: 1px solid #6434ef;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	margin-top: 40px;
 	padding-bottom: 50px;
@@ -758,9 +861,9 @@ button.submitBtn{
 /* 흰색 버튼에서 hover 시 보라색으로 변경 */
 input.submitBtn:hover,
 button.submitBtn:hover{
-	background: #7362DE;
+	background: #6434ef;
 	color: #fff;
-}
+} 
 
 /* --------------------------------- */
 
@@ -800,14 +903,17 @@ button.submitBtn:hover{
 
 .reply_write_btn{
 	width: 100px;
-	height: 105px;
+	height: 100px;
 	background-color: white;
-	border: 1px solid #808080;
-	font-size: 25px;
-		border-radius: 5px 5px;
-	color: #808080;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 5px 5px;
+	color: #6434ef;
 	cursor: pointer;
 	padding: 0px;
+	margin-bottom: 5px;
 	
 }
 
@@ -868,8 +974,6 @@ button.submitBtn:hover{
 	background: white;
 	border: none;
 	cursor: pointer;
-	width: 30px;
-	margin-left: 0.5%;
 }
 
 .write_recomeent_btn:hover{
