@@ -51,4 +51,19 @@ public class StudyCateDaoImpl implements StudyCateDao{
 		return cateListForHomeMap;
 	}
 
+	@Override
+	public Map<Integer, String> selectCategoryOfStudy(int cate_no) {
+		Map<Integer, String> cate_Name = new HashMap<Integer, String>();
+		String name = "";
+		
+		try {
+			name = sqlSession.selectOne(NAMESPACE+"categoryListForHome", cate_no);
+			cate_Name.put(cate_no, name);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : categoryListForHome");
+			e.printStackTrace();
+		}
+		return cate_Name;
+	}
+
 }

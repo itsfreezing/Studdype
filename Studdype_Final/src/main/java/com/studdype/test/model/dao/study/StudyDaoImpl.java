@@ -65,20 +65,6 @@ public class StudyDaoImpl implements StudyDao {
 		
 		return res;
 	}
-
-	// 등록된 스터디 마지막 번호
-	@Override
-	public int selectStudyFinalNumber() {
-		int res = 0;
-		
-		try {
-			res = sqlSession.selectOne(NAMESPACE+"selectStudyFinalNumber");
-		} catch (Exception e) {
-			System.out.println("[ERROR] : selectStudyFinalNumber");
-			e.printStackTrace();
-		}
-		return res;
-	}
 	
 	//스터디 리스트 총 갯수
 	@Override

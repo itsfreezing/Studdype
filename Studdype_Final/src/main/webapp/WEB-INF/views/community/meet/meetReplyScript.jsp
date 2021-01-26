@@ -98,15 +98,9 @@ function getMeetReplyList() {
 								
 								// 로그인 아이디와 댓글 작성자가 같을 때(답글/수정/삭제 버튼이 추가 된다.)
 								if( ${login.mem_no} == list[i].r_writer ){
-									reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
-										  		+"<img src='./resources/assets/img/icon_recomment.png'>"
-										   	+"</button>"
-										  	+"<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
-											  	+"<img src='./resources/assets/img/icon_update.png'>"
-										  	+"</button>"
-										  	+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
-											  	+"<img src='./resources/img/remove_file.png'>"								
-										  	+"</button>"
+									reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button>"
+										  	+"<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">수정하기</button>"
+										  	+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>삭제하기</button>"
 									  	+"</div>"
 								  	+"</div>"
 								
@@ -151,9 +145,7 @@ function getMeetReplyList() {
 								
 								// 로그인 아이디와 댓글 작성자가 다를 때(답글 버튼만 추가된다.)
 								} else {
-						 		 	reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>"
-											  	+"<img src='./resources/assets/img/icon_recomment.png'>"
-										  	+"</button>"
+						 		 	reply += "<button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button>"
 									  	+"</div>"
 								  	+"</div>"
 						
@@ -186,13 +178,13 @@ function getMeetReplyList() {
 					 var reply = "<li class='replyItem'>"
 									+"<div class='delete_reply'>삭제 된 댓글입니다.</div>"
 								+"</li>"
-								+"</hr>";
+								+"<hr>";
 				// ---------------------------- 댓글이 부모댓글인데 삭제 된 댓글일 때
 								
 				// 댓글이 부모댓글이 아닐 때
 				} else {
 					 var reply = "<li class='replyItem'>"
-									 "<div class='reply_area showDiv' style='margin-left: 35px;'>";
+									 +"<div class='reply_area showDiv' style='margin-left: 35px;'>"
 					 						
 					 			// 모임 작성자와 댓글 작성자가 같을 때(닉네임 좌측에 왕관 아이콘이 추가된다.)
 			 			  	 	if( meetWriter == list[i].r_writer ) {
@@ -217,34 +209,30 @@ function getMeetReplyList() {
 					 						
 					 					
 							// 로그인 된 아이디와 댓글 작성자가 같을 때(수정/삭제 버튼이 추가된다.)
-							if( ${login.mem_no} == list[i].r_writer ) {
-									reply += "<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">"
-												+"<img src='./resources/assets/img/icon_update.png'>"
-											+"</button>"
-											+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>"
-												+"<img src='./resources/img/remove_file.png'>"
-											+"</button>"
+							if ( ${login.mem_no} == list[i].r_writer ) {
+									reply += "<button class='write_recomeent_btn' onclick='updateReplyForm(this);' value=" + list[i].r_no + ">수정하기</button>"
+											+"<button class='write_recomeent_btn' value=" + list[i].r_no + " onclick='deleteReply(this);'>삭제하기</button>"
 										+"</div>"
 									+"</div>"
 						
 									// 댓글 수정 html 추가부분
-									+"<div class='update_reply_div hideDiv recomment_div'>"
+								  	+"<div class='update_reply_div hideDiv recomment_div'>"
 										+"<table>"
 											+"<tr>"
-												+"<td class='update_reply_writer'>" + member[list[i].r_no].mem_id + "</td>"
-											+"</tr>"
-											+"<tr>"
-											    +"<td><textarea class='update_reply_comment'>" + list[i].r_comment + "</textarea></td>"
+											  	+"<td class='update_reply_writer'>" + member[list[i].r_no].mem_id + "</td>"
 										  	+"</tr>"
-										+"</table>"
-										+"<div class='update_reply_btnDiv'>"
-											+"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
-											+"<button class='update_reply_btn' onclick='updateReply(this);' value=" + list[i].r_no + ">수정</button>"
-										+"</div>"
-									+"</div>"
-								+"</li>"
-								+"<hr>";
-									// ---------------------------- 댓글 수정 html 추가부분
+										  	+"<tr>"
+											  	+"<td><textarea class='update_reply_comment'>" + list[i].r_comment + "</textarea></td>"
+										  	+"</tr>"
+									  	+"</table>"
+									  	+"<div class='update_reply_btnDiv'>"
+										  	+"<button class='update_reply_btn' onclick='getMeetReplyList();'>취소</button>"
+										  	+"<button class='update_reply_btn' onclick='updateReply(this);' value=" + list[i].r_no + ">수정</button>"
+									  	+"</div>"
+								  	+"</div>"
+								  	+"</li>"
+								  	+"<hr>";
+								  	// ---------------------------- 댓글 수정 html 추가부분
 						// ---------------------------- 로그인 된 아이디와 댓글 작성자가 같을 때
 						
 						// 로그인 된 아이디와 댓글 작성자가 다를 때
@@ -339,51 +327,55 @@ function insertReply(){
 	});
 };
 
-<!-- 수정하기 누를시  hide/show 관리하는 함수 -->
+//수정하기 누를시  hide/show 관리하는 함수
 function updateReplyForm(btn){
-
+	
 	/*
-	1. reply_area 리스트와 update_reply_div 리스트들을 가져온 후 class이름들을 초기화 해준다.
-	2. 그 후 btn으로 넘어온 element값을 이용해 replyItem(<li>)태그를 선택한다.
-	3. replyItem의 자식선택자를 이용해 showDiv 와 hideDiv 클래스를 적절하게 추가/제거 해준다.
-	4. btn을 이용해 추가한 클래스를 제거한다.
+		1. reply_area 리스트와 update_reply_div 리스트들을 가져온 후 
+		   class이름들을 초기화 해준다.
+		2. 그 후 btn으로 넘어온 element값을 이용해 replyItem(<li>)태그를 선택한다.
+		3. replyItem의 자식선택자를 이용해 showDiv 와 hideDiv 클래스를 적절하게 추가/제거 해준다.
+		4. btn을 이용해 추가한 클래스를 제거한다.
 	*/
 	
-	// 1.
+	//  1번
 	var replyAreaList = $(".reply_area");
 	var updateReplyDivList = $(".update_reply_div");
 	var writeRecommentDiv = $(".write_recomment_div");
-	$(".write_recomment_hr").remove(); // 답글쓰기 hr 삭제
+	$(".write_recomment_hr").remove(); //답글쓰기 hr삭제
 	
-	for ( var i = 0; i < replyAreaList.length; i++ ) {
+		
+	for(var i = 0 ; i < replyAreaList.length ; i++){
 		replyAreaList.eq(i).attr("class","reply_area showDiv")
 	}
-	
-	for ( var i = 0; i < updateReplyDivList.length; i++ ) {
+	for(var i = 0 ; i < updateReplyDivList.length ; i++){
 		updateReplyDivList.eq(i).attr("class","update_reply_div hideDiv recomment_div")
 	}
-	
-	for ( var i = 0; i < writeRecommentDiv.length; i++ ) {
+	for(var i = 0 ; i < writeRecommentDiv.length ; i++){
 		writeRecommentDiv.eq(i).attr("class","write_recomment_div hideDiv recomment_div")
 	}
 	
-	// 2.
-	btn.className += ' update_btn';
+	//2번
+	btn.className += ' update_btn';  //update_btn 클래스 추가
 	var replyItem = $(".update_btn").parent().parent().parent();
 	
-	// 3. 
+	
+	//3번
 	replyItem.children((".reply_area")).removeClass('showDiv');
 	replyItem.children((".reply_area")).addClass('hideDiv');
 	replyItem.children((".update_reply_div")).removeClass('hideDiv');
 	replyItem.children((".update_reply_div")).addClass('showDiv');
+
 	
-	// 4.
-	btn.className = 'write_recomeent_btn';
+	//4번
+	btn.className = 'write_recomeent_btn'; //추가한 클래스 원상복구
+
+
 }
+
 
 <!-- 댓글 수정하기 ajax -->
 function updateReply(btn) {
-	
 	btn.className += ' update_btn';
 	var updateReplyDiv = $(".update_btn").parent().parent();
 	

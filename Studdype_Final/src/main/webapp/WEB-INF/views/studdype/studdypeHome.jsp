@@ -115,9 +115,9 @@ input#search:focus {
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
 				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 
-					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword }"> <span>
-					<button type="button" id="homeSearch" name="homeSearch">
-						<img src="./resources/assets/img/icon_search_white.png" style="width: 20px;">
+					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword}" style="width:100px; height:60px; margin-top:10px;"> <span>
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc;">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 					</button>
 				</span>
 			</div>
@@ -136,7 +136,7 @@ input#search:focus {
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
-				<c:forEach items="${studyList }" var="studyDto">
+				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-lg-4 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
 						<div class="single-blog-post">
@@ -147,7 +147,7 @@ input#search:focus {
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
-								<h3>${studyDto.s_name }</h3>
+								<h3>${studyDto.s_name}</h3>
 								<br> <span><img
 									src="./resources/assets/img/profile_placeholder.png"
 									style="width: 15px;">${siList.get(studyDto.si_no) }&nbsp;
@@ -158,10 +158,10 @@ input#search:focus {
 							<p>${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
-								<span> <b>${leaderName.get(studyDto.leader_no) }</b> <a
+								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
 									style="float: right;"><img
 										src="./resources/assets/img/profile_user.png"
-										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt }</a>
+										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
 								</span>
 							</div>
 						</div>
