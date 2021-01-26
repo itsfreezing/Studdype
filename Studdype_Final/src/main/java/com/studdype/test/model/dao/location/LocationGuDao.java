@@ -12,4 +12,5 @@ public interface LocationGuDao {
 	
 	public List<LocationGuDto> locationGuList();
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //메인페이지 리스트 넘기기
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
 }
