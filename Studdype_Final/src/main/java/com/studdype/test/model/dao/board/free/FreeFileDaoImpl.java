@@ -31,6 +31,7 @@ public class FreeFileDaoImpl implements FreeFileDao{
 			}
 			
 		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeFileDaoImpl] insertFile method");
 			e.printStackTrace();
 		}
 		
@@ -45,6 +46,7 @@ public class FreeFileDaoImpl implements FreeFileDao{
 		try {
 			resList = sqlSession.selectList(NAMESPACE+"selectAttachFileList", b_no);
 		} catch (Exception e) {
+			System.out.println("[ERROR} [[FreeFileDaoImpl] selectAttachFileList method");
 			e.printStackTrace();
 		}
 		
@@ -59,7 +61,7 @@ public class FreeFileDaoImpl implements FreeFileDao{
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"selectFile", f_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectFile");
+			System.out.println("[ERROR] [FreeFileDaoImpl] selectFile method");
 			e.printStackTrace();
 		}
 		

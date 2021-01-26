@@ -65,5 +65,21 @@ public class LocationGuDaoImpl implements LocationGuDao{
 		
 		return guName;
 	}
+	
+	@Override
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no) {
+		Map<Integer, String> gu_Name = new HashMap<Integer, String>();
+		String name = "";
+		
+		try {
+			name = sqlSession.selectOne(NAMESPACE+"selectGuForMainPage", gu_no);
+			gu_Name.put(gu_no, name);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectLocationSiOfStudy");
+			e.printStackTrace();
+		}
+		
+		return gu_Name;
+	}
 
 }

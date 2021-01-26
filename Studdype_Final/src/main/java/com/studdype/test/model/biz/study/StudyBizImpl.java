@@ -52,6 +52,9 @@ public class StudyBizImpl implements StudyBiz{
 	@Autowired
 	private BookDao bookDao;
 	
+	@Autowired
+	private StudyCateDao studyCateDao;
+	
 	private FileHandler fileHandler = new FileHandler();
 	
 	//메인페이지 스터디 list
@@ -101,12 +104,6 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return res;
 	}
-
-	// 등록된 스터디 마지막 번호
-	@Override
-	public int selectStudyFinalNumber() {
-		return study_Dao.selectStudyFinalNumber();
-	}
 	
 	//리더이름 selectOne
 	@Override
@@ -152,7 +149,17 @@ public class StudyBizImpl implements StudyBiz{
 
 	@Override
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
-		return null;
+		return locationSidao.selectLocationSiOfStudy(si_no);
+	}
+
+	@Override
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no) {
+		return locationGudao.selectLocationGuOfStudy(gu_no);
+	}
+
+	@Override
+	public Map<Integer, String> selectCategoryOfStudy(int cate_no) {
+		return studyCateDao.selectCategoryOfStudy(cate_no);
 	}
 
 	@Override
