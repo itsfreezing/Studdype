@@ -22,7 +22,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			totalNum = sqlSession.selectOne(NAMESPACE+"totalBoardNum", s_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectTotalBoardNum(int s_no)!!");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectTotalBoardNum method");
 			e.printStackTrace();
 		}
 		
@@ -37,7 +37,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			resList = sqlSession.selectList(NAMESPACE+"pagingBoardList", pageMap);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectPagingBoardList");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectPagingBoardList method");
 			e.printStackTrace();
 		}
 		
@@ -52,7 +52,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertBoard", board);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: insertBoard!");
+			System.out.println("[ERROR] FreeBoardDaoImpl insertBoard method");
 			e.printStackTrace();
 		}
 		return res;
@@ -66,7 +66,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"selectOne", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectOne!!");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectOne method");
 			e.printStackTrace();
 		}
 		return dto;
@@ -79,7 +79,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.update(NAMESPACE+"updateCnt", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: UpdateCnt");
+			System.out.println("[ERROR] FreeBoardDaoImpl UpdateCnt method");
 			e.printStackTrace();
 		}
 		return res;
@@ -93,7 +93,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: deleteBoard!!");
+			System.out.println("[ERROR][FreeBoardDaoImpl] deleteBoard method");
 			e.printStackTrace();
 		}
 		return res;
@@ -107,7 +107,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.update(NAMESPACE+"updateBoard", board);
 		} catch (Exception e) {
-			System.out.println("[ERROR}: updateBoard");
+			System.out.println("[ERROR} FreeBoardDaoImpl updateBoard method");
 			e.printStackTrace();
 		}
 		return res;
@@ -124,7 +124,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
 		} catch (Exception e) {
-			System.out.println("{ERROR}: selectRecentList!!");
+			System.out.println("{ERROR}FreeBoardDaoImpl selectRecentList method");
 			e.printStackTrace();
 		}
 		
