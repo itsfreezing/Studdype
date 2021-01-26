@@ -29,6 +29,7 @@ import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
 import com.studdype.test.model.dto.board.BookDto;
@@ -36,6 +37,7 @@ import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyApplyingDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.study.StudyMemberDto;
@@ -55,6 +57,8 @@ public class StudyController {
 	private BookBiz bookBiz;
 	@Autowired
 	private StudyMemberBiz StudyMemberBiz;
+	@Autowired
+	private StudyApplyingBiz studyApplyingBiz;
 	
 	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
@@ -243,6 +247,42 @@ public class StudyController {
 		model.addAttribute("mainBook", bookDto);
 		
 		return "studdype/StuddypeDetailForm";
+	}
+	
+	@RequestMapping("/apply.do")
+	public String studyApplyForm(Model model, HttpSession session, HttpServletRequest request) {
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
+		StudyDto studyDto = studyBiz.selectOneBySno(s_no);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		String category = studyBiz.categoryNameForStudyHome(studyDto.getCate_no());
+		
+		model.addAttribute("study", studyDto);
+		session.setAttribute("login", login);
+		model.addAttribute("category", category);
+		return "studdype/studyApplyForm";
+	}
+	
+	@RequestMapping("/studyMemberInsert.do")
+	public String StudyMemberInsert(Model model, HttpServletRequest request, StudyApplyingDto dto) {
+		int mem_no = (Integer.parseInt(request.getParameter("mem_no")));
+		int s_no = (Integer.parseInt(request.getParameter("s_no")));
+		String info = request.getParameter("info");
+		
+		dto.setS_no(s_no);
+		dto.setMem_no(mem_no);
+		dto.setInfo(info);
+		
+		int res = studyApplyingBiz.insertStudyMember(dto);
+		
+		if( res > 0 ) {
+			return "studdype/myPage";
+		} else {
+			model.addAttribute("msg", "스터디 가입 신청에 실패하였습니다. 다시 가입 해주세요.");
+			model.addAttribute("url", "studdype/StuddypeDetailForm?s_no="+dto.getS_no());
+			return "commond/alert";
+		}
+		
 	}
 }
 

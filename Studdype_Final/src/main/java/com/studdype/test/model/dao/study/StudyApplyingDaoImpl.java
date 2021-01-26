@@ -1,6 +1,7 @@
 package com.studdype.test.model.dao.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,20 @@ public class StudyApplyingDaoImpl implements StudyApplyingDao{
 			res = sqlSession.delete(NAMESPACE+"receivedelete",dto);
 		} catch (Exception e) {
 			System.out.println("ERROR: receivedelete !!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	// 스터디 가입신청
+	@Override
+	public int insertStudyMember(StudyApplyingDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertStudyMember", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: StudyApplyingDao_insertStudyMember");
 			e.printStackTrace();
 		}
 		return res;
