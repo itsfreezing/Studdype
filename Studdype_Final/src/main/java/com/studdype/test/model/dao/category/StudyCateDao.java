@@ -12,5 +12,6 @@ public interface StudyCateDao {
 	
 	public List<StudyCategoryDto> categoryList();
 	public Map<Integer, String> categoryListForHome(List<StudyDto> studyList); 	//메인페이지에 카테고리 리스트 넘기기
+	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
 
 }

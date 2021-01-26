@@ -51,6 +51,22 @@ public class LocationSiDaoImpl implements LocationSiDao{
 		return selectSiForMainMap;
 	}
 
+	@Override
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+		Map<Integer, String> si_Name = new HashMap<Integer, String>();
+		String name = "";
+		
+		try {
+			name = sqlSession.selectOne(NAMESPACE+"selectSiForMainPage", si_no);
+			si_Name.put(si_no, name);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectLocationSiOfStudy");
+			e.printStackTrace();
+		}
+		
+		return si_Name;
+	}
+
 
 
 }

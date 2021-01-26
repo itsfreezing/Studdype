@@ -23,7 +23,6 @@ public interface StudyBiz {
 	public List<LocationGuDto> locationGuList(); // 지역(구/군) selectList
 	public List<StudyCategoryDto> categoryList(); // 카테고리 selectList
 	public int insertStudy(StudyDto studyDto, MultipartFile[] mfileList, String path, List<FileDto> fileList); // [스터디 생성] 스터디 insert
-	public int selectStudyFinalNumber();	// 등록된 스터디 마지막 번호
 	public Map<Integer, String> selectLeaderNameByMainPage(List<StudyDto> studyList); //리더이름 가져오기
 	public Map<Integer, String> selectGuForMainPage(List<StudyDto> studyList); //구이름 가져오기
 	public Map<Integer, String> selectSiForMainPage(List<StudyDto> studyList); //시이름 가져오기
@@ -31,7 +30,8 @@ public interface StudyBiz {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
 	public int newLeader(StudyDto dto); 
-	public Map<Integer, String> selectLocationSiOfStudy(int si_no);
-
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no);	// 시 이름 가져오기
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
+	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
 	
 }
