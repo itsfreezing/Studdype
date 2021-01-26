@@ -50,6 +50,21 @@ public class StudyCateDaoImpl implements StudyCateDao{
 		}
 		return cateListForHomeMap;
 	}
+	
+	// [studyHome] 카테고리 번호로 카테고리 이름 가져오기
+	@Override
+	public String categoryNameForStudyHome(int cate_no) {
+		String cateName = null;
+		
+		try {
+			cateName = sqlSession.selectOne(NAMESPACE+"categoryListForHome", cate_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: categoryNameForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return cateName;
+	}
 
 	@Override
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no) {
