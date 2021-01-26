@@ -359,5 +359,19 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
+	// [studyHome] 리더 번호로 리더 이름 가져오기
+	@Override
+	public String leaderNameForStudyHome(int leader_no) {
+		String leaderName = null;
+		
+		try {
+			leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", leader_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: leaderNameForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return leaderName;
+	}
 
 }
