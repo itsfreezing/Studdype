@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.study;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,12 @@ public class StudyApplyingBizImpl implements StudyApplyingBiz {
 	public int receivedelete(StudyApplyingDto dto) {
 		
 		return studyapplyingDao.receivedelete(dto);
+	}
+
+	// 스터디 가입신청
+	@Override
+	public int insertStudyMember(StudyApplyingDto dto) {
+		return studyapplyingDao.insertStudyMember(dto);
 	}
 	
 	
