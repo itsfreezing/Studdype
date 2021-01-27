@@ -29,6 +29,7 @@ import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
 import com.studdype.test.model.dto.board.BookDto;
@@ -36,6 +37,7 @@ import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyApplyingDto;
 import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.study.StudyMemberDto;
@@ -55,6 +57,8 @@ public class StudyController {
 	private BookBiz bookBiz;
 	@Autowired
 	private StudyMemberBiz StudyMemberBiz;
+	@Autowired
+	private StudyApplyingBiz studyApplyingBiz;
 	
 	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
@@ -93,12 +97,18 @@ public class StudyController {
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddypeForm(Model model,HttpSession session) {
+		
+		// 로그인 인터셉터 완료 전까지 비로그인 스터디생성 막기
+		if(session.getAttribute("login") == null) {
+			model.addAttribute("msg", "로그인을 하고 진행주세요.");
+			model.addAttribute("url", "studyList.do");
+			return "commond/alert";
+		}
+		
 		List<LocationSiDto> sidtos = studyBiz.locationSiList();
 		List<LocationGuDto> gudtos = studyBiz.locationGuList();
 		List<StudyCategoryDto> catedtos = studyBiz.categoryList();
-		MemberDto login = (MemberDto)session.getAttribute("login");
 
-		model.addAttribute("login", login);
 		model.addAttribute("sidtos", sidtos);
 		model.addAttribute("gudtos", gudtos);
 		model.addAttribute("catedtos", catedtos);
@@ -109,12 +119,8 @@ public class StudyController {
 
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
-	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile) {
+	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile, Model model) {
 		int res = 0;
-		
-		// 스터디 마지막 번호 가져오기
-		int studyFinalNumber = studyBiz.selectStudyFinalNumber();
-		studyDto.setS_no(studyFinalNumber + 1);
 		
 		//파일 업로드
 		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
@@ -138,9 +144,13 @@ public class StudyController {
 		// 성공 시 -> 스터디 커뮤니티 홈
 		// 실패 시 -> 스터디 생성 폼
 		if (res > 0) {
-			return "redirect:studyList.do";
+			model.addAttribute("msg", "스터디 생성 완료");
+			model.addAttribute("url", "myPage.do");
+			return "commond/alert";
 		} else {
-			return "redirect:createStuddypeform.do";
+			model.addAttribute("msg", "스터디 생성 실패");
+			model.addAttribute("url", "createStuddypeform.do");
+			return "commond/alert";
 		}
 	}
 
@@ -216,20 +226,74 @@ public class StudyController {
 	@RequestMapping("/studdypeDetailForm.do")
 	public String studdypeDetailForm(Model model, HttpServletRequest request) {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
-		
+		int brCnt = 40;
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
-		System.out.println(studyDto);
+		if(studyDto.getS_content().length() > brCnt) {
+			String oldStr = studyDto.getS_content().replace("\r\n", "");
+			StringBuffer origin = new StringBuffer(oldStr);
+			int br = origin.length() / brCnt;
+			
+			for(int i = 0; i < br; i++) {
+				origin.insert(brCnt, "<br>");
+				brCnt += 40;
+			}
+			studyDto.setS_content(origin.toString());
+		}
 		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
+		
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
-		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no());
+		
+		Map<Integer, String> cateDto = studyBiz.selectCategoryOfStudy(studyDto.getCate_no());	// 스터디 카테고리
+		Map<Integer, String> siDto = studyBiz.selectLocationSiOfStudy(studyDto.getSi_no()); // 스터디 지역시
+		Map<Integer, String> guDto = studyBiz.selectLocationGuOfStudy(studyDto.getGu_no()); // 스터디 지역구
 		
 		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
+		System.out.println(bookDto);
 		
+		model.addAttribute("studyCate", cateDto);
+		model.addAttribute("studySi", siDto);
+		model.addAttribute("studyGu", guDto);
 		model.addAttribute("study", studyDto);
 		model.addAttribute("leader", memberDto);
 		model.addAttribute("mainBook", bookDto);
 		
 		return "studdype/StuddypeDetailForm";
+	}
+	
+	@RequestMapping("/apply.do")
+	public String studyApplyForm(Model model, HttpSession session, HttpServletRequest request) {
+		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		
+		StudyDto studyDto = studyBiz.selectOneBySno(s_no);
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		String category = studyBiz.categoryNameForStudyHome(studyDto.getCate_no());
+		
+		model.addAttribute("study", studyDto);
+		session.setAttribute("login", login);
+		model.addAttribute("category", category);
+		return "studdype/studyApplyForm";
+	}
+	
+	@RequestMapping("/studyMemberInsert.do")
+	public String StudyMemberInsert(Model model, HttpServletRequest request, StudyApplyingDto dto) {
+		int mem_no = (Integer.parseInt(request.getParameter("mem_no")));
+		int s_no = (Integer.parseInt(request.getParameter("s_no")));
+		String info = request.getParameter("info");
+		
+		dto.setS_no(s_no);
+		dto.setMem_no(mem_no);
+		dto.setInfo(info);
+		
+		int res = studyApplyingBiz.insertStudyMember(dto);
+		
+		if( res > 0 ) {
+			return "redirect:myPage.do";
+		} else {
+			model.addAttribute("msg", "스터디 가입 신청에 실패하였습니다. 다시 가입 해주세요.");
+			model.addAttribute("url", "studdype/StuddypeDetailForm?s_no="+dto.getS_no());
+			return "commond/alert";
+		}
+		
 	}
 }
 

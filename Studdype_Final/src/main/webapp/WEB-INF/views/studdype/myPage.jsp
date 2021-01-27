@@ -306,7 +306,7 @@
       
    </div>
    <!--  모임 관리    -->
-   <div style="border:1px solid black; width:400px; height:400px; float:left ;margin:37px; border-radius: 15px;
+   <%-- <div style="border:1px solid black; width:400px; height:400px; float:left ;margin:37px; border-radius: 15px;
    box-shadow: 1px 1px 2px 6px #e9e9e9;">
       <p style="text-align:center; font-weight:bold; font-size:28px;">Meeting Management</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">내가 가입한 스터디 모임 관리</p>
@@ -325,12 +325,12 @@
      
      
     
-   </div>
+   </div> --%>
    <!--  내가 가입한 스터디 리스트     -->
-   <p id="mystudyl">My Study List</p>
-   <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;">
+    <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:85%; left:4%;">내가 가입한 스터디</p>
+   <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px; position:absolute; top:90%;">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
-     	<div class="hero-slider-info"><a style="color:black; font-weight:bold; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>
+        <div class="hero-slider-info"  ><a style="color:black; font-weight:bold; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>
      
      </c:forEach>
  
@@ -344,7 +344,7 @@
 
 <footer>
 
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 
 </footer>
 </html>

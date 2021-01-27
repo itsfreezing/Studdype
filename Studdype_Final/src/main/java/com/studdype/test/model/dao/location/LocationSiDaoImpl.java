@@ -50,6 +50,37 @@ public class LocationSiDaoImpl implements LocationSiDao{
 		
 		return selectSiForMainMap;
 	}
+	
+	// [studyHome] 시 번호로 시 이름 가져오기
+	@Override
+	public String selectSiForStudyHome(int si_no) {
+		String siName = null;
+		
+		try {
+			siName = sqlSession.selectOne(NAMESPACE+"selectSiForMainPage", si_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: selectSiForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return siName;
+	}
+
+	@Override
+	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+		Map<Integer, String> si_Name = new HashMap<Integer, String>();
+		String name = "";
+		
+		try {
+			name = sqlSession.selectOne(NAMESPACE+"selectSiForMainPage", si_no);
+			si_Name.put(si_no, name);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectLocationSiOfStudy");
+			e.printStackTrace();
+		}
+		
+		return si_Name;
+	}
 
 
 
