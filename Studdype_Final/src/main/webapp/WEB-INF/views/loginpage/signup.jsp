@@ -154,6 +154,7 @@ $(document).ready(function(){
 			$("#gender").focus();
 			return false;
 		}
+		signupform.submit();
 	});	
 	
 	
@@ -170,15 +171,16 @@ $(document).ready(function(){
 			contentType:"application/json",
 			dataType:"json",
 			success:function(data){
-				console.log("0=사용가능 /1=사용불가"+data);
-				if(data==0&&mem_id.title=="n"){
-					$("#chkid_no").show();
-					$("#chkid_ok").hide();
+				console.log("1=사용가능 /0=사용불가"+data);
+				alert(data);
+				if(data==1){
+					$("#chkid_ok").show();
+					$("#chkid_no").hide();
 					$("#chk").attr("title",'y');
 				}
 				else {
-					$("#chkid_no").hide();
-					$("#chkid_ok").show();
+					$("#chkid_no").show();
+					$("#chkid_ok").hide();
 					$("#chk").attr("title",'n');
 					}
 				},error:function(){
@@ -292,7 +294,7 @@ input{
                  <td> 
                      <input type="text"  name="mem_id" id="memberId" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요" />
                     <input type="button" value="중복확인" id="check" >
-                     <input type="hidden" id="chk" title="n"><!-- 사용가능할경우  -->
+                     <input type="hidden" id="chk" title="y"><!-- 사용가능할경우  -->
                  </td>
              </tr>
              <tr style="display:none;" id="chkid_ok">
@@ -378,14 +380,18 @@ input{
             			성별<span class="ico">*</span>
             		</th>
             		<td>
-            			<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="male">남성
-            			<input type="radio" style="width:23px; height:23px;" name="mem_gender" value="female">여성
+            		<!-- 	<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="m">M
+            			<input type="radio" style="width:23px; height:23px;" name="mem_gender" value="f">F
+            		 -->
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="M">M
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="F">F
+            		
             		</td>
                 </tr>  
              	
         </table>
         <br>
-          <input type="button" id="sign" name="join" value="회원가입">
+          <input type="submit" id="sign" name="join" value="회원가입">
        </form>
       </div>
 </body>

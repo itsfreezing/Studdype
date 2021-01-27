@@ -62,6 +62,7 @@ public class MemberController {
 		System.out.println(memberrrn);
 		System.out.println(dto);
 		res=memberBiz.memberInsert(dto);
+		System.out.println(res);
 		if(res>0) {
 			System.out.println("성공");
 			return "loginpage/login";
@@ -75,10 +76,10 @@ public class MemberController {
 	public @ResponseBody int idchk(@RequestBody MemberDto dto) {
 		logger.info("ID CHECK");
 		MemberDto res=null;
-		int isUsed=0;
+		int isUsed=1;//중복아이디가 아닐때
 		System.out.println(dto.getMem_id());
 		res=memberBiz.idchk(dto.getMem_id());
-		if(res!=null) { //중복되지 않는 아이디일경우 
+		if(res==null) { //중복아닌 아이디일경우 
 			 isUsed=1;
 		}else {
 			 isUsed=0;
