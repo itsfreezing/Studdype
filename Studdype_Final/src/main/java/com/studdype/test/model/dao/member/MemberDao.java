@@ -55,8 +55,7 @@ public interface MemberDao {
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
 	public int updatePw(MemberDto dto); // 비밀번호 변경
 	
-	
-	
+	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기
 	
 	
 	

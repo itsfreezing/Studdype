@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.common.FileHandler;
+import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
+import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyApplyingDto;
+import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.study.StudyMemberDto;
 
@@ -41,6 +45,8 @@ public class HomeController {
 	private StudyMemberBiz studymemberBiz;
 	@Autowired
 	private StudyApplyingBiz studyapplyingBiz;
+	@Autowired
+	private BookBiz bookBiz;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -60,8 +66,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/searchbycategory.do")
-	public String searchByCategory(HttpSession session) {
-		session.setAttribute("headerMenu", "category");
+	public String searchByCategory() {
+	
 		return "studdype/searchByCategory";
 	}
 	
@@ -131,7 +137,7 @@ public class HomeController {
 		model.addAttribute("applylist",applylist);
 		session.setAttribute("login",login);
 		model.addAttribute("studylist", studylist);
-		session.setAttribute("headerMenu", "myPage");
+	
 		
 		
 		return "studdype/myPage";
@@ -307,7 +313,7 @@ public class HomeController {
 	public String communityHome1(HttpSession session,Model model) {
 
 		/////////////////////// 테스트용 세션
-		MemberDto login = memberBiz.selectOne(2);
+		MemberDto login = memberBiz.selectOne(1);
 		StudyDto study = studyBiz.selectOneBySno(1);
 		
 		session.setAttribute("study", study); //스터디 세션
@@ -322,8 +328,12 @@ public class HomeController {
 	@RequestMapping("studycommunity.do")
 	public String studycommunity(HttpSession session, Model model,int s_no) {
 		FileHandler filehandler = new FileHandler();	// FileHandler Class 객체 생성
-		StudyDto study = studyBiz.selectOneBySno(s_no);	// 스터디 번호로 스터디하나 선택하기
-		
+		StudyDto study = studyBiz.selectOneBySno(s_no);
+		String category = studyBiz.categoryNameForStudyHome(study.getCate_no());
+		String leaderName = studyBiz.leaderNameForStudyHome(study.getLeader_no());
+		String guName = studyBiz.guNameForStudyHome(study.getGu_no());
+		String siName = studyBiz.siNameForStudyHome(study.getSi_no());
+		List<BoardDto> noticeList = studyBiz.selectNoticeBoard(study.getS_no()); 
 		// DB에 저장된 사진이 없을 때 
 		// null 값으로 넣으면 nullPointerException 발생
 		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력
@@ -334,30 +344,33 @@ public class HomeController {
 		// FileHandler의 getFilName 메소드 매개변수에 파일경로를 넣어준다.
 		String fileName = filehandler.getFileName(study.getPhoto(), "Studdype_Final");
 		
-		System.out.println("-----------------------------------------------------------------------\n"
-						  +"<<스터디 홈>> ["+study.getS_no()+"]번 스터디 DB에 저장된 이미지의 경로가\n["+study.getPhoto()+"] 입니다.\n"
-						  +"-----------------------------------------------------------------------");
+		BookDto book = bookBiz.selectMainBookOfStudy(study.getS_no());
+
 		
-		
+		model.addAttribute("book", book);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("siName", siName);
+		model.addAttribute("guName", guName);
+		model.addAttribute("category", category);
 		model.addAttribute("fileName", fileName);
+		model.addAttribute("leaderName", leaderName);
 		session.setAttribute("study", study);
 		session.setAttribute("leftnavi", "studyhome");
 		
-		return "community/communityHome";
+		return "community/communityHome";	
 	}
 	
 	// 커뮤니티 홈
 	@RequestMapping("/communityhome.do")
 	public String communityHome(HttpSession session,Model model, int s_no) {
 		StudyDto study = studyBiz.selectOneBySno(s_no);
-		String photo = study.getPhoto();
+		System.out.println("study: "+study.getPhoto());
 
 		session.setAttribute("leftnavi", "studyhome");
-		model.addAttribute("photo", photo);
 		return "community/communityHome";
 	}
 	
-	
+
 
 	
 	@RequestMapping("/signupform.do")

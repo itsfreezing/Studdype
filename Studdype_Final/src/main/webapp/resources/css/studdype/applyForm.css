@@ -1,0 +1,143 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body,html {
+	font-family:Noto Sans;
+	height: 1220px;
+	background-color: #ebebeb;
+}
+
+.row justify-content-center,
+.hero-text-wrapper,
+.hero-text-inner{
+	display: none;
+}
+
+#main-section{
+	position: relative;
+	width: 50%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10%;
+	margin-top: 10%;
+	/*background-image: url('applyForm.png');
+	background-size: cover;*/ 
+}
+
+#main-section img{
+	position: absolute;
+	width: 100%;
+}
+
+#title{
+	position: relative;
+	font-weight: 700;
+	font-size: 50px;
+	top: 150px;
+	left: 250px;
+}
+
+#member{
+	position: relative;
+	font-size: 25px;
+	top: 250px;
+	left: 250px;
+}
+
+#title p,
+#member p,
+#studyTitle p,
+#studyCate p{
+	display: inline-block;
+	background-color: #909098;
+	width: 180px;
+	font-size: 25px;
+	text-align: center;
+	color: #fff;
+	padding: 1% 2%;
+	border-radius: 1em;
+	opacity: 0.5;
+	margin-right: 3%;
+}
+
+#studyTitle{
+	position: relative;
+	font-size: 25px;
+	top: 280px;
+	left: 250px;
+}
+
+#studyCate{
+	position: relative;
+	font-size: 25px;
+	top: 310px;
+	left: 250px;
+}
+
+#selfInfo{
+	position: relative;
+	font-size: 25px;
+	top: 340px;
+	left: 250px;
+	margin-top: 50px;
+}
+
+#selfInfo p{
+	display: inline-block;
+	background-color: #909098;
+	width: 180px;
+	font-size: 25px;
+	text-align: center;
+	color: #fff;
+	padding: 1% 2%;
+	border-radius: 1em;
+	opacity: 0.5;
+	margin-right: 3%;
+}
+
+#selfInfoText{
+	position: relative;
+	overflow: auto;
+	resize: none;
+	width: 530px;
+	height: 250px;
+	top: 360px;
+	left: 250px;
+	border: 7px ridge #909098;
+	opacity: 0.5;
+	font-size: 25px;
+}
+
+#chkBtn{
+	position: relative;
+	left: 250px;
+	top: 400px;
+}
+
+input.submitBtn{
+	position: relative;
+	color: #fff;
+	background-color: #909098;
+	opacity: 0.5;
+	padding-bottom: 50px;
+	width: 200px;
+	height: 70px;
+	line-height: 70px;
+	font-size: 25px;
+	font-weight: 600;
+	border-radius: 2em;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	left: 330px;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+input.submitBtn:hover,
+button.submitBtn:hover{
+	background: #909098;
+	opacity: 1;
+	color: #fff;
+} 
+
+

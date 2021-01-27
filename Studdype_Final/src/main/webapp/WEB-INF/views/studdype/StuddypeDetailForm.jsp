@@ -233,7 +233,7 @@ body,html {
 	// 스터디 신청 기능 구현 시 사용
 	function studyApply() {
 		var s_no = $("#s_no").val();
-		location.href=""+s_no;	
+		location.href="apply.do?s_no="+s_no;	
 	}
 </script>
 </head>
@@ -329,7 +329,7 @@ body,html {
 		</div>
 	</div>
 	
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 	
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

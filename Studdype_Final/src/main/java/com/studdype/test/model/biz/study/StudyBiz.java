@@ -30,6 +30,11 @@ public interface StudyBiz {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
 	public int newLeader(StudyDto dto); 
+	public String categoryNameForStudyHome(int cate_no); // [studyHome] 카테고리 번호로 카테고리 이름 가져오기
+	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기
+	public String guNameForStudyHome(int gu_no); // [studyHome] 구 번호로 구 이름 가져오기
+	public String siNameForStudyHome(int si_no); // [studyHome] 시 번호로 시 이름 가져오기
+	public List<BoardDto> selectNoticeBoard(int s_no); // [studyHome] 공지사항 게시글 리스트 가져오기
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no);	// 시 이름 가져오기
 	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
