@@ -158,7 +158,6 @@
    //스터디 리스트 배너 
    $(document).ready(function() {
 		var owl = $('.owl-carousel');
-
 		owl.owlCarousel({
 			items : 10, // 한번에 보여줄 아이템 수
 			loop : true, // 반복여부
@@ -168,10 +167,8 @@
 			autoplayHoverPause : false
 		//마우스오버시 멈출지 여부
 		});
-
 	
 	});
-
  
 	 
   	//회원 탈퇴 버튼 클릭시 
@@ -240,7 +237,6 @@
   	}
   
  
-
    </script>
 </head>
 
@@ -311,7 +307,6 @@
       <p style="text-align:center; font-weight:bold; font-size:28px;">Meeting Management</p>
       <p style="margin-left:15px; font-size:20px;margin-top:50px; font-weight:bold;">내가 가입한 스터디 모임 관리</p>
       
-
       
      <c:forEach var="i" begin="0" end="${pageList.size()-1}" step="1">
      		<p>${pageList.get(i).getS_no()}</p>
@@ -319,7 +314,6 @@
       <c:if test="${not empty pageList}">
      <c:forEach var="pageList" items="${pageList}">
      		<p>${pageList.getS_no() }</p>
-
      </c:forEach>
      </c:if>
      
