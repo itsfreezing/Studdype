@@ -35,7 +35,95 @@
 <script src="./resources/assets/js/main2.js"></script>
 
 <style type="text/css">
+.main-section {
+	width: 60%;
+	margin-right: 10%;
+}
 
+#main-section-top {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding: 1%;
+	border-top: 2px solid #868e96;
+	border-radius: 5px;
+}
+
+#main-section-mid {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	border-top: 2px solid #868e96;
+	border-bottom: 2px solid #868e96;
+	padding: 1%;
+}
+
+#book-content {
+	position: relative;
+	float: right;
+	width: 100%;
+	height: 500px;
+	padding: 1%;
+	margin: 1%;
+}
+
+#main-section-mid table {
+	width: 100%;
+	margin-top:-40px;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+}
+
+#book-img {
+	left:12%;
+	width:180px;
+	height: 250px;
+	border: 5px solid #f9f9f0;
+	border-radius: 10px;
+	background: #f6f5f0;
+	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px
+		rgba(255, 255, 255, 0.5);
+}
+
+.main-section input {
+	border: none;
+	font-weight: bolder;
+	width:100%;
+}
+
+.main-section textarea {
+	border: 2px solid #868e96;
+}
+
+#button-area button {
+	width: 12%;
+	height: 30px;
+	float:right;
+	margin-left:10px;
+	border: 2px solid #868e96;
+	border-radius: 20px;
+	font-size: 20px;
+	color: #868e96;
+	font-weight: bolder;
+	background: #fff;
+}
+
+#button-area button:hover {
+	cursor: pointer;
+	background: rgb(115, 98, 222);
+	color: #fff;
+	transition: 0.5s ease all;
+}
+
+#link {
+	width: 20px;
+	height: 20px;
+}
+#isMain {
+	color:#6f42c1;
+	font-size:20px;
+	font-weight:bolder;
+}
 </style>
 
 <script type="text/javascript">
@@ -73,7 +161,6 @@
 			<c:otherwise>
 				<!-- 메인 섹션 상단(글제목영역) -->
 				<div id="main-section-top">
-
 					<table>
 						<col width="800">
 						<col width="200">
@@ -96,10 +183,6 @@
 
 				<!-- 메인 섹션 중앙(도서 정보) -->
 				<div id="main-section-mid">
-
-					<div id="book-img">
-						<img src="${detailBookDto.getBook_img() }">
-					</div>
 					<div id="book-content">
 						<input type="hidden" id="b_no" value="${detailBookDto.getB_no() }">
 						<table>
@@ -111,6 +194,9 @@
 										<span id="isMain">&nbsp;대표도서</span>
 									</c:if>
 								</th>
+								<td rowspan="4">
+									<img id="book-img" src="${detailBookDto.getBook_img() }">
+								</td>
 							</tr>
 							<tr>
 								<th>저자&nbsp;</th>
@@ -131,34 +217,22 @@
 							</tr>
 							<tr>
 								<th style="vertical-align: top;">도서 설명</th>
-								<th><textarea style="width: 100%;" rows="10"
+								<th colspan="2"><textarea style="width: 100%;" rows="10"
 										readonly="readonly">${detailBookDto.getB_content() }</textarea></th>
 							</tr>
-							<tr style="text-align: right;">
-								<c:choose>
-									<c:when
-										test="${login.getMem_no() eq detailBookDto.getB_writer() }">
-										<td colspan="3">
-											<button onclick="updateBookForm();">수정</button>
-											<button onclick="deleteBook();">삭제</button>
-											<button onclick="location.href='searchBook.do'">목록</button>
-										</td>
-									</c:when>
-									<c:otherwise>
-										<td colspan="3">
-											<button onclick="location.href='searchBook.do'">목록</button>
-										</td>
-									</c:otherwise>
-								</c:choose>
-							</tr>
 						</table>
-					</div>
-
+					</div>		
 				</div>
-
 			</c:otherwise>
 
 		</c:choose>
+		<div id="button-area">
+			<c:if test="${login.getMem_no() eq detailBookDto.getB_writer() }">
+				<button onclick="updateBookForm();">수정</button>
+				<button onclick="deleteBook();">삭제</button>
+			</c:if>
+				<button onclick="location.href='searchBook.do'">목록</button>
+		</div>
 	</div>
 	<!-- 메인섹션 종료 -->
 
