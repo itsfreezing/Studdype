@@ -222,8 +222,19 @@ public class StudyController {
 	@RequestMapping("/studdypeDetailForm.do")
 	public String studdypeDetailForm(Model model, HttpServletRequest request) {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
-		
+		int brCnt = 40;
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
+		if(studyDto.getS_content().length() > brCnt) {
+			String oldStr = studyDto.getS_content().replace("\r\n", "");
+			StringBuffer origin = new StringBuffer(oldStr);
+			int br = origin.length() / brCnt;
+			
+			for(int i = 0; i < br; i++) {
+				origin.insert(brCnt, "<br>");
+				brCnt += 40;
+			}
+			studyDto.setS_content(origin.toString());
+		}
 		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
 		
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보

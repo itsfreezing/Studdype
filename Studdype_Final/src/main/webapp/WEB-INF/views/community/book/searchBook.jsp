@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<link rel="stylesheet" href="./resources/css/community/book/searchBook.css">
+<!-- <link rel="stylesheet" href="./resources/css/community/book/searchBook.css"> -->
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -37,7 +37,6 @@
 .main-section {
 	width:72%;
 }
-
 
 #no-mainBook {
 	width:100%;
@@ -191,6 +190,7 @@
 	font-weight:bolder;
 	z-index:1;
 	border-radius:10px;
+	border:3px solid black;
 }
 </style>
 
@@ -249,7 +249,7 @@
 	
 	<!-- 메인 섹션----------------------------------------------------------------------------- -->
 	<div class="main-section">
-	<h3 style="color:#6f42c1;">스터디 도서 목록</h3>
+	<h3>스터디 도서 목록</h3>
 		<!--메인 상단 세션 --------------------------------------------------------------------- -->
 		<div id="main-section-top">
 		<c:choose>
