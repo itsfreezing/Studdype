@@ -56,7 +56,7 @@
 		<form id="applyForm" action="studyMemberInsert.do" method="post">
 			<input type="hidden" name="s_no" value="${ study.s_no }">
 			<input type="hidden" name="mem_no" value="${ login.mem_no }">
-			<textarea id="selfInfoText" name="info"></textarea>
+			<textarea id="selfInfoText" name="info" placeholder="자기소개를 작성 해주세요."></textarea>
 			<div id="chkBtn">
 				<input type="button" class="submitBtn" onclick="chkInfo();" value="신청하기">
 			</div>
