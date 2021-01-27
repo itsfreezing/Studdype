@@ -4,7 +4,7 @@
 body,html {
 	font-family:Noto Sans;
 	height: 1220px;
-	background-color: #f5ddff;
+	background-color: #ebebeb;
 }
 
 .row justify-content-center,
@@ -106,6 +106,7 @@ body,html {
 	left: 250px;
 	border: 7px ridge #909098;
 	opacity: 0.5;
+	font-size: 25px;
 }
 
 #chkBtn{
@@ -114,30 +115,28 @@ body,html {
 	top: 400px;
 }
 
-input.submitBtn,
-button.submitBtn{
+input.submitBtn{
 	position: relative;
-	background: #fff;
-	color: #6434ef;
-	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	margin-top: 40px;
+	color: #fff;
+	background-color: #909098;
+	opacity: 0.5;
 	padding-bottom: 50px;
-	width: 150px;
-	height: 50px;
-	line-height: 52px;
-	padding: 0;
-	font-size: 12px;
+	width: 200px;
+	height: 70px;
+	line-height: 70px;
+	font-size: 25px;
 	font-weight: 600;
-	border-radius: 50px;
+	border-radius: 2em;
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
+	left: 330px;
 }
 
 /* 흰색 버튼에서 hover 시 보라색으로 변경 */
 input.submitBtn:hover,
 button.submitBtn:hover{
-	background: #6434ef;
+	background: #909098;
+	opacity: 1;
 	color: #fff;
 } 
 

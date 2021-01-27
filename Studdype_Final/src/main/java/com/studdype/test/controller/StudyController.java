@@ -276,7 +276,7 @@ public class StudyController {
 		int res = studyApplyingBiz.insertStudyMember(dto);
 		
 		if( res > 0 ) {
-			return "studdype/myPage";
+			return "redirect:myPage.do";
 		} else {
 			model.addAttribute("msg", "스터디 가입 신청에 실패하였습니다. 다시 가입 해주세요.");
 			model.addAttribute("url", "studdype/StuddypeDetailForm?s_no="+dto.getS_no());
