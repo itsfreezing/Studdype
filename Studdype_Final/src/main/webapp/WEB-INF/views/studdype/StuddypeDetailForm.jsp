@@ -230,10 +230,10 @@ body,html {
 		$("#mainPhoto").attr("src", imgPath);
 	}
 	
-	// 스터디 신청 기능 구현 시 사용
 	function studyApply() {
 		var s_no = $("#s_no").val();
-		location.href="apply.do?s_no="+s_no;	
+		
+		return location.href="apply.do?s_no="+s_no;
 	}
 </script>
 </head>

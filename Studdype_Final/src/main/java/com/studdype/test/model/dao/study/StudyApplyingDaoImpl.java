@@ -108,6 +108,19 @@ public class StudyApplyingDaoImpl implements StudyApplyingDao{
 		}
 		return res;
 	}
+	
+	// 가입된 스터디인지 확인
+	@Override
+	public String selectAgree(StudyApplyingDto dto) {
+		String agree = null;
+		try {
+			agree = sqlSession.selectOne(NAMESPACE+"selectAgree", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: StudyApplyingDao_selectAgree");
+			e.printStackTrace();
+		}
+		return agree;
+	}
 
 	
 }
