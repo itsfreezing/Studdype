@@ -22,6 +22,7 @@ public interface MemberDao {
 	
 	public MemberDto login(MemberDto dto);//로그인
 	public String logout(HttpSession session);//로그아웃
+	public String findId(MemberDto dto);	//아이디 찾기
 	public int memberInsert(MemberDto dto);//회원가입
 	MemberDto selectOne(int mem_no);   //멤버번호로 하나 셀렉트
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기

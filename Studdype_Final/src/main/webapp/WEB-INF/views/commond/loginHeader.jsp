@@ -32,7 +32,7 @@ $(function() {
 });
 
 </script>
-<style>
+<style type="text/css">
 
 </style>
 </head>
@@ -68,7 +68,7 @@ $(function() {
 								<li class="nav-item" id="location">
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 								</li>
-							</ul>
+							
 								<div class="usericon">
 									<a href=""><img src="./resources/assets/img/user3.png"></a>
 								<c:choose>
@@ -96,7 +96,7 @@ $(function() {
 								</div>
 								<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 								<li class="nav-item"></li>
-								
+								</ul>
 							</div>
 							</div>
 							</nav>
@@ -108,18 +108,17 @@ $(function() {
 					</form>
 			
 				<!-- 네비 끝 -->
-				<div class="row justify-content-center">
+				<div class="row justify-content-center" style="background-image: url('./resources/img/loginBanner.png')">	
 				<div class="col-lg-6 text-center">
 					<div class="hero-text-wrapper">
 						<div class="hero-text-inner">
 							<div class="hero-text">
-
 								<h1><c:if test="${studylist != null}">My Page</c:if></h1>
-
 							</div>
 						</div>
 					</div>
 				</div>
+				<!--  <img alt="" src="./resources/img/loginBanner.png"> -->
 			</div>
 			<!-- 헤더 텍스트 끝 -->
 	<!-- 헤더 끝 -->

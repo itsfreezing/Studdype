@@ -1,0 +1,175 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>find ID</title>
+
+<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet"href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet"href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
+<link rel="stylesheet" href="./resources/assets/css/animate.css">
+<link rel="stylesheet" href="./resources/assets/css/normalize.css">
+<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/assets/css/responsive.css">
+<link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<style type="text/css">
+h1{
+	font-weight:800;
+	font-size: 30px;
+	line-height: 20px;
+	text-align: center;
+}
+.main_head{
+	width: 800px;
+	margin: auto;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 50px;
+}
+.sub_head{
+	box-sizing: border-box;
+	display: block;
+}
+.name_part{
+	font-weight: 800;
+}
+#name1{
+	margin-left:10%;
+    width:300px;
+    height:50px;
+    margin-bottom: 3%;
+}
+.rno_part{
+	font-weight: 800;
+}
+#rno1{
+	margin-left:3%;
+    width:300px;
+    height:50px;
+}
+#mid_rno{
+	font-weight: 800;
+	font-size: 25px;
+}
+#rno2{
+	margin-bottom:5%;
+    width:300px;
+    height:50px;
+}
+.btn_part{
+	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+#send_btn{
+	width: 300px;
+	height: 50px;
+	border-radius: 0px;
+}
+#search_btn{
+	width: 120px;
+	height: 50px;
+}
+#cancel{
+	width: 120px;
+	height: 50px;
+	margin-left: 4.5%;
+}
+input.submitBtn{
+	position: relative;
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin-top: 40px;
+	padding-bottom: 50px;
+	width: 150px;
+	height: 50px;
+	line-height: 52px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+input.submitBtn:hover{
+	background: #6434ef;
+	color: #fff;
+} 
+.row justify-content-center,
+.hero-text-wrapper,
+.hero-text-inner{
+	
+}
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+function idsearch() { //이름,주민번호로 '찾기' 버튼
+	var doc=document.getElementsByName("name")[0];
+	
+	var emailtitle = $("#rno1").attr('title');
+	var rno = $("#rno1").val()+"-"+$("#rno2").val();
+	if(doc.value.trim()==""||doc.value==null){
+		alert("이름을 입력해주세요");
+		return false;
+	}
+	 if(rnotitle == "n"){
+		alert("주민등록번호를 확인해주세요");
+		return false;
+	}else{
+		   var target="email.do?command=searchid&name="+doc.value.trim()+"&email="+email;
+		   open(target,"","width=900,height=700");
+		   self.close();
+	}
+}
+
+function cancel(){
+	self.close();
+}
+
+
+</script>
+</head>
+<body>
+<jsp:include page="../commond/loginHeader.jsp"></jsp:include>
+	<h1>이메일 계정 찾기 </h1>
+	<form class="main_head">
+		<div class="sub_head">
+			<div class="name_part">
+				<label id="nameLabel">이름</label>
+				<input type="text" name="name" id="name1" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
+			</div>			
+			<div class="rno_part">
+				<label id="rnoLabel">주민등록번호</label>
+				<input type="text" name="rno" id="rno1" style="border:2px solid #6E45E3"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" style="border:2px solid #6E45E3">
+			</div>
+			<div class="btn_part">
+				<div>
+					<input type="button" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	
+	<jsp:include page="../commond/loginFooter.jsp"></jsp:include>
+
+	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/bootstrap.min.js"></script>
+	<script src="./resources/assets/js/owl.carousel.min.js"></script>
+	<script src="./resources/assets/js/modal-video.js"></script>
+	<script src="./resources/assets/js/loadmore.js"></script>
+	<script src="./resources/assets/js/prefixfree.min.js"></script>
+	<script src="./resources/assets/js/main.js"></script>
+	
+</body>
+</html>

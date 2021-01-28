@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-lg-8 text-left">
 					<div class="copyright">
-						<p>Copyright © StuDdype Inc. All Rights Reserced.</p>
+						<p>Copyright © StuDdype Inc. All Rights Reserved.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 text-right">

@@ -43,6 +43,19 @@ public class MemberDaoImpl implements MemberDao{
 		return null;
 	}
 	
+	//아이디 찾기
+	@Override 
+	public String findId(MemberDto dto) {
+		String res = null;
+			
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"findId", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]:findId");
+		}
+		return res;
+	}
+	
 	//멤버번호로 하나 셀렉트
 	@Override
 	public MemberDto selectOne(int mem_no) {
