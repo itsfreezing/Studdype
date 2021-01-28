@@ -62,7 +62,6 @@ public class MemberController {
 		System.out.println(memberrrn);
 		System.out.println(dto);
 		res=memberBiz.memberInsert(dto);
-		System.out.println(res);
 		if(res>0) {
 			System.out.println("성공");
 			return "loginpage/login";
@@ -155,25 +154,25 @@ public class MemberController {
 	}
 	
 	
-	
+	//회원가입 이메일 전송
 	@RequestMapping(value="/sendmail.do", method=RequestMethod.POST)
-	public @ResponseBody Map sendmail(@RequestBody MemberDto dto, HttpSession session ) {
+	public @ResponseBody Map sendmail(@RequestBody MemberDto dto , HttpSession session ) {
 		MailSender sender=new MailSender();
-		
-		Map res= new HashMap();
-		
-		MemberDto rdto = memberBiz.sendmail(dto);
-		if(rdto!=null) {
-			res.put("isExist", "y");
-			String randomNum=sender.getRandNum();
+		logger.info("send mail");
+		Map resMap = new HashMap();
+
+		MemberDto res=null;
+		if(res!=null) {
+			resMap.put("isExist","y");
+			String randNum=sender.getRandNum();
 			
-			sender.sendVerifiNum(rdto, randomNum);
-			session.setAttribute("randomNum", randomNum);
+			sender.sendVerifiNum(res, randNum);
+			session.setAttribute("randNum", randNum);
 		}else {
-			res.put("isExist", "n");
+			resMap.put("isExist", res);
 		}
 		
-		return res;
+		return resMap;
 	}
 	
 	//인증번호 확인

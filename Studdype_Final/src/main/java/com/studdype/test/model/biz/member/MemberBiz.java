@@ -19,7 +19,6 @@ public interface MemberBiz {
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
 	
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member 가져오기 
-	public MemberDto sendmail(MemberDto dto);//회원가입 이메일 인증 
 	public int updatePw(MemberDto dto); //비밀 번호 변경
 	
 

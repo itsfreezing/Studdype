@@ -21,19 +21,22 @@
 <script type="text/javascript">
 function chkpwd(){
 	var pw=document.getElementById('memberpw').value;
-	var pw2=document.getElementById('mempwd').value;
+	var pw2=document.getElementById('mempw').value;
 	if(pw!=pw2){
-		document.getElementById('checkpw').style.color="red";
-		document.getElementById('checkpw').innerHTML="동일하지 않습니다";
+		$("#chkpw_no").show();
+		$("#chkpw_ok").hide();
+		$("#chkpw").hide();
 	
 	}
 	else if(pw==""||pw==null){
-		   document.getElementById('checkpw').style.color="red";
-		   document.getElementById('checkpw').innerHTML="비밀번호를 입력해주세요";
+		  $("#chkpw").show();
+		  $("#chkpw_no").hide();
+		  $("#chkpw_ok").hide();
   }
 	else{
-		document.getElementById('checkpw').style.color="blue";
-		document.getElementById('checkpw').innerHTML="확인되었습니다";
+		$("#chkpw_ok").show();
+		$("#chkpw_no").hide();
+		$("#chkpw").hide();
 	}
 }
 $(function(){
@@ -57,8 +60,8 @@ function sendmail(){
 	         data:JSON.stringify(emailVal),
 	         contentType:"application/json",
 			 dataType:"json",
-	         success:function(ramdom){
-	            $("#code").html("<input type='text' id='num'><input type='button' value='인증확인' onclick='numchk();'><input type='hidden' id='num2' value='"+ramdom+"'>");
+	         success:function(randNum){
+	            $("#code").html("<input type='text' id='num'><input type='button' value='인증확인' onclick='numchk();'><input type='hidden' id='num2' value='"+randNum+"'>");
 	            document.getElementById("memberMail").title="n"
 	            alert("인증번호가 전송되었습니다.");
 
@@ -106,7 +109,7 @@ function chkVerifiNum(){
 
 function chkSubmit(){
 	var chk = $("#chk").attr("title");
-	var form = $("#sendExtraPwForm");
+	var form = $("#submit_email");
 	
 	if( chk == 'y'){
 		form.submit();
@@ -117,18 +120,21 @@ function chkSubmit(){
 }
 
 $(document).ready(function(){
-
+	var check=$("#check").attr("title");
 	$("#sign").click(function(){	
-		if($("#memberId").val().trim()==""){
+		if($("#memberId").val().trim()==""||$("#memberId").val()==null){
 			alert("아이디를 입력해주세요");
 			$("#memberId").focus();
 			return false;
+		}else if($("#check").attr("title")=="n"){
+			alert("아이디 중복체크해주세요");
+			return false;
 		}
-		else if($("#memberpw").val().trim()==""){
+		else if($("#memberpw").val().trim()==""||$("#memberpw").val()==null){
 			alert("password를 입력해주세요");
 			$("#memberpw").focus();
 			return false;
-		}else if($("#memberpw").val()!=$("#mempwd").val()){
+		}else if($("#memberpw").val()!=$("#mempw").val()){
 			alert("패스워드가 다릅니다");
 			$("#memberpw").focus();
 			return false;
@@ -149,7 +155,7 @@ $(document).ready(function(){
 			alert("핸드폰번호를 입력해주세요");
 			$("#memberphone").focus();
 			return false;
-		}else if($("#gender").val()==""){
+		}else if($("#gender").val()==""||$("#gender").val()==null){
 			alert("성별을 선택해주세요");
 			$("#gender").focus();
 			return false;
@@ -157,7 +163,7 @@ $(document).ready(function(){
 		signupform.submit();
 	});	
 	
-	
+
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
 		var mem_id=$("#memberId").val();
@@ -172,11 +178,12 @@ $(document).ready(function(){
 			dataType:"json",
 			success:function(data){
 				console.log("1=사용가능 /0=사용불가"+data);
-				alert(data);
+				
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
 					$("#chk").attr("title",'y');
+				
 				}
 				else {
 					$("#chkid_no").show();
@@ -216,10 +223,12 @@ function num_check(){
 	}
 	if(flag==1){
 		if((11-((total1+total2)%11)%10)==rno2[6]){
-			alert("유효한 주민등록번호입니다");
+			$("#chknum_ok").show();
+			$("#chknum_no").hide();
 			flag=0;
 		}else{
-			alert("존재하지 않는 주민등록번호 입니다 다시 확인해주세요");
+			$("#chknum_no").show();
+			$("#chknum_ok").hide();
 			flag=0;
 		}
 	}
@@ -252,6 +261,14 @@ input{
    width:120px;
    height:40px;
 }
+#chkNum_btn{
+	width:120px;
+	height:40px;
+}
+#submit_email{
+   width:120px;
+   height:40px;
+}
 #sign{
    width:150px;
    height:44px;
@@ -275,7 +292,7 @@ input{
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-<div class="head">
+	<div class="head">
 		<h3 class="title">회원가입</h3>
 		<p class="sub">
 			<span class="icos">*</span>
@@ -283,7 +300,7 @@ input{
 			<hr>
 		</p>
 	</div> 
-   <div id="signtitle">
+   <div id="signtitle"> 
       <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" >
         <table>
         	<tr>
@@ -293,7 +310,7 @@ input{
 				</th>
                  <td> 
                      <input type="text"  name="mem_id" id="memberId" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요" />
-                    <input type="button" value="중복확인" id="check" >
+                    <input type="button" value="중복확인" id="check" title="n">
                      <input type="hidden" id="chk" title="y"><!-- 사용가능할경우  -->
                  </td>
              </tr>
@@ -321,10 +338,23 @@ input{
                  비번확인 <span class="ico">*</span>
                  </th>
                  <td>
-                 	<input type="password" id="mempwd"name="mempwchk" style="border:1px solid #ccc"onclick="chkpwd();">
-                    <div id="checkpw">동일한 암호를 입력</div>
+                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onclick="chkpwd();">
                  </td> 
-              </tr>     
+              </tr> 
+              <tr style="display:none;" id="chkpw_ok">
+   				<td></td>
+   				<td style="color:blue">확인되었습니다</td>
+   			</tr>
+   			<tr style="display:none;" id="chkpw_no">
+   				<td></td>
+   				<td style="color:red;">패스워드가 다릅니다</td>
+   			</tr>
+   			<tr style="display:none;" id="chkpw">
+   				<td></td>
+   				<td style="color:red;">패스워드를 입력해주세요</td>
+   			</tr>
+   			
+                
                 <tr>
                  <th align="right" width="100">
                     이메일<span class="ico">*</span>
@@ -364,9 +394,17 @@ input{
 	                       주민번호<span class="ico">*</span>
 	                 </th>
 	                 <td colspan="5">
-	                    <input type="text" id="rno1" name="mem_rno"style="border:1px solid #ccc" maxlength="6">-<input type="password"name="memrno" id="rno2" style="border:1px solid #ccc" onkeyup="num_check();">
+	                    <input type="text" id="rno1" name="mem_rno"style="border:1px solid #ccc" maxlength="6">-<input type="password"name="memrno" id="rno2" style="border:1px solid #ccc" maxlength="7" onkeyup="num_check();">
 	                 </td>
 	            </tr>
+	            <tr style="display:none;" id="chknum_ok">
+	   				<td></td>
+	   				<td style="color:blue">올바른 주민번호입니다</td>
+   				</tr>
+	   			<tr style="display:none;" id="chknum_no">
+	   				<td></td>
+	   				<td style="color:red;">올바르지 않은 주민번호 입니다</td>
+	   			</tr> 
             	<tr>
             		<th align="right" width="100">
             			핸드폰번호<span class="ico">*</span>
@@ -393,6 +431,15 @@ input{
         <br>
           <input type="submit" id="sign" name="join" value="회원가입">
        </form>
-      </div>
+   </div>
+     <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+
+	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/bootstrap.min.js"></script>
+	<script src="./resources/assets/js/owl.carousel.min.js"></script>
+	<script src="./resources/assets/js/modal-video.js"></script>
+	<script src="./resources/assets/js/loadmore.js"></script>
+	<script src="./resources/assets/js/prefixfree.min.js"></script>
+	<script src="./resources/assets/js/main.js"></script>
 </body>
 </html>
