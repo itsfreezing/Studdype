@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.book.BookDao;
+import com.studdype.test.model.dao.board.book.BookReplyDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -20,6 +21,9 @@ public class BookBizImpl implements BookBiz{
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private BookReplyDao bookReplyDao;
 	
 	// 스터디에 등록한 도서 리스트 검색
 	@Override
@@ -80,6 +84,7 @@ public class BookBizImpl implements BookBiz{
 		BookDto resDto = new BookDto();
 		
 		int res = bookDao.deleteBook(dto);
+		bookReplyDao.deleteBoardReply(dto.getB_no());
 		
 		if(res > 0) {
 			resDto = null;

@@ -93,6 +93,7 @@ public class StudyController {
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddypeForm(Model model,HttpSession session) {
+		logger.info("createStuddypeform");
 		
 		// 로그인 인터셉터 완료 전까지 비로그인 스터디생성 막기
 		if(session.getAttribute("login") == null) {
@@ -116,6 +117,7 @@ public class StudyController {
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
 	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile, Model model) {
+		logger.info("createStuddype");
 		int res = 0;
 		
 		//파일 업로드
@@ -221,6 +223,7 @@ public class StudyController {
 	// 스터디 디테일 페이지(스터디 홈에서 리스트 클릭 시 넘어옴)
 	@RequestMapping("/studdypeDetailForm.do")
 	public String studdypeDetailForm(Model model, HttpServletRequest request) {
+		logger.info("studdypeDetailForm");
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int brCnt = 40;
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보

@@ -44,7 +44,7 @@
 	display: inline-block;
 	width: 100%;
 	padding: 1%;
-	border-top: 2px solid #868e96;
+	border-top: 1px solid #868e96;
 	border-radius: 5px;
 }
 
@@ -52,8 +52,8 @@
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	border-top: 2px solid #868e96;
-	border-bottom: 2px solid #868e96;
+	border-top: 1px solid #868e96;
+	border-bottom: 0.2px solid #868e96;
 	padding: 1%;
 }
 
@@ -104,35 +104,33 @@
 	font-weight:bolder;
 }
 
-.update-btn-group {
-	width: 12%;
-	height: 30px;
-	float:right;
-	margin-left:10px;
-	border: 2px solid #868e96;
-	border-radius: 20px;
-	font-size: 20px;
-	color: #868e96;
-	font-weight: bolder;
-	background: #fff;
+.update-btn-group, button[type=submit] {
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+	
 }
 
 button[type=submit] {
-	margin-top:0px;
-	padding:0px;
-	background:#fff;
-	border: 2px solid #868e96;
-	border-radius: 20px;
-	font-size: 20px;
-	color: #868e96;
-	font-weight: bolder;
+	box-shadow:none;
 }
 
 button[type=submit]:hover, .update-btn-group:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
 	cursor: pointer;
-	background: rgb(115, 98, 222);
-	color: #fff;
-	transition: 0.5s ease all;
+	transition: 0.5s;
 }
 
 #link {
@@ -196,17 +194,11 @@ button[type=submit]:hover, .update-btn-group:hover {
 							<col width="200">
 							<col width="100">
 							<tr>
-								<th>글제목</th>
-								<th>작성자</th>
-								<th>작성시간</th>
-							</tr>
-							<tr>
 								<th><input type="text" id="title" name="b_title"
 									value="${bookDto.getB_title() }"></th>
 								<th><input type="text" readonly="readonly" class="input_none"
 									value="${writerNameMap.get(bookDto.getB_writer()).getMem_id()}(${writerNameMap.get(bookDto.getB_writer()).getMem_name() })"></th>
-								<th><fmt:formatDate value="${bookDto.getB_regdate() }"
-										timeStyle="YYYY-MM-DD" /></th>
+								<th><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.DD HH.MM"/></th>
 							</tr>
 						</table>
 					</div>

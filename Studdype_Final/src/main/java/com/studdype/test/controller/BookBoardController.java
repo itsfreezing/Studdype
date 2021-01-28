@@ -93,6 +93,7 @@ public class BookBoardController {
 	public String insertRegisterBook(Model model, BookDto dto) {
 		logger.info("[insertRegisterBook]");
 		int res = 0;
+		System.out.println(dto);
 		res = bookBiz.insertRegisterBook(dto);
 
 		if (res > 0) {

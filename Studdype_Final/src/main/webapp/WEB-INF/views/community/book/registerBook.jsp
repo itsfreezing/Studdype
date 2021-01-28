@@ -427,6 +427,32 @@ tooltip-persistent 요소 추가 할 것 */
 	font-size:20pt; 
 	margin-top:30px;
 }
+
+#category {
+	width:100%;
+	text-align:center;
+}
+
+#category input {
+    background-color: #EFF0F2;
+    border: 1px solid #EFF0F2;
+    width: 80px;
+    height: 30px;
+    font-size: 10pt;
+    border-radius: 10px 10px;
+    color: black;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+#category input:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 </style>
 
 <script type="text/javascript">
@@ -662,6 +688,15 @@ tooltip-persistent 요소 추가 할 것 */
 					</button></span>
 				</div>
 			</form>
+			<div id="category">
+				<input type="button" onclick="categorySearch(this);" value="IT">
+				<input type="button" onclick="categorySearch(this);" value="자격증">
+				<input type="button" onclick="categorySearch(this);" value="공무원">
+				<input type="button" onclick="categorySearch(this);" value="뷰티">
+				<input type="button" onclick="categorySearch(this);" value="대입/수능">
+				<input type="button" onclick="categorySearch(this);" value="어학/회화">
+				<input type="button" onclick="categorySearch(this);" value="취업스터디">
+			</div>
 		</div>
 		<!-- 메인 섹션 상단 종료 -->
 		
