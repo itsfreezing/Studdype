@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComunityHome</title>
+<title>스터띱 스터디 생성</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -124,10 +124,11 @@
 		});
 		///////////////////////////////////////////////////////////////
 		
-		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		var menuName = $(".active").text().trim();
-		
 		// 네비 메뉴 이름 가져오기
+		var currentMenu = $("#currentMenu").val();
+		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
+		
+		// 헤더 메뉴 선택 시 h1태그 이름 변경
 		$(".hero-text h1").text(menuName);
 		
 		// 스터디 생성에 맞는 이미지 가져오기
@@ -169,15 +170,15 @@
 		var maxcnt = $("#maxcnt_id").val();
 		var content = $("#content_id").val();
 		
-		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined ||
+		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined || mem_name.trim().length > 30 ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
 			$("#mem_name_id").css('border', '1.5px solid red');
-			alert("스터디 이름 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 이름 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
-		}else if(info.trim() == "" || info == null || info == undefined ||
+		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 30 ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			alert("스터디 한줄 소개 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
@@ -191,15 +192,15 @@
 			$("#selectLocationGu").css('border', '1.5px solid red');
 			alert("스터디 지역(구/군)을 선택해주세요.");
 			return false;
-		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
+		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined || 
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
 			$("#maxcnt_id").css('border', '1.5px solid red');
 			alert("스터디 최대 인원 작성란을 작성해주세요.");
 			return false;
-		}else if(content.trim() == "" || content == null || content == undefined ||
+		}else if(content.trim() == "" || content == null || content == undefined || content.trim().length > 1000 ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
 			$("#content_id").css('border', '1.5px solid red');
-			alert("스터디 상세 소개글 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 상세 소개글 작성란을 확인해주세요.(1000자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else {
 			return true;
@@ -301,6 +302,6 @@
 
 	</div>
 
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 </body>
 </html>

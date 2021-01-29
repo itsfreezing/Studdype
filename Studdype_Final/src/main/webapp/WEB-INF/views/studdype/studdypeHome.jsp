@@ -193,7 +193,7 @@ input#search:focus {
 
 
 
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

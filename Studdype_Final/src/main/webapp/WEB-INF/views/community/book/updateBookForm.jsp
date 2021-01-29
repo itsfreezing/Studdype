@@ -18,22 +18,131 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<link rel="stylesheet" href="./resources/css/community/book/updateBookForm.css">
+<!-- <link rel="stylesheet" href="./resources/css/community/book/updateBookForm.css"> -->
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
+<style type="text/css">
+.main-section {
+	width: 60%;
+	margin-right: 10%;
+}
 
+#main-section-top {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding: 1%;
+	border-top: 2px solid #868e96;
+	border-radius: 5px;
+}
+
+#main-section-mid {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	border-top: 2px solid #868e96;
+	border-bottom: 2px solid #868e96;
+	padding: 1%;
+}
+
+#book-content {
+	position: relative;
+	float: right;
+	width: 100%;
+	height: 500px;
+	padding: 1%;
+	margin: 1%;
+}
+
+#main-section-mid table {
+	width: 100%;
+	margin-top:-40px;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+}
+
+#book-img {
+	float:right;
+	margin-right:28%;
+	width:180px;
+	height: 250px;
+	border: 5px solid #f9f9f0;
+	border-radius: 10px;
+	background: #f6f5f0;
+	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px
+		rgba(255, 255, 255, 0.5);
+}
+
+.main-section input {
+	font-weight: bolder;
+}
+
+#title {
+	border: 2px solid gray;
+	height:35px;
+	width:90%;
+}
+
+#content:focus, #title:focus {
+	border:3px solid rgb(115, 98, 222);
+}
+
+#content {
+	border: 2px solid #868e96;
+	font-weight:bolder;
+}
+
+.update-btn-group {
+	width: 12%;
+	height: 30px;
+	float:right;
+	margin-left:10px;
+	border: 2px solid #868e96;
+	border-radius: 20px;
+	font-size: 20px;
+	color: #868e96;
+	font-weight: bolder;
+	background: #fff;
+}
+
+button[type=submit] {
+	margin-top:0px;
+	padding:0px;
+	background:#fff;
+	border: 2px solid #868e96;
+	border-radius: 20px;
+	font-size: 20px;
+	color: #868e96;
+	font-weight: bolder;
+}
+
+button[type=submit]:hover, .update-btn-group:hover {
+	cursor: pointer;
+	background: rgb(115, 98, 222);
+	color: #fff;
+	transition: 0.5s ease all;
+}
+
+#link {
+	width: 20px;
+	height: 20px;
+}
+.input_none {
+	border:none;
+}
+</style>
 <script type="text/javascript">
 	var b_no = 0;
 	
@@ -104,11 +213,7 @@
 
 					<!-- 메인 섹션 중앙(도서 정보) -->
 					<div id="main-section-mid">
-
-						<div id="book-img">
-							<img src="${bookDto.getBook_img() }">
-							<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
-						</div>
+						<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
 						<div id="book-content">
 							<input type="hidden" id="b_no" name="b_no" value="${bookDto.getB_no() }">
 							<table>
@@ -116,6 +221,9 @@
 									<th>도서 이름&nbsp;</th>
 									<th><input type="text" readonly="readonly" class="input_none" name="book_title"
 										value="${bookDto.getBook_title()}"></th>
+									<td rowspan="4">
+										<img id="book-img" src="${bookDto.getBook_img() }">
+									</td>
 								</tr>
 								<tr>
 									<th>저자&nbsp;</th>
@@ -136,18 +244,14 @@
 								</tr>
 								<tr>
 									<th style="vertical-align: top;">도서 설명</th>
-									<th><textarea id="content" name="b_content" style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
-								</tr>
-								<tr style="text-align: right;">
-									<td colspan="3">
-										<button type="submit">완료</button>
-										<button type="button" onclick="returnDetailPage();">취소</button>
-									</td>
-
+									<th colspan="2"><textarea id="content" name="b_content" style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
 								</tr>
 							</table>
 						</div>
-
+						<div id="button-area">
+							<button class="update-btn-group" type="submit">완료</button>
+							<button class="update-btn-group" type="button" onclick="returnDetailPage();">취소</button>
+						</div>
 					</div>
 				</form>
 			</c:otherwise>

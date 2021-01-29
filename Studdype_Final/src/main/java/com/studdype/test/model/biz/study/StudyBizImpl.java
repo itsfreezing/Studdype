@@ -10,12 +10,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dao.board.book.BookDao;
 import com.studdype.test.model.dao.board.dataFile.DataFileDao;
+import com.studdype.test.model.dao.board.notice.NoticeBoardDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;
 import com.studdype.test.model.dao.location.LocationSiDao;
 import com.studdype.test.model.dao.member.MemberDao;
 import com.studdype.test.model.dao.study.StudyDao;
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
 import com.studdype.test.model.dto.location.LocationSiDto;
@@ -42,6 +45,15 @@ public class StudyBizImpl implements StudyBiz{
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private NoticeBoardDao noticeDao;
+	
+	@Autowired
+	private BookDao bookDao;
+	
+	@Autowired
+	private StudyCateDao studyCateDao;
 	
 	private FileHandler fileHandler = new FileHandler();
 	
@@ -92,12 +104,6 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return res;
 	}
-
-	// 등록된 스터디 마지막 번호
-	@Override
-	public int selectStudyFinalNumber() {
-		return study_Dao.selectStudyFinalNumber();
-	}
 	
 	//리더이름 selectOne
 	@Override
@@ -143,9 +149,45 @@ public class StudyBizImpl implements StudyBiz{
 
 	@Override
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
-		return null;
+		return locationSidao.selectLocationSiOfStudy(si_no);
 	}
 
+	@Override
+	public Map<Integer, String> selectLocationGuOfStudy(int gu_no) {
+		return locationGudao.selectLocationGuOfStudy(gu_no);
+	}
 
+	@Override
+	public Map<Integer, String> selectCategoryOfStudy(int cate_no) {
+		return studyCateDao.selectCategoryOfStudy(cate_no);
+	}
+
+	@Override
+	public String categoryNameForStudyHome(int cate_no) {
+		return studyCatedao.categoryNameForStudyHome(cate_no);
+	}
+
+	@Override
+	public String leaderNameForStudyHome(int leader_no) {
+		return memberDao.leaderNameForStudyHome(leader_no);
+	}
+
+	// [studyHome] 구 번호로 구 이름 가져오기
+	@Override
+	public String guNameForStudyHome(int gu_no) {
+		return locationGudao.selectGuForStudyHome(gu_no);
+	}
+
+	// [studyHome] 시 번호로 시 이름 가져오기
+	@Override
+	public String siNameForStudyHome(int si_no) {
+		return locationSidao.selectSiForStudyHome(si_no);
+	}
+
+	// [studyHome] 공지사항 게시글 리스트 가져오기
+	@Override
+	public List<BoardDto> selectNoticeBoard(int s_no) {
+		return noticeDao.selectNoticeBoard(s_no);
+	}
 
 }

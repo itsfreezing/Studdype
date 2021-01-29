@@ -159,8 +159,6 @@ function chkEndDate(){
 	day = endDateSplit[2];   
 
 	InputEndDate = year +""+ month +""+ day; 
-	alert(InputStartDate);
-	alert(InputEndDate);
 
  	if ( meetDate == null || meetDate.trim() == '' ) {
  		alert("모임날짜를 입력 해주세요.");
