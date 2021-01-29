@@ -18,6 +18,8 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.reply.FreeReplyBiz;
 import com.studdype.test.model.biz.reply.MeetReplyBiz;
 import com.studdype.test.model.biz.reply.NoticeReplyBiz;
+import com.studdype.test.model.biz.reply.photoReplyBiz;
+import com.studdype.test.model.dao.board.photo.PhotoReplyDao;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -36,6 +38,9 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	private MeetBiz meetBiz;
 	@Autowired
 	private NoticeReplyBiz noticeReplyBiz;
+	
+	@Autowired
+	private photoReplyBiz photoReplyBiz;
 		
 	//자유게시판 리플리스트 반환 메소드
 	@RequestMapping(value="/freeReplyList.do", method=RequestMethod.POST)
@@ -239,5 +244,62 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		return res;
 	}
 	
+	//---------------------------------------------PHOTO REPLY SECTION--------------------------------------------------------//
+	
+	@RequestMapping(value="/photoReplyList.do", method=RequestMethod.POST)
+	public @ResponseBody Map photoReplyList(@RequestBody ReplyDto dto) {
+		logger.info("[photoReplyList]");
+		Map replyMap = new HashMap(); // 리플리스트dto 및 작성자이름 담을 MAP (반환 할거임)
+		List<ReplyDto> replyList = null;  // 댓글 LIST
+		Map<Integer,MemberDto> replyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자dto 담을 맵
+		
+		replyList = photoReplyBiz.galleryReplyList(dto.getB_no());
+		replyMember = photoReplyBiz.getMemberByList(replyList);
+		
+		replyMap.put("replyList", replyList);
+		replyMap.put("replyMember", replyMember);
+		
+		return replyMap;
+	}
+		
+	//자유게시판 댓글 삭제 메소드
+	@RequestMapping(value="/photoReplyDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int photoReplyDelete(@RequestBody ReplyDto dto) {
+		logger.info("[photoReplyDelete]");
+		
+		int res = photoReplyBiz.deleteGalleryReply(dto.getR_no());
+		
+		return res;
+	}
+		
+	//자유게시판 댓글 쓰기 메소드
+	@RequestMapping(value="/photoReplyWrite.do", method=RequestMethod.POST)
+	public @ResponseBody int photoReplyWrite(@RequestBody ReplyDto dto) {
+		logger.info("[photoReplyWrite]");
+		
+		int res =photoReplyBiz.insertGalleryReply(dto);
+		
+		return res;
+	}
+	
+	//자유게시판 댓글 수정 메소드
+	@RequestMapping(value="/photoReplyUpdate.do", method=RequestMethod.POST)
+	public @ResponseBody int photoReplyUpdate(@RequestBody ReplyDto dto) {
+		logger.info("[photoReplyUpdate]");
+		
+		int res = photoReplyBiz.updateGalleryReply(dto);
+		
+		return res;
+	}
+		
+	//자유게시판 댓글 답글 작성 메소드
+	@RequestMapping(value="/photoRecommentWrite.do", method=RequestMethod.POST)
+	public @ResponseBody int photoRecommentWrite(@RequestBody ReplyDto dto) {
+		logger.info("[photoRecommentWrite]");
+		
+		int res = photoReplyBiz.insertGalleryRecomment(dto);
+		
+		return res;
+	}
 	
 }

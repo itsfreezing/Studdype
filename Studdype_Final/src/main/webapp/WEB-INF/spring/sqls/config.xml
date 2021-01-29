@@ -37,7 +37,8 @@
 		<mapper resource="./mybatis/Study/studyMember-mapper.xml"/>
 	
 		
-
+		
+		<mapper resource="./mybatis/reply/photoReply-mapper.xml" />
 		<mapper resource="./mybatis/File/photoFile-mapper.xml" />
 		<mapper resource="./mybatis/Board/photoBoard-mapper.xml" />
 		<mapper resource="./mybatis/Study/studyApplying-mapper.xml"/>

@@ -185,16 +185,16 @@ console.log(url);
 		<div class="container-fluid">
 			<div class="row">
 				<!-- photo List start -->
-				<c:forEach items="${galleryList }" var="galleryList">
+				<c:forEach items="${galleryList }" var="galleryList" varStatus="status">
 				<div class="col-lg-4 col-md-8">
 					<div class=" hover-blur">
 						<a href="galleryDetail.do?b_no=${galleryList.b_no }" title="">
-						<img src="${pageContext.request.contextPath}/resources/file/${attachImage }" alt="" />
+						<img src="${attachImage.get(status.index).getF_url() }" alt="" style="width: 500px; height: 400px;"/>
 							<h2>
-								<span class="text-white">${galleryList.b_title }</span>
+								<span class="text-white">${galleryList.b_title} </span>
 							</h2>
 						</a>
-						<h4 class="text-center">${galleryList.b_title }</h4>
+						<h4 class="text-center">${galleryList.b_title}</h4>
 					</div>
 				</div>
 				</c:forEach>
@@ -206,15 +206,15 @@ console.log(url);
 		<div>
 		<ul>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
-				<li><a href="galleryList.do${pageMaker.makeSearch(i)}">${i}</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(i)}">${i}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

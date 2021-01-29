@@ -87,6 +87,7 @@ CREATE SEQUENCE BOOKSEQ NOCACHE; -- 북게시판
 CREATE SEQUENCE PHOTOBOARDSEQ NOCACHE;  --사진게시판게시글
 CREATE SEQUENCE PHOTOREPLYSEQ NOCACHE;  --사진게시판 댓글
 CREATE SEQUENCE PHOTOFILESEQ NOCACHE;  --사진 게시판 게시그 사진
+CREATE SEQUENCE PHOTOGROUPSEQ NOCACHE; --사진 댓글 그룹순서
 
 CREATE SEQUENCE SCHEBOARDSEQ NOCACHE; --일정 게시판 게시글
 
@@ -115,7 +116,7 @@ DROP TABLE PHOTO_BOARD CASCADE CONSTRAINTS;
 DROP TABLE PHOTO_FILE CASCADE CONSTRAINTS;
 
 -------------------------------------------------------------
-
+SELECT * FROM PHOTO_BOARD;
 ------------------ DROP TABLE ----------------------------
 -------------------------------------------------------------
 DROP TABLE FREE_BOARD;

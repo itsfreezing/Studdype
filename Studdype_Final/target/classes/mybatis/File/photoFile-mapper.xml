@@ -17,9 +17,9 @@
 	</insert>
 	
  	<select id="galleryAttachImage" parameterType="int" resultMap="fileMap">
-		SELECT F_NAME
+		SELECT *
 		FROM PHOTO_FILE
-		WHERE B_NO = #{b_no} AND PHOTO_ISMAIN = 'Y'
+		WHERE PHOTO_ISMAIN = 'Y'
 	</select> 
 	
 	<select id="galleryDetail" parameterType="int" resultMap="fileMap">
@@ -28,7 +28,14 @@
 		WHERE B_NO = #{b_no}
 	</select>
 
-
+	<delete id="deleteGalleryFile" parameterType="int">
+		DELETE FROM PHOTO_BOARD WHERE F_NO = #{f_no}
+	</delete>
+	
+	<insert id="updateGalleryFile" parameterType="fileDto">
+		INSERT INTO PHOTO_FILE
+	 	VALUES ( PHOTOFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+	</insert>
 
 
 
