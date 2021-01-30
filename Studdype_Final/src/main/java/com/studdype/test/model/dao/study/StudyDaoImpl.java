@@ -105,4 +105,18 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	@Override
+	public List<StudyDto> selectStudyByCategory(int cate_no) {
+		List<StudyDto> studyList = null;
+		
+		try {
+			studyList = sqlSession.selectList(NAMESPACE+"selectStudyByCategory", cate_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectStudyByCategory");
+			e.printStackTrace();
+		}
+		
+		return studyList;
+	}
+
 }

@@ -119,23 +119,20 @@ public class StudyController {
 	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile, Model model) {
 		logger.info("createStuddype");
 		int res = 0;
+		MultipartFile[] mfileList = null;
+		List<FileDto> fileList = null;
+		String path = "";
 		
-		//파일 업로드
-		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
-		
-		// 파일요소들 뽑아서 fileList에 저장
-		List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
-		
-		String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
-		
-		//파일이있으면
-		if(mfileList != null) {
+		if(studyDto.getPhoto().equals("")) {
+			//파일 업로드
+			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+			
+			// 파일요소들 뽑아서 fileList에 저장
+			fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
+			
+			path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
 			studyDto.setPhoto(fileList.get(0).getF_url());
-		}else {
-			studyDto.setPhoto("noImage");
 		}
-		
-		System.out.println(studyDto);
 		
 		res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
 
@@ -247,7 +244,6 @@ public class StudyController {
 		Map<Integer, String> guDto = studyBiz.selectLocationGuOfStudy(studyDto.getGu_no()); // 스터디 지역구
 		
 		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
-		System.out.println(bookDto);
 		
 		model.addAttribute("studyCate", cateDto);
 		model.addAttribute("studySi", siDto);

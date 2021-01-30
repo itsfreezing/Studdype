@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<!-- <link rel="stylesheet" href="./resources/css/community/book/updateBookForm.css"> -->
+<link rel="stylesheet" href="./resources/css/community/book/updateBookForm.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -33,114 +33,7 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main2.js"></script>
-<style type="text/css">
-.main-section {
-	width: 60%;
-	margin-right: 10%;
-}
 
-#main-section-top {
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	padding: 1%;
-	border-top: 1px solid #868e96;
-	border-radius: 5px;
-}
-
-#main-section-mid {
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	border-top: 1px solid #868e96;
-	border-bottom: 0.2px solid #868e96;
-	padding: 1%;
-}
-
-#book-content {
-	position: relative;
-	float: right;
-	width: 100%;
-	height: 500px;
-	padding: 1%;
-	margin: 1%;
-}
-
-#main-section-mid table {
-	width: 100%;
-	margin-top:-40px;
-	border-collapse: separate;
-	border-spacing: 0 20px;
-}
-
-#book-img {
-	float:right;
-	margin-right:28%;
-	width:180px;
-	height: 250px;
-	border: 5px solid #f9f9f0;
-	border-radius: 10px;
-	background: #f6f5f0;
-	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px
-		rgba(255, 255, 255, 0.5);
-}
-
-.main-section input {
-	font-weight: bolder;
-}
-
-#title {
-	border: 2px solid gray;
-	height:35px;
-	width:90%;
-}
-
-#content:focus, #title:focus {
-	border:3px solid rgb(115, 98, 222);
-}
-
-#content {
-	border: 2px solid #868e96;
-	font-weight:bolder;
-}
-
-.update-btn-group, button[type=submit] {
-	float: right;
-	margin-top : 15px;
-	background-color: #EFF0F2;
-	border: 1px solid #EFF0F2;
-	width: 8%;
-	height: 50px;
-	font-size: 15px;
-	padding: 1%;
-	border-radius: 10px 10px;
-	color: black;
-	font-weight: bold;
-	margin-left: 1%;
-	
-}
-
-button[type=submit] {
-	box-shadow:none;
-}
-
-button[type=submit]:hover, .update-btn-group:hover {
-	background-color: white;
-	border: 1px solid #6434ef;
-	font-weight:bold;
-	color: #6434ef;
-	cursor: pointer;
-	transition: 0.5s;
-}
-
-#link {
-	width: 20px;
-	height: 20px;
-}
-.input_none {
-	border:none;
-}
-</style>
 <script type="text/javascript">
 	var b_no = 0;
 	
@@ -191,8 +84,8 @@ button[type=submit]:hover, .update-btn-group:hover {
 					<div id="main-section-top">
 						<table>
 							<col width="800">
-							<col width="200">
-							<col width="100">
+							<col width="250">
+							<col width="150">
 							<tr>
 								<th><input type="text" id="title" name="b_title"
 									value="${bookDto.getB_title() }"></th>
@@ -208,14 +101,15 @@ button[type=submit]:hover, .update-btn-group:hover {
 						<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
 						<div id="book-content">
 							<input type="hidden" id="b_no" name="b_no" value="${bookDto.getB_no() }">
-							<table>
+							<table id="info-table">
+								<col width="100">
+								<tr>
+									<td colspan="2"><img id="book-img" src="${bookDto.getBook_img() }"></td>
+								</tr>
 								<tr>
 									<th>도서 이름&nbsp;</th>
 									<th><input type="text" readonly="readonly" class="input_none" name="book_title"
 										value="${bookDto.getBook_title()}"></th>
-									<td rowspan="4">
-										<img id="book-img" src="${bookDto.getBook_img() }">
-									</td>
 								</tr>
 								<tr>
 									<th>저자&nbsp;</th>
@@ -234,9 +128,16 @@ button[type=submit]:hover, .update-btn-group:hover {
 									</a> <input type="hidden" value="${bookDto.getBook_url() }">
 									</th>
 								</tr>
+							</table>
+						</div>
+						<div id="book_textarea">
+							<table>
 								<tr>
-									<th style="vertical-align: top;">도서 설명</th>
-									<th colspan="2"><textarea id="content" name="b_content" style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
+									<th>도서 설명</th>
+								</tr>
+								<tr>
+									<th><textarea style="width: 100%;" rows="20" id="book_board_content" 
+									name="b_content">${detailBookDto.getB_content() }</textarea></th>
 								</tr>
 							</table>
 						</div>

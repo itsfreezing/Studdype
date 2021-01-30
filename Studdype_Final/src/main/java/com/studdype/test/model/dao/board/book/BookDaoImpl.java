@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BookDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -152,7 +153,27 @@ public class BookDaoImpl implements BookDao {
 		
 		return resDto;
 	}
-	
-	
 
+	@Override
+	public List<BookDto> selectMainBookByStudy(List<StudyDto> study) {
+		List<BookDto> bookList = new ArrayList<BookDto>();
+		
+		try {
+			
+			for(int i = 0; i < study.size(); i++) {
+				BookDto dto = sqlSession.selectOne(NAMESPACE+"selectMainBookOfStudy", study.get(i).getS_no());
+				
+				if(dto != null) {
+					bookList.add(dto);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectMainBookOfStudy");
+			e.printStackTrace();
+		}
+		
+		return bookList;
+	}
+	
 }
