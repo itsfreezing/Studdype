@@ -55,6 +55,11 @@ public class StudyApplyingBizImpl implements StudyApplyingBiz {
 	public int insertStudyMember(StudyApplyingDto dto) {
 		return studyapplyingDao.insertStudyMember(dto);
 	}
+
+	@Override
+	public String selectAgree(StudyApplyingDto dto) {
+		return studyapplyingDao.selectAgree(dto);
+	}
 	
 	
 }

@@ -15,5 +15,6 @@ public interface StudyApplyingBiz {
 	public int receivereject(StudyApplyingDto dto); // 마이페이지 received 거절클릭시
 	public int receivedelete(StudyApplyingDto dto); // 마이페이지 recevie 내역 삭제 
 	public int insertStudyMember(StudyApplyingDto dto); // 스터디 가입신청
+	public String selectAgree(StudyApplyingDto dto); // 가입된 스터디인지 확인
 
 }

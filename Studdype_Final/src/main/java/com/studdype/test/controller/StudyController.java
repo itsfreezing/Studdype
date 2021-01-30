@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
@@ -259,18 +262,60 @@ public class StudyController {
 		return "studdype/StuddypeDetailForm";
 	}
 	
+	// 스터디 가입 신청
 	@RequestMapping("/apply.do")
 	public String studyApplyForm(Model model, HttpSession session, HttpServletRequest request) {
-		int s_no = Integer.parseInt(request.getParameter("s_no"));
+		int s_no = Integer.parseInt(request.getParameter("s_no")); // 스터디 디테일에서 스터디 번호 가져오기
 		
-		StudyDto studyDto = studyBiz.selectOneBySno(s_no);
-		MemberDto login = (MemberDto)session.getAttribute("login");
-		String category = studyBiz.categoryNameForStudyHome(studyDto.getCate_no());
+		StudyDto studyDto = studyBiz.selectOneBySno(s_no); // 스터디번호로 스터디 하나 선택
+		MemberDto login = (MemberDto)session.getAttribute("login"); // 로그인 세션 
+		String category = studyBiz.categoryNameForStudyHome(studyDto.getCate_no()); // 선택 된 스터디의 카테고리 번호로 카테고리 이름 가져오기
 		
-		model.addAttribute("study", studyDto);
-		session.setAttribute("login", login);
-		model.addAttribute("category", category);
-		return "studdype/studyApplyForm";
+		// 신청 버튼 누를 때 예외처리
+		if ( session.getAttribute("login") == null ) { // 로그인이 안 되어있을 때
+			model.addAttribute("msg", "로그인 후 이용바랍니다.");
+			model.addAttribute("url", "loginform.do");
+			return "commond/alert";
+		} else{ // 로그인이 되어있다면 스터디번호&멤버번호로 study_applying테이블의 agree 컬럼 값 가져오기
+			StudyApplyingDto applyDto = new StudyApplyingDto();
+			applyDto.setS_no(s_no);
+			applyDto.setMem_no(login.getMem_no());
+			
+			String agree = studyApplyingBiz.selectAgree(applyDto);
+			String Default = new String("D");
+			String Yes = new String("Y");
+			
+			if (agree == null) {
+				
+				if ( studyDto.getLeader_no() == login.getMem_no() ) { // 회원이 스터디의 팀장일 때
+					model.addAttribute("msg", "내가 만든 스터디입니다. 마이페이지에서 스터디 리스트를 확인 해주세요.");
+					model.addAttribute("url", "myPage.do");
+					return "commond/alert";
+				} else { 
+					model.addAttribute("study", studyDto); 
+					session.setAttribute("login", login);
+					model.addAttribute("category", category);
+					return "studdype/studyApplyForm";
+				}
+				
+			} else { // 회원이 스터디의 팀장이 아닐 때
+				
+				if ( agree.equals(Default) ) { // 가입 심사중일 때
+					model.addAttribute("msg", "가입 심사 대기 중인 스터디 입니다. 마이페이지에서 신청내역을 확인 해주세요.");
+					model.addAttribute("url", "myPage.do");
+					return "commond/alert";
+				} else if ( agree.equals(Yes) ) { // 이미 가입한 스터디일 때
+					model.addAttribute("msg", "이미 가입한 스터디 입니다. 마이페이지에서 내가 가입한 스터디를 확인 해주세요.");
+					model.addAttribute("url", "myPage.do");
+					return "commond/alert";
+				} else {
+					model.addAttribute("study", studyDto); 
+					session.setAttribute("login", login);
+					model.addAttribute("category", category);
+					return "studdype/studyApplyForm";
+				}
+			}
+		}
 	}
 	
 	@RequestMapping("/studyMemberInsert.do")
