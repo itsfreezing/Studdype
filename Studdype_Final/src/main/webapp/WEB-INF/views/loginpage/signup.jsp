@@ -39,6 +39,7 @@ function chkpwd(){
 		$("#chkpw").hide();
 	}
 }
+
 $(function(){
 	
 	var chkNum_btn = $("#chkNum_btn");
@@ -60,11 +61,17 @@ function sendmail(){
 	         data:JSON.stringify(emailVal),
 	         contentType:"application/json",
 			 dataType:"json",
-	         success:function(randNum){
-	            $("#code").html("<input type='text' id='num'><input type='button' value='인증확인' onclick='numchk();'><input type='hidden' id='num2' value='"+randNum+"'>");
-	            document.getElementById("memberMail").title="n"
-	            alert("인증번호가 전송되었습니다.");
-
+	         success:function(map){
+	          if(map.isExist=="n"){
+	        	  alert("메일이 잘못되었습니다");
+	        	  
+	          }else{
+	        	  alert("인증번호 전송");
+	        	  var chkNum_btn=$("#chkNum_btn");
+	        	  var emailInput=$("#memberMail");
+	        	  emailInput.attr("readonly","readonly");
+	        	  chkNum_btn.removeAttr("disabled");
+	          }
 	         },
 	         error:function(){
 	            alert("ajax 통신 실패");
@@ -107,29 +114,17 @@ function chkVerifiNum(){
 	});		
 }
 
-function chkSubmit(){
-	var chk = $("#chk").attr("title");
-	var form = $("#submit_email");
+$(document).ready(function(){	
 	
-	if( chk == 'y'){
-		form.submit();
-	}else{
-		alert("이메일 인증을 해주세요.");
-	}
-	
-}
-
-$(document).ready(function(){
-	var check=$("#check").attr("title");
 	$("#sign").click(function(){	
 		if($("#memberId").val().trim()==""||$("#memberId").val()==null){
 			alert("아이디를 입력해주세요");
 			$("#memberId").focus();
 			return false;
-		}else if($("#check").attr("title")=="n"){
+		}/*else if($("#check").attr("title")=="n"){
 			alert("아이디 중복체크해주세요");
 			return false;
-		}
+		}*/
 		else if($("#memberpw").val().trim()==""||$("#memberpw").val()==null){
 			alert("password를 입력해주세요");
 			$("#memberpw").focus();
@@ -138,31 +133,39 @@ $(document).ready(function(){
 			alert("패스워드가 다릅니다");
 			$("#memberpw").focus();
 			return false;
-		}else if($("#memberemail").val()==""){
+		}else if($("#memberMail").val().trim()==""||$("#memberMail").val()==null){
 			alert("이메일을 입력해주세요");
 			$("#memberemail").focus();
 			return false;
-		}else if($("#memberName").val()==""){
+		}/*else if($("#memberMail").attr("title")=="n"){
+			alert("이메일 인증해주세요");
+			return false;
+		}*/
+		else if($("#memberName").val()==""){
 			alert("이름을 입력해주세요");
 			$("#memberName").focus();
 			return false;
-		}else if($("#rno1").val()==""||$("#rno2").val()==""){
+		}else if($("#unum1").val()==""||$("#unum1").val()==null){
 			alert("주민번호를 입력해주세요");
 			$("#rno1").focus();
+			return false;
+		}else if($("#unum2").val()==""||$("#unum2").val()==null){
+			alert("주민번호 뒷자리를 입력해주세요");
+			$("#rno2").focus();
 			return false;
 		}
 		else if($("#memberphone").val()==""){
 			alert("핸드폰번호를 입력해주세요");
 			$("#memberphone").focus();
 			return false;
-		}else if($("#gender").val()==""||$("#gender").val()==null){
+		}else if($("#gender").val()==""){
 			alert("성별을 선택해주세요");
 			$("#gender").focus();
 			return false;
 		}
 		signupform.submit();
+
 	});	
-	
 
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
@@ -197,42 +200,44 @@ $(document).ready(function(){
 	});	
 });
 function num_check(){
-	var flag=0;
-	rno1=[];
-	rno2=[];
-	sum1=0;
-	sum2=0;
-	var i=0;
-	var j=0;
-	var total=0;
-	var total2=0;
-	var num1=document.getElementById("rno1").value;
-	var num2=document.getElementById("rno2").value;
-	rno1=num1;//앞자리
-	rno2=num2;//뒷자리
-	for(i=0;i<6;i++){
-		sum1+=parseInt(rno1[i])*(i+2);
-	}
-	total1=sum1;
-	for(j=2;j<6;j++){
-		sum2+=parseInt(rno2[j])*j;
-	}
-	total2=sum2+parseInt((rno1[0])*8)+parseInt((rno1[1])*9);
-	if(rno2.length==7){
-		flag=1;
-	}
-	if(flag==1){
-		if((11-((total1+total2)%11)%10)==rno2[6]){
-			$("#chknum_ok").show();
-			$("#chknum_no").hide();
-			flag=0;
-		}else{
-			$("#chknum_no").show();
+	 var num1 = document.getElementById("unum1");
+     var num2 = document.getElementById("unum2");
+     var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
+     var arrNum2 = new Array();
+     
+     for (var i=0; i<num1.value.length; i++) {
+          arrNum1[i] = num1.value.charAt(i);
+      } // 주민번호 앞자리를 배열에 순서대로 담는다.
+
+      for (var i=0; i<num2.value.length; i++) {
+          arrNum2[i] = num2.value.charAt(i);
+      } // 주민번호 뒷자리를 배열에 순서대로 담는다.
+
+      var tempSum=0;
+
+      for (var i=0; i<num1.value.length; i++) {
+          tempSum += arrNum1[i] * (2+i);
+      } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
+
+      for (var i=0; i<num2.value.length-1; i++) {
+          if(i>=2) {
+              tempSum += arrNum2[i] * i;
+          }
+          else {
+              tempSum += arrNum2[i] * (8+i);
+          }
+      } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
+      if((11-(tempSum%11))%10!=arrNum2[6]) {
+    		$("#chknum_no").show();
 			$("#chknum_ok").hide();
-			flag=0;
-		}
-	}
-}
+          return false;
+      }else{
+    	  $("#chknum_ok").show();
+			$("#chknum_no").hide();
+      }
+  }
+	
+
 
 </script>
 <style type="text/css">
@@ -244,7 +249,7 @@ function num_check(){
 	margin-left:65%;
 }
 .ico{
-   color:red;
+   color:green;
 }
 hr{
    width:900px;
@@ -294,14 +299,11 @@ input{
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<div class="head">
 		<h3 class="title">회원가입</h3>
-		<p class="sub">
-			<span class="icos">*</span>
-				필수입력사항	
+			
 			<hr>
-		</p>
 	</div> 
    <div id="signtitle"> 
-      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" >
+      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
         <table>
         	<tr>
 				<th>
@@ -309,8 +311,8 @@ input{
 				 	<span class="ico">*</span>
 				</th>
                  <td> 
-                     <input type="text"  name="mem_id" id="memberId" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요" />
-                    <input type="button" value="중복확인" id="check" title="n">
+                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
+                    <input type="button" value="중복확인" id="check" title="n" >
                      <input type="hidden" id="chk" title="y"><!-- 사용가능할경우  -->
                  </td>
              </tr>
@@ -322,6 +324,7 @@ input{
    				<td></td>
    				<td style="color:red;">중복된 아이디 존재 </td>
    			</tr>
+   		
             
               <tr>
                  <th align="right" width="100">
@@ -360,12 +363,12 @@ input{
                     이메일<span class="ico">*</span>
                  </th>
                  <td>
-                    <input type="text" id="memberMail"name="mem_email" style="border:1px solid #ccc" placeholder="email@studdype.com">
+                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
                     <input type="button" value="인증번호 전송" id="submit_email" onclick="sendmail();">
                  </td>
               </tr>
               <tr>
-   				<td><label for="chkNum">인증번호</label></td>
+   				<td><label for="chkNum">인증번호<span class="ico">*</span></label></td>
    				<td>
 	   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 	   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
@@ -394,7 +397,8 @@ input{
 	                       주민번호<span class="ico">*</span>
 	                 </th>
 	                 <td colspan="5">
-	                    <input type="text" id="rno1" name="mem_rno"style="border:1px solid #ccc" maxlength="6">-<input type="password"name="memrno" id="rno2" style="border:1px solid #ccc" maxlength="7" onkeyup="num_check();">
+	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
+	                    <input type="password"name="unum2" id="unum2" style="border:1px solid #ccc" maxlength="7" onkeyup="num_check();">
 	                 </td>
 	            </tr>
 	            <tr style="display:none;" id="chknum_ok">
@@ -410,7 +414,7 @@ input{
             			핸드폰번호<span class="ico">*</span>
             		</th>
             		<td colspan="5">
-            			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"/>
+            			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"/>
             		</td>
             	</tr>
             	 <tr>
@@ -418,18 +422,17 @@ input{
             			성별<span class="ico">*</span>
             		</th>
             		<td>
-            		<!-- 	<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="m">M
-            			<input type="radio" style="width:23px; height:23px;" name="mem_gender" value="f">F
-            		 -->
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="M">M
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" value="F">F
-            		
+            		 	
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" >M
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender"value="F">F
+            		 
+
             		</td>
                 </tr>  
              	
         </table>
         <br>
-          <input type="submit" id="sign" name="join" value="회원가입">
+          <input type="submit" id="sign" name="join" value="회원가입" >
        </form>
    </div>
      <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
