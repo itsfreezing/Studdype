@@ -409,16 +409,25 @@ tooltip-persistent 요소 추가 할 것 */
 
 .recommend-img {
 	width:100%!important;
-	height:330px!important;
+	height:250px!important;
 	text-align:center!important;
 	margin:25px 0 25px 0!important;
 }
 
-.recommend-img img {
-	width:20%!important;
-	height:330px!important;
+.categoryDiv {
+	display:inline-block;
+	width:15%!important;
+	height:250px!important;
 	margin-right:20px!important;
-	
+}
+
+.categoryDiv:hover {
+	cursor:pointer;
+}
+
+.categoryDiv img {
+	width:100%!important;
+	height:250px!important;
 }
 
 #recommend-comment {
@@ -426,6 +435,44 @@ tooltip-persistent 요소 추가 할 것 */
 	font-weight:600; 
 	font-size:20pt; 
 	margin-top:30px;
+}
+
+#category {
+	width:100%;
+	text-align:center;
+}
+
+#category input {
+    background-color: #EFF0F2;
+    border: 1px solid #EFF0F2;
+    width: 80px;
+    height: 30px;
+    font-size: 10pt;
+    border-radius: 10px 10px;
+    color: black;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+#category input:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.categorySelected {
+	background:#6434ef!important;
+	color:#fff!important;
+}
+
+#no-categoryList {
+	position:relative;
+	text-align:center;
+	width:200px!important;
+	height:200px!important;
 }
 </style>
 
@@ -440,10 +487,12 @@ tooltip-persistent 요소 추가 할 것 */
 		// 카카오 도서 검색 api
 		$("#searchForm").submit(function() {
 			$("#book-img-section").empty();
+			$(".recommend-img").empty();
+			$(".categorySelected").removeClass("categorySelected");
+			
 			$.ajax({
 				method:"GET",
 				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=3&size=50&query="+$("#bookName").val()+"&target=title&target=person",
-				data:{ query: $("#bookName").val() },
 				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" },
 				error:function() {
 					alert("도서 검색 실패!");
@@ -500,10 +549,34 @@ tooltip-persistent 요소 추가 할 것 */
 			$('.modal').removeClass('hidden');
 		})
 		
+		// 페이지 번호 클릭 이벤트 (페이징 처리)
 		$(document).on("click", ".pageNumber", function() {
 			var pageOrder = $(this).text();
 			
 			paging(listLength, pageOrder);
+		});
+		
+		// 카테고리 버튼 클릭 이벤트
+		$(".inputCategory").click(function() {
+			$(".categorySelected").removeClass("categorySelected");
+			$(this).addClass("categorySelected");
+			
+		});
+		
+		// 카테고리 책 클릭 시 모달 띄우기
+		$(document).on("click", ".categoryDiv" , function() {
+			$("#title").val($(this).children().eq(1).val());
+			$("#author").val($(this).children().eq(2).val());
+			$("#publish").val($(this).children().eq(3).val());
+			$("#link").attr("href", $(this).children().eq(4).val());
+			$("#book_img").attr("src", $(this).children().eq(0).attr("src"));
+			$("#input_book_img").val($(this).children().eq(0).attr("src"));
+			$("#book_url").val($(this).children().eq(4).val());
+			
+			$("#b_title").val("");
+			$("#content").val("");
+			
+			$('.modal').removeClass('hidden');
 		});
 		
 	}); // 즉시 실행 종료
@@ -512,6 +585,9 @@ tooltip-persistent 요소 추가 할 것 */
 	function appendBookList(bookList) {
 		listLength = bookList.length; // 전달받은 도서 수
 		$("#paging-section").empty();
+		$(".recommend-img").empty();
+		$(".categorySelected").removeClass("categorySelected");
+		
 		if(listLength == 0) {
 			$("#book-img-section").append(
 				"<div id='no-list'>"+
@@ -591,6 +667,53 @@ tooltip-persistent 요소 추가 할 것 */
 			return true;
 		}
 	}
+	
+	function categorySearch(cate_no) {
+		console.log(cate_no);
+		
+		$("#book-img-section").empty();	// 검색창으로 나온 영역 비우기
+		$("#paging-section").empty();
+		
+		var categoryVal = {
+				"cate_no":cate_no
+		}
+		
+		$.ajax({
+			type:"post",
+			url:"bookCategorySearch.do",
+			data:JSON.stringify(categoryVal),
+			contentType:"application/json",
+			dataType:"json",
+			success:function(map) {
+				var html = "";
+				// <img src="./resources/img/no-exsist-book.png">
+				//	<p>등록된 도서가 없습니다.</p>
+				// <img src="./resources/assets/img/recommend1.jpg">
+				if(map.bookList.length == 0 ) {
+					html = "<img id='no-categoryList' src='./resources/img/no-exsist-book.png'><p id='recommend-comment'>등록된 카테고리 도서가 없습니다.</p>"
+					$(".recommend-img").html(html);
+					return false;
+				}else {
+					html += "<p id='recommend-comment'>카테고리 추천 도서</p>";
+					for(var i = 0; i < map.bookList.length; i++) {
+						html += "<div class='categoryDiv'>"+
+						"<img src='"+map.bookList[i].book_img+"'>"+
+						"<input type='hidden' class='cate_title' value='"+map.bookList[i].book_title+"'>"+
+						"<input type='hidden' class='cate_author' value='"+map.bookList[i].book_author+"'>"+
+						"<input type='hidden' class='cate_publish' value='"+map.bookList[i].book_publish+"'>"+
+						"<input type='hidden' class='cate_url' value='"+map.bookList[i].book_url+"'>"+
+						"</div>";
+					}
+					
+					$(".recommend-img").html(html);
+				}
+				
+			},
+			error:function() {
+				alert("카테고리 검색 실패");
+			}
+		});
+	}
 </script>
 
 </head>
@@ -662,6 +785,11 @@ tooltip-persistent 요소 추가 할 것 */
 					</button></span>
 				</div>
 			</form>
+			<div id="category">
+				<c:forEach  items="${cateList }" var="cate">
+					<input type="button" class="inputCategory" onclick="categorySearch(${cate.getCate_no()});" value="${cate.getCate_name() }">
+				</c:forEach>
+			</div>
 		</div>
 		<!-- 메인 섹션 상단 종료 -->
 		
@@ -669,20 +797,8 @@ tooltip-persistent 요소 추가 할 것 */
 		
 		<!-- 메인 섹션 중앙 시작 -->
 		<div id="main-section-bottom">
-			<div id='book-img-section'>
-				<p id="recommend-comment">스터띱 베스트 도서</p>
-				<div class="recommend-img">
-					<img src="./resources/assets/img/recommend1.jpg">
-					<img src="./resources/assets/img/recommend2.jpg">
-					<img src="./resources/assets/img/recommend3.jpg">
-					<img src="./resources/assets/img/recommend4.jpg">
-				</div>
-				<div class="recommend-img">
-					<img src="./resources/assets/img/recommend5.jpg">
-					<img src="./resources/assets/img/recommend6.jpg">
-					<img src="./resources/assets/img/recommend7.jpg">
-				</div>
-			</div>
+			<div id='book-img-section'></div>
+			<div class="recommend-img"></div>
 			<div id="paging-section"></div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->
