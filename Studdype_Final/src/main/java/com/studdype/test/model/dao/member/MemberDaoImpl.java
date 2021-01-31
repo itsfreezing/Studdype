@@ -1,4 +1,4 @@
-gpackage com.studdype.test.model.dao.member;
+package com.studdype.test.model.dao.member;
 
 import java.util.HashMap;
 import java.util.List;

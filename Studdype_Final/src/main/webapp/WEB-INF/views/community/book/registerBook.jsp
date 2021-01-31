@@ -690,7 +690,7 @@ tooltip-persistent 요소 추가 할 것 */
 				//	<p>등록된 도서가 없습니다.</p>
 				// <img src="./resources/assets/img/recommend1.jpg">
 				if(map.bookList.length == 0 ) {
-					html = "<img id='no-categoryList' src='./resources/img/no-exsist-book.png'><p id='recommend-comment'>등록된 카테고리 도서가 없습니다.</p>"
+					html = "<img id='no-categoryList' src='./resources/img/no-exsist-book.png'><p id='recommend-comment'>카테고리 추천 도서가 없습니다.</p>"
 					$(".recommend-img").html(html);
 					return false;
 				}else {
@@ -698,10 +698,10 @@ tooltip-persistent 요소 추가 할 것 */
 					for(var i = 0; i < map.bookList.length; i++) {
 						html += "<div class='categoryDiv'>"+
 						"<img src='"+map.bookList[i].book_img+"'>"+
-						"<input type='hidden' class='cate_title' value='"+map.bookList[i].book_title+"'>"+
-						"<input type='hidden' class='cate_author' value='"+map.bookList[i].book_author+"'>"+
-						"<input type='hidden' class='cate_publish' value='"+map.bookList[i].book_publish+"'>"+
-						"<input type='hidden' class='cate_url' value='"+map.bookList[i].book_url+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_title+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_author+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_publish+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_url+"'>"+
 						"</div>";
 					}
 					
