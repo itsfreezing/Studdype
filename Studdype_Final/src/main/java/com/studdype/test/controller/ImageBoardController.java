@@ -58,7 +58,7 @@ public class ImageBoardController {
 		attachImage = photoBiz.attachImageList();
 		for(int i=0; i<photoList.size(); i++) {
 			attachImage.get(i).setF_url(fileHandler.getFileName(attachImage.get(i).getF_url(), "Studdype_Final"));
-			/* attachImage.get(i).setPhotoNumber(attachImage.size()); */
+			
 		}
 		
 		PageMaker pageMaker = new PageMaker();

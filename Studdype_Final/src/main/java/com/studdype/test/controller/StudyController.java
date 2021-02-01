@@ -66,7 +66,7 @@ public class StudyController {
 	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
 
 	@RequestMapping(value = "/studyList.do", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
+	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session, StudyDto studyDto) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -85,7 +85,17 @@ public class StudyController {
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-
+			
+		for(int i=0; i<studyList.size(); i++) {
+			System.out.println("들어 있냐?: "+studyList.get(i).getPhoto());
+			if(studyList.get(i).getPhoto() != null) {
+				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				System.out.println(studyList.get(i).getPhoto());
+			}
+			System.out.println(studyList.get(i).getPhoto());
+		}
+			
+		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
@@ -242,6 +252,7 @@ public class StudyController {
 			}
 			studyDto.setS_content(origin.toString());
 		}
+		
 		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
 		
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보

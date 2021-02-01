@@ -125,90 +125,213 @@ div#carousel ~ span:hover {
 	cursor: pointer;
 }
 /* 갤러리 뷰 css 끝 */
+/* 댓글 */
+.replyItem{
+		list-style: none;
+}
 
-/* 댓글 css 시작 */
-hr {
+.replyWrite{
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.replyWrite table{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.write_td{
+	width: 90%;	
+}
+
+.write_btn_td{
+	width: 5%;
+}
+
+.write_content{
+	width: 100%;
+	height: 100px;
+	resize: none;
+	border: 1px solid #808080;
+	border-radius: 5px 5px;
+	padding: 20px;
+	
+}
+
+.reply_write_btn{
+	width: 100px;
+	height: 105px;
+	background-color: white;
+	border: 1px solid #808080;
+	font-size: 25px;
+		border-radius: 5px 5px;
+	color: #808080;
+	cursor: pointer;
+	padding: 0px;
+	
+}
+
+.reply_write_btn:hover {
+	background-color: #6434ef;
+	color: white;	
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.replyBox{
 	margin-top: 20px;
-	margin-bottom: 20px;
-	border: 0;
-	border-top: 1px solid #FFFFFF;
+	
 }
 
-a {
-	color: #82b440;
-	text-decoration: none;
+.replyTitle{
+	margin-bottom: 30px;
+	font-size: 20px;
 }
 
-.blog-comment::before, .blog-comment::after, .blog-comment-form::before,
-	.blog-comment-form::after {
-	content: "";
-	display: table;
-	clear: both;
+.replyTitle span{
+	font-size: 25px;
+	font-weight: bold;
 }
 
-.blog-comment {
-	padding-left: 15px;
+
+.reply_arrow{
+	width:30px; 
+	height:auto;
+	padding-right: 5px;
+	padding-bottom: 15px;
+	
+}
+
+.reply_writer_box{
+	font-weight: bold;
+}
+
+.reply_comment_box{
+	padding-bottom: 15px;
+	word-break:break-all;
+}
+
+.reply_info_box{
+	color:rgb(170,170,170);
+	
+}
+
+.write_recomeent_btn{
+	font-size: 15px;
+	color:rgb(170,170,170);
+	background: white;
+	border: none;
+	cursor: pointer;
+}
+
+.write_recomeent_btn:hover{
+	font-weight: bold;
+	color: black;
+}
+
+.writerId{
+	font-weight: bold;
+}
+
+/* 댓글 수정 css */
+.recomment_div{
+	width: 80%;
+	border: 1px solid rgb(180,180,180);
+}
+.recomment_div table{
+	width: 100%;
+	
+	margin-top: 15px;
+	
+}
+
+.recomment_div table tr td{
+	padding-bottom: 15px;
 	padding-right: 15px;
+	padding-left: 15px;
+}
+.recomment_div table tr{
+	margin-left: 20px;
+	margin-right:20px;
+}
+.update_reply_btnDiv{
+	height: 60px;
+	border-top: 1px solid rgba(0,0,0,.1);
 }
 
-.blog-comment ul {
-	list-style-type: none;
-	padding: 0;
+.update_reply_comment{
+	width: 98%;
+	height: 100px;
+	resize: none;	
+	border: none;	
+	padding: 20px;	
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	word-break:break-all;
+	
+	
 }
 
-.blog-comment img {
-	opacity: 1;
-	filter: Alpha(opacity = 100);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
+.update_reply_comment:focus{
+	border: 1px solid #ccc;
+	border-radius: 5px 5px;
 }
 
-.blog-comment img.avatar {
-	position: relative;
-	float: left;
-	margin-left: 0;
-	margin-top: 0;
-	width: 65px;
-	height: 65px;
-	border: 1px solid
+.update_reply_writer{
+	font-weight: bold;
 }
 
-.blog-comment .post-comments {
-	border: 1px solid #eee;
-	margin-bottom: 20px;
-	margin-left: 85px;
-	margin-right: 0px;
-	padding: 10px 20px;
-	position: relative;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	background: #fff;
-	color: #6b6e80;
-	position: relative;
+.update_reply_btn{
+	float: right;
+	cursor: pointer;
+	height: 100%;
+	background-color:white;
+	border: none;
+	border-left: 1px solid rgba(0,0,0,.1);
+	font-weight: bold;
+	width: 100px;
 }
 
-.blog-comment .meta {
-	font-size: 13px;
-	color: #aaaaaa;
-	padding-bottom: 8px;
-	margin-bottom: 10px !important;
-	border-bottom: 1px solid #eee;
+.update_reply_btn:hover{
+	background-color:  #6434ef;
+	color:white;
+	transition: 0.3s;
 }
 
-.blog-comment>ul.comments>li>ul {
-	list-style-type: none;
-	padding: 0;
-	margin-left: 85px;
+.showDiv{
+	display: block;
 }
 
-.blog-comment-form {
-	padding-left: 15%;
-	padding-right: 15%;
-	padding-top: 40px;
+.hideDiv{
+	display: none;
+}
+
+.free_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.free_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
 }
 </style>
 
@@ -217,7 +340,7 @@ a {
 	<!-- 댓글 목록 가져오기 AJAX -->
 	function getReplyList() {
 		var boardVal = {
-				"b_no":${dto.b_no}
+				"b_no":${detail.b_no}
 		};
 		
 		$.ajax({
@@ -312,7 +435,45 @@ a {
 		});
 	};
 
+	function insertReply(){
+		var content = $("#write_content").val();
+		
+		if(content.length > 500){
+			alert("500자 이하로 댓글을 작성해주세요!");
+			return false;
+		}
+		
+		var b_no = ${detail.b_no};
+		var r_writer = ${login.mem_no};
+		
+		var replyVal = {
+				"b_no" : b_no ,
+				"r_writer":r_writer ,
+				"r_comment" : content
+		};
 
+		//댓글 쓰기
+		$.ajax({
+			type:"post",
+			url:"photoReplyWrite.do",
+			data:JSON.stringify(replyVal),
+			contentType:"application/json",
+			dataType:"json",
+			success: function(res){
+				$(".write_content").val(""); //댓글 입력창 비우기
+				if ( res > 0 ){
+					getReplyList();
+				}else{
+					alert("[ERROR]: 댓글 등록 실패!!");
+					getReplyList();
+				}
+			} 
+			,
+			error:function(){
+				alert("댓글 등록 ajax 실패 ㅠ..");
+			}
+		});
+	}
 
 
 
@@ -456,7 +617,7 @@ a {
 		
 		
 		var r_no = btn.value; //부모 댓글 번호
-		var b_no = ${dto.b_no}; //글번호
+		var b_no = ${detail.b_no}; //글번호
 		var r_writer = ${login.mem_no};//댓글작성자
 		var r_comment = updateReplyDiv.find(".update_reply_comment").val(); //댓글 내용
 		if(r_comment.length > 500){
@@ -614,50 +775,9 @@ a {
 				</tr>				
 			</table>
 		</div>
-		<script type="text/javascript">
-		<!-- 댓글 쓰기 AJAX -->
-		function insertReply(){
-			var content = $("#write_content").val();
-			
-			if(content.length > 500){
-				alert("500자 이하로 댓글을 작성해주세요!");
-				return false;
-			}
-			
-			var b_no = ${dto.b_no};
-			var r_writer = ${login.mem_no};
-			
-			var replyVal = {
-					"b_no" : b_no ,
-					"r_writer":r_writer ,
-					"r_comment" : content
-			};
 
-			//댓글 쓰기
-			$.ajax({
-				type:"post",
-				url:"photoReplyWrite.do",
-				data:JSON.stringify(replyVal),
-				contentType:"application/json",
-				dataType:"json",
-				success: function(res){
-					$(".write_content").val(""); //댓글 입력창 비우기
-					if ( res > 0 ){
-						getReplyList();
-					}else{
-						alert("[ERROR]: 댓글 등록 실패!!");
-						getReplyList();
-					}
-				} 
-				,
-				error:function(){
-					alert("댓글 등록 ajax 실패 ㅠ..");
-				}
-			});
-		}
-		</script>
 		<!-- 게시글 위 아래 근처글 부분 -->
-		<div class="recent_board_box">
+<%-- 		<div class="recent_board_box">
 			<h4>자유게시판 글</h4>
 			<table class="recent_table">	
 				<col width="60%"><col width="25%"><col width="15%">
@@ -708,9 +828,8 @@ a {
 					</tr>					
 				</tbody>
 			</table>
-		</div>
+		</div> --%>
 			
- 	</div>
 		<!-- 갤러리 댓글 끝 -->
 		<div class="galleryBtnDiv">
 			<c:choose>
@@ -724,7 +843,7 @@ a {
 				</c:otherwise>
 			</c:choose>
 		</div>
-	</div>
+ 	</div>
 
 
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
