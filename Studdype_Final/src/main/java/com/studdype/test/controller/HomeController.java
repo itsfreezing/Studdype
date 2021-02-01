@@ -78,19 +78,21 @@ public class HomeController {
 
 		
 		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
-
+		
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(login.getMem_no()); //해당 회원번호로 가입되있는 스터디 번호 가져오기
 
 		List<StudyDto> studylist = new ArrayList<StudyDto>();
 		List<StudyDto> applylist = new ArrayList<StudyDto>();
-		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());    //본인이 리더인 스터디 리스트 
+		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());    //본인이 리더인 스터디 리스트
+	
 		List<StudyApplyingDto> Receiveapply = new ArrayList<StudyApplyingDto>(); //내가 받은 가입 신청
 		List<StudyApplyingDto> studyApplylist = studyapplyingBiz.studyApplyingList(login.getMem_no()); //멤버 번호로 studyapply 리스트 가져오기
 		List<StudyDto> receiveapplyname = new ArrayList<StudyDto>();
 		List<StudyMemberDto> pageList = null;
+		List<MemberDto> allMember = memberBiz.allMember();
 		int totalStudyListNum = studymemberBiz.StudyTotalNum(login.getMem_no()); //5개씩 스터디 번호 가져오기
 		
-		
+		List<MemberDto> applymember = new ArrayList<MemberDto>();
 		Map<String,Integer> pageMap = new HashMap<String,Integer>();
 		
 		paging(pageMap, pagenum, totalStudyListNum);
@@ -98,11 +100,15 @@ public class HomeController {
 		
 		System.out.println("pageMap:"+pageMap);
 		System.out.println("mem_no: "+login.getMem_no()+", 스터디 총개수: "+totalStudyListNum);
+
+		
 		
 		
 		for(int i=0;i<joinedstudy.size();i++) {
 			StudyDto dto = studyBiz.selectOneBySno(joinedstudy.get(i).getS_no());
+		
 			studylist.add(dto);
+			
 		}
 		
 		
@@ -122,8 +128,17 @@ public class HomeController {
 			StudyDto dto4 = studyBiz.selectOneBySno(Receiveapply.get(i).getS_no());
 			receiveapplyname.add(dto4);
 		}
+		for(int i=0;i<Receiveapply.size();i++) {
+			MemberDto dto5 = memberBiz.selectOne(Receiveapply.get(i).getMem_no());
+			applymember.add(dto5);
+		}
 	
-		
+		System.out.println(receiveapplyname.size());
+		System.out.println(Receiveapply.size());
+		System.out.println(applylist.size());
+		System.out.println("전체멤버"+allMember);
+		model.addAttribute("allMember",allMember);
+		model.addAttribute("applymember",applymember);
 		model.addAttribute("startPage", pageMap.get("startPage"));
 		model.addAttribute("endPage",pageMap.get("endPage"));
 		model.addAttribute("currentPage",pageMap.get("currentPage"));
@@ -144,7 +159,7 @@ public class HomeController {
 	}
 	//마이페이지 회원탈퇴 버튼 클릭시
 	@RequestMapping(value="/memberDelete.do",method = RequestMethod.GET)
-	public String getout(HttpServletRequest request, Model model) {
+	public String getout(HttpServletRequest request,HttpSession session, Model model) {
 		int res = 0;
 		
 		res = memberBiz.memberDelete(Integer.parseInt(request.getParameter("mem_no")));
@@ -152,6 +167,7 @@ public class HomeController {
 		if(res > 0) {
 			model.addAttribute("msg","탈퇴 성공");
 			model.addAttribute("url","studyList.do");
+			session.invalidate();
 			return "commond/alert";
 		}
 			model.addAttribute("msg","탈퇴 실패");
