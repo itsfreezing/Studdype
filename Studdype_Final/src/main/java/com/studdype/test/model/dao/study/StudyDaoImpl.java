@@ -44,6 +44,7 @@ public class StudyDaoImpl implements StudyDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectOneBySno", s_no);
+			System.out.println(res.getPhoto());
 		} catch (Exception e) {
 			System.out.println("[ERROR]: selectOneBySno");
 			e.printStackTrace();

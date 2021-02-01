@@ -16,7 +16,7 @@
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
 	<select id="studyList" resultType="studyDto" parameterType="searchPagination">
-      SELECT *
+      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
       				SELECT ROW_NUMBER() OVER(ORDER BY S_NO) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       				FROM STUDY
@@ -24,7 +24,7 @@
       				<include refid="search"></include>
       				) ST
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-      ORDER BY S_NO DESC
+      ORDER BY S_NO ASC
 	</select>
 	
 	<sql id="search">
