@@ -15,8 +15,7 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-	
-	<select id="studyList" resultType="studyDto" parameterType="com.studdype.test.common.SearchPagination">
+	<select id="studyList" resultType="studyDto" parameterType="searchPagination">
       SELECT *
       FROM (
       				SELECT ROW_NUMBER() OVER(ORDER BY S_NO) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
@@ -57,7 +56,7 @@
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
-		VALUES(#{s_no}, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, DEFAULT)
+		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, DEFAULT)
 	</insert>
 	
 	<select id="selectStudyFinalNumber" resultType="int">
@@ -72,9 +71,16 @@
 	<update id="newLeader" parameterType="int" >
 		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
 	</update>
+
 	<update id="newInfo" parameterType="studyDto">
 		UPDATE STUDY SET S_INFO = #{s_info} , CATE_NO = #{cate_no}, SI_NO = #{si_no}, GU_NO =#{gu_no},
 		S_MAXCNT = #{s_maxcnt}, S_NAME = #{s_name} WHERE S_NO = ${s_no}
 	</update>
+
+	
+	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
+	</select>
+
 
 </mapper>

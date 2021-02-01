@@ -63,7 +63,7 @@
 			 chk_arr.push(chk);
 			 
 		})
-		alert(chk_arr);
+		
 		location.href="updateleader.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m+"&exile_no="+chk_arr;
 	}
 	

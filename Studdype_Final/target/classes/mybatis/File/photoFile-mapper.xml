@@ -7,12 +7,26 @@
 		<result property="f_no" column="F_NO"></result>
 		<result property="b_no" column="B_NO"></result>
 		<result property="f_name" column="F_NAME"></result>
-		<result property="photo_ismain" column="Photo_IsMain"></result>
+		<result property="f_url" column="F_URL"></result>
+		<result property="photo_ismain" column="PHOTO_ISMAIN"></result>
 	</resultMap>
 	
 	<insert id="insertImage" parameterType="fileDto">
-		INSERT INTO 
+		INSERT INTO PHOTO_FILE
+		VALUES ( PHOTOFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM PHOTO_BOARD), #{f_name}, #{f_size}, #{f_url}, #{photo_ismain} )
 	</insert>
+	
+ 	<select id="galleryAttachImage" parameterType="int" resultMap="fileMap">
+		SELECT F_NAME
+		FROM PHOTO_FILE
+		WHERE B_NO = #{b_no} AND PHOTO_ISMAIN = 'Y'
+	</select> 
+	
+	<select id="galleryDetail" parameterType="int" resultMap="fileMap">
+		SELECT *
+		FROM PHOTO_FILE
+		WHERE B_NO = #{b_no}
+	</select>
 
 
 

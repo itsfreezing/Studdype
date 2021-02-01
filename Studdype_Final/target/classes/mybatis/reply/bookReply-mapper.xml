@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  		
+<mapper namespace="bookReply">
+	<select id="selectBookReplyList" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM BOOK_REPLY
+		WHERE B_NO = #{b_no} ORDER BY R_GROUPNO, R_ORDER
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM BOOK_REPLY
+		WHERE R_NO = #{r_no}
+	</select>
+	
+	<select id="selectGroupReplyList" parameterType="int" resultType="replyDto">
+		SELECT * 
+		FROM BOOK_REPLY
+		WHERE R_GROUPNO = #{r_groupNo}
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM BOOK_REPLY WHERE R_NO = #{r_no}
+	</delete>
+	
+	<update id="deleteParentReply" parameterType="int">
+		UPDATE BOOK_REPLY SET R_CLASS = -1 WHERE R_NO = #{r_no}
+	</update>
+	
+	<insert id="insertReply" parameterType="replyDto">
+		INSERT INTO BOOK_REPLY
+		VALUES(BOOKREPLYSEQ.NEXTVAL, #{b_no}, BOOKGROUPSEQ.NEXTVAL, 0, 0, #{r_writer}, #{r_comment}, SYSDATE)
+	</insert>
+	
+	<update id="updateReply" parameterType="replyDto">
+		UPDATE BOOK_REPLY
+		SET R_COMMENT = #{r_comment}, R_REGDATE = SYSDATE 
+		WHERE R_NO = #{r_no}
+	</update>
+	
+	<insert id="insertRecomment" parameterType="replyDto">
+		INSERT INTO BOOK_REPLY
+		VALUES(
+			BOOKREPLYSEQ.NEXTVAL,
+			#{b_no},
+			(SELECT R_GROUPNO FROM BOOK_REPLY WHERE R_NO = #{r_no}),
+			1,
+			(SELECT MAX(R_ORDER) FROM BOOK_REPLY WHERE R_GROUPNO = (SELECT R_GROUPNO FROM BOOK_REPLY WHERE R_NO = #{r_no})) + 1,
+			#{r_writer},
+			#{r_comment},
+			SYSDATE
+		)
+	</insert>
+	
+	<delete id="deleteBoardReply" parameterType="int">
+		DELETE FROM BOOK_REPLY WHERE B_NO = #{b_no}
+	</delete>
+</mapper>

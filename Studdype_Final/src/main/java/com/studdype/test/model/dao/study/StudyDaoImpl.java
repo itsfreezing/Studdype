@@ -65,20 +65,6 @@ public class StudyDaoImpl implements StudyDao {
 		
 		return res;
 	}
-
-	// 등록된 스터디 마지막 번호
-	@Override
-	public int selectStudyFinalNumber() {
-		int res = 0;
-		
-		try {
-			res = sqlSession.selectOne(NAMESPACE+"selectStudyFinalNumber");
-		} catch (Exception e) {
-			System.out.println("[ERROR] : selectStudyFinalNumber");
-			e.printStackTrace();
-		}
-		return res;
-	}
 	
 	//스터디 리스트 총 갯수
 	@Override
@@ -120,6 +106,7 @@ public class StudyDaoImpl implements StudyDao {
 	}
 
 
+
 	@Override
 	public int newInfo(StudyDto dto) {
 		int res = 0;
@@ -135,6 +122,22 @@ public class StudyDaoImpl implements StudyDao {
 
 
 	
+
+
+
+	@Override
+	public List<StudyDto> selectStudyByCategory(int cate_no) {
+		List<StudyDto> studyList = null;
+		
+		try {
+			studyList = sqlSession.selectList(NAMESPACE+"selectStudyByCategory", cate_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectStudyByCategory");
+			e.printStackTrace();
+		}
+		
+		return studyList;
+	}
 
 
 }

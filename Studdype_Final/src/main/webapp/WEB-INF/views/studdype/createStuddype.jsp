@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ComunityHome</title>
+<title>스터띱 스터디 생성</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -124,15 +124,49 @@
 		});
 		///////////////////////////////////////////////////////////////
 		
-		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		var menuName = $(".active").text().trim();
-		
 		// 네비 메뉴 이름 가져오기
+		var currentMenu = $("#currentMenu").val();
+		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
+		
+		// 헤더 메뉴 선택 시 h1태그 이름 변경
 		$(".hero-text h1").text(menuName);
 		
 		// 스터디 생성에 맞는 이미지 가져오기
 		$(".justify-content-center").css({"background-image":"url('resources/img/createStudy.png')"
 									,"background-size":"cover"});
+		
+		// file hide하고 div 영역 클릭 시 이벤트 양도
+		$("#fileinput").hide();
+		
+		// 파일 선택 클릭 이벤트
+		$("#fileDiv").click(function() {
+			$("#fileinput").click();
+		});
+		
+		// 기본 이미지 클릭 이벤트 (모달 show)
+		$("#basicImageDiv").click(function() {
+			$("#modal").show();
+		});
+		
+		// 모달 취소 이벤트 (모달 hide)
+		$("#basicImageCancel").click(function() {
+			$("#modal").hide();
+		});
+		
+		// 모달 이미지 클릭 이벤트 (selected Class 추가)
+		$(".modal-image").click(function() {
+			$(".selected").removeClass("selected");
+			$(this).addClass("selected");
+		});
+		
+		// 모달 선택 완료 클릭 이벤트 (이미지 영역 최신화 / photo value 변경)
+		$("#basicImageSelect").click(function() {
+			var image = $(".selected").attr("src");
+			$("#image-section").empty();
+			$("#image-section").append("<img id='studyMainPhoto' src='"+image+"' />");
+			$("#basicPhoto").val(image);
+			$("#modal").hide();
+		});
 	});
 	
 	// 이미지 미리보기 함수
@@ -145,11 +179,13 @@
 				if(e.target.result.substring(5,10) == 'image') {
 					$("#image-section").empty();
 					$("#image-section").append("<img id='studyMainPhoto' src='"+e.target.result+"' />");
+					$("#basicPhoto").val("");
 				}else {
 					alert("이미지 확장자만 업로드 가능합니다.");
 					$("#fileinput").val("");	// 보통 브라우저에서 file 값 초기화 방법
 					$("#fileinput").replaceWith($("#fileinput").clone(true));	// IE version 초기화방법
 					$("#image-section").empty();
+					$("#basicPhoto").val("");
 					return false;
 				}
 				
@@ -168,16 +204,18 @@
 		var locationGu = $("#selectLocationGu option:selected").val();
 		var maxcnt = $("#maxcnt_id").val();
 		var content = $("#content_id").val();
+		var img = $("#image_section").attr("src");
+		var imgSection = $("#image-section").html();
 		
-		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined ||
+		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined || mem_name.trim().length > 30 ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
 			$("#mem_name_id").css('border', '1.5px solid red');
-			alert("스터디 이름 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 이름 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
-		}else if(info.trim() == "" || info == null || info == undefined ||
+		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 30 ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			alert("스터디 한줄 소개 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
@@ -191,15 +229,21 @@
 			$("#selectLocationGu").css('border', '1.5px solid red');
 			alert("스터디 지역(구/군)을 선택해주세요.");
 			return false;
-		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined ||
+		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined || 
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
 			$("#maxcnt_id").css('border', '1.5px solid red');
 			alert("스터디 최대 인원 작성란을 작성해주세요.");
 			return false;
-		}else if(content.trim() == "" || content == null || content == undefined ||
+		}else if(content.trim() == "" || content == null || content == undefined || content.trim().length > 1000 ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
 			$("#content_id").css('border', '1.5px solid red');
-			alert("스터디 상세 소개글 작성란을 확인해주세요.(공백, 띄어쓰기만 제외)");
+			alert("스터디 상세 소개글 작성란을 확인해주세요.(1000자 이내, 공백, 띄어쓰기만 제외)");
+			return false;
+		}else if( img =="./resources/assets/img/icon_photoUpload.png" ) {
+			alert("스터디 대표 사진을 선택해주세요.");
+			return false;
+		}else if( imgSection == "" || imgSection.trim() == "" ) {
+			alert("스터디 대표 사진을 선택해주세요.");
 			return false;
 		}else {
 			return true;
@@ -279,7 +323,14 @@
 						<div id="image-section">
 							<img style="position:relative; top:20%; width:200px; height:200px;" id="image_section" src="./resources/assets/img/icon_photoUpload.png" />
 						</div>
+						<div class="fileSelectDiv" id="fileDiv">
+							<span>파일 선택</span>
+						</div>
+						<div class="fileSelectDiv" id="basicImageDiv">
+							<span>기본 이미지</span>
+						</div>
 						<input type="file" name="file" id="fileinput">
+						<input type="hidden" id="basicPhoto" name="photo" value="">
 					</div>
 				</div>
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
@@ -300,7 +351,22 @@
 		</form>
 
 	</div>
+	
+	<div id="modal">
+		<div id="modal-inside">
+			<img class="modal-image" src="./resources/assets/img/img_study7.png">
+			<img class="modal-image" src="./resources/assets/img/img_study5.png">
+			<img class="modal-image" src="./resources/assets/img/img_study3.png">
+			<img class="modal-image" src="./resources/assets/img/img_study1.png">
+			<div style="float:right; margin-top:25px;" class="fileSelectDiv" id="basicImageCancel">
+				<span>취소</span>
+			</div>
+			<div style="float:right; margin-top:25px;" class="fileSelectDiv" id="basicImageSelect">
+				<span>선택 완료</span>
+			</div>
+		</div>
+	</div>
 
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 </body>
 </html>

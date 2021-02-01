@@ -39,6 +39,7 @@ public interface MemberDao {
 	// 게시판 댓글 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); // [자유게시판 댓글]
 	Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList); // [모임게시판 댓글] 
+	Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList); // [도서게시판 댓글]
 	
 	
 	//마이페이지 관련 메소드
@@ -55,8 +56,7 @@ public interface MemberDao {
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
 	public int updatePw(MemberDto dto); // 비밀번호 변경
 	
-	
-	
+	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기
 	
 	
 	
