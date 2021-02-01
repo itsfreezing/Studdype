@@ -374,8 +374,10 @@ public class MemberDaoImpl implements MemberDao{
 		return leaderName;
 	}
 
+	
+	//[도서게시판 댓글]  리스트로 member 정보 가져오기 
 	@Override
-	public Map<Integer, MemberDto> selectMemberByPhotoReply(List<ReplyDto> replyList) {
+	public Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList) {
 		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
 		MemberDto dto = null;
 		int mem_no = 0;
@@ -384,7 +386,7 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("에러 댓글 멤버 맵으로 가져오기");
+				System.out.println("[ERROR] : selectMemberByBookReply");
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);
@@ -407,6 +409,25 @@ public class MemberDaoImpl implements MemberDao{
 				e.printStackTrace();
 			}
 			resMap.put(list.get(i).getB_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	@Override
+	public Map<Integer, MemberDto> selectMemberByPhotoReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("에러 selectOne");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
 		}
 		
 		return resMap;

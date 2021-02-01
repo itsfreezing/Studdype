@@ -28,7 +28,7 @@ public class StudyDaoImpl implements StudyDao {
 
 		try {
 			studyList = sqlSession.selectList(NAMESPACE + "studyList", searchPagination);
-			System.out.println(searchPagination.getKeyword());
+			System.out.println(studyList.get(0).toString());
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
@@ -58,6 +58,7 @@ public class StudyDaoImpl implements StudyDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
+			System.out.println(dto.getPhoto());
 		} catch (Exception e) {
 			System.out.println("[ERROR] : insertStudy");
 			e.printStackTrace();
@@ -103,6 +104,20 @@ public class StudyDaoImpl implements StudyDao {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public List<StudyDto> selectStudyByCategory(int cate_no) {
+		List<StudyDto> studyList = null;
+		
+		try {
+			studyList = sqlSession.selectList(NAMESPACE+"selectStudyByCategory", cate_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectStudyByCategory");
+			e.printStackTrace();
+		}
+		
+		return studyList;
 	}
 
 }

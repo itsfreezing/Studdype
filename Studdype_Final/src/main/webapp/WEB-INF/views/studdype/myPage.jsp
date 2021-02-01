@@ -156,7 +156,7 @@
    <script type="text/javascript">
 	
    //스터디 리스트 배너 
-   $(document).ready(function() {
+	$(document).ready(function() {
 		var owl = $('.owl-carousel');
 		owl.owlCarousel({
 			items : 10, // 한번에 보여줄 아이템 수

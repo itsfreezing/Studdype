@@ -46,6 +46,7 @@
 		<mapper resource="./mybatis/File/noticeFile-mapper.xml"/>
 		<mapper resource="./mybatis/Board/noticeBoard-mapper.xml"/>
 		<mapper resource="./mybatis/reply/noticeReply-mapper.xml"/>
+		<mapper resource="./mybatis/reply/bookReply-mapper.xml"/>
 
   	</mappers>  
   

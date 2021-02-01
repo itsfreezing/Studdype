@@ -46,7 +46,7 @@
 		</selectKey>
 		INSERT INTO BOOK
 		VALUES(#{b_no}, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE,
-		 #{book_title}, #{book_author}, #{book_publish}, #{book_img}, #{book_url}, DEFAULT)
+		 #{book_title}, #{book_author}, #{book_publish}, #{book_img}, #{book_url}, #{book_ismain})
 	</insert>
 	
 	<delete id="deleteBook" parameterType="bookDto">

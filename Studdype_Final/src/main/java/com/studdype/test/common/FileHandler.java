@@ -209,13 +209,11 @@ public class FileHandler {
 		String[] fileNames;
 		String fileName = "";
 		
-		try {
+		if(f_url.contains(folderName)) {
 			fileNames = f_url.split(folderName);
 			fileName = "."+fileNames[fileNames.length-1];
-			
-		} catch (Exception e) {
+		}else {
 			fileName = f_url;
-			e.printStackTrace();
 		}
 		
 		return fileName;

@@ -47,8 +47,7 @@
 		WHERE MEM_NO = ${mem_no}
 	</select>
 
-	<select id="selectOneBySno" parameterType="int"
-		resultMap="studyMap">
+	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
 		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
@@ -71,5 +70,9 @@
 	<update id="newLeader" parameterType="int" >
 		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
 	</update>
+	
+	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
+	</select>
 
 </mapper>
