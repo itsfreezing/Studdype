@@ -71,5 +71,9 @@
 	<update id="newLeader" parameterType="int" >
 		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
 	</update>
+	
+	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
+	</select>
 
 </mapper>

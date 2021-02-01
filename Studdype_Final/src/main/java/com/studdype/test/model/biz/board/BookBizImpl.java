@@ -1,16 +1,23 @@
 package com.studdype.test.model.biz.board;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.book.BookDao;
+import com.studdype.test.model.dao.board.book.BookReplyDao;
+import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.member.MemberDao;
+import com.studdype.test.model.dao.study.StudyDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyCategoryDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 @Service
 public class BookBizImpl implements BookBiz{
@@ -20,6 +27,15 @@ public class BookBizImpl implements BookBiz{
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private BookReplyDao bookReplyDao;
+	
+	@Autowired
+	private StudyCateDao studyCateDao;
+	
+	@Autowired
+	private StudyDao studyDao;
 	
 	// 스터디에 등록한 도서 리스트 검색
 	@Override
@@ -53,9 +69,7 @@ public class BookBizImpl implements BookBiz{
 	}
 
 	@Override
-
 	public int deletebookmain() {
-		
 		return bookDao.deletebookmain();
 	}
 	
@@ -70,8 +84,22 @@ public class BookBizImpl implements BookBiz{
 		}
 		
 	}
+	
+	@Override
+	@Transactional
 	public int insertRegisterBook(BookDto dto) {
-		return bookDao.insertRegisterBook(dto);
+		int bookCnt = bookDao.selectTotalRegisterBookNum(dto.getS_no());
+		int res = 0;
+		
+		if(bookCnt == 0) {
+			dto.setBook_ismain("Y");
+			res = bookDao.insertRegisterBook(dto);
+		}else {
+			dto.setBook_ismain("N");
+			res = bookDao.insertRegisterBook(dto);
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -80,6 +108,7 @@ public class BookBizImpl implements BookBiz{
 		BookDto resDto = new BookDto();
 		
 		int res = bookDao.deleteBook(dto);
+		bookReplyDao.deleteBoardReply(dto.getB_no());
 		
 		if(res > 0) {
 			resDto = null;
@@ -102,5 +131,52 @@ public class BookBizImpl implements BookBiz{
 		return bookDao.selectMainBookOfStudy(s_no);
 	}
 
-	
+	@Override
+	public List<StudyCategoryDto> selectCateGoryListOfBook() {
+		return studyCateDao.categoryList();
+	}
+
+	@Override
+	public List<StudyDto> selectStudyByCategory(int cate_no) {
+		List<StudyDto> studyList = studyDao.selectStudyByCategory(cate_no);
+		
+		return studyList;
+	}
+
+	@Override
+	public List<BookDto> selectMainBookByStudy(List<StudyDto> study) {
+		Random rand = new Random();
+		int[] bookRandom = {};
+		int cnt = 0;
+		List<BookDto> bookList = new ArrayList<BookDto>();
+		List<BookDto> resList = new ArrayList<BookDto>();
+		
+		bookList = bookDao.selectMainBookByStudy(study);
+		
+		if(bookList != null) {
+			if(bookList.size() > 4) {
+				bookRandom[0] = rand.nextInt(bookList.size());
+				while(cnt < 4) {
+					int random = rand.nextInt(bookList.size());
+					
+					if(bookRandom[cnt] != random) {
+						bookRandom[cnt+1] = random;
+						cnt++;
+					}
+				}
+				
+				for(int i = 0; i <= cnt; i++) {
+					resList.add(bookList.get(bookRandom[i]));
+				}
+				
+			}else {
+				for(int i = 0; i < bookList.size(); i++) {
+					resList.add(bookList.get(i));
+				}
+			}
+		}
+		
+		return resList;
+	}
+
 }
