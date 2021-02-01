@@ -9,7 +9,7 @@
 	display: inline-block;
 	width: 100%;
 	padding: 1%;
-	border-top: 2px solid #868e96;
+	border-top: 1px solid #868e96;
 	border-radius: 5px;
 }
 
@@ -17,44 +17,49 @@
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	border-top: 2px solid #868e96;
-	border-bottom: 2px solid #868e96;
-	padding: 1%;
-}
-
-#book-content {
-	position: relative;
-	float: right;
-	width: 60%;
-	height: 500px;
-	padding: 1%;
-	margin: 1%;
+	border-top: 1px solid #868e96;
+	border-bottom: 0.2px solid #868e96;
+	padding:1% 0 1% 0;
 }
 
 #main-section-mid table {
+	width:100%;
+}
+
+#book-content {
+	float:left;
+	margin-top:20px;
+	width: 48%;
+	height: 450px;
+	border-right:0.2px solid gray;
+}
+
+#info-table {
 	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 20px;
+	
 }
 
-#book-content table th, td {
-	padding: 1%;
+#info-table input {
+	white-space:nowrap;
+	text-overflow:ellipsis;
 }
 
-#book-content a {
-	color: #1a0dab;
+#book_textarea {
+	float:left;
+	left:48%;
+	margin-left:10px;
+	width:48%;
+	height: 420px;
+	padding:1% 0% 0% 1%;;
 }
 
 #book-img {
 	position: relative;
-	float: left;
-	width: 35%;
-	height: 500px;
-	margin: 1%;
-}
-
-#book-img img {
-	height: 498px;
+	left:30%;
+	width:150px;
+	height: 200px;
 	border: 5px solid #f9f9f0;
 	border-radius: 10px;
 	background: #f6f5f0;
@@ -72,43 +77,43 @@
 	width:90%;
 }
 
-#content:focus, #title:focus {
+#book_board_content:focus, #title:focus {
 	border:3px solid rgb(115, 98, 222);
 }
 
-#content {
+#book_board_content {
 	border: 2px solid #868e96;
 	font-weight:bolder;
+	resize:none;
 }
 
-table button {
-	width: 20%;
-	height: 30px;
-	border: 2px solid #868e96;
-	border-radius: 20px;
-	font-size: 20px;
-	color: #868e96;
-	font-weight: bolder;
-	background: #fff;
-	margin-top:0px;
+.update-btn-group, button[type=submit] {
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+	
 }
 
 button[type=submit] {
-	margin-top:0px;
-	padding:0px;
-	background:#fff;
-	border: 2px solid #868e96;
-	border-radius: 20px;
-	font-size: 20px;
-	color: #868e96;
-	font-weight: bolder;
+	box-shadow:none;
 }
 
-button[type=submit]:hover, table button:hover {
+button[type=submit]:hover, .update-btn-group:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
 	cursor: pointer;
-	background: rgb(115, 98, 222);
-	color: #fff;
-	transition: 0.5s ease all;
+	transition: 0.5s;
 }
 
 #link {

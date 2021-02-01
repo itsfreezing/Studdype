@@ -19,6 +19,6 @@ public interface StudyDao {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //리스트 총 갯수
 	public List<StudyDto> studyLeader(int leader_no); //스터디 리더 
 	public int newLeader(StudyDto dto);
-
+	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
 
 }
