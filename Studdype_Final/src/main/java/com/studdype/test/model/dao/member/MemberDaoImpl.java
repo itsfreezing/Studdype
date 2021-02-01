@@ -400,6 +400,20 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
+	@Override
+	public List<MemberDto> allMember() {
+		List<MemberDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"allMember");
+		} catch (Exception e) {
+			System.out.println("ERROR : ALLMEMBER!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
 	
 	//[도서게시판 댓글]  리스트로 member 정보 가져오기 
 	@Override
@@ -421,4 +435,5 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 	
+
 }

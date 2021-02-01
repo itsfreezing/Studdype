@@ -78,6 +78,11 @@ public class MemberBizImpl implements MemberBiz {
 	}
 
 
+	@Override
+	public List<MemberDto> allMember() {
+		
+		return memberDao.allMember();
+	}
 
 	
 }

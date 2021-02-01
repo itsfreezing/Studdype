@@ -115,9 +115,10 @@ function chkVerifiNum(){
 }
 
 $(document).ready(function(){	
-	
-	$("#sign").click(function(){	
-   		 if($("#memberId").val().trim()==""||$("#memberId").val()==null){
+		var man=document.register.mem_gender[0];
+		var woman=document.register.mem_gender[1];
+		$("#sign").click(function(){	
+   		if($("#memberId").val().trim()==""||$("#memberId").val()==null){
 			alert("아이디를 입력해주세요");
 			$("#memberId").focus();
 			return false;
@@ -137,8 +138,10 @@ $(document).ready(function(){
 			alert("이메일을 입력해주세요");
 			$("#memberemail").focus();
 			return false;
-		}else if($("#chknum").attr("title")=="n"){
+		}
+		else if($("#chknum").attr("title")=="n"){
 			alert("이메일 인증해주세요");
+			$("#chknum").focus();
 			return false;
 		}
 		else if($("#memberName").val()==""){
@@ -158,12 +161,13 @@ $(document).ready(function(){
 			alert("핸드폰번호를 입력해주세요");
 			$("#memberphone").focus();
 			return false;
-		} else if($("#gender").val().checked==""||$("#gender").val().checked==null){
-			alert("성별을 선택해주세요");
-			$("#gender").focus();
-			return false;
 		}
-		//alert($("#gender").val());
+		else if(man.checked==false&&woman.checked==false){
+			alert("성별을 선택해주세요");
+			man.focus();
+   			return false;
+   		}
+   		
 		signupform.submit();
 
 	});	
@@ -280,11 +284,11 @@ input{
    height:44px;
    margin-left:17%;
 }
-#rno1{
+#unum1{
    width:120px;
    height:30px;
 }
-#rno2{
+#unum2{
    width:120px;
    height:30px;
 }
@@ -292,6 +296,12 @@ input{
 	width:150px;
 	height:30px;
 	margin-left:23%;
+}
+#signupform{
+	margin-left:10%;
+}
+.head{
+	margin-top:-1%;
 }
 </style>
 
@@ -304,6 +314,7 @@ input{
 			<hr>
 	</div> 
    <div id="signtitle"> 
+
       <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
         <table>
         	<tr>
@@ -424,9 +435,8 @@ input{
             		</th>
             		<td>
             		 	
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" checked>M
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender"value="F">F
-            		 
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" >M
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="F">F
 
             		</td>
                 </tr>  

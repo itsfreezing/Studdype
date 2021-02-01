@@ -3,7 +3,8 @@
 CREATE USER STUDDYPE IDENTIFIED BY STUDDYPE;
 GRANT CONNECT, RESOURCE TO STUDDYPE;
 -------------------------------------------------------------
-
+select * from study where s_no= 1;
+update study set leader_no = 1 where s_no =1;
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
  DROP SEQUENCE SISEQ;
@@ -228,7 +229,7 @@ CREATE TABLE STUDY_CATEGORY(
     
  );
  
- CREATE TABLE STUDY_FILE(
+CREATE TABLE STUDY_FILE(
     F_NO NUMBER PRIMARY KEY, --파일 번호
     S_NO NUMBER NOT NULL UNIQUE,
     F_NAME VARCHAR2(1000) NOT NULL, --파일 실제이름
@@ -246,7 +247,7 @@ CREATE TABLE STUDY_MEMBER(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)    
 );
-select * from study_member where mem_no=1;
+
 
 --스터디 가입신청 현황
 CREATE TABLE STUDY_APPLYING(
@@ -258,14 +259,11 @@ CREATE TABLE STUDY_APPLYING(
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE,
     PRIMARY KEY(S_NO, MEM_NO)        
 );
-select *from study_member;
-         본인이 팀장인때 
-UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO =1 AND MEM_NO = 1;
-INSERT INTO STUDY_APPLYING VALUES(1,1,'Y','APPLYING INFO');
-delete STUDY_APPLYING WHERE S_NO=38;
-select *from study_applying;
-select * from study;
-SELECT * FROM MEMBER;
+
+INSERT INTO STUDY_APPLYING VALUES(1,6,'D','FFFF');
+
+
+
 -------------------------------------------------------------
 
 ------------------ CREATE BOARD -----------------------------
@@ -484,7 +482,7 @@ CREATE TABLE MEET_BOARD(
     FOREIGN KEY(S_NO) REFERENCES STUDY(S_NO) ON DELETE CASCADE,
     FOREIGN KEY(MEET_WRITER) REFERENCES MEMBER (MEM_NO) ON DELETE CASCADE    
 );
-
+select * from member;
 --모임 투표 
 CREATE TABLE MEET_VOTE(
     MEET_NO NUMBER, --모임번호
@@ -494,7 +492,8 @@ CREATE TABLE MEET_VOTE(
     FOREIGN KEY(MEET_NO) REFERENCES MEET_BOARD(MEET_NO) ON DELETE CASCADE,
     FOREIGN KEY(MEM_NO) REFERENCES MEMBER(MEM_NO) ON DELETE CASCADE
 );
-
+select * from member;
+select * from study_member;
 --모임 댓글
 CREATE TABLE MEET_REPLY(
     R_NO NUMBER PRIMARY KEY, -- 댓글 번호

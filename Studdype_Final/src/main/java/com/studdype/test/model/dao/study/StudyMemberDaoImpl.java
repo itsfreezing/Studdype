@@ -71,5 +71,18 @@ public class StudyMemberDaoImpl implements StudyMemberDao {
 		
 		return List;
 	}
+
+	@Override
+	public int deletemember(StudyMemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deletemember",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR : 스터디 회원탈퇴");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 }
