@@ -100,6 +100,7 @@ public class StudyController {
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddypeForm(Model model,HttpSession session) {
+		logger.info("createStuddypeform");
 		
 		// 로그인 인터셉터 완료 전까지 비로그인 스터디생성 막기
 		if(session.getAttribute("login") == null) {
@@ -123,24 +124,22 @@ public class StudyController {
 	// 스터디 생성 후 Stduddypehome으로
 	@RequestMapping("createStuddype.do")
 	public String createStuddype(HttpServletRequest request, StudyDto studyDto, UploadFile uploadFile, Model model) {
+		logger.info("createStuddype");
 		int res = 0;
+		MultipartFile[] mfileList = null;
+		List<FileDto> fileList = null;
+		String path = "";
 		
-		//파일 업로드
-		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
-		
-		// 파일요소들 뽑아서 fileList에 저장
-		List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
-		
-		String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
-		
-		//파일이있으면
-		if(mfileList != null) {
+		if(studyDto.getPhoto().equals("")) {
+			//파일 업로드
+			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+			
+			// 파일요소들 뽑아서 fileList에 저장
+			fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
+			
+			path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
 			studyDto.setPhoto(fileList.get(0).getF_url());
-		}else {
-			studyDto.setPhoto("noImage");
 		}
-		
-		System.out.println(studyDto);
 		
 		res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
 
@@ -227,7 +226,8 @@ public class StudyController {
 	
 	// 스터디 디테일 페이지(스터디 홈에서 리스트 클릭 시 넘어옴)
 	@RequestMapping("/studdypeDetailForm.do")
-	public String studdypeDetailForm(Model model, HttpServletRequest request, HttpSession session) {
+	public String studdypeDetailForm(Model model, HttpServletRequest request) {
+		logger.info("studdypeDetailForm");
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int brCnt = 40;
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
@@ -251,7 +251,6 @@ public class StudyController {
 		Map<Integer, String> guDto = studyBiz.selectLocationGuOfStudy(studyDto.getGu_no()); // 스터디 지역구
 		
 		BookDto bookDto = bookBiz.selectMainBookOfStudy(s_no);	// 스터디 대표도서 정보
-		System.out.println(bookDto);
 		
 		model.addAttribute("studyCate", cateDto);
 		model.addAttribute("studySi", siDto);

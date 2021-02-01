@@ -97,12 +97,12 @@ function chkVerifiNum(){
 			if(map.isExist == "n"){//이메일이 올바르지 않음
 				$("#chk_ok").hide();
 				$("#chk_no").show();
-				$("#chk").attr("title",'n');
+				$("#chknum").attr("title",'n');
 			
 			}else{
 				$("#chk_no").hide();
 				$("#chk_ok").show();
-				$("#chk").attr("title",'y');
+				$("#chknum").attr("title",'y');
 			}
 		} 
 		,
@@ -117,14 +117,14 @@ function chkVerifiNum(){
 $(document).ready(function(){	
 	
 	$("#sign").click(function(){	
-		if($("#memberId").val().trim()==""||$("#memberId").val()==null){
+   		 if($("#memberId").val().trim()==""||$("#memberId").val()==null){
 			alert("아이디를 입력해주세요");
 			$("#memberId").focus();
 			return false;
-		}/*else if($("#check").attr("title")=="n"){
+		}else if($("#chk").attr("title")=="n"){
 			alert("아이디 중복체크해주세요");
 			return false;
-		}*/
+		}
 		else if($("#memberpw").val().trim()==""||$("#memberpw").val()==null){
 			alert("password를 입력해주세요");
 			$("#memberpw").focus();
@@ -137,10 +137,10 @@ $(document).ready(function(){
 			alert("이메일을 입력해주세요");
 			$("#memberemail").focus();
 			return false;
-		}/*else if($("#memberMail").attr("title")=="n"){
+		}else if($("#chknum").attr("title")=="n"){
 			alert("이메일 인증해주세요");
 			return false;
-		}*/
+		}
 		else if($("#memberName").val()==""){
 			alert("이름을 입력해주세요");
 			$("#memberName").focus();
@@ -154,15 +154,16 @@ $(document).ready(function(){
 			$("#rno2").focus();
 			return false;
 		}
-		else if($("#memberphone").val()==""){
+		else if($("#memberphone").val()==""||$("#memberphone").val==null){
 			alert("핸드폰번호를 입력해주세요");
 			$("#memberphone").focus();
 			return false;
-		}else if($("#gender").val()==""){
+		} else if($("#gender").val().checked==""||$("#gender").val().checked==null){
 			alert("성별을 선택해주세요");
 			$("#gender").focus();
 			return false;
 		}
+		//alert($("#gender").val());
 		signupform.submit();
 
 	});	
@@ -312,8 +313,8 @@ input{
 				</th>
                  <td> 
                      <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
-                    <input type="button" value="중복확인" id="check" title="n" >
-                     <input type="hidden" id="chk" title="y"><!-- 사용가능할경우  -->
+                    <input type="button" value="중복확인" id="check" >
+                     <input type="hidden" id="chk" title="n"><!-- 사용가능할경우  -->
                  </td>
              </tr>
              <tr style="display:none;" id="chkid_ok">
@@ -341,7 +342,7 @@ input{
                  비번확인 <span class="ico">*</span>
                  </th>
                  <td>
-                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onclick="chkpwd();">
+                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
                  </td> 
               </tr> 
               <tr style="display:none;" id="chkpw_ok">
@@ -372,7 +373,7 @@ input{
    				<td>
 	   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 	   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
-	   				<input type="hidden" id="chk" title="n">
+	   				<input type="hidden" id="chknum" title="n">
    				</td>
    			</tr> 
    			<tr style="display:none;" id="chk_ok">
@@ -423,7 +424,7 @@ input{
             		</th>
             		<td>
             		 	
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" >M
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" checked>M
             		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender"value="F">F
             		 
 
