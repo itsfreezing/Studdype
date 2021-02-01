@@ -10,7 +10,7 @@
 	
 	<select id="StudyMemberList" parameterType="int" resultType="studyMemberDto">
 		SELECT * FROM STUDY_MEMBER
-		WHERE S_NO = #{s_no}
+		WHERE S_NO = #{s_no} 
 	</select>
 	
 	<select id="StudyList" parameterType="int" resultType="studyMemberDto">
@@ -39,4 +39,8 @@
 		]]>
 	
 	</select>
+	<delete id="deletemember" parameterType="studyMemberDto">
+		DELETE FROM STUDY_MEMBER
+		WHERE S_NO = #{s_no} AND MEM_NO = #{mem_no}
+	</delete>
 </mapper>

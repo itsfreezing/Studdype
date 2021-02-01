@@ -76,5 +76,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.updatePw(dto);
 	}
 
+	@Override
+	public List<MemberDto> allMember() {
+		
+		return memberDao.allMember();
+	}
+
 	
 }
