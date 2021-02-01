@@ -33,9 +33,7 @@ $(function() {
 
 
 </script>
-<style>
 
-</style>
 </head>
 
 <body>

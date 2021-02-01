@@ -329,7 +329,7 @@
     
    </div>
    <!--  내가 가입한 스터디 리스트     -->
-   <p id="mystudyl">My Study List</p>
+   <p id="mystudyl">내가 가입한 스터디</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
      	<div class="hero-slider-info"><a style="color:black; font-weight:bold; font-size:20px; margin-left:250px;"href="studycommunity.do?s_no=${studylist.s_no }">${studylist.s_name }</a></div>

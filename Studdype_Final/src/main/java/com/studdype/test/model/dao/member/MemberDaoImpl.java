@@ -360,4 +360,17 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
+	@Override
+	public List<MemberDto> allMember() {
+		List<MemberDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"allMember");
+		} catch (Exception e) {
+			System.out.println("ERROR : ALLMEMBER!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

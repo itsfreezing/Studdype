@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,29 +41,35 @@
 	margin-right: 5%;
 	margin-top: 3%;
 	width: 70%;
-	border: 1px solid rgb(115, 98, 222);
+	
 	border-radius: 10px;
+	height:1000px;
 }
 
 #book1 {
 	border: 1px solid grey;
-	height: 400px;
-	width: 500px;
+	width: 600px;
 	text-align: center;
+	position:absolute;
+	top:65%;
+	left:63%;
 }
 
 #member {
 	border: 1px solid grey;
-	height: 400px;
-	width: 500px;
+	
+	width: 600px;
 	text-align: center;
+	position:absolute;
+	left:63%;
+	top:100%;
 }
 
 #studyimage {
 	width: 300px;
 	height: 195px;
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 600px;
 }
 
@@ -71,13 +78,13 @@
 	font: bold;
 	font-size: 20px;
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 560px;
 }
 
 #imgAttach {
 	position: absolute;
-	left: 1420px;
+	left: 770px;
 	top: 760px;
 }
 
@@ -88,7 +95,7 @@
 
 #creater {
 	position: absolute;
-	left: 1570px;
+	left: 920px;
 	top: 600px;
 	font-size: 20px;
 	color: purple;
@@ -97,7 +104,7 @@
 #createrarea {
 	border: 1px solid purple;
 	position: absolute;
-	left: 1570px;
+	left: 920px;
 	top: 630px;
 	height: 30px;
 	width: 200px;
@@ -105,7 +112,7 @@
 
 #studyname {
 	position: absolute;
-	left: 1570px;
+	left: 920px;
 	top: 665px;
 	font-size: 20px;
 	color: purple;
@@ -116,19 +123,19 @@
 	position: absolute;
 	height: 30px;
 	width: 200px;
-	left: 1570px;
+	left: 920px;
 	top: 700px;
 }
 
 #samename {
 	position: absolute;
-	left: 1570px;
+	left: 920px;
 	top: 760px;
 }
 
 #category {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 820px;
 	font-size: 20px;
 	color: purple;
@@ -136,14 +143,14 @@
 
 #cate {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 850px;
 	width: 300px;
 }
 
 #Max {
 	position: absolute;
-	left: 1420px;
+	left: 800px;
 	top: 820px;
 	font-size: 20px;
 	color: purple;
@@ -151,14 +158,14 @@
 
 #Max_member {
 	position: absolute;
-	left: 1420px;
+	left: 800px;
 	top: 850px;
 	width: 353px;
 }
 
 #locsi {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	font-size: 20px;
 	color: purple;
 	top: 890px;
@@ -166,14 +173,14 @@
 
 #locationsi {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 920px;
 	width: 300px;
 }
 
 #locgu {
 	position: absolute;
-	left: 1420px;
+	left: 800px;
 	top: 890px;
 	font-size: 20px;
 	color: purple;
@@ -181,14 +188,14 @@
 
 #locationgu {
 	position: absolute;
-	left: 1420px;
+	left: 800px;
 	top: 920px;
 	width: 353px;
 }
 
 #studyinfo {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 960px;
 	font-size: 20px;
 	color: purple;
@@ -196,7 +203,7 @@
 
 #studyinfot {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 1000px;
 	width: 672px;
 	height: 407px;
@@ -204,7 +211,7 @@
 
 #update {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	width: 672px;
 	top: 1450px;
 }
@@ -215,9 +222,32 @@
 
 #imgAttach {
 	position: absolute;
-	left: 1100px;
+	left: 480px;
 	top: 800px;
 }
+
+#allbook{
+	position:absolute;
+	left:88%;
+	top:101%;
+}
+#memberbtn{
+	position:absolute;
+	left:63%;
+	top:100%;
+}
+#allmember{
+	position:absolute;
+	left:88%;
+	top:147%;
+}
+#bookbtn{
+	position:absolute;
+	left:63%;
+	top:59%;
+}
+
+
 </style>
 <script type="text/javascript">
 	function LoadImg(value) {
@@ -257,13 +287,13 @@
 		var s = document.getElementById('locationsi').value;
 		var g = document.getElementById('locationgu').value;
 		var m = document.getElementById('Max_member').value;
-		
+		var n = document.getElementById('studynameupdate').value;
 		
 		var imgname =document.getElementById('imgAttach').value;
 		alert(imgname);
 		
-		location.href="studyupdate.do?b_no="+b+"&mem_no="+m+"&ban_no="+e+"&s_no="+'${study.s_no}'+"&s_info="+i
-				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+imgname;
+		location.href="studyupdate.do?"+"&s_no="+'${study.s_no}'+"&s_info="+i+"&b_no="+b
+				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+imgname+"&s_name="+n;
 		
 		
 		
@@ -288,71 +318,7 @@
 	<div id="main">
 
 
-		<!-- 대표 도서 table -->
-		<table id="book1"
-			class="table table-striped table-bordered table-hover"
-			style="border: 1px solid;">
-
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>등록된 책 제목</th>
-					<th>대표설정</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="bookList" items="${bookList}" varStatus="status">
-					<tr>
-						<td>${status.count }</td>
-						<td>${bookList.book_title }</td>
-						<c:if test="${bookList.book_ismain eq 'N' }">
-							<td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
-								name="bookmain">대표</td>
-						</c:if>
-						<c:if test="${bookList.book_ismain eq 'Y' }">
-							<td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
-								name="bookmain" checked="checked" >대표</td>
-						</c:if>
-					</tr>
-				</c:forEach>
-
-			</tbody>
-		</table>              
-		<!--  대표 도서 table 끝 -->
-
-
-		<!-- 스터디멤버 table  -->
-		<table id="member"
-			class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>이름</th>
-					<th>이메일</th>
-					<th>추방하기</th>
-					<th>대표설정</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="membername" items="${membername}">
-					<tr>
-						<td>${membername.mem_name }</td>
-						<td>${membername.mem_email }</td>
-						<td><input type="checkbox" name="exile" value="${membername.mem_no }">추방</td>
-						<c:if test="${membername.mem_no == login.mem_no }">
-							<td><input name="maker" type="radio" checked="checked"
-								value="${membername.mem_no }">대표</td>
-						</c:if>
-						<c:if test="${membername.mem_no != login.mem_no }">
-							<td><input name="maker" type="radio"
-								value="${membername.mem_no }">대표</td>
-						</c:if>
-
-					</tr>
-				</c:forEach>
-
-			</tbody>
-		</table>
-		<!-- 스터디 멤버 table 끝 -->
+		
 
 
 		<!-- 대표 사진  -->
@@ -371,15 +337,14 @@
 		</div>
 	
 		<!-- 대표 사진 끝 -->
-
+		
 		<!-- 스터디 정보 수정  -->
 
-		<p id="creater">생성자</p>
+		<p id="creater">스터디 팀장</p>
 		<input id="createrarea" readonly="readonly" value="${login.mem_name }">
 		<p id="studyname">스터디 이름</p>
 		<input id="studynameupdate" value="${study.s_name }">
-		<button id="samename" type="button" class="btn btn-purple" onclick="check();">스터디
-			이름 중복 Check!</button>
+		
 		<p id="category">카테고리</p>
 		<select id="cate">
 			<c:forEach var="category" items="${category }">
@@ -406,10 +371,72 @@
 		</select>
 		<p id="studyinfo">스터디 소개</p>
 		<input id="studyinfot" value="${study.s_info }">
-		<button id="update" type="button" class="btn btn-purple" onclick="update();">Update!</button>
+		<button id="update" type="button" class="btn btn-purple" onclick="update();">스터디 변경</button>
 
+		<!-- 대표 도서 table -->
+		<div id="bdiv">
+     	 <table id="book1"
+         class="table table-striped table-bordered table-hover"
+         style="border: 1px solid;">
 
+         <thead>
+            <tr>
+               <th>번호</th>
+               <th>등록된 책 제목</th>
+               <th>대표 도서</th>
+            </tr>
+         </thead>
+         <tbody style="text-align:center;">
+            <c:forEach var="bookList" items="${bookList}" varStatus="status" begin="1" end="6">
+               <tr style="text-align:center;">
+                  <td>${status.count }</td>
+                  <td>${bookList.book_title }</td>
+                  <c:if test="${bookList.book_ismain eq 'N' }">
+                     <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
+                        name="bookmain">대표</td>
+                  </c:if>
+                  <c:if test="${bookList.book_ismain eq 'Y' }">
+                     <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
+                        name="bookmain" checked="checked" >대표</td>
+                  </c:if>
+               </tr>
+            </c:forEach>
 
+         </tbody>
+      </table>            
+      <button class="btn btn-purple" onclick="location.href='Allbook.do?s_no=${study.s_no}'" id="bookbtn" style="display:inline;">도서 수정하러 가기</button>
+      </div>
+      <!--  대표 도서 table 끝 -->
+		
+	  <!-- 스터디멤버 table  -->
+      <table id="member"
+         class="table table-striped table-bordered table-hover">
+         <thead>
+            <tr>
+               <th>이름</th>
+               <th>이메일</th>
+               <th>아이디</th>
+               <th>성별</th>
+            </tr>
+         </thead>
+         <tbody>
+            <c:forEach var="membername" items="${membername}" begin="1" end="5">
+            <c:if test="${membername.mem_no != login.mem_no }">
+               <tr>
+                  <td>${membername.mem_name }</td>
+                  <td>${membername.mem_email }</td>
+                  <td>${membername.mem_id }</td>
+                  <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
+                  
+
+               </tr>
+               </c:if>
+            </c:forEach>
+
+         </tbody>
+      </table>
+      <button onclick="location.href='Allmember.do?s_no=${study.s_no}'" class="btn btn-purple" id="memberbtn">멤버 수정하러 가기</button>
+      <!-- 스터디 멤버 table 끝 -->
 
 
 
