@@ -179,6 +179,43 @@
 	border: 0.1px black solid;
 }
 
+/* 공지사항 css */
+.notice_title{
+	color: #ff4e59;
+	font-weight: bold;
+	text-align:left;
+}
+.notice_title a:hover{
+		font-weight: bold;
+		border-bottom: 1px solid #ff4e59;
+		padding-bottom: 3px;
+}
+.notice_tr{
+	background-color: rgb(245,245,245);
+	text-align:center;
+}	
+.notice_tag{
+	padding: 3px 5px;
+	width: 200px;
+	border: 0.5px solid #ffc6c9;
+	background-color: #ffe3e4;
+	color: #ff4e59;
+	height: 35px;
+	display: inline;
+	border-radius: 2px 2px;
+	margin-right: 20px;
+	margin-left:10px;
+}
+
+.data_tr {
+	text-align:center;
+}
+
+.td_data_title {
+	text-align:left;
+	padding-left:10px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -188,6 +225,44 @@
 		$(".current_page").css('border','1px solid #6434ef');
 		$(".current_page").css('cursor','default');
 	});
+	
+	// 페이징---------------------- 
+	// 페이지 이동 
+	function movePage(pagenum){
+		
+		$("#pagenum").val(pagenum.text);
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+		
+	}
+	
+	// 다음 페이지그룹 
+	function nextPageGroup(){
+	if( ${endPage < totalPageNum}){
+		$("#pagenum").val(${endPage+1});
+		var pageform = document.getElementById('pageform');
+		pageform.submit();
+	}
+	
+	}
+	
+	// 이전 페이지 그룹 
+	function prePageGroup(){
+		if( ${startPage - 1 > 0}){
+			$("#pagenum").val(${startPage-1});
+			var pageform = document.getElementById('pageform');
+			pageform.submit();
+		}
+	}
+	
+	function search_chk(){
+		var keyword = $("#search_keyword");
+		if( keyword.val() == null || keyword.val().trim() == "" ){
+			alert("검색어를 입력해주세요.");
+		}else{
+			$("#search_form").submit();
+		}
+	}
 </script>
 
 </head>
@@ -212,9 +287,9 @@
 			</tr>
 			<c:if test="${not empty noticeList }">
 				<c:forEach var="i" begin="0" end="${noticeList.size()-1 }" step="1">
-					<tr >
-						<td class="td_notice_title">
-						<div class="notice_div">공지</div>
+					<tr class="notice_tr">
+						<td class="notice_title">
+						<div class="notice_tag">공지</div>
 						<a href="noticedetail.do?b_no=${noticeList.get(i).getB_no() }">${noticeList.get(i).getB_title() }
 						<c:if test="${noticeReplyCntMap.get(noticeList.get(i).getB_no()) != 0}">
 							<span class="td_reply_cnt">[${noticeReplyCntMap.get(dataList.get(i).getB_no()) }]</span>
@@ -232,13 +307,13 @@
 			</c:if>
 			<c:choose>
 				<c:when test="${empty dataList }">
-					<tr>
+					<tr class="data_tr">
 						<td colspan="5" style="text-align:center; font-weight:bold;">학습 자료실에 대한 게시글이없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${dataList.size()-1 }" step="1">
-						<tr>
+						<tr class="data_tr">
 							<td class="td_data_title">${dataList.get(i).getB_title() }</td>
 							<td class="td_data_file">첨부</td>
 							<td class="td_data_writer">${dataList.get(i).getB_writer() }</td>
