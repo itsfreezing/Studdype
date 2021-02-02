@@ -28,7 +28,6 @@ $(function() {
    $(".feature-page.header-area").css("height", "80px");
    $(".hero-text-wrapper").css("height", "500px");
    $(".nav-link").css("color", "black");
-   
 });
 
 

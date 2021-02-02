@@ -1,0 +1,82 @@
+@charset "UTF-8";
+.title{
+   margin-left:45%;
+   padding:1%;
+}
+
+.idico{
+   color:red;
+}
+.pwico{
+	color:red;
+}
+.mailico{
+	color:red;
+}
+.numico{
+	color:red;
+}
+.nameico{
+	color:red;
+}
+.rnoico{
+	color:red;
+}
+.genderico{
+	color:red;
+}
+.phoneico{
+	color:red;
+}
+hr{
+   width:900px;
+   border:1px solid black;
+}
+#signtitle{
+	margin-left:30%;
+}
+input{
+   width:350px;
+   height:44px;
+}
+#check{
+   width:120px;
+   height:40px;
+}
+#chkNum_btn{
+	width:120px;
+	height:40px;
+}
+#submit_email{
+   width:120px;
+   height:40px;
+}
+#sign{
+   width:150px;
+   height:44px;
+   margin-left:17%;
+}
+#unum1{
+   width:170px;
+   height:30px;
+}
+#unum2{
+   width:170px;
+   height:30px;
+}
+#signup{
+	width:150px;
+	height:30px;
+	margin-left:23%;
+}
+#signupform{
+	margin-left:10%;
+}
+.head{
+	margin-top:-1%;
+}
+
+img{
+	width:1900px;
+	height:300px;	
+}
