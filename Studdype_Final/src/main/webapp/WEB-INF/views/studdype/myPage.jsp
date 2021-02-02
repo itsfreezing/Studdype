@@ -33,6 +33,12 @@
 	ul{
 		text-align:center;
 	}
+	.owl-dot{
+	background-color: black!important;
+	}
+	.owl-dot.active{
+	background-color: #808080!important;
+	}
 </style>
 <script type="text/javascript">
 //스터디 리스트 배너 

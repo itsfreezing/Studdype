@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
-<link rel="stylesheet" href="./resources/css/community/mainsection.css">
 <link rel="stylesheet" href="./resources/css/community/studyHome.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -37,7 +36,7 @@
 	<div class="main-section">
 							
 		<div id="studyImg"><img src="${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
-		<img id="studyGif" src="./resources/assets/img/studdypeGif.gif"><span id="studyOneLineIntro"> ${ study.getS_name() } </span>
+		<!--<img id="studyGif" src="./resources/assets/img/studdypeGif.gif"><span id="studyOneLineIntro"> ${ study.getS_name() } </span>-->
 		<div id="studyOneLineIntro">
 			<img class="quote" src="./resources/assets/img/studyHome_quote_left.png">
 			${ study.s_info }
