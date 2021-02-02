@@ -22,6 +22,7 @@ public interface MemberDao {
 	
 	public MemberDto login(MemberDto dto);//로그인
 	public String logout(HttpSession session);//로그아웃
+	public String findId(MemberDto dto);	//아이디 찾기
 	public int memberInsert(MemberDto dto);//회원가입
 	MemberDto selectOne(int mem_no);   //멤버번호로 하나 셀렉트
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기
@@ -57,7 +58,9 @@ public interface MemberDao {
 	 
 	
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
-	
+
+	public MemberDto sendMail(MemberDto dto );//회원가입 이메일 인증
+
 	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기
 	
 	
