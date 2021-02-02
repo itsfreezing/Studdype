@@ -37,7 +37,7 @@
 		</select>
 		
 		<!-- 아이디 찾기  -->
-		<select id="findId" parameterType="memberDto" resultType="String">
+		<select id="findId" parameterType="memberDto" resultType="string">
 			SELECT MEM_ID FROM MEMBER
 			WHERE MEM_NAME = #{mem_name} AND MEM_RNO = #{mem_rno}
 		</select>
@@ -54,10 +54,7 @@
 			DELETE FROM MEMBER
 			WHERE MEM_NO = #{mem_no}
 		</delete>
-		 <select id="findId" parameterType="String" resultType="memberDto">
-	         SELECT * FROM MEMBER
-	         WHERE MEM_NAME = #{mem_name} AND MEM_RNO = #{mem_rno}
-	      </select>
+		
 		
 		<select id="selectMemberByIdAndEmail" parameterType="memberDto" resultMap="memberMap">
 			SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_EMAIL = #{mem_email}

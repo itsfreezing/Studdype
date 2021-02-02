@@ -49,7 +49,7 @@ public class MemberDaoImpl implements MemberDao{
 		String res = null;
 			
 		try {
-			res = sqlSession.selectOne(NAMESPACE+"findId", dto);
+		res = sqlSession.selectOne(NAMESPACE+"findId", dto);
 		} catch (Exception e) {
 			System.out.println("[ERROR]:findId");
 		}
@@ -343,19 +343,7 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
-	//아이디 찾기
-    @Override 
-    public MemberDto findId(MemberDto dto) {
-    	MemberDto res= null;
-    	
-    	try {
-    		res=sqlSession.selectOne(NAMESPACE+"findId",dto);
-		} catch (Exception e) {
-			System.out.println("[ERROR:FindId]");
-			e.printStackTrace();
-		}
-    	return res;
-   }
+
 	//[비밀번호 찾기] 아이디와 이메일로 member가져오기
 	@Override
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto) {

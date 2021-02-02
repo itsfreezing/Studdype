@@ -95,8 +95,9 @@ h1{
 <script type="text/javascript">
 	$(function() {
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-		$(".justify-content-center").hide(); 
-		//$(".justify-content-center").css({"background":"black"}); 
+		//$(".justify-content-center").hide(); 
+		$(".justify-content-center").show(); 
+		$(".justify-content-center").css({"background":"black"}); 
 	})
 	
 function login_btn(){
