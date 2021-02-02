@@ -40,14 +40,14 @@
       }
       #chkid2{
        position:absolute;
-       top: 594px;
+       top: 175px;
        left: 1050px;
       }
       #id2{
       font-size: 20px;
       margin-left: 300px;
       position:absolute;
-      top:600px;
+      top:180px;
       }
       #email{
       font-size: 20px;
@@ -58,7 +58,7 @@
       font-size: 20px;
       margin-left: 300px;
       position:absolute;
-      top:700px;
+      top:280px;
       }
       #gender{
       font-size:20px;
@@ -80,7 +80,7 @@
       font-size: 20px;
       margin-left: 300px;
       position:absolute;
-      top:750px;
+      top:330px;
       }
       #pw{
        font-size: 20px;
@@ -91,7 +91,7 @@
       	font-size: 20px;
       margin-left: 300px;
       position:absolute;
-      top:650px;
+      top:230px;
       }
       #updatemember{
       	margin-left: 200px;
@@ -133,6 +133,12 @@
       }
 	</style>
 	<script type="text/javascript">
+	$(function() {
+		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+		$(".justify-content-center").hide(); 
+		$(".justify-content-center").css({"background":"black"}); 
+	})
+	
 		var z;
 		function idchk(){
 			 var i = $('input[name=newid]').val();
@@ -145,10 +151,7 @@
 			
 		}
 		function complete(){
-		alert(z);
-			if(z!=true){
-				alert("아이디 중복체크를 해주세요.");
-			}else{
+		
 			
 			var i = $('input[name=newid]').val();
 			var p = $('input[name=newpw]').val();
@@ -159,7 +162,7 @@
 			
 			location.href="memberupdate.do?mem_id="+i+"&mem_pw="+p+"&mem_email="+e+"&mem_phone="+h+"&mem_no="+l;
 			
-			}
+			
 		}
 		
 	</script>

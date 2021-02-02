@@ -30,6 +30,7 @@ body,html {
 }
 #main-location {
 	position:relative;
+	top:-20px;
 	width:100%;
 	height:100%;
 	font-family:Noto Sans;
@@ -41,7 +42,7 @@ body,html {
 	position:relative;
 	width:50%;
 	height:100%;
-	left:22%;
+	left:25%;
 	margin:1%;
 	background:#fff;
 	font-family: "Noto Sans KR", sans-serif !important;
@@ -59,7 +60,7 @@ body,html {
 }
 
 #mainPhoto {
-	width:48%;
+	width:45%;
 	height:100%;
 	border-radius:230px;
 	border:1px solid gray;
@@ -105,7 +106,6 @@ body,html {
 
 #study-detail-section {
 	border-bottom:1px solid gray;
-	padding-bottom:2%;
 }
 
 .table-style {
@@ -130,11 +130,14 @@ body,html {
 	border-bottom:1px solid gray;
 	padding-bottom:2%;
 }
+#content-book p {
+	margin-top:10px;
+}
 
 /* 스터디 신청영역 */
 #fixed-apply-seciton {
 	position:fixed;
-	top:12%;
+	top:35%;
 	left:80%;
 	width:13%;
 	height:300px;
@@ -214,8 +217,10 @@ body,html {
 		// 대표사진 불러오기 함수
 		imageSetting();
 		
-		
 		$("body").css("height", "");
+		
+		var content = $("#pre-study-info").text();
+		
 	});
 	
 	// 대표사진 src 형식에 맞추기 함수
@@ -225,23 +230,25 @@ body,html {
 		$("#mainPhoto").attr("src", imgPath);
 	}
 	
-	// 스터디 신청 기능 구현 시 사용
 	function studyApply() {
 		var s_no = $("#s_no").val();
-		location.href=""+s_no;	
+		
+		return location.href="apply.do?s_no="+s_no;
 	}
 </script>
 </head>
 <body>
 	
 	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
+	
 	<!-- 스터디 신청 시 필요한 스터디 번호 히든 처리 -->
 	<input type="hidden" id="s_no" value="${study.getS_no() }">
+	
 	<div id="main-location">
 		<div id="main-content-section">
 			<div id="study-photo-section">
 				<input type="hidden" id="img_url" value="${study.getPhoto() }">
-				<img id="mainPhoto" src="" onError="this.src='./resources/img/no_image.png'">
+				<img id="mainPhoto" src="" onError="this.src='./resources/img/no-study-image.png'">
 			</div>
 			<div id="study-content-section">
 				<div id="content-title">
@@ -256,7 +263,7 @@ body,html {
 				<div id="content-detail">
 					<!-- 스터디 상세 소개 -->
 					<label class="label-title">스터디 소개</label>
-					<pre>${study.getS_content() }</pre>
+					<pre id="pre-study-info">${study.getS_content() }</pre>
 				</div>
 				<div id="study-detail-section">
 					<table class="table-style">
@@ -283,12 +290,17 @@ body,html {
 							</c:choose>
 							)
 							</td>
-							<th>이메일</th>
+							<th>팀장 이메일</th>
 							<td>${leader.getMem_email() }</td>
 						</tr>
 						<tr>
 							<th>카테고리</th>
 							<td>${studyCate.get(study.getCate_no())}</td>
+							<th>팀장 번호</th>
+							<td>${leader.getMem_phone() }</td>
+						</tr>
+						<tr>
+							<th colspan="4"><p><b style="color:red; font-size:9pt;">스터디가 문의가 아닌 광고 등의 목적으로 연락처를 사용할 경우 법적 처벌을 받을 수 있습니다</b></p></th>
 						</tr>
 					</table>
 				</div>
@@ -317,7 +329,7 @@ body,html {
 		</div>
 	</div>
 	
-	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 	
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

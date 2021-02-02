@@ -43,6 +43,19 @@ public class MemberDaoImpl implements MemberDao{
 		return null;
 	}
 	
+	//아이디 찾기
+	@Override 
+	public String findId(MemberDto dto) {
+		String res = null;
+			
+		try {
+		res = sqlSession.selectOne(NAMESPACE+"findId", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]:findId");
+		}
+		return res;
+	}
+	
 	//멤버번호로 하나 셀렉트
 	@Override
 	public MemberDto selectOne(int mem_no) {
@@ -287,9 +300,6 @@ public class MemberDaoImpl implements MemberDao{
 		
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
-			
-		
-			
 		} catch (Exception e) {
 			System.out.println("ERROR: idchk FAIL!!!!!!!!!!!!!!!!");
 			
@@ -333,6 +343,7 @@ public class MemberDaoImpl implements MemberDao{
 		return res;
 	}
 
+
 	//[비밀번호 찾기] 아이디와 이메일로 member가져오기
 	@Override
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto) {
@@ -346,7 +357,22 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
-
+	
+	//이메일 인증
+	@Override
+	public MemberDto sendMail(MemberDto dto) {
+		MemberDto res= null;
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"sendmail",dto);
+		} catch (Exception e) {
+			System.out.println("[error]:SendMail FAIL");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
 	//[비밀번호 찾기] 비밀번호 변경
 	@Override
 	public int updatePw(MemberDto dto) {
@@ -359,7 +385,56 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
-	
+	// [studyHome] 리더 번호로 리더 이름 가져오기
+	@Override
+	public String leaderNameForStudyHome(int leader_no) {
+		String leaderName = null;
+		
+		try {
+			leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", leader_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: leaderNameForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return leaderName;
+	}
 
+
+	@Override
+	public List<MemberDto> allMember() {
+		List<MemberDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"allMember");
+		} catch (Exception e) {
+			System.out.println("ERROR : ALLMEMBER!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	
+	//[도서게시판 댓글]  리스트로 member 정보 가져오기 
+	@Override
+	public Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] : selectMemberByBookReply");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+	
 
 }

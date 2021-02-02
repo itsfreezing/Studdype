@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<link rel="stylesheet" href="./resources/css/community/book/searchBook.css">
+<!-- <link rel="stylesheet" href="./resources/css/community/book/searchBook.css"> -->
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -38,15 +38,19 @@
 	width:72%;
 }
 
-h3 {
-	color:#6f42c1;
+#no-mainBook {
+	width:100%;
+	text-align:center;
 }
 
-h2 {
-	color:#6f42c1;
-	position:relative;
-	top:25%;
-	left:35%;
+#no-mainBook p {
+	font-size:25pt;
+	font-weight:bold;
+}
+
+#no-mainBook img {
+	width:30%;
+	height:300px;
 }
 
 #main-section-top {
@@ -58,6 +62,7 @@ h2 {
 
 #register-section {
 	display:inline-block;
+	text-align:center;
 }
 
 #no-list {
@@ -112,7 +117,7 @@ h2 {
 	border-top:1px solid black;
 }
 
-table {
+#book-area {
 	border-collapse: separate;
 	border-spacing: 0 15px;
 }
@@ -185,6 +190,7 @@ table {
 	font-weight:bolder;
 	z-index:1;
 	border-radius:10px;
+	border:3px solid black;
 }
 </style>
 
@@ -224,6 +230,7 @@ table {
 		// 등록 여부 
 		if($("#isMain").children().hasClass("firstMain") == true) {
 			$("#isMain").children().first().remove();
+			$("#detailBook").show();
 		}
 		
 		$(document).on("click", ".append",  function() {
@@ -257,7 +264,10 @@ table {
 					<span>자세히 보기</span>
 				</div>
 				<div id="isMain">
-					<h2>스터디 대표도서가 없습니다.</h2>
+					<div id="no-mainBook">
+						<img src="./resources/img/no-exsist-book.png">
+						<p>스터디 대표도서가 없습니다.</p>					
+					</div>
 					<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
 						<c:if test="${list.get(i).getBook_ismain() eq 'Y' }">
 							<div class="book-info thisBook append firstMain">
@@ -313,7 +323,7 @@ table {
 							</c:choose>
 						</div>
 						<div class="book-info-bottom">
-						<table>
+						<table id="book-area">
 							<tr>
 								<th>제목&nbsp;</th>
 								<th>${list.get(i).getB_title() }</th>

@@ -1,5 +1,7 @@
 package com.studdype.test.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +13,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.model.biz.board.BookBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Controller
@@ -83,8 +88,13 @@ public class BookBoardController {
 
 	// 도서 검색 및 등록 페이지
 	@RequestMapping("/registerBook.do")
-	public String registerBook() {
+	public String registerBook(Model model) {
 		logger.info("[registerBook]");
+		
+		List<StudyCategoryDto> cateList = bookBiz.selectCateGoryListOfBook();
+		
+		model.addAttribute("cateList", cateList);
+		
 		return "community/book/registerBook";
 	}
 
@@ -93,6 +103,7 @@ public class BookBoardController {
 	public String insertRegisterBook(Model model, BookDto dto) {
 		logger.info("[insertRegisterBook]");
 		int res = 0;
+		System.out.println(dto);
 		res = bookBiz.insertRegisterBook(dto);
 
 		if (res > 0) {
@@ -170,6 +181,26 @@ public class BookBoardController {
 			model.addAttribute("url", "updateBookForm.do?b_no="+dto.getB_no());
 			return "commond/alert";
 		}
+	}
+	
+	@RequestMapping(value="/bookCategorySearch.do", method=RequestMethod.POST)
+	public @ResponseBody Map bookCategorySearch(@RequestBody StudyCategoryDto cate) {
+		Map bookMap = new HashMap();
+		List<BookDto> bookList = new ArrayList<BookDto>();
+		List<StudyDto> studyList = new ArrayList<StudyDto>();
+		
+		studyList = bookBiz.selectStudyByCategory(cate.getCate_no());
+		
+		if(studyList == null) {
+			bookMap.put("bookList", bookList);
+			return bookMap;
+		}
+		
+		bookList = bookBiz.selectMainBookByStudy(studyList);
+		
+		bookMap.put("bookList", bookList);
+		
+		return bookMap;
 	}
 
 // [도서 게시판]
