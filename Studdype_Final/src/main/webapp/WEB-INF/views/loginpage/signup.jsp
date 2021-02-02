@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
-<link rel="stylesheet" href="./resources/css/studdype/signup/signup.css">
+<link rel="stylesheet" href="./resources/css/signup/signup.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function chkpwd(){

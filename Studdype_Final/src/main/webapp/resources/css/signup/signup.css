@@ -3,7 +3,6 @@
    margin-left:45%;
    padding:1%;
 }
-
 .idico{
    color:red;
 }
@@ -42,19 +41,35 @@ input{
 #check{
    width:120px;
    height:40px;
+   border-radius:15px;
+   background:#9400D3;
+   color:white;
+   font-weight:bold;
 }
 #chkNum_btn{
 	width:120px;
 	height:40px;
+	border-radius:15px;
+	background:#9400D3;
+	color:white;
+	font-weight:bold;
 }
 #submit_email{
    width:120px;
    height:40px;
+   border-radius:15px;
+   background:#9400D3;
+   color:white;
+   font-weight:bold;
 }
 #sign{
    width:150px;
    height:44px;
    margin-left:17%;
+   border-radius:15px;
+   background:#9400D3;
+   color:white;
+   font-weight:bold;
 }
 #unum1{
    width:170px;
@@ -64,18 +79,9 @@ input{
    width:170px;
    height:30px;
 }
-#signup{
-	width:150px;
-	height:30px;
-	margin-left:23%;
-}
 #signupform{
 	margin-left:10%;
 }
-.head{
-	margin-top:-1%;
-}
-
 img{
 	width:1900px;
 	height:300px;	
