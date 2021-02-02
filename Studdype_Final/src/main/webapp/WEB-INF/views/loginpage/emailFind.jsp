@@ -37,6 +37,7 @@ function cancel(){
 	<h1>
 		이메일 계정 찾기 
 	</h1>
+	<form action="email.do">
 	<table>
 		<tr>
 			<th>
@@ -66,6 +67,7 @@ function cancel(){
              </tr>
 		
 		
-	</table>
+		</table>
+	</form>
 </body>
 </html>
