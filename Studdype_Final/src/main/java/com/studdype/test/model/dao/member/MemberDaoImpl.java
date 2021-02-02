@@ -408,6 +408,19 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return resMap;
 	}
+
+	@Override
+	public int newemail(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"newemail",dto);
+		} catch (Exception e) {
+			System.out.println("마이페이지 이메일 변경 오류");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 
 }

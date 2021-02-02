@@ -64,7 +64,6 @@ public class StudyController {
 	private StudyApplyingBiz studyApplyingBiz;
 	
 	private FileHandler fileHandler = new FileHandler(); // 스터디 대표사진 관련 파일 핸들러
-
 	@RequestMapping(value = "/studyList.do", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 

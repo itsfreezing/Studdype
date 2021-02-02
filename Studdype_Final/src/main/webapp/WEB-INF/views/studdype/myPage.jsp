@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+    <script src="./resources/assets/js/popper.min.js"></script>
+    <script src="./resources/assets/js/bootstrap.min.js"></script>
+    <script src="./resources/assets/js/owl.carousel.min.js"></script>
+    <script src="./resources/assets/js/modal-video.js"></script>
+    <script src="./resources/assets/js/main.js"></script>
+
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	.nav-container {
@@ -28,13 +35,138 @@
 	
 	ul li{
 		float:left;
+		padding: 15px;
 		display:inline-block;
 	}
 	ul{
 		text-align:center;
 	}
+	#popup {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  z-index: 1;
+	  backdrop-filter: blur(4px);
+	  -webkit-backdrop-filter: blur(4px);
+	}
+	#emailpopup{
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  z-index: 1;
+	  backdrop-filter: blur(4px);
+	  -webkit-backdrop-filter: blur(4px);
+	}
+	#phonepopup{
+	 display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  z-index: 1;
+	  backdrop-filter: blur(4px);
+	  -webkit-backdrop-filter: blur(4px);
+	
+	}
+	
+	#popup.hide {
+	  display: none;
+	}
+	#emailpopup.hide{
+	  display: none;
+	}
+	#phonepopup.hide{
+	  display: none;
+	}
+	
+	#popup.multiple-filter {
+	  backdrop-filter: blur(4px) grayscale(90%);
+	  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+	}
+	
+	#emailpopup.multiple-filter {
+      backdrop-filter: blur(4px) grayscale(90%);
+	  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+	}
+	#phonepopup.multiple-filter{
+	  backdrop-filter: blur(4px) grayscale(90%);
+	  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+	}
+	
+	#popup .content {
+	  height:300px;
+	  width:500px;
+	  padding: 20px;
+	  background: #fff;
+	  border-radius: 5px;
+	  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+	}
+	#phonepopup .content{
+	  height:300px;
+	  width:500px;
+	  padding: 20px;
+	  background: #fff;
+	  border-radius: 5px;
+	  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+	}
+	
+	#emailpopup .content{
+	  height:200px;
+	  width:500px;
+	  padding: 20px;
+	  background: #fff;
+	  border-radius: 5px;
+	  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+	}
+	.owl-dot{
+   background-color: black!important;
+   }
+   .owl-dot.active{
+   background-color: #808080!important;
+   }
+   
+   .owl-dots{
+   	margin-top:25px !important; 
+   }
+   
 </style>
 <script type="text/javascript">
+$(function(){
+	$("#alert-success").hide();
+	$("#alert-danger").hide();
+	$("input").keyup(function(){
+		var pwd1=$("#pwd1").val(); 
+		var pwd2=$("#pwd2").val(); 
+		if(pwd1 != "" || pwd2 != ""){
+			if(pwd1 == pwd2){ 
+				$("#alert-success").show(); 
+				$("#alert-danger").hide(); 
+				$("#submit").removeAttr("disabled"); 
+				}else{ 
+					$("#alert-success").hide();
+					$("#alert-danger").show();
+					$("#submit").attr("disabled", "disabled"); 
+					} 
+			}
+		}); 
+	});
+
 //스터디 리스트 배너 
 $(document).ready(function() {
 		var owl = $('.owl-carousel');
@@ -51,19 +183,8 @@ $(document).ready(function() {
 
 	
 	});
-	// 회원탈퇴
-	function getout(){
-		var no = '${login.mem_no}';
-	if('${LeaderList}'!="[]"){
-		alert('본인이 팀장인 스터디가 존재합니다. 스터디 관리를 통해 스터디 대표를 양도해주세요.');
-	}else{
-		if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
-			location.href="memberDelete.do?mem_no="+no;
-		}else{
-			return;
-		}
-	}
-}	
+	
+	
 	//내가 신청한 가입 삭제
 	function receivedelete(){
   		var a = '${Appli}'
@@ -114,24 +235,111 @@ $(document).ready(function() {
 			    return;
 			}
 			
-	   }
-  	function myapply(){
-  		$('#myapply').show();
-  		$('#Receive').hide();
-  		$('#meet').hide();
-  		
-  	}
+	    }
   	
-  	function receive(){
-  		$('#myapply').hide();
-  		$('#Receive').show();
-  		$('#meet').hide();
-  	} 
-  	function meet(){
-  		$('#myapply').hide();
-  		$('#Receive').hide();
-  		$('#meet').show();
-  	}
+	  	function myapply(){
+	  		$('#myapply').show();
+	  		$('#Receive').hide();
+	  		$('#meet').hide();
+	  		$('#a').css("color","#808080");
+	  		$('#b').css("color","white");
+	  		$('#c').css("color","white");
+  		
+  		}
+  	
+  		function receive(){
+  			$('#myapply').hide();
+  			$('#Receive').show();
+  			$('#meet').hide();
+  			$('#b').css("color","#808080");
+	  		$('#a').css("color","white");
+	  		$('#c').css("color","white");
+  		} 
+	  	function meet(){
+	  		$('#myapply').hide();
+	  		$('#Receive').hide();
+	  		$('#meet').show();
+	  		$('#c').css("color","#808080");
+	  		$('#b').css("color","white");
+	  		$('#a').css("color","white");
+  		}
+	  	
+	  	
+	  	//비밀번호 변경
+	  	function showPw(multipleFilter) {
+			const popup = document.querySelector('#popup');
+		  
+		  if (multipleFilter) {
+		  	popup.classList.add('multiple-filter');
+		  } else {
+		  	popup.classList.remove('multiple-filter');
+		  }
+		  
+		  popup.classList.remove('hide');
+		}
+
+		function pwclosePopup() {
+			const popup = document.querySelector('#popup');
+		  popup.classList.add('hide');
+		}
+		function changepw(){
+			var a = $('input[name=pwd2]').val();
+			
+			location.href="changepw.do?mem_no="+'${login.mem_no}'+"&new_pw="+a;
+		}
+		//이메일 변경 
+		function showEmail(multipleFilter) {
+			const emailpopup = document.querySelector('#emailpopup');
+		  
+		  if (multipleFilter) {
+		  	emailpopup.classList.add('multiple-filter');
+		  } else {
+		  	emailpopup.classList.remove('multiple-filter');
+		  }
+		  
+		  emailpopup.classList.remove('hide');
+		}
+		function closeemailPopup() {
+			const emailpopup = document.querySelector('#emailpopup');
+		   emailpopup.classList.add('hide');
+		}
+		function changeemail(){
+			var a = $('input[name=newemail]').val();
+			location.href="changeemail.do?mem_no="+'${login.mem_no}'+"&new_email="+a;
+		}
+		//회원 탈퇴
+		function getout(){
+			var no = '${login.mem_no}';
+		if('${LeaderList}'!="[]"){
+			alert('본인이 팀장인 스터디가 존재합니다. 스터디 관리를 통해 스터디 대표를 양도해주세요.');
+		}else{
+			if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
+				location.href="memberDelete.do?mem_no="+no;
+			}else{
+				return;
+			}
+		}
+	}	
+		//전화번호 변경
+		function showphone(multipleFilter) {
+			const phonepopup = document.querySelector('#phonepopup');
+		  
+		  if (multipleFilter) {
+		  	phonepopup.classList.add('multiple-filter');
+		  } else {
+		  	phonepopup.classList.remove('multiple-filter');
+		  }
+		  
+		  phonepopup.classList.remove('hide');
+		}
+		function closephonePopup() {
+			const emailpopup = document.querySelector('#phonepopup');
+		   phonepopup.classList.add('hide');
+		}
+		function changephone(){
+			var a = $('input[name=newphone]').val();
+			//location.href="changeemail.do?mem_no="+'${login.mem_no}'+"&new_email="+a;
+		}
 </script>
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,13 +358,7 @@ $(document).ready(function() {
 	href="./resources/assets/css/owl.carousel.min2.css">
  
     
-    <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-    <script src="./resources/assets/js/popper.min.js"></script>
-    <script src="./resources/assets/js/bootstrap.min.js"></script>
-    <script src="./resources/assets/js/owl.carousel.min.js"></script>
-    <script src="./resources/assets/js/modal-video.js"></script>
-    <script src="./resources/assets/js/main.js"></script>
-</head>
+    </head>
 <body>
 <!-- 헤더 -->
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
@@ -165,23 +367,22 @@ $(document).ready(function() {
 <!-- 상단 정보 회원정보div -->
 
 <div id="container"style="width:100%; height:200px; background-color:black; float:left;">
-
+<a style="color:grey; font-size:14px; position:absolute; top:11.5%; left:25%;" onclick="getout();">회원 탈퇴</a>
 	<h3 style="color:white; font-weight:bold; font-size:20px; position:absolute; top:11%; left:4%; ">My page</h3>
 	<h3 style="color:white; font-weight:bold; font-size:30px; position:absolute; top:15%; left:4%;"><c:if test="${login != null }">${login.mem_name }</c:if></h3>
-	
-	<a style="color:grey; font-size:14px; position:absolute; top:16.5%; left:12%;" href="UpdateMember.do" >회원정보변경</a>
+	<a style="color:grey; font-size:14px; position:absolute; top:18.5%; left:60%;" onclick="showphone()" >전화번호 변경</a>
+	<a style="color:grey; font-size:14px; position:absolute; top:16.5%; left:12%;" onclick="showPw()" >비밀번호 변경</a>
+	<a style="color:grey; font-size:14px; position:absolute; top:18.5%; left:30%;" onclick="showEmail()" >이메일 변경</a>
 	<p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:11%; left:20%;">회원 정보</p>
 	<p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:20%;">아이디 : </p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:24%;">${login.mem_id }</p>
 	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:30%;">이메일 :</p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:34%">${login.mem_email}</p>
-	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:46%;">성별 : </p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:49%"><c:if test="${login.mem_gender == 'M'}">남자</c:if><c:if test="${login.mem_gender == 'F'}">여자</c:if></p>
+	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:50%;">성별 : </p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:53%"><c:if test="${login.mem_gender == 'M'}">남자</c:if><c:if test="${login.mem_gender == 'F'}">여자</c:if></p>
 	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:60%;">전화번호 :</p><p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:65%">${login.mem_phone }</p>
 </div>
-<ul class="nav-container"style="margin-left:600px; text-align:center; position:absolute; top:22%; left:3%;">
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="myapply();">신청 내역</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="receive();">신청 받은  내역</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="meet();">모임확인</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="getout();">회원 탈퇴</li>
-
+<ul class="nav-container"style="margin-left:730px; text-align:center; position:absolute; top:22%; left:1%;">
+	<li class="nav-item" style="color:#808080; margin:10px; cursor:pointer " id="a" onclick="myapply();">신청 내역</li>
+	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" id="b" onclick="receive();">신청 받은  내역</li>
+	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" id="c" onclick="meet();">모임확인</li>
 </ul>
 <!-- 상단 div 끝 -->
 <!--  스터디 신청 내역 div -->
@@ -192,7 +393,7 @@ $(document).ready(function() {
 	<br>
 	<br>
 	<c:if test="${fn:length(applylist) != 0 }">
-	<table class="table table-striped table-bordered table-hover" style="border:1px solid blac; width:70%; text-align:center; position:absolute; top:47%; left:10%; ">
+	<table class="table table-striped table-bordered table-hover" style="border:1px solid blac; width:70%; text-align:center; position:absolute; top:36%; left:10%; ">
 	<thead>
 	<tr>
 		<th>내가 신청한 스터디 이름</th>
@@ -251,9 +452,11 @@ $(document).ready(function() {
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="receiveapplyname" items="${receiveapplyname }" varStatus="status">
+		<c:forEach var="receiveapplyname" items="${receiveapplyname }" varStatus="status" begin="0" end="4">
+	
 		<c:if test="${Receiveapply[status.index].agree == 'D' }">
 			<tr>
+				
 				<c:if test="${Receiveapply[status.index].agree == 'D' }"><td id="receive">${receiveapplyname.s_name }</td></c:if>
 				<td>${applymember[status.index].mem_name }</td>
 				<td>
@@ -270,7 +473,7 @@ $(document).ready(function() {
 	
 	</table>
 	
-	<c:if test="${fn:length(applylist) == 0 }">
+	<c:if test="${fn:length(Receiveapply) == 0 }">
 		<p style="font-weight:bold; font-size: 30px; margin-left:42%; margin-top:9%;">받은 신청이 없습니다!</p>
 	</c:if>
 </div>
@@ -319,7 +522,7 @@ $(document).ready(function() {
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;  position:absolute; top:950px; ">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
      	<div class="hero-slider-info"  >
-     	<div style="height:100px; width:400px; border:1px solid black; background-color:black; margin-left:130px; cursor:pointer;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
+     	<div style="height:130px; width:400px; border:1px solid black; background-color:black; margin-left:130px; cursor:pointer;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
      	<p style="color:white !important;  margin-left:20px;font-size:10px; font-weight:bold; display:inline;">
      	<c:if test="${studylist.si_no == 1 }">서울</c:if>
      	<c:if test="${studylist.si_no == 2 }">부산</c:if>
@@ -367,11 +570,47 @@ $(document).ready(function() {
    
    </c:if>
 <!--  내가 가입한 스터디 리스트 끝 -->
+<!--  비밀번호 변경    -->
+<div id="popup" class="hide">
+  <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:38.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:39%; left:48%;" id="pwd1" type='password'><br>
+    <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:46%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:46%; left:48%;" id="pwd2" name="pwd2"type='password'>
+    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 51%; left: 44%;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 51%; left: 44%;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
 
+    <button onclick="changepw()" style="position:absolute; top:58%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="pwclosePopup()" style="position:absolute; top:58%; left:57%;" class="btn btn-purple" >취소</button>
+  </div>
+	
 
+</div>
+<!--  비밀 번호 변경 끝 -->
+<!--  이메일 변경 -->
+	<div id="emailpopup" class="hide">
+    <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 이메일:</p><input style="position:absolute; top:45%; left:47%;" id="newemail" name="newemail" placeholder="000000@00000.com"><br>
+   
+
+
+    <button onclick="changeemail()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="closeemailPopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    </div>
+	</div>
+<!-- 이메일 변경 끝 -->
+<!-- 전화 번호 변경  -->
+    <div id="phonepopup" class="hide">
+    <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 전화번호:</p><input style="position:absolute; top:45%; left:48%;" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
+   
+
+
+    <button onclick="changephone()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="closephonePopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    </div>
+	</div>
+<!-- 전화 번호 변경 끝 -->
 </body>
-<footer style="position:absolute; top:1500px; left:42%;">
+<footer style="position:absolute; top:1300px; left:42%;">
 		<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 </footer>
 </html>

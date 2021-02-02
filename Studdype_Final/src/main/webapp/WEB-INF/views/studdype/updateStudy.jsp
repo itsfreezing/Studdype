@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -33,7 +33,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 <style type="text/css">
 #main {
 	float: right;
@@ -51,7 +51,7 @@
 	width: 600px;
 	text-align: center;
 	position:absolute;
-	top:65%;
+	top:75%;
 	left:63%;
 }
 
@@ -62,7 +62,7 @@
 	text-align: center;
 	position:absolute;
 	left:63%;
-	top:100%;
+	top:110%;
 }
 
 #studyimage {
@@ -74,10 +74,11 @@
 }
 
 #studyimagep {
-	color: purple;
+	color: #967BDC;
 	font: bold;
 	font-size: 20px;
 	position: absolute;
+	font-weight:bold;
 	left: 480px;
 	top: 560px;
 }
@@ -98,11 +99,12 @@
 	left: 920px;
 	top: 600px;
 	font-size: 20px;
-	color: purple;
+	font-weight:bold;
+	color: #967BDC;
 }
 
 #createrarea {
-	border: 1px solid purple;
+	border: 2px solid #967BDC;
 	position: absolute;
 	left: 920px;
 	top: 630px;
@@ -115,11 +117,12 @@
 	left: 920px;
 	top: 665px;
 	font-size: 20px;
-	color: purple;
+	color: #967BDC;
+	font-weight:bold;
 }
 
 #studynameupdate {
-	border: 1px solid purple;
+	border: 2px solid #967BDC;
 	position: absolute;
 	height: 30px;
 	width: 200px;
@@ -138,7 +141,8 @@
 	left: 480px;
 	top: 820px;
 	font-size: 20px;
-	color: purple;
+	color: #967BDC;
+	font-weight:bold;
 }
 
 #cate {
@@ -153,7 +157,8 @@
 	left: 800px;
 	top: 820px;
 	font-size: 20px;
-	color: purple;
+	font-weight:bold;
+	color: #967BDC;
 }
 
 #Max_member {
@@ -167,7 +172,8 @@
 	position: absolute;
 	left: 480px;
 	font-size: 20px;
-	color: purple;
+	color: #967BDC;
+	font-weight:bold;
 	top: 890px;
 }
 
@@ -183,7 +189,8 @@
 	left: 800px;
 	top: 890px;
 	font-size: 20px;
-	color: purple;
+	font-weight:bold;
+	color: #967BDC;
 }
 
 #locationgu {
@@ -198,7 +205,8 @@
 	left: 480px;
 	top: 960px;
 	font-size: 20px;
-	color: purple;
+	font-weight:bold;
+	color: #967BDC;
 }
 
 #studyinfot {
@@ -373,70 +381,7 @@
 		<input id="studyinfot" value="${study.s_info }">
 		<button id="update" type="button" class="btn btn-purple" onclick="update();">스터디 변경</button>
 
-		<!-- 대표 도서 table -->
-		<div id="bdiv">
-     	 <table id="book1"
-         class="table table-striped table-bordered table-hover"
-         style="border: 1px solid;">
-
-         <thead>
-            <tr>
-               <th>번호</th>
-               <th>등록된 책 제목</th>
-               <th>대표 도서</th>
-            </tr>
-         </thead>
-         <tbody style="text-align:center;">
-            <c:forEach var="bookList" items="${bookList}" varStatus="status" begin="1" end="6">
-               <tr style="text-align:center;">
-                  <td>${status.count }</td>
-                  <td>${bookList.book_title }</td>
-                  <c:if test="${bookList.book_ismain eq 'N' }">
-                     <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
-                        name="bookmain">대표</td>
-                  </c:if>
-                  <c:if test="${bookList.book_ismain eq 'Y' }">
-                     <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
-                        name="bookmain" checked="checked" >대표</td>
-                  </c:if>
-               </tr>
-            </c:forEach>
-
-         </tbody>
-      </table>            
-      <button class="btn btn-purple" onclick="location.href='Allbook.do?s_no=${study.s_no}'" id="bookbtn" style="display:inline;">도서 수정하러 가기</button>
-      </div>
-      <!--  대표 도서 table 끝 -->
 		
-	  <!-- 스터디멤버 table  -->
-      <table id="member"
-         class="table table-striped table-bordered table-hover">
-         <thead>
-            <tr>
-               <th>이름</th>
-               <th>이메일</th>
-               <th>아이디</th>
-               <th>성별</th>
-            </tr>
-         </thead>
-         <tbody>
-            <c:forEach var="membername" items="${membername}" begin="1" end="5">
-            <c:if test="${membername.mem_no != login.mem_no }">
-               <tr>
-                  <td>${membername.mem_name }</td>
-                  <td>${membername.mem_email }</td>
-                  <td>${membername.mem_id }</td>
-                  <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
-                  
-
-               </tr>
-               </c:if>
-            </c:forEach>
-
-         </tbody>
-      </table>
-      <button onclick="location.href='Allmember.do?s_no=${study.s_no}'" class="btn btn-purple" id="memberbtn">멤버 수정하러 가기</button>
-      <!-- 스터디 멤버 table 끝 -->
 
 
 

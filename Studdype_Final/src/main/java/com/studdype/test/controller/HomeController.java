@@ -98,8 +98,7 @@ public class HomeController {
 		paging(pageMap, pagenum, totalStudyListNum);
 		pageMap.put("mem_no", login.getMem_no());
 		
-		System.out.println("pageMap:"+pageMap);
-		System.out.println("mem_no: "+login.getMem_no()+", 스터디 총개수: "+totalStudyListNum);
+		
 
 		
 		
@@ -112,11 +111,11 @@ public class HomeController {
 		}
 		
 		
-		pageList = studymemberBiz.pagingstudylist(pageMap);
-		System.out.println(pageMap.getClass().getName());
+		
 		
 		for(int i=0;i<studyApplylist.size();i++) {
 			StudyDto dto2 = studyBiz.selectOneBySno(studyApplylist.get(i).getS_no());
+			System.out.println("여기가수상해"+dto2);
 			applylist.add(dto2);
 		}
 		
@@ -132,10 +131,15 @@ public class HomeController {
 			MemberDto dto5 = memberBiz.selectOne(Receiveapply.get(i).getMem_no());
 			applymember.add(dto5);
 		}
-	
+		
+		
+		System.out.println("studyapplylist :"+studyApplylist.size());
+		System.out.println("씨발너뭔데"+receiveapplyname);
 		System.out.println(receiveapplyname.size());
 		System.out.println(Receiveapply.size());
-		System.out.println(applylist.size());
+		System.out.println("씨발 넌또뭐야"+Receiveapply);
+		System.out.println("아니씨발 혹시너였니?"+applymember);
+		
 		System.out.println("전체멤버"+allMember);
 		model.addAttribute("allMember",allMember);
 		model.addAttribute("applymember",applymember);
@@ -151,6 +155,7 @@ public class HomeController {
 		model.addAttribute("studyApplylist",studyApplylist);
 		model.addAttribute("applylist",applylist);
 		session.setAttribute("login",login);
+		session.setAttribute("headerMenu", "myPage");
 		model.addAttribute("studylist", studylist);
 	
 		
@@ -275,6 +280,41 @@ public class HomeController {
 		return "commond/alert";
 		}
 		
+	}
+	//비밀번호 변경시 
+	@RequestMapping(value="/changepw.do",method = RequestMethod.GET)
+	public String changepw(HttpServletRequest request,Model model) {
+		MemberDto dto = new MemberDto(Integer.parseInt(request.getParameter("mem_no")),request.getParameter("new_pw"));
+		int res = memberBiz.updatePw(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg", "비밀번호 변경 성공!");
+			model.addAttribute("url", "myPage.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg","비밀번호 변경 실패!");
+			model.addAttribute("url","myPage.do");
+			return "commond/alert";
+		}
+		
+	}
+	//마이페이지 이메일 변경
+	@RequestMapping(value="/changeemail.do",method = RequestMethod.GET)
+	public String changeemail(HttpServletRequest request,Model model,HttpSession session) {
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		MemberDto dto = new MemberDto(login.getMem_no(),login.getMem_phone(),request.getParameter("new_email"));
+		int res = memberBiz.newemail(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg", "이메일 변경 성공!");
+			model.addAttribute("url", "myPage.do");
+			session.setAttribute("login", login);
+			return "redirect:myPage.do";
+		}else {
+			model.addAttribute("msg","이메일 변경 실패!");
+			model.addAttribute("url","myPage.do");
+			return "commond/alert";
+		}
 	}
 	
 	

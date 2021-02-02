@@ -27,7 +27,7 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
 select * from study_category;
 insert into STUDY_APPLYING values(49,1,'Y','ddd');
 --멤버 테이블
-INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader22', 'leader9', '테스트팀장', '966308-1010101', 'M', '036-8801-9068', 'bin3105@naver.com');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'tjdgy', 'tjdgy', '성효', '980919-1010101', 'M', '010-9486-6924', 'chosuk0000@gmail.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin22', 'bin25', '이승빈', '914308-1880101', 'M', '010-8901-9068', 'bin2605@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin22','1236','관리자','935111-1119953','M','010-1774-1234','admin12@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'user22', 'user0', 'user0', '922208-0010101', 'M', '010-1121-9068', 'binbsaa5@nxver.com');
