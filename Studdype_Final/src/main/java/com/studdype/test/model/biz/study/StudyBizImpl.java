@@ -155,7 +155,12 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
+	public int newInfo(StudyDto dto) {
+		
+		return study_Dao.newInfo(dto);
+	}
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+
 		return locationSidao.selectLocationSiOfStudy(si_no);
 	}
 
@@ -172,6 +177,7 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public String categoryNameForStudyHome(int cate_no) {
 		return studyCatedao.categoryNameForStudyHome(cate_no);
+
 	}
 
 	@Override
