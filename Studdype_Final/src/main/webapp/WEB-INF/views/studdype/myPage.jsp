@@ -29,12 +29,15 @@
 <script src="./resources/assets/js/myPageScript.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".tab_content").hide(); 
-    $("ul.nav-items li:first").addClass("active").show();
-    $(".tab_content:first").show(); 
 
-    //On Click Event
-    $("ul.nav-items li").click(function() {
+    	$(".tab_content").hide(); 
+        $("ul.nav-items li:first").addClass("active").show();
+        $(".tab_content:first").show(); 
+        
+        
+
+    
+	$("ul.nav-items li").click(function() {
 
         $("ul.nav-items li").removeClass("active"); //Remove any "active" class
         $(this).addClass("active"); //Add "active" class to selected tab
@@ -43,6 +46,7 @@ $(document).ready(function() {
         $($(this).find("a").attr("href")).fadeIn(); //Find the href attribute value to identify the active tab + content
         return false;
     });
+   
 
 });
 </script>
@@ -84,9 +88,9 @@ $(document).ready(function() {
 <!-- 상단 div_탭 -->
 <div id="nav-container">
 	<ul class="nav-items">
-	   <li class="my-nav-item"><a href="#myApply">신청 내역</a></li>
-	   <li class="my-nav-item"><a href="#applyList">신청받은 내역</a></li>
-	   <li class="my-nav-item"><a href="#myMeet">모임확인</a></li>
+	   <li class="my-nav-item" value="test1"><a href="#myApply">신청 내역</a></li>
+	   <li class="my-nav-item" value="test2"><a href="#applyList">신청받은 내역</a></li>
+	   <li class="my-nav-item" value="test3"><a href="#myMeet">모임확인</a></li>
 	</ul>
 </div>
 <!-- 상단 div 끝 -->

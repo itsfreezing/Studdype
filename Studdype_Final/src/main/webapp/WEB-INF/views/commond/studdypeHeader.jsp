@@ -43,7 +43,6 @@ $(function() {
         return true;
     });
 
-
 </script>
 
 </head>
@@ -100,9 +99,9 @@ $(function() {
 											<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="회원정보 변경"></div>
 										</div>
 											<a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
-											<a class="dropdown-item" id="create" href="myPage.do#myApply">신청 내역</a>
-											<a class="dropdown-item" id="receive" href="myPage.do#applyList" target="applyList">신청받은 내역</a>
-											<a class="dropdown-item" id="create" href="myPage.do#myMeet">모임확인</a>
+											<a class="dropdown-item" href="myPage.do#myApply">신청 내역</a>
+											<a class="dropdown-item" href="myPage.do">신청받은 내역</a>
+											<a class="dropdown-item" href="myPage.do#myMeet">모임확인</a>
 											<hr id="profileHR">
 											<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
 									</div>
