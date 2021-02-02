@@ -63,6 +63,7 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.memberDelete(mem_no);
 	}
 
+
 	
 	//아이디와 이메일로 member가져오기
 	@Override
@@ -75,6 +76,7 @@ public class MemberBizImpl implements MemberBiz {
 	public int updatePw(MemberDto dto) {
 		return memberDao.updatePw(dto);
 	}
+
 
 	@Override
 	public List<MemberDto> allMember() {

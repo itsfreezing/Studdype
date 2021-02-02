@@ -24,8 +24,8 @@ public class MailSender {
 		mail = new JavaMailSenderImpl();
 		mail.setHost("smtp.gmail.com");
 		mail.setPort(587);
-		mail.setUsername("보내는 계정 아이디");
-		mail.setPassword("보내는 계정 비밀번호");
+		mail.setUsername("ehldks2104");
+		mail.setPassword("EunYou0706!!");
 		mail.setDefaultEncoding("UTF-8");
 		Properties prop = new Properties();
 		prop.setProperty("mail.smtp.auth", "true");
@@ -33,7 +33,37 @@ public class MailSender {
 		mail.setJavaMailProperties(prop);
 		
 	}
+	public void sendMail(MemberDto dto,String randNum) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		String html = "<table style='width:700px; margin-left:20px;'>"//+"<tr><img src='https://i.esdrop.com/d/xEjnS7UFZv.JPG' style='width:700px; height:300px;'</tr>"
+				+"<tr>"+"<td><span style='font-size: 30px; font-weight: bold;'>StuDdype</span><span style='font-size: 12px; color:#80878d'> SINCE 2021</span></td>"
+				+"</tr><tr><td><span>안녕하세요. <strong>스터띱</strong> 입니다.<br>저희 사이트를 방문해 주셔서 감사드립니다.<br><br><strong>"+"회원가입 시 이메일 인증번호입니다"+"</strong></span></td>" 
+				+"</tr>"
+				+"<tr><td><table style='margin-top:20px;'><col width='100px'><col width='200px'><tr style='border:1px solid gray; '>"
+				+"<td style='background-color: #f5f6f5; color:#80878d'>인증번호</td><td>"+randNum+"</td>"
+				+"</tr></table></td></tr><tr><td><span><br>인증번호 칸에 인증번호를 입력해주세요.</td>"
+				+"</tr></table>";
+				
+		MimeMessage msg = mail.createMimeMessage();
+		MimeMessageHelper helper;
+		
+		try {
+			helper = new MimeMessageHelper(msg,true);
+			helper.setFrom(new InternetAddress("ehldks2104","StuDdype","UTF-8"));
+			helper.setTo(dto.getMem_email());
+			helper.setSubject("[스터띱] 에서 보낸 인증번호 :"+" 회원가입 시 인증번호 입니다.");
+			helper.setText(html, true);
+			
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		mail.send(msg);
+	}
 	
+
 	public void sendExtraPwMail(MemberDto member) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		
@@ -94,7 +124,7 @@ public class MailSender {
 		
 		try {
 			helper = new MimeMessageHelper(msg,true);
-			helper.setFrom(new InternetAddress("bin9058@gamil.com","StuDdype","UTF-8"));
+			helper.setFrom(new InternetAddress("","StuDdype","UTF-8"));
 			helper.setTo(member.getMem_email());
 			helper.setSubject("[스터띱] "+member.getMem_id()+"님 인증번호 입니다.");
 			helper.setText(html, true);
@@ -106,5 +136,42 @@ public class MailSender {
 		
 		mail.send(msg);
 	}	
+	
+	
+	public void sendVerifiNum(MemberDto dto, String randNum) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		
+		String html = "<table style='width:700px; margin-left:20px;'>"
+					+"<tr><img src='https://i.esdrop.com/d/xEjnS7UFZv.JPG' style='width:700px; height:300px;'</tr>"
+					+"<tr>"
+					//+"<td><span style='font-size: 30px; font-weight: bold;'>StuDdype</span><span style='font-size: 12px; color:#80878d'> SINCE 2021</span></td>"
+					+"</tr><tr><td><span>안녕하세요. <strong>스터띱</strong> 입니다.<br>저희 사이트를 방문해 주셔서 감사드립니다.<br><br><strong>"+"</strong> StudDype에서 보낸 인증번호는 다음과 같습니다.</span></td>" 
+					+"</tr>"
+					+"<tr><td><table style='margin-top:20px;'><col width='100px'><col width='200px'><tr style='border:1px solid gray; '>"
+					+"<td style='background-color: #f5f6f5; color:#80878d'>인증번호</td><td>"+randNum+"</td>"
+					+"</tr></table></td></tr><tr><td><span><br>인증번호 칸에 인증번호를 입력해주세요.</td>"
+					+"</tr></table>";
+			
+		MimeMessage msg = mail.createMimeMessage();
+		MimeMessageHelper helper;
+		
+		
+		try {
+			helper = new MimeMessageHelper(msg,true);
+			helper.setFrom(new InternetAddress("","StuDdype","UTF-8"));
+			helper.setTo(dto.getMem_email());
+			helper.setSubject("[스터띱] "+dto.getMem_id()+"님 인증번호 입니다.");
+			helper.setText(html, true);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		mail.send(msg);
+	}
+	
+	
+	
+	
 	
 }

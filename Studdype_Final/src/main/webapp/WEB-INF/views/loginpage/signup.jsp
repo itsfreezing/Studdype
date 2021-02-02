@@ -21,33 +21,163 @@
 <script type="text/javascript">
 function chkpwd(){
 	var pw=document.getElementById('memberpw').value;
-	var pw2=document.getElementById('mempwd').value;
+	var pw2=document.getElementById('mempw').value;
 	if(pw!=pw2){
-		document.getElementById('checkpw').style.color="red";
-		document.getElementById('checkpw').innerHTML="동일하지 않습니다";
+		$("#chkpw_no").show();
+		$("#chkpw_ok").hide();
+		$("#chkpw").hide();
 	
 	}
+	else if(pw==""||pw==null){
+		  $("#chkpw").show();
+		  $("#chkpw_no").hide();
+		  $("#chkpw_ok").hide();
+  }
 	else{
-		document.getElementById('checkpw').style.color="blue";
-		document.getElementById('checkpw').innerHTML="확인되었습니다";
+		$("#chkpw_ok").show();
+		$("#chkpw_no").hide();
+		$("#chkpw").hide();
 	}
 }
 
-
-function checkId(){
-	var id=document.getElementsByName("mem_id")[0];
-	if(id.value.trim()==""||id.value==null){
-		alert("아이디를 입력해주세요");
-	}
+$(function(){
+	
+	var chkNum_btn = $("#chkNum_btn");
+	
+	chkNum_btn.attr('disabled', 'disabled');
+});
+function sendmail(){
+	   var mem_email = $("#memberMail").val();
+	   var emailVal={
+			   "mem_email":mem_email
+	   };
+	   if(mem_email==null||mem_email.trim()==''){
+			 alert("올바른 이메일을 입력해주세요");
+			return false;
+		 }
+	   $.ajax({
+	         type:'POST',
+	         url: "sendmail.do",
+	         data:JSON.stringify(emailVal),
+	         contentType:"application/json",
+			 dataType:"json",
+	         success:function(map){
+	          if(map.isExist=="n"){
+	        	  alert("메일이 잘못되었습니다");
+	        	  
+	          }else{
+	        	  alert("인증번호 전송");
+	        	  var chkNum_btn=$("#chkNum_btn");
+	        	  var emailInput=$("#memberMail");
+	        	  emailInput.attr("readonly","readonly");
+	        	  chkNum_btn.removeAttr("disabled");
+	          }
+	         },
+	         error:function(){
+	            alert("ajax 통신 실패");
+	         }
+	   }); 
 }
-$(document).ready(function(){
+
+function chkVerifiNum(){
+	var input = $("#chkNum").val();
+	
+	var verificationVal = {
+			"chk":input
+	};
+
+	//인증번호 확인
+	$.ajax({
+		type:"post",
+		url:"chkVerification.do",
+		data:JSON.stringify(verificationVal),
+		contentType:"application/json",
+		dataType:"json",
+		success: function(map){
+			if(map.isExist == "n"){//이메일이 올바르지 않음
+				$("#chk_ok").hide();
+				$("#chk_no").show();
+				$("#chknum").attr("title",'n');
+			
+			}else{
+				$("#chk_no").hide();
+				$("#chk_ok").show();
+				$("#chknum").attr("title",'y');
+			}
+		} 
+		,
+		error:function(){
+			alert("인증번호 확인 ajax 실패 ㅠ..");
+		}
+		
+		
+	});		
+}
+
+$(document).ready(function(){	
+		var man=document.register.mem_gender[0];
+		var woman=document.register.mem_gender[1];
+		$("#sign").click(function(){	
+   		if($("#memberId").val().trim()==""||$("#memberId").val()==null){
+			alert("아이디를 입력해주세요");
+			$("#memberId").focus();
+			return false;
+		}else if($("#chk").attr("title")=="n"){
+			alert("아이디 중복체크해주세요");
+			return false;
+		}
+		else if($("#memberpw").val().trim()==""||$("#memberpw").val()==null){
+			alert("password를 입력해주세요");
+			$("#memberpw").focus();
+			return false;
+		}else if($("#memberpw").val()!=$("#mempw").val()){
+			alert("패스워드가 다릅니다");
+			$("#memberpw").focus();
+			return false;
+		}else if($("#memberMail").val().trim()==""||$("#memberMail").val()==null){
+			alert("이메일을 입력해주세요");
+			$("#memberemail").focus();
+			return false;
+		}
+		else if($("#chknum").attr("title")=="n"){
+			alert("이메일 인증해주세요");
+			$("#chknum").focus();
+			return false;
+		}
+		else if($("#memberName").val()==""){
+			alert("이름을 입력해주세요");
+			$("#memberName").focus();
+			return false;
+		}else if($("#unum1").val()==""||$("#unum1").val()==null){
+			alert("주민번호를 입력해주세요");
+			$("#rno1").focus();
+			return false;
+		}else if($("#unum2").val()==""||$("#unum2").val()==null){
+			alert("주민번호 뒷자리를 입력해주세요");
+			$("#rno2").focus();
+			return false;
+		}
+		else if($("#memberphone").val()==""||$("#memberphone").val==null){
+			alert("핸드폰번호를 입력해주세요");
+			$("#memberphone").focus();
+			return false;
+		}
+		else if(man.checked==false&&woman.checked==false){
+			alert("성별을 선택해주세요");
+			man.focus();
+   			return false;
+   		}
+   		
+		signupform.submit();
+
+	});	
+
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
 		var mem_id=$("#memberId").val();
 		var memberVal = {
 						"mem_id":mem_id
 		};
-
 		$.ajax({
 			url:"idcheck.do",
 			data:JSON.stringify(memberVal),
@@ -55,332 +185,275 @@ $(document).ready(function(){
 			contentType:"application/json",
 			dataType:"json",
 			success:function(data){
-				console.log("0=사용가능 /1=사용불가"+data);
-				if(data==0){
-					var html="<tr><td colspan='3' style='color:blue'>사용가능</td></tr>";
-						$('#IdCheck').empty();
-						$('#IdCheck').append(html);
-						
-				}else {
-					var html="<tr><td colspan='3' style='color:red'>이미 존재하는 아이디입니다 </td></tr>";
-					$('#IdCheck').empty();
-					$('#IdCheck').append(html);
+				console.log("1=사용가능 /0=사용불가"+data);
+				
+				if(data==1){
+					$("#chkid_ok").show();
+					$("#chkid_no").hide();
+					$("#chk").attr("title",'y');
+				
+				}
+				else {
+					$("#chkid_no").show();
+					$("#chkid_ok").hide();
+					$("#chk").attr("title",'n');
 					}
 				},error:function(){
 					alert("FAIL");
 			}		
 		});
 	});	
-
 });
-
 function num_check(){
-	var flag=0;
-	rno1=[];
-	rno2=[];
-	sum1=0;
-	sum2=0;
-	var i=0;
-	var j=0;
-	var total=0;
-	var total2=0;
-	var num1=document.getElementById("rno1").value;
-	var num2=document.getElementById("rno2").value;
-	rno1=num1;//앞자리
-	rno2=num2;//뒷자리
-	for(i=0;i<6;i++){
-		sum1+=parseInt(rno1[i])*(i+2);
-	}
-	total1=sum1;
-	for(j=2;j<6;j++){
-		sum2+=parseInt(rno2[j])*j;
-	}
-	total2=sum2+parseInt((rno1[0])*8)+parseInt((rno1[1])*9);
-	if(rno2.length==7){
-		flag=1;
-	}
-	if(flag==1){
-		if((11-((total1+total2)%11)%10)==rno2[6]){
-			alert("유효한 주민등록번호입니다");
-			flag=0;
-		}else{
-			alert("존재하지 않는 주민등록번호 입니다 다시 확인해주세요");
-			flag=0;
-		}
-	}
-}
-function validate(){
+	 var num1 = document.getElementById("unum1");
+     var num2 = document.getElementById("unum2");
+     var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
+     var arrNum2 = new Array();
+     
+     for (var i=0; i<num1.value.length; i++) {
+          arrNum1[i] = num1.value.charAt(i);
+      } // 주민번호 앞자리를 배열에 순서대로 담는다.
+
+      for (var i=0; i<num2.value.length; i++) {
+          arrNum2[i] = num2.value.charAt(i);
+      } // 주민번호 뒷자리를 배열에 순서대로 담는다.
+
+      var tempSum=0;
+
+      for (var i=0; i<num1.value.length; i++) {
+          tempSum += arrNum1[i] * (2+i);
+      } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
+
+      for (var i=0; i<num2.value.length-1; i++) {
+          if(i>=2) {
+              tempSum += arrNum2[i] * i;
+          }
+          else {
+              tempSum += arrNum2[i] * (8+i);
+          }
+      } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
+      if((11-(tempSum%11))%10!=arrNum2[6]) {
+    		$("#chknum_no").show();
+			$("#chknum_ok").hide();
+          return false;
+      }else{
+    	  $("#chknum_ok").show();
+			$("#chknum_no").hide();
+      }
+  }
 	
-	var form=document.register;
-	
-	if(form.memberId.value==""){
-		alert("아이디를 입력해주세요");
-		form.memberId.focus();
-		return false;
-	}
-	if(form.memberpw.value==""){
-		alert("비밀번호를 입력해주세요");
-		form.memberpw.focus();
-		return false;
-	}
-	if(form.memberemail.value==""){
-		alert("이메일을 입력해주세요");
-		form.memberemail.focus();
-		return false;
-	}
-	if(form.memberName.value==""){
-		alert("이름을 입력해주세요");
-		form.memberName.focus();
-		return false;
-	}
-	if(form.rno1.value==""){
-		alert("주민등록번호를 입력해주세요");
-		form.rno1.focus();
-		return false;
-	}
-	if(form.memberphone.value==""){
-		alert("전화번호를 입력해주세요");
-		form.memberphone.focus();
-		return false;
-	}
-	
-}
+
 
 </script>
 <style type="text/css">
-h1{
-   margin-top:5%;
-   margin-left:46.5%;
-   color:white;
-}
-#header{
-   background:#D0A9F5;
-}
-#line{
-   margin-top:6.3%;
-}
-#logo{
-   width:240px;
-   height:50px;
-}
-#title{
-   color:black;
-   margin-left:46.5%;
-}
-#pic{
-   width:170px;
-   height:50px;
-   margin-left:47.5%;
-}
-
-#big{
-   margin-left:46%;
-   margin-top:-2%;
-   color:blue;
-}
-h3{
+.title{
    margin-left:45%;
 }
-table{
-    margin-left: 40%;
+.icos{
+	color:red;	
+	margin-left:65%;
 }
-#name{
-    margin-top:1%;
-    margin-left:1%;
-   margin-bottom:0.5%;
-   color:#F5A9F2;
-   font-weight:bold;
+.ico{
+   color:green;
 }
-
-#id{
-	width:100px;
-	height:30px;
+hr{
+   width:900px;
+   border:1px solid black;
 }
-
-#pw{
-	width:320px;
-	height:30px;	
-}
-
-#idtitle{
-   margin-top:1%;
-   margin-bottom:0.5%;
-   margin-left:1%;
-   color:#F5A9F2;
-
-}
-#check{
-   background:#7401DF;
-   color:white;
-   width:130px;
-   height:30px;
-   font-weight:bold;
-}
-#sub{
-   background:#7401DF;
-   color:white;
-   width:330px;
-   height:50px;
-   font-weight:bold;
-   margin-top:15%;
-   margin-left:43%;
-}
-#select{
-   margin-left:1%;
-   width:330px;
-   height:30px;
-}
-
-#chk{
-   width:100px;
-   height:30px;
-   
+#signtitle{
+	margin-left:30%;
 }
 input{
-   width:320px;
+   width:350px;
+   height:44px;
+}
+#check{
+   width:120px;
+   height:40px;
+}
+#chkNum_btn{
+	width:120px;
+	height:40px;
+}
+#submit_email{
+   width:120px;
+   height:40px;
+}
+#sign{
+   width:150px;
+   height:44px;
+   margin-left:17%;
+}
+#unum1{
+   width:120px;
    height:30px;
 }
-
-#nametitle{
-   width:280px;
+#unum2{
+   width:120px;
    height:30px;
-   border: 2px solid #DA81F5;
 }
-#signUp{
+#signup{
 	width:150px;
 	height:30px;
+	margin-left:23%;
 }
-
-#phone{
-	width:250px;
-	height:30px;
+#signupform{
+	margin-left:10%;
 }
-
+.head{
+	margin-top:-1%;
+}
 </style>
 
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
- <img src="" id="pic">
-   <br><br>   
-      <h3>--Please be our colleague--</h3>
-      <br><h2 id="big">정보를 입력해주세요</h2>
-   <div id="signtitle">
-      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off" onsubmit="return validate();">
-        <table>
-                    <tr>
-                        <td><h3 id="idtitle">아이디</h3></td>
-                    </tr>
-                    <tr>
-                      <td> 
-                           <input type="text" title="n" name="mem_id" id="memberId" style="border:2px solid #DA81F5;"placeholder="아이디를 입력해주세요" />
-                     		<input type="button" value="중복확인" id="check" onclick="checkId();">
-                     </td>
-                    </tr>
-                    <tr>
-						<td colspan=3 id="IdCheck"></td>
-					</tr>
-                   <tr>
-                        <td>
-                            <h3 id="idtitle">비밀번호</h3>
-                        </td>
-                    </tr>   
-                    <tr>           
-                        <td>
-                            <input type="password" id="memberpw"  title="n"name="mem_pw" style="border:2px solid #DA81F5;" placeholder="비밀번호를 입력해주세요">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">비밀번호확인</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td colspan="5">
-                            <input type="password" name="mempwchk" id="mempwd" style="border:2px solid #DA81F5;" placeholder="비밀번호를 확인해주세요" onclick="chkpwd();">
-                        	<div id="checkpw">동일한 암호를 입력</div>
-                        </td>
-                    </tr>
+	<div class="head">
+		<h3 class="title">회원가입</h3>
+			
+			<hr>
+	</div> 
+   <div id="signtitle"> 
 
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">이메일</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                    	<td>
-                    		<input type="text" title="n" name="mem_email" id="memberemail" style="border: 2px solid #DA81F5;"placeholder="이메일을 입력해주세요" size="30" >
-                    	    <input type="button" value="인증번호 전송 " id="check" onclick="sendemail();">  
-                    	</td>
-                    </tr>
-                    <tr id="ssss">
-                        <td>
-                              <h3 id="idtitle">인증번호 </h3>
-                        </td>
-                        <td id="code" width="600"></td>	
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3 id="idtitle">이름</h3>
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td><input type="text" name="mem_name" id="memberName"style="border: 2px solid #DA81F5;" placeholder="이름을 입력해주세요" onclick="ChkConfirm(),ChkConfirm2()"></td>
-                    </tr>
-                    <tr>
-                    	<td>
-                    		<h3 id="idtitle">주민등록번호 </h3>
-                    	</td>
-                    </tr>
-                    
-                    <tr>
-                    	<td colspan="5">
-                    		   <input type="text" id="rno1" name="mem_rno" title="n" maxlength="6">-<input type="password" name="memrno" id="rno2" onkeyup="num_check()" >
-                    	</td>
-                    </tr>
-                    
-                    <tr>
-                    	<td>
-                    		<h3 id="idtitle">핸드폰 번호 </h3>
-                    	</td>
-                    </tr>
-                    <tr>
-                    	<td colspan="5">
-                    	<!--  <select id="phone" name="mem_phone" class="telnum">
-                    			<option value="010" selected>010</option>
-                    			<option value="011">011</option>
-                    			<option value="016">016</option>
-                    			<option value="018">018</option>
-							</select>-<input type="tel" id="phone" name="mem_phone" maxlength="13" pattern="-[0-9]{4}-[0-9]{4}">	
-							 -->
-							<input type="tel" id="memberphone" name="mem_phone" maxlength="13" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">							
-                    	 
-                    	</td>
-                    </tr>
-                   
-                       <tr>
-                    	<td>
-                    		<h3 id="idtitle">성별 </h3>
-                    	</td>
-                    </tr>
-                    <tr>
-                    	<td>
-		               		<select id="select" name="mem_gender" id="gender"style="border: 2px solid #DA81F5;">
-					        	<option value="M">
-					        		남자 
-					        	</option>
-					        	<option value="F">
-					        		여자
-					        	</option>
-					        </select>
-					     </td>
-                    </tr>
+      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
+        <table>
+        	<tr>
+				<th>
+				 아이디
+				 	<span class="ico">*</span>
+				</th>
+                 <td> 
+                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
+                    <input type="button" value="중복확인" id="check" >
+                     <input type="hidden" id="chk" title="n"><!-- 사용가능할경우  -->
+                 </td>
+             </tr>
+             <tr style="display:none;" id="chkid_ok">
+   				<td></td>
+   				<td style="color:blue">아이디 사용 가능</td>
+   			</tr>
+   			<tr style="display:none;" id="chkid_no">
+   				<td></td>
+   				<td style="color:red;">중복된 아이디 존재 </td>
+   			</tr>
+   		
+            
+              <tr>
+                 <th align="right" width="100">
+                    비밀번호 <span class="ico">*</span>
+                 </th>
+             
+                 <td colspan="4">
+                    <input type="password" id="memberpw"name="mem_pw" style="border:1px solid #ccc">
+                 </td>
+              </tr>
+         
+              <tr>
+                 <th align="right" width="100">
+                 비번확인 <span class="ico">*</span>
+                 </th>
+                 <td>
+                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
+                 </td> 
+              </tr> 
+              <tr style="display:none;" id="chkpw_ok">
+   				<td></td>
+   				<td style="color:blue">확인되었습니다</td>
+   			</tr>
+   			<tr style="display:none;" id="chkpw_no">
+   				<td></td>
+   				<td style="color:red;">패스워드가 다릅니다</td>
+   			</tr>
+   			<tr style="display:none;" id="chkpw">
+   				<td></td>
+   				<td style="color:red;">패스워드를 입력해주세요</td>
+   			</tr>
+   			
                 
+                <tr>
+                 <th align="right" width="100">
+                    이메일<span class="ico">*</span>
+                 </th>
+                 <td>
+                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
+                    <input type="button" value="인증번호 전송" id="submit_email" onclick="sendmail();">
+                 </td>
+              </tr>
+              <tr>
+   				<td><label for="chkNum">인증번호<span class="ico">*</span></label></td>
+   				<td>
+	   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
+	   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
+	   				<input type="hidden" id="chknum" title="n">
+   				</td>
+   			</tr> 
+   			<tr style="display:none;" id="chk_ok">
+   				<td></td>
+   				<td style="color:#4075dd">인증번호가 같습니다.</td>
+   			</tr>
+   			<tr style="display:none;" id="chk_no">
+   				<td></td>
+   				<td style="color:red;">인증번호가 다릅니다.</td>
+   			</tr> 
+              <tr>
+                 <th align="right" width="100">
+                    이름<span class="ico">*</span>
+                   
+                 </th>
+                 <td>
+                    <input type="text" id="memberName" name="mem_name" style="border:1px solid #ccc"> 
+                 </td>
+              </tr>
+	            <tr>
+	               <th align="right" width="100">
+	                       주민번호<span class="ico">*</span>
+	                 </th>
+	                 <td colspan="5">
+	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
+	                    <input type="password"name="unum2" id="unum2" style="border:1px solid #ccc" maxlength="7" onkeyup="num_check();">
+	                 </td>
+	            </tr>
+	            <tr style="display:none;" id="chknum_ok">
+	   				<td></td>
+	   				<td style="color:blue">올바른 주민번호입니다</td>
+   				</tr>
+	   			<tr style="display:none;" id="chknum_no">
+	   				<td></td>
+	   				<td style="color:red;">올바르지 않은 주민번호 입니다</td>
+	   			</tr> 
+            	<tr>
+            		<th align="right" width="100">
+            			핸드폰번호<span class="ico">*</span>
+            		</th>
+            		<td colspan="5">
+            			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"/>
+            		</td>
+            	</tr>
+            	 <tr>
+                    <th align="right" width="100">
+            			성별<span class="ico">*</span>
+            		</th>
+            		<td>
+            		 	
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" >M
+            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="F">F
+
+            		</td>
+                </tr>  
+             	
         </table>
         <br>
-		<center>
-          <input type="submit" id="sign" name="join" value="회원가입">
+          <input type="submit" id="sign" name="join" value="회원가입" >
        </form>
-      </div>
+   </div>
+     <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+
+	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/bootstrap.min.js"></script>
+	<script src="./resources/assets/js/owl.carousel.min.js"></script>
+	<script src="./resources/assets/js/modal-video.js"></script>
+	<script src="./resources/assets/js/loadmore.js"></script>
+	<script src="./resources/assets/js/prefixfree.min.js"></script>
+	<script src="./resources/assets/js/main.js"></script>
 </body>
 </html>
