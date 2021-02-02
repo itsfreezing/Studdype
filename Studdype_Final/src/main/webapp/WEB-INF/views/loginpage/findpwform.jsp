@@ -23,6 +23,88 @@
 <link rel="stylesheet" href="./resources/css/studdype/findpw.css">
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
+<style type="text/css">
+h1{
+	font-weight:800;
+	font-size: 30px;
+	line-height: 20px;
+	text-align: center;
+}
+#sendExtraPwForm{
+	width: 800px;
+	margin: auto;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 20px;
+}
+#id{
+	margin-left:3%;
+    width:250px;
+    height:40px;
+    margin-bottom: 3%;
+}
+#email{
+	margin-left:3%;
+    width:250px;
+    height:40px;
+    margin-bottom: 3%;
+}
+#submit_email{
+    width:50px;
+    height:40px;
+    margin-bottom: 15%;
+}
+
+#chkNum{
+	margin-left:3%;
+    width:250px;
+    height:40px;
+    margin-bottom: 5%;
+}
+#chkNum_btn{
+    width:50px;
+    height:40px;
+    margin-bottom: 18%;
+}
+.main_btn{
+	margin-left: 15%;
+}
+#home_btn{
+	position: relative;
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 150px;
+	height: 50px;
+	line-height: 30px;
+	padding: 0;
+	font-size: 18px;
+	font-weight: 400;
+	border-radius: 25px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+#psw_btn{
+	margin-left: 5%;
+	position: relative;
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 150px;
+	height: 50px;
+	line-height: 30px;
+	padding: 0;
+	font-size: 18px;
+	font-weight: 400;
+	border-radius: 25px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+</style>
+
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
  <script type="text/javascript">
@@ -125,26 +207,25 @@ function chkSubmit(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-
-	<div class="main_div">
 	
+	<div class="main_div">
+	<h1 class="page_title">비밀번호 찾기</h1>
 	<form action="sendExtraPw.do" method="post" id="sendExtraPwForm">
 	<div>
-		<h1 class="page_title">비밀번호 찾기</h1>
    		<table>
-   			<col width="150px"><col width="400px"><col width="100px">
+   			<col width="150px"><col width="350px"><col width="100px">
    			<tr>
-   				<td><label for="id">아이디</label></td>
-   				<td><input type="text" id="id" name="mem_id"></td>
+   				<td><label for="id" style="font-weight: 800;">아이디</label></td>
+   				<td><input type="text" id="id" name="mem_id" style="border:2px solid #6E45E3"></td>
    			</tr>
    			<tr>
-   				<td><label for="email">이메일</label></td>
-   				<td><input type="text" id="email" name="mem_email" placeholder="이메일 (email@studdype.com)"></td>
+   				<td><label for="email" style="font-weight: 800;">이메일</label></td>
+   				<td><input type="text" id="email" name="mem_email" placeholder="이메일 (email@studdype.com)" style="border:2px solid #6E45E3"></td>
    				<td><input type="button" value="전송" id="submit_email" onclick="sendEmail()"></td>
    			</tr>
    			<tr>
-   				<td><label for="chkNum">인증번호</label></td>
-   				<td><input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력"></td>
+   				<td><label for="chkNum" style="font-weight: 800;">인증번호</label></td>
+   				<td><input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:2px solid #6E45E3"></td>
    				<td><input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" ></td>
    				<input type="hidden" id="chk" title="n">
    			</tr> 
@@ -160,10 +241,10 @@ function chkSubmit(){
    		</table>
    		
    </div>
-   
-   <div style="text-align: center;">
-   		<input type="button" value="홈" onclick="" class="findform_btn">
-   		<input type="button" value="비밀번호 찾기" class="findform_btn" onclick="chkSubmit();">
+   <br><br>
+   <div class="main_btn">
+   		<input type="button" id="home_btn" value="홈" onclick="" class="findform_btn">
+   		<input type="button" id="psw_btn" value="비밀번호 찾기" class="findform_btn" onclick="chkSubmit();">
    </div>
    
    	</form>

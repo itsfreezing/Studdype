@@ -123,11 +123,36 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		logger.info("logout");
 		
-		session.invalidate();
+		session.removeAttribute("login");
 		return "redirect:/studyList.do";		
 	}
 	
-	//비밀번호 찾기
+	//아이디 찾기 페이지
+	@RequestMapping("/findIdForm.do")
+	public String findIdForm(MemberDto dto) {
+		logger.info("findId page");
+		
+		return "loginpage/findId";
+	}
+	
+	//아이디 찾기
+	@RequestMapping("/findId.do")
+	public String findId(MemberDto dto) {
+		logger.info("findId");
+		
+		String findId = memberBiz.findId(dto);
+			
+		System.out.println(findId);
+			
+		if(findId != null) {
+			System.out.println("search_btn");
+			return "findId";
+		}
+		return findId;
+	}
+	
+	
+	//비밀번호 찾기 페이지
 	@RequestMapping("/findpwform.do")
 	public String findPasswordForm() { 
 		
