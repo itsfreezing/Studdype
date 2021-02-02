@@ -21,7 +21,7 @@ div.copyright{
 		<!-- SNS -->
 		
 					<div class="copyright">
-						<p>Copyright © StuDdype Inc. All Rights Reserced.</p>
+						<p>Copyright © StuDdype Inc. All Rights Reserved.</p>
 					</div>
 				
 				

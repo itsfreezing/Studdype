@@ -9,19 +9,15 @@
 <body>
 	<!-- footer 영역 -->
 	<div class="footer-menu">
-		
-		
+
 		<!-- SNS -->
 		
 					<div class="copyright">
-						<p>Copyright © StuDdype Inc. All Rights Reserced.</p>
+						<p>Copyright © StuDdype Inc. All Rights Reserved.</p>
 					</div>
 				
-				
-		
-		</div>
-		<a href="#" class="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
 	</div>
+		<a href="#" class="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
 	<!-- footer 끝 -->
 </body>
 </html>

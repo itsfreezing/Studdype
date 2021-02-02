@@ -24,8 +24,8 @@ public class MailSender {
 		mail = new JavaMailSenderImpl();
 		mail.setHost("smtp.gmail.com");
 		mail.setPort(587);
-		mail.setUsername("ehldks2104");
-		mail.setPassword("EunYou0706!!");
+		mail.setUsername("2dudwnd");
+		mail.setPassword("hree1215!@");
 		mail.setDefaultEncoding("UTF-8");
 		Properties prop = new Properties();
 		prop.setProperty("mail.smtp.auth", "true");
@@ -84,7 +84,7 @@ public class MailSender {
 		
 		try {
 			helper = new MimeMessageHelper(msg,true);
-			helper.setFrom(new InternetAddress("보내는 계정 아이디","StuDdype","UTF-8"));
+			helper.setFrom(new InternetAddress("2dudwnd@gmail.com","StuDdype","UTF-8"));
 			helper.setTo(member.getMem_email());
 			helper.setSubject("[스터띱] "+member.getMem_id()+"님 임시 비밀번호 입니다.");
 			helper.setText(html, true);
@@ -124,7 +124,7 @@ public class MailSender {
 		
 		try {
 			helper = new MimeMessageHelper(msg,true);
-			helper.setFrom(new InternetAddress("","StuDdype","UTF-8"));
+			helper.setFrom(new InternetAddress("2dudwnd@gamil.com","StuDdype","UTF-8"));
 			helper.setTo(member.getMem_email());
 			helper.setSubject("[스터띱] "+member.getMem_id()+"님 인증번호 입니다.");
 			helper.setText(html, true);

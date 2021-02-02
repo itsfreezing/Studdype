@@ -44,7 +44,12 @@ public class MemberBizImpl implements MemberBiz {
 		return null;
 	}
 
-
+	//아이디 찾기
+	@Override 
+	public String findId(MemberDto dto) {
+		return memberDao.findId(dto);
+	}
+	
 	@Override
 	public int updateMember(MemberDto dto) {
 		
