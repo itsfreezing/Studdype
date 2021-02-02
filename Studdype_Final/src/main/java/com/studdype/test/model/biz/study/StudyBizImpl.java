@@ -93,13 +93,20 @@ public class StudyBizImpl implements StudyBiz{
 	public int insertStudy(StudyDto dto, MultipartFile[] mfileList, String path, List<FileDto> fileList) {
 		int res = 0; // 스터디생성 후 파일 저장 결과 
 		int insertRes = 0; // 스터디 생성 결과 
+		int basicPhoto = 0;
+		
+		if(mfileList == null) {
+			basicPhoto = 1;
+		}
 		
 		insertRes = study_Dao.insertStudy(dto);
 		
 		// 실행 성공 시 실제 파일 저장
-		if(insertRes == 1) {
+		if(insertRes == 1 && basicPhoto == 0) {
 			res = 1;
 			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+		}else {
+			res = insertRes;
 		}
 		
 		return res;
@@ -148,7 +155,12 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
+	public int newInfo(StudyDto dto) {
+		
+		return study_Dao.newInfo(dto);
+	}
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
+
 		return locationSidao.selectLocationSiOfStudy(si_no);
 	}
 
@@ -165,6 +177,7 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public String categoryNameForStudyHome(int cate_no) {
 		return studyCatedao.categoryNameForStudyHome(cate_no);
+
 	}
 
 	@Override

@@ -12,4 +12,5 @@ public interface StudyMemberDao {
 	public List<StudyMemberDto> StudyList(int mem_no);  //멤버 번호로 가입된 스터디번호 가져오기
 	public int StudyTotalNum(int mem_no);
 	public List<StudyMemberDto> pagingstudylist(Map pageMap);
+	public int deletemember(StudyMemberDto dto);
 }
