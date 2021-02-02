@@ -118,16 +118,16 @@ input.submitBtn:hover{
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function idsearch(){
-	var form = $(".main_head");
+	var form = $("#findidform");
 	var name = $("#name");
 	var rno = $("#rno1").val()+"-"+$("#rno2").val();
-
 	if(name.val() == null || name.val().trim() == ''){
 		alert("이름을 확인해 주세요.");
-	}else if(rno.val() == null || rno.val().trim() == ''){
+	}else if(rno == null || rno.trim() == ''){
 		alert("주민번호를 확인해 주세요.");
 	}else{
-		form.button();
+		$("#realRno").val(rno);
+		form.submit();
 	}
 };
 
@@ -140,16 +140,17 @@ function cancel(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<h1>이메일 계정 찾기 </h1>
-	<form class="main_head" action="findId.do" method="POST">
+	<form class="main_head" id="findidform" action="findId.do" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">
 			<div class="name_part">
 				<label id="nameLabel">이름</label>
-				<input type="text" name="name" id="name" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
+				<input type="text" name="mem_name" id="name" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
 			</div>
 			<div class="rno_part">
 				<label id="rnoLabel">주민등록번호</label>
 				<input type="text" name="rno" id="rno1" style="border:2px solid #6E45E3" maxlength="6"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" style="border:2px solid #6E45E3" maxlength="7">
+				<input type="hidden" name="mem_rno" id="realRno">
 			</div>
 			</div>
 			<div class="btn_part">
