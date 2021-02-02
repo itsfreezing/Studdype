@@ -82,16 +82,15 @@
 					<input type="hidden" name="s_no" value="${study.s_no }">
 					<input type="hidden" name="b_writer" value="${login.mem_no }">
 					<div id="main-section-top">
-						<table>
-							<col width="800">
+						<table id="titleTable">
+							<col width="700">
 							<col width="250">
-							<col width="150">
+							<col width="100">
 							<tr>
-								<th><input type="text" id="title" name="b_title"
-									value="${bookDto.getB_title() }"></th>
+								<th style="font-size:25pt;"><input type="text" id="title" name="b_title" value="${bookDto.getB_title() }"></th>
 								<th><input type="text" readonly="readonly" class="input_none"
 									value="${writerNameMap.get(bookDto.getB_writer()).getMem_id()}(${writerNameMap.get(bookDto.getB_writer()).getMem_name() })"></th>
-								<th><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.DD HH.MM"/></th>
+								<th style="font-size:13pt;"><fmt:formatDate value="${bookDto.getB_regdate() }" pattern="YYYY.MM.dd"/></th>
 							</tr>
 						</table>
 					</div>
@@ -102,41 +101,38 @@
 						<div id="book-content">
 							<input type="hidden" id="b_no" name="b_no" value="${bookDto.getB_no() }">
 							<table id="info-table">
-								<col width="100">
+								<col width="200px"><col width="100px">
 								<tr>
-									<td colspan="2"><img id="book-img" src="${bookDto.getBook_img() }"></td>
-								</tr>
-								<tr>
-									<th>도서 이름&nbsp;</th>
-									<th><input type="text" readonly="readonly" class="input_none" name="book_title"
-										value="${bookDto.getBook_title()}"></th>
+									<td rowspan="5"><img id="book-img" src="${bookDto.getBook_img() }"></td>
+									<td colspan="2" style="font-size:21pt; font-weight:bold;"><input type="text" readonly="readonly" class="input_none" name="book_title"
+										value="${bookDto.getBook_title()}"></td>
 								</tr>
 								<tr>
 									<th>저자&nbsp;</th>
-									<th><input type="text" readonly="readonly" class="input_none" name="book_author"
-										value="${bookDto.getBook_author() }"></th>
+									<td><input type="text" readonly="readonly" class="input_none" name="book_author"
+										value="${bookDto.getBook_author() }"></td>
 								</tr>
 								<tr>
 									<th>출판사&nbsp;</th> 
-									<th><input type="text" readonly="readonly" class="input_none" name="book_publish"
-										value="${bookDto.getBook_publish() }"></th>
+									<td><input type="text" readonly="readonly" class="input_none" name="book_publish"
+										value="${bookDto.getBook_publish() }"></td>
 								</tr>
 								<tr>
-									<th>링크&nbsp;</th>
-									<th><a href="${bookDto.getBook_url() }" target="_blank">
+									<td>링크&nbsp;</td>
+									<td><a href="${bookDto.getBook_url() }" target="_blank">
 											<img id="link" src='resources/img/link-icon.png' />
 									</a> <input type="hidden" value="${bookDto.getBook_url() }">
-									</th>
+									</td>
 								</tr>
 							</table>
 						</div>
 						<div id="book_textarea">
 							<table>
 								<tr>
-									<th>도서 설명</th>
+									<th style="color:black;">도서 설명</th>
 								</tr>
 								<tr>
-									<th><textarea style="width: 100%;" rows="20" id="book_board_content" 
+									<th><textarea style="width: 100%;" rows="15" id="book_board_content" 
 									name="b_content">${detailBookDto.getB_content() }</textarea></th>
 								</tr>
 							</table>

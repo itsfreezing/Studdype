@@ -1,4 +1,4 @@
-package com.studdype.test.model.dao.board.dataFile;
+package com.studdype.test.model.dao.board.data;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

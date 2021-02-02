@@ -394,5 +394,24 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return resMap;
 	}
+
+	@Override
+	public Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getB_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] [MemberDaoImpl]  selectMemberByFreeList method");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getB_no(), dto);
+		}
+		
+		return resMap;
+	}
 	
 }

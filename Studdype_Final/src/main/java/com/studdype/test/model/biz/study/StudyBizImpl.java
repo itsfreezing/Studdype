@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.book.BookDao;
-import com.studdype.test.model.dao.board.dataFile.DataFileDao;
+import com.studdype.test.model.dao.board.data.DataFileDao;
 import com.studdype.test.model.dao.board.notice.NoticeBoardDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;

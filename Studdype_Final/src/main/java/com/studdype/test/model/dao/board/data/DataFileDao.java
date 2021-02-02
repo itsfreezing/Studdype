@@ -1,4 +1,4 @@
-package com.studdype.test.model.dao.board.dataFile;
+package com.studdype.test.model.dao.board.data;
 
 
 public interface DataFileDao {
