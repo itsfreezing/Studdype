@@ -53,8 +53,10 @@ public interface MemberDao {
 
 	
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
+	public MemberDto findId(MemberDto dto);
 	
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
+	public MemberDto sendMail(MemberDto dto );//회원가입 이메일 인증
 	public int updatePw(MemberDto dto); // 비밀번호 변경
 	
 	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,9 +59,12 @@ public class MemberController {
 		int res=0;
 		System.out.println(dto.getMem_id());
 		System.out.println(dto.getMem_pw());
-		String memberrrn=request.getParameter("mem_rno")+"-"+request.getParameter("memrno");
-		System.out.println(memberrrn);
+		String mem_rno=request.getParameter("unum1")+"-"+request.getParameter("unum2");
+		dto.setMem_rno(mem_rno);
+		System.out.println(mem_rno);
 		System.out.println(dto);
+		
+		
 		res=memberBiz.memberInsert(dto);
 		if(res>0) {
 			System.out.println("성공");
@@ -75,13 +79,13 @@ public class MemberController {
 	public @ResponseBody int idchk(@RequestBody MemberDto dto) {
 		logger.info("ID CHECK");
 		MemberDto res=null;
-		int isUsed=0;
+		int isUsed=1;//중복아이디가 아닐때
 		System.out.println(dto.getMem_id());
 		res=memberBiz.idchk(dto.getMem_id());
-		if(res!=null) { //중복되지 않는 아이디일경우 
-			 isUsed=1;
-		}else {
+		if(res!=null) { //중복아닌 아이디일경우 
 			 isUsed=0;
+		}else {
+			isUsed=1;
 		}
 		return isUsed;
 	}
@@ -178,6 +182,32 @@ public class MemberController {
 		return resMap;
 	}
 	
+	
+	//회원가입 이메일 전송
+	@RequestMapping(value="/sendmail.do", method=RequestMethod.POST)
+	public @ResponseBody Map sendmail(@RequestBody MemberDto dto , 	HttpSession session ) {
+		MailSender sender=new MailSender();
+		logger.info("send mail");
+		Map resMap = new HashMap();
+		
+		String res=dto.getMem_email();
+	
+		if(res!=null) {
+			System.out.println(res);
+
+			resMap.put("isExist", "y");
+			String randNum=sender.getRandNum();
+			sender.sendMail(dto, randNum);
+
+			session.setAttribute("randNum", randNum);
+		}else {
+			resMap.put("isExist","n");
+			
+		}
+		
+		return resMap;
+	}
+	
 	//인증번호 확인
 		@RequestMapping(value="/chkVerification.do", method=RequestMethod.POST)
 		public @ResponseBody Map chkVerification(@RequestBody String chk, HttpSession session) {
@@ -223,6 +253,4 @@ public class MemberController {
 			return "loginpage/findpwres";
 		}		
 }
-	
-
 	
