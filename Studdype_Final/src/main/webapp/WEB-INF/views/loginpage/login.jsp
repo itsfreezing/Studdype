@@ -63,7 +63,7 @@ h1{
     height:50px;
 }
 #pw{
-	margin-bottom:5%;
+	margin-bottom:10%;
     width:300px;
     height:50px;
 }
@@ -80,7 +80,7 @@ h1{
 	font-size:20px;
 }
 .findSection{
-    margin-left:43%;
+    margin-left:32.5%;
     font-weight: 800;
 }
 .mainBtn{
@@ -106,9 +106,11 @@ function login_btn(){
 	
 	if ( mem_id.val() == null || mem_id.val().trim() == ''){
 		alert("아이디를 확인해 주세요.");
+		return false;
 		
 	}else if ( mem_pw.val() == null || mem_pw.val().trim() == '' ){
 		alert("비밀번호를 확인해 주세요.");
+		return false;
 		
 	}else {
 		form.submit();
@@ -137,13 +139,14 @@ function login_btn(){
        		<br>
    		</table>
    		<div class="findSection">
+   		<a href="signform.do" id="signUp" onClick="loginpage/signup">회원가입 | </a>
    		<a href="findIdForm.do" id="findId" onClick="loginpage/findId">아이디 찾기  | </a>
    		<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기</a>
    		</div>
+   		<br>
    		<div class="mainBtn">
        	<button type="submit" id="login" onclick="login_btn();">LOGIN</button>
        	<br>
-       	<button type="submit" id="signup" onClick="loginpage/signup">회원가입</button>
    		</div>
  	</form>
 	</div>

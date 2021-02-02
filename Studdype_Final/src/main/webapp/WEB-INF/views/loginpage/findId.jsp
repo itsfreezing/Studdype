@@ -117,30 +117,11 @@ input.submitBtn:hover{
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-/* function idsearch() { //이름,주민번호로 '찾기' 버튼
-	var doc=document.getElementsByName("name")[0];
-	
-	var emailtitle = $("#rno1").attr('title');
-	var rno = $("#rno1").val()+"-"+$("#rno2").val();
-	if(doc.value.trim()==""||doc.value==null){
-		alert("이름을 입력해주세요");
-		return false;
-	}
-	 if(rnotitle == "n"){
-		alert("주민등록번호를 확인해주세요");
-		return false;
-	}else{
-		   var target="email.do?command=searchid&name="+doc.value.trim()+"&email="+email;
-		   open(target,"","width=900,height=700");
-		   self.close();
-	}
-} */
-
 function idsearch(){
 	var form = $(".main_head");
 	var name = $("#name");
-	var rno = $("#rno1")+'-'+$("#rno2");
-	
+	var rno = $("#rno1").val()+"-"+$("#rno2").val();
+
 	if(name.val() == null || name.val().trim() == ''){
 		alert("이름을 확인해 주세요.");
 	}else if(rno.val() == null || rno.val().trim() == ''){
@@ -159,7 +140,7 @@ function cancel(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<h1>이메일 계정 찾기 </h1>
-	<form class="main_head">
+	<form class="main_head" action="findId.do" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">
 			<div class="name_part">
