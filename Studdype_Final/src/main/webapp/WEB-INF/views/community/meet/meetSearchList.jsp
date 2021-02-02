@@ -38,37 +38,6 @@
 
 
 <script type="text/javascript">
-
-<!-- 모임 페이지 슬라이더 -->
-(function ($) {
-	 $ (document) .ready (function () {
-		 $('.owl-carousel').owlCarousel({
-		        items:1,                 	// 한번에 보여줄 아이템 수
-		        loop:true,               	// 반복여부
-		        //margin:35,               	// 오른쪽 간격
-		        autoplay:true,				// 자동재생 여부
-		        autoplayTimeout:1800,    	// 재생간격
-		        autoplayHoverPause:false  	//마우스오버시 멈출지 여부
-		    });    
-	 		
-		    $('.customNextBtn').click(function() {
-		    	$('.owl-carousel').trigger('next.owl.carousel');
-		    })
-		    
-		    $('.customPrevBtn').click(function() {
-		    	$('.owl-carousel').trigger('prev.owl.carousel', [300]);
-		    })
-	});
-})(jQuery);
-
-//부모 선택 후 흰색변경 script 
-$(function(){
-	$(".current_page").parent().css('color','white');
-	$(".current_page").css('border','1px solid #6434ef');
-	$(".current_page").css('cursor','default');
-	
-});	
-
 <!-- 페이징 --> 
 // 페이지 이동 
 function movePage(pagenum){
@@ -107,23 +76,6 @@ $("#nothingMeet.val(${keyword})").css("color","red");
      <!--main content 섹션-->
      <div class="main-section">
         
-		<!-- 모임관리 페이지 슬라이더 영역 -->
-		<div class="owl-carousel hero-slider-area" id="mainBanner">
-			<div class="hero-slider-info">
-				<img src="./resources/assets/img/banner_meetingPage1.png">
-			</div>
-			<div class="hero-slider-info">
-				<img src="./resources/assets/img/banner_meetingPage2.png">
-			</div> 
-			<div class="hero-slider-info">
-				<img src="./resources/assets/img/banner_meetingPage3.png">
-			</div>
-			<div class="hero-slider-info">
-				<img src="./resources/assets/img/banner_meetingPage4.png">
-			</div>
-		</div>
-		<!-- ---------------------------------- -->       
-        
        	<!-- 검색 창 -->
        	<div id="bigBox">
 	       	<div class="divBox" tooltip="검색어를 입력한후 Enter 버튼을 눌러주세요!"  tooltip-persistent>
@@ -143,12 +95,6 @@ $("#nothingMeet.val(${keyword})").css("color","red");
 				<!-- ---------------------------------- -->
 				
 			</div>
-			
-			<!-- 모임등록 버튼 -->
-			<div id="listBtnDiv">
-				<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'" style="float: right; margin-top: 0;">모임 등록</button>   
-			</div> 
-	       	<!-- ---------------------------------- -->
 	       	
        	</div>
        	
@@ -186,6 +132,10 @@ $("#nothingMeet.val(${keyword})").css("color","red");
 			</c:otherwise>
 		</c:choose>
 		<!-- ---------------------------------- -->
+		
+		<!-- 모임등록 버튼 -->
+		<button class="submitBtn" id="listBtn_insertform" onclick="location.href='meetinsertform.do'">모임 등록</button>   
+       	<!-- ---------------------------------- -->
 		
 		<!-- 페이징 -->
 		<div class="pagin_div">

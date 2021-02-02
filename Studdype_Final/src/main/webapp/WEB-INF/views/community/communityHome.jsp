@@ -30,12 +30,60 @@
 <body>
 <jsp:include page="../commond/communityHeader.jsp"></jsp:include>
 <jsp:include page="../commond/communityLeftNavi.jsp"></jsp:include>
+<jsp:include page="./rightInfo.jsp"></jsp:include>
+
 	
 	<!--main conternt 섹션-->
 	<div class="main-section">
 							
-					<div id="studyImg"><img src="/studyHomeImg//${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<div id="studyImg"><img src="${ fileName }" onError="this.src='resources/img/no_image.png'"></div>
+		<img id="studyGif" src="./resources/assets/img/studdypeGif.gif"><span id="studyOneLineIntro"> ${ study.getS_name() } </span>
+		<div id="studyOneLineIntro">
+			<img class="quote" src="./resources/assets/img/studyHome_quote_left.png">
+			${ study.s_info }
+			<img class="quote" src="./resources/assets/img/studyHome_quote_right.png">
+		</div>
+		<div id="subMain">
+			<div id="content">스터디 상세내용</div>
+			<div id="studyContent">
+				${ study.s_content }
+			</div>
+			<div id="content">대표 책 소개</div>
 			
+			<c:choose>
+				<c:when test="${empty book.book_ismain }">
+					<div id="studyBook"><img src="./resources/assets/img/nothingBook.png"></div>
+				</c:when>
+				<c:otherwise>
+					<div id="bookContent">
+						<div id="bookContentLeft">
+							<div id="bookImg"><img src="${ book.book_img} "></div>
+						</div>
+						<div id="bookContentRight">
+							<div id="bookTitle">${ book.book_title }</div>
+							<div id="bookInfo">
+								<div id="bookInfoLeft">
+									저자<br><br>
+									출판사<br><br>
+									링크<br><br>
+									<hr id="bookHR"><br>
+									도서안내<br><br>
+								</div>
+								<div id="bookInfoRight">
+									${ book.book_author }<br><br>
+									${ book.book_publish }<br><br>
+									<a href="${book.book_url }"
+									target="_blank"><img id="link"
+										src='resources/img/link-icon.png' /></a><input type="hidden"
+									value="${book.book_url }"><br><br>
+									<div id="bookExplan"><br>${ book.b_content }<br><br></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>	
 			
 	</div>
     

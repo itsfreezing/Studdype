@@ -62,4 +62,7 @@
 		<update id="updatePw" parameterType="memberDto">
 			UPDATE MEMBER SET MEM_PW = #{mem_pw} WHERE MEM_NO = #{mem_no}
 		</update>
+		<select id="allMember" resultType="memberDto">
+			SELECT * FROM MEMBER
+		</select>
 	</mapper>

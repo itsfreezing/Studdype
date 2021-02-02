@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -32,7 +32,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
 <script type="text/javascript">
 	var b_no = 0;
@@ -84,34 +84,28 @@
 					<div id="main-section-top">
 						<table>
 							<col width="800">
-							<col width="200">
-							<col width="100">
-							<tr>
-								<th>글제목</th>
-								<th>작성자</th>
-								<th>작성시간</th>
-							</tr>
+							<col width="250">
+							<col width="150">
 							<tr>
 								<th><input type="text" id="title" name="b_title"
 									value="${bookDto.getB_title() }"></th>
 								<th><input type="text" readonly="readonly" class="input_none"
 									value="${writerNameMap.get(bookDto.getB_writer()).getMem_id()}(${writerNameMap.get(bookDto.getB_writer()).getMem_name() })"></th>
-								<th><fmt:formatDate value="${bookDto.getB_regdate() }"
-										timeStyle="YYYY-MM-DD" /></th>
+								<th><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.DD HH.MM"/></th>
 							</tr>
 						</table>
 					</div>
 
 					<!-- 메인 섹션 중앙(도서 정보) -->
 					<div id="main-section-mid">
-
-						<div id="book-img">
-							<img src="${bookDto.getBook_img() }">
-							<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
-						</div>
+						<input type="hidden" name="book_img" value="${bookDto.getBook_img() }">
 						<div id="book-content">
 							<input type="hidden" id="b_no" name="b_no" value="${bookDto.getB_no() }">
-							<table>
+							<table id="info-table">
+								<col width="100">
+								<tr>
+									<td colspan="2"><img id="book-img" src="${bookDto.getBook_img() }"></td>
+								</tr>
 								<tr>
 									<th>도서 이름&nbsp;</th>
 									<th><input type="text" readonly="readonly" class="input_none" name="book_title"
@@ -134,20 +128,23 @@
 									</a> <input type="hidden" value="${bookDto.getBook_url() }">
 									</th>
 								</tr>
+							</table>
+						</div>
+						<div id="book_textarea">
+							<table>
 								<tr>
-									<th style="vertical-align: top;">도서 설명</th>
-									<th><textarea id="content" name="b_content" style="width: 100%;" rows="10">${bookDto.getB_content() }</textarea></th>
+									<th>도서 설명</th>
 								</tr>
-								<tr style="text-align: right;">
-									<td colspan="3">
-										<button type="submit">완료</button>
-										<button type="button" onclick="returnDetailPage();">취소</button>
-									</td>
-
+								<tr>
+									<th><textarea style="width: 100%;" rows="20" id="book_board_content" 
+									name="b_content">${detailBookDto.getB_content() }</textarea></th>
 								</tr>
 							</table>
 						</div>
-
+						<div id="button-area">
+							<button class="update-btn-group" type="submit">완료</button>
+							<button class="update-btn-group" type="button" onclick="returnDetailPage();">취소</button>
+						</div>
 					</div>
 				</form>
 			</c:otherwise>

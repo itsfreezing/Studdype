@@ -17,39 +17,486 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<link rel="stylesheet" href="./resources/css/community/book/registerBook.css">
+<!-- <link rel="stylesheet" href="./resources/css/community/book/registerBook.css"> -->
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
+
+<style type="text/css">
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: rgb(115, 98, 222);
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+    text-align:center;
+}
+
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 0.9;
+    
+    /* 변경가능 */
+    background: #fff;
+    border:2px solid rgb(115, 98, 222);
+    margin-top: 90px;
+    margin-left: 12px;    
+}
+
+/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
+tooltip-persistent 요소 추가 할 것 */
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}
+
+/* 모달 CSS */
+*,
+:before,
+:after {
+  box-sizing: border-box;
+  margin: 0;
+  transition: 0.7s ease all;
+}
+
+.modal {
+  height: 600px;
+  width: 1300px;
+  margin: auto;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 12%;
+  right: 0;
+  transition: 0.4s, box-shadow 0.3s 0.4s;
+  font-family: Roboto;
+  display:block;
+  border-color:rgba(0,0,0,0.5);
+  z-index:100;
+  background:#fff;
+}
+.modal.hidden {
+  box-shadow: none;
+  transition: 0.4s, box-shadow 0s;
+  opacity: 0;
+  visibility: hidden;
+}
+.modal.hidden .form {
+  top: 100%;
+}
+.modal.hidden .invite {
+  top: -100%;
+}
+.modal.hidden .invite .close {
+  height: 0;
+  width: 0;
+  top: 0;
+  right: 0;
+}
+
+.form {
+	width: 60%;
+	height: 100%;
+	padding: 25px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background:rgba(167, 148, 255, 0.2);
+}
+
+.board-label {
+	font-weight:600;
+	font-size:15pt;
+}
+
+.board-input {
+	width:100%;
+	height:30px;
+	padding-top:5px;
+	font-weight:550;
+	border:none;
+}
+
+.board-input:focus {
+	border:2px solid gray;
+	transition: none;
+}
+
+#content {
+	width:100%;
+	padding-top:5px;
+	font-weight:550;
+	border:none;
+}
+
+#content:focus {
+	border:2px solid gray;
+	transition: none;
+}
+
+.invite {
+  width: 40%;
+  height: 100%;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 60%;
+  text-align:center;
+}
+
+.content-div {
+	width:100%;
+	text-align:left;
+	margin:5px 0 5px 0;
+}
+
+.book-label {
+	font-weight:600;
+	font-size:15pt;
+}
+
+.book-input {
+	width:100%;
+	border:none;
+}
+
+.invite img {
+	width:30%;
+	height:32%;
+	border:5px solid #f9f9f0;
+	border-radius:10px;
+	background:#f6f5f0;
+}
+
+#modal-top {
+	width:100%;
+	height:100px;
+}
+
+#modal-bottom {
+	width:100%;
+	height:480px;
+}
+
+#modal-textarea {
+	width:100%;
+	height:450px;
+}
+
+#modal-content {
+	width:100%;
+	height:330px;
+	padding:1%;
+	text-align:center;
+}
+
+#modal-content img {
+	width:25px;
+	height:25px;
+}
+
+#modal-content textarea {
+	width:450px;
+}
+
+.form input, textarea {
+  font-size: 15px;
+}
+
+.label {
+  font: 500 14px Roboto;
+  color: #fb5781;
+}
+
+.form button {
+  background: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  padding:2% 5%;
+  bottom: 30px;
+  left: 50%;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.form button:hover {
+	color:#fff;
+	background:gray;
+}
+
+.form button:hover:before {
+  left: 110%;
+  transition: 0.3s;
+}
+.form button:before {
+  content: "";
+  background: rgba(255, 255, 255, 0.3);
+  height: 100%;
+  width: 65px;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skew(-45deg);
+}
+
+.nope {
+  background: rgba(167, 148, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  font-size: 18px;
+  font-weight:550;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateX(-50%);
+  color:black;
+}
+.nope:hover {
+	background:gray;
+	color:#fff;
+}
+
+.nope:hover:before {
+	left: 110%;
+	transition: 0.3s;
+}
+
+.nope:before {
+  content: "";
+  background: rgba(255, 255, 255, 0.3);
+  height: 100%;
+  width: 65px;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skew(-45deg);
+}
+
+.close {
+  background: #474747;
+  height: 30px;
+  width: 30px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  cursor: pointer;
+  transition: 0.4s 0.3s;
+}
+.close:before, .close:after {
+  content: "";
+  background: #fff;
+  height: 80%;
+  width: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.close:after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+/* 모달 CSS 종료 */
+
+#main-section-top {
+	position:relative;
+	width:100%;
+	border:1px solid #fff;
+}
+
+#main-section-bottom {
+	position:relative;
+	width:100%;
+	border:1px solid #fff;
+}
+
+#book-img-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+}
+
+.divBox {
+	position:relative;
+	float:left;
+	margin:2%;
+	width:15%;
+	border:5px solid #f9f9f0;
+	border-radius:10px;
+	background:#f6f5f0;
+	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+#book-img-section img {
+	width:100%;
+	height:250px;
+}
+
+#book-img-section img:hover {
+	cursor:pointer;
+}
+
+#no-list {
+	position:relative;
+	width:30%;
+	height:auto;
+	left:35%;
+}
+
+#paging-section {
+	position:relative;
+	display:inline-block;
+	width:100%;
+	text-align:center;
+}
+
+.pageNumber {
+    padding: 0px 10px 5px 10px;
+    padding-top: 10px;
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
+    color: pink;
+    font-weight: bold;
+    border: 1px solid #dee2e6;
+    text-align: center;
+    text-decoration: none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.show {
+	color: white!important;
+    background-color: #6434ef;
+    cursor:default;
+}
+#homeSearch {
+	margin-top:10px; 
+	border:none; 
+	background-color: #f9fafc; 
+	cursor:pointer;
+	padding:10px 5px 5px 20px;
+	background:#fff;
+	text-transform: uppercase;
+	box-shadow: none;
+}
+
+.recommend-img {
+	width:100%!important;
+	height:250px!important;
+	text-align:center!important;
+	margin:25px 0 25px 0!important;
+}
+
+.categoryDiv {
+	display:inline-block;
+	width:15%!important;
+	height:250px!important;
+	margin-right:20px!important;
+}
+
+.categoryDiv:hover {
+	cursor:pointer;
+}
+
+.categoryDiv img {
+	width:100%!important;
+	height:250px!important;
+}
+
+#recommend-comment {
+	text-align:center; 
+	font-weight:600; 
+	font-size:20pt; 
+	margin-top:30px;
+}
+
+#category {
+	width:100%;
+	text-align:center;
+}
+
+#category input {
+    background-color: #EFF0F2;
+    border: 1px solid #EFF0F2;
+    width: 80px;
+    height: 30px;
+    font-size: 10pt;
+    border-radius: 10px 10px;
+    color: black;
+    font-weight: bold;
+    margin-left: 1%;
+}
+
+#category input:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.categorySelected {
+	background:#6434ef!important;
+	color:#fff!important;
+}
+
+#no-categoryList {
+	position:relative;
+	text-align:center;
+	width:200px!important;
+	height:200px!important;
+}
+</style>
+
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
-	var pageSize = 12; 		// 한 페이지 수 
+	var pageSize = 10; 		// 한 페이지 수 
 	var pageGroupSize = 5; 	// 페이징 당 페이지 수 
 	var listLength = 0;		// 전달받은 도서 수
 	
 	$(function() {
-	///////////////////////////////////////////////////////////////////////
-		search();
 		
 		// 카카오 도서 검색 api
 		$("#searchForm").submit(function() {
 			$("#book-img-section").empty();
+			$(".recommend-img").empty();
+			$(".categorySelected").removeClass("categorySelected");
+			
 			$.ajax({
 				method:"GET",
 				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=3&size=50&query="+$("#bookName").val()+"&target=title&target=person",
-				data:{ query: $("#bookName").val() },
-				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" }
+				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" },
+				error:function() {
+					alert("도서 검색 실패!");
+				},
 			})
 			// 데이터 정제
 			.done(function(msg) {
@@ -76,6 +523,7 @@
 				appendBookList(bookList);
 				
 			});
+			return false;
 		});	
 		
 		// 모달 창 닫기 이벤트
@@ -101,10 +549,34 @@
 			$('.modal').removeClass('hidden');
 		})
 		
+		// 페이지 번호 클릭 이벤트 (페이징 처리)
 		$(document).on("click", ".pageNumber", function() {
 			var pageOrder = $(this).text();
 			
 			paging(listLength, pageOrder);
+		});
+		
+		// 카테고리 버튼 클릭 이벤트
+		$(".inputCategory").click(function() {
+			$(".categorySelected").removeClass("categorySelected");
+			$(this).addClass("categorySelected");
+			
+		});
+		
+		// 카테고리 책 클릭 시 모달 띄우기
+		$(document).on("click", ".categoryDiv" , function() {
+			$("#title").val($(this).children().eq(1).val());
+			$("#author").val($(this).children().eq(2).val());
+			$("#publish").val($(this).children().eq(3).val());
+			$("#link").attr("href", $(this).children().eq(4).val());
+			$("#book_img").attr("src", $(this).children().eq(0).attr("src"));
+			$("#input_book_img").val($(this).children().eq(0).attr("src"));
+			$("#book_url").val($(this).children().eq(4).val());
+			
+			$("#b_title").val("");
+			$("#content").val("");
+			
+			$('.modal').removeClass('hidden');
 		});
 		
 	}); // 즉시 실행 종료
@@ -113,6 +585,9 @@
 	function appendBookList(bookList) {
 		listLength = bookList.length; // 전달받은 도서 수
 		$("#paging-section").empty();
+		$(".recommend-img").empty();
+		$(".categorySelected").removeClass("categorySelected");
+		
 		if(listLength == 0) {
 			$("#book-img-section").append(
 				"<div id='no-list'>"+
@@ -132,7 +607,7 @@
 					"</div>"
 			);
 		}
-		$(".divBox:gt(11)").hide();
+		$(".divBox:gt(9)").hide();
 	}
 	
 	// 페이징 계산 및 append 함수
@@ -175,47 +650,15 @@
 		$(".pageNumber:first").addClass("show");
 	}
 	
-	// 검색창 함수
-	function search() {
-		//검색창 영역
-		const input = document.querySelector(".finder_input");
-		const finder = document.querySelector(".finder");
-		const form = document.querySelector("#searchForm");
-
-		input.addEventListener("focus", () => {
-		  finder.classList.add("active");
-		});
-
-		input.addEventListener("blur", () => {
-		  if (input.value.length === 0) {
-		    finder.classList.remove("active");
-		  }
-		});
-
-		form.addEventListener("submit", (ev) => {
-		  ev.preventDefault();
-		  finder.classList.add("processing");
-		  finder.classList.remove("active");
-		  input.disabled = true;
-		  setTimeout(() => {
-		    finder.classList.remove("processing");
-		    input.disabled = false;
-		    if (input.value.length > 0) {
-		      finder.classList.add("active");
-		    }
-		  }, 1000);
-		});
-	}
-	
 	function validateSubmit() {
 		var title = $("#b_title").val();
 		var content = $("#content").val();
 		
-		if( (title.trim().length==0) || (title==null) || (title.trim()=='') ) {
-			alert("글제목을 작성해주세요.");
+		if( (title.trim().length==0) || (title==null) || (title.trim()=='')) {
+			alert("글제목을 작성해주세요. (공백, 띄어쓰기 제외)");
 			return false;
-		}else if(title.trim() > 500) {
-			alert("글제목은 500자 이내로 작성해주세요.");
+		}else if(title.trim().length > 50) {
+			alert("글제목은 50자 이내로 작성해주세요.");
 			return false;
 		}else if( (content.trim().length==0) || (content.trim()=='') || (conetnt==null) ) {
 			alert("도서 설명을 작성해주세요.");
@@ -224,6 +667,53 @@
 			return true;
 		}
 	}
+	
+	function categorySearch(cate_no) {
+		console.log(cate_no);
+		
+		$("#book-img-section").empty();	// 검색창으로 나온 영역 비우기
+		$("#paging-section").empty();
+		
+		var categoryVal = {
+				"cate_no":cate_no
+		}
+		
+		$.ajax({
+			type:"post",
+			url:"bookCategorySearch.do",
+			data:JSON.stringify(categoryVal),
+			contentType:"application/json",
+			dataType:"json",
+			success:function(map) {
+				var html = "";
+				// <img src="./resources/img/no-exsist-book.png">
+				//	<p>등록된 도서가 없습니다.</p>
+				// <img src="./resources/assets/img/recommend1.jpg">
+				if(map.bookList.length == 0 ) {
+					html = "<img id='no-categoryList' src='./resources/img/no-exsist-book.png'><p id='recommend-comment'>카테고리 추천 도서가 없습니다.</p>"
+					$(".recommend-img").html(html);
+					return false;
+				}else {
+					html += "<p id='recommend-comment'>카테고리 추천 도서</p>";
+					for(var i = 0; i < map.bookList.length; i++) {
+						html += "<div class='categoryDiv'>"+
+						"<img src='"+map.bookList[i].book_img+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_title+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_author+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_publish+"'>"+
+						"<input type='hidden' value='"+map.bookList[i].book_url+"'>"+
+						"</div>";
+					}
+					
+					$(".recommend-img").html(html);
+				}
+				
+			},
+			error:function() {
+				alert("카테고리 검색 실패");
+			}
+		});
+	}
 </script>
 
 </head>
@@ -231,43 +721,50 @@
 
 	<!-- 모달 영역 시작 -->
 		<div class="modal hidden">
+			<form action="insertRegisterBook.do" onsubmit="return validateSubmit();" autocomplete="off" accept-charset="utf-8">
 			<div class="form">
-    			<form action="insertRegisterBook.do" onsubmit="return validateSubmit();" autocomplete="off" accept-charset="utf-8">
     				<input type="hidden" name="s_no" value="${study.s_no }">
     				<input type="hidden" name="b_writer" value="${login.mem_no }">
     				<input type="hidden" id="input_book_img" name="book_img" value="">
     				<div id="modal-top">
-    					<label for="b_title">글 제목</label>
-     					<input id="b_title" name="b_title" type="text"/>
+    					<label class="board-label" for="b_title">글 제목</label>
+     					<input class="board-input" id="b_title" name="b_title" type="text"/>
     				</div>
     				<div id="modal-bottom">
     					<div id="modal-textarea">
-    						<label for="content" >도서 설명글</label>
-							<textarea id="content" rows="12" name="b_content"></textarea>
-    					</div>
-    					<div id="modal-content">
-    						<label for="title">도서 이름</label>
-      						<input id="title" type="text" name="book_title" value="" readonly="readonly" >
-      				
-      						<label for="author">저자</label>
-      						<input id="author" type="text" name="book_author" value="" readonly="readonly">
-      				
-      						<label for="publish">출판사</label>
-      						<input id="publish" type="text" name="book_publish" value="" readonly="readonly">
-      				
-      						<label for="link">링크&nbsp;</label>
-      						<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
-      						<button type="submit">등록</button>
+    						<label class="board-label" for="content" >도서 설명글</label>
+							<textarea id="content" rows="18" name="b_content"></textarea>
     					</div>
     				</div>
-      				
-    			</form>
+      				<button type="submit">등록</button>
   			</div>
   			<div class="invite">
     			<img id="book_img" src="" onError="this.src='resources/img/no-image.png'" />
+    			<div id="modal-content">
+    				<div class="content-div">
+    					<label class="book-label" for="title">도서 이름</label>
+      					<input class="book-input" id="title" type="text" name="book_title" value="" readonly="readonly" >
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="author">저자</label>
+      					<input class="book-input" id="author" type="text" name="book_author" value="" readonly="readonly">
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="publish">출판사</label>
+      					<input class="book-input" id="publish" type="text" name="book_publish" value="" readonly="readonly">
+      				</div>
+      				
+      				<div class="content-div">
+      					<label class="book-label" for="link">링크&nbsp;</label>
+      					<a id="link" href="" target="_blank"><img src='resources/img/link-icon.png'/><input id="book_url" type="hidden" name="book_url" value=""></a>
+      				</div>
+    			</div>
     			<div class="nope">다른 책 보러가기</div>
     			<div class="close" title="close"></div>
   			</div>
+  			</form>
 	</div>
 	<!-- 모달 영역 종료 -->
 
@@ -276,30 +773,23 @@
 	
 	<!-- 메인 섹션 시작 -->
 	<div class="main-section">
-	
+	<h3>도서 검색</h3>
 		<!-- ----------------------------------------------------------------------------------- -->
 		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">
-		
-			<!-- 검색창 영역 시작 -->
-			<div class="search-container">
-			
-				<!-- 검색창 form 시작 -->
-				<form autocomplete="off" id="searchForm">
-					<div class="finder">
-						<div class="finder_outer">
-							<div class="finder_inner">
-								<div class="finder_icon" ref="icon"></div>
-								<input class="finder_input" id="bookName" type="text" placeholder="도서이름 또는 작가로 검색" name="book_title" />
-							</div>
-						</div>
-					</div>
-				</form>
-				<!-- 검색창 form 종료 -->
-				
+			<form autocomplete="off" id="searchForm">
+				<div class="input-group" style="width: 50%; margin: auto; margin-bottom: 30px;">
+					<input type="text" class="form-control" id="bookName" name="keyword" placeholder="도서이름 또는 작가로 검색" style="width:100px; height:60px; margin-top:10px;"> 
+					<span><button type="submit" id="homeSearch">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 40px;">
+					</button></span>
+				</div>
+			</form>
+			<div id="category">
+				<c:forEach  items="${cateList }" var="cate">
+					<input type="button" class="inputCategory" onclick="categorySearch(${cate.getCate_no()});" value="${cate.getCate_name() }">
+				</c:forEach>
 			</div>
-			<!--검색창 영역 종료 -->
-			
 		</div>
 		<!-- 메인 섹션 상단 종료 -->
 		
@@ -308,6 +798,7 @@
 		<!-- 메인 섹션 중앙 시작 -->
 		<div id="main-section-bottom">
 			<div id='book-img-section'></div>
+			<div class="recommend-img"></div>
 			<div id="paging-section"></div>
 		</div>
 		<!-- 메인 섹션 중앙 종료 -->

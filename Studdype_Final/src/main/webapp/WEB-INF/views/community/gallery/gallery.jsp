@@ -29,7 +29,24 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
+<script type="text/javascript">
+$('.customNextBtn').click(function() {
+	owl.trigger('next.owl.carousel');
+});
 
+$('.customPrevBtn').click(function() {
+	owl.trigger('prev.owl.carousel', [ 300 ]);
+});
+
+$(document).on('click', '#btnSearch', function(e){
+e.preventDefault();
+var url = "${studyList}";
+url = url + "?searchType=" + $('#searchType').val();
+url = url + "&search=" + $('#search').val();
+location.href = url;
+console.log(url);
+});
+</script>
 <style type="text/css">
 /* Hover Blur Effect */
 .text-white {
@@ -145,26 +162,62 @@
 
 		<br> <br>
 		<h1 style="text-align: center;">Gallery</h1>
+		<br>
+		<form action="galleryList.do" method="get" role="form">
+			<div class="input-group"
+				style="width: 50%; margin: auto; margin-bottom: 100px;">
+				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 
+					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword }" style="width:100px; height:60px; margin-top:10px;"> <span>
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc;">
+						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
+					</button>
+				</span>
+			</div>
+		</form>
+		<script>
+		 $(function(){
+		        $('#homeSearch').click(function() {
+		          self.location = "gallery.do" + '${pageMaker.makeQuery(1)}' +  "&keyword=" + encodeURIComponent($('#keywordInput').val());
+		        });
+		      }); 
+		</script>
 		<br> <br>
 		<div class="container-fluid">
 			<div class="row">
 				<!-- photo List start -->
+				<c:forEach items="${galleryList }" var="galleryList">
 				<div class="col-lg-4 col-md-8">
 					<div class=" hover-blur">
-						<a href="galleryDetail.do" title=""> <img
-							src="http://placeimg.com/260/260/nature/3/" alt="" />
+						<a href="galleryDetail.do?b_no=${galleryList.b_no }" title="">
+						<img src="${pageContext.request.contextPath}/resources/file/${attachImage }" alt="" />
 							<h2>
-								<span class="text-white">Hover Blur</span>
+								<span class="text-white">${galleryList.b_title }</span>
 							</h2>
 						</a>
-						<h4 class="text-center">Hover-Blur</h4>
+						<h4 class="text-center">${galleryList.b_title }</h4>
 					</div>
 				</div>
+				</c:forEach>
 				<!-- photo List end -->
 
 			</div>
 		</div>
 	<button onclick="location.href='gallerywriteform.do'" style="float: right;">글쓰기</button>
+		<div>
+		<ul>
+			<c:if test="${pageMaker.prev}">
+				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
+				<li><a href="galleryList.do${pageMaker.makeSearch(i)}">${i}</a></li>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+			</c:if>
+		</ul>
+	</div>
 	</div>
 
 

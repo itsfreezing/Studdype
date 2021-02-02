@@ -117,7 +117,7 @@ public class MemberDaoImpl implements MemberDao{
 		try {
 			name= sqlSession.selectOne(NAMESPACE+"selectNameByNo", mem_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectNameByNO!");
+			System.out.println("[ERROR] [MemberDaoImpl] selectNameByNO method");
 			e.printStackTrace();
 		}
 				
@@ -152,7 +152,7 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR]:  selectMemberByFreeList( !!!!!!");
+				System.out.println("[ERROR] [MemberDaoImpl]  selectMemberByFreeList method");
 				e.printStackTrace();
 			}
 			resMap.put(list.get(i).getB_no(), dto);
@@ -172,7 +172,7 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR]: selectMemberByFreeReply !!!!!!");
+				System.out.println("[ERROR] [MemberDaoImpl] selectMemberByFreeReply method");
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);
@@ -372,5 +372,55 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
+	// [studyHome] 리더 번호로 리더 이름 가져오기
+	@Override
+	public String leaderNameForStudyHome(int leader_no) {
+		String leaderName = null;
+		
+		try {
+			leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", leader_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: leaderNameForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return leaderName;
+	}
+
+	@Override
+	public List<MemberDto> allMember() {
+		List<MemberDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"allMember");
+		} catch (Exception e) {
+			System.out.println("ERROR : ALLMEMBER!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	
+	//[도서게시판 댓글]  리스트로 member 정보 가져오기 
+	@Override
+	public Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] : selectMemberByBookReply");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+	
 
 }

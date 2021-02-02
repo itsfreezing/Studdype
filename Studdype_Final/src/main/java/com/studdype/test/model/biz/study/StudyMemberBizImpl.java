@@ -44,4 +44,11 @@ public class StudyMemberBizImpl implements StudyMemberBiz{
 		return studyMemberDao.pagingstudylist(pageMap);
 	}
 
+
+	@Override
+	public int deletemember(StudyMemberDto dto) {
+		
+		return studyMemberDao.deletemember(dto);
+	}
+
 }

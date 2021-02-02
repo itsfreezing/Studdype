@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studdype.test.model.dto.board.BookDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 public interface BookDao {
 	String NAMESPACE="book.";
@@ -21,5 +22,5 @@ public interface BookDao {
 	public int deleteBook(BookDto dto); // 도서 게시글 삭제
 	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
 	public BookDto selectMainBookOfStudy(int s_no);	// 스터디 메인도서 가져오기
-
+	public List<BookDto> selectMainBookByStudy(List<StudyDto> study);	// 스터디 번호 리스트로 대표 도서 정보 가져오기
 }

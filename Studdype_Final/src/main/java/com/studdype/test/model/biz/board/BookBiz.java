@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyCategoryDto;
+import com.studdype.test.model.dto.study.StudyDto;
 
 public interface BookBiz {
 
@@ -23,5 +25,8 @@ public interface BookBiz {
 	public BookDto deleteBook(BookDto dto); // 도서 게시글 삭제
 	public int bookBoardUpdateBook(BookDto dto);	// 도서 게시글 수정
 	public BookDto selectMainBookOfStudy(int s_no);	// 스터디 메인도서 가져오기
+	public List<StudyCategoryDto> selectCateGoryListOfBook();	// 카테고리 리스트 가져오기
+	public List<StudyDto> selectStudyByCategory(int cate_no);	// 카테고리 번호로 스터디 정보 가져오기
+	public List<BookDto> selectMainBookByStudy(List<StudyDto> study);	// 스터디 번호 리스트로 대표 도서 정보 가져오기
 
 }
