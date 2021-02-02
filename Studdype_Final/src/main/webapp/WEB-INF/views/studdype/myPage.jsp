@@ -285,11 +285,11 @@ $(document).ready(function() {
   <div class="content">
     <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:38.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:39%; left:48%;" id="pwd1" type='password'><br>
     <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:46%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:46%; left:48%;" id="pwd2" name="pwd2"type='password'>
-    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 51%; left: 44%;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 51%; left: 44%;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 51%; left: 44%;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 51%; left: 42%;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
 
-    <button onclick="changepw()" style="position:absolute; top:58%; left:40%;" class="btn btn-purple" >변경</button>
-    <button onclick="pwclosePopup()" style="position:absolute; top:58%; left:57%;" class="btn btn-purple" >취소</button>
+    <button onclick="changepw()"  class="profileBtn submitBtnPW" >변경</button>
+    <button onclick="pwclosePopup()"  class="profileBtn cancelBtnPW" >취소</button>
   </div>
    
 
@@ -298,24 +298,26 @@ $(document).ready(function() {
 <!--  이메일 변경 -->
    <div id="emailpopup" class="hide">
     <div class="content">
-    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 이메일:</p><input style="position:absolute; top:45%; left:47%;" id="newemail" name="newemail" placeholder="000000@00000.com"><br>
+    <p>새 이메일:</p>
+    <input class="popupInput" id="newemail" name="newemail" placeholder="000000@00000.com"><br>
    
 
 
-    <button onclick="changeemail()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
-    <button onclick="closeemailPopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    <button onclick="changeemail()" class="profileBtn submitBtn" >변경</button>
+    <button onclick="closeemailPopup()" class="profileBtn cancelBtn" >취소</button>
     </div>
    </div>
 <!-- 이메일 변경 끝 -->
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 전화번호:</p><input style="position:absolute; top:45%; left:48%;" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
+    	<p>새 전화번호:</p>
+    	<input style="" class="popupInput" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
    
 
 
-    <button onclick="changephone()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
-    <button onclick="closephonePopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    <button onclick="changephone()" class="profileBtn submitBtn" >변경</button>
+    <button onclick="closephonePopup()" class="profileBtn cancelBtn" >취소</button>
     </div>
    </div>
 <!-- 전화 번호 변경 끝 -->
