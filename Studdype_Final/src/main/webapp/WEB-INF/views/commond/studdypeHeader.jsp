@@ -7,6 +7,7 @@
 
 <head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./resources/assets/js/profile.js"></script>
 <script>
 function logout_btn(){
    var form = $("#logoutForm");
@@ -30,6 +31,17 @@ $(function() {
    $(".nav-link").css("color", "black");
    
 });
+
+
+
+    //On Click Event
+    $(".dropdown-item").click(function() {
+
+        $(".dropdown-item").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+		
+        return true;
+    });
 
 
 </script>
@@ -58,9 +70,6 @@ $(function() {
                         <li class="nav-item" id="home">
                         <a class="nav-link" href="studyList.do">스터띱 홈</a>
                         </li>
-                        <li class="nav-item" id="create">
-                           <a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
-                        </li>
                         <li class="nav-item" id="category">
                            <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
                         </li>
@@ -76,17 +85,29 @@ $(function() {
                            <a class="nav-link" href="signform.do">회원가입</a>
                         </li>
                         </c:when>
-                        <c:otherwise>
-                  <!--       <li class="nav-item">
-                           <a class="nav-lick" href="#">${login.mem_id }님 </a>
-                        </li>
-                  -->      <li class="nav_item" id="myPage">
-                           <a class="nav-link" href="myPage.do" >마이 페이지</a>
-                        </li>
-                        <li class="nav-item" id="logout">
-                           <a class="nav-link" href="logout.do" type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
-                        </li>
-                        </c:otherwise>
+                        	<c:otherwise>
+		                        <li class="nav_item" id="myPage">
+		                           <a class="nav-link" href="myPage.do" >마이 페이지</a>
+		                        </li>
+		                        <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<div id="down-menu">
+											<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
+											<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
+											<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="회원정보 변경"></div>
+										</div>
+											<a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
+											<a class="dropdown-item" id="create" href="myPage.do#myApply">신청 내역</a>
+											<a class="dropdown-item" id="receive" href="myPage.do#applyList" target="applyList">신청받은 내역</a>
+											<a class="dropdown-item" id="create" href="myPage.do#myMeet">모임확인</a>
+											<hr id="profileHR">
+											<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
+									</div>
+								</li>
+                        	</c:otherwise>
                         </c:choose>
                         <!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
                         <li class="nav-item"></li>

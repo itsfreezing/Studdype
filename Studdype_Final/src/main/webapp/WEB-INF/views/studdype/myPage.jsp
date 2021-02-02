@@ -7,144 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<style type="text/css">
-	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-	.nav-container {
-		display: flex;
-		flex-direction:row;
-		width: 100%;
-		margin:0;
-		padding:0;
-		list-style-type:none;
-		text-align:center;
-		
-	}
-	.nav-item{
-		padding: 15px;
-		cursor: pointer;
-		float:left;
-	}
-	
-	ul li{
-		float:left;
-		display:inline-block;
-	}
-	ul{
-		text-align:center;
-	}
-	.owl-dot{
-	background-color: black!important;
-	}
-	.owl-dot.active{
-	background-color: #808080!important;
-	}
-</style>
-<script type="text/javascript">
-//스터디 리스트 배너 
-$(document).ready(function() {
-		var owl = $('.owl-carousel');
-
-		owl.owlCarousel({
-			items : 10, // 한번에 보여줄 아이템 수
-			loop : true, // 반복여부
-			//margin:35,               // 오른쪽 간격
-			autoplay : false, // 자동재생 여부
-			autoplayTimeout : 5000, // 재생간격
-			autoplayHoverPause : false
-		//마우스오버시 멈출지 여부
-		});
-
-	
-	});
-	// 회원탈퇴
-	function getout(){
-		var no = '${login.mem_no}';
-	if('${LeaderList}'!="[]"){
-		alert('본인이 팀장인 스터디가 존재합니다. 스터디 관리를 통해 스터디 대표를 양도해주세요.');
-	}else{
-		if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
-			location.href="memberDelete.do?mem_no="+no;
-		}else{
-			return;
-		}
-	}
-}	
-	//내가 신청한 가입 삭제
-	function receivedelete(){
-  		var a = '${Appli}'
-  		var e = window.event,
-  		btn = e.target || e.srcElement;
-  		var c= (btn.id);
-  		var d = document.getElementById(c).value;
-  		var f = document.getElementById(c).name;
-  		
-  		
-  		if(confirm("정말 삭제하시겠습니까?")==true){
-  			location.href="receivedelete.do?mem_no="+d+"&s_no="+f;
-  		}else{
-  			return;
-  		}
-  		
-  		
-  	}
-	//팀장일 경우 가입 신청 거절버튼
-  	function reject(){
-  		 var a = '${Appli}'
-  		   var e = window.event,
-  		   btn = e.target || e.srcElement;
-  		   var c = (btn.id);
-  		   var d = document.getElementById(c).value;
-  		   var f = document.getElementById(c).name;
-  		   
-  		   if(confirm("정말 거절하시겠습니까?") == true){
-  			   location.href="receivereject.do?mem_no="+d+"&s_no="+f;
-  		   }else{
-  			   return;
-  		   }
-  	} 
-  //팀장일 경우 가입신청 수락버튼
-	function agree(){
-		   var a = '${Appli}'
-		   var e = window.event,
-		   btn = e.target || e.srcElement;
-		   var c = (btn.id);
-		   var d = document.getElementById(c).value;
-		   var f = document.getElementById(c).name;
-		   
-		 	alert('mem_no:'+d+"s_no:"+f);
-		   if (confirm("정말 수락하시겠습니까?") == true){    //확인
-			  	
-		   		location.href="receiveagree.do?mem_no="+d+"&s_no="+f;
-		   }else{   
-			    return;
-			}
-			
-	   }
-  	function myapply(){
-  		$('#myapply').show();
-  		$('#Receive').hide();
-  		$('#meet').hide();
-  		
-  	}
-  	
-  	function receive(){
-  		$('#myapply').hide();
-  		$('#Receive').show();
-  		$('#meet').hide();
-  	} 
-  	function meet(){
-  		$('#myapply').hide();
-  		$('#Receive').hide();
-  		$('#meet').show();
-  	}
-</script>
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="./resources/assets/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
@@ -152,46 +18,83 @@ $(document).ready(function() {
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/owl.carousel.min2.css">
- 
-    
-    <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-    <script src="./resources/assets/js/popper.min.js"></script>
-    <script src="./resources/assets/js/bootstrap.min.js"></script>
-    <script src="./resources/assets/js/owl.carousel.min.js"></script>
-    <script src="./resources/assets/js/modal-video.js"></script>
-    <script src="./resources/assets/js/main.js"></script>
+<link rel="stylesheet"  href="./resources/assets/css/owl.carousel.min2.css">
+<link rel="stylesheet"  href="./resources/css/community/myPage.css">
+<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+<script src="./resources/assets/js/popper.min.js"></script>
+<script src="./resources/assets/js/bootstrap.min.js"></script>
+<script src="./resources/assets/js/owl.carousel.min.js"></script>
+<script src="./resources/assets/js/modal-video.js"></script>
+<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/myPageScript.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".tab_content").hide(); 
+    $("ul.nav-items li:first").addClass("active").show();
+    $(".tab_content:first").show(); 
+
+    //On Click Event
+    $("ul.nav-items li").click(function() {
+
+        $("ul.nav-items li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+        $(".tab_content").hide(); //Hide all tab content
+		
+        $($(this).find("a").attr("href")).fadeIn(); //Find the href attribute value to identify the active tab + content
+        return false;
+    });
+
+});
+</script>
 </head>
 <body>
-<!-- 헤더 -->
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-<!--  헤더끝 -->
 
-<!-- 상단 정보 회원정보div -->
-
-<div id="container"style="width:100%; height:200px; background-color:black; float:left;">
-
-	<h3 style="color:white; font-weight:bold; font-size:20px; position:absolute; top:11%; left:4%; ">My page</h3>
-	<h3 style="color:white; font-weight:bold; font-size:30px; position:absolute; top:15%; left:4%;"><c:if test="${login != null }">${login.mem_name }</c:if></h3>
-	
-	<a style="color:grey; font-size:14px; position:absolute; top:16.5%; left:12%;" href="UpdateMember.do" >회원정보변경</a>
-	<p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:11%; left:20%;">회원 정보</p>
-	<p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:20%;">아이디 : </p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:24%;">${login.mem_id }</p>
-	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:30%;">이메일 :</p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:34%">${login.mem_email}</p>
-	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:46%;">성별 : </p><p style="color:white;font-size:20px; font-weight:bold; position:absolute; top:16%; left:49%"><c:if test="${login.mem_gender == 'M'}">남자</c:if><c:if test="${login.mem_gender == 'F'}">여자</c:if></p>
-	<p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:60%;">전화번호 :</p><p style="color:white; font-size:20px; font-weight:bold; position:absolute; top:16%; left:65%">${login.mem_phone }</p>
+<!-- 상단 div_회원정보 -->
+<div id="container">
+	<div id="myPageBanner"><b>My page</b></div>
+	<div id="memberInfo">
+		<div id="myPageName"><c:if test="${login != null }">${login.mem_name }</c:if></div>
+		<span class="memberInfo">님의</span><br><span class="memberInfo">회원정보 입니다.</span><br><br>
+		<a class="info-btn-dark" onclick="getout();">회원탈퇴</a>
+	</div>
+	<div id="myPageBanner-left">
+		<div class="myPageBanner-text"><b>아이디</b>&nbsp;${login.mem_id }
+			<a class="info-btn-bright" onclick="showPw();">비밀번호 변경</a>
+		</div>
+		<div class="myPageBanner-text"><c:choose> 
+											<c:when test="${login.mem_gender == 'M'}">
+												<b>성별</b>&nbsp;남자
+											</c:when>
+											<c:otherwise>
+												<b>성별</b>&nbsp;여자
+											</c:otherwise>
+										</c:choose>
+		</div>
+	</div>
+	<div id="myPageBanner-right">
+		<div class="myPageBanner-text"><b>이메일</b>&nbsp;${login.mem_email}
+			<a class="info-btn-bright" onclick="showEmail();">이메일 변경</a>
+		</div>
+		<div class="myPageBanner-text"><b>전화번호</b>&nbsp;${login.mem_phone }
+			<a class="info-btn-bright" onclick="showphone();">전화번호 변경</a>
+		</div>
+	</div>
 </div>
-<ul class="nav-container"style="margin-left:600px; text-align:center; position:absolute; top:22%; left:3%;">
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="myapply();">신청 내역</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="receive();">신청 받은  내역</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="meet();">모임확인</li>
-	<li class="nav-item" style="color:white; margin:10px; cursor:pointer" onclick="getout();">회원 탈퇴</li>
-
-</ul>
+<!-- 상단 div_탭 -->
+<div id="nav-container">
+	<ul class="nav-items">
+	   <li class="my-nav-item"><a href="#myApply">신청 내역</a></li>
+	   <li class="my-nav-item"><a href="#applyList">신청받은 내역</a></li>
+	   <li class="my-nav-item"><a href="#myMeet">모임확인</a></li>
+	</ul>
+</div>
 <!-- 상단 div 끝 -->
+
+<!-- tab 영역 -->
+
 <!--  스터디 신청 내역 div -->
-<div style=" float:left; height:600px; width:100%; position:absolute; top:280px; "  id="myapply">
+<div class="tab_content" id="myApply">
 	<p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">나의 스터디 신청 내역</p>
 	
 	<br>
@@ -245,7 +148,7 @@ $(document).ready(function() {
 <!-- 스터디 신청내역 끝 -->
 
 <!--  신청 받은 내역 -->
-<div style=" float:left; height:600px; width:100%; position:absolute; top:280px; display:none;" id="Receive">
+<div class="tab_content" id="applyList">
 	<p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">내가 받은 스터디 신청</p>
 	
 	<table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
@@ -283,26 +186,26 @@ $(document).ready(function() {
 
 <!-- 신청 받은 내역 끝 -->
 <!--  모임 이동 -->
-<div style=" float:left; height:600px; width:100%; position:absolute; top:280px; display:none;"  id="meet">
-	<p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">스터디 모임으로 이동</p>
-	<table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
-	<thead>
-		<tr>
-			<th>스터디 이름</th>
-			<th>확인하기</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var = "studylist" items="${studylist }" end="4">
-		<tr>
-			<td>${studylist.s_name }</td>
-			<td><button onclick="location.href='meetlist.do?s_no=${studylist.s_no}'">확인하기</button></td>
-		</tr>
-		</c:forEach>
-	
-	</tbody>
-	
-	</table>
+<div class="tab_content" id="myMeet">
+   <p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">스터디 모임으로 이동</p>
+   <table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
+   <thead>
+      <tr>
+         <th>스터디 이름</th>
+         <th>확인하기</th>
+      </tr>
+   </thead>
+   <tbody>
+      <c:forEach var = "studylist" items="${studylist }" end="4">
+      <tr>
+         <td>${studylist.s_name }</td>
+         <td><button onclick="location.href='meetlist.do?s_no=${studylist.s_no}'">확인하기</button></td>
+      </tr>
+      </c:forEach>
+   
+   </tbody>
+   
+   </table>
 
 
 
@@ -320,64 +223,100 @@ $(document).ready(function() {
 
 
 <!--  내가 가입한 스터디 리스트     -->
-	<c:if test="${fn:length(studylist) != 0 }">
+   <c:if test="${fn:length(studylist) != 0 }">
    <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:45.5%;">내가 가입한 스터디</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;  position:absolute; top:950px; ">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
-     	<div class="hero-slider-info"  >
-     	<div style="height:100px; width:400px; border:1px solid black; background-color:black; margin-left:130px; cursor:pointer;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
-     	<p style="color:white !important;  margin-left:20px;font-size:10px; font-weight:bold; display:inline;">
-     	<c:if test="${studylist.si_no == 1 }">서울</c:if>
-     	<c:if test="${studylist.si_no == 2 }">부산</c:if>
-     	<c:if test="${studylist.si_no == 3 }">인천</c:if>
-     	<c:if test="${studylist.si_no == 4 }">대구</c:if>
-     	<c:if test="${studylist.si_no == 5 }">광주</c:if>
-     	<c:if test="${studylist.si_no == 6 }">대전</c:if>
-     	<c:if test="${studylist.si_no == 7 }">울산</c:if>
-     	<c:if test="${studylist.si_no == 8 }">경기</c:if>
-     	<c:if test="${studylist.si_no == 9 }">강원도</c:if>
-     	<c:if test="${studylist.si_no == 10 }">충북</c:if>
-     	<c:if test="${studylist.si_no == 11 }">충남</c:if>
-     	<c:if test="${studylist.si_no == 12 }">경북</c:if>
-     	<c:if test="${studylist.si_no == 13 }">경남</c:if>
-     	<c:if test="${studylist.si_no == 14 }">전북</c:if>
-     	<c:if test="${studylist.si_no == 15 }">전남</c:if>
-     	<c:if test="${studylist.si_no == 16 }">제주</c:if>
-     	</p>
-     	<p style="color:white !important; margin-left:10px;font-size:10px; font-weight:bold; display:inline;" >
-     	<c:if test="${studylist.cate_no == 1 }">IT</c:if>
-     	<c:if test="${studylist.cate_no == 2 }">자격증</c:if>
-     	<c:if test="${studylist.cate_no == 3 }">공무원</c:if>
-     	<c:if test="${studylist.cate_no == 4 }">뷰티</c:if>
-     	<c:if test="${studylist.cate_no == 5 }">대입/수능</c:if>
-     	<c:if test="${studylist.cate_no == 6 }">어학/회화</c:if>
-     	<c:if test="${studylist.cate_no == 7 }">취업스터디</c:if>
-     	<c:if test="${studylist.cate_no == 8 }">기타</c:if>
-     	</p>
-     	<a style="color:white; font-weight:bold; margin-left:20px; font-size:20px;  display:block;">${studylist.s_name }</a>
-     	<c:forEach var="allMember" items="${allMember }">
-     	<c:if test="${studylist.leader_no == allMember.mem_no }">
-     	<p style="color:white !important; margin-left:20px; font-size:10px; font-weight:bold; display:inline;">팀장: ${allMember.mem_name }</p>
-     	</c:if>
-     	</c:forEach>
-     	<p style="color:white !important; font-size:10px; font-weight:bold;display:inline; margin-left:70px;">최대 :${studylist.s_maxcnt }명</p>
-     	</div>
-     	</div>
-  	
+        <div class="hero-slider-info"  >
+        <div style="height:130px; width:400px; border:1px solid black; background-color:black; margin-left:130px; cursor:pointer;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
+        <p style="color:white !important;  margin-left:20px;font-size:10px; font-weight:bold; display:inline;">
+        <c:if test="${studylist.si_no == 1 }">서울</c:if>
+        <c:if test="${studylist.si_no == 2 }">부산</c:if>
+        <c:if test="${studylist.si_no == 3 }">인천</c:if>
+        <c:if test="${studylist.si_no == 4 }">대구</c:if>
+        <c:if test="${studylist.si_no == 5 }">광주</c:if>
+        <c:if test="${studylist.si_no == 6 }">대전</c:if>
+        <c:if test="${studylist.si_no == 7 }">울산</c:if>
+        <c:if test="${studylist.si_no == 8 }">경기</c:if>
+        <c:if test="${studylist.si_no == 9 }">강원도</c:if>
+        <c:if test="${studylist.si_no == 10 }">충북</c:if>
+        <c:if test="${studylist.si_no == 11 }">충남</c:if>
+        <c:if test="${studylist.si_no == 12 }">경북</c:if>
+        <c:if test="${studylist.si_no == 13 }">경남</c:if>
+        <c:if test="${studylist.si_no == 14 }">전북</c:if>
+        <c:if test="${studylist.si_no == 15 }">전남</c:if>
+        <c:if test="${studylist.si_no == 16 }">제주</c:if>
+        </p>
+        <p style="color:white !important; margin-left:10px;font-size:10px; font-weight:bold; display:inline;" >
+        <c:if test="${studylist.cate_no == 1 }">IT</c:if>
+        <c:if test="${studylist.cate_no == 2 }">자격증</c:if>
+        <c:if test="${studylist.cate_no == 3 }">공무원</c:if>
+        <c:if test="${studylist.cate_no == 4 }">뷰티</c:if>
+        <c:if test="${studylist.cate_no == 5 }">대입/수능</c:if>
+        <c:if test="${studylist.cate_no == 6 }">어학/회화</c:if>
+        <c:if test="${studylist.cate_no == 7 }">취업스터디</c:if>
+        <c:if test="${studylist.cate_no == 8 }">기타</c:if>
+        </p>
+        <a style="color:white; font-weight:bold; margin-left:20px; font-size:20px;  display:block;">${studylist.s_name }</a>
+        <c:forEach var="allMember" items="${allMember }">
+        <c:if test="${studylist.leader_no == allMember.mem_no }">
+        <p style="color:white !important; margin-left:20px; font-size:10px; font-weight:bold; display:inline;">팀장: ${allMember.mem_name }</p>
+        </c:if>
+        </c:forEach>
+        <p style="color:white !important; font-size:10px; font-weight:bold;display:inline; margin-left:70px;">최대 :${studylist.s_maxcnt }명</p>
+        </div>
+        </div>
+     
      </c:forEach>
  
    </div>
    </c:if>
    <c:if test="${fn:length(studylist) == 0 }">
-   	<p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:45.5%;">가입한 스터디가 없습니다!</p>
+      <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:45.5%;">가입한 스터디가 없습니다!</p>
    
    </c:if>
 <!--  내가 가입한 스터디 리스트 끝 -->
+<!--  비밀번호 변경    -->
+<div id="popup" class="hide">
+  <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:38.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:39%; left:48%;" id="pwd1" type='password'><br>
+    <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:46%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:46%; left:48%;" id="pwd2" name="pwd2"type='password'>
+    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 51%; left: 44%;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 51%; left: 44%;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
 
+    <button onclick="changepw()" style="position:absolute; top:58%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="pwclosePopup()" style="position:absolute; top:58%; left:57%;" class="btn btn-purple" >취소</button>
+  </div>
+   
 
+</div>
+<!--  비밀 번호 변경 끝 -->
+<!--  이메일 변경 -->
+   <div id="emailpopup" class="hide">
+    <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 이메일:</p><input style="position:absolute; top:45%; left:47%;" id="newemail" name="newemail" placeholder="000000@00000.com"><br>
+   
+
+
+    <button onclick="changeemail()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="closeemailPopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    </div>
+   </div>
+<!-- 이메일 변경 끝 -->
+<!-- 전화 번호 변경  -->
+    <div id="phonepopup" class="hide">
+    <div class="content">
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 전화번호:</p><input style="position:absolute; top:45%; left:48%;" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
+   
+
+
+    <button onclick="changephone()" style="position:absolute; top:53%; left:40%;" class="btn btn-purple" >변경</button>
+    <button onclick="closephonePopup()" style="position:absolute; top:53%; left:57%;" class="btn btn-purple" >취소</button>
+    </div>
+   </div>
+<!-- 전화 번호 변경 끝 -->
 </body>
-<footer style="position:absolute; top:1500px; left:42%;">
-		<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+<footer style="position:absolute; top:1300px; left:42%;">
+      <jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 </footer>
 </html>
