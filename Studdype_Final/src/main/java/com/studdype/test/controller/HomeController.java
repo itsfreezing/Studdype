@@ -375,6 +375,11 @@ public class HomeController {
 		return "community/freeboard/uploadtest";
 	}
 		
+	@RequestMapping("/findpwres.do")
+	public String findpwresTest() {
+		return "loginpage/findpwres";
+	}
+	
 	
 }
 

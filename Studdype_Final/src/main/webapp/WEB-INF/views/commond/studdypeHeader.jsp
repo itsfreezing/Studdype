@@ -6,6 +6,23 @@
 <html lang="en">
 
 <head>
+<style type="text/css">
+.mainmenu li.active:not(:last-child):after,
+.mainmenu li:not(:last-child):hover:after { 
+	background: #fff;
+}
+
+.header-area {
+	background: #88d3ce;
+	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
+}
+
+
+</style>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 function logout_btn(){
@@ -19,7 +36,7 @@ function logout_btn(){
 	}
 };
 
-$(function() {
+/* $(function() {
 	var currentMenu = $("#currentMenu").val();
 	
 	// 해당 메뉴 페이지에 메뉴 active Class 추가
@@ -27,9 +44,17 @@ $(function() {
 	
 	$(".feature-page.header-area").css("height", "80px");
 	$(".hero-text-wrapper").css("height", "500px");
-	//$(".nav-link").css("color", "black");
+	$(".nav-link").css("color", "black");
 	
+}); */
+
+$(function() {
+	$("b").click(function(){
+		$(this).next().slideToggle().end().parent().siblings().find("ul").slideUp();
+	});
 });
+
+
 
 </script>
 <style>
@@ -69,8 +94,8 @@ $(function() {
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
 								</li>
 							</ul>
-								<div class="usericon">
-									<a href=""><img src="./resources/assets/img/user3.png"></a>
+							<ul>
+								<b><a href=""><img src="./resources/assets/img/user3.png"></a></b>
 								<c:choose>
 								<c:when test="${login == null }">
 								<li class="nav-item"  id="loginMenu">
@@ -90,36 +115,25 @@ $(function() {
 								<li class="nav-item" id="logout">
 									<a class="nav-link" href="logout.do" type="submit" onclick="logout_btn();" id="logout" style="border:0">로그아웃</a>
 								</li>
-								</a>
 								</c:otherwise>
 								</c:choose>
-								</div>
 								<!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
 								<li class="nav-item"></li>
-								
+							</ul>
 							</div>
 							</div>
 							</nav>
 							</div>
-							
 						</div>
-			
+
 					</div>
 					</form>
 			
 				<!-- 네비 끝 -->
 				<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="hero-text-wrapper">
-						<div class="hero-text-inner">
-							<div class="hero-text">
-
-								<h1><c:if test="${studylist != null}">My Page</c:if></h1>
-
-							</div>
-						</div>
-					</div>
-				</div>
+				<!-- <div class="col-lg-6 text-center"><img src="./resources/assets/img/loginBanner.png">
+					
+				</div> -->
 			</div>
 			<!-- 헤더 텍스트 끝 -->
 	<!-- 헤더 끝 -->

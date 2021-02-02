@@ -19,6 +19,19 @@
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style type="text/css">
+<style type="text/css">
+.mainmenu li.active:not(:last-child):after,
+.mainmenu li:not(:last-child):hover:after { 
+	background: #fff;
+}
+
+.header-area {
+	background: #88d3ce;
+	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
+	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
+}
 h1{
 	margin-top: 3%;
 	font-weight:800;
@@ -37,6 +50,7 @@ h1{
 	margin: auto;
 	margin-right: auto;
 	margin-left: auto;
+	
 }
 .loginTable{
 	margin: auto;
@@ -81,21 +95,21 @@ h1{
 <script type="text/javascript">
 	$(function() {
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-		$(".justify-content-center").show(); 
+		$(".justify-content-center").hide(); 
 		//$(".justify-content-center").css({"background":"black"}); 
 	})
 	
 function login_btn(){
-	var form = $("#loginForm");
+	var form = $(".loginForm");
 	var mem_id = $("#id");
 	var mem_pw = $("#pw");
 	
 	if ( mem_id.val() == null || mem_id.val().trim() == ''){
 		alert("아이디를 확인해 주세요.");
-		return false;
+		
 	}else if ( mem_pw.val() == null || mem_pw.val().trim() == '' ){
 		alert("비밀번호를 확인해 주세요.");
-		return false;
+		
 	}else {
 		form.submit();
 	}
@@ -104,7 +118,7 @@ function login_btn(){
 </script>
 </head>
 <body>
-<jsp:include page="../commond/loginHeader.jsp"></jsp:include>
+<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<h1>로그인</h1>
 	<div class="main">
     <form class="loginForm" action="login.do" method="POST">
@@ -135,7 +149,7 @@ function login_btn(){
 	</div>
    
 	
-	<jsp:include page="../commond/loginFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

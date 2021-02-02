@@ -142,8 +142,9 @@ public class MemberController {
 			
 		if(findId != null) {
 			System.out.println("search_btn");
-			return "login.do";
+			return "findId";
 		}
+		return findId;
 	}
 	
 	

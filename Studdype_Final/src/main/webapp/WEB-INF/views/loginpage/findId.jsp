@@ -24,6 +24,7 @@ h1{
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
+	margin-top: 5%;
 }
 .main_head{
 	width: 800px;
@@ -36,13 +37,16 @@ h1{
 	box-sizing: border-box;
 	display: block;
 }
+.namerno_part{
+	margin-left: 12%;
+}
 .name_part{
 	font-weight: 800;
 }
-#name1{
-	margin-left:10%;
-    width:300px;
-    height:50px;
+#name{
+	margin-left:12%;
+    width:200px;
+    height:40px;
     margin-bottom: 3%;
 }
 .rno_part{
@@ -50,8 +54,8 @@ h1{
 }
 #rno1{
 	margin-left:3%;
-    width:300px;
-    height:50px;
+    width:200px;
+    height:40px;
 }
 #mid_rno{
 	font-weight: 800;
@@ -59,8 +63,8 @@ h1{
 }
 #rno2{
 	margin-bottom:5%;
-    width:300px;
-    height:50px;
+    width:200px;
+    height:40px;
 }
 .btn_part{
 	margin: auto;
@@ -113,7 +117,7 @@ input.submitBtn:hover{
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function idsearch() { //이름,주민번호로 '찾기' 버튼
+/* function idsearch() { //이름,주민번호로 '찾기' 버튼
 	var doc=document.getElementsByName("name")[0];
 	
 	var emailtitle = $("#rno1").attr('title');
@@ -130,38 +134,53 @@ function idsearch() { //이름,주민번호로 '찾기' 버튼
 		   open(target,"","width=900,height=700");
 		   self.close();
 	}
-}
+} */
+
+function idsearch(){
+	var form = $(".main_head");
+	var name = $("#name");
+	var rno = $("#rno1")+'-'+$("#rno2");
+	
+	if(name.val() == null || name.val().trim() == ''){
+		alert("이름을 확인해 주세요.");
+	}else if(rno.val() == null || rno.val().trim() == ''){
+		alert("주민번호를 확인해 주세요.");
+	}else{
+		form.button();
+	}
+};
 
 function cancel(){
 	self.close();
 }
 
-
 </script>
 </head>
 <body>
-<jsp:include page="../commond/loginHeader.jsp"></jsp:include>
+<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<h1>이메일 계정 찾기 </h1>
 	<form class="main_head">
 		<div class="sub_head">
+			<div class="namerno_part">
 			<div class="name_part">
 				<label id="nameLabel">이름</label>
-				<input type="text" name="name" id="name1" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
-			</div>			
+				<input type="text" name="name" id="name" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
+			</div>
 			<div class="rno_part">
 				<label id="rnoLabel">주민등록번호</label>
-				<input type="text" name="rno" id="rno1" style="border:2px solid #6E45E3"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" style="border:2px solid #6E45E3">
+				<input type="text" name="rno" id="rno1" style="border:2px solid #6E45E3" maxlength="6"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" style="border:2px solid #6E45E3" maxlength="7">
+			</div>
 			</div>
 			<div class="btn_part">
 				<div>
-					<input type="button" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">
+					<input type="button" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();"><input type="button" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">
 				</div>
 			</div>
 		</div>
 	</form>
 	
 	
-	<jsp:include page="../commond/loginFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>
