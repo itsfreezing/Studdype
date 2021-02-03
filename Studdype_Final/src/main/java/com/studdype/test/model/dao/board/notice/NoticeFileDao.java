@@ -1,7 +1,9 @@
 package com.studdype.test.model.dao.board.notice;
 
 import java.util.List;
+import java.util.Map;
 
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 
 public interface NoticeFileDao {
@@ -14,4 +16,5 @@ public interface NoticeFileDao {
 	int insertAddFile(List<FileDto> fileList); // 자유게시판 글 수정시 추가 파일 삽입
 	int deleteFile(int f_no); //파일삭제하기
 	
+	public Map<Integer, List<FileDto>> selectBoardFileList(List<BoardDto> noticeList); // 첨부파일 리스트 게시글 번호로 가져오기
 }

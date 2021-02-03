@@ -69,6 +69,7 @@
 	position:relative;
 	width:60%;
 	left:20%;
+	top:15%;
 	margin-top:3%;
 	opacity:0.8;
 	text-align:center;
@@ -77,8 +78,8 @@
 }
 
 #no-list img{
-	width:500px;
-	height:400px
+	width:300px;
+	height:250px
 }
 
 .book-info {

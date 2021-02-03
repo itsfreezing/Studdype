@@ -1,11 +1,14 @@
 package com.studdype.test.model.dao.board.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 
 @Repository
@@ -100,6 +103,23 @@ public class NoticeFileDaoImpl implements NoticeFileDao{
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public Map<Integer, List<FileDto>> selectBoardFileList(List<BoardDto> noticeList) {
+		Map<Integer, List<FileDto>> resMap = new HashMap<Integer, List<FileDto>>();
+		
+		try {
+			for(int i = 0; i < noticeList.size(); i++) {
+				List<FileDto> fileList = null;
+				fileList = sqlSession.selectList(NAMESPACE+"selectAttachFileList", noticeList.get(i).getB_no());
+				resMap.put(noticeList.get(i).getB_no(), fileList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resMap;
 	}
 
 }
