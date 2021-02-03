@@ -41,7 +41,7 @@ function chkpwd(){
 		$("#chkpw_ok").show();
 		$("#chkpw_no").hide();
 		$("#chkpw").hide();
-		$(".pwico").css("color","#1FDA11");
+		$(".pwico").css("color","#04700F");
 
 	}
 }
@@ -52,7 +52,7 @@ function chktel(){
 		$(".phoneico").css("color","red");
 		return false;
 	}else{
-		$(".phoneico").css("color","#1FDA11");
+		$(".phoneico").css("color","#04700F");
 		return false;
 	}
 }
@@ -62,14 +62,14 @@ function namechk(){
 		$(".nameico").css("color","red");
 		return false;
 	}else{
-		$(".nameico").css("color","#1FDA11");
+		$(".nameico").css("color","#04700F");
 		return false;
 	}
 }
 function changen(gender){
 	var gender=document.getElementById('membergender').value;
 	if(gender.checked!=null||gender.checked!=""){
-		$(".genderico").css("color","#1FDA11");
+		$(".genderico").css("color","#04700F");
 		return false;
 	}else{
 		$(".genderico").css("color","red");
@@ -106,7 +106,7 @@ function sendmail(){
 	        	  alert("인증번호가 전송되었습니다.");
 	        	  var chkNum_btn=$("#chkNum_btn");
 	        	  var emailInput=$("#memberMail");
-	        	  $(".mailico").css("color","#1FDA11");
+	        	  $(".mailico").css("color","#04700F");
 	        	  emailInput.attr("readonly","readonly");
 	        	  chkNum_btn.removeAttr("disabled");
 	          }
@@ -142,7 +142,7 @@ function chkVerifiNum(){
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
-				$(".mailico").css("color","#1FDA11");
+				$(".mailico").css("color","#04700F");
 			}
 		} 
 		,
@@ -204,7 +204,6 @@ $(document).ready(function(){
 		}
 		else if(man.checked==false&&woman.checked==false){
 			alert("성별을 선택해주세요");
-			$(".genico").css("color","red");
 			man.focus();
    			return false;
    		}
@@ -230,7 +229,7 @@ $(document).ready(function(){
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
-					$(".idico").css("color","#006400");
+					$(".idico").css("color","#04700F");
 					$("#chk").attr("title",'y');
 				}
 				else{
@@ -285,7 +284,7 @@ function num_check(){
       }else{
     	  $("#chknum_ok").show();
 			$("#chknum_no").hide();
-			$(".rnoico").css("color","#1FDA11");
+			$(".rnoico").css("color","#04700F");
 			return false;
       }
   }
@@ -316,12 +315,12 @@ $(function(){
 	
 	                 <td colspan="4"> 
 	                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
-	                   	 <input type="button" value="중복확인" id="check" >
-	                     <input type="hidden" id="chk" title="n"><!-- 사용가능할경우  -->
+	                   	 <input type="button" value="중복확인" id="check" class="chk_btn">
+	                     <input type="hidden" id="chk"  title="n"><!-- 사용가능할경우  -->
 	                 </td>
 	                  <tr style="display:none;" id="chkid_ok">
 		   				<td></td>
-		   				<td style="color:#004a00">아이디 사용 가능</td>
+		   				<td style="color:#04700F">아이디 사용 가능</td>
 		   			</tr>
 		   			<tr style="display:none;" id="chkid_no">
 		   				<td></td>
@@ -357,7 +356,7 @@ $(function(){
 	              </tr> 
 	              <tr style="display:none;" id="chkpw_ok">
 	   				<td></td>
-	   				<td style="color:blue">확인되었습니다</td>
+	   				<td style="color:#04700F">확인되었습니다</td>
 	   			</tr>
 	   			<tr style="display:none;" id="chkpw_no">
 	   				<td></td>
@@ -377,7 +376,7 @@ $(function(){
 	                    이메일<span class="mailico" style="font-size:25px;">*</span>
 	                 <td>
 	                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
-	                    <input type="button" value="인증번호 전송" id="submit_email" onclick="sendmail();">
+	                    <input type="button" value="인증번호 전송" id="submit_email" class="mail_btn"onclick="sendmail();">
 	                 </td>
 	           </tr>
            		<tr>
@@ -388,13 +387,13 @@ $(function(){
 	   				<td><label for="chkNum">인증번호<span class="mailico" style="font-size:25px;">*</span></label></td>
 	   				<td>
 		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
-		   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
+		   				<input type="button" value="확인" id="chkNum_btn" class="chkNum_btn"onclick="chkVerifiNum();" >
 		   				<input type="hidden" id="chknum" title="n">
 	   				</td>
    				</tr> 
 	   			<tr style="display:none;" id="chk_ok">
 	   				<td></td>
-	   				<td style="color:#4075dd">인증번호가 같습니다.</td>
+	   				<td style="color:##04700F">인증번호가 같습니다.</td>
 	   			</tr>
 	   			<tr style="display:none;" id="chk_no">
 	   				<td></td>
@@ -426,7 +425,7 @@ $(function(){
 	            </tr>
 	            <tr style="display:none;" id="chknum_ok">
 	   				<td></td>
-	   				<td style="color:blue">올바른 주민번호입니다</td>
+	   				<td style="color:#04700F">올바른 주민번호입니다</td>
    				</tr>
 	   			<tr style="display:none;" id="chknum_no">
 	   				<td></td>

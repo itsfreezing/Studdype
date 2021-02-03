@@ -81,6 +81,8 @@
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
-
+	<select id="selectStudyByLocation" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE SI_NO=#{si_no} and GU_NO=#{gu_no}
+	</select>
 
 </mapper>

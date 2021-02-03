@@ -98,7 +98,7 @@ public class StudyController {
 	}
 	
 	//지역별 검색 
-	@RequestMapping(value = "/searchLocation.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/SearchLocation.do", method = RequestMethod.GET)
 	public String SearchLocation(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
@@ -108,7 +108,7 @@ public class StudyController {
 		Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
 
 		// 로그
-		logger.info("STUDY - SELECTLIST");
+		logger.info("STUDY - SearchLocationLIST");
 
 		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
 		PageMaker pageMaker = new PageMaker();

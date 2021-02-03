@@ -7,7 +7,7 @@
      top:50%;
      left:50%;
      transform: translate(-50%, -50%);                                                                   
-     font-size:30rem;
+     font-size:50px;
      color: white;
      z-index: 2;
      text-align: center;
@@ -17,17 +17,12 @@
 .idico{
    color:red;
    margin:40px 10px 10px;
-   /* 30px 5px 10px 10px; */
-/*    transform: translate(-50%, -50%);                                                                     
- */
 }
 
 .pwico{
 	color:red;
    margin: 5px 7px 5px ;
-  	/* 5px 7px 5px */
-/*    	transform: translate(-50%, -50%); 
- */}
+}
 .mailico{
 	color:red;
    margin:50px 10px 10px;
@@ -36,26 +31,19 @@
 .nameico{
 	color:red;
    	margin:40px 10px 10px;
-/*    	transform: translate(-50%, -50%); 
- */
+
 }
 .rnoico{
 	color:red;
    	margin:40px 10px 10px;
-/*    	transform: translate(-50%, -50%); 
- */
 }
 .genderico{
 	color:red;
    	margin:40px 10px 10px;
-/*    	transform: translate(-50%, -50%); 
- */}
+}
 .phoneico{
 	color:red;
    	margin:5px 1px 1px 5px;
-	
-  /*  	margin:5px 1px 1px 5px;
-   	transform: translate(-50%, -50%);  */
 }
 hr{
    border:1px solid black;
@@ -67,38 +55,93 @@ input{
    width:350px;
    height:44px;
 }
-#check{
-   width:120px;
-   height:40px;
-   border-radius:15px;
-   background:#9400D3;
-   color:white;
-   font-weight:bold;
-}
-#chkNum_btn{
+.chk_btn{
 	width:120px;
-	height:40px;
-	border-radius:15px;
-	background:#9400D3;
-	color:white;
-	font-weight:bold;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
 }
-#submit_email{
+.chk_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.chkNum_btn{
+	width:120px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.chkNum_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.mail_btn{
+  	width:120px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.mail_btn:hover{
    width:120px;
    height:40px;
    border-radius:15px;
-   background:#9400D3;
-   color:white;
+   background-color: white;
    font-weight:bold;
+   border: 1px solid #6434ef;
+   color: #6434ef;
+   cursor: pointer;
+   transition: 0.5s;
+   
 }
 #sign{
    width:150px;
    height:44px;
+   margin-top : 15px;
    margin-left:17%;
-   border-radius:15px;
-   background:#9400D3;
-   color:white;
+   background-color: #EFF0F2;
+   border: 1px solid #EFF0F2;
+   font-size: 15px; 
+   padding: 1%;
+   border-radius: 10px 10px;
+   color: black;
    font-weight:bold;
+}
+#sign:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 #unum1{
    width:170px;

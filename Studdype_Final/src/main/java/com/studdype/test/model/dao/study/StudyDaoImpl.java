@@ -139,15 +139,26 @@ public class StudyDaoImpl implements StudyDao {
 		return studyList;
 	}
 
-	public List<StudyDto>selectStudyByLocation(int gu_no,int si_no, String gu_name){
-		List<StudyDto>LocationList=null;
-		try {
-			LocationList=sqlSession.selectList(NAMESPACE+"SelectStudyByLocation",gu_no,si_no,gu_name);
-		} catch (Exception e) {
-			System.out.println();
-			e.printStackTrace();
+	@Override
+	public List<StudyDto> selectStudyByLocation(int si_no) {
+		List<StudyDto>locList=null;
+			try {
+				locList=sqlSession.selectList(NAMESPACE+"selectStudyByLocation", si_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR]:selectStudyByLocation");
+				e.printStackTrace();
+			}
+			return locList;
 		}
-		
-		return LocationList;
-	}
 }
+
+///*
+// * public List<StudyDto>selectStudyByLocation(int si_no,int gu_no){
+// * List<StudyDto>locationList=null; try { locationList=
+// * sqlSession.selectList(NAMESPACE+"SelectStudyByLocation", si_no, gu_no);
+// * 
+// * } catch (Exception e) { System.out.println("[ERROR]:SelectStudyByLocation");
+// * e.printStackTrace(); }
+// * 
+// * return locationList; } }
+// */
