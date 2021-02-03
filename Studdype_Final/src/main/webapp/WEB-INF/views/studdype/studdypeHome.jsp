@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
-<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 

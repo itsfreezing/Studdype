@@ -8,6 +8,7 @@
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComunityHome</title>
+    <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <style type="text/css">
 .header-area {
 	background: #88d3ce;
@@ -19,6 +20,10 @@
 .mainmenu li.active:not(:last-child):after,
 .mainmenu li:not(:last-child):hover:after { 
 	background: #fff;
+}
+
+.dropdown-menu.show{
+	left: -200px;
 }
 </style>
 </head>
@@ -47,6 +52,23 @@
 	                              </li>
 	                              <li class="nav-item">
 								<a class="nav-link" href="myPage.do">마이페이지</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<div id="down-menu">
+										<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
+										<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
+										<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="나의 스터디"></div>
+									</div>
+										<a class="dropdown-item" href="myPage.do#myApply">신청 내역</a>
+										<a class="dropdown-item" href="myPage.do">신청받은 내역</a>
+										<a class="dropdown-item" href="myPage.do#myMeet">모임확인</a>
+										<hr id="profileHR">
+										<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
+								</div>
 							</li>
 							<li class="nav-item"></li>
 	

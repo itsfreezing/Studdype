@@ -6,6 +6,7 @@
 <html lang="en">
 
 <head>
+<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="./resources/assets/js/profile.js"></script>
 <script>
