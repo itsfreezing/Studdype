@@ -96,7 +96,42 @@ public class StudyController {
 
 		return "studdype/studdypeHome";
 	}
+	
+	//지역별 검색 
+	@RequestMapping(value = "/searchLocation.do", method = RequestMethod.GET)
+	public String SearchLocation(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
+		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
+		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
+		Map<Integer, String> selectSiForMainMap = null; // 시 리스트 담을 곳
+		Map<Integer, String> selectGuForMainMap = null; // 구 리스트 담을 곳
+		Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
+
+		// 로그
+		logger.info("STUDY - SELECTLIST");
+
+		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPagination(searchPagination);
+		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
+		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); // 구 리스트
+		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
+		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
+		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
+
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("studyList", studyList);
+		model.addAttribute("leaderName", studyMainLeaderNameMap);
+		model.addAttribute("siList", selectSiForMainMap);
+		model.addAttribute("guList", selectGuForMainMap);
+		model.addAttribute("cateList", selectCateForMainMap);
+		session.setAttribute("headerMenu", "home");
+
+		return "studdype/SearchLocation";
+	}
+	
+	
+	
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddypeForm(Model model,HttpSession session) {

@@ -1,8 +1,8 @@
 @charset "UTF-8";
-.title{
-   margin-left:45%;
-   padding:1%;
+.image{
+	position:relative;	
 }
+
 .idico{
    color:red;
 }
@@ -28,7 +28,6 @@
 	color:red;
 }
 hr{
-   width:900px;
    border:1px solid black;
 }
 #signtitle{

@@ -68,12 +68,13 @@ public class StudyBizImpl implements StudyBiz{
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
+	
 	// 지역 (시) selectList
-
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
 	}
+	
 	// 지역 (구/군) selectList
 	@Override
 	public List<LocationGuDto> locationGuList() {

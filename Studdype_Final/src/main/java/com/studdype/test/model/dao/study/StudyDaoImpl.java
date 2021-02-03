@@ -139,5 +139,15 @@ public class StudyDaoImpl implements StudyDao {
 		return studyList;
 	}
 
-
+	public List<StudyDto>selectStudyByLocation(int gu_no,int si_no, String gu_name){
+		List<StudyDto>LocationList=null;
+		try {
+			LocationList=sqlSession.selectList(NAMESPACE+"SelectStudyByLocation",gu_no,si_no,gu_name);
+		} catch (Exception e) {
+			System.out.println();
+			e.printStackTrace();
+		}
+		
+		return LocationList;
+	}
 }

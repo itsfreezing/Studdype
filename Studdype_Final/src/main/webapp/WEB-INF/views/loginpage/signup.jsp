@@ -298,18 +298,18 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<div>
-		<img src="./resources/img/loginBanner.png">
-	</div>	
-		<h3 class="title">회원가입</h3>
+	
+	<div class="image">
+			<img src="./resources/img/loginBanner.png" style="width:1900px; height:400px;" >
 			<hr>
+	</div>	
    <div id="signtitle"> 
          <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
 	   <table>
 			   <tr>
 					<th align="right" width="100">
 					 아이디
-					 	<span class="idico">*</span>
+					 	<span class="idico" style="font-size:27px;">*</span>
 	
 	                 <td colspan="4"> 
 	                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
@@ -332,7 +332,7 @@ $(function(){
 	   		   </tr>
 	 			<tr>
 	                 <th align="right" width="100">
-	                    비밀번호 <span class="pwico">*</span>
+	                    비밀번호 <span class="pwico" style="font-size:25px;">*</span>
 	                 </th>
 	             
 	                 <td colspan="4">
@@ -346,7 +346,7 @@ $(function(){
 	             	</tr>  
 	              <tr>
 	                 <th align="right" width="100">
-	                 비번확인 <span class="pwico">*</span>
+	                 비번확인 <span class="pwico" style="font-size:25px;">*</span>
 	                 </th>
 	                 <td>
 	                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
@@ -365,13 +365,13 @@ $(function(){
 	   				<td style="color:red;">패스워드를 입력해주세요</td>
 	   			</tr>
 	   			<tr>
-		        		<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
-		                 <td width="600" height="30"></td>
+		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		            <td width="600" height="30"></td>
 	            </tr>  
 	   		
 	           	<tr>
 	                 <th align="right" width="100">
-	                    이메일<span class="mailico">*</span>
+	                    이메일<span class="mailico" style="font-size:25px;">*</span>
 	                 <td>
 	                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
 	                    <input type="button" value="인증번호 전송" id="submit_email" onclick="sendmail();">
@@ -382,7 +382,7 @@ $(function(){
 	                 <td width="600" height="30"></td>
             	</tr> 
               	<tr>
-	   				<td><label for="chkNum">인증번호<span class="mailico">*</span></label></td>
+	   				<td><label for="chkNum">인증번호<span class="mailico" style="font-size:25px;">*</span></label></td>
 	   				<td>
 		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 		   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
@@ -403,7 +403,7 @@ $(function(){
 	            </tr> 
 	            <tr>
 	                 <th align="right" width="100">
-	                    이름<span class="nameico">*</span>
+	                    이름<span class="nameico" style="font-size:25px;">*</span>
 	                 <td>
 	                    <input type="text" id="memberName" name="mem_name" style="border:1px solid #ccc" onkeyup="namechk();"> 
 	                 </td>
@@ -414,7 +414,7 @@ $(function(){
 	         </tr>
 	           <tr>
 	               <th align="right" width="100">
-	                       주민번호<span class="rnoico">*</span>
+	                       주민번호<span class="rnoico" style="font-size:25px;">*</span>
 	                 </th>
 	                 <td colspan="5">
 	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
@@ -435,7 +435,7 @@ $(function(){
 	            </tr>
 	            <tr>
             		<th align="right" width="100">
-            			핸드폰번호<span class="phoneico">*</span>
+            			핸드폰번호<span class="phoneico" style="font-size:25px;">*</span>
             		</th>
             		<td colspan="5">
             			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"onkeyup="chktel();"/>
@@ -447,10 +447,11 @@ $(function(){
 	         	</tr>
             	 <tr>
                     <th align="right" width="100">
-            			성별<span class="genderico">*</span>
+            			성별<span class="genderico" style="">*</span>
             		</th>
             		<td>
 	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">M
+	            		&nbsp;&nbsp;&nbsp;
 	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="F" onclick="changen(this.value);">F
             		</td>
                 </tr>  
