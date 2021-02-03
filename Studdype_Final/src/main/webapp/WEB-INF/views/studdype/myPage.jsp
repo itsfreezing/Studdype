@@ -588,7 +588,7 @@ $(document).ready(function() {
 <!--  이메일 변경 -->
 	<div id="emailpopup" class="hide">
     <div class="content">
-    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 이메일:</p><input style="position:absolute; top:45%; left:47%;" id="newemail" name="newemail" placeholder="000000@00000.com"><br>
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 이메일:</p><input style="position:absolute; top:45%; left:47%;" id="newemail" name="newemail" autocomplete="off" placeholder="000000@00000.com"><br>
    
 
 
@@ -600,7 +600,7 @@ $(document).ready(function() {
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 전화번호:</p><input style="position:absolute; top:45%; left:48%;" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
+    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 전화번호:</p><input style="position:absolute; top:45%; left:48%;" id="newphone" name="newphone" autocomplete="off" placeholder="000-0000-0000"><br>
    
 
 
