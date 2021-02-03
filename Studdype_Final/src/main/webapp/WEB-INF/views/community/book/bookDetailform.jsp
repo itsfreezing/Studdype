@@ -428,16 +428,14 @@ function writeRecomment(btn){
 			<c:otherwise>
 				<!-- 메인 섹션 상단(글제목영역) -->
 				<div id="main-section-top">
-					<table>
-						<col width="800">
+					<table id="titleTable">
+						<col width="700">
 						<col width="250">
-						<col width="150">
+						<col width="100">
 						<tr>
-							<th><input type="text" readonly="readonly"
-								value="${detailBookDto.getB_title() }"></th>
-							<th><input type="text" readonly="readonly"
-								value="${writerNameMap.get(detailBookDto.getB_writer()).getMem_id()}(${writerNameMap.get(detailBookDto.getB_writer()).getMem_name() })"></th>
-							<th><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.DD HH.MM"/></th>
+							<th style="font-size:25pt;">${detailBookDto.getB_title() }</th>
+							<th>${writerNameMap.get(detailBookDto.getB_writer()).getMem_id()}(${writerNameMap.get(detailBookDto.getB_writer()).getMem_name() })</th>
+							<th style="font-size:13pt;"><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.dd"/></th>
 						</tr>
 					</table>
 				</div>
@@ -447,17 +445,15 @@ function writeRecomment(btn){
 					<div id="book-content">
 						<input type="hidden" id="b_no" value="${detailBookDto.getB_no() }">
 						<table id="info-table">
-							<col width="100">
+						<col width="200px"><col width="100px">
 							<tr>
-								<td colspan="2"><img id="book-img" src="${detailBookDto.getBook_img() }"></td>
+								<c:if test="${detailBookDto.getBook_ismain() eq 'Y' }">
+									<th style="padding-left:30px;"><span id="isMain">&nbsp;대표도서</span></th>
+								</c:if>
 							</tr>
 							<tr>
-								<th>도서 이름&nbsp;</th>
-								<td><input type="text" readonly="readonly" value="${detailBookDto.getBook_title()}">
-									<c:if test="${detailBookDto.getBook_ismain() eq 'Y' }">
-										<span id="isMain">&nbsp;대표도서</span>
-									</c:if>
-								</td>
+								<td rowspan="5"><img id="book-img" src="${detailBookDto.getBook_img() }"></td>
+								<td colspan="2" style="font-size:21pt; font-weight:bold;"><input type="text" readonly="readonly" value="${detailBookDto.getBook_title()}"></td>
 							</tr>
 							<tr>
 								<th>저자&nbsp;</th>
@@ -471,7 +467,7 @@ function writeRecomment(btn){
 							</tr>
 							<tr>
 								<th>링크&nbsp;</th>
-								<td><a href="${detailBookDto.getBook_url() }"target="_blank">
+								<td style="float:left;"><a href="${detailBookDto.getBook_url() }"target="_blank">
 									<img id="link" src='resources/img/link-icon.png' /></a>
 									<input type="hidden" value="${detailBookDto.getBook_url() }">
 								</td>
@@ -481,11 +477,11 @@ function writeRecomment(btn){
 					<div id="book_textarea">
 						<table>
 							<tr>
-								<th>도서 설명</th>
+								<th style="color:black;">도서 설명</th>
 							</tr>
 							<tr>
-								<th><textarea style="width: 100%;" rows="10" id="book_board_content"
-									readonly="readonly">${detailBookDto.getB_content() }</textarea></th>
+								<td><textarea style="width: 100%; padding-top:20px;" rows="15" id="book_board_content"
+									readonly="readonly">${detailBookDto.getB_content() }</textarea></td>
 							</tr>
 						</table>
 					</div>

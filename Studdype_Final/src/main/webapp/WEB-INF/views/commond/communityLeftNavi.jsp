@@ -55,7 +55,7 @@
   				<li class="leftnavi-item" > <img src="./resources/assets/img/category_notice.png"><input type="button" value="공지사항" onclick="location.href='notice.do'"  class="navBtn" id="notice"></li>
   			</c:if>          	
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_freeBoard.png"><input type="button" value="자유게시판" onclick="location.href='freeboard.do'" class="navBtn" id="freeboard"></li>
-            <li class="leftnavi-item"> <img src="./resources/assets/img/category_dataRoom.png"><input type="button" value="학습자료실" onclick="" class="navBtn"></li>
+            <li class="leftnavi-item"> <img src="./resources/assets/img/category_dataRoom.png"><input type="button" value="학습자료실" onclick="location.href='dataBoard.do'" class="navBtn" id="dataBoard"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_gallery.png"><input type="button" value="갤러리" onclick="location.href='gallery.do'" class="navBtn" id="imageBoard"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_schedule.png"><input type="button" value="일정관리" onclick="location.href='calendarView.do'" class="navBtn" id="calendar"></li>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_meet.png"><input type="button" value="모임관리" onclick="location.href='meetlist.do'" class="navBtn" id="meet"></li>

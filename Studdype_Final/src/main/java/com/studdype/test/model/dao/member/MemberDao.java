@@ -22,6 +22,7 @@ public interface MemberDao {
 	
 	public MemberDto login(MemberDto dto);//로그인
 	public String logout(HttpSession session);//로그아웃
+	public String findId(MemberDto dto);	//아이디 찾기
 	public int memberInsert(MemberDto dto);//회원가입
 	MemberDto selectOne(int mem_no);   //멤버번호로 하나 셀렉트
 	String selectNameByNo(int mem_no); //멤버번호로 이름 가져오기
@@ -32,6 +33,8 @@ public interface MemberDao {
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list);  // [모임게시판]
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); // [자유게시판]
 	Map<Integer, MemberDto> selectMemberByPhotoList(List<BoardDto> list);
+	Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list); // [학습 자료실]
+	
 	
 	// 투표한 사람 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list);  // [모임게시판_투표_참석]
@@ -56,6 +59,7 @@ public interface MemberDao {
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴 
 	
 	public MemberDto selectMemberByIdAndEmail(MemberDto dto); //아이디와 이메일로 member가져오기
+	public MemberDto sendMail(MemberDto dto );//회원가입 이메일 인증
 	public int updatePw(MemberDto dto); // 비밀번호 변경
 	
 	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기

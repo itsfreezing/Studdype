@@ -361,5 +361,64 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 
 		return res;
 	}
+	// --------------------------------------------------------------------------------------------------------------------------------------//
+	// [학습 자료실 댓글]
+	
+	// 학습 자료실 리플리스트 반환 메소드
+//	@RequestMapping(value="/dataReplyList.do", method=RequestMethod.POST)
+//	public @ResponseBody Map dataReplyList(@RequestBody ReplyDto dto) {
+//		logger.info("[dataReplyList]");
+//		Map replyMap = new HashMap(); // 리플리스트 dto 및 작성자이름 담을 MAP (반환 할거임)
+//		List<ReplyDto> replyList = null;  // 댓글 LIST
+//		Map<Integer,MemberDto> replyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자 dto 담을 맵
+//		
+//		replyList = bookReplyBiz.selectBookReplyList(dto.getB_no());
+//		replyMember = bookReplyBiz.getMemberByList(replyList);
+//		
+//		replyMap.put("replyList", replyList);
+//		replyMap.put("replyMember", replyMember);
+//		
+//		return replyMap;
+//	}
+//			
+//	// 도서게시판 댓글 삭제 메소드
+//	@RequestMapping(value="/bookReplyDelete.do", method=RequestMethod.POST)
+//	public @ResponseBody int bookReplyDelete(@RequestBody ReplyDto dto) {
+//		logger.info("[BookReplyDelete]");
+//		
+//		int res = bookReplyBiz.deleteReply(dto.getR_no());
+//		
+//		return res;
+//	}
+//			
+//	//도서게시판 댓글 쓰기 메소드
+//	@RequestMapping(value="/bookReplyWrite.do", method=RequestMethod.POST)
+//	public @ResponseBody int bookReplyWrite(@RequestBody ReplyDto dto) {
+//		logger.info("[BookReplyWrite]");
+//		
+//		int res = bookReplyBiz.writeReply(dto);
+//		
+//		return res;
+//	}
+//		
+//	//자유게시판 댓글 수정 메소드
+//	@RequestMapping(value="/bookReplyUpdate.do", method=RequestMethod.POST)
+//	public @ResponseBody int bookReplyUpdate(@RequestBody ReplyDto dto) {
+//		logger.info("[BookReplyUpdate]");
+//		
+//		int res = bookReplyBiz.updateReply(dto);
+//		
+//		return res;
+//	}
+//			
+//	//도서게시판 댓글 답글 작성 메소드
+//	@RequestMapping(value="/bookRecommentWrite.do", method=RequestMethod.POST)
+//	public @ResponseBody int bookRecommentWrite(@RequestBody ReplyDto dto) {
+//		logger.info("[BookRecommentWrite]");
+//		
+//		int res = bookReplyBiz.writeRecomment(dto);
+//		
+//		return res;
+//	}
 	
 }

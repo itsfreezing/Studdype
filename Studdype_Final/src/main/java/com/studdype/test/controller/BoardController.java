@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,7 +37,6 @@ import com.studdype.test.model.biz.board.NoticeBiz;
 import com.studdype.test.model.biz.file.FreeFileBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
-import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
@@ -434,8 +430,8 @@ public class BoardController {
 		 */
 		int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
 		int endPage = numPageGroup * pageGroupSize; // 끝 페이지
-		int totalPageNum = totalBoardNum / pageSize + 1; // 총페이지 개수
-
+		int totalPageNum = (int)Math.ceil( (totalBoardNum+0.0) /pageSize); //총 페이지
+		
 		// 마지막 페이지가 총 페이지 갯수보다 많으면
 		if (endPage > totalPageNum) {
 			endPage = totalPageNum;

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 
 <!-- commond css -->
@@ -101,7 +101,7 @@ function prePageGroup(){
 				<div id ="nothingImg"><img src="./resources/assets/img/searchNothing_keyword.png"></div>
 				<div id="nothingMeet"> 
 					<br>
-					더 이상모임이 존재하지 않습니다.
+					모임이 존재하지 않습니다.
 				</div>
 			</c:when>
 			 <c:otherwise>

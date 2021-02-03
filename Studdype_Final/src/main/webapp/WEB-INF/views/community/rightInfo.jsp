@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./resources/css/community/studyHome.css">
 
 <script type="text/javascript">
-//왼쪽네비 고정 스크립트
+//오른쪽 네비 고정 스크립트
 $(window).scroll(function(){
     var div = document.querySelector('div');        
      var compStyle = window.getComputedStyle(div);
