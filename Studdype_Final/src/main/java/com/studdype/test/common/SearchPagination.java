@@ -5,7 +5,15 @@ public class SearchPagination extends Pagination{
 	private String searchType = "";
 	private String keyword = "";
 	private int s_no = 0;
+	private int cate_no = 0;
 	
+	
+	public int getCate_no() {
+		return cate_no;
+	}
+	public void setCate_no(int cate_no) {
+		this.cate_no = cate_no;
+	}
 	public String getSearchType() {
 		return searchType;
 	}

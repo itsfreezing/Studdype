@@ -29,7 +29,7 @@
 	</select>
 
 	<delete id="deleteGalleryFile" parameterType="int">
-		DELETE FROM PHOTO_BOARD WHERE F_NO = #{f_no}
+		DELETE FROM PHOTO_FILE WHERE F_NO = #{f_no}
 	</delete>
 	
 	<insert id="updateGalleryFile" parameterType="fileDto">

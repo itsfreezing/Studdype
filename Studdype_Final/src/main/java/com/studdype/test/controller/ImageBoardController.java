@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
@@ -102,7 +104,7 @@ public class ImageBoardController {
 		model.addAttribute("galleryWriter", galleryWriter);
 		model.addAttribute("detail", detail);
 		model.addAttribute("fileDetail", fileDetail);
-		if(fileDetail.size() > 6) {
+		if(fileDetail.size() > 8) {
 			return "community/gallery/galleryDetail";
 		} else {
 			return "community/gallery/galleryDetailFew";
@@ -121,9 +123,6 @@ public class ImageBoardController {
 		int writer_no = ((MemberDto) session.getAttribute("login")).getMem_no();
 		int s_no = ((StudyDto) session.getAttribute("study")).getS_no();
 		int res = 0;
-		Date date = new Date();
-		System.out.println((MemberDto) session.getAttribute("login"));
-		System.out.println((StudyDto) session.getAttribute("study"));
 
 		boardDto.setB_writer(writer_no);
 		boardDto.setS_no(s_no);
@@ -162,12 +161,23 @@ public class ImageBoardController {
 		}
 	}
 	
+	//자유게시판 글 수정 파일삭제 AJAX
+	@RequestMapping(value="/galleryFileDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int freeFileDelete(@RequestBody FileDto dto) {
+		logger.info("[galleryFileDelete]");
+		
+		int res = photoFileBiz.deleteGalleryFile(dto.getF_no());
+		
+		return res;
+		
+	}
+	
 	@RequestMapping(value = "/galleryupdateform.do", method = RequestMethod.GET)
 	public String galleryUpdateForm(Model model, HttpServletRequest request) {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		
 		BoardDto galleryDto = photoBiz.galleryDetailOne(b_no);
-		List<FileDto> fileList = photoFileBiz.attachImageList(b_no);
+		List<FileDto> fileList = photoFileBiz.galleryDetailFile(b_no);
 		
 		//첨부파일 확장자 이미지
 		Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
@@ -204,12 +214,10 @@ public class ImageBoardController {
 				fileList.get(i).setB_no(dto.getB_no());
 			}
 			res = photoBiz.updateGallery(dto, mfileList, path, fileList);
-		}else { //사진이 없으면
-			return "commond/alert";
 		}
 		
 		if (res > 0) {
-			return "redirect:freedetail.do?b_no=" + dto.getB_no();
+			return "redirect:galleryDetail.do?b_no=" + dto.getB_no();
 		} else {
 			model.addAttribute("msg", "글 수정 실패!!");
 			model.addAttribute("url", "galleryupdateform.do?b_no=" + dto.getB_no());

@@ -62,7 +62,7 @@ $(function() {
 									<a class="nav-link" href="createStuddypeform.do">스터디 생성</a>
 								</li>
 								<li class="nav-item" id="category">
-									<a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
+									<a class="nav-link" href="studycategoryList.do">카테고리별 검색</a>
 								</li>
 								<li class="nav-item" id="location">
 									<a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>

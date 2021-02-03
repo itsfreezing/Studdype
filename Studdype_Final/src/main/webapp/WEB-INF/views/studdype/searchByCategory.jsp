@@ -92,139 +92,213 @@ input#search:focus {
 	height: 80px;
 }
 
-/* categories */
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500,900);
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-.snip1446 {
-  font-family: 'Source Sans Pro', Arial, sans-serif;
-  position: relative;
-  overflow: hidden;
-  margin: 10px;
-  min-width: 230px;
-  max-width: 315px;
-  max-height: 230px;
-  width: 100%;
-  color: #ffffff;
-  text-align: center;
-  font-size: 16px;
+
+/* Winona */
+.button--winona {
+	overflow: hidden;
+	padding: 0;
+	-webkit-transition: border-color 0.3s, background-color 0.3s;
+	transition: border-color 0.3s, background-color 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-.snip1446 * {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
+.button--winona::after {
+	content: attr(data-text);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	color: #3f51b5;
+	-webkit-transform: translate3d(0, 25%, 0);
+	transform: translate3d(0, 25%, 0);
 }
-.snip1446 img {
-  opacity: 1;
-  width: 100%;
+.button--winona > span {
+	display: block;
 }
-.snip1446:after,
-.snip1446:before,
-.snip1446 figcaption:after,
-.snip1446 figcaption:before {
-  background: #0a0a0a;
-  width: 25%;
-  position: absolute;
-  content: '';
-  opacity: 0;
-  -webkit-transition: all 0.3s steps(4);
-  transition: all 0.3s steps(4);
-  z-index: 1;
-  top: 100%;
-  bottom: 0;
+.button--winona.button--inverted {
+	color: #7986cb;
 }
-.snip1446:before {
-  left: 0;
-  -webkit-transition-delay: 0;
-  transition-delay: 0;
+.button--winona.button--inverted:after {
+	color: #fff;
 }
-.snip1446:after {
-  left: 25%;
-  -webkit-transition-delay: 0.1s;
-  transition-delay: 0.1s;
+.button--winona::after,
+.button--winona > span {
+	padding: 1em 2em;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
-.snip1446 figcaption:before {
-  left: 50%;
-  -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s;
-  z-index: -1;
+.button--winona:hover {
+	border-color: #3f51b5;
+	background-color: rgba(63, 81, 181, 0.1);
 }
-.snip1446 figcaption:after {
-  left: 75%;
-  -webkit-transition-delay: 0.3s;
-  transition-delay: 0.3s;
-  z-index: -1;
+.button--winona.button--inverted:hover {
+	border-color: #21333C;
+	background-color: #21333C;
 }
-.snip1446 figcaption {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  padding: 30px;
+.button--winona:hover::after {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
 }
-.snip1446 h2,
-.snip1446 p,
-.snip1446 .icons {
-  margin: 0;
-  width: 100%;
-  opacity: 0;
+.button--winona:hover > span {
+	opacity: 0;
+	-webkit-transform: translate3d(0, -25%, 0);
+	transform: translate3d(0, -25%, 0);
 }
-.snip1446 h2 {
-  font-weight: 900;
-  text-transform: uppercase;
+/* Common button styles */
+.button {
+	float: left;
+	min-width: 150px;
+	max-width: 250px;
+	display: block;
+	margin: 1em;
+	padding: 1em 2em;
+	border: none;
+	background: none;
+	color: inherit;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
 }
-.snip1446 p {
-  font-weight: 300;
+.button:focus {
+	outline: none;
 }
-.snip1446 .icons {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
+.button > span {
+	vertical-align: middle;
 }
-.snip1446 i {
-  padding: 0px 10px;
-  display: inline-block;
-  font-size: 24px;
-  color: #ffffff;
-  text-align: center;
-  opacity: 0.8;
+
+/* Text color adjustments (we could stick to the "inherit" but that does not work well in Safari) */
+
+.bg-1 .button {
+	color: #37474f;
+	border-color: #37474f;
 }
-.snip1446 i:hover {
-  opacity: 1;
+.bg-2 .button {
+	color: #ECEFF1;
+	border-color: #ECEFF1;
 }
-.snip1446:hover:after,
-.snip1446.hover:after,
-.snip1446:hover:before,
-.snip1446.hover:before,
-.snip1446:hover figcaption:after,
-.snip1446.hover figcaption:after,
-.snip1446:hover figcaption:before,
-.snip1446.hover figcaption:before {
-  top: 0;
-  opacity: 0.8;
+.bg-3 .button {
+	color: #fff;
+	border-color: #fff;
 }
-.snip1446:hover figcaption h2,
-.snip1446.hover figcaption h2,
-.snip1446:hover figcaption p,
-.snip1446.hover figcaption p,
-.snip1446:hover figcaption .icons,
-.snip1446.hover figcaption .icons {
-  -webkit-transition-delay: 0.4s;
-  transition-delay: 0.4s;
+
+/* Sizes */
+.button--size-s {
+	font-size: 14px;
 }
-.snip1446:hover figcaption h2,
-.snip1446.hover figcaption h2,
-.snip1446:hover figcaption .icons,
-.snip1446.hover figcaption .icons {
-  opacity: 1;
+.button--size-m {
+	font-size: 16px;
 }
-.snip1446:hover figcaption p,
-.snip1446.hover figcaption p {
-  opacity: 0.7;
+.button--size-l {
+	font-size: 18px;
 }
+
+/* Typography and Roundedness */
+.button--text-upper {
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+.button--text-thin {
+	font-weight: 300;
+}
+.button--text-medium {
+	font-weight: 500;
+}
+.button--text-thick {
+	font-weight: 600;
+}
+.button--round-s {
+	border-radius: 5px;
+}
+.button--round-m {
+	border-radius: 15px;
+}
+.button--round-l {
+	border-radius: 40px;
+}
+
+/* Borders */
+.button--border-thin {
+	border: 1px solid;
+}
+.button--border-medium {
+	border: 2px solid;
+}
+.button--border-thick {
+	border: 3px solid;
+}
+
+/* Individual button styles */
+
+/* Winona */
+.button--winona {
+	overflow: hidden;
+	padding: 0;
+	-webkit-transition: border-color 0.3s, background-color 0.3s;
+	transition: border-color 0.3s, background-color 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--winona::after {
+	content: attr(data-text);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	color: #3f51b5;
+	-webkit-transform: translate3d(0, 25%, 0);
+	transform: translate3d(0, 25%, 0);
+}
+.button--winona > span {
+	display: block;
+}
+.button--winona.button--inverted {
+	color: #7986cb;
+}
+.button--winona.button--inverted:after {
+	color: #fff;
+}
+.button--winona::after,
+.button--winona > span {
+	padding: 1em 2em;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--winona:hover {
+	border-color: #3f51b5;
+	background-color: rgba(63, 81, 181, 0.1);
+}
+.button--winona.button--inverted:hover {
+	border-color: #21333C;
+	background-color: #21333C;
+}
+.button--winona:hover::after {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.button--winona:hover > span {
+	opacity: 0;
+	-webkit-transform: translate3d(0, -25%, 0);
+	transform: translate3d(0, -25%, 0);
+}
+.categoryImage {
+	width: 100%;
+	border: 1px solid;
+	height: 400px;
+	background-color: white;
+}
+
 
 </style>
 
@@ -233,72 +307,114 @@ input#search:focus {
 <body>
 	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-	<!-- 메인페이지 슬라이더 영역 -->
-	<!-- 속성 검색 시 owl-carousel로 검색하면 찾기 쉬움! -->
-	<div class="owl-carousel hero-slider-area" id="mainBanner"
-		style="box-shadow: 5px 5px 5px;">
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage1.png">
-		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage2.png">
-		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage3.png">
-		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage4.png">
-		</div>
-	</div>
-	<!-- 슬라이더 끝 -->
-
+<!-- 카테고리 사진 hover시 변경하기 -->
+<div class="categoryImage">
+	
+</div>
 	<!-- 스터디 영역 -->
 	<div class="blogpost-area">
 		<!-- 카테고리 -->
-<div>
-<row>
-  <figure class="snip1446">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample15.jpg" alt="sample15" />
-    <figcaption>
-      <h2>IT</h2>
-    </figcaption>
-  </figure>
-<figure class="snip1446 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample52.jpg" alt="sample52" />
-  <figcaption>
-    <h2>Niles Peppertrout</h2>
-    <p>Given that sooner or later we're all just going to die, what's the point of learning about integers?</p>
-    <div class="icons"><a href="#"><i class="ion-chatbubbles"></i></a>
-      <a href="#"> <i class="ion-person-add"></i></a>
-      <a href="#"> <i class="ion-heart"></i></a>
+		<h2 style="text-align: center;">Studdype Categories</h2>
+				<div class="box bg-1">
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn1" value=""><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Open Project" id="catebtn2"><span>Open Project</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Create New" id="catebtn3"><span>Create New</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn4"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn5"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn6"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn7"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn8"><span>Publish</span></button>
+				</div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h2>Studdype Categories</h2>
     </div>
-  </figcaption>
-</figure>
-<figure class="snip1446"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg" alt="sample71" />
-  <figcaption>
-    <h2>Ingredia Nutrisha</h2>
-    <p>That's the problem with nature, something's always stinging you or oozing mucous all over you.</p>
-    <div class="icons"><a href="#"><i class="ion-chatbubbles"></i></a>
-      <a href="#"> <i class="ion-person-add"></i></a>
-      <a href="#"> <i class="ion-heart"></i></a>
-    </div>
-  </figcaption>
-</figure>
-</row>
-</div>
+  </div>
+  <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+        <img src="http://image.flaticon.com/icons/svg/297/297591.svg" class="img-responsive center-block" alt="" />
+        	
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=1">IT</a>
+          </h4>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+        <img src="http://image.flaticon.com/icons/svg/297/297581.svg" class="img-responsive center-block" alt="" />
+        <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=2">자격증</a>
+          </h4>
+        </div>
+      </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+      <img src="http://image.flaticon.com/icons/svg/283/283998.svg" class="img-responsive center-block" alt="" />
+      
+      <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=3">공무원</a>
+          </h4>
+        </div>
+      
+      </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+      <img src="http://image.flaticon.com/icons/svg/284/284007.svg" class="img-responsive center-block" alt="" />
+      <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=4">뷰티</a>
+          </h4>
 
-		<div class="container">
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+        <img src="http://image.flaticon.com/icons/svg/297/297591.svg" class="img-responsive center-block" alt="" />
+        <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=5">대입/수능</a>
+          </h4>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+        <img src="http://image.flaticon.com/icons/svg/297/297581.svg"  class="img-responsive center-block" alt="" />
+        <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=6">어학/회화</a>
+          </h4>
+        </div>
+      </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+      <img src="http://image.flaticon.com/icons/svg/283/283998.svg" class="img-responsive center-block" alt="" />
+      
+      <div>
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=7">취업스터디</a>
+          </h4>
+
+        </div>
+      
+      </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
+      <img src="http://image.flaticon.com/icons/svg/284/284007.svg" class="img-responsive center-block" alt="" />
+          <h4 class="pull-left">
+            <a href="studycategoryList.do?cate_no=8">기타</a>
+          </h4>
+       </div>
+  </div>
+</div> -->
+
+		<div class="container-fluid">
 			<div class="row">
 
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
 				<c:forEach items="${studyList}" var="studyDto">
-					<div class="col-sm-3 blogs-load"
-						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
+					<div class="col-sm-3 p-5 blogs-load"
+						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 350px; height: 233px;">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">

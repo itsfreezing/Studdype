@@ -23,6 +23,11 @@ public class photoFileBizImpl implements photoFileBiz{
 	public List<FileDto> galleryDetailFile(int b_no) {
 		return photoFileDao.galleryDetailFile(b_no);
 	}
+
+	@Override
+	public int deleteGalleryFile(int f_no) {
+		return photoFileDao.deleteGalleryFile(f_no);
+	}
 	
 
 

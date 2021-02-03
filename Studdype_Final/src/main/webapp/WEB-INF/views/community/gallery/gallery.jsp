@@ -150,6 +150,30 @@ console.log(url);
 	filter: alpha(opacity = 1);
 	opacity: 1;
 }
+.gallery_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.gallery_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
 </style>
 </head>
 <body>
@@ -158,7 +182,7 @@ console.log(url);
 
 
 	<!--main conternt 섹션-->
-	<div class="main-section" style="border: 1px solid red;">
+	<div class="main-section">
 
 		<br> <br>
 		<h1 style="text-align: center;">Gallery</h1>
@@ -202,7 +226,7 @@ console.log(url);
 
 			</div>
 		</div>
-	<button onclick="location.href='gallerywriteform.do'" style="float: right;">글쓰기</button>
+	<button onclick="location.href='gallerywriteform.do'" class="gallery_Btn">글쓰기</button>
 		<div>
 		<ul>
 			<c:if test="${pageMaker.prev}">

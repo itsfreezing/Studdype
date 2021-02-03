@@ -130,19 +130,19 @@ input#search:focus {
 		      }); 
 		</script>
 
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
 				<c:forEach items="${studyList}" var="studyDto">
-					<div class="col-sm-3 blogs-load"
-						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
+					<div class="col-sm-3 p-5 blogs-load"
+						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 350px; height: 233px;">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">

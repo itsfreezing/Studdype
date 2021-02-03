@@ -309,7 +309,7 @@ div#carousel ~ span:hover {
 	display: none;
 }
 
-.free_Btn{
+.gallery_Btn{
 	float: right;
 	margin-top : 15px;
 	background-color: #EFF0F2;
@@ -324,7 +324,7 @@ div#carousel ~ span:hover {
 	font-weight: bold;
 	margin-left: 1%;
 }
-.free_Btn:hover{
+.gallery_Btn:hover{
 	background-color: white;
 	border: 1px solid #6434ef;
 	font-weight:bold;
@@ -712,8 +712,8 @@ div#carousel ~ span:hover {
 	<!--main conternt 섹션-->
 	<div class="main-section">
 		<br>
-		<h1 style="text-align: center;">Title: ${detail.b_title }</h1>
-		<h2>by. ${galleryWriter}</h2>
+		<h1 style="text-align: center; font-weight: bold;">${detail.b_title }</h1><hr>
+		<p>by. ${galleryWriter}</p>
 		<div class="container mt-5">
 			<div id="carousel">
 				<figure id="spinner">
@@ -751,7 +751,7 @@ div#carousel ~ span:hover {
 		<!-- 갤러리 뷰 끝 -->
 
 		<!-- 갤러리 내용 시작 -->
-		<div class="galleryContent"></div>
+		<div class="galleryContent">${detail.b_content }</div>
 		<!-- 갤러리 내용 끝 -->
 
 
@@ -775,77 +775,24 @@ div#carousel ~ span:hover {
 				</tr>				
 			</table>
 		</div>
-
-		<!-- 게시글 위 아래 근처글 부분 -->
-<%-- 		<div class="recent_board_box">
-			<h4>자유게시판 글</h4>
-			<table class="recent_table">	
-				<col width="60%"><col width="25%"><col width="15%">
-				
-				<c:choose>
-					<c:when test="${empty recentList }">
-						<td colspan="3">게 시 글 이 없 습 니 다</td>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" >
-							<c:choose>
-							<c:when test="${dto.b_no == recentList.get(i).getB_no() }">
-								<tr class="recent_board_tr current_board">
-							
-								<td class="tdtitle">
-									<a href="galleryDetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-										</c:if>							
-									</a>
-								</td>
-								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-								
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<tr class="recent_board_tr">
-							
-								<td class="tdtitle">
-									<a href="galleryDetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-										</c:if>					
-									</a>
-								</td>
-								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-								
-								</tr>
-							</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-					<tr style="border:none;">
-						<td colspan="3" class="look_all_td"><a href="gallery.do">전체보기</a></td>
-					</tr>					
-				</tbody>
-			</table>
-		</div> --%>
 			
 		<!-- 갤러리 댓글 끝 -->
 		<div class="galleryBtnDiv">
 			<c:choose>
-				<c:when test="${dto.b_writer == login.mem_no }">
-					<input type="button" class="galleryBtn" value="삭제" onclick="location.href='galleryDelete.do?b_no=${detail.b_no}'" />
-					<input type="button" class="galleryBtn"  value="수정" onclick="location.href='galleryupdateform.do?b_no=${detail.b_no}'" />
-					<input type="button" class="galleryBtn" value="목록" onclick="location.href='gallery.do'">
+				<c:when test="${detail.b_writer == login.mem_no }">
+					<input type="button" class="gallery_Btn" value="삭제" onclick="location.href='gallerydelete.do?b_no=${detail.b_no}'" />
+					<input type="button" class="gallery_Btn"  value="수정" onclick="location.href='galleryupdateform.do?b_no=${detail.b_no}'" />
+					<input type="button" class="gallery_Btn" value="목록" onclick="location.href='gallery.do'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="free_Btn" value="목록" onclick="location.href='gallery.do'">
+					<input type="button" class="gallery_Btn" value="목록" onclick="location.href='gallery.do'">
 				</c:otherwise>
 			</c:choose>
 		</div>
  	</div>
 
-
+	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
+	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

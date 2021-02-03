@@ -11,4 +11,5 @@ public interface photoFileBiz {
 	
 	List<FileDto> attachImageList(int b_no);  //이미지ismain 'Y' 가져오기
 	List<FileDto> galleryDetailFile(int b_no); 
+	public int deleteGalleryFile(int f_no);
 }
