@@ -158,8 +158,7 @@ public class HomeController {
 		session.setAttribute("headerMenu", "myPage");
 		model.addAttribute("studylist", studylist);
 	
-		
-		
+	
 		return "studdype/myPage";
 	}
 	//마이페이지 회원탈퇴 버튼 클릭시
