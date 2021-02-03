@@ -55,3 +55,90 @@
 	padding: 18px 35px 16px;
 	border-radius: 50px;
 }
+
+.dropdown-menu{
+	padding-left: 10px;
+}
+
+.dropdown-menu a{
+	color: black!important;
+}
+
+#userImg{
+	width: 20px;
+	margin-right: 5px;
+}
+
+#down-menu{
+	padding: 15px;
+	font-size: 15px;
+	color: black;
+	width: 280px;
+	height: 100px;
+}
+
+#down-left{
+	position: absolute;
+}
+
+#down-top{
+	position: absolute;
+	left: 110px;
+	top: 30px;
+}
+
+#down-bottom{
+	position: absolute;
+	left: 120px;
+	top: 63px;
+}
+
+#down-bottom input{
+	border: 1px solid gray;
+	background-color: #b3b3b8;
+	color: #fff;
+	padding: 5px 8px;
+	border-radius: 7px;
+}
+
+#down-bottom input:hover{
+	background-color: gray;
+	color: #fff;
+	cursor: pointer;
+}
+
+.dropdown-menu.show{
+	width: 280px;
+	left: -160px
+} 
+
+li.nav-item.dropdown.active::after,
+li.nav-item.dropdown.active.show::after{
+	display: none!important;
+}
+
+#userSquare{
+	width: 70px;
+}
+
+#profileHR{
+	width: 90%;
+}
+
+.dropdown-menu a#logout{
+	color: gray!important;
+}
+
+.dropdown-item.active{
+	border: 1px solid black;
+	background-color: #f0f0f0;
+	width: 95%;
+	border-radius: 2em;
+	margin-bottom: 5px;
+}
+
+.dropdown-item:hover{
+	width: 95%;
+	background-color: #f0f0f0;
+	transition: all 0.3s;
+}
