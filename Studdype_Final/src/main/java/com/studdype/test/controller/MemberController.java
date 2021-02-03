@@ -137,18 +137,16 @@ public class MemberController {
 	
 	//아이디 찾기
 	@RequestMapping("/findId.do")
-	public String findId(MemberDto dto) {
+	public String findId(MemberDto dto,Model model) {
 		logger.info("findId");
 		
 		String findId = memberBiz.findId(dto);
-			
 		System.out.println(findId);
+		model.addAttribute("findName", dto.getMem_name());
+		model.addAttribute("findId", findId);
 			
-		if(findId != null) {
-			System.out.println("search_btn");
-			return "findId";
-		}
-		return findId;
+		
+		return "loginpage/findidres";
 	}
 	
 	
