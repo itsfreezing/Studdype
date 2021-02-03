@@ -129,7 +129,7 @@
 		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
 		
 		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		$(".hero-text h1").text(menuName);
+		$(".hero-text").html("<h1>"+menuName+"</h1>");
 		
 		// 스터디 생성에 맞는 이미지 가져오기
 		$(".justify-content-center").css({"background-image":"url('resources/img/createStudy.png')"

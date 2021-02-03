@@ -1,6 +1,7 @@
 package com.studdype.test.model.biz.file;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.dao.board.notice.NoticeFileDao;
+import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
 
 @Service
@@ -48,6 +50,12 @@ public class NoticeFileBizImpl implements NoticeFileBiz {
 		}		
 		
 		return res;
+	}
+	
+	// 첨부파일 리스트 게시글 번호로 가져오기
+	@Override
+	public Map<Integer, List<FileDto>> getBoardFileList(List<BoardDto> noticeList) {
+		return noticeFileDao.selectBoardFileList(noticeList);
 	}
 
 }
