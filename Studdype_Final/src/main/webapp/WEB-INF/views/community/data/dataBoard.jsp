@@ -186,9 +186,9 @@
 	text-align:left;
 }
 .notice_title a:hover{
-		font-weight: bold;
-		border-bottom: 1px solid #ff4e59;
-		padding-bottom: 3px;
+	font-weight: bold;
+	border-bottom: 1px solid #ff4e59;
+	padding-bottom: 3px;
 }
 .notice_tr{
 	background-color: rgb(245,245,245);
@@ -216,6 +216,59 @@
 	padding-left:10px;
 }
 
+/* 첨부파일 영역 */
+.attach_file_img {
+	width:20px;
+	height:20px;
+	cursor:pointer;
+}
+
+.file_entirety_div {
+	display:none;
+    position: absolute;
+	width: 190px;
+    padding:5px;
+    border: 1px solid #44465c;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: left;
+    z-index: 3;
+}
+
+.file_div {
+	cursor:pointer;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-bottom:0.5px solid rgba(0,0,0,0.15);
+}
+
+.file_div:hover {
+	background:rgba(0,0,0,0.05);
+}
+
+.file_name {
+	font-size:10pt;
+}
+
+.file_format_img {
+	width:30px;
+	height:30px;
+}
+
+.file_close {
+	float:right;
+	width:30px;
+	height:20px;
+	font-size:10pt;
+	cursor:pointer;
+}
+
+.open {
+	display:block;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -224,8 +277,35 @@
 		$(".current_page").parent().css('color','white');
 		$(".current_page").css('border','1px solid #6434ef');
 		$(".current_page").css('cursor','default');
+		
+		// 공지사항 첨부파일 열기 함수
+		$(".attach_file_img").click(function() {
+			$(".open").removeClass("open");
+			$(this).next().addClass("open");
+		});
+		
+		// 첨부파일 닫기 함수
+		$(".file_close").click(function() {
+			$(".open").removeClass("open");
+		});
+		
+		// 공지사항 파일 다운로드 함수
+		$(".notice_file_attach_div").click(function() {
+			var f_no = $(this).children().first().val();
+			
+			location.href="noticeFileDown.do?f_no="+f_no;
+			
+		});
+		
+		// 학습자료실 파일 다운로드 함수
+		$(".data_file_attach_div").click(function() {
+			var f_no = $(this).children().first().val();
+			
+			location.href-"dataFileDownload.do?f_no="+f_no;
+			
+		});
+		
 	});
-	
 	// 페이징---------------------- 
 	// 페이지 이동 
 	function movePage(pagenum){
@@ -297,7 +377,19 @@
 						</a>
 						</td>
 						<td class="td_notice_file">
-							공지사항 파일
+							<c:if test="${not empty noticeFileMap.get(noticeList.get(i).getB_no()) }">
+								<img class="attach_file_img" src="./resources/img/link-icon.png">
+								<div class="file_entirety_div">
+									<c:forEach var="j" begin="0" end="${noticeFileMap.get(noticeList.get(i).getB_no()).size()-1 }" step="1">
+										<div class="notice_file_attach_div file_div">
+											<input type="hidden" value="${noticeFileMap.get(noticeList.get(i).getB_no()).get(j).getF_no() }">
+											<img class="file_format_img" src="./resources/img/fileFormat/${noticeFileFormatMap.get(noticeList.get(i).getB_no()).get(j) }.png" onError="this.src='./resources/img/fileFormat/nomal.png'">
+											<span class="file_name">${noticeFileMap.get(noticeList.get(i).getB_no()).get(j).getF_name() }</span>
+										</div>
+									</c:forEach>
+									<div class="file_close">닫기</div>
+								</div>
+							</c:if>
 						</td>
 						<td class="td_notice_writer">${noticeMemberMap.get(noticeList.get(i).getB_no()).getMem_id() }(${noticeMemberMap.get(noticeList.get(i).getB_no()).getMem_name() })</td>
 						<td class="td_notice_date"><fmt:formatDate value="${noticeList.get(i).getB_regdate() }" pattern="YYYY.MM.dd"/></td>
@@ -314,8 +406,22 @@
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${dataList.size()-1 }" step="1">
 						<tr class="data_tr">
-							<td class="td_data_title">${dataList.get(i).getB_title() }</td>
-							<td class="td_data_file">첨부</td>
+							<td class="td_data_title"><a href="dataDetail.do?b_no=${dataList.get(i).getB_no() }">${dataList.get(i).getB_title() }</a></td>
+							<td class="td_data_file">
+								<c:if test="${not empty dataFileMap.get(dataList.get(i).getB_no()) }">
+								<img class="attach_file_img" src="./resources/img/link-icon.png">
+								<div class="file_entirety_div">
+									<c:forEach var="j" begin="0" end="${dataFileMap.get(dataList.get(i).getB_no()).size()-1 }" step="1">
+										<div class="data_file_attach_div file_div">
+											<input type="hidden" value="${dataFileMap.get(dataList.get(i).getB_no()).get(j).getF_no() }">
+											<img class="file_format_img" src="./resources/img/fileFormat/${dataFileFormatMap.get(dataList.get(i).getB_no()).get(j) }.png" onError="this.src='./resources/img/fileFormat/nomal.png'">
+											<span class="file_name">${dataFileMap.get(noticeList.get(i).getB_no()).get(j).getF_name() }</span>
+										</div>
+									</c:forEach>
+									<div class="file_close">닫기</div>
+								</div>
+							</c:if>
+							</td>
 							<td class="td_data_writer">${dataList.get(i).getB_writer() }</td>
 							<td class="td_data_date"><fmt:formatDate value="${dataList.get(i).getB_regdate() }" pattern="YYYY.MM.dd"/></td>
 							<td class="td_data_cnt">${dataList.get(i).getB_cnt() }</td>
@@ -366,7 +472,7 @@
 				<li class="page_li"><a class="next_page" onclick="nextPageGroup();">></a></li>
 			</ul>
 			
-			<!--  -->
+			<!-- 페이지 전환 form -->
 			<form action="dataBoard.do" method="post" id="pageform" name="pageform">
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>

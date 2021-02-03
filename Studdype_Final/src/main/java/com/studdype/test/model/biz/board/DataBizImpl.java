@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.studdype.test.model.dao.board.data.DataBoardDao;
 import com.studdype.test.model.dao.board.data.DataReplyDao;
@@ -42,6 +43,19 @@ public class DataBizImpl implements DataBiz {
 	@Override
 	public Map<Integer, Integer> getReplyCnt(List<BoardDto> dataList) {
 		return dataReplyDao.selectReplyCnt(dataList);
+	}
+
+	// 조회수 올리고 디테일 페이지 가져오기 
+	@Override
+	@Transactional
+	public BoardDto selectDetail(int b_no, int isVisitPage) {
+		int res = 1;
+		
+//		if(isVistPage == 0) {
+//			
+//		}
+		
+		return null;
 	}
 
 }
