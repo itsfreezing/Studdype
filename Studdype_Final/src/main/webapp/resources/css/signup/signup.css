@@ -1,31 +1,61 @@
 @charset "UTF-8";
-.image{
+.img{
 	position:relative;	
 }
-
+.img .content{
+	 position: absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%);                                                                   
+     font-size:30rem;
+     color: white;
+     z-index: 2;
+     text-align: center;
+     font-weight:bold;
+	
+}
 .idico{
    color:red;
+   margin:40px 10px 10px;
+   /* 30px 5px 10px 10px; */
+/*    transform: translate(-50%, -50%);                                                                     
+ */
 }
+
 .pwico{
 	color:red;
-}
+   margin: 5px 7px 5px ;
+  	/* 5px 7px 5px */
+/*    	transform: translate(-50%, -50%); 
+ */}
 .mailico{
 	color:red;
+   margin:50px 10px 10px;
 }
-.numico{
-	color:red;
-}
+
 .nameico{
 	color:red;
+   	margin:40px 10px 10px;
+/*    	transform: translate(-50%, -50%); 
+ */
 }
 .rnoico{
 	color:red;
+   	margin:40px 10px 10px;
+/*    	transform: translate(-50%, -50%); 
+ */
 }
 .genderico{
 	color:red;
-}
+   	margin:40px 10px 10px;
+/*    	transform: translate(-50%, -50%); 
+ */}
 .phoneico{
 	color:red;
+   	margin:5px 1px 1px 5px;
+	
+  /*  	margin:5px 1px 1px 5px;
+   	transform: translate(-50%, -50%);  */
 }
 hr{
    border:1px solid black;

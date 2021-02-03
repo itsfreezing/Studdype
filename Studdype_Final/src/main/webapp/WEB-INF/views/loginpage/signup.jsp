@@ -41,7 +41,7 @@ function chkpwd(){
 		$("#chkpw_ok").show();
 		$("#chkpw_no").hide();
 		$("#chkpw").hide();
-		$(".pwico").css("color","blue");
+		$(".pwico").css("color","#1FDA11");
 
 	}
 }
@@ -52,7 +52,7 @@ function chktel(){
 		$(".phoneico").css("color","red");
 		return false;
 	}else{
-		$(".phoneico").css("color","blue");
+		$(".phoneico").css("color","#1FDA11");
 		return false;
 	}
 }
@@ -62,14 +62,14 @@ function namechk(){
 		$(".nameico").css("color","red");
 		return false;
 	}else{
-		$(".nameico").css("color","blue");
+		$(".nameico").css("color","#1FDA11");
 		return false;
 	}
 }
 function changen(gender){
 	var gender=document.getElementById('membergender').value;
 	if(gender.checked!=null||gender.checked!=""){
-		$(".genderico").css("color","blue");
+		$(".genderico").css("color","#1FDA11");
 		return false;
 	}else{
 		$(".genderico").css("color","red");
@@ -106,7 +106,7 @@ function sendmail(){
 	        	  alert("인증번호가 전송되었습니다.");
 	        	  var chkNum_btn=$("#chkNum_btn");
 	        	  var emailInput=$("#memberMail");
-	        	  $(".mailico").css("color","blue");
+	        	  $(".mailico").css("color","#1FDA11");
 	        	  emailInput.attr("readonly","readonly");
 	        	  chkNum_btn.removeAttr("disabled");
 	          }
@@ -142,7 +142,7 @@ function chkVerifiNum(){
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
-				$(".mailico").css("color","blue");
+				$(".mailico").css("color","#1FDA11");
 			}
 		} 
 		,
@@ -230,7 +230,7 @@ $(document).ready(function(){
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
-					$(".idico").css("color","blue");
+					$(".idico").css("color","#006400");
 					$("#chk").attr("title",'y');
 				}
 				else{
@@ -285,7 +285,7 @@ function num_check(){
       }else{
     	  $("#chknum_ok").show();
 			$("#chknum_no").hide();
-			$(".rnoico").css("color","blue");
+			$(".rnoico").css("color","#1FDA11");
 			return false;
       }
   }
@@ -298,11 +298,14 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	
-	<div class="image">
-			<img src="./resources/img/loginBanner.png" style="width:1900px; height:400px;" >
+	<div class="img" >
+			  <img src="./resources/img/loginBanner.png" style="width:1900px; height:470px;">
 			<hr>
-	</div>	
+		<div class="content">
+			<h3>회원가입</h3>
+		</div>
+	</div>
+
    <div id="signtitle"> 
          <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
 	   <table>
@@ -318,7 +321,7 @@ $(function(){
 	                 </td>
 	                  <tr style="display:none;" id="chkid_ok">
 		   				<td></td>
-		   				<td style="color:blue">아이디 사용 가능</td>
+		   				<td style="color:#004a00">아이디 사용 가능</td>
 		   			</tr>
 		   			<tr style="display:none;" id="chkid_no">
 		   				<td></td>
@@ -447,7 +450,7 @@ $(function(){
 	         	</tr>
             	 <tr>
                     <th align="right" width="100">
-            			성별<span class="genderico" style="">*</span>
+            			성별<span class="genderico" style="font-size:25px;">*</span>
             		</th>
             		<td>
 	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">M
