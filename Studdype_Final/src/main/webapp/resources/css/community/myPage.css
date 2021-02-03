@@ -1,0 +1,256 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+/* 마이페이지 배너 */
+#container{
+	padding: 0 20%;
+	width: 100%; 
+	height: 200px; 
+	background-color: black;
+}
+
+#myPageBanner{
+	margin: 0.5%;
+	color: white; 
+	font-size: 20px; 
+}
+
+#memberInfo{
+	display: inline-block;
+	width: 28%;
+}
+
+.memberInfo{
+	color: white; 
+	font-size: 20px; 
+}
+
+#myPageName{
+	display: inline-block;
+	color:white; 
+	font-weight:bold; 
+	font-size:30px; 
+	margin-top: 30px;
+}
+
+#memberInfo .info-btn-dark{
+	color: grey;
+	font-size: 14px;
+	padding: 0.5% 1%;
+	cursor: pointer; 
+}
+
+.info-btn-bright{
+	background-color: #f0f0f0;
+	color: black!important;
+	font-size: 14px;
+	padding: 0.5% 1%;
+	border-radius: 1.2em;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+#myPageBanner-left{
+	position: absolute;
+	top: 130px;
+	left: 39%;
+	width: 30%;
+	height: 100%;
+}
+
+#myPageBanner-right{
+	position: absolute;
+	top: 130px;
+	left: 56%;
+	width: 42%;
+	height: 100%;
+}
+
+.myPageBanner-text{
+	font-size: 18px;
+	color: #fff;
+	margin-bottom: 3%;
+}
+
+#nav-container {
+	position: absolute; 
+	text-align: center; 
+	top: 26%; 
+	margin-left: 40%;
+	font-size: 18px;
+   	font-weight: bold;
+   	color: #fff;
+}
+
+.nav-items{
+	list-style: none;
+}
+
+.my-nav-item{
+   padding: 15px;
+   cursor: pointer;
+   float:left;
+}
+
+.my-nav-item.active{
+	font-size: 22px;
+	padding-bottom: 0;
+	border-bottom: 5px solid orange;   
+}
+
+.tab_content{
+	float:left; 
+	height:600px; 
+	width:100%; 
+	position:absolute; 
+	top:280px;
+}
+.profileBtn{
+	background-color: #eaeaea;
+	border-radius: 0.25em;
+	border: none;
+	padding: 0.5% 1%;
+	cursor: pointer;
+}
+.profileBtn.cancelBtn{
+	position:absolute; 
+	top:55%; 
+	left:53.5%;
+}
+
+.profileBtn.submitBtn{
+	position:absolute;
+	top:55%; 
+	left:49.5%;
+}
+
+.profileBtn.cancelBtnPW{
+	position:absolute; 
+	top:60%; 
+	left:53.5%;
+}
+
+.profileBtn.submitBtnPW{
+	position:absolute;
+	top:60%; 
+	left:49.5%;
+}
+
+div.content p{
+	display:inline; 
+	font-size:20px; 
+	font-weight:bold; 
+	position:absolute; 
+	top:44.7%; 
+	left:41%;
+}
+
+.popupInput{
+	position:absolute; 
+	top:45%; 
+	left:48%;
+}
+
+#popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#emailpopup{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#phonepopup{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+}
+
+#popup.hide {
+  display: none;
+}
+#emailpopup.hide{
+  display: none;
+}
+#phonepopup.hide{
+  display: none;
+}
+
+#popup.multiple-filter {
+  backdrop-filter: blur(4px) grayscale(90%);
+  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+}
+
+#emailpopup.multiple-filter {
+   backdrop-filter: blur(4px) grayscale(90%);
+  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+}
+#phonepopup.multiple-filter{
+  backdrop-filter: blur(4px) grayscale(90%);
+  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+}
+
+#popup .content {
+  height:300px;
+  width:500px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+#phonepopup .content{
+  height:300px;
+  width:500px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+
+#emailpopup .content{
+  height:200px;
+  width:500px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+.owl-dot{
+background-color: black!important;
+}
+.owl-dot.active{
+background-color: #808080!important;
+}
+
+.owl-dots{
+   margin-top:25px !important; 
+}
