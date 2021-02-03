@@ -13,6 +13,15 @@
 	border-radius: 5px;
 }
 
+#titleTable {
+	width:100%;
+}
+
+#titleTable th {
+	text-overflow:ellipsis;
+	font-size:16pt;
+}
+
 #main-section-mid {
 	position: relative;
 	display: inline-block;
@@ -22,23 +31,22 @@
 	padding:1% 0 1% 0;
 }
 
-#main-section-mid table {
-	width:100%;
+#main-section-mid table th {
+	font-size:15pt;
+	color:rgb(0,0,0,0.5);
 }
 
 #book-content {
-	float:left;
-	margin-top:20px;
-	width: 48%;
-	height: 450px;
-	border-right:0.2px solid gray;
+	width: 100%;
+	border-bottom:0.5px solid rgba(0,0,0,0.15);
+	padding-bottom:20px;
+	padding-left:10px;
 }
 
 #info-table {
 	width: 100%;
 	border-collapse: separate;
-	border-spacing: 0 20px;
-	
+	border-spacing: 0 10px;
 }
 
 #info-table input {
@@ -47,17 +55,15 @@
 }
 
 #book_textarea {
-	float:left;
-	left:48%;
-	margin-left:10px;
-	width:48%;
-	height: 420px;
+	width:100%;
 	padding:1% 0% 0% 1%;;
 }
 
+#book_textarea table {
+	width:100%;
+}
+
 #book-img {
-	position: relative;
-	left:30%;
 	width:150px;
 	height: 200px;
 	border: 5px solid #f9f9f0;
@@ -68,7 +74,9 @@
 }
 
 .main-section input {
+	border: none;
 	font-weight: bolder;
+	width:100%;
 }
 
 #title {
