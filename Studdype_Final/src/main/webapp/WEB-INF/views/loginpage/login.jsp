@@ -70,7 +70,7 @@ h1{
 #login{
 	width:300px;
 	height:50px;
-	border-radius:25px;
+	border-radius:2px;
 	font-size:20px;
 }
 #signup{
@@ -127,7 +127,6 @@ function login_btn(){
     <form class="loginForm" action="login.do" method="POST">
     	<table class="loginTable">
        		<tr>
-       		<br>
             	<td>
             	<input type="text" name="mem_id" id="id" placeholder="아이디를 입력해주세요" style="border:2px solid #6E45E3" autofocus="autofocus">
             	</td>
@@ -140,11 +139,10 @@ function login_btn(){
        		<br>
    		</table>
    		<div class="findSection">
-   		<a href="signform.do" id="signUp" onClick="loginpage/signup">회원가입 | </a>
-   		<a href="findIdForm.do" id="findId" onClick="loginpage/findId">아이디 찾기  | </a>
-   		<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기</a>
+   		<a href="findIdForm.do" id="findId" onClick="loginpage/findId">아이디 찾기  |  </a>
+   		<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기   |  </a>
+   		<a href="signform.do" id="signUp" onClick="loginpage/signup">회원가입</a>
    		</div>
-   		<br>
    		<div class="mainBtn">
        	<button type="submit" id="login" onclick="login_btn();">LOGIN</button>
        	<br>

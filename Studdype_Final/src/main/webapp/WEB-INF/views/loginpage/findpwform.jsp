@@ -67,47 +67,34 @@ h1{
     margin-bottom: 18%;
 }
 .main_btn{
-	margin-left: 15%;
-}
-#home_btn{
-	position: relative;
-	background: #fff;
-	color: #6434ef;
-	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	width: 150px;
-	height: 50px;
-	line-height: 30px;
-	padding: 0;
-	font-size: 18px;
-	font-weight: 400;
-	border-radius: 25px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
+	margin-left: 14%;
 }
 #psw_btn{
-	margin-left: 5%;
-	position: relative;
-	background: #fff;
-	color: #6434ef;
-	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	width: 150px;
-	height: 50px;
-	line-height: 30px;
-	padding: 0;
-	font-size: 18px;
-	font-weight: 400;
-	border-radius: 25px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
+	width:200px;
+	height:50px;
+	border-radius:2px;
+	font-size:18px;
 }
+#home_btn{
+	width:200px;
+	height:50px;
+	border-radius:2px;
+	font-size:18px;
+}
+
 
 </style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
  <script type="text/javascript">
+$(function() {
+	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+	//$(".justify-content-center").hide(); 
+	$(".justify-content-center").show(); 
+	$(".justify-content-center").css({"background":"black"}); 
+})
+ 
 $(function(){
 	
 	var chkNum_btn = $("#chkNum_btn");
@@ -203,6 +190,10 @@ function chkSubmit(){
 	}
 	
 }
+
+function cancel(){
+	self.close();
+}
 </script>
 </head>
 <body>
@@ -243,8 +234,8 @@ function chkSubmit(){
    </div>
    <br><br>
    <div class="main_btn">
-   		<input type="button" id="home_btn" value="홈" onclick="" class="findform_btn">
-   		<input type="button" id="psw_btn" value="비밀번호 찾기" class="findform_btn" onclick="chkSubmit();">
+		<button type="submit" id="psw_btn" class="findform_btn" onclick="chkSubmit();">비밀번호 찾기</button>
+   		<button type="submit" id="home_btn" class="findform_btn" onclick="cancel();">취소</button>
    </div>
    
    	</form>

@@ -25,9 +25,36 @@
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
- <script type="text/javascript">
-
+<script type="text/javascript">
+$(function() {
+	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+	//$(".justify-content-center").show(); 
+	$(".justify-content-center").show(); 
+	$(".justify-content-center").css({"background":"black"}); 
+})
 </script>
+<style type="text/css">
+.main_div{
+	margin-top: 5%;
+	margin-bottom: 2%;
+	margin-left: 33%;
+   	text-align: center;
+	width: 500px;
+	height: 70px;
+	color: white;
+	background: #6E45E3;
+	border-radius: 10px;
+}
+#name{
+	font-size: 18px;
+	font-weight: 600;
+}
+.sub_btn{
+	margin-left: 45%;
+	margin-bottom: 3%;
+	font-weight: 800;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
@@ -37,17 +64,20 @@
 		<c:choose>
 
 			<c:when test="${findId != null }">
-				<span>${findName }님의 아이디는 ${findId }입니다.</span>
+				<span>${findName }님의 아이디는<span id=name> '${findId }' </span>입니다.</span>
 			</c:when>
 			
-			 
 			<c:otherwise>
 				<span>${findName }님이 가입한 아이디는 존재하지 않습니다.</span>
 			</c:otherwise>
 		</c:choose>
    		
    </div>
-   
+   <div class="sub_btn">
+	<a href="loginform.do" id="login" onClick="loginpage/loginform">로그인   |  </a>
+	<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기</a>
+	</div>
+	
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script>

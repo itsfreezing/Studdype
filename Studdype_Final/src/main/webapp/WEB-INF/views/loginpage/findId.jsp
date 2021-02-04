@@ -46,7 +46,7 @@ h1{
 #name{
 	margin-left:12%;
     width:200px;
-    height:40px;
+    height:45px;
     margin-bottom: 3%;
 }
 .rno_part{
@@ -55,7 +55,7 @@ h1{
 #rno1{
 	margin-left:3%;
     width:200px;
-    height:40px;
+    height:45px;
 }
 #mid_rno{
 	font-weight: 800;
@@ -64,7 +64,7 @@ h1{
 #rno2{
 	margin-bottom:5%;
     width:200px;
-    height:40px;
+    height:45px;
 }
 .btn_part{
 	margin: auto;
@@ -72,59 +72,49 @@ h1{
 	margin-right: auto;
 	text-align: center;
 }
-#send_btn{
-	width: 300px;
-	height: 50px;
-	border-radius: 0px;
+.mid_menu{
+	margin-left: 41%;
+}
+#login{
+	font-weight: 800;
+}
+#findPw{
+	font-weight: 800;
 }
 #search_btn{
-	width: 120px;
+	width: 200px;
 	height: 50px;
+	border-radius: 5px;
+	font-size: 18px;
+
 }
 #cancel{
-	width: 120px;
+	width: 200px;
 	height: 50px;
-	margin-left: 4.5%;
-}
-input.submitBtn{
-	position: relative;
-	background: #fff;
-	color: #6434ef;
-	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	margin-top: 40px;
-	padding-bottom: 50px;
-	width: 150px;
-	height: 50px;
-	line-height: 52px;
-	padding: 0;
-	font-size: 12px;
-	font-weight: 600;
-	border-radius: 50px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
-}
-input.submitBtn:hover{
-	background: #6434ef;
-	color: #fff;
-} 
-.row justify-content-center,
-.hero-text-wrapper,
-.hero-text-inner{
-	
+	border-radius: 5px;
+	font-size: 18px;
 }
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+$(function() {
+	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
+	//$(".justify-content-center").hide(); 
+	$(".justify-content-center").show(); 
+	$(".justify-content-center").css({"background":"black"}); 
+})
+
 function idsearch(){
 	var form = $("#findidform");
 	var name = $("#name");
 	var rno = $("#rno1").val()+"-"+$("#rno2").val();
 	if(name.val() == null || name.val().trim() == ''){
 		alert("이름을 확인해 주세요.");
+		return false;
 	}else if(rno == null || rno.trim() == ''){
 		alert("주민번호를 확인해 주세요.");
+		return false;
 	}else{
 		$("#realRno").val(rno);
 		form.submit();
@@ -139,7 +129,7 @@ function cancel(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<h1>이메일 계정 찾기 </h1>
+	<h1>아이디 찾기 </h1>
 	<form class="main_head" id="findidform" action="findId.do" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">
@@ -155,7 +145,8 @@ function cancel(){
 			</div>
 			<div class="btn_part">
 				<div>
-					<input type="button" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();"><input type="button" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">
+					<button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
+					<button type="submit" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">취소</button>
 				</div>
 			</div>
 		</div>
