@@ -136,13 +136,13 @@ function chkVerifiNum(){
 				$("#chk_ok").hide();
 				$("#chk_no").show();
 				$("#chknum").attr("title",'n');
-				$(".mailico").css("color","red");
+				$(".numico").css("color","red");
 			
 			}else{
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
-				$(".mailico").css("color","#04700F");
+				$(".numico").css("color","#04700F");
 			}
 		} 
 		,
@@ -384,7 +384,7 @@ $(function(){
 	                 <td width="600" height="30"></td>
             	</tr> 
               	<tr>
-	   				<td><label for="chkNum">인증번호<span class="mailico" style="font-size:25px;">*</span></label></td>
+	   				<td><label for="chkNum">인증번호<span class="numico" style="font-size:25px;">*</span></label></td>
 	   				<td>
 		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 		   				<input type="button" value="확인" id="chkNum_btn" class="chkNum_btn"onclick="chkVerifiNum();" >

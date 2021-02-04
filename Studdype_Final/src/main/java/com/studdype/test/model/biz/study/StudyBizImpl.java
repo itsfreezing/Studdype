@@ -204,4 +204,20 @@ public class StudyBizImpl implements StudyBiz{
 		return noticeDao.selectNoticeBoard(s_no);
 	}
 
+	//지역별 검색 
+	@Override
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
+		return study_Dao.studyListLocation(searchPagination);
+	}
+	
+	@Override
+	public StudyDto selectOneBySi_no(int si_no) {
+		return study_Dao.selectOneBySi_no(si_no);
+	}
+	@Override
+	public List<StudyDto> selectStudyByLocation(int si_no){
+		return study_Dao.selectStudyByLocation(si_no);
+	}
+
+	
 }

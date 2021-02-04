@@ -72,7 +72,7 @@ $(function() {
                            <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
-                           <a class="nav-link" href="SearchLocation.do">지역별 검색</a>
+                           <a class="nav-link" href="studyListLocation.do">지역별 검색</a>
                         </li>
                         <c:choose>
                         <c:when test="${login == null }">
