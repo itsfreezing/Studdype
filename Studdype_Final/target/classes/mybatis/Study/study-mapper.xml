@@ -15,22 +15,30 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
-	<select id="studyList" resultType="studyDto" parameterType="searchPagination">
-      SELECT *
+	<select id="studyList" resultMap="studyMap" parameterType="searchPagination">
+      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
-      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       				FROM STUDY
       				WHERE 1=1
       				<include refid="search"></include>
-      				) ST
+      				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-      ORDER BY S_NO DESC
 	</select>
 	
 	<sql id="search">
 			<if test="keyword != null">AND S_NAME LIKE '%' || #{keyword} || '%'</if>
 	</sql>
 
+	<select id="studyListCategory" resultMap="studyMap" parameterType="searchPagination">
+		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE CATE_NO = #{cate_no}
+      				)
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
 
 <!-- 총 게시글 수 -->
 
@@ -47,8 +55,7 @@
 		WHERE MEM_NO = ${mem_no}
 	</select>
 
-	<select id="selectOneBySno" parameterType="int"
-		resultMap="studyMap">
+	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
 		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
