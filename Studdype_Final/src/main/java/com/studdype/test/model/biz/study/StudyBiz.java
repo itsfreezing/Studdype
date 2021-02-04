@@ -41,5 +41,7 @@ public interface StudyBiz {
 	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
 
-	
+	public StudyDto selectOneBySi_no(int si_no);
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
+	public List<StudyDto> selectStudyByLocation(int si_no);
 }

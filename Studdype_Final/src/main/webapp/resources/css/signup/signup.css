@@ -1,0 +1,160 @@
+@charset "UTF-8";
+.img{
+	position:relative;	
+}
+.img .content{
+	 position: absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%);                                                                   
+     font-size:50px;
+     color: white;
+     z-index: 2;
+     text-align: center;
+     font-weight:bold;
+	
+}
+.idico{
+   color:red;
+   margin:40px 10px 10px;
+}
+
+.pwico{
+	color:red;
+   margin: 5px 7px 5px ;
+}
+.mailico{
+	color:red;
+   margin:50px 10px 10px;
+}
+
+.nameico{
+	color:red;
+   	margin:40px 10px 10px;
+
+}
+.rnoico{
+	color:red;
+   	margin:40px 10px 10px;
+}
+.genderico{
+	color:red;
+   	margin:40px 10px 10px;
+}
+.phoneico{
+	color:red;
+   	margin:5px 1px 1px 5px;
+}
+hr{
+   border:1px solid black;
+}
+#signtitle{
+	margin-left:30%;
+}
+input{
+   width:350px;
+   height:44px;
+}
+.chk_btn{
+	width:120px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.chk_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.chkNum_btn{
+	width:120px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.chkNum_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.mail_btn{
+  	width:120px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	font-size: 15px;
+	padding: 1%;
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.mail_btn:hover{
+   width:120px;
+   height:40px;
+   border-radius:15px;
+   background-color: white;
+   font-weight:bold;
+   border: 1px solid #6434ef;
+   color: #6434ef;
+   cursor: pointer;
+   transition: 0.5s;
+   
+}
+#sign{
+   width:150px;
+   height:44px;
+   margin-top : 15px;
+   margin-left:17%;
+   background-color: #EFF0F2;
+   border: 1px solid #EFF0F2;
+   font-size: 15px; 
+   padding: 1%;
+   border-radius: 10px 10px;
+   color: black;
+   font-weight:bold;
+}
+#sign:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+#unum1{
+   width:170px;
+   height:30px;
+}
+#unum2{
+   width:170px;
+   height:30px;
+}
+#signupform{
+	margin-left:10%;
+}
+img{
+	width:1900px;
+	height:300px;	
+}
