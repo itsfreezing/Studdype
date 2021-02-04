@@ -469,7 +469,11 @@ public class MemberDaoImpl implements MemberDao{
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);
-			
+		}
+		
+		return resMap;
+	}
+		
 	public Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list) {
 		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
 		MemberDto dto = null;

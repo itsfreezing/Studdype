@@ -151,7 +151,6 @@ input#search:focus {
 }
 /* Common button styles */
 .button {
-	float: left;
 	min-width: 150px;
 	max-width: 250px;
 	display: block;
@@ -296,7 +295,13 @@ input#search:focus {
 	width: 100%;
 	border: 1px solid;
 	height: 400px;
-	background-color: white;
+}
+.categoryImage > img {
+width: 100%;
+height: 400px;
+}
+.cateBtn2{
+	text-align: center;
 }
 
 
@@ -309,99 +314,150 @@ input#search:focus {
 
 <!-- 카테고리 사진 hover시 변경하기 -->
 <div class="categoryImage">
+	<img src="./resources/assets/img/img_startPage.png" id="changeImage">
 	
 </div>
 	<!-- 스터디 영역 -->
-	<div class="blogpost-area">
 		<!-- 카테고리 -->
 		<h2 style="text-align: center;">Studdype Categories</h2>
-				<div class="box bg-1">
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn1" value=""><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Open Project" id="catebtn2"><span>Open Project</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Create New" id="catebtn3"><span>Create New</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn4"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn5"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn6"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn7"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn8"><span>Publish</span></button>
+				<div class="cateBtn2">
+					<button class="button button--winona button--border-thin button--round-s" data-text="IT" id="catebtn1" onclick="location.href='studycategoryList.do?cate_no=1'" style="display: inline-block;"><span>IT</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="자격증" id="catebtn2" onclick="location.href='studycategoryList.do?cate_no=2'" style="display: inline-block;"><span>자격증</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="공무원" id="catebtn3" onclick="location.href='studycategoryList.do?cate_no=3'" style="display: inline-block;"><span>공무원</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn4" onclick="location.href='studycategoryList.do?cate_no=4'" style="display: inline-block;"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn5" onclick="location.href='studycategoryList.do?cate_no=5'" style="display: inline-block;"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn6" onclick="location.href='studycategoryList.do?cate_no=6'" style="display: inline-block;"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn7" onclick="location.href='studycategoryList.do?cate_no=7'" style="display: inline-block;"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="기타" id="catebtn8" onclick="location.href='studycategoryList.do?cate_no=8'" style="display: inline-block;"><span>기타</span></button>
 				</div>
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <h2>Studdype Categories</h2>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-        <img src="http://image.flaticon.com/icons/svg/297/297591.svg" class="img-responsive center-block" alt="" />
-        	
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=1">IT</a>
-          </h4>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-        <img src="http://image.flaticon.com/icons/svg/297/297581.svg" class="img-responsive center-block" alt="" />
-        <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=2">자격증</a>
-          </h4>
-        </div>
-      </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-      <img src="http://image.flaticon.com/icons/svg/283/283998.svg" class="img-responsive center-block" alt="" />
-      
-      <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=3">공무원</a>
-          </h4>
-        </div>
-      
-      </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-      <img src="http://image.flaticon.com/icons/svg/284/284007.svg" class="img-responsive center-block" alt="" />
-      <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=4">뷰티</a>
-          </h4>
+<script type="text/javascript">
 
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-        <img src="http://image.flaticon.com/icons/svg/297/297591.svg" class="img-responsive center-block" alt="" />
-        <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=5">대입/수능</a>
-          </h4>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-        <img src="http://image.flaticon.com/icons/svg/297/297581.svg"  class="img-responsive center-block" alt="" />
-        <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=6">어학/회화</a>
-          </h4>
-        </div>
-      </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-      <img src="http://image.flaticon.com/icons/svg/283/283998.svg" class="img-responsive center-block" alt="" />
-      
-      <div>
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=7">취업스터디</a>
-          </h4>
 
-        </div>
-      
-      </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 block">
-      <img src="http://image.flaticon.com/icons/svg/284/284007.svg" class="img-responsive center-block" alt="" />
-          <h4 class="pull-left">
-            <a href="studycategoryList.do?cate_no=8">기타</a>
-          </h4>
-       </div>
-  </div>
-</div> -->
+$("#catebtn1").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
 
+$("#catebtn1").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+$("#catebtn2").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
+
+$("#catebtn2").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+
+$("#catebtn3").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
+
+$("#catebtn3").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+
+$("#catebtn4").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
+
+$("#catebtn4").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+
+$("#catebtn5").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
+
+$("#catebtn5").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+
+$("#catebtn6").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	}
+});
+
+$("#catebtn6").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+	}
+});
+
+
+$("#catebtn7").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("style","animation: fadein 2s");
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png');
+	}
+});
+
+$("#catebtn7").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("style","transition-duration: 1s");
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+	
+	}
+});
+
+
+$("#catebtn8").on({
+	'mouseenter': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn(600).css("display", "inline-block");
+
+	}
+});
+
+$("#catebtn8").on({
+	'mouseleave':
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeIn(600).css("display", "inline-block");
+
+	}
+});
+</script>
+
+	<div class="blogpost-area">
 		<div class="container-fluid">
 			<div class="row">
 
