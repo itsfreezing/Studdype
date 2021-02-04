@@ -21,34 +21,68 @@
 <link rel="stylesheet"  href="./resources/assets/css/owl.carousel.min2.css">
 <link rel="stylesheet"  href="./resources/css/community/myPage.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+<script src="./resources/assets/js/myPageScript.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
-<script src="./resources/assets/js/myPageScript.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+	
+	// Header의 프로필 메뉴에 하위 메뉴들은 href에 #를 가지고 있다.
+	// ex) myPage.do#hashTag
+	// command 뒤에 붙는 #의 값을 strHash변수에 넣어준다.
+	var strHash = document.location.hash;
+	
+	// 프로필의 하위 메뉴 (dropdown-item 클래스를 가진 a태그)를 클릭했을 때
+	$("a.dropdown-item").click(function(){
+		var id = $(this).attr("id"); // 클릭 된 a태그의 아이디값을 가지고 온다.
+		
+		if ( id == "create" ){ // 스터디 생성을 클릭했을때
+			return "location.href='createStuddypeform.do'"
+			
+		} else { // 마이페이지 tab 메뉴가 아닌 프로필의 하위메뉴를 클릭했을 때
+			$("ul.nav-items li").removeClass("active"); 
+		    $("ul.nav-items li#"+id).addClass("active");
+		    $(".tab_content").hide();
+			
+		    $("div#"+id).fadeIn();
+		    
+		    return false;
+		}
+		
+	});
+	
+	// 마이페이지의 tab메뉴를 클릭했을 때
+    $("ul.nav-items li").click(function() {
+	    $("ul.nav-items li").removeClass("active"); 
+	    $(this).addClass("active"); 
+	    $(".tab_content").hide();
+		
+	    $("div"+$(this).find("a").attr("href")).fadeIn(); 
+	    
+	    return false;
+	});
+	
+	// 프로필의 마이페이지 하위 메뉴가 아닌 Header의 마이페이지 메뉴로 페이지를 로드했을(#값이 없을) 때
+    if ( strHash == "" || strHash == null ) {
     	$(".tab_content").hide(); 
-        $("ul.nav-items li:first").addClass("active").show();
+        $("ul.nav-items li:first").addClass("active");
         $(".tab_content:first").show(); 
         
         
-
-    
-	$("ul.nav-items li").click(function() {
-
-        $("ul.nav-items li").removeClass("active"); //Remove any "active" class
-        $(this).addClass("active"); //Add "active" class to selected tab
-        $(".tab_content").hide(); //Hide all tab content
-		
-        $($(this).find("a").attr("href")).fadeIn(); //Find the href attribute value to identify the active tab + content
+    // 프로필의 마이페이지 하위 메뉴로 페이지를 로드했을 때     
+    } else {
+    	$(".tab_content").hide(); 
+        $("ul.nav-items li"+strHash).addClass("active");
+        $("div"+strHash).show();
+        
         return false;
-    });
-   
+    }
 
 });
+
 </script>
 </head>
 <body>
@@ -88,9 +122,9 @@ $(document).ready(function() {
 <!-- 상단 div_탭 -->
 <div id="nav-container">
 	<ul class="nav-items">
-	   <li class="my-nav-item" value="test1"><a href="#myApply">신청 내역</a></li>
-	   <li class="my-nav-item" value="test2"><a href="#applyList">신청받은 내역</a></li>
-	   <li class="my-nav-item" value="test3"><a href="#myMeet">모임확인</a></li>
+	   <li class="my-nav-item" id="myApply"><a href="#myApply">신청 내역</a></li>
+	   <li class="my-nav-item" id="applyList"><a href="#applyList">신청받은 내역</a></li>
+	   <li class="my-nav-item" id="myMeet"><a href="#myMeet">모임확인</a></li>
 	</ul>
 </div>
 <!-- 상단 div 끝 -->

@@ -152,7 +152,7 @@ public class HomeController {
 		model.addAttribute("applylist",applylist);
 		session.setAttribute("login",login);
 		model.addAttribute("studylist", studylist);
-	
+		
 		
 		
 		return "studdype/myPage";

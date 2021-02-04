@@ -133,11 +133,7 @@ li.nav-item.dropdown.active.show::after{
 }
 
 .dropdown-item.active{
-	border: 1px solid black;
-	background-color: #f0f0f0;
-	width: 95%;
-	border-radius: 2em;
-	margin-bottom: 5px;
+	background-color: #fff!important;
 }
 
 .dropdown-item:hover{

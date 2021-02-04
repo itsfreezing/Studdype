@@ -50,9 +50,6 @@
 	                              <li class="nav-item">
 								<a class="nav-link" href="logout.do">로그아웃</a>
 	                              </li>
-	                              <li class="nav-item">
-								<a class="nav-link" href="myPage.do">마이페이지</a>
-							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
@@ -61,11 +58,12 @@
 									<div id="down-menu">
 										<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
 										<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
-										<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="나의 스터디"></div>
+										<div id="down-bottom"><input type="button" onclick="location.href='myPage.do'" value="프로필 보기"></div>
 									</div>
-										<a class="dropdown-item" href="myPage.do#myApply">신청 내역</a>
-										<a class="dropdown-item" href="myPage.do">신청받은 내역</a>
-										<a class="dropdown-item" href="myPage.do#myMeet">모임확인</a>
+										<a class="dropdown-item" href="myPage.do"><b>마이페이지</b></a>
+										<a class="dropdown-item" id="myApply" href="myPage.do#myApply">스터디 신청 내역</a>
+										<a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
+										<a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
 										<hr id="profileHR">
 										<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
 								</div>
