@@ -15,6 +15,7 @@ public class SearchPagination extends Pagination{
 	}
 	public void setCate_no(int cate_no) {
 		this.cate_no = cate_no;
+	}
 	
 	public int getSi_no() {
 		return si_no;
