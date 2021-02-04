@@ -29,7 +29,6 @@ $(function() {
    $(".feature-page.header-area").css("height", "80px");
    $(".hero-text-wrapper").css("height", "500px");
    $(".nav-link").css("color", "black");
-   
 });
 
 
@@ -73,7 +72,7 @@ $(function() {
                            <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
-                           <a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
+                           <a class="nav-link" href="studyListLocation.do">지역별 검색</a>
                         </li>
                         <c:choose>
                         <c:when test="${login == null }">
