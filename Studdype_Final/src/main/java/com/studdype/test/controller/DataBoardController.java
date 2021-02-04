@@ -17,13 +17,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.PageChecker;
+import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.DataBiz;
 import com.studdype.test.model.biz.board.NoticeBiz;
 import com.studdype.test.model.biz.file.DataFileBiz;
 import com.studdype.test.model.biz.file.NoticeFileBiz;
+import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.reply.DataReplyBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.FileDto;
@@ -44,6 +48,8 @@ public class DataBoardController {
 	private DataReplyBiz dataReplyBiz;
 	@Autowired
 	private NoticeFileBiz noticeFileBiz;
+	@Autowired
+	private MemberBiz memberBiz;
 	
 	private final static int pageSize = 15;	
 	private final static int pageGroupSize = 5;
@@ -155,22 +161,168 @@ public class DataBoardController {
 		
 		FileDto dto = dataFileBiz.getFileByFno(f_no);
 		
+		System.out.println(dto.getF_name());
+		
 		if(dto != null) {
 			fileHandler.downloadFile(dto,response);
 		}
 	}
 	
+	// 학습자료실 디테일 페이지
 	@RequestMapping("/dataDetail.do")
 	public String dataDetail(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		int s_no = ((StudyDto)session.getAttribute("study")).getS_no();
 		
 		// 조회수 함수 isVisitPage = 1 -> 방문한 적있음 0 -> 없음
 		int isVisitPage = pageChecker.chkVisited(request, response, "dataBoardvisit", request.getParameter("b_no"));
-		BoardDto dataDto = dataBiz.selectDetail(b_no, isVisitPage);
+		BoardDto dataDto = dataBiz.selectDetail(b_no, isVisitPage); // 조회수 / 해당 게시물 가져오기
+		MemberDto member = memberBiz.selectOne(dataDto.getB_writer()); // 작성자 정보가져오기
 		
-		return "";
+		// 첨부파일 가져오기
+		List<FileDto> fileList = dataFileBiz.getAttachFileList(b_no);
+		
+		// 첨부파일 파일 확장자 구하기
+		Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
+		for(int i = 0 ; i < fileList.size(); i++) {
+			String[] fileNameList = fileList.get(i).getF_name().split("\\.");
+			String fileFormat = fileNameList[fileNameList.length-1];
+			
+			fileFormat = fileFormat.toLowerCase();
+			
+			fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
+		}
+		
+		model.addAttribute("dataDto", dataDto);
+		model.addAttribute("member", member);
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("fileFormatMap", fileFormatMap);
+		
+		return "community/data/dataDetail";
+	}
+	
+	// 학습자료실 게시글 삭제
+	@RequestMapping(value="/dataBoardDelete.do", method=RequestMethod.GET)
+	public String dataBoardDelete(HttpServletRequest request, Model model) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
+		int res = dataBiz.deleteBoard(b_no); 
+		
+		if(res > 0) {
+			return "redirect:dataBoard.do";
+		}else {
+			model.addAttribute("msg", "글 삭제 실패");
+			model.addAttribute("url", "dataDetail.do?b_no=" + b_no);
+			return "commond/alert";
+		}
+				
+	}
+	
+	// 학습자료실 게시글 작성 form
+	@RequestMapping("/dataBoardWriteForm")
+	public String dataBoardWriteForm() {
+		return "community/data/dataWriteForm";
+	}
+	
+	// 학습자료실 게시글 작성
+	@RequestMapping(value="/dataWrite.do", method=RequestMethod.POST)
+	public String dataWrite(BoardDto board, HttpSession session, HttpServletRequest request, UploadFile uploadFile) {
+		int writer = ((MemberDto)session.getAttribute("login")).getMem_no(); // 작성자 번호
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no();
+		int res = 0;
+		
+		board.setB_writer(writer);
+		board.setS_no(s_no);
+		
+		//파일 업로드
+		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		
+		if(mfileList != null) {
+			// 파일요소들 뽑아서 fileList에 저장
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성		
+			String path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
+			
+			// 글 작성
+			res = dataBiz.writeBoard(board, mfileList, path, fileList);
+		}else {
+			res = dataBiz.writeBoard(board);
+		}
+		
+		if(res > 0) {
+			return "redirect:dataBoard.do";
+		}else {
+			return "redirect:dataBoardWriteForm.do";
+		}
+	}
+	
+	// 학급자료실 게시글 수정
+	@RequestMapping(value="/dataBoardUpdateForm.do", method=RequestMethod.GET)
+	public String dataBoardUpdateForm(HttpServletRequest request, Model model) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
+		BoardDto dataDto = dataBiz.selectOne(b_no);
+		
+		//첨부파일 가져오기
+		List<FileDto> fileList = dataFileBiz.getAttachFileList(b_no);
+		
+		// 첨부파일 파일 확장자 구하기
+		Map<Integer, String> fileFormatMap = new HashMap<Integer, String>();
+		for(int i = 0 ; i < fileList.size(); i++) {
+			String[] fileNameList = fileList.get(i).getF_name().split("\\.");
+			String fileFormat = fileNameList[fileNameList.length-1];
+					
+			fileFormat = fileFormat.toLowerCase();
+					
+			fileFormatMap.put(fileList.get(i).getF_no(), fileFormat);
+		}
+		
+		model.addAttribute("fileFormatMap", fileFormatMap);
+		model.addAttribute("fileList",fileList);
+		model.addAttribute("dataDto", dataDto);	
+		
+		return "community/data/dataUpdateForm";
+	}
+	
+	// 학습자료실 글 수정 파일 삭제 AJAX
+	@RequestMapping(value="/dataFileDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int dataFileDelete(@RequestBody FileDto dto) {
+		logger.info("[dataFileDelete]");
+		
+		int res = dataFileBiz.deleteFile(dto.getF_no());
+		
+		return res;
+	}
+	
+	// 학습자료실 글 수정
+	@RequestMapping("/dataBoardUpdate.do")
+	public String dataBoardUpdte(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
+		int res = 0;
+		
+		MultipartFile[] mfileList = uploadFile.getFile(); // 파일리스트 반환해서 생성 
+		
+		// 파일이 있을 시
+		if(mfileList != null) {
+			String path = fileHandler.getPath(request);
+			// 파일 리스트 생성 파일 요소를 뽑아서 fileList에 저장
+			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);
+			
+			for(int i = 0; i < fileList.size(); i++) {
+				fileList.get(i).setB_no(dto.getB_no());
+			}
+			
+			res = dataBiz.updateBoard(dto, mfileList, path, fileList);
+		}else {
+			res = dataBiz.updateBoard(dto);
+		}
+		
+		if(res > 0) {
+			return "redirect:dataDetail.do?b_no"+dto.getB_no();
+		}else {
+			model.addAttribute("msg", "글 수정 실패");
+			model.addAttribute("url", "dataBoardUpdateForm.do?b_no=" + dto.getB_no());
+			return "commond/alert";
+		}
+		
 	}
 	
 	// 페이징 함수
@@ -185,7 +337,7 @@ public class DataBoardController {
 			 */
 			int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
 			int endPage = numPageGroup * pageGroupSize; // 끝 페이지
-			int totalPageNum = totalBoardNum / pageSize + 1; // 총페이지 개수
+			int totalPageNum = (int) Math.ceil((double)totalBoardNum / pageSize); // 총페이지 개수
 
 			// 마지막 페이지가 총 페이지 갯수보다 많으면
 			if (endPage > totalPageNum) {

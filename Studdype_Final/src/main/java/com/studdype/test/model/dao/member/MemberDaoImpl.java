@@ -454,6 +454,5 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return resMap;
 	}
-	
 
 }

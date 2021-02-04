@@ -2,15 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>스터띱 스터디 생성</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
@@ -34,10 +30,46 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
+<!-- summernote css / js -->
+<link rel="stylesheet" href="./resources/summernote/summernote.min.css">
+<script src="./resources/summernote/summernote.min.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+
 <script type="text/javascript">
 	var sel_files = [];
 
 	$(function() {
+		// 서머노트 양식
+		 $('#summernote').summernote({
+			 toolbar: [
+				    // [groupName, [list of button]]
+				    ['fontname', ['fontname']],
+				    ['fontsize', ['fontsize']],
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    ['color', ['forecolor','color']],
+				    ['table', ['table']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert',['picture','link','video']],
+				    ['view', ['fullscreen', 'help']]
+				  ],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+				height: 450,
+				width : 1000,
+				minHeight: null,
+				maxHeight: null,
+				focus: true,
+				lang: "ko-KR",
+				disableResizeEditor: true,
+				callbacks: {
+					onImageUpload : function(files){
+						sendFile(files[0],this);
+					}
+				}
+					
+			});
+		
 		// 시 미선택 시 구/군은 숨김 
 		$("#selectLocationGu option").hide();
 
@@ -116,10 +148,10 @@
 		});
 		
 		// 상세 소개글
-		$("#content_id").focusin(function() {
+		$("#summernote").focusin(function() {
 			$(this).css('border', '3px solid #6610f2');
 		});
-		$("#content_id").focusout(function() {
+		$("#summernote").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
 		});
 		///////////////////////////////////////////////////////////////
@@ -203,7 +235,7 @@
 		var locationSi = $("#selectLocationSi option:selected").val();
 		var locationGu = $("#selectLocationGu option:selected").val();
 		var maxcnt = $("#maxcnt_id").val();
-		var content = $("#content_id").val();
+		var content = $("#summernote").val();
 		var img = $("#image_section").attr("src");
 		var imgSection = $("#image-section").html();
 		
@@ -251,9 +283,33 @@
 		
 	} // submit 종료
 	
+	// 서머노트 파일 저장
+	function sendFile(file, editor){
+		var data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "summernoteImgUpload.do",
+			enctype: 'multipart/form-data',
+			contentType : false,
+			processData : false,
+			success : function(data){
+				var url = decodeURIComponent(data);
+				console.log(data);
+				console.log(url);
+				$(editor).summernote('editor.insertImage',url);
+			},
+			error: function(){
+				alert("서머노트 이미지 업로드 실패");
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
+
 	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<!--main conternt 섹션-->
@@ -339,8 +395,7 @@
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 				<div id="mainbottom">
 					<label>스터디 상세 소개글</label>
-					<textarea class="form-control" rows="10" cols="3" name="s_content" id="content_id"
-						placeholder="스터디 상세 소개글"></textarea>
+					<textarea id="summernote" rows="5" name="s_content" style="width:100%; height:250px;"></textarea>
 				</div>
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			</div>
@@ -368,5 +423,6 @@
 	</div>
 
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	
 </body>
 </html>

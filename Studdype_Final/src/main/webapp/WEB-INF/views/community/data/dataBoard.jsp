@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>학습 자료실</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -216,6 +216,11 @@
 	padding-left:10px;
 }
 
+.td_reply_cnt {
+	font-weight:bold;
+	color:red;
+}
+
 /* 첨부파일 영역 */
 .attach_file_img {
 	width:20px;
@@ -301,7 +306,7 @@
 		$(".data_file_attach_div").click(function() {
 			var f_no = $(this).children().first().val();
 			
-			location.href-"dataFileDownload.do?f_no="+f_no;
+			location.href="dataFileDownload.do?f_no="+f_no;
 			
 		});
 		
@@ -372,7 +377,7 @@
 						<div class="notice_tag">공지</div>
 						<a href="noticedetail.do?b_no=${noticeList.get(i).getB_no() }">${noticeList.get(i).getB_title() }
 						<c:if test="${noticeReplyCntMap.get(noticeList.get(i).getB_no()) != 0}">
-							<span class="td_reply_cnt">[${noticeReplyCntMap.get(dataList.get(i).getB_no()) }]</span>
+							<span class="td_reply_cnt">[${noticeReplyCntMap.get(noticeList.get(i).getB_no()) }]</span>
 						</c:if>
 						</a>
 						</td>
@@ -406,7 +411,11 @@
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${dataList.size()-1 }" step="1">
 						<tr class="data_tr">
-							<td class="td_data_title"><a href="dataDetail.do?b_no=${dataList.get(i).getB_no() }">${dataList.get(i).getB_title() }</a></td>
+							<td class="td_data_title"><a href="dataDetail.do?b_no=${dataList.get(i).getB_no() }">${dataList.get(i).getB_title() }</a>
+							<c:if test="${replyCntMap.get(dataList.get(i).getB_no()) != 0}">
+								<span class="td_reply_cnt">[${replyCntMap.get(dataList.get(i).getB_no()) }]</span>
+							</c:if>
+							</td>
 							<td class="td_data_file">
 								<c:if test="${not empty dataFileMap.get(dataList.get(i).getB_no()) }">
 								<img class="attach_file_img" src="./resources/img/link-icon.png">
@@ -415,14 +424,14 @@
 										<div class="data_file_attach_div file_div">
 											<input type="hidden" value="${dataFileMap.get(dataList.get(i).getB_no()).get(j).getF_no() }">
 											<img class="file_format_img" src="./resources/img/fileFormat/${dataFileFormatMap.get(dataList.get(i).getB_no()).get(j) }.png" onError="this.src='./resources/img/fileFormat/nomal.png'">
-											<span class="file_name">${dataFileMap.get(noticeList.get(i).getB_no()).get(j).getF_name() }</span>
+											<span class="file_name">${dataFileMap.get(dataList.get(i).getB_no()).get(j).getF_name() }</span>
 										</div>
 									</c:forEach>
 									<div class="file_close">닫기</div>
 								</div>
 							</c:if>
 							</td>
-							<td class="td_data_writer">${dataList.get(i).getB_writer() }</td>
+							<td class="td_data_writer">${memberMap.get(dataList.get(i).getB_no()).getMem_id() }(${memberMap.get(dataList.get(i).getB_no()).getMem_name()})</td>
 							<td class="td_data_date"><fmt:formatDate value="${dataList.get(i).getB_regdate() }" pattern="YYYY.MM.dd"/></td>
 							<td class="td_data_cnt">${dataList.get(i).getB_cnt() }</td>
 						</tr>
@@ -434,7 +443,7 @@
 		<!-- 글쓰기 -->
 		<div style="width: 100%; height: 100px;">
 			<!-- 글쓰기 기능 처리 후 이 주석 삭제 -->
-			<button class="writeBtn" onclick="location.href=''">글 쓰기</button>
+			<button class="writeBtn" onclick="location.href='dataBoardWriteForm.do'">글 쓰기</button>
 		</div>
 		
 		<!-- 검색 영역 -->

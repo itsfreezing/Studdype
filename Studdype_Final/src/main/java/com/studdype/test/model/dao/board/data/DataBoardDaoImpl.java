@@ -23,7 +23,7 @@ public class DataBoardDaoImpl implements DataBoardDao{
 		try {
 			totalBoardNum = sqlSession.selectOne(NAMESPACE+"selectTotalBoardNum", s_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR] : selectTotalBoardNum");
+			System.out.println("[ERROR] : [학습자료실] selectTotalBoardNum");
 			e.printStackTrace();
 		}
 		
@@ -37,11 +37,81 @@ public class DataBoardDaoImpl implements DataBoardDao{
 		try {
 			dataList = sqlSession.selectList(NAMESPACE+"selectPagingBoardList", pageMap);
 		} catch (Exception e) {
-			System.out.println("[ERROR] : selectPagingBoardList");
+			System.out.println("[ERROR] : [학습자료실] selectPagingBoardList");
 			e.printStackTrace();
 		}
 		
 		return dataList;
+	}
+
+	@Override
+	public int updateCnt(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateCnt", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실] updateCnt");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public BoardDto selectOne(int b_no) {
+		BoardDto dto = new BoardDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실] selectOne");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public int deleteBoard(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실] deleteBoard");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int insertBoard(BoardDto board) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertBoard", board);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습 자료실] insertBoard");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int updateBoard(BoardDto board) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateBoard"+board);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습 자료실] updateBoard");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 
