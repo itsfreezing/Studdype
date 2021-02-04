@@ -99,6 +99,7 @@
 	color: #fff;
 	padding: 5px 8px;
 	border-radius: 7px;
+	margin-left: 23px;
 }
 
 #down-bottom input:hover{
@@ -108,8 +109,10 @@
 }
 
 .dropdown-menu.show{
-	width: 280px;
-	left: -160px
+	width: 300px;
+	left: -150px;
+	box-shadow: 4px 4px 4px gray; 
+	border: 1px solid gray;
 } 
 
 li.nav-item.dropdown.active::after,

@@ -56,6 +56,7 @@ $(document).ready(function() {
 
 <!-- 상단 div_회원정보 -->
 <div id="container">
+
    <div id="myPageBanner"><b>My page</b></div>
    <div id="memberInfo">
       <div id="myPageName"><c:if test="${login != null }">${login.mem_name }</c:if></div>
@@ -84,6 +85,7 @@ $(document).ready(function() {
          <a class="info-btn-bright" onclick="showphone();">전화번호 변경</a>
       </div>
    </div>
+
 </div>
 <!-- 상단 div_탭 -->
 <div id="nav-container">
@@ -99,6 +101,7 @@ $(document).ready(function() {
 
 <!--  스터디 신청 내역 div -->
 <div class="tab_content" id="myApply">
+
    <p class="tab_p">나의 스터디 신청 내역</p>
    
    <br>
@@ -153,6 +156,7 @@ $(document).ready(function() {
 
 <!--  신청 받은 내역 -->
 <div class="tab_content" id="applyList">
+
    <p class="tab_p">내가 받은 스터디 신청</p>
    
    <table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
@@ -186,6 +190,7 @@ $(document).ready(function() {
    <c:if test="${fn:length(applylist) == 0 }">
       <p style="font-weight:bold; font-size: 30px; margin-left:42%; margin-top:9%;">받은 신청이 없습니다!</p>
    </c:if>
+
 </div>
 
 <!-- 신청 받은 내역 끝 -->

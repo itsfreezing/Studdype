@@ -3,6 +3,7 @@
 
 /* 마이페이지 배너 */
 #container{
+<<<<<<< HEAD
    padding: 0 8%;
    width: 100%; 
    height: 250px; 
@@ -18,6 +19,23 @@
 #memberInfo{
    display: inline-block;
    width: 100%;
+=======
+	padding: 0 8%;
+	width: 100%; 
+	height: 250px; 
+	background-color: black;
+}
+
+#myPageBanner{
+	padding: 5px 5px;
+	color: white; 
+	font-size: 20px; 
+}
+
+#memberInfo{
+	display: inline-block;
+	width: 100%;
+>>>>>>> 1d3a21491a9f51bc04eae6fbec985b4a7de69e1c
 }
 
 .memberInfo{
@@ -41,6 +59,7 @@
 }
 
 .info-btn-bright{
+<<<<<<< HEAD
    color: grey!important;
    font-size: 12px;
    cursor: pointer;
@@ -92,12 +111,66 @@
 .my-nav-item{
    z-index: 5;
    display: inline-block;
+=======
+	color: grey!important;
+	font-size: 12px;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+#myPageBanner-left{
+	position: absolute;
+	top: 130px;
+	left: 38%;
+	width: 30%;
+	height: 100%;
+}
+
+#myPageBanner-right{
+	position: absolute;
+	top: 130px;
+	left: 70%;
+	width: 42%;
+	height: 100%;
+}
+
+.myPageBanner-text{
+	font-size: 18px;
+	color: #fff;
+	margin-bottom: 33px;
+}
+
+#nav-container {
+	position: absolute; 
+	text-align: center; 
+	top: 30.7%; 
+	margin-left: 35%;
+	font-size: 18px;
+   	font-weight: bold;
+   	color: #fff;
+}
+
+.nav-items{
+	list-style: none;
+	position: absolute;
+	display: inline-block;
+	width: 800px;
+	margin-left: -150px;
+	margin-bottom: 0;
+	z-index: 6;
+}
+
+.my-nav-item{
+	z-index: 5;
+	display: inline-block;
+>>>>>>> 1d3a21491a9f51bc04eae6fbec985b4a7de69e1c
    cursor: pointer;
    width: 200px;
    margin-top: 15px;
 }
 
 .my-nav-item.active{
+<<<<<<< HEAD
    font-size: 22px;
    padding-bottom: 0;
    border-bottom: 5px solid #fff;   
@@ -110,6 +183,20 @@
    top:280px;
    margin-top: 100px;
    margin-bottom: 200px;
+=======
+	font-size: 22px;
+	padding-bottom: 0;
+	border-bottom: 5px solid #fff;   
+}
+
+.tab_content{
+	height:600px; 
+	width:100%; 
+	position:absolute; 
+	top:280px;
+	margin-top: 100px;
+	margin-bottom: 200px;
+>>>>>>> 1d3a21491a9f51bc04eae6fbec985b4a7de69e1c
 }
 .profileBtn{
    background-color: #eaeaea;
@@ -143,12 +230,21 @@
 }
 
 p.tab_p{
+<<<<<<< HEAD
    display:inline; 
    font-size:20px; 
    font-weight:bold; 
    position:absolute; 
    top:10%; 
    left:10%;
+=======
+	display:inline; 
+	font-size:20px; 
+	font-weight:bold; 
+	position:absolute; 
+	top:10%; 
+	left:10%;
+>>>>>>> 1d3a21491a9f51bc04eae6fbec985b4a7de69e1c
 }
 
 .popupInput{

@@ -32,6 +32,8 @@ public interface MemberDao {
 	// 게시판 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list);  // [모임게시판]
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); // [자유게시판]
+	Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list); // [학습 자료실]
+	
 	
 	// 투표한 사람 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list);  // [모임게시판_투표_참석]

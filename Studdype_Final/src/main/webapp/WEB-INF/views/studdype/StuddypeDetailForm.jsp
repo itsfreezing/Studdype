@@ -56,14 +56,11 @@ body,html {
 	border-bottom:1px solid gray;
 	padding:10px 0 10px 0;
 	text-align:center;
-	background:rgba(138, 109, 255, 0.75);
 }
 
 #mainPhoto {
-	width:45%;
+	width:100%;
 	height:100%;
-	border-radius:230px;
-	border:1px solid gray;
 	background:#fff;
 }
 

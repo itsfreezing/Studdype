@@ -1243,9 +1243,9 @@ a.scroll-down:hover {
    z-index: -1;
    opacity: 0.75;
    background: #7156e0;
-   background: -moz-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-   background: -webkit-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-   background: linear-gradient(to right, #7156e0 0%, #86c9cf 100%);
+   background: -moz-linear-gradient(left, rgb(216, 205, 239) 0%, rgb(166, 183, 232) 100%);
+   background: -webkit-linear-gradient(left, rgb(216, 205, 239) 0%, rgb(166, 183, 232) 100%);
+   background: linear-gradient(to right, rgb(216, 205, 239) 0%, rgb(166, 183, 232) 100%);
    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7156e0', endColorstr='#86c9cf', GradientType=1);
 }
 
