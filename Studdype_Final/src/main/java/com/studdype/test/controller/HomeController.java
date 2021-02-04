@@ -55,7 +55,6 @@ public class HomeController {
 	
 	@RequestMapping("/studdypehome.do")
 	public String studdypeHeader() {
-		
 		return "studdype/studdypeHome";
 	}
 	
@@ -159,7 +158,7 @@ public class HomeController {
 		model.addAttribute("studylist", studylist);
 	
 	
-		return "studdype/myPage";
+		return "studdype/myPage2";
 	}
 	//마이페이지 회원탈퇴 버튼 클릭시
 	@RequestMapping(value="/memberDelete.do",method = RequestMethod.GET)

@@ -609,9 +609,9 @@
 		
 		
 		<table id="member"
-         class="table table-striped table-bordered table-hover">
+         class="table table-hover">
          <thead>
-            <tr>
+            <tr style="background-color:#967BDC;">
                <th>이름</th>
                <th>이메일</th>
                <th>아이디</th>
@@ -623,7 +623,7 @@
          <tbody>
             <c:forEach var="membername" items="${membername}" begin='1' end='10'>
             
-               <tr>
+               <tr >
                   <td>${membername.mem_name }</td>
                   <td>${membername.mem_email }</td>
                   <td>${membername.mem_id }</td>
@@ -645,9 +645,9 @@
          </tbody>
       </table>
 	  <table id="member2"
-         class="table table-striped table-bordered table-hover">
+         class="table table-hover">
          <thead>
-            <tr>
+            <tr style="background-color:#967BDC;">
                <th>이름</th>
                <th>이메일</th>
                <th>아이디</th>
@@ -682,9 +682,9 @@
          </tbody>
       </table>
       <table id="member3"
-         class="table table-striped table-bordered table-hover">
+         class="table table-hover">
          <thead>
-            <tr>
+            <tr style="background-color:#967BDC;">
                <th>이름</th>
                <th>이메일</th>
                <th>아이디</th>
@@ -753,11 +753,11 @@
 		<p style="position:absolute; top:57%; left:28%; color:#967BDC; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
 	<table id="book1"
-         class="table table-striped table-bordered table-hover"
+         class="table table-hover"
          style="border: 1px solid;">
 
          <thead>
-            <tr style="text-align:center;">
+            <tr style="text-align:center; background-color:#967BDC;">
                <th>번호</th>
                <th>등록된 책 제목</th>
                <th>대표 도서</th>
@@ -781,8 +781,6 @@
 
          </tbody>
       </table>            
-	
-	
 	
 	<c:if test="${fn:length(bookList) > 11 }">
 		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:53%; cursor:pointer;" onclick="first();">

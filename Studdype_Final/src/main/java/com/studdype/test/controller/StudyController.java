@@ -242,14 +242,31 @@ public class StudyController {
 		
 		return "studdype/Allmember";
 	}
+	
+	
 	@RequestMapping("/updateleader.do")
 	public String updateleader(Model model,HttpServletRequest request) {
 		System.out.println("아니");
 		StudyDto dto = new StudyDto(Integer.parseInt(request.getParameter("leader_no")),Integer.parseInt(request.getParameter("s_no")));
 		int dto2 = studyBiz.newLeader(dto);
-		String a = request.getParameter("exile_no");
-		String[] array = a.split(",");
-	
+		
+		System.out.println(request.getParameter("exile_no"));
+		if(request.getParameter("exile_no")==null) {
+			if(dto2>0) {
+				model.addAttribute("msg","수정성공  !");
+				model.addAttribute("url","studyList.do");
+				return "commond/alert";
+			}else {
+				model.addAttribute("msg"," 수정 실패!");
+				model.addAttribute("url","studyList.do");
+				
+				
+				return "commond/alert";
+				
+			}
+		}else {
+			String a = request.getParameter("exile_no");
+			String[] array = a.split(",");
 		for(int i=0; i<array.length;i++) {
 			StudyMemberDto dto3 = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),Integer.parseInt(array[i]));
 			int res = StudyMemberBiz.deletemember(dto3);
@@ -259,7 +276,7 @@ public class StudyController {
 				model.addAttribute("msg","멤버삭제 실패!");
 			}
 		}
-		
+		}
 		
 		if(dto2>0) {
 			model.addAttribute("msg","수정성공  !");
