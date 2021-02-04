@@ -36,11 +36,11 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 	}
 
 	@Override
-	public List<FileDto> attachImageList(int b_no) {
+	public List<FileDto> attachImageList() {
 		List<FileDto> res = null;
 		
 		try {
-			res = sqlSession.selectList(NAMESPACE+"galleryAttachImage", b_no);
+			res = sqlSession.selectList(NAMESPACE+"galleryAttachImage");
 			
 		} catch (Exception e) {
 			System.out.println("에러: 이즈메인 이미지 가져오기");
@@ -62,5 +62,36 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		
 		return res;
 	}
+
+	@Override
+	public int deleteGalleryFile(int f_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteGalleryFile", f_no);
+		} catch (Exception e) {
+		System.out.println("에러 갤러리 삭제");
+		e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int updateGalleryFile(List<FileDto> fileList) {
+		int res = 0;
+		int resCnt = 0;
+		
+		try {
+			for(int i=0; i < fileList.size(); i++) {
+				res = sqlSession.insert(NAMESPACE+"updateGalleryFile", fileList.get(i));
+			}
+		} catch (Exception e) {
+			System.out.println("에러 업데이트갤러리");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+
 
 }

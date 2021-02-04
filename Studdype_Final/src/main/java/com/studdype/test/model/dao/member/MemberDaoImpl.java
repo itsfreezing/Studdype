@@ -437,6 +437,43 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public Map<Integer, MemberDto> selectMemberByPhotoList(List<BoardDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int photo_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			photo_no = list.get(i).getB_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", photo_no);
+			} catch (Exception e) {
+				System.out.println("에러 갤러리 멤버 리스트");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getB_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	@Override
+	public Map<Integer, MemberDto> selectMemberByPhotoReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("에러 selectOne");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+		
 	public Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list) {
 		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
 		MemberDto dto = null;
@@ -454,6 +491,5 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return resMap;
 	}
-	
 
 }

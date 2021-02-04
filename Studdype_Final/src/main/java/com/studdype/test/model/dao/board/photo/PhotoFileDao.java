@@ -10,6 +10,9 @@ public interface PhotoFileDao {
 	String NAMESPACE="photofile.";
 	
 	int insertImage(List<FileDto> fileList); //file테이블에 데이터 삽입
-	List<FileDto> attachImageList(int b_no);  //이미지ismain 'Y' 가져오기
+	List<FileDto> attachImageList();  //이미지ismain 'Y' 가져오기
 	public List<FileDto> galleryDetailFile(int b_no); //b_no로 한개만 가져오기
+	public int deleteGalleryFile(int f_no);
+	public int updateGalleryFile(List<FileDto> fileList);
+	
 }

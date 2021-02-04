@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,9 +57,25 @@ function attachFile(){
 	var file = upload_div.children(".upload_file");
 	file[(file.length)-1].click();
 	
+};
+
+function chkForm(){
+	var form = $("#updateForm");
+	var title = $("#title");
+	var content = $("#content");
+	alert("무슨일이지");
+	if( title.val() == null || title.val().trim() == ''){
+		alert("제목을 작성해주세요")
+	}else if( title.val().length  > 50  ){
+		alert("제목을 50글자 이하로 수정해주세요!!");
+	}else if( content.val() == null || content.val().trim() == ''){
+		alert("글 내용을 작성해주세요.")
+	}else{
+		form.submit();
+	}
 	
-	
-}
+ };
+ 
  //파일첨부시 파일정보 div추가 함수
 function create_file_info(file){ 
 	//업로드 파일 박스
@@ -102,6 +122,45 @@ function clickFileBtn(fileName){
 	fileName.className = 'upload_file'; //추가한 클래스 원상복구
 }
 
+//파일삭제 db랑 로컬도 AJAX
+function deleteFile(fileName){
+	 
+	 	const result = confirm('파일이 완전히 삭제됩니다.\n삭제하시겠습니까?');
+	 
+	 	if(result){
+	 		var f_no = fileName.title;
+		 	
+		 	var fileVal = {
+					"f_no" : f_no //파일번호
+			};
+
+			//댓글 답글 쓰기
+			$.ajax({
+				type:"post",
+				url:"galleryFileDelete.do",
+				data:JSON.stringify(fileVal),
+				contentType:"application/json",
+				dataType:"json",
+				success:function(res){
+					if(res > 0){
+						fileName.className += ' change_file';  //update_btn 클래스 추가
+					 	var upload_file_box = $(".change_file").parent();
+					 	
+					 	upload_file_box.remove();
+					}else{
+						alert("첨부파일 삭제 실패\n관리자에게 문의 해주세요.");
+					}
+				},
+				error:function(){
+					alert("파일 삭제 ajax 실패 ㅠ..");
+				}
+				
+				
+			});	
+	 	}
+	 	
+};
+
 </script>
 <style type="text/css">
 .gallery_Btn{
@@ -127,6 +186,7 @@ function clickFileBtn(fileName){
 	cursor: pointer;
 	transition: 0.5s;
 
+}
 </style>
 
 
@@ -139,27 +199,38 @@ function clickFileBtn(fileName){
 	<!--main conternt 섹션-->
 	<div class="main-section">
 		<br> <br> <br> <br> <br>
-		<form action="gallerywrite.do" method="post" id="writeForm" enctype="multipart/form-data">
+		<form action="galleryupdate.do" method="post" id="updateForm" enctype="multipart/form-data">
+		<input type="hidden" name="b_no" value="${dto.b_no }">
 			<div class="container" role="main">
-				<h2>gallery write</h2>
+				<h2>gallery update</h2>
 				<div class="mb-3">
-					<label for="title">제목:</label> <input type="text" class="form-control" name="b_title" id="title" placeholder="제목을 입력해 주세요" autocomplete="off">
+					<label for="title">제목:</label> <input type="text" class="form-control" name="b_title" id="title" placeholder="제목을 입력해 주세요" value="${dto.b_title }" autocomplete="off">
 				</div>
 				<br>
 					<div class="upload_box">
 						<div class="upload_btn_box">
 							<input type="button" onclick="attachFile();" class="uploadFile" value="파일 첨부..." >
 						</div>
+						<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
+							<c:forEach var = "fileList" items="${fileList }">
+							<div class='upload_file_box'>
+									<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
+									<span class='file_name' >${fileList.f_name }</span>
+									<input type='button' class='remove_file_btn'  onclick='deleteFile(this);' title='${fileList.f_no}'>
+									<span class='file_size'>${fileList.f_size }KB</span>
+							</div>
+							</c:forEach>		
+						</c:if>
 					</div>
 				<br>
 				<div class="mb-3">
 					<label for="content">내용:</label>
-					<textarea class="form-control" rows="10" cols="5" name="b_content" id="content" placeholder="내용을 입력해 주세요"></textarea>
+					<textarea class="form-control" rows="10" cols="5" name="b_content" id="content" placeholder="내용을 입력해 주세요">${dto.b_content }</textarea>
 				</div>
 
 				<!-- </form> -->
-				<input type="submit" class="gallery_Btn"  value="올리기"/>
-				<input type="button" class="gallery_Btn" onclick="location.href='gallery.do'" value="목록" />
+				<input type="button" class="gallery_Btn" onclick="chkForm();" value="수정"/>
+				<input type="button" class="gallery_Btn" onclick="location.href='gallery.do'" value="취소" />
 			</div>
 		</form>
 		<br> <br> <br> <br>

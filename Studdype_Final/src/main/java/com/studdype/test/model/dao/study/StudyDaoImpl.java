@@ -2,16 +2,13 @@ package com.studdype.test.model.dao.study;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
-import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -25,10 +22,9 @@ public class StudyDaoImpl implements StudyDao {
 	public List<StudyDto> studyList(SearchPagination searchPagination) {
 
 		List<StudyDto> studyList = null;
-
+		
 		try {
 			studyList = sqlSession.selectList(NAMESPACE + "studyList", searchPagination);
-			System.out.println(searchPagination.getKeyword());
 		} catch (Exception e) {
 			System.out.println("에러 발생: studyDao - selectList");
 			e.printStackTrace();
@@ -58,6 +54,7 @@ public class StudyDaoImpl implements StudyDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
+			System.out.println(dto.getPhoto());
 		} catch (Exception e) {
 			System.out.println("[ERROR] : insertStudy");
 			e.printStackTrace();
@@ -121,18 +118,31 @@ public class StudyDaoImpl implements StudyDao {
 	}
 
 
+
 	@Override
-	public List<StudyDto> selectStudyByCategory(int cate_no) {
-		List<StudyDto> studyList = null;
+	public List<StudyDto> studyListCategory(SearchPagination searchPagination) {
+		List<StudyDto> res = null;
 		
 		try {
-			studyList = sqlSession.selectList(NAMESPACE+"selectStudyByCategory", cate_no);
+			res = sqlSession.selectList(NAMESPACE+"studyListCategory", searchPagination);
 		} catch (Exception e) {
-			System.out.println("[ERROR] : selectStudyByCategory");
+			System.out.println("에러 카테고리 스터디 리스트");
 			e.printStackTrace();
 		}
+		return res;
+	}
+
+	@Override
+	public List<StudyDto> selectStudyByCategory(int cate_no) {
+		List<StudyDto> res = null;
 		
-		return studyList;
+		try {
+			res = sqlSession.selectList(NAMESPACE+"selectStudyByCategory", cate_no);
+		} catch (Exception e) {
+			System.out.println("에러 북");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 
