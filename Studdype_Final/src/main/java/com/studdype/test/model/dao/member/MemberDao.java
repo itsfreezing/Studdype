@@ -32,16 +32,20 @@ public interface MemberDao {
 	// 게시판 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list);  // [모임게시판]
 	Map<Integer, MemberDto> selectMemberByFreeList(List<BoardDto> list); // [자유게시판]
+	Map<Integer, MemberDto> selectMemberByPhotoList(List<BoardDto> list);
+	Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list); // [학습 자료실]
+	
 	
 	// 투표한 사람 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list);  // [모임게시판_투표_참석]
 	Map<Integer, MemberDto> selectAbsentMemberList(List<VoteDto> list);  // [모임게시판_투표_불참석]
 	
+	
 	// 게시판 댓글 리스트로 멤버 정보 map으로 가져오기 ex) ID(이름)/이름(ID)/ID/이름 ...
 	Map<Integer, MemberDto> selectMemberByFreeReply(List<ReplyDto> replyList); // [자유게시판 댓글]
 	Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList); // [모임게시판 댓글] 
 	Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList); // [도서게시판 댓글]
-	
+	Map<Integer, MemberDto> selectMemberByPhotoReply(List<ReplyDto> replyList);
 	
 	//마이페이지 관련 메소드
 	public int updateMember(MemberDto dto); // 마이페이지 내정보 수정

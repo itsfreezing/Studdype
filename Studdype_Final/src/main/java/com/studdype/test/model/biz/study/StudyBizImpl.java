@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dao.board.book.BookDao;
-import com.studdype.test.model.dao.board.dataFile.DataFileDao;
+import com.studdype.test.model.dao.board.data.DataFileDao;
 import com.studdype.test.model.dao.board.notice.NoticeBoardDao;
 import com.studdype.test.model.dao.category.StudyCateDao;
 import com.studdype.test.model.dao.location.LocationGuDao;
@@ -68,12 +68,13 @@ public class StudyBizImpl implements StudyBiz{
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
+	
 	// 지역 (시) selectList
-
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
 	}
+	
 	// 지역 (구/군) selectList
 	@Override
 	public List<LocationGuDto> locationGuList() {
@@ -203,4 +204,25 @@ public class StudyBizImpl implements StudyBiz{
 		return noticeDao.selectNoticeBoard(s_no);
 	}
 
+	@Override
+	public List<StudyDto> studyListCategory(SearchPagination searchPagination) {
+		return study_Dao.studyListCategory(searchPagination);
+	}
+
+	//지역별 검색 
+	@Override
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
+		return study_Dao.studyListLocation(searchPagination);
+	}
+	
+	@Override
+	public StudyDto selectOneBySi_no(int si_no) {
+		return study_Dao.selectOneBySi_no(si_no);
+	}
+	@Override
+	public List<StudyDto> selectStudyByLocation(int si_no){
+		return study_Dao.selectStudyByLocation(si_no);
+	}
+
+	
 }

@@ -9,8 +9,7 @@ import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.study.StudyDto;
 
 public interface StudyDao {
-	//스터디 
-	String NAMESPACE="study.";
+String NAMESPACE="study.";
 	
 	//메소드
 	public List<StudyDto> studyList(SearchPagination searchPagination); //메인페이지 리스트
@@ -22,7 +21,9 @@ public interface StudyDao {
 	public int newLeader(StudyDto dto); //스터디관리 스터디리더 변경
 	public int newInfo(StudyDto dto); //스터디관리 스터디 정보 변경
 
+	public List<StudyDto> studyListCategory(SearchPagination searchPagination); // 카테고리 번호로 스터디 정보 가져오기
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
-
-
+	public List<StudyDto>selectStudyByLocation(int si_no);//지역 시와 구 스터디 검색
+	public StudyDto selectOneBySi_no(int si_no);
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
 }
