@@ -45,7 +45,7 @@
 }
 
 #BoardList tr {
-	border-bottom:0.5px solid gray;
+	border-bottom:0.5px solid rgba(0,0,0,0.1);
 	height:50px;
 }
 
@@ -238,6 +238,7 @@
     border-radius: 5px;
     text-align: left;
     z-index: 3;
+    left:59.5%;
 }
 
 .file_div {
@@ -448,7 +449,7 @@
 		
 		<!-- 검색 영역 -->
 		<div class="search_div">
-			<form action="dataSearch.do" method="post" id="search_form">
+			<form action="data_search.do" method="post" id="search_form">
 				<select name="searchType"  class="search_type_box" id="searchType">
 					<option value="title_content">제목+내용</option>
 					<option value="title">제목</option>

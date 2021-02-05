@@ -2,8 +2,9 @@
 .main-section {
 	display: block;
 	position: relative;
-	width: 60%;
+	width: 52.5%;
 	margin: 0px auto;
+	left:1.5%;
 }
 
 #main-contrainer {

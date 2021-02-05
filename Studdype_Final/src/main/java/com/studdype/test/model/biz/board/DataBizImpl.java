@@ -145,4 +145,14 @@ public class DataBizImpl implements DataBiz {
 		return dataDao.updateBoard(board);
 	}
 
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		return dataDao.selectTotalBoardNumOfSearch(searchMap);
+	}
+
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		return dataDao.selectPagingSearchBoardList(pageMap);
+	}
+
 }

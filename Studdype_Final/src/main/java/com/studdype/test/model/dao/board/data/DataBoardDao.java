@@ -15,4 +15,6 @@ public interface DataBoardDao {
 	public int deleteBoard(int b_no);	// 해당 게시물 삭제
 	public int insertBoard(BoardDto board);	// 글삽입
 	public int updateBoard(BoardDto board); // 글 수정
+	public int selectTotalBoardNumOfSearch(Map searchMap); // 검색 시 게시글 총 갯수
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap); // 검색으로 페이징 게시글 가져오기 
 }

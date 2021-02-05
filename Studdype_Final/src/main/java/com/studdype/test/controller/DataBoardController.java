@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.PageChecker;
+import com.studdype.test.common.SearchPagination;
 import com.studdype.test.common.UploadFile;
 import com.studdype.test.model.biz.board.DataBiz;
 import com.studdype.test.model.biz.board.NoticeBiz;
@@ -322,6 +323,86 @@ public class DataBoardController {
 			model.addAttribute("url", "dataBoardUpdateForm.do?b_no=" + dto.getB_no());
 			return "commond/alert";
 		}
+		
+	}
+	
+	// 학습자료실 검색
+	@RequestMapping(value="/data_search.do", method=RequestMethod.POST)
+	public String dataSearch(SearchPagination search, String pagenum , Model model
+								, HttpServletRequest request, HttpSession session ) {
+		/*
+		 	(검색창 select option 값 가져옴)
+			title_content:제목+내용
+			title:제목
+			content:내용
+			writer:작성자
+		 */
+		
+		StudyDto study = (StudyDto)session.getAttribute("study");
+		List<BoardDto> dataList = null; // 페이징 시 15개 게시글 리스트
+		Map<String, Object> pageMap = new HashMap<String, Object>(); // 시작, 끝 페이지 정보 Map
+		Map<Integer, MemberDto> memberMap = null; // 게시글 작성자 정보 Map
+		Map<Integer, Integer> replyCntMap = null; // 댓글 갯수 Map
+		Map searchMap = new HashMap(); // 검색 정보 Map
+		Map<Integer, List<FileDto>> dataFileMap = null; // 학습 자료실 파일 리스트
+		
+		searchMap.put("s_no", study.getS_no());
+		searchMap.put("searchType", search.getSearchType());
+		searchMap.put("keyword", search.getKeyword());
+		
+		int totalBoardNum = dataBiz.selectTotalBoardNumOfSearch(searchMap); // 검색 내용 총 게시글 갯수
+		
+		paging(pageMap, pagenum, totalBoardNum); // 페이징 함수
+		
+		pageMap.put("s_no", study.getS_no());
+		pageMap.put("searchType", search.getSearchType());
+		pageMap.put("keyword", search.getKeyword());
+		
+		// 게시글 정보
+		dataList = dataBiz.selectPagingSearchBoardList(pageMap);
+		
+		// 작성자 정보
+		memberMap = dataBiz.getMemberMap(dataList);
+		// 댓글 갯수 
+		replyCntMap = dataBiz.getReplyCnt(dataList);
+		
+		// 학습자료실 파일 받아오기
+		if(dataList != null) {
+			dataFileMap = dataFileBiz.getBoardFileList(dataList);
+		}
+				
+		// 학습 자료실 파일 포멧팅 정보
+		Map<Integer, List> dataFileFormatMap = new HashMap<Integer, List>();
+				
+		if(dataFileMap != null) {
+			for(int i = 0; i < dataList.size(); i++) {
+				List list = new ArrayList();
+				for(int j = 0; j < dataFileMap.get(dataList.get(i).getB_no()).size(); j++) {
+					String[] dataFileNameList = dataFileMap.get(dataList.get(i).getB_no()).get(j).getF_name().split("\\.");
+					String fileFormat = dataFileNameList[dataFileNameList.length-1];
+					
+					fileFormat = fileFormat.toLowerCase();
+						
+					list.add(fileFormat);
+				}
+				dataFileFormatMap.put(dataList.get(i).getB_no(), list);
+			}
+		}
+		
+		model.addAttribute("startPage", pageMap.get("startPage"));
+		model.addAttribute("endPage", pageMap.get("endPage"));
+		model.addAttribute("currentPage", pageMap.get("currentPage"));
+		model.addAttribute("totalPageNum", pageMap.get("totalPageNum"));
+		model.addAttribute("dataList", dataList);
+		model.addAttribute("memberMap", memberMap);
+		session.setAttribute("leftnavi", "freeboard");
+		model.addAttribute("replyCntMap", replyCntMap);
+		model.addAttribute("dataFileMap", dataFileMap);
+		model.addAttribute("dataFileFormatMap", dataFileFormatMap);
+		
+		model.addAttribute("search", search);
+		
+		return "community/data/dataBoardSearch";
 		
 	}
 	

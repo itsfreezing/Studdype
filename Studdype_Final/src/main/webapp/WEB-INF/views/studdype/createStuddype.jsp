@@ -36,40 +36,7 @@
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
 <script type="text/javascript">
-	var sel_files = [];
-
 	$(function() {
-		// 서머노트 양식
-		 $('#summernote').summernote({
-			 toolbar: [
-				    // [groupName, [list of button]]
-				    ['fontname', ['fontname']],
-				    ['fontsize', ['fontsize']],
-				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-				    ['color', ['forecolor','color']],
-				    ['table', ['table']],
-				    ['para', ['ul', 'ol', 'paragraph']],
-				    ['height', ['height']],
-				    ['insert',['picture','link','video']],
-				    ['view', ['fullscreen', 'help']]
-				  ],
-				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-				height: 450,
-				width : 1000,
-				minHeight: null,
-				maxHeight: null,
-				focus: true,
-				lang: "ko-KR",
-				disableResizeEditor: true,
-				callbacks: {
-					onImageUpload : function(files){
-						sendFile(files[0],this);
-					}
-				}
-					
-			});
-		
 		// 시 미선택 시 구/군은 숨김 
 		$("#selectLocationGu option").hide();
 
@@ -156,16 +123,14 @@
 		});
 		///////////////////////////////////////////////////////////////
 		
-		// 네비 메뉴 이름 가져오기
-		var currentMenu = $("#currentMenu").val();
-		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
-		
-		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		$(".hero-text").html("<h1>"+menuName+"</h1>");
+		// 스터디 생성 문구 생성
+		$(".hero-text").html("<h1>스터디 생성</h1>");
 		
 		// 스터디 생성에 맞는 이미지 가져오기
-		$(".justify-content-center").css({"background-image":"url('resources/img/createStudy.png')"
-									,"background-size":"cover"});
+		$(".justify-content-center").css({
+			"background-image":"url('resources/img/createstudy1.png')",
+			"background-size":"cover"
+		});
 		
 		// file hide하고 div 영역 클릭 시 이벤트 양도
 		$("#fileinput").hide();
@@ -199,6 +164,38 @@
 			$("#basicPhoto").val(image);
 			$("#modal").hide();
 		});
+		
+		// 서머노트 양식
+		 $('#summernote').summernote({
+			 toolbar: [
+				    // [groupName, [list of button]]
+				    ['fontname', ['fontname']],
+				    ['fontsize', ['fontsize']],
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    ['color', ['forecolor','color']],
+				    ['table', ['table']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert',['picture','link','video']],
+				    ['view', ['fullscreen', 'help']]
+				  ],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+				height: 450,
+				width : 1000,
+				minHeight: null,
+				maxHeight: null,
+				focus: true,
+				lang: "ko-KR",
+				disableResizeEditor: true,
+				callbacks: {
+					onImageUpload : function(files){
+						sendFile(files[0],this);
+					}
+				}
+					
+			});
+		
 	});
 	
 	// 이미지 미리보기 함수
@@ -244,10 +241,10 @@
 			$("#mem_name_id").css('border', '1.5px solid red');
 			alert("스터디 이름 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
-		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 30 ||
+		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 50 ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
 			$("#info_id").css('border', '1.5px solid red');
-			alert("스터디 한줄 소개 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(50자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(category == "카테고리 분류") {
 			$("#category_id").css('border', '1.5px solid red');
@@ -268,7 +265,7 @@
 			return false;
 		}else if(content.trim() == "" || content == null || content == undefined || content.trim().length > 1000 ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
-			$("#content_id").css('border', '1.5px solid red');
+			$("#summernote").css('border', '1.5px solid red');
 			alert("스터디 상세 소개글 작성란을 확인해주세요.(1000자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if( img =="./resources/assets/img/icon_photoUpload.png" ) {
@@ -421,7 +418,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
 	
 </body>

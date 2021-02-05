@@ -114,5 +114,33 @@ public class DataBoardDaoImpl implements DataBoardDao{
 		return res;
 	}
 
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		int totalNum = 0;
+		
+		try {
+			totalNum = sqlSession.selectOne(NAMESPACE+"selectTotalBoardNumOfSearch", searchMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습 자료실] selectTotalBoardNumOfSearch");
+			e.printStackTrace();
+		}
+		
+		return totalNum;
+	}
+
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		List<BoardDto> searchDataList = null;
+		
+		try {
+			searchDataList = sqlSession.selectList(NAMESPACE+"selectPagingSearchBoardList", pageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [학습 자료실] selectPagingSearchBoardList");
+			e.printStackTrace();
+		}
+		
+		return searchDataList;
+	}
+
 
 }

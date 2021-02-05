@@ -20,5 +20,7 @@ public interface DataBiz {
 	public int writeBoard(BoardDto board); // 파일이 없을 시 글 작성
 	public BoardDto selectOne(int b_no);	// 해당 게시글 가져오기
 	public int updateBoard(BoardDto board, MultipartFile[] mfileList, String path, List<FileDto> fileList); // 파일이 있을 시 글 수정
-	public int updateBoard(BoardDto board); // 파일이 ㅇ벗을 시 글 수정
+	public int updateBoard(BoardDto board); // 파일이 없을 시 글 수정
+	public int selectTotalBoardNumOfSearch(Map searchMap); // 검색 시 총 게시글 수
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap); // 검색으로 페이징 게시글 가져오기 
 }
