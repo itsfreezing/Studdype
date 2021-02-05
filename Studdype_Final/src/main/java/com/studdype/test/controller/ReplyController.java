@@ -45,7 +45,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	@Autowired
 	private DataReplyBiz dataReplyBiz;
 	@Autowired
-	private PhotoReplyBiz photoReplyBiz; 
+	private photoReplyBiz photoReplyBiz; 
 	
 	//자유게시판 리플리스트 반환 메소드
 	@RequestMapping(value="/freeReplyList.do", method=RequestMethod.POST)
