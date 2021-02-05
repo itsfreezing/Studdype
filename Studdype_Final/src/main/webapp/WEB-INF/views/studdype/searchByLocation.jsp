@@ -26,38 +26,17 @@
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		var owl = $('.owl-carousel');
-
-		owl.owlCarousel({
-			items : 1, // 한번에 보여줄 아이템 수
-			loop : true, // 반복여부
-			//margin:35,               // 오른쪽 간격
-			autoplay : true, // 자동재생 여부
-			autoplayTimeout : 5000, // 재생간격
-			autoplayHoverPause : false
-		//마우스오버시 멈출지 여부
-		});
-
-		$('.customNextBtn').click(function() {
-			owl.trigger('next.owl.carousel');
-			mee
-		});
-
-		$('.customPrevBtn').click(function() {
-			owl.trigger('prev.owl.carousel', [ 300 ]);
-		});
-		
-		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-		$(".justify-content-center").hide(); 
-	});
-	
 	 $(function(){
 	        $('#Search').click(function() {
 	          self.location = 
 	        	  "studyListLocation.do" + '${pageMaker.makeQuery(1)}' +  "&keyword=" 
 	        	  + encodeURIComponent($('#selectLocationSi').val()+$('#selectLocationGu').val());
+	        $("select[name=si_no]").val();
+	        $("select[name=gu_no]").val();
+	        alert($("select[name=si_no]").val());
+			alert($("select[name=gu_no]").val());
 	        });
+	        
 	      }); 
 	 
 	 
@@ -79,7 +58,9 @@
 </script>
 
 <style type="text/css">
-
+#title{
+	text-align:center;
+}
 #selectLocationSi{
 	width:500px;
 	height:50px;
@@ -106,53 +87,42 @@ label{
 <body>
 	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-	<!-- 메인페이지 슬라이더 영역 -->
-	<!-- 속성 검색 시 owl-carousel로 검색하면 찾기 쉬움! -->
-	<div class="owl-carousel hero-slider-area" id="mainBanner"
-		style="box-shadow: 5px 5px 5px;">
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage1.png">
+
+		<div id="title">		
+			<h2>Studdype Location</h2>
 		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage2.png">
-		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage3.png">
-		</div>
-		<div class="hero-slider-info">
-			<img src="./resources/assets/img/banner_mainPage4.png">
-		</div>
-	</div>
-	<!-- 슬라이더 끝 -->
 
 	<!-- 스터디 영역 -->
 	<br><br>
-			<div id="mainsection">
+	<form action="studyListLocation.do" method="POST" id="location">
+		 <div id="mainsection">
 						<label>스터디 지역(시)</label> 
 						<select class="form-control"
-							name="si_no" id="selectLocationSi">
+							name="si_no" id="selectLocationSi" >
 							<option>(시 단위)</option>
-							<c:forEach var="locationsi" items="${sidtos}">
-								<option value="${locationsi.si_no }">${locationsi.si_name }</option>
+							<c:forEach var="locationsi" items="${sidto}">
+								<option value="${locationsi.si_no}">${locationsi.si_name }</option>
 							</c:forEach>
 						</select>
 						<label>스터디 지역(구/군)</label> 
 						<select class="form-control"
-							name="gu_no" id="selectLocationGu">
+							name="gu_no" id="selectLocationGu" >
 							<option>(구/군 단위)</option>
-							<c:forEach var="locationgu" items="${ gudtos}">
+							<c:forEach var="locationgu" items="${gudto}">
 								<option class="${locationgu.si_no }"
 									value="${locationgu.gu_no }">${locationgu.gu_name }</option>
 							</c:forEach>
 						</select>
 						<div id="search_btn">
-							<button type="button" id="Search" name="Search" style=" border:none; background-color: #f9fafc;" onclick="location.href='studyListLocation.do?si_no=?and gu_no=?'">
+							<button type="button" id="Search" name="Search" style="border:none; background-color:white;" >
 								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
-		
+				</div>
+		</form>						
+				
+					
 					<br><br>
-		</div>
 		<div class="container">
 			<div class="row">
 
@@ -192,7 +162,7 @@ label{
 				</c:forEach>
 			</div>
 		</div>
-
+	
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->

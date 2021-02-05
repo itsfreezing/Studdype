@@ -8,25 +8,31 @@ public class SearchPagination extends Pagination{
 	private int cate_no = 0;
 	private int si_no=0;
 	private int gu_no=0;
-	
-	
+	private String si_name="";
 	public int getCate_no() {
 		return cate_no;
 	}
 	public void setCate_no(int cate_no) {
 		this.cate_no = cate_no;
-	
+	}
 	public int getSi_no() {
 		return si_no;
 	}
 	public void setSi_no(int si_no) {
 		this.si_no=si_no;
 	}
+	
 	public int getGU_no() {
 		return gu_no;
 	}
 	public void setGU_no(int gu_no) {
 		this.gu_no=gu_no;
+	}
+	public String getsi_name() {
+		return si_name;
+	}
+	public void setsi_name(String si_name) {
+		this.si_name=si_name;
 	}
 	public String getSearchType() {
 		return searchType;

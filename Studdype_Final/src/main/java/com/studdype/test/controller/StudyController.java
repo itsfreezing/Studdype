@@ -1,12 +1,6 @@
 package com.studdype.test.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.WebUtils;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.common.PageMaker;
@@ -35,6 +26,7 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
+import com.studdype.test.model.dao.study.StudyDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
@@ -51,7 +43,8 @@ public class StudyController {
 	private static final Logger logger = LoggerFactory.getLogger(StudyController.class);
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
-
+	private int si_no;
+	private int gu_no;
 	@Autowired
 	private StudyBiz studyBiz;
 	@Autowired
@@ -102,43 +95,7 @@ public class StudyController {
 		return "studdype/studdypeHome";
 	}
 	
-	//지역별 검색 
-	@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
-	public String SearchLocation(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
-		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
-		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
-		Map<Integer, String> selectSiForMainMap = null; // 시 리스트 담을 곳
-		Map<Integer, String> selectGuForMainMap = null; // 구 리스트 담을 곳
-		Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
-		List<LocationSiDto> sidtos = studyBiz.locationSiList();
-		List<LocationGuDto> gudtos = studyBiz.locationGuList();
-		// 로그
-		logger.info("STUDY - SearchLocationLIST");
-
-		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setPagination(searchPagination);
-		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
-		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); // 구 리스트
-		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
-		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
-		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-		
-		
-		model.addAttribute("sidtos", sidtos);
-		model.addAttribute("gudtos", gudtos);
-		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("studyList", studyList);
-		model.addAttribute("leaderName", studyMainLeaderNameMap);
-		model.addAttribute("siList", selectSiForMainMap);
-		model.addAttribute("guList", selectGuForMainMap);
-		model.addAttribute("cateList", selectCateForMainMap);
-		session.setAttribute("headerMenu", "selectLocationList");
-
-		return "studdype/searchByLocation";
-	}
-	
 	
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
@@ -516,6 +473,49 @@ public class StudyController {
 		
 		return "studdype/searchByCategory";
 	}
+	//지역별 검색 
+	@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
+	public String SearchLocation(Model model,StudyDto studyDto,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
+
+		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
+		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
+		
+		Map<Integer, String> selectSiForMainMap = null; // 시 리스트 담을 곳
+		Map<Integer, String> selectGuForMainMap = null; // 구 리스트 담을 곳
+		Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
+		List<LocationSiDto> sidto = studyBiz.locationSiList();
+		List<LocationGuDto> gudto = studyBiz.locationGuList();
+		// 로그
+		logger.info("STUDY - SearchLocationLIST");
+		
+		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
+		System.out.println(studyBiz.selectLocationSiOfStudy(si_no));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPagination(searchPagination);
+		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
+		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); // 구 리스트
+		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
+		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
+		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
+		
+		for(int i=0; i<studyList.size(); i++) {
+			studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+		}
+		
+	
+		model.addAttribute("sidto", sidto);
+		model.addAttribute("gudto", gudto);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("studyList", studyList);
+		model.addAttribute("leaderName", studyMainLeaderNameMap);
+		model.addAttribute("siList", selectSiForMainMap);
+		model.addAttribute("guList", selectGuForMainMap);
+		model.addAttribute("cateList", selectCateForMainMap);
+		session.setAttribute("headerMenu", "selectLocationList");
+
+		return "studdype/searchByLocation";
+	}
+	
 }
 
 

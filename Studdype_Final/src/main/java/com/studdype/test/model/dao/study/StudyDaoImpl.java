@@ -156,7 +156,8 @@ public class StudyDaoImpl implements StudyDao {
 				e.printStackTrace();
 			}
 			return res;
-		}
+	}
+	
 	@Override
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
 		List<StudyDto> res= null;
@@ -167,23 +168,11 @@ public class StudyDaoImpl implements StudyDao {
 			System.out.println("[ERROR]:LocationStudyList");
 			e.printStackTrace();
 		}
-		
-		
 		return res;
 	}
+
 	
-	@Override
-	public StudyDto selectOneBySi_no(int si_no) {
-		StudyDto res = null;
-		
-		try {
-			res = sqlSession.selectOne(NAMESPACE+"selectOneBySi_no", si_no);
-		} catch (Exception e) {
-			System.out.println("[ERROR]: selectOneBySno");
-			e.printStackTrace();
-		}
-		return res;		
-	}
+	
 
 }
 

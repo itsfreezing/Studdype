@@ -41,7 +41,7 @@ function chkpwd(){
 		$("#chkpw_ok").show();
 		$("#chkpw_no").hide();
 		$("#chkpw").hide();
-		$(".pwico").css("color","#04700F");
+		$(".pwico").css("color","#32CD32");
 
 	}
 }
@@ -52,7 +52,7 @@ function chktel(){
 		$(".phoneico").css("color","red");
 		return false;
 	}else{
-		$(".phoneico").css("color","#04700F");
+		$(".phoneico").css("color","#32CD32");
 		return false;
 	}
 }
@@ -62,14 +62,14 @@ function namechk(){
 		$(".nameico").css("color","red");
 		return false;
 	}else{
-		$(".nameico").css("color","#04700F");
+		$(".nameico").css("color","#32CD32");
 		return false;
 	}
 }
 function changen(gender){
 	var gender=document.getElementById('membergender').value;
 	if(gender.checked!=null||gender.checked!=""){
-		$(".genderico").css("color","#04700F");
+		$(".genderico").css("color","#32CD32");
 		return false;
 	}else{
 		$(".genderico").css("color","red");
@@ -106,7 +106,7 @@ function sendmail(){
 	        	  alert("인증번호가 전송되었습니다.");
 	        	  var chkNum_btn=$("#chkNum_btn");
 	        	  var emailInput=$("#memberMail");
-	        	  $(".mailico").css("color","#04700F");
+	        	  $(".mailico").css("color","#32CD32");
 	        	  emailInput.attr("readonly","readonly");
 	        	  chkNum_btn.removeAttr("disabled");
 	          }
@@ -142,7 +142,7 @@ function chkVerifiNum(){
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
-				$(".numico").css("color","#04700F");
+				$(".numico").css("color","#32CD32");
 			}
 		} 
 		,
@@ -229,7 +229,7 @@ $(document).ready(function(){
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
-					$(".idico").css("color","#04700F");
+					$(".idico").css("color","#32CD32");
 					$("#chk").attr("title",'y');
 				}
 				else{
@@ -284,7 +284,7 @@ function num_check(){
       }else{
     	  $("#chknum_ok").show();
 			$("#chknum_no").hide();
-			$(".rnoico").css("color","#04700F");
+			$(".rnoico").css("color","#32CD32");
 			return false;
       }
   }
@@ -311,8 +311,8 @@ $(function(){
 			   <tr>
 					<th align="right" width="100">
 					 아이디
-					 	<span class="idico" style="font-size:27px;">*</span>
-	
+					 	<span class="idico" style="font-size:23px;">*</span>
+					</th>
 	                 <td colspan="4"> 
 	                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
 	                   	 <input type="button" value="중복확인" id="check" class="chk_btn">
@@ -320,7 +320,7 @@ $(function(){
 	                 </td>
 	                  <tr style="display:none;" id="chkid_ok">
 		   				<td></td>
-		   				<td style="color:#04700F">아이디 사용 가능</td>
+		   				<td style="color:#32CD32">아이디 사용 가능</td>
 		   			</tr>
 		   			<tr style="display:none;" id="chkid_no">
 		   				<td></td>
@@ -329,12 +329,12 @@ $(function(){
 		   		
 	   				<tr>
 		        		<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
-		                 <td width="600" height="30"></td>
+		                <td width="600" height="30"></td>
 	             	</tr> 	   
 	   		   </tr>
 	 			<tr>
 	                 <th align="right" width="100">
-	                    비밀번호 <span class="pwico" style="font-size:25px;">*</span>
+	                    비밀번호 <span class="pwico" style="font-size:23px;">*</span>
 	                 </th>
 	             
 	                 <td colspan="4">
@@ -356,7 +356,7 @@ $(function(){
 	              </tr> 
 	              <tr style="display:none;" id="chkpw_ok">
 	   				<td></td>
-	   				<td style="color:#04700F">확인되었습니다</td>
+	   				<td style="color:#32CD32">확인되었습니다</td>
 	   			</tr>
 	   			<tr style="display:none;" id="chkpw_no">
 	   				<td></td>
@@ -393,7 +393,7 @@ $(function(){
    				</tr> 
 	   			<tr style="display:none;" id="chk_ok">
 	   				<td></td>
-	   				<td style="color:##04700F">인증번호가 같습니다.</td>
+	   				<td style="color:#32CD32">인증번호가 같습니다.</td>
 	   			</tr>
 	   			<tr style="display:none;" id="chk_no">
 	   				<td></td>
@@ -425,7 +425,7 @@ $(function(){
 	            </tr>
 	            <tr style="display:none;" id="chknum_ok">
 	   				<td></td>
-	   				<td style="color:#04700F">올바른 주민번호입니다</td>
+	   				<td style="color:#32CD32">올바른 주민번호입니다</td>
    				</tr>
 	   			<tr style="display:none;" id="chknum_no">
 	   				<td></td>

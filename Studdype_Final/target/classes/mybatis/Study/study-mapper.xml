@@ -97,7 +97,7 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
-		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
+	<select id="selectStudyByLocation" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE SI_NO=#{si_no} AND GU_NO=#{gu_no}
 	</select>
 </mapper>
