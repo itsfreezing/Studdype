@@ -85,7 +85,7 @@ public class FreeReplyDaoImpl implements FreeReplyDao{
 			System.out.println("[ERROR]: selectGroupReplyList");
 			e.printStackTrace();
 		}
-		return resList                ;
+		return resList;
 	}
 
 	//댓글 쓰기
@@ -135,6 +135,7 @@ public class FreeReplyDaoImpl implements FreeReplyDao{
 	@Override
 	public Map<Integer, Integer> selectReplyCnt(List<BoardDto> list) {
 		Map<Integer, Integer> cntList = new HashMap<Integer, Integer>();
+		
 		
 		for(int i = 0 ; i < list.size() ; i++) {
 			int cnt = sqlSession.selectOne(NAMESPACE+"selectReplyCnt", list.get(i).getB_no());

@@ -1,6 +1,8 @@
 package com.studdype.test.model.dao.board.photo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,49 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao{
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public int updateGallery(BoardDto board) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateGallery", board);
+		} catch (Exception e) {
+			System.out.println("에러 갤러리 수정");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteGallery(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteGallery", b_no);
+		} catch (Exception e) {
+		System.out.println("에러 갤러리 삭제");
+		e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public List<BoardDto> selectRecentList(int s_no, int b_no) {
+		List<BoardDto> resList = null;
+		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+		paramMap.put("s_no", s_no);
+		paramMap.put("b_no", b_no);
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
+		} catch (Exception e) {
+			System.out.println("에러 recentList");
+			e.printStackTrace();
+		}
+		
+		return resList;
 	}
 
 }

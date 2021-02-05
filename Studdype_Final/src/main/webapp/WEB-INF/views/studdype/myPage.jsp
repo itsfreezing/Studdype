@@ -59,7 +59,7 @@ $(document).ready(function() {
 	<div id="myPageBanner"><b>My page</b></div>
 	<div id="memberInfo">
 		<div id="myPageName"><c:if test="${login != null }">${login.mem_name }</c:if></div>
-		<span class="memberInfo">님의</span><br><span class="memberInfo">회원정보 입니다.</span><br><br>
+		<span class="memberInfo">님의</span><br><span class="memberInfo">회원정보 입니다.</span>
 		<a class="info-btn-dark" onclick="getout();">회원탈퇴</a>
 	</div>
 	<div id="myPageBanner-left">
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 <!--  스터디 신청 내역 div -->
 <div class="tab_content" id="myApply">
-	<p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">나의 스터디 신청 내역</p>
+	<p class="tab_p">나의 스터디 신청 내역</p>
 	
 	<br>
 	<br>
@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 <!--  신청 받은 내역 -->
 <div class="tab_content" id="applyList">
-	<p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">내가 받은 스터디 신청</p>
+	<p class="tab_p">내가 받은 스터디 신청</p>
 	
 	<table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
 	<thead>
@@ -191,7 +191,7 @@ $(document).ready(function() {
 <!-- 신청 받은 내역 끝 -->
 <!--  모임 이동 -->
 <div class="tab_content" id="myMeet">
-   <p style="font-size:20px; font-weight:bold; margin-left:850px; margin-top:100px;">스터디 모임으로 이동</p>
+   <p class="tab_p">스터디 모임으로 이동</p>
    <table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
    <thead>
       <tr>
@@ -228,10 +228,10 @@ $(document).ready(function() {
 
 <!--  내가 가입한 스터디 리스트     -->
    <c:if test="${fn:length(studylist) != 0 }">
-   <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:45.5%;">내가 가입한 스터디</p>
+   <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:100%; left:10%;">내가 가입한 스터디</p>
    <div id="studylistdiv" class="owl-carousel hero-slider-area" style="height:50px;  position:absolute; top:950px; ">
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
-        <div class="hero-slider-info"  >
+        <div class="hero-slider-info">
         <div style="height:130px; width:400px; border:1px solid black; background-color:black; margin-left:130px; cursor:pointer;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
         <p style="color:white !important;  margin-left:20px;font-size:10px; font-weight:bold; display:inline;">
         <c:if test="${studylist.si_no == 1 }">서울</c:if>

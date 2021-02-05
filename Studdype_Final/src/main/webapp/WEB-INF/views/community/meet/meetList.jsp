@@ -101,7 +101,7 @@ function prePageGroup(){
 				<div id ="nothingImg"><img src="./resources/assets/img/searchNothing_keyword.png"></div>
 				<div id="nothingMeet"> 
 					<br>
-					더 이상모임이 존재하지 않습니다.
+					모임이 존재하지 않습니다.
 				</div>
 			</c:when>
 			 <c:otherwise>

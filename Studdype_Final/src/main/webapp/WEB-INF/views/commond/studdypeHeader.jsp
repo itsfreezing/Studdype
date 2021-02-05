@@ -28,8 +28,6 @@ $(function() {
    $(".feature-page.header-area").css("height", "70px");
    $(".hero-text-wrapper").css("height", "400px");
    $(".nav-link").css("color", "black");
-   
-   
 });
 
 
@@ -73,7 +71,7 @@ $(function() {
                            <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
-                           <a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
+                           <a class="nav-link" href="studyListLocation.do">지역별 검색</a>
                         </li>
                         <c:choose>
                         <c:when test="${login == null }">
@@ -96,7 +94,7 @@ $(function() {
 										<div id="down-menu">
 											<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
 											<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
-											<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="회원정보 변경"></div>
+											<div id="down-bottom"><input type="button" onclick="location.href='UpdateMember.do'" value="나의 스터디"></div>
 										</div>
 											<a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
 											<a class="dropdown-item" href="myPage.do#myApply">신청 내역</a>
