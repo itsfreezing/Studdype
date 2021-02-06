@@ -24,7 +24,6 @@
 <script src="./resources/assets/js/myPageScript.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
-<script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 <script type="text/javascript">
@@ -80,6 +79,23 @@ $(document).ready(function() {
         
         return false;
     }
+    
+	var owl = $('.owl-carousel');
+
+	owl.owlCarousel({
+		items : 3, // 한번에 보여줄 아이템 수
+		loop : true, // 반복여부
+	});
+
+	$('.customNextBtn').click(function() {
+		owl.trigger('next.owl.carousel');
+	})
+
+	$('.customPrevBtn').click(function() {
+		owl.trigger('prev.owl.carousel', [ 300 ]);
+	})
+
+    	 
 
 });
 
@@ -306,8 +322,11 @@ $(document).ready(function() {
         </div>
      
      </c:forEach>
- 
+     
    </div>
+   <!-- prev/next 버튼 -->
+   <div class="customNextBtn">next</div>
+   <div class="customPrevBtn">prev</div>
    </c:if>
    <c:if test="${fn:length(studylist) == 0 }">
       <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:45.5%;">가입한 스터디가 없습니다!</p>
@@ -355,6 +374,7 @@ $(document).ready(function() {
     </div>
    </div>
 <!-- 전화 번호 변경 끝 -->
+<script src="./resources/assets/js/owl.carousel.min.js"></script>
 </body>
 <footer style="position:absolute; top:1300px; left:42%;">
       <jsp:include page="../commond/commondFooter.jsp"></jsp:include>

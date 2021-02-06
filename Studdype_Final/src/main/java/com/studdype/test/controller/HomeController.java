@@ -71,6 +71,30 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
+	@RequestMapping("/studdypeInfo.do")
+	public String studdypeInfo() {
+		
+		return "commond/studdypeInfo";
+	}
+	
+	@RequestMapping("/conditions.do")
+	public String condition() {
+		
+		return "commond/conditions";
+	}
+	
+	@RequestMapping("/policy.do")
+	public String policy() {
+		
+		return "commond/policy";
+	}
+	
+	@RequestMapping("/locationConditions.do")
+	public String locationConditions() {
+		
+		return "commond/locationConditions";
+	}
+	
 	//마이페이지로 이동
 	@RequestMapping("/myPage.do")
 	public String myPage(HttpSession session,String pagenum, Model model) {

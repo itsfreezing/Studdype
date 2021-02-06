@@ -120,7 +120,6 @@ $(function() {
                   <div class="hero-text-inner">
                      <div class="hero-text">
 
-                        
 
                      </div>
                   </div>
