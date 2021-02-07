@@ -23,38 +23,9 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<link rel="stylesheet" href="./resources/css/studdype/searchLocation/searchLocation.css">
+
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-
-<style type="text/css">
-#title{
-	text-align:center;
-}
-
-#selectLocationSi{
-	width:500px;
-	height:50px;
-}
-#selectLocationGu{
-	width:500px;
-	height:50px;
-}
-.form-control{
-	margin-left:40%;
-}
-label{
-	margin-left:40%;
-}
-#search_btn{
-	margin-left:67%;
-	margin-bottom:-1%;
-	margin-top:-2%;
-}
-.header-top {
-   padding: 48px 0 0;
-}
-
-
-</style>
 <script type="text/javascript">
 /*$(document).ready(function(){
 	$("#Search").click(function(){
@@ -82,7 +53,12 @@ label{
 		});
 	});
 	*/
-
+	$(function(){
+		$(".hero-text").html("<h3>지역별 검색</h3>");
+		$(".row justify-content-center").css({"background-image":"url('resources/img/location.png')"});	
+		
+	});
+	
 		$(function() {
 			// 시 미선택 시 구/군은 숨김 
 			$("#selectLocationGu option").hide();
@@ -101,6 +77,9 @@ function search(){
 	var selectGu=$("#selectLocationGu option:selected").val();
 	alert(selectSi);
 	alert(selectGu);
+	if(selectSi!=null&&selectGu!=null){
+		
+	}
 	return ;
 	
 	
@@ -111,12 +90,11 @@ function search(){
 
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-<div class="header-top">
-	<img src="./resources/img/location.png">
-</div>	
+	
+	<hr>
 	<!-- 스터디 영역 -->
 	<br><br>
-	<form action="studyListLocation.do" method="POST" id="location">
+	<form action="studyListLocation.do" method="POST" id="location" onsubmit='return search();'>
 		 <div id="mainsection">
 						<label>스터디 지역(시)</label> 
 						<select class="form-control"
@@ -136,7 +114,7 @@ function search(){
 							</c:forEach>
 						</select>
 						<div id="search_btn">
-							<button type="button" id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
+							<button type="submit" id="Search" name="Search" style="border:none; background-color:white;" >
 								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
