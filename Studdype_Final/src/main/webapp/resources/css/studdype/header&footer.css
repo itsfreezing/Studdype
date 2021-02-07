@@ -110,7 +110,7 @@
 
 .dropdown-menu.show{
 	width: 300px;
-	left: -150px;
+	left: -180px;
 	box-shadow: 4px 4px 4px gray; 
 	border: 1px solid gray;
 } 
