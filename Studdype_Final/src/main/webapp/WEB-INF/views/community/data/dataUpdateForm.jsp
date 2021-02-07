@@ -37,10 +37,7 @@
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
 <style type="text/css">
-.main-section {
-	width:60%;
-	margin-right:8%;
-}
+
 
 .hideFile {
 	display:none;
@@ -85,7 +82,7 @@ $(function() {
 		 
 	 	if(result) {
 	 		$(this).parent().removeClass("showFile");
-	 		$(this).parent().addClass("hideFile");
+	 		$(this).parent().addClass("hideDiv");
 	 	}
 	});
 	
@@ -120,7 +117,7 @@ function sendFile(file, editor){
 		var title = $("#boardtitle");
 		var content = $("#summernote");
 		var attach = $(".upload_file");
-		var hideFile = $(".hideFile");
+		var hideFile = $(".hideDiv");
 		
 		//만약 전파일이 업로드안됬으면 지워버리기
 	 	var chkFalse = $(".upload_file_box");
@@ -143,7 +140,7 @@ function sendFile(file, editor){
 			}else {
 				if(hideFile.length) {
 					for(var i = 0; i < hideFile.length; i++) {
-						deleteFile($(".hideFile").eq(i));
+						deleteFile($(".hideDiv").eq(i));
 					}
 				}
 				form.submit();
@@ -152,7 +149,7 @@ function sendFile(file, editor){
 			if(hideFile.length) {
 				for(var i = 0; i < hideFile.length; i++) {
 					var f_no = hideFile.children().eq(2);
-					deleteFile($(".hideFile").eq(i).children().first().val());
+					deleteFile($(".hideDiv").eq(i));
 				}
 			}
 			form.submit();
@@ -279,7 +276,7 @@ function sendFile(file, editor){
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
-	<div class="main-section">
+	<div class="main-section" style="width:60%; margin-right:8%;">
 		<form action="dataBoardUpdate.do" method="post" id="updateForm" enctype="multipart/form-data" >
 		<input type="hidden" name="b_no" value="${dataDto.b_no }">
  		<table class="maintable">
