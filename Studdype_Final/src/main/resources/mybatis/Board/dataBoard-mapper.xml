@@ -99,7 +99,7 @@
 	
 	<update id="updateBoard" parameterType="boardDto">
 		UPDATE DATA_BOARD
-		SET SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+		SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
 	</update>
   
 </mapper>

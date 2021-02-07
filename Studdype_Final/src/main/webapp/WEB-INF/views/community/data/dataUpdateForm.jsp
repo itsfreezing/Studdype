@@ -41,6 +41,10 @@
 	width:60%;
 	margin-right:8%;
 }
+
+.hideFile {
+	display:none;
+}
 </style>
 
 <script type="text/javascript">
@@ -75,6 +79,16 @@ $(function() {
 			}
 				
 		});
+	
+	$(".original").click(function() {
+		const result = confirm('파일이 완전히 삭제됩니다.\n삭제하시겠습니까?');
+		 
+	 	if(result) {
+	 		$(this).parent().removeClass("showFile");
+	 		$(this).parent().addClass("hideFile");
+	 	}
+	});
+	
 });
 
 // 서머노트 파일 저장
@@ -102,10 +116,11 @@ function sendFile(file, editor){
 
 // 폼 태그 유효성 검사
  function chkForm(){
-		var form = $("#writeForm");
+		var form = $("#updateForm");
 		var title = $("#boardtitle");
 		var content = $("#summernote");
 		var attach = $(".upload_file");
+		var hideFile = $(".hideFile");
 		
 		//만약 전파일이 업로드안됬으면 지워버리기
 	 	var chkFalse = $(".upload_file_box");
@@ -120,16 +135,26 @@ function sendFile(file, editor){
 			alert("제목을 50글자 이하로 작성해주세요!!");
 		}else if( content.val() == null || content.val().trim() == ''){
 			alert("글 내용을 작성해주세요.")
-		}else if($(".upload_file").length == 0) {
+		}else if($(".upload_file").length == 0 && $(".showFile").length == 0) {
 			alert("학습 자료실에서는 파일 첨부가 필수사항입니다.")
 		}else if($(".upload_file").length) {
-			alert("test");
-			if($(".upload_file").val() == null || $(".upload_file").val() == "") {
+			if(($(".upload_file").val() == null || $(".upload_file").val() == "") && $(".showFile").length == 0) {
 				alert("학습 자료실에서는 파일 첨부가 필수사항입니다.");
 			}else {
+				if(hideFile.length) {
+					for(var i = 0; i < hideFile.length; i++) {
+						deleteFile($(".hideFile").eq(i));
+					}
+				}
 				form.submit();
 			}
 		}else{
+			if(hideFile.length) {
+				for(var i = 0; i < hideFile.length; i++) {
+					var f_no = hideFile.children().eq(2);
+					deleteFile($(".hideFile").eq(i).children().first().val());
+				}
+			}
 			form.submit();
 		}
 		
@@ -212,42 +237,38 @@ function sendFile(file, editor){
  	fileName.className = 'upload_file'; //추가한 클래스 원상복구
  } 
  
+ function deleteCheck() {
+	 
+ }
+ 
  //파일삭제 db랑 로컬도 AJAX
- function deleteFile(fileName){
-	 
-	 	const result = confirm('파일이 완전히 삭제됩니다.\n삭제하시겠습니까?');
-	 
-	 	if(result){
-	 		var f_no = fileName.title;
+ function deleteFile(hideFile){
+	 	var f_no = hideFile.children().first().val();
 		 	
-		 	var fileVal = {
-					"f_no" : f_no //파일번호
-			};
+		 var fileVal = {
+				"f_no" : f_no //파일번호
+		};
 
-			//댓글 답글 쓰기
-			$.ajax({
-				type:"post",
-				url:"dataFileDelete.do",
-				data:JSON.stringify(fileVal),
-				contentType:"application/json",
-				dataType:"json",
-				success:function(res){
-					if(res > 0){
-						fileName.className += ' change_file';  //update_btn 클래스 추가
-					 	var upload_file_box = $(".change_file").parent();
-					 	
-					 	upload_file_box.remove();
-					}else{
-						alert("첨부파일 삭제 실패\n관리자에게 문의 해주세요.");
-					}
-				},
-				error:function(){
-					alert("파일 삭제 ajax 실패 ㅠ..");
+		//댓글 답글 쓰기
+		$.ajax({
+			type:"post",
+			url:"dataFileDelete.do",
+			data:JSON.stringify(fileVal),
+			contentType:"application/json",
+			dataType:"json",
+			success:function(res){
+				if(res > 0){
+				 	hideFile.remove();
+				}else{
+					alert("첨부파일 삭제 실패\n관리자에게 문의 해주세요.");
 				}
-				
-				
-			});	
-	 	}
+			},
+			error:function(){
+				alert("파일 삭제 ajax 실패 ㅠ..");
+			}
+			
+			
+		});	
 	 	
  }
 </script>
@@ -285,10 +306,11 @@ function sendFile(file, editor){
 					
 						<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
 							<c:forEach var = "fileList" items="${fileList }">
-							<div class='upload_file_box'>
+							<div class='upload_file_box showFile'>
+								<input type="hidden" value="${fileList.f_no}">
 									<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
 									<span class='file_name' >${fileList.f_name }</span>
-									<input type='button' class='remove_file_btn'  onclick='deleteFile(this);' title='${fileList.f_no}'>
+									<input type='button' class='remove_file_btn original'>
 									<span class='file_size'>${fileList.f_size }KB</span>
 							</div>
 							</c:forEach>		

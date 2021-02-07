@@ -105,7 +105,7 @@ public class DataBoardDaoImpl implements DataBoardDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.update(NAMESPACE+"updateBoard"+board);
+			res = sqlSession.update(NAMESPACE+"updateBoard",board);
 		} catch (Exception e) {
 			System.out.println("[ERROR] : [학습 자료실] updateBoard");
 			e.printStackTrace();

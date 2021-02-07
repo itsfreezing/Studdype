@@ -300,7 +300,6 @@ public class DataBoardController {
 		int res = 0;
 		
 		MultipartFile[] mfileList = uploadFile.getFile(); // 파일리스트 반환해서 생성 
-		
 		// 파일이 있을 시
 		if(mfileList != null) {
 			String path = fileHandler.getPath(request);
@@ -317,7 +316,7 @@ public class DataBoardController {
 		}
 		
 		if(res > 0) {
-			return "redirect:dataDetail.do?b_no"+dto.getB_no();
+			return "redirect:dataDetail.do?b_no="+dto.getB_no();
 		}else {
 			model.addAttribute("msg", "글 수정 실패");
 			model.addAttribute("url", "dataBoardUpdateForm.do?b_no=" + dto.getB_no());

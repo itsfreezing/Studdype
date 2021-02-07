@@ -59,7 +59,7 @@
 			var maxcnt = $(this).val();
 			if(isNaN(maxcnt)) {
 				alert("숫자만 입력하세요.");
-				$("input#maxcnt_id").css('border', '3px solid red');
+				$("input#maxcnt_id").css('border', '1px solid red');
 				$(this).val("");
 			}else {
 				$(this).css('border', '1px solid #ced4da');
@@ -69,13 +69,13 @@
 		/////////////// border 값 및 값 비우기 처리 함수////////////////////////
 		// 최대인원
 		$("#maxcnt_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 			$(this).val("");
 		});
 		
 		// 스터디 이름 
 		$("#mem_name_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 			$(this).val("");
 		});
 		$("#mem_name_id").focusout(function() {
@@ -84,7 +84,7 @@
 		
 		// 한줄 소개
 		$("#info_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#info_id").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -92,7 +92,7 @@
 		
 		// 카테고리
 		$("#category_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#category_id").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -100,7 +100,7 @@
 		
 		// 지역 (시)
 		$("#selectLocationSi").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#selectLocationSi").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -108,7 +108,7 @@
 		
 		// 지역(구)
 		$("#selectLocationGu").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#selectLocationGu").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -116,7 +116,7 @@
 		
 		// 상세 소개글
 		$("#summernote").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#summernote").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -128,8 +128,10 @@
 		
 		// 스터디 생성에 맞는 이미지 가져오기
 		$(".justify-content-center").css({
-			"background-image":"url('resources/img/createstudy1.png')",
-			"background-size":"cover"
+			"background-image":"url('resources/img/createstudy2.png')",
+			"background-size":"cover",
+			"background-position":"center",
+			"height":"450px"
 		});
 		
 		// file hide하고 div 영역 클릭 시 이벤트 양도
@@ -238,34 +240,34 @@
 		
 		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined || mem_name.trim().length > 30 ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
-			$("#mem_name_id").css('border', '1.5px solid red');
+			$("#mem_name_id").css('border', '1px solid red');
 			alert("스터디 이름 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 50 ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
-			$("#info_id").css('border', '1.5px solid red');
+			$("#info_id").css('border', '1px solid red');
 			alert("스터디 한줄 소개 작성란을 확인해주세요.(50자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(category == "카테고리 분류") {
-			$("#category_id").css('border', '1.5px solid red');
+			$("#category_id").css('border', '1px solid red');
 			alert("스터디 카테고리를 선택해주세요.");
 			return false;
 		}else if(locationSi == "(시 단위)") {
-			$("#selectLocationSi").css('border', '1.5px solid red');
+			$("#selectLocationSi").css('border', '1px solid red');
 			alert("스터디 지역(시)을 선택해주세요.");
 			return false;
 		}else if(locationGu == "(구/군 단위)") {
-			$("#selectLocationGu").css('border', '1.5px solid red');
+			$("#selectLocationGu").css('border', '1px solid red');
 			alert("스터디 지역(구/군)을 선택해주세요.");
 			return false;
 		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined || 
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
-			$("#maxcnt_id").css('border', '1.5px solid red');
+			$("#maxcnt_id").css('border', '1px solid red');
 			alert("스터디 최대 인원 작성란을 작성해주세요.");
 			return false;
 		}else if(content.trim() == "" || content == null || content == undefined || content.trim().length > 1000 ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
-			$("#summernote").css('border', '1.5px solid red');
+			$("#summernote").css('border', '1px solid red');
 			alert("스터디 상세 소개글 작성란을 확인해주세요.(1000자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if( img =="./resources/assets/img/icon_photoUpload.png" ) {
@@ -329,7 +331,7 @@
 							name="s_info" placeholder="스터디 한줄 소개" id="info_id">
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 카테고리</label><select class="form-control" id="category_id"
 							name="cate_no">
 							<option>카테고리 분류</option>
@@ -339,7 +341,7 @@
 						</select>
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 지역(시)</label> <select class="form-control"
 							name="si_no" id="selectLocationSi">
 							<option>(시 단위)</option>
@@ -349,7 +351,7 @@
 						</select>
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 지역(구/군)</label> <select class="form-control"
 							name="gu_no" id="selectLocationGu">
 							<option>(구/군 단위)</option>
@@ -398,7 +400,7 @@
 			</div>
 			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="btndiv">
-				<button type="submit" class="submitBtn">스터디 생성</button>
+				<input type="submit" id="createBtn" value="스터디 생성">
 			</div>
 		</form>
 
