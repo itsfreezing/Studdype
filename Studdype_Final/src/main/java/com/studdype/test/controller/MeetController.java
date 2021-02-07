@@ -135,7 +135,8 @@ public class MeetController {
 		 */
 		int startPage = (numPageGroup - 1) * pageGroupSize + 1; // 시작페이지
 		int endPage = numPageGroup * pageGroupSize; 			// 끝 페이지
-		int totalPageNum = totalBoardNum / pageSize + 1; 		// 총페이지 개수
+		//int totalPageNum = totalBoardNum / pageSize; 			// 총페이지 개수
+		int totalPageNum = (int)Math.ceil((totalBoardNum+0.0)/pageSize);
 
 		// 마지막 페이지가 총 페이지 갯수보다 많으면
 		if (endPage > totalPageNum) {
