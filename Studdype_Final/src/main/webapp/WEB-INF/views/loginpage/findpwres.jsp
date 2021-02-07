@@ -22,11 +22,31 @@
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <link rel="stylesheet" href="./resources/css/studdype/findpw.css">
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<style type="text/css">
+.main_div{
+	margin-left: 33%;
+	margin-top: 5%;
+	margin-bottom: 2%;
+   	text-align: center;
+	width: 600px;
+	height: 70px;
+	color: white;
+	background: #6E45E3;
+	border-radius: 10px;
+}
+#mail_name{
+	font-size: 18px;
+	font-weight: 600;	
+}
+</style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
  <script type="text/javascript">
-
+ $(function() {
+		$(".justify-content-center").show(); 
+		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
+	})
 </script>
 </head>
 <body>
@@ -34,7 +54,7 @@
 
 	<div class="main_div">
 	
-   		<span>${member.mem_email }로 임시 비밀번호를 전송했습니다.</span>
+   		<span><span id="mail_name">'${member.mem_email }' </span>로 임시 비밀번호를 전송했습니다.</span>
    		
    </div>
    

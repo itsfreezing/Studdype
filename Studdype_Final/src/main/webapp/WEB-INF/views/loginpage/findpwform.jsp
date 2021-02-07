@@ -30,12 +30,25 @@ h1{
 	line-height: 20px;
 	text-align: center;
 }
+.page_title{
+	margin-bottom: 3%;
+	margin-left: 8%;
+	width: 500px;
+}
+#findPsw{
+	width: 50px;
+	height: 50px;
+	margin-left: 4%;
+}
 #sendExtraPwForm{
 	width: 800px;
 	margin: auto;
 	margin-right: auto;
 	margin-left: auto;
 	padding-top: 20px;
+}
+.main_div{
+	margin-top: 3%;
 }
 #id{
 	margin-left:3%;
@@ -52,7 +65,11 @@ h1{
 #submit_email{
     width:50px;
     height:40px;
-    margin-bottom: 15%;
+    margin-top: 3%;
+    margin-bottom: 10%;
+    border-radius: 5px;
+ 	background: #8324FF;
+ 	color: black;
 }
 
 #chkNum{
@@ -65,21 +82,43 @@ h1{
     width:50px;
     height:40px;
     margin-bottom: 18%;
+    margin-top: -15%;
+    margin-bottom: 10%;
+    border-radius: 5px;
 }
 .main_btn{
-	margin-left: 14%;
+	margin-left: 13%;
+	margin-top: 3%;
 }
-#psw_btn{
+#psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	width:200px;
 	height:50px;
 	border-radius:2px;
 	font-size:18px;
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border-color: #3f51b5;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+    border-width: 3px;
+    border: 2px solid #6E45E3;
+    opacity: 10;
 }
-#home_btn{
+#cancel_btn{
 	width:200px;
 	height:50px;
 	border-radius:2px;
 	font-size:18px;
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border-color: #3f51b5;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+    border-width: 3px;
+    border: 2px solid #6E45E3;
+    opacity: 10;
 }
 
 
@@ -92,7 +131,7 @@ $(function() {
 	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 	//$(".justify-content-center").hide(); 
 	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background":"black"}); 
+	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
 })
  
 $(function(){
@@ -200,7 +239,7 @@ function cancel(){
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	<div class="main_div">
-	<h1 class="page_title">비밀번호 찾기</h1>
+	<h1 class="page_title">비밀번호 찾기<img id="findPsw" src="resources/img/findPsw.png"></h1>
 	<form action="sendExtraPw.do" method="post" id="sendExtraPwForm">
 	<div>
    		<table>
@@ -232,10 +271,9 @@ function cancel(){
    		</table>
    		
    </div>
-   <br><br>
    <div class="main_btn">
-		<button type="submit" id="psw_btn" class="findform_btn" onclick="chkSubmit();">비밀번호 찾기</button>
-   		<button type="submit" id="home_btn" class="findform_btn" onclick="cancel();">취소</button>
+		<button type="submit" class="findform_btn" id="psw_btn" onClick="chkSubmit();">비밀번호 찾기</button>
+   		<button type="submit" class="findform_btn" id="cancel_btn" onClick="cancel();">취소</button>
    </div>
    
    	</form>

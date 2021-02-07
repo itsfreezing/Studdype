@@ -19,12 +19,24 @@
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style type="text/css">
+.mainmenu li.active:not(:last-child):after,
+.mainmenu li:not(:last-child):hover:after { 
+	background: #fff;
+}
 h1{
 	font-weight:800;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
-	margin-top: 5%;
+	margin-top: 3%;
+	margin-bottom: -1%;
+	margin-left: 2%;
+}
+#findLogo{
+	width: 50px;
+	height: 50px;
+	margin-left: 2%;
+	margin-bottom: 1%;
 }
 .main_head{
 	width: 800px;
@@ -67,7 +79,6 @@ h1{
     height:45px;
 }
 .btn_part{
-	margin: auto;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -86,23 +97,38 @@ h1{
 	height: 50px;
 	border-radius: 5px;
 	font-size: 18px;
-
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border-color: #3f51b5;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+    border-width: 3px;
+    border: 2px solid #6E45E3;
+    opacity: 10;
 }
 #cancel{
 	width: 200px;
 	height: 50px;
 	border-radius: 5px;
 	font-size: 18px;
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border-color: #3f51b5;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+    border-width: 3px;
+    border: 2px solid #6E45E3;
+    opacity: 10;
 }
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-	//$(".justify-content-center").hide(); 
 	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background":"black"}); 
+	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
 })
 
 function idsearch(){
@@ -124,12 +150,13 @@ function idsearch(){
 function cancel(){
 	self.close();
 }
-
 </script>
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<h1>아이디 찾기 </h1>
+
+	<h1>아이디 찾기<img id="findLogo" src="resources/img/findIdLogo.png"></h1>
+	
 	<form class="main_head" id="findidform" action="findId.do" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">

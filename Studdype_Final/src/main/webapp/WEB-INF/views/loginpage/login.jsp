@@ -19,7 +19,6 @@
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style type="text/css">
-<style type="text/css">
 .mainmenu li.active:not(:last-child):after,
 .mainmenu li:not(:last-child):hover:after { 
 	background: #fff;
@@ -35,10 +34,17 @@
 h1{
 	margin-top: 3%;
 	font-weight:800;
-	font-size: 35px;
+	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
-	
+	margin-left: 5%;
+	margin-bottom: -1%;
+}
+#loginLogo{
+	width: 50px;
+	height: 50px;
+	margin-left: 2%;
+	margin-bottom: 1%;
 }
 .main{
 	width: 800px;
@@ -71,7 +77,16 @@ h1{
 	width:300px;
 	height:50px;
 	border-radius:2px;
-	font-size:20px;
+	font-size:18px;
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border-color: #3f51b5;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+    border-width: 3px;
+    border: 2px solid #6E45E3;
+    opacity: 10;
 }
 #signup{
 	width:300px;
@@ -97,7 +112,7 @@ h1{
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		//$(".justify-content-center").hide(); 
 		$(".justify-content-center").show(); 
-		$(".justify-content-center").css({"background":"black"}); 
+		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
 	})
 	
 function login_btn(){
@@ -122,7 +137,7 @@ function login_btn(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<h1>로그인</h1>
+	<h1>로그인<img id="loginLogo" src="resources/img/loginLogo.png"></h1>
 	<div class="main">
     <form class="loginForm" action="login.do" method="POST">
     	<table class="loginTable">
