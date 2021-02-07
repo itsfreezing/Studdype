@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
@@ -26,7 +28,6 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
-import com.studdype.test.model.dao.study.StudyDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
@@ -474,7 +475,7 @@ public class StudyController {
 		return "studdype/searchByCategory";
 	}
 	//지역별 검색 
-	@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/studyListLocation.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String SearchLocation(Model model,StudyDto studyDto,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
@@ -489,7 +490,6 @@ public class StudyController {
 		logger.info("STUDY - SearchLocationLIST");
 		
 		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
-		System.out.println(studyBiz.selectLocationSiOfStudy(si_no));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
 		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
@@ -511,7 +511,7 @@ public class StudyController {
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
-		session.setAttribute("headerMenu", "selectLocationList");
+		session.setAttribute("headerMenu", "home");
 
 		return "studdype/searchByLocation";
 	}

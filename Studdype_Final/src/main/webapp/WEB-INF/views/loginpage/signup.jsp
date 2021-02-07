@@ -311,7 +311,7 @@ $(function(){
 			   <tr>
 					<th align="right" width="100">
 					 아이디
-					 	<span class="idico" style="font-size:23px;">*</span>
+					 	<span class="idico" style="font-size:20px;">*</span>
 					</th>
 	                 <td colspan="4"> 
 	                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
@@ -334,7 +334,7 @@ $(function(){
 	   		   </tr>
 	 			<tr>
 	                 <th align="right" width="100">
-	                    비밀번호 <span class="pwico" style="font-size:23px;">*</span>
+	                    비밀번호 <span class="pwico" style="font-size:20px;">*</span>
 	                 </th>
 	             
 	                 <td colspan="4">
@@ -348,7 +348,7 @@ $(function(){
 	             	</tr>  
 	              <tr>
 	                 <th align="right" width="100">
-	                 비번확인 <span class="pwico" style="font-size:25px;">*</span>
+	                 비번확인 <span class="pwico" style="font-size:20px;">*</span>
 	                 </th>
 	                 <td>
 	                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
@@ -373,7 +373,7 @@ $(function(){
 	   		
 	           	<tr>
 	                 <th align="right" width="100">
-	                    이메일<span class="mailico" style="font-size:25px;">*</span>
+	                    이메일<span class="mailico" style="font-size:20px">*</span>
 	                 <td>
 	                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
 	                    <input type="button" value="인증번호 전송" id="submit_email" class="mail_btn"onclick="sendmail();">
@@ -384,7 +384,7 @@ $(function(){
 	                 <td width="600" height="30"></td>
             	</tr> 
               	<tr>
-	   				<td><label for="chkNum">인증번호<span class="numico" style="font-size:25px;">*</span></label></td>
+	   				<td><label for="chkNum">인증번호<span class="numico" style="font-size:20px">*</span></label></td>
 	   				<td>
 		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 		   				<input type="button" value="확인" id="chkNum_btn" class="chkNum_btn"onclick="chkVerifiNum();" >
@@ -405,7 +405,7 @@ $(function(){
 	            </tr> 
 	            <tr>
 	                 <th align="right" width="100">
-	                    이름<span class="nameico" style="font-size:25px;">*</span>
+	                    이름<span class="nameico" style="font-size:20px;">*</span>
 	                 <td>
 	                    <input type="text" id="memberName" name="mem_name" style="border:1px solid #ccc" onkeyup="namechk();"> 
 	                 </td>
@@ -416,7 +416,7 @@ $(function(){
 	         </tr>
 	           <tr>
 	               <th align="right" width="100">
-	                       주민번호<span class="rnoico" style="font-size:25px;">*</span>
+	                       주민번호<span class="rnoico" style="font-size:20px;">*</span>
 	                 </th>
 	                 <td colspan="5">
 	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
@@ -437,7 +437,7 @@ $(function(){
 	            </tr>
 	            <tr>
             		<th align="right" width="100">
-            			핸드폰번호<span class="phoneico" style="font-size:25px;">*</span>
+            			핸드폰<span class="phoneico" style="font-size:20px;">*</span>
             		</th>
             		<td colspan="5">
             			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"onkeyup="chktel();"/>
@@ -449,7 +449,7 @@ $(function(){
 	         	</tr>
             	 <tr>
                     <th align="right" width="100">
-            			성별<span class="genderico" style="font-size:25px;">*</span>
+            			성별<span class="genderico" style="font-size:20px;text-align:center;">*</span>
             		</th>
             		<td>
 	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">M

@@ -23,44 +23,13 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
-
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-<script type="text/javascript">
-	 $(function(){
-	        $('#Search').click(function() {
-	          self.location = 
-	        	  "studyListLocation.do" + '${pageMaker.makeQuery(1)}' +  "&keyword=" 
-	        	  + encodeURIComponent($('#selectLocationSi').val()+$('#selectLocationGu').val());
-	        $("select[name=si_no]").val();
-	        $("select[name=gu_no]").val();
-	        alert($("select[name=si_no]").val());
-			alert($("select[name=gu_no]").val());
-	        });
-	        
-	      }); 
-	 
-	 
-	 
-		$(function() {
-			// 시 미선택 시 구/군은 숨김 
-			$("#selectLocationGu option").hide();
-
-			// 시 option 선택 시 해당 시에 대한 구/군 리스트 보여주기 (전에 보여준 구/군은 다시 숨김)
-			$("#selectLocationSi").change(function() {
-				var selectSi = $("#selectLocationSi option:selected").val();
-
-				$("#selectLocationGu option").hide();
-				$("." + selectSi).show();
-
-			});
-		});
-
-</script>
 
 <style type="text/css">
 #title{
 	text-align:center;
 }
+
 #selectLocationSi{
 	width:500px;
 	height:50px;
@@ -80,18 +49,71 @@ label{
 	margin-bottom:-1%;
 	margin-top:-2%;
 }
+.header-top {
+   padding: 48px 0 0;
+}
+
+
 </style>
+<script type="text/javascript">
+/*$(document).ready(function(){
+	$("#Search").click(function(){
+			var selectSi=$("#selectLocationSi option:selected").val();
+			alert(selectSi);
+			var selectGu=$("#selectLocationGu option:selected").val();
+			alert(selectGu);
+			var locationVal={
+					"selectSi":selectSi,
+				 	"selectGu":selectGu 
+			};
+			$.ajax({
+				url:"studyListLocation.do",
+				data:JSON.stringify(locationVal),
+				type:"POST",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					locationVal=data;
+				},error:function(){
+					alert("통신fail");
+				}
+			});
+				
+		});
+	});
+	*/
+
+		$(function() {
+			// 시 미선택 시 구/군은 숨김 
+			$("#selectLocationGu option").hide();
+
+			// 시 option 선택 시 해당 시에 대한 구/군 리스트 보여주기 (전에 보여준 구/군은 다시 숨김)
+			$("#selectLocationSi").change(function() {
+				var selectSi = $("#selectLocationSi option:selected").val();
+
+				$("#selectLocationGu option").hide();
+				$("." + selectSi).show();
+
+			});
+		});
+function search(){
+	var selectSi=$("#selectLocationSi option:selected").val();
+	var selectGu=$("#selectLocationGu option:selected").val();
+	alert(selectSi);
+	alert(selectGu);
+	return ;
+	
+	
+}
+</script>
 
 </head>
 
 <body>
-	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-
-
-		<div id="title">		
-			<h2>Studdype Location</h2>
-		</div>
-
+<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
+<div class="header-top">
+	<img src="./resources/img/location.png">
+</div>	
 	<!-- 스터디 영역 -->
 	<br><br>
 	<form action="studyListLocation.do" method="POST" id="location">
@@ -114,14 +136,12 @@ label{
 							</c:forEach>
 						</select>
 						<div id="search_btn">
-							<button type="button" id="Search" name="Search" style="border:none; background-color:white;" >
+							<button type="button" id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
 								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
 				</div>
-		</form>						
-				
-					
+		</form>
 					<br><br>
 		<div class="container">
 			<div class="row">
@@ -129,6 +149,7 @@ label{
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
+				<c:if test="${not empty list}">
 				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-lg-4 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
@@ -160,9 +181,11 @@ label{
 						</div>
 					</div>
 				</c:forEach>
+				</c:if>
 			</div>
 		</div>
-	
+
+		
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->

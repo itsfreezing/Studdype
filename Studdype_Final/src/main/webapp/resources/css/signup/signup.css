@@ -15,49 +15,54 @@
 	
 }
 .idico{
-   color:red;
-   margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+	color:red;
+	margin-left:3px;
+	margin-top:30px;
+	margin-bottom:15px;
 }
-
 .pwico{
 	color:red;
-   margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+	margin-left:3px;
+	margin-top:20px;
+	margin-bottom:15px;
 }
 .mailico{
 	color:red;
-   margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+	margin-left:3px;
+	margin-top: 35px;
+	margin-bottom:20px;
 }
-
+.numico{
+	color:red;
+	margin-left:3px;
+	margin-top:20px;
+	margin-bottom:15px;
+}
 .nameico{
-	color:red;
-   margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+		color:red;
+	margin-left:3px;
+	margin-top:20px;
+	margin-bottom:15px;
 
-}
-.rnoico{
-	color:red;
-   	 margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
 }
 .genderico{
 	color:red;
-    margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+	margin-left:3px;
+	margin-top:20px;
+	margin-bottom:15px;
+
+}
+.rnoico{
+		color:red;
+	margin-left:3px;
+	margin-top:25px;
+	margin-bottom:15px;
 }
 .phoneico{
-	color:red;
-   margin-top:20px;
-   margin-right:20px;
-   margin-bottom:15px;
+		color:red;
+	margin-left:3px;
+	margin-top:30px;
+	margin-bottom:15px;
 }
 hr{
    border:1px solid black;
