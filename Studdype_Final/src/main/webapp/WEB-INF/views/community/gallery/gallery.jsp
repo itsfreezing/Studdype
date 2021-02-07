@@ -150,6 +150,30 @@ console.log(url);
 	filter: alpha(opacity = 1);
 	opacity: 1;
 }
+.gallery_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.gallery_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
 </style>
 </head>
 <body>
@@ -158,7 +182,7 @@ console.log(url);
 
 
 	<!--main conternt 섹션-->
-	<div class="main-section" style="border: 1px solid red;">
+	<div class="main-section">
 
 		<br> <br>
 		<h1 style="text-align: center;">Gallery</h1>
@@ -185,16 +209,16 @@ console.log(url);
 		<div class="container-fluid">
 			<div class="row">
 				<!-- photo List start -->
-				<c:forEach items="${galleryList }" var="galleryList">
+				<c:forEach items="${galleryList }" var="galleryList" varStatus="status">
 				<div class="col-lg-4 col-md-8">
 					<div class=" hover-blur">
 						<a href="galleryDetail.do?b_no=${galleryList.b_no }" title="">
-						<img src="${pageContext.request.contextPath}/resources/file/${attachImage }" alt="" />
+						<img src="${attachImage.get(status.index).getF_url() }" alt="" style="width: 500px; height: 400px;"/>
 							<h2>
-								<span class="text-white">${galleryList.b_title }</span>
+								<span class="text-white">${galleryList.b_title} </span>
 							</h2>
 						</a>
-						<h4 class="text-center">${galleryList.b_title }</h4>
+						<h4 class="text-center">${galleryList.b_title}</h4>
 					</div>
 				</div>
 				</c:forEach>
@@ -202,19 +226,19 @@ console.log(url);
 
 			</div>
 		</div>
-	<button onclick="location.href='gallerywriteform.do'" style="float: right;">글쓰기</button>
+	<button onclick="location.href='gallerywriteform.do'" class="gallery_Btn">글쓰기</button>
 		<div>
 		<ul>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
-				<li><a href="galleryList.do${pageMaker.makeSearch(i)}">${i}</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(i)}">${i}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="galleryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

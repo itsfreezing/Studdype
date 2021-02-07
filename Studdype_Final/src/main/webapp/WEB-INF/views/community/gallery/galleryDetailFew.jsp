@@ -1,55 +1,278 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>스터띱 자유게시판</title>
+<title>CommunityHome</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="./resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/mainstyle.css">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-<link rel="stylesheet" href="./resources/css/community/header&footer.css">
+<link rel="stylesheet"
+	href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
-
-
-<!--  freeboard mainsection css -->
-<link rel="stylesheet" href="./resources/css/community/freeboard/mainsection.css">
-
-<!-- freeboard css -->
-<link rel="stylesheet" href="./resources/css/community/freeboard/freeboard.css">
+<link rel="stylesheet" href="./resources/css/community/mainsection.css">
+<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond"
+	rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel= "stylesheet">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main2.js"></script>
+<script src="./resources/assets/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 
-<!-- ToolTip CSS -->
-<link href="./resources/css/community/freeboard/pop-pop.min.css" rel="stylesheet" />
+<style type="text/css">
+/* 갤러리 뷰 css 시작 */
+.row {
+	margin: 15px;
+}
+#fewsize{
+	width: 350px;
+	height: 300px;
+	margin: 15px;
+}
+/* 갤러리 뷰 css 끝 */
 
-<script type="text/javascript" >
+.replyItem{
+		list-style: none;
+}
+
+.replyWrite{
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.replyWrite table{
+	width: 100%;
+	margin-top: 15px;
+}
+
+.write_td{
+	width: 90%;	
+}
+
+.write_btn_td{
+	width: 5%;
+}
+
+.write_content{
+	width: 100%;
+	height: 100px;
+	resize: none;
+	border: 1px solid #808080;
+	border-radius: 5px 5px;
+	padding: 20px;
+	
+}
+
+.reply_write_btn{
+	width: 100px;
+	height: 105px;
+	background-color: white;
+	border: 1px solid #808080;
+	font-size: 25px;
+		border-radius: 5px 5px;
+	color: #808080;
+	cursor: pointer;
+	padding: 0px;
+	
+}
+
+.reply_write_btn:hover {
+	background-color: #6434ef;
+	color: white;	
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.replyBox{
+	margin-top: 20px;
+	
+}
+
+.replyTitle{
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.replyTitle span{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+
+.reply_arrow{
+	width:30px; 
+	height:auto;
+	padding-right: 5px;
+	padding-bottom: 15px;
+	
+}
+
+.reply_writer_box{
+	font-weight: bold;
+}
+
+.reply_comment_box{
+	padding-bottom: 15px;
+	word-break:break-all;
+}
+
+.reply_info_box{
+	color:rgb(170,170,170);
+	
+}
+
+.write_recomeent_btn{
+	font-size: 15px;
+	color:rgb(170,170,170);
+	background: white;
+	border: none;
+	cursor: pointer;
+}
+
+.write_recomeent_btn:hover{
+	font-weight: bold;
+	color: black;
+}
+
+.writerId{
+	font-weight: bold;
+}
+
+/* 댓글 수정 css */
+.recomment_div{
+	width: 80%;
+	border: 1px solid rgb(180,180,180);
+}
+.recomment_div table{
+	width: 100%;
+	
+	margin-top: 15px;
+	
+}
+
+.recomment_div table tr td{
+	padding-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.recomment_div table tr{
+	margin-left: 20px;
+	margin-right:20px;
+}
+.update_reply_btnDiv{
+	height: 60px;
+	border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.update_reply_comment{
+	width: 98%;
+	height: 100px;
+	resize: none;	
+	border: none;	
+	padding: 20px;	
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	word-break:break-all;
+	
+	
+}
+
+.update_reply_comment:focus{
+	border: 1px solid #ccc;
+	border-radius: 5px 5px;
+}
+
+.update_reply_writer{
+	font-weight: bold;
+}
+
+.update_reply_btn{
+	float: right;
+	cursor: pointer;
+	height: 100%;
+	background-color:white;
+	border: none;
+	border-left: 1px solid rgba(0,0,0,.1);
+	font-weight: bold;
+	width: 100px;
+}
+
+.update_reply_btn:hover{
+	background-color:  #6434ef;
+	color:white;
+	transition: 0.3s;
+}
+
+.showDiv{
+	display: block;
+}
+
+.hideDiv{
+	display: none;
+}
+
+.free_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.free_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
+</style>
+
+<script type="text/javascript">
+$(document).on("click", '[data-toggle="lightbox"]', function(event) {
+	  event.preventDefault();
+	  $(this).ekkoLightbox();
+	});
+	
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
 	var boardVal = {
-			"b_no":${dto.b_no }
+			"b_no":${detail.b_no}
 	};
-
-	
 	
 	$.ajax({
 		type:"post",
-		url:"freeReplyList.do",
+		url:"photoReplyList.do",
 		data:JSON.stringify(boardVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -139,40 +362,6 @@ function getReplyList() {
 	});
 };
 
-<!-- 댓글 삭제 AJAX -->
-function deleteReply(btn){
-	var r_no = btn.value //댓글 번호
-	
-	var replyVal = {
-			"r_no":r_no
-	};
-
-	//댓글 삭제 
-	$.ajax({
-		type:"post",
-		url:"freeReplyDelete.do",
-		data:JSON.stringify(replyVal),
-		contentType:"application/json",
-		dataType:"json",
-		success: function(res){
-			if ( res > 0 ){
-				getReplyList();
-			}else{
-				alert("[ERROR]: 댓글 삭제 실패!!");
-				getReplyList();
-			}
-		} 
-		,
-		error:function(){
-			alert("댓글 삭제 ajax 실패 ㅠ..");
-		}
-		
-		
-	});
-	
-};
-
-<!-- 댓글 쓰기 AJAX -->
 function insertReply(){
 	var content = $("#write_content").val();
 	
@@ -181,7 +370,7 @@ function insertReply(){
 		return false;
 	}
 	
-	var b_no = ${dto.b_no};
+	var b_no = ${detail.b_no};
 	var r_writer = ${login.mem_no};
 	
 	var replyVal = {
@@ -193,7 +382,7 @@ function insertReply(){
 	//댓글 쓰기
 	$.ajax({
 		type:"post",
-		url:"freeReplyWrite.do",
+		url:"photoReplyWrite.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -210,12 +399,10 @@ function insertReply(){
 		error:function(){
 			alert("댓글 등록 ajax 실패 ㅠ..");
 		}
-		
-		
 	});
-	
-	
 }
+
+
 
 //수정하기 누를시  hide/show 관리하는 함수
 function updateReplyForm(btn){
@@ -284,7 +471,7 @@ function updateReply(btn){
 	//댓글 수정
 	$.ajax({
 		type:"post",
-		url:"freeReplyUpdate.do",
+		url:"photoReplyUpdate.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -357,7 +544,7 @@ function writeRecomment(btn){
 	
 	
 	var r_no = btn.value; //부모 댓글 번호
-	var b_no = ${dto.b_no}; //글번호
+	var b_no = ${detail.b_no}; //글번호
 	var r_writer = ${login.mem_no};//댓글작성자
 	var r_comment = updateReplyDiv.find(".update_reply_comment").val(); //댓글 내용
 	if(r_comment.length > 500){
@@ -375,7 +562,7 @@ function writeRecomment(btn){
 	//댓글 답글 쓰기
 	$.ajax({
 		type:"post",
-		url:"freeRecommentWrite.do",
+		url:"photoRecommentWrite.do",
 		data:JSON.stringify(replyVal),
 		contentType:"application/json",
 		dataType:"json",
@@ -398,6 +585,38 @@ function writeRecomment(btn){
 	
 	btn.className = 'write_recomment_btn'; //추가한 클래스 원상복구
 }
+<!-- 댓글 삭제 AJAX -->
+function deleteReply(btn){
+	var r_no = btn.value //댓글 번호
+	
+	var replyVal = {
+			"r_no":r_no
+	};
+
+	//댓글 삭제 
+	$.ajax({
+		type:"post",
+		url:"photoReplyDelete.do",
+		data:JSON.stringify(replyVal),
+		contentType:"application/json",
+		dataType:"json",
+		success: function(res){
+			if ( res > 0 ){
+				getReplyList();
+			}else{
+				alert("[ERROR]: 댓글 삭제 실패!!");
+				getReplyList();
+			}
+		} 
+		,
+		error:function(){
+			alert("댓글 삭제 ajax 실패 ㅠ..");
+		}
+		
+		
+	});
+	
+}
 
 //페이지 로드 후에
 $(document).ready( getReplyList() );
@@ -409,83 +628,40 @@ function showAttach(){
 		uploadFileDiv.eq(i).toggle();
 	}
 }
-
-//파일 다운로드 함수
-function downloadFile(btn){
-	
-	location.href="freeFileDown.do?f_no="+btn.title;
-	
-}
- 
 </script>
 </head>
 <body>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
-	<!-- 게시글 부분 -->
- 	<div class="main-section3">
-		<div class="titleDiv" aria-label="${dto.b_title }" data-pop="bottom"  data-pop-delay="short"  >
-			<span class="title" >${dto.b_title }</span>
-			<span class="regdate" ><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
 
-			
-		</div>
-		<div class="writerDiv">
-			<span class="writer"> ${member.mem_id } (${member.mem_name })</span>
-			<span class="cnt">조회수
-				<span class="cnt2">${dto.b_cnt }</span>
-			</span>
-		</div>
-		<div class="contentDiv">${dto.b_content }</div>
-		
-		<!-- 첨부파일 부분 -->
-		<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
-			<div class="upload_box_detail">
-				<div class="attach_box_title">
-					<span style="font-size:25px; font-weight: bold">첨부파일 </span>
-					<span style="font-size: 20px;">${fileList.size() } 개</span>
-					<input type="button" value="↓" onclick="showAttach();" class="attach_Btn">			
+	<!--main conternt 섹션-->
+	<div class="main-section">
+		<br>
+		<h1 style="text-align: center;">${detail.b_title}</h1>
+		<h2>by.${galleryWriter }</h2>
+		<div class="container mt-5">
+				<div class="row">
+				<c:forEach items="${fileDetail}" var="fileDetail">
+					<a href="${fileDetail.f_url }" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+						<img id="fewsize" src="${fileDetail.f_url }" class="img-fluid rounded" alt></a>
+				</c:forEach>
 				</div>
-
-				<c:forEach var = "fileList" items="${fileList }">
-				
-					<div class='upload_file_box_detail hideDiv'>
-						<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
-						<span class='file_name' >${fileList.f_name }</span>
-						<input type='button' class='download_file_btn'  onclick='downloadFile(this);' title='${fileList.f_no}'>
-						<span class='file_size'>${fileList.f_size }KB</span>
-					</div>
-				</c:forEach>		
-			</div>
-		
-		</c:if>
-		
-		
-		
-		
-		
-		<!-- 게시글 버튼 부분 (수정,삭제,목록) -->
-		<div class="btnDiv">
-			<c:choose>
-				<c:when test="${dto.b_writer == login.mem_no }">
-					<input type="button" class="free_Btn" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
-					<input type="button" class="free_Btn"  value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
-					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
-				</c:when>
-				<c:otherwise>
-					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
-				</c:otherwise>
-			</c:choose>
-		
+			<!-- /row -->
 		</div>
+		<!-- /container -->
+		<!-- 갤러리 뷰 끝 -->
+
+		<!-- 갤러리 내용 시작 -->
+		<div class="galleryContent">${detail.b_content }</div>
+		<!-- 갤러리 내용 끝 -->
 		
-		<!-- 댓글 리스트 부분 -->
-		<div class="replyBox" >
-			
-		</div>	
+
+		<hr>
+		<!-- 갤러리 댓글 시작 -->
+		<br> <br>
+		<div class="replyBox" ></div>
 		
-		<!-- 댓글 작성 부분 -->	
 		<div class="replyWrite"  >
 			<table >
 				<tr>
@@ -498,66 +674,25 @@ function downloadFile(btn){
 			</table>
 		</div>
 		
-		<!-- 게시글 위 아래 근처글 부분 -->
-		<div class="recent_board_box">
-			<h4>자유게시판 글</h4>
-			<table class="recent_table">	
-				<col width="60%"><col width="25%"><col width="15%">
-				
-				<c:choose>
-					<c:when test="${empty recentList }">
-						<td colspan="3">게 시 글 이 없 습 니 다</td>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" >
-							<c:choose>
-							<c:when test="${dto.b_no == recentList.get(i).getB_no() }">
-								<tr class="recent_board_tr current_board">
-							
-								<td class="tdtitle">
-									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-										</c:if>							
-									</a>
-								</td>
-								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-								
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<tr class="recent_board_tr">
-							
-								<td class="tdtitle">
-									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
-										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
-											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
-										</c:if>					
-									</a>
-								</td>
-								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
-								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
-								
-								</tr>
-							</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-					<tr style="border:none;">
-						<td colspan="3" class="look_all_td"><a href="freeboard.do">전체보기</a></td>
-					</tr>					
-				</tbody>
-			</table>
+		
+		<!-- 갤러리 댓글 끝 -->
+			<div class="galleryBtnDiv">
+			<c:choose>
+				<c:when test="${dto.b_writer == login.mem_no }">
+					<input type="button" class="galleryBtn" value="삭제" onclick="location.href='galleryDelete.do?b_no=${detail.b_no}'" />
+					<input type="button" class="galleryBtn"  value="수정" onclick="location.href='galleryupdateform.do?b_no=${detail.b_no}'" />
+					<input type="button" class="galleryBtn" value="목록" onclick="location.href='gallery.do'">
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='gallery.do'">
+				</c:otherwise>
+			</c:choose>
 		</div>
-			
- 	</div>
- 	
- 
+	</div>
 
-	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
-	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
+	
+
+
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
