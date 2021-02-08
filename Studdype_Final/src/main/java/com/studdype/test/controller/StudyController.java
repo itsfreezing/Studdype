@@ -85,10 +85,10 @@ public class StudyController {
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-			
-		for(int i=0; i<studyList.size(); i++) {
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-		}
+//			
+//		for(int i=0; i<studyList.size(); i++) {
+//				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+//		}
 			
 		
 		model.addAttribute("pageMaker", pageMaker);
