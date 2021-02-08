@@ -127,19 +127,17 @@
 #left-allow {
 	position:relative;
 	float:left;
-	width:3%;
-	height:5px;
 }
 
 #right-allow {
 	position:relative;
 	float:right;
-	width:3%;
-	height:5px;
 }
 
 .allow {
 	margin:8% 1% 0% 1%;
+	width:1.5%;
+	height:5px;
 }
 
 .allow img {

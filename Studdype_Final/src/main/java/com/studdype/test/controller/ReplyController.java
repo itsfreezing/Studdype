@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.reply.BookReplyBiz;
+import com.studdype.test.model.biz.reply.DataReplyBiz;
 import com.studdype.test.model.biz.reply.FreeReplyBiz;
 import com.studdype.test.model.biz.reply.MeetReplyBiz;
 import com.studdype.test.model.biz.reply.NoticeReplyBiz;
@@ -41,6 +42,8 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	private NoticeReplyBiz noticeReplyBiz;
 	@Autowired
 	private BookReplyBiz bookReplyBiz;
+	@Autowired
+	private DataReplyBiz dataReplyBiz;
 	@Autowired
 	private photoReplyBiz photoReplyBiz; 
 	
@@ -286,7 +289,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 		return res;
 	}
 	
-	//자유게시판 댓글 수정 메소드
+	//도서게시판 댓글 수정 메소드
 	@RequestMapping(value="/bookReplyUpdate.do", method=RequestMethod.POST)
 	public @ResponseBody int bookReplyUpdate(@RequestBody ReplyDto dto) {
 		logger.info("[BookReplyUpdate]");
@@ -365,60 +368,60 @@ private static final Logger logger = LoggerFactory.getLogger(ReplyController.cla
 	// [학습 자료실 댓글]
 	
 	// 학습 자료실 리플리스트 반환 메소드
-//	@RequestMapping(value="/dataReplyList.do", method=RequestMethod.POST)
-//	public @ResponseBody Map dataReplyList(@RequestBody ReplyDto dto) {
-//		logger.info("[dataReplyList]");
-//		Map replyMap = new HashMap(); // 리플리스트 dto 및 작성자이름 담을 MAP (반환 할거임)
-//		List<ReplyDto> replyList = null;  // 댓글 LIST
-//		Map<Integer,MemberDto> replyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자 dto 담을 맵
-//		
-//		replyList = bookReplyBiz.selectBookReplyList(dto.getB_no());
-//		replyMember = bookReplyBiz.getMemberByList(replyList);
-//		
-//		replyMap.put("replyList", replyList);
-//		replyMap.put("replyMember", replyMember);
-//		
-//		return replyMap;
-//	}
-//			
-//	// 도서게시판 댓글 삭제 메소드
-//	@RequestMapping(value="/bookReplyDelete.do", method=RequestMethod.POST)
-//	public @ResponseBody int bookReplyDelete(@RequestBody ReplyDto dto) {
-//		logger.info("[BookReplyDelete]");
-//		
-//		int res = bookReplyBiz.deleteReply(dto.getR_no());
-//		
-//		return res;
-//	}
-//			
-//	//도서게시판 댓글 쓰기 메소드
-//	@RequestMapping(value="/bookReplyWrite.do", method=RequestMethod.POST)
-//	public @ResponseBody int bookReplyWrite(@RequestBody ReplyDto dto) {
-//		logger.info("[BookReplyWrite]");
-//		
-//		int res = bookReplyBiz.writeReply(dto);
-//		
-//		return res;
-//	}
-//		
-//	//자유게시판 댓글 수정 메소드
-//	@RequestMapping(value="/bookReplyUpdate.do", method=RequestMethod.POST)
-//	public @ResponseBody int bookReplyUpdate(@RequestBody ReplyDto dto) {
-//		logger.info("[BookReplyUpdate]");
-//		
-//		int res = bookReplyBiz.updateReply(dto);
-//		
-//		return res;
-//	}
-//			
-//	//도서게시판 댓글 답글 작성 메소드
-//	@RequestMapping(value="/bookRecommentWrite.do", method=RequestMethod.POST)
-//	public @ResponseBody int bookRecommentWrite(@RequestBody ReplyDto dto) {
-//		logger.info("[BookRecommentWrite]");
-//		
-//		int res = bookReplyBiz.writeRecomment(dto);
-//		
-//		return res;
-//	}
+	@RequestMapping(value="/dataReplyList.do", method=RequestMethod.POST)
+	public @ResponseBody Map dataReplyList(@RequestBody ReplyDto dto) {
+		logger.info("[dataReplyList]");
+		Map replyMap = new HashMap(); // 리플리스트 dto 및 작성자이름 담을 MAP (반환 할거임)
+		List<ReplyDto> replyList = null;  // 댓글 LIST
+		Map<Integer,MemberDto> replyMember = new HashMap<Integer, MemberDto>(); //리플리스트 작성자 dto 담을 맵
+		
+		replyList = dataReplyBiz.selectDataReplyList(dto.getB_no());
+		replyMember = dataReplyBiz.getMemberByList(replyList);
+		
+		replyMap.put("replyList", replyList);
+		replyMap.put("replyMember", replyMember);
+		
+		return replyMap;
+	}
+			
+	// 학습 자료실 댓글 삭제 메소드
+	@RequestMapping(value="/dataReplyDelete.do", method=RequestMethod.POST)
+	public @ResponseBody int dataReplyDelete(@RequestBody ReplyDto dto) {
+		logger.info("[dataReplyDelete]");
+		
+		int res = dataReplyBiz.deleteReply(dto.getR_no());
+		
+		return res;
+	}
+			
+	// 학습 자료실 댓글 쓰기 메소드
+	@RequestMapping(value="/dataReplyWrite.do", method=RequestMethod.POST)
+	public @ResponseBody int dataReplyWrite(@RequestBody ReplyDto dto) {
+		logger.info("[dataReplyWrite]");
+		
+		int res = dataReplyBiz.writeReply(dto);
+		
+		return res;
+	}
+		
+	// 학습 자료실 댓글 수정 메소드
+	@RequestMapping(value="/dataReplyUpdate.do", method=RequestMethod.POST)
+	public @ResponseBody int dataReplyUpdate(@RequestBody ReplyDto dto) {
+		logger.info("[dataReplyUpdate]");
+		
+		int res = dataReplyBiz.updateReply(dto);
+		
+		return res;
+	}
+			
+	// 학습 자료실 댓글 답글 작성 메소드
+	@RequestMapping(value="/dataRecommentWrite.do", method=RequestMethod.POST)
+	public @ResponseBody int dataRecommentWrite(@RequestBody ReplyDto dto) {
+		logger.info("[dataRecommentWrite]");
+		
+		int res = dataReplyBiz.writeRecomment(dto);
+		
+		return res;
+	}
 	
 }

@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
-<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
@@ -53,7 +52,7 @@
 		$(".justify-content-center").hide(); 
 	});
 /* 	
-	$(document).on('click', '#btnSearch', function(e){
+	$(document).on('pclick', '#btnSearch', function(e){
 		e.preventDefault();
 		var url = "${studyList}";
 		url = url + "?searchType=" + $('#searchType').val();
@@ -82,7 +81,11 @@ input#search:focus {
 .feature-page.header-area {
 	height: 80px;
 }
-
+.blogpost-area{
+	background: #ffff;
+	margin-left: 5%;
+	margin-right: 5%;
+}
 </style>
 
 </head>
@@ -146,7 +149,7 @@ input#search:focus {
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
-								<h3>${studyDto.s_name}</h3>
+								<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
 								<br> <span><img
 									src="./resources/assets/img/profile_placeholder.png"
 									style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;
@@ -191,7 +194,7 @@ input#search:focus {
 
 
 
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>
