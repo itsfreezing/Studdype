@@ -68,8 +68,11 @@ h1{
     margin-top: 3%;
     margin-bottom: 10%;
     border-radius: 5px;
- 	background: #8324FF;
- 	color: black;
+ 	background: gray;
+ 	color: white;
+}
+#submit_email:hover{
+	background-color: #6E45E3;
 }
 
 #chkNum{
@@ -85,7 +88,13 @@ h1{
     margin-top: -15%;
     margin-bottom: 10%;
     border-radius: 5px;
+    background: gray;
+ 	color: white;
 }
+#chkNum_btn:hover{
+	background-color: #6E45E3;
+}
+
 .main_btn{
 	margin-left: 13%;
 	margin-top: 3%;
@@ -102,8 +111,11 @@ h1{
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
-    border: 2px solid #6E45E3;
-    opacity: 10;
+	color:white;
+	background-color: gray;
+}
+#psw_btn:hover{
+	background-color: #6E45E3;
 }
 #cancel_btn{
 	width:200px;
@@ -117,10 +129,12 @@ h1{
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
-    border: 2px solid #6E45E3;
-    opacity: 10;
+	color:white;
+	background-color: gray;
 }
-
+#cancel_btn:hover{
+	background-color: #6E45E3;
+}
 
 </style>
 
@@ -239,7 +253,7 @@ function cancel(){
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	<div class="main_div">
-	<h1 class="page_title">비밀번호 찾기<img id="findPsw" src="resources/img/findPsw.png"></h1>
+	<h1 class="page_title">비밀번호 찾기</h1>
 	<form action="sendExtraPw.do" method="post" id="sendExtraPwForm">
 	<div>
    		<table>
@@ -280,7 +294,7 @@ function cancel(){
    	</div>
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
-	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/popper.min.js"></script> 
 	<script src="./resources/assets/js/bootstrap.min.js"></script>
 	<script src="./resources/assets/js/owl.carousel.min.js"></script>
 	<script src="./resources/assets/js/modal-video.js"></script>

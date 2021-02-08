@@ -23,22 +23,16 @@
 .mainmenu li:not(:last-child):hover:after { 
 	background: #fff;
 }
-
-.header-area {
-	background: #88d3ce;
-	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
-	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
-	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
-}
 h1{
 	margin-top: 3%;
-	font-weight:800;
+	font-weight:600;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
-	margin-left: 5%;
-	margin-bottom: -1%;
+}
+#main_span{
+	font-size: 20px;
+	color:white;
 }
 #loginLogo{
 	width: 50px;
@@ -56,6 +50,7 @@ h1{
 	margin: auto;
 	margin-right: auto;
 	margin-left: auto;
+	margin-top: 3%;
 	
 }
 .loginTable{
@@ -84,15 +79,19 @@ h1{
 	-webkit-appearance:s;
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
-    border-width: 3px;
-    border: 2px solid #6E45E3;
-    opacity: 10;
+ 	color: white;
+ 	background-color: #6E45E3;
 }
-#signup{
+#signUp{
 	width:300px;
 	height:50px;
-	border-radius:25px;
-	font-size:20px;
+	color: #5D5D5D;
+}
+#findId{
+	color: #5D5D5D;
+}
+#findPw{
+	color: #5D5D5D;
 }
 .findSection{
     margin-left:32.5%;
@@ -112,7 +111,7 @@ h1{
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		//$(".justify-content-center").hide(); 
 		$(".justify-content-center").show(); 
-		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
+		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
 	})
 	
 function login_btn(){
@@ -137,7 +136,6 @@ function login_btn(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<h1>로그인<img id="loginLogo" src="resources/img/loginLogo.png"></h1>
 	<div class="main">
     <form class="loginForm" action="login.do" method="POST">
     	<table class="loginTable">

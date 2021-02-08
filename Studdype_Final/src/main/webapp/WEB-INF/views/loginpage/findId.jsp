@@ -30,7 +30,6 @@ h1{
 	text-align: center;
 	margin-top: 3%;
 	margin-bottom: -1%;
-	margin-left: 2%;
 }
 #findLogo{
 	width: 50px;
@@ -99,17 +98,20 @@ h1{
 	font-size: 18px;
 	transition: color 0.5s;
 	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	border-color: #3f51b5;
 	-webkit-appearance:s;
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
-    border: 2px solid #6E45E3;
-    opacity: 10;
+    color:white;
+    background-color: gray;
+}
+#search_btn:hover{
+	background-color: #6E45E3;
 }
 #cancel{
 	width: 200px;
 	height: 50px;
+	margin-left:7%;
 	border-radius: 5px;
 	font-size: 18px;
 	transition: color 0.5s;
@@ -119,8 +121,11 @@ h1{
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
-    border: 2px solid #6E45E3;
-    opacity: 10;
+	color: white;
+	background-color: gray;
+}
+#cancel:hover{
+	background-color: #6E45E3;
 }
 </style>
 
@@ -155,7 +160,7 @@ function cancel(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-	<h1>아이디 찾기<img id="findLogo" src="resources/img/findIdLogo.png"></h1>
+	<h1>아이디 찾기</h1>
 	
 	<form class="main_head" id="findidform" action="findId.do" method="POST">
 		<div class="sub_head">
@@ -173,7 +178,7 @@ function cancel(){
 			<div class="btn_part">
 				<div>
 					<button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
-					<button type="submit" class="submitBtn" value="취소 " id="cancel" onClick="cancel();">취소</button>
+					<button type="submit" class="submitBtn" id="cancel" value="취소 " onClick="cancel();">취소</button>
 				</div>
 			</div>
 		</div>
