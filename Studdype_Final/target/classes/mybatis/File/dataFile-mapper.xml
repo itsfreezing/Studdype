@@ -18,11 +18,25 @@
   		WHERE B_NO = #{b_no}
   	</select>
   	
-  	<select id="selectFile" parameterType="int">
+  	<select id="selectFile" parameterType="int" resultMap="fileMap">
   		SELECT *
   		FROM DATA_FILE
   		WHERE F_NO = #{f_no}
   	</select>
   	
+  	<insert id="insertFile" parameterType="fileDto" >
+	 	INSERT INTO DATA_FILE 
+		VALUES ( DATAFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM DATA_BOARD ), #{f_name}, #{f_size}, #{f_url} )
+	 </insert>
+	 
+	 <delete id="deleteFile" parameterType="int">
+		DELETE FROM DATA_FILE 
+		WHERE F_NO = #{f_no}
+	 </delete>
+  	
+  	<insert id="insertAddFile" parameterType="fileDto">
+  		INSERT INTO DATA_FILE
+	 	VALUES ( DATAFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+  	</insert>
   	
 </mapper>

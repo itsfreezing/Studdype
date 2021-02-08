@@ -6,8 +6,8 @@
 <html lang="en">
 
 <head>
+<script src="./resources/assets/js/profile.js"></script>
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 function logout_btn(){
    var form = $("#logoutForm");
@@ -26,8 +26,8 @@ $(function() {
    // 해당 메뉴 페이지에 메뉴 active Class 추가
    $("#"+currentMenu).addClass("active");
    
-   $(".feature-page.header-area").css("height", "80px");
-   $(".hero-text-wrapper").css("height", "500px");
+   $(".feature-page.header-area").css("height", "70px");
+   $(".hero-text-wrapper").css("height", "400px");
    $(".nav-link").css("color", "black");
 });
 

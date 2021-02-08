@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,19 +11,18 @@
 <title>학습 자료실</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="./resources/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
-<link rel="stylesheet"
-	href="./resources/css/community/header&footer.css">
+<link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
+
+
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -33,20 +32,21 @@
 <script src="./resources/assets/js/main2.js"></script>
 
 <style type="text/css">
-#boardTitle {
-	margin-bottom:30px;
-}
-
-#BoardList tr:first-child{
+#Boardlist tr:first-child{
 	text-align:center;
 	border-top:1px solid black;
 	font-size:11pt;
 	background:rgb(0,0,0,0.02);
 }
 
-#BoardList tr {
+#Boardlist tr {
 	border-bottom:0.5px solid rgba(0,0,0,0.1);
 	height:50px;
+}
+
+.text1{
+	color: #6434ef;
+	font-weight: bold;
 }
 
 /* 페이징 css  */
@@ -179,34 +179,6 @@
 	border: 0.1px black solid;
 }
 
-/* 공지사항 css */
-.notice_title{
-	color: #ff4e59;
-	font-weight: bold;
-	text-align:left;
-}
-.notice_title a:hover{
-	font-weight: bold;
-	border-bottom: 1px solid #ff4e59;
-	padding-bottom: 3px;
-}
-.notice_tr{
-	background-color: rgb(245,245,245);
-	text-align:center;
-}	
-.notice_tag{
-	padding: 3px 5px;
-	width: 200px;
-	border: 0.5px solid #ffc6c9;
-	background-color: #ffe3e4;
-	color: #ff4e59;
-	height: 35px;
-	display: inline;
-	border-radius: 2px 2px;
-	margin-right: 20px;
-	margin-left:10px;
-}
-
 .data_tr {
 	text-align:center;
 }
@@ -274,7 +246,6 @@
 .open {
 	display:block;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -295,14 +266,6 @@
 			$(".open").removeClass("open");
 		});
 		
-		// 공지사항 파일 다운로드 함수
-		$(".notice_file_attach_div").click(function() {
-			var f_no = $(this).children().first().val();
-			
-			location.href="noticeFileDown.do?f_no="+f_no;
-			
-		});
-		
 		// 학습자료실 파일 다운로드 함수
 		$(".data_file_attach_div").click(function() {
 			var f_no = $(this).children().first().val();
@@ -312,6 +275,7 @@
 		});
 		
 	});
+	
 	// 페이징---------------------- 
 	// 페이지 이동 
 	function movePage(pagenum){
@@ -340,7 +304,6 @@
 			pageform.submit();
 		}
 	}
-	
 	function search_chk(){
 		var keyword = $("#search_keyword");
 		if( keyword.val() == null || keyword.val().trim() == "" ){
@@ -353,16 +316,30 @@
 
 </head>
 <body>
-
-	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
-	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	
-	<!-- 메인 섹션 시작 -->
+	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
+	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>	
+	
 	<div class="main-section">
-		<h3 id="boardTitle">학습 자료실</h3>
+		<h1 style="font-size:20px;" ><span class="text1">'${search.keyword }' </span>	
+		<c:choose>
+			<c:when test="${search.searchType eq 'title_content' }">
+				제목 + 내용 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'title' }">
+				제목 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'content' }">
+				내용 검색결과입니다.
+			</c:when>
+			<c:when test="${search.searchType eq 'writer' }">
+				작성자 검색결과입니다.
+			</c:when>
+		</c:choose>
+		</h1>
 		
-		<!-- 게시판 리스트 게시글 제목 / 첨부 / 작성자 / 작성시간 / 조회수 -->
-		<table id="BoardList">
+		<!-- 보드 --> <!-- 게시글제목 / 작성자 / 작성시간 / 조회수  -->
+		<table id="Boardlist">
 			<col width="600px"><col width="100px"><col width="250px"><col width="150px"><col width="100px">
 			<tr>
 				<th>게시글 제목</th>
@@ -371,43 +348,9 @@
 				<th>작성시간</th>
 				<th>조회수</th>
 			</tr>
-			<c:if test="${not empty noticeList }">
-				<c:forEach var="i" begin="0" end="${noticeList.size()-1 }" step="1">
-					<tr class="notice_tr">
-						<td class="notice_title">
-						<div class="notice_tag">공지</div>
-						<a href="noticedetail.do?b_no=${noticeList.get(i).getB_no() }">${noticeList.get(i).getB_title() }
-						<c:if test="${noticeReplyCntMap.get(noticeList.get(i).getB_no()) != 0}">
-							<span class="td_reply_cnt">[${noticeReplyCntMap.get(noticeList.get(i).getB_no()) }]</span>
-						</c:if>
-						</a>
-						</td>
-						<td class="td_notice_file">
-							<c:if test="${not empty noticeFileMap.get(noticeList.get(i).getB_no()) }">
-								<img class="attach_file_img" src="./resources/img/link-icon.png">
-								<div class="file_entirety_div">
-									<c:forEach var="j" begin="0" end="${noticeFileMap.get(noticeList.get(i).getB_no()).size()-1 }" step="1">
-										<div class="notice_file_attach_div file_div">
-											<input type="hidden" value="${noticeFileMap.get(noticeList.get(i).getB_no()).get(j).getF_no() }">
-											<img class="file_format_img" src="./resources/img/fileFormat/${noticeFileFormatMap.get(noticeList.get(i).getB_no()).get(j) }.png" onError="this.src='./resources/img/fileFormat/nomal.png'">
-											<span class="file_name">${noticeFileMap.get(noticeList.get(i).getB_no()).get(j).getF_name() }</span>
-										</div>
-									</c:forEach>
-									<div class="file_close">닫기</div>
-								</div>
-							</c:if>
-						</td>
-						<td class="td_notice_writer">${noticeMemberMap.get(noticeList.get(i).getB_no()).getMem_id() }(${noticeMemberMap.get(noticeList.get(i).getB_no()).getMem_name() })</td>
-						<td class="td_notice_date"><fmt:formatDate value="${noticeList.get(i).getB_regdate() }" pattern="YYYY.MM.dd"/></td>
-						<td class="td_notice_cnt">${noticeList.get(i).getB_cnt() }</td>
-					</tr>
-				</c:forEach>
-			</c:if>
 			<c:choose>
 				<c:when test="${empty dataList }">
-					<tr class="data_tr">
-						<td colspan="5" style="text-align:center; font-weight:bold;">학습 자료실에 대한 게시글이없습니다.</td>
-					</tr>
+					<td colspan="5" style="text-align:center; font-weight:bold;">검 색 결 과 가 없 습 니 다</td>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="i" begin="0" end="${dataList.size()-1 }" step="1">
@@ -437,13 +380,13 @@
 							<td class="td_data_cnt">${dataList.get(i).getB_cnt() }</td>
 						</tr>
 					</c:forEach>
+					
 				</c:otherwise>
 			</c:choose>
 		</table>
 		
 		<!-- 글쓰기 -->
 		<div style="width: 100%; height: 100px;">
-			<!-- 글쓰기 기능 처리 후 이 주석 삭제 -->
 			<button class="writeBtn" onclick="location.href='dataBoardWriteForm.do'">글 쓰기</button>
 		</div>
 		
@@ -490,9 +433,8 @@
 		</div>		
 		
 	</div>
-	<!-- 메인 섹션 종료 -->
 	
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
-
+	
 </body>
 </html>
