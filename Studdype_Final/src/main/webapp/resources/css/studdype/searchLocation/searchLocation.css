@@ -1,27 +1,45 @@
 @charset "UTF-8";
+.img{
+	position:relative;		
+}
 
+.img .content{
+	 position: absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%);                                                                   
+     font-size:50px;
+     color: white;
+     z-index: 2;
+     text-align: center;
+     font-weight:bold;
+	
+}
 #title{
 	text-align:center;
 }
 #selectLocationSi{
 	width:500px;
-	height:50px;
+	height:50px;	
 }
 #selectLocationGu{
 	width:500px;
 	height:50px;
 }
-.form-control{
+#mainsection{
 	margin-left:40%;
 }
-label{
-	margin-left:40%;
-}
+/* #Search{
+	margin-left:45%;
+	margin-bottom:-3%;
+	margin-top:-5%;
+} */
 #search_btn{
-	margin-left:67%;
+	margin-left:45%;
 	margin-bottom:-1%;
-	margin-top:20px;
+	margin-top:-3%;
 }
+
 button[type=submit]{
 	box-shadow:none;
 	background:none;

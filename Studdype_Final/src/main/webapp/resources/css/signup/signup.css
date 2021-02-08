@@ -1,7 +1,8 @@
 @charset "UTF-8";
 .img{
-	position:relative;	
+	position:relative;		
 }
+
 .img .content{
 	 position: absolute;
      top:50%;
@@ -14,55 +15,58 @@
      font-weight:bold;
 	
 }
+#membergender{
+	font-size:20px;
+	top:5px;
+}
 .idico{
 	color:red;
 	margin-left:3px;
-	margin-top:30px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 }
 .pwico{
 	color:red;
 	margin-left:3px;
-	margin-top:20px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 }
 .mailico{
 	color:red;
 	margin-left:3px;
-	margin-top: 35px;
-	margin-bottom:20px;
+	top:5px;
+	position:relative;
 }
 .numico{
 	color:red;
 	margin-left:3px;
-	margin-top:20px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 }
 .nameico{
 		color:red;
 	margin-left:3px;
-	margin-top:20px;
-	margin-bottom:15px;
-
+	top:5px;
+	position:relative;
 }
 .genderico{
 	color:red;
 	margin-left:3px;
-	margin-top:20px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 
 }
 .rnoico{
 		color:red;
 	margin-left:3px;
-	margin-top:25px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 }
 .phoneico{
 		color:red;
 	margin-left:3px;
-	margin-top:30px;
-	margin-bottom:15px;
+	top:5px;
+	position:relative;
 }
 hr{
    border:1px solid black;

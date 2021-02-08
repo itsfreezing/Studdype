@@ -62,39 +62,46 @@
 		$(function() {
 			// 시 미선택 시 구/군은 숨김 
 			$("#selectLocationGu option").hide();
-
 			// 시 option 선택 시 해당 시에 대한 구/군 리스트 보여주기 (전에 보여준 구/군은 다시 숨김)
 			$("#selectLocationSi").change(function() {
 				var selectSi = $("#selectLocationSi option:selected").val();
-
 				$("#selectLocationGu option").hide();
 				$("." + selectSi).show();
-
 			});
 		});
+		
+		
 function search(){
 	var selectSi=$("#selectLocationSi option:selected").val();
 	var selectGu=$("#selectLocationGu option:selected").val();
+	var form =$("#location");
 	alert(selectSi);
 	alert(selectGu);
-	if(selectSi!=null&&selectGu!=null){
+	if(selectSi!=null||selectGu!=null){
 		
+		form.submit();
+	}else{
+		return false;
 	}
-	return ;
-	
-	
+		
 }
+$(function(){
+	$(".justify-content-center").hide();
+});
 </script>
-
 </head>
 
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	
-	<hr>
+	<div class="img" >
+			  <img src="./resources/img/location.png" style="width:100%;height:100%;">
+		<div class="content">
+			<h3>지역별 검색 </h3>
+		</div>
+	</div>
 	<!-- 스터디 영역 -->
 	<br><br>
-	<form action="studyListLocation.do" method="POST" id="location" onsubmit='return search();'>
+	<form action="studyListLocation.do" method="POST" id="location" >
 		 <div id="mainsection">
 						<label>스터디 지역(시)</label> 
 						<select class="form-control"
@@ -114,12 +121,12 @@ function search(){
 							</c:forEach>
 						</select>
 						<div id="search_btn">
-							<button type="submit" id="Search" name="Search" style="border:none; background-color:white;" >
+							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
 								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
 				</div>
-		</form>
+	
 					<br><br>
 		<div class="container">
 			<div class="row">
@@ -162,7 +169,7 @@ function search(){
 				</c:if>
 			</div>
 		</div>
-
+	</form>
 		
 	<!-- 스터디 리스트 끝 -->
 

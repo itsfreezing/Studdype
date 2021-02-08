@@ -41,35 +41,46 @@ function chkpwd(){
 		$("#chkpw_ok").show();
 		$("#chkpw_no").hide();
 		$("#chkpw").hide();
-		$(".pwico").css("color","#32CD32");
+		$(".pwico").css("color","#19ce60");
 
 	}
 }
 
 function chktel(){
 	var tel=document.getElementById('memberphone').value;
-	if(tel==""||tel==null){
-		$(".phoneico").css("color","red");
-		return false;
-	}else{
-		$(".phoneico").css("color","#32CD32");
-		return false;
+	var b=tel.split("-");
+	if(b.length>2){
+	 if(b[1].length<3){
+	      $(".phoneico").css("color","red");
+	      return false;
+	   }else if(b[2].length<4){
+		   $(".phoneico").css("color","red");
+		   return false;
+	   }else{
+	      $(".phoneico").css("color","#19ce60");
+	      return false;
+	   }
 	}
+	   
 }
+
+
+
+
 function namechk(){
 	var name=document.getElementById('memberName').value;
-	if(name==""||name==null){
+	if(name.length<3){
 		$(".nameico").css("color","red");
 		return false;
 	}else{
-		$(".nameico").css("color","#32CD32");
+		$(".nameico").css("color","#19ce60");
 		return false;
 	}
 }
 function changen(gender){
 	var gender=document.getElementById('membergender').value;
 	if(gender.checked!=null||gender.checked!=""){
-		$(".genderico").css("color","#32CD32");
+		$(".genderico").css("color","#19ce60");
 		return false;
 	}else{
 		$(".genderico").css("color","red");
@@ -106,7 +117,7 @@ function sendmail(){
 	        	  alert("인증번호가 전송되었습니다.");
 	        	  var chkNum_btn=$("#chkNum_btn");
 	        	  var emailInput=$("#memberMail");
-	        	  $(".mailico").css("color","#32CD32");
+	        	  $(".mailico").css("color","#19ce60");
 	        	  emailInput.attr("readonly","readonly");
 	        	  chkNum_btn.removeAttr("disabled");
 	          }
@@ -142,7 +153,7 @@ function chkVerifiNum(){
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
-				$(".numico").css("color","#32CD32");
+				$(".numico").css("color","#19ce60");
 			}
 		} 
 		,
@@ -229,7 +240,7 @@ $(document).ready(function(){
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
-					$(".idico").css("color","#32CD32");
+					$(".idico").css("color","#19ce60");
 					$("#chk").attr("title",'y');
 				}
 				else{
@@ -284,12 +295,12 @@ function num_check(){
       }else{
     	  $("#chknum_ok").show();
 			$("#chknum_no").hide();
-			$(".rnoico").css("color","#32CD32");
+			$(".rnoico").css("color","#19ce60");
 			return false;
       }
   }
-	
-
+</script>
+<script type="text/javascript">
 $(function(){
 	$(".justify-content-center").hide();
 });
@@ -298,8 +309,7 @@ $(function(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<div class="img" >
-			  <img src="./resources/img/loginBanner.png" style="width:1900px; height:470px;">
-			<hr>
+			  <img src="./resources/img/loginBanner.png">
 		<div class="content">
 			<h3>회원가입</h3>
 		</div>
@@ -307,6 +317,7 @@ $(function(){
 
    <div id="signtitle"> 
          <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
+         <br>
 	   <table>
 			   <tr>
 					<th align="right" width="100">
@@ -452,9 +463,9 @@ $(function(){
             			성별<span class="genderico" style="font-size:20px;text-align:center;">*</span>
             		</th>
             		<td>
-	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">M
+	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">&nbsp;&nbsp;Man&nbsp;
 	            		&nbsp;&nbsp;&nbsp;
-	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="F" onclick="changen(this.value);">F
+	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="F" onclick="changen(this.value);">&nbsp;&nbsp;Woman&nbsp;
             		</td>
                 </tr>  
              	<tr>
