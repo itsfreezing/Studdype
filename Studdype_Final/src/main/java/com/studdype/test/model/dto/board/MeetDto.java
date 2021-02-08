@@ -170,5 +170,16 @@ public class MeetDto {
 		this.meet_cnt = meet_cnt;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "MeetDto [meet_no=" + meet_no + ", s_no=" + s_no + ", meet_title=" + meet_title + ", meet_writer="
+				+ meet_writer + ", meet_content=" + meet_content + ", meet_addr=" + meet_addr + ", meet_addr_detail="
+				+ meet_addr_detail + ", meet_date=" + meet_date + ", meet_time=" + meet_time + ", meet_regdate="
+				+ meet_regdate + ", vote_startdate=" + vote_startdate + ", vote_enddate=" + vote_enddate + ", meet_cnt="
+				+ meet_cnt + ", keyword=" + keyword + "]";
+	}
+
 	
 }
