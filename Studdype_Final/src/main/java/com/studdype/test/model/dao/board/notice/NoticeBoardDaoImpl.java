@@ -155,7 +155,6 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"recentListForStudyHome", s_no);
-			System.out.println("noticeImpl: "+s_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR][NoticeBoardDaoImpl] recentListForStudyHome");
 			e.printStackTrace();
