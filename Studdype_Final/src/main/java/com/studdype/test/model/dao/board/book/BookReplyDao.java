@@ -10,7 +10,6 @@ public interface BookReplyDao {
 	String NAMESPACE = "bookReply.";
 	
 	public List<ReplyDto> selectBookReplyList(int b_no);
-	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList);
 	public ReplyDto selectOne(int r_no); // 댓글 번호로 댓글 정보 가져오기
 	public List<ReplyDto> selectGroupReplyList(int r_groupNo); // 그룹 번호로 해당 그룹 댓글 리스트 가져오기
 	public int deleteReply(int r_no); // 댓글 삭제

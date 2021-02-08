@@ -32,11 +32,6 @@ public class BookReplyDaoImpl implements BookReplyDao {
 	}
 
 	@Override
-	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList) {
-		return null;
-	}
-
-	@Override
 	public ReplyDto selectOne(int r_no) {
 		ReplyDto reply = null;
 		try {

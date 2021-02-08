@@ -151,6 +151,15 @@ p.tab_p{
 	left:10%;
 }
 
+.content p{
+	display:inline; 
+	font-size:20px; 
+	font-weight:bold; 
+	position:absolute; 
+	top:44.7%; 
+	left:40%;
+}
+
 .popupInput{
 	position:absolute; 
 	top:45%; 

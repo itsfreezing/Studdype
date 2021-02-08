@@ -2,15 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>스터띱 스터디 생성</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
@@ -34,9 +30,12 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 
-<script type="text/javascript">
-	var sel_files = [];
+<!-- summernote css / js -->
+<link rel="stylesheet" href="./resources/summernote/summernote.min.css">
+<script src="./resources/summernote/summernote.min.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
+<script type="text/javascript">
 	$(function() {
 		// 시 미선택 시 구/군은 숨김 
 		$("#selectLocationGu option").hide();
@@ -60,7 +59,7 @@
 			var maxcnt = $(this).val();
 			if(isNaN(maxcnt)) {
 				alert("숫자만 입력하세요.");
-				$("input#maxcnt_id").css('border', '3px solid red');
+				$("input#maxcnt_id").css('border', '1px solid red');
 				$(this).val("");
 			}else {
 				$(this).css('border', '1px solid #ced4da');
@@ -70,13 +69,13 @@
 		/////////////// border 값 및 값 비우기 처리 함수////////////////////////
 		// 최대인원
 		$("#maxcnt_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 			$(this).val("");
 		});
 		
 		// 스터디 이름 
 		$("#mem_name_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 			$(this).val("");
 		});
 		$("#mem_name_id").focusout(function() {
@@ -85,7 +84,7 @@
 		
 		// 한줄 소개
 		$("#info_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#info_id").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -93,7 +92,7 @@
 		
 		// 카테고리
 		$("#category_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#category_id").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -101,7 +100,7 @@
 		
 		// 지역 (시)
 		$("#selectLocationSi").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#selectLocationSi").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
@@ -109,31 +108,31 @@
 		
 		// 지역(구)
 		$("#selectLocationGu").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+			$(this).css('border', '1px solid #6610f2');
 		});
 		$("#selectLocationGu").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
 		});
 		
 		// 상세 소개글
-		$("#content_id").focusin(function() {
-			$(this).css('border', '3px solid #6610f2');
+		$("#summernote").focusin(function() {
+			$(this).css('border', '1px solid #6610f2');
 		});
-		$("#content_id").focusout(function() {
+		$("#summernote").focusout(function() {
 			$(this).css('border', '1px solid #ced4da');
 		});
 		///////////////////////////////////////////////////////////////
 		
-		// 네비 메뉴 이름 가져오기
-		var currentMenu = $("#currentMenu").val();
-		var menuName = $("#"+currentMenu+" .nav-link").text().trim();
-		
-		// 헤더 메뉴 선택 시 h1태그 이름 변경
-		$(".hero-text").html("<h1>"+menuName+"</h1>");
+		// 스터디 생성 문구 생성
+		$(".hero-text").html("<h1>스터디 생성</h1>");
 		
 		// 스터디 생성에 맞는 이미지 가져오기
-		$(".justify-content-center").css({"background-image":"url('resources/img/createStudy.png')"
-									,"background-size":"cover"});
+		$(".justify-content-center").css({
+			"background-image":"url('resources/img/createstudy2.png')",
+			"background-size":"cover",
+			"background-position":"center",
+			"height":"450px"
+		});
 		
 		// file hide하고 div 영역 클릭 시 이벤트 양도
 		$("#fileinput").hide();
@@ -167,6 +166,38 @@
 			$("#basicPhoto").val(image);
 			$("#modal").hide();
 		});
+		
+		// 서머노트 양식
+		 $('#summernote').summernote({
+			 toolbar: [
+				    // [groupName, [list of button]]
+				    ['fontname', ['fontname']],
+				    ['fontsize', ['fontsize']],
+				    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				    ['color', ['forecolor','color']],
+				    ['table', ['table']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']],
+				    ['insert',['picture','link','video']],
+				    ['view', ['fullscreen', 'help']]
+				  ],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+				fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+				height: 450,
+				width : 1000,
+				minHeight: null,
+				maxHeight: null,
+				focus: true,
+				lang: "ko-KR",
+				disableResizeEditor: true,
+				callbacks: {
+					onImageUpload : function(files){
+						sendFile(files[0],this);
+					}
+				}
+					
+			});
+		
 	});
 	
 	// 이미지 미리보기 함수
@@ -203,40 +234,40 @@
 		var locationSi = $("#selectLocationSi option:selected").val();
 		var locationGu = $("#selectLocationGu option:selected").val();
 		var maxcnt = $("#maxcnt_id").val();
-		var content = $("#content_id").val();
+		var content = $("#summernote").val();
 		var img = $("#image_section").attr("src");
 		var imgSection = $("#image-section").html();
 		
 		if(mem_name.trim() == "" || mem_name == null || mem_name == undefined || mem_name.trim().length > 30 ||
 						( mem_name != null && typeof mem_name == "object" && !Object.keys(mem_name).length )) {
-			$("#mem_name_id").css('border', '1.5px solid red');
+			$("#mem_name_id").css('border', '1px solid red');
 			alert("스터디 이름 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
-		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 30 ||
+		}else if(info.trim() == "" || info == null || info == undefined || info.trim().length > 50 ||
 				( info != null && typeof info == "object" && !Object.keys(info).length )) {
-			$("#info_id").css('border', '1.5px solid red');
-			alert("스터디 한줄 소개 작성란을 확인해주세요.(30자 이내, 공백, 띄어쓰기만 제외)");
+			$("#info_id").css('border', '1px solid red');
+			alert("스터디 한줄 소개 작성란을 확인해주세요.(50자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if(category == "카테고리 분류") {
-			$("#category_id").css('border', '1.5px solid red');
+			$("#category_id").css('border', '1px solid red');
 			alert("스터디 카테고리를 선택해주세요.");
 			return false;
 		}else if(locationSi == "(시 단위)") {
-			$("#selectLocationSi").css('border', '1.5px solid red');
+			$("#selectLocationSi").css('border', '1px solid red');
 			alert("스터디 지역(시)을 선택해주세요.");
 			return false;
 		}else if(locationGu == "(구/군 단위)") {
-			$("#selectLocationGu").css('border', '1.5px solid red');
+			$("#selectLocationGu").css('border', '1px solid red');
 			alert("스터디 지역(구/군)을 선택해주세요.");
 			return false;
 		}else if(maxcnt == "" || maxcnt == null || maxcnt == undefined || 
 				( maxcnt != null && typeof maxcnt == "object" && !Object.keys(maxcnt).length )) {
-			$("#maxcnt_id").css('border', '1.5px solid red');
+			$("#maxcnt_id").css('border', '1px solid red');
 			alert("스터디 최대 인원 작성란을 작성해주세요.");
 			return false;
 		}else if(content.trim() == "" || content == null || content == undefined || content.trim().length > 1000 ||
 				( content != null && typeof content == "object" && !Object.keys(content).length )) {
-			$("#content_id").css('border', '1.5px solid red');
+			$("#summernote").css('border', '1px solid red');
 			alert("스터디 상세 소개글 작성란을 확인해주세요.(1000자 이내, 공백, 띄어쓰기만 제외)");
 			return false;
 		}else if( img =="./resources/assets/img/icon_photoUpload.png" ) {
@@ -251,9 +282,33 @@
 		
 	} // submit 종료
 	
+	// 서머노트 파일 저장
+	function sendFile(file, editor){
+		var data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "summernoteImgUpload.do",
+			enctype: 'multipart/form-data',
+			contentType : false,
+			processData : false,
+			success : function(data){
+				var url = decodeURIComponent(data);
+				console.log(data);
+				console.log(url);
+				$(editor).summernote('editor.insertImage',url);
+			},
+			error: function(){
+				alert("서머노트 이미지 업로드 실패");
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
+
 	<jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<!--main conternt 섹션-->
@@ -276,7 +331,7 @@
 							name="s_info" placeholder="스터디 한줄 소개" id="info_id">
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 카테고리</label><select class="form-control" id="category_id"
 							name="cate_no">
 							<option>카테고리 분류</option>
@@ -286,7 +341,7 @@
 						</select>
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 지역(시)</label> <select class="form-control"
 							name="si_no" id="selectLocationSi">
 							<option>(시 단위)</option>
@@ -296,7 +351,7 @@
 						</select>
 					</div>
 
-					<div>
+					<div style="margin-bottom: 1rem;">
 						<label>스터디 지역(구/군)</label> <select class="form-control"
 							name="gu_no" id="selectLocationGu">
 							<option>(구/군 단위)</option>
@@ -339,14 +394,13 @@
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 				<div id="mainbottom">
 					<label>스터디 상세 소개글</label>
-					<textarea class="form-control" rows="10" cols="3" name="s_content" id="content_id"
-						placeholder="스터디 상세 소개글"></textarea>
+					<textarea id="summernote" rows="5" name="s_content" style="width:100%; height:250px;"></textarea>
 				</div>
 				<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			</div>
 			<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 			<div id="btndiv">
-				<button type="submit" class="submitBtn">스터디 생성</button>
+				<input type="submit" id="createBtn" value="스터디 생성">
 			</div>
 		</form>
 
@@ -367,6 +421,6 @@
 		</div>
 	</div>
 
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

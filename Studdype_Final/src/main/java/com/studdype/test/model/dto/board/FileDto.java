@@ -62,6 +62,7 @@ public class FileDto {
 		this.f_url = f_url;
 	}
 
+
 	public double getF_size() {
 		return f_size;
 	}
@@ -111,6 +112,13 @@ public class FileDto {
 
 	public void setPhoto_ismain(String photo_ismain) {
 		this.photo_ismain = photo_ismain;
+	}
+
+
+	@Override
+	public String toString() {
+		return "FileDto [f_no=" + f_no + ", b_no=" + b_no + ", f_name=" + f_name + ", f_size=" + f_size + ", f_url="
+				+ f_url + ", photo_ismain=" + photo_ismain + "]";
 	}
 	
 	

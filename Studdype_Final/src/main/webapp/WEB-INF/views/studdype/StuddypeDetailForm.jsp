@@ -22,26 +22,55 @@
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+<script src="./resources/assets/js/popper.min.js"></script>
+<script src="./resources/assets/js/bootstrap.min.js"></script>
+<script src="./resources/assets/js/owl.carousel.min.js"></script>
+<script src="./resources/assets/js/modal-video.js"></script>
+<script src="./resources/assets/js/main.js"></script>
 
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-body,html {
-	height:2000px;
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+    text-align:center;
+    font-size:12pt;
+    z-index:3;
 }
+
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 1;
+    
+    /* 변경가능 */
+    background: #fff;
+    border:1px solid black;
+    margin-top: 40px;
+    margin-left: 1px;    
+}
+
 #main-location {
-	position:relative;
-	top:-20px;
-	width:100%;
-	height:100%;
-	font-family:Noto Sans;
-	background:#ebebeb;
+    position: relative;
+    width: 100%;
+    font-family: Noto Sans;
+    background: #ebebeb;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /* 스터디 소개 전체 영역 */
 #main-content-section {
 	position:relative;
 	width:50%;
-	height:100%;
 	left:25%;
 	margin:1%;
 	background:#fff;
@@ -52,15 +81,12 @@ body,html {
 #study-photo-section {
 	position:relative;
 	width:100%;
-	height:450px;
-	border-bottom:1px solid gray;
-	padding:10px 0 10px 0;
 	text-align:center;
 }
 
 #mainPhoto {
 	width:100%;
-	height:100%;
+	height:400px;
 	background:#fff;
 }
 
@@ -68,13 +94,12 @@ body,html {
 #study-content-section {
 	position:relative;
 	width:100%;
-	height:700px;
 	padding:2% 5% 2% 5%;
 }
 
 #content-title {
 	text-align:center;
-	border-bottom:1px solid gray;
+	border-bottom:1px solid rgba(0,0,0,0.2);
 	padding-bottom:2%;
 }
 
@@ -96,13 +121,17 @@ body,html {
 
 #content-detail {
 	margin-top:2%;
-	text-align:center;
 	padding-bottom:3%;
-	border-bottom:1px solid gray;
+	border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+#content-detail label {
+	position:relative;
+	left:45%;
 }
 
 #study-detail-section {
-	border-bottom:1px solid gray;
+	border-bottom:1px solid rgba(0,0,0,0.2);
 }
 
 .table-style {
@@ -115,7 +144,6 @@ body,html {
 #content-detail pre{
 	margin-top:10px;
 	width:100%;
-	text-align:center;
 	font-size:14pt;
 	font-weight:700;
 	font-family: "Noto Sans KR", sans-serif !important;
@@ -124,7 +152,6 @@ body,html {
 #content-book {
 	padding-top:2%;
 	text-align:center;
-	border-bottom:1px solid gray;
 	padding-bottom:2%;
 }
 #content-book p {
@@ -137,7 +164,7 @@ body,html {
 	top:35%;
 	left:80%;
 	width:13%;
-	height:300px;
+	height:auto;
 	border-radius:5px;
 	background:#fff;
 }
@@ -145,7 +172,7 @@ body,html {
 /* 신청 정보 영역(상단) */
 #apply-top-section {
 	width:100%;
-	height:80%;
+	height:auto;
 	padding:5%;
 	text-align:center;
 }
@@ -153,8 +180,8 @@ body,html {
 /* 신청 영역(하단) */
 #apply-bottom-section {
 	width:100%;
-	height:20%;
-	padding:5%;
+	height:auto;
+	padding:0% 5% 5% 5%;
 }
 
 .apply-section {
@@ -168,10 +195,7 @@ body,html {
 #fixed-study-name {
 	height:60%;
 	border-bottom:1px solid gray;
-}
-
-#fixed-study-name span{
-	vertical-align: middle;
+	padding-bottom:10px;
 }
 
 #study-cnt {
@@ -182,7 +206,7 @@ body,html {
 
 #apply-button {
 	width:100%;
-	height:100%;
+	height:30px;
 	background:rgba(138, 109, 255, 1);
 	cursor:pointer;
 	font-weight:bolder;
@@ -200,9 +224,21 @@ body,html {
 	font-weight:700;
 }
 
-#mainBook {
-	width:20%;
-	height:200px;
+#mainBook_table {
+	position:relative;
+	width:100%;
+}
+
+#mainBook_table td {
+	text-align:left;
+}
+
+#book_title_td {
+	font-size:20pt; 
+	font-weight:bold;
+	white-space : nowrap;
+	text-overflow : ellipsis;
+	overflow:hidden;
 }
 
 </style>
@@ -214,10 +250,6 @@ body,html {
 		// 대표사진 불러오기 함수
 		imageSetting();
 		
-		$("body").css("height", "");
-		
-		var content = $("#pre-study-info").text();
-		
 	});
 	
 	// 대표사진 src 형식에 맞추기 함수
@@ -225,6 +257,10 @@ body,html {
 		var imgPath = $("#img_url").val();
 		
 		$("#mainPhoto").attr("src", imgPath);
+		
+		if(!$("#content-book").length) {
+			$("#study-detail-section").css("border", "none");
+		}
 	}
 	
 	function studyApply() {
@@ -241,7 +277,7 @@ body,html {
 	<!-- 스터디 신청 시 필요한 스터디 번호 히든 처리 -->
 	<input type="hidden" id="s_no" value="${study.getS_no() }">
 	
-	<div id="main-location">
+ 	<div id="main-location">
 		<div id="main-content-section">
 			<div id="study-photo-section">
 				<input type="hidden" id="img_url" value="${study.getPhoto() }">
@@ -270,8 +306,8 @@ body,html {
 						<tr>
 							<th>지역</th>
 							<td>${studySi.get(study.getSi_no()) } ${studyGu.get(study.getGu_no()) }</td>
-							<th>인원</th>
-							<td>${study.getS_maxcnt() }인 이하</td>
+							<th>현재 인원/최대인원</th>
+							<td>${study.getS_currentcnt() }/${study.getS_maxcnt() }</td>
 							
 						</tr>
 						<tr>
@@ -305,13 +341,37 @@ body,html {
 					<div id="content-book">
 					<!-- 도서 정보 -->
 					<p class="label-title">현재 스터디 대표 도서</p>
-					<a href="${mainBook.getBook_url() }" target="_blank"><img id="mainBook" src="${mainBook.getBook_img() }"></a>
-					<p>${mainBook.getBook_title() }</p>
-				</div>
+					<table id="mainBook_table">
+						<col width="200px"><col width="100px">
+						<tr>
+							<th rowspan="5"><img id="mainBook" src="${mainBook.getBook_img() }"></th>
+							<td id="book_title_td" colspan="2" tooltip='${mainBook.getBook_title() }' tooltip-persistent data-backdrop='static' >${mainBook.getBook_title()}</td>
+						</tr>
+						<tr>
+							<th>저자&nbsp;</th>
+							<td>${mainBook.getBook_author() }</td>
+						</tr>
+						<tr>
+							<th>출판사&nbsp;</th>
+							<td>${mainBook.getBook_publish() }</td>
+						</tr>
+						<tr>
+							<th>링크&nbsp;</th>
+							<td>
+								<a href="${mainBook.getBook_url() }" target="_blank">
+									<img style="width:20px; height:20px;" src='resources/img/link-icon.png'>
+								</a>
+							</td>
+						</tr>
+					</table>
+					</div>
 				</c:if>
 			</div>
 		</div>
-		<div id="fixed-apply-seciton">
+		
+	</div> 
+	
+	<div id="fixed-apply-seciton">
 			<div id="apply-top-section">
 				<div class="apply-section" id="fixed-study-name">
 					<span>${study.getS_name() }</span>
@@ -324,14 +384,8 @@ body,html {
 				<button id="apply-button" onclick="studyApply();">스터디 신청</button>
 			</div>
 		</div>
-	</div>
 	
-	<jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	
-	<script src="./resources/assets/js/popper.min.js"></script>
-	<script src="./resources/assets/js/bootstrap.min.js"></script>
-	<script src="./resources/assets/js/owl.carousel.min.js"></script>
-	<script src="./resources/assets/js/modal-video.js"></script>
-	<script src="./resources/assets/js/main.js"></script>
 </body>
 </html>

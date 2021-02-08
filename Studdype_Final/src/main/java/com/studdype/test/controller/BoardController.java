@@ -407,13 +407,14 @@ public class BoardController {
 	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session, MeetDto dto) {
 		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
 		logger.info("calendar");
-
 		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
+		MeetDto dtos = meetBiz.selectOneMeetBoard(dto.getMeet_no());
+		System.out.println(meetList.get(0).toString());
 		Map<String, Object> calendarMap = new HashMap<String, Object>();
 		
 		
 		calendarMap.put("meetList", meetList);
-		
+		calendarMap.put("dtos", dtos);
 		return calendarMap;
 	}
 		
