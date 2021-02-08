@@ -19,6 +19,48 @@
   	WHERE S_NO = #{s_no}
   </select>
   
+  <select id="selectTotalBoardNumOfSearch" parameterType="hashMap" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM DATA_BOARD
+  	WHERE S_NO = #{s_no}
+  	<include refid="search_all"></include>
+  </select>
+  
+  	<select id="selectPagingSearchBoardList" parameterType="hashMap" resultMap="dataMap">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+			FROM
+			(
+				SELECT ROWNUM N, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+				FROM DATA_BOARD
+				WHERE S_NO = #{s_no} ]]> <include refid="search_all"></include> <![CDATA[
+				ORDER BY B_NO DESC
+			)
+			WHERE N >= #{startRow} AND N <= #{endRow}
+		]]>
+		
+	</select>
+	
+	<sql id="search_all">
+		<if test="searchType eq 'title_content' ">
+			AND (B_TITLE LIKE '%' || #{keyword} || '%'  OR CONTAINS(B_CONTENT, '%'|| #{keyword} ||'%') > 0)
+		</if>
+		<if test="searchType eq 'title' ">
+			AND B_TITLE LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="searchType eq 'content' ">
+			 AND CONTAINS(B_CONTENT, '%'|| #{keyword} ||'%') > 0
+		</if>
+		<if test="searchType eq 'writer' ">
+			AND B_WRITER =
+			(
+				SELECT MEM_NO FROM MEMBER WHERE MEM_ID LIKE '%'||#{keyword}||'%' OR MEM_NAME LIKE '%'|| #{keyword} ||'%'
+			)
+			
+		</if>		
+	</sql>
+	<!-- 검색 -->
+  
   <select id="selectPagingBoardList" parameterType="hashMap" resultMap="dataMap">
 		<![CDATA[
 			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
@@ -32,5 +74,32 @@
 			WHERE N >= #{startRow} AND N <= #{endRow}
 		]]>
 	</select>
+	
+	<update id="updateCnt" parameterType="int">
+		UPDATE DATA_BOARD 
+		SET B_CNT = B_CNT + 1
+		WHERE B_NO = #{b_no}
+	</update>
+	
+	<select id="selectOne" parameterType="int" resultMap="dataMap">
+		SELECT *
+		FROM DATA_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM DATA_BOARD 
+		WHERE B_NO = #{b_no}
+	</delete>
+	
+	<insert id="insertBoard" parameterType="boardDto">
+		INSERT INTO DATA_BOARD
+		VALUES(DATABOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<update id="updateBoard" parameterType="boardDto">
+		UPDATE DATA_BOARD
+		SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
   
 </mapper>

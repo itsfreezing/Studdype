@@ -85,10 +85,10 @@ public class StudyController {
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-			
-		for(int i=0; i<studyList.size(); i++) {
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-		}
+//			
+//		for(int i=0; i<studyList.size(); i++) {
+//				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+//		}
 			
 		
 		model.addAttribute("pageMaker", pageMaker);
@@ -368,18 +368,6 @@ public class StudyController {
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int brCnt = 40;
 		StudyDto studyDto = studyBiz.selectOneBySno(s_no);	// 스터디 정보
-		if(studyDto.getS_content().length() > brCnt) {
-			String oldStr = studyDto.getS_content().replace("\r\n", "");
-			StringBuffer origin = new StringBuffer(oldStr);
-			int br = origin.length() / brCnt;
-			
-			for(int i = 0; i < br; i++) {
-				origin.insert(brCnt, "<br>");
-				brCnt += 40;
-			}
-			studyDto.setS_content(origin.toString());
-		}
-		
 		studyDto.setPhoto(fileHandler.getFileName(studyDto.getPhoto(), "Studdype_Final"));
 		
 		MemberDto memberDto = memberBiz.selectOne(studyDto.getLeader_no());	// 스터디 팀장 정보
