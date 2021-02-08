@@ -88,4 +88,14 @@
 		]]>
 	</select>
 	
+	<select id="recentListForStudyHome" parameterType="int" resultMap="boardMap">
+		<![CDATA[
+			SELECT *
+			FROM NOTICE_BOARD 
+			WHERE S_NO = #{s_no}
+			AND ROWNUM <= 3
+			ORDER BY B_NO DESC
+		]]>
+	</select>
+	
 </mapper>  		

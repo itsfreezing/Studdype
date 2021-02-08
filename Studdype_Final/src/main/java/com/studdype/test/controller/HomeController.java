@@ -373,7 +373,8 @@ public class HomeController {
 		String leaderName = studyBiz.leaderNameForStudyHome(study.getLeader_no());
 		String guName = studyBiz.guNameForStudyHome(study.getGu_no());
 		String siName = studyBiz.siNameForStudyHome(study.getSi_no());
-		List<BoardDto> noticeList = studyBiz.selectNoticeBoard(study.getS_no()); 
+		List<BoardDto> noticeList = studyBiz.recentListForStudyHome(study.getS_no()); 
+		System.out.println("noticeList: "+noticeList);
 		// DB에 저장된 사진이 없을 때 
 		// null 값으로 넣으면 nullPointerException 발생
 		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력
