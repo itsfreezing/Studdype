@@ -77,12 +77,26 @@ function search(){
 	var form =$("#location");
 	alert(selectSi);
 	alert(selectGu);
-	if(selectSi!=null||selectGu!=null){
-		
-		form.submit();
-	}else{
-		return false;
-	}
+	var locationVal={
+			"selectSi":selectSi,
+		 	"selectGu":selectGu 
+	};
+	$.ajax({
+		url:"studyListLocation.do",
+		data:locationVal,
+		type:"GET",
+		contentType:"application/json",
+		dataType:"json",
+		success:function(data){	
+			if(data!=null){
+				
+				form.submit();
+			}
+		},error:function(){
+			alert("통신fail");
+		}
+	});
+	
 		
 }
 $(function(){
@@ -103,6 +117,7 @@ $(function(){
 	<br><br>
 	<form action="studyListLocation.do" method="POST" id="location" >
 		 <div id="mainsection">
+		 		<div id="si">
 						<label>스터디 지역(시)</label> 
 						<select class="form-control"
 							name="si_no" id="selectLocationSi" >
@@ -111,6 +126,8 @@ $(function(){
 								<option value="${locationsi.si_no}">${locationsi.si_name }</option>
 							</c:forEach>
 						</select>
+				</div>
+				<div id="gu">
 						<label>스터디 지역(구/군)</label> 
 						<select class="form-control"
 							name="gu_no" id="selectLocationGu" >
@@ -120,13 +137,15 @@ $(function(){
 									value="${locationgu.gu_no }">${locationgu.gu_name }</option>
 							</c:forEach>
 						</select>
+				</div>
 						<div id="search_btn">
 							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
 								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
 				</div>
-	
+		</form>
+			
 					<br><br>
 		<div class="container">
 			<div class="row">
@@ -169,7 +188,6 @@ $(function(){
 				</c:if>
 			</div>
 		</div>
-	</form>
 		
 	<!-- 스터디 리스트 끝 -->
 

@@ -44,8 +44,6 @@ public class StudyController {
 	private static final Logger logger = LoggerFactory.getLogger(StudyController.class);
 	private final static int pageSize = 15; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
-	private int si_no;
-	private int gu_no;
 	@Autowired
 	private StudyBiz studyBiz;
 	@Autowired
@@ -463,7 +461,7 @@ public class StudyController {
 		return "studdype/searchByCategory";
 	}
 	//지역별 검색 
-	@RequestMapping(value = "/studyListLocation.do", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/studyListLocation.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String SearchLocation(Model model,StudyDto studyDto,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
@@ -485,11 +483,6 @@ public class StudyController {
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-		
-		for(int i=0; i<studyList.size(); i++) {
-			studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-		}
-		
 	
 		model.addAttribute("sidto", sidto);
 		model.addAttribute("gudto", gudto);
