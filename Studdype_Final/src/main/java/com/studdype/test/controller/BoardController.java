@@ -409,7 +409,7 @@ public class BoardController {
 		logger.info("calendar");
 		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
 		MeetDto dtos = meetBiz.selectOneMeetBoard(dto.getMeet_no());
-		
+		System.out.println(meetList.get(0).toString());
 		Map<String, Object> calendarMap = new HashMap<String, Object>();
 		
 		
