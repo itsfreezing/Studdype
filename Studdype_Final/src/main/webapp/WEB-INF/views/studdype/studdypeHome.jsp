@@ -53,7 +53,7 @@
 		$(".justify-content-center").hide(); 
 	});
 /* 	
-	$(document).on('click', '#btnSearch', function(e){
+	$(document).on('pclick', '#btnSearch', function(e){
 		e.preventDefault();
 		var url = "${studyList}";
 		url = url + "?searchType=" + $('#searchType').val();
@@ -82,7 +82,11 @@ input#search:focus {
 .feature-page.header-area {
 	height: 80px;
 }
-
+.blogpost-area{
+	background: #ffff;
+	margin-left: 5%;
+	margin-right: 5%;
+}
 </style>
 
 </head>
@@ -146,7 +150,7 @@ input#search:focus {
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
-								<h3>${studyDto.s_name}</h3>
+								<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
 								<br> <span><img
 									src="./resources/assets/img/profile_placeholder.png"
 									style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;

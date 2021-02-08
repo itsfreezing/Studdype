@@ -88,7 +88,7 @@
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
-	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
+<!-- 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
 		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
       				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
@@ -99,5 +99,5 @@
 	</select>
 	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
 		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
-	</select>
+	</select> -->
 </mapper>
