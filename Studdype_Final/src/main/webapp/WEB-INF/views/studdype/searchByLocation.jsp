@@ -81,17 +81,16 @@ function search(){
 			"selectSi":selectSi,
 		 	"selectGu":selectGu 
 	};
+
 	$.ajax({
 		url:"studyListLocation.do",
 		data:locationVal,
+		async:false, 
 		type:"GET",
 		contentType:"application/json",
 		dataType:"json",
 		success:function(data){	
-			if(data!=null){
-				
-				form.submit();
-			}
+			form.submit();
 		},error:function(){
 			alert("통신fail");
 		}
@@ -108,7 +107,7 @@ $(function(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<div class="img" >
-			  <img src="./resources/img/location.png" style="width:100%;height:100%;">
+			  <img src="./resources/img/location.png" style="width:100%;height:500px;">
 		<div class="content">
 			<h3>지역별 검색 </h3>
 		</div>
