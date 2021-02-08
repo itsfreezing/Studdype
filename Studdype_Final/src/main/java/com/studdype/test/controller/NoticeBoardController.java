@@ -170,13 +170,14 @@ public class NoticeBoardController {
 		@RequestMapping(value = "/noticeBoardDelete.do", method = RequestMethod.GET)
 		public String noticeBoardDelete(HttpServletRequest request, Model model) {
 			int b_no = Integer.parseInt(request.getParameter("b_no"));
-
+			StudyDto study = (StudyDto) request.getSession().getAttribute("study"); // 현재 클릭된 스터디
 			int res = noticeBiz.deleteBoard(b_no);
 			
 						
 			
 			if (res > 0) {
-				return "community/communityHome";
+				//return "community/communityHome";
+				return "redirect:studycommunity.do?s_no=" + study.getS_no();
 			} else {
 				model.addAttribute("msg", "글 삭제 실패!!");
 				model.addAttribute("url", "noticedetail.do?b_no=" + b_no);
