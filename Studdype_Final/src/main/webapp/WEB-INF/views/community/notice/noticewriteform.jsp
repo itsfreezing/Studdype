@@ -41,7 +41,7 @@
 <!-- summernote css / js -->
 <link rel="stylesheet" href="./resources/summernote/summernote.min.css">
 <script src="./resources/summernote/summernote.min.js"></script>
-<script src="./resources/summernote/summernote-ko-KR.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
 
 <script type="text/javascript" >

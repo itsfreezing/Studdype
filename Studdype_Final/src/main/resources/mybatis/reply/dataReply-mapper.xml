@@ -9,4 +9,59 @@
 		FROM DATA_REPLY
 		WHERE B_NO = #{b_no}
 	</select>
+	
+	<select id="selectDataReplyList" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM DATA_REPLY
+		WHERE B_NO = #{b_no} ORDER BY R_GROUPNO, R_ORDER
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="replyDto">
+		SELECT *
+		FROM DATA_REPLY
+		WHERE R_NO = #{r_no}
+	</select>
+	
+	<select id="selectGroupReplyList" parameterType="int" resultType="replyDto">
+		SELECT * 
+		FROM DATA_REPLY
+		WHERE R_GROUPNO = #{r_groupNo}
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM DATA_REPLY WHERE R_NO = #{r_no}
+	</delete>
+	
+	<update id="deleteParentReply" parameterType="int">
+		UPDATE DATA_REPLY SET R_CLASS = -1 WHERE R_NO = #{r_no}
+	</update>
+	
+	<insert id="insertReply" parameterType="replyDto">
+		INSERT INTO DATA_REPLY
+		VALUES(DATAREPLYSEQ.NEXTVAL, #{b_no}, DATAGROUPSEQ.NEXTVAL, 0, 0, #{r_writer}, #{r_comment}, SYSDATE)
+	</insert>
+	
+	<update id="updateReply" parameterType="replyDto">
+		UPDATE DATA_REPLY
+		SET R_COMMENT = #{r_comment}, R_REGDATE = SYSDATE 
+		WHERE R_NO = #{r_no}
+	</update>
+	
+	<insert id="insertRecomment" parameterType="replyDto">
+		INSERT INTO DATA_REPLY
+		VALUES(
+			DATAREPLYSEQ.NEXTVAL,
+			#{b_no},
+			(SELECT R_GROUPNO FROM DATA_REPLY WHERE R_NO = #{r_no}),
+			1,
+			(SELECT MAX(R_ORDER) FROM DATA_REPLY WHERE R_GROUPNO = (SELECT R_GROUPNO FROM DATA_REPLY WHERE R_NO = #{r_no})) + 1,
+			#{r_writer},
+			#{r_comment},
+			SYSDATE
+		)
+	</insert>
+	
+	<delete id="deleteBoardReply" parameterType="int">
+		DELETE FROM DATA_REPLY WHERE B_NO = #{b_no}
+	</delete>
 </mapper>

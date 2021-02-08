@@ -30,6 +30,7 @@ public class DataFileDaoImpl implements DataFileDao{
 				resMap.put(dataList.get(i).getB_no(), fileList);
 			}
 		} catch (Exception e) {
+			System.out.println("[ERROR] : selectBoardFileList");
 			e.printStackTrace();
 		}
 		
@@ -41,13 +42,83 @@ public class DataFileDaoImpl implements DataFileDao{
 		FileDto resDto = new FileDto();
 		
 		try {
-			resDto = sqlSession.selectOne(NAMESPACE+"selectFile");
+			resDto = sqlSession.selectOne(NAMESPACE+"selectFile", f_no);
 		} catch (Exception e) {
 			System.out.println("[ERROR] : selectFile");
 			e.printStackTrace();
 		}
 		
 		return resDto;
+	}
+
+	@Override
+	public List<FileDto> selectAttachFileList(int b_no) {
+		List<FileDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectAttachFileList", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectAttachFileList");
+			e.printStackTrace();
+		}
+		
+		return resList;
+	}
+
+	@Override
+	public int insertFile(List<FileDto> fileList) {
+		int res = 0;
+		int resCnt = 0;
+		
+		try {
+			for(int i = 0 ; i < fileList.size() ; i++) {
+				res = sqlSession.insert(NAMESPACE+"insertFile", fileList.get(i));
+				//성공하면
+				if(res == 1) {
+					resCnt++;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("[ERROR] [DataFileDaoImpl] insertFile method");
+			e.printStackTrace();
+		}
+		
+		return resCnt;
+	}
+
+	@Override
+	public int deleteFile(int f_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteFile", f_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습 자료실] deleteFile");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertAddFile(List<FileDto> fileList) {
+		int res = 0;
+		int resCnt = 0;
+		
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				res = sqlSession.insert(NAMESPACE+"insertAddFile", fileList.get(i));
+				
+				if(res == 1) {
+					resCnt++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resCnt;
 	}
 
 }
