@@ -12,11 +12,23 @@
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
 
+<!-- 스크롤 위치에 따라서 <h1>글씨 안보이게 z-index 변경 -->
+$(window).scroll(function(){
+    var scrollValue = $(document).scrollTop(); 
+    console.log(scrollValue);
+    if ( scrollValue > 125 && scrollValue <= 375 ){
+		$(".justify-content-center").attr("style","z-index:2");
+	} else {
+		$(".justify-content-center").attr("style","z-index:3");
+	}
+});
+
 $(function(){
 	$(".hero-text").html("<hr id='infoHR'><h1>이용약관</h1>");
 	$(".feature-page.header-area").css({"background-image":"url('resources/assets/img/conditions.png')"});	
-	
 });
+
+
 </script>
 <style>
 

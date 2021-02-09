@@ -17,4 +17,5 @@ public interface NoticeBoardDao {
 	List<BoardDto> selectNoticeBoardList(int s_no); // 공지사항 게시글 리스트 역순 가져오기
 	int deleteBoard(int b_no); //글삭제
 	int updateBoard(BoardDto dto); //글 수정
+	List<BoardDto> recentListForStudyHome(int s_no); // 스터디홈에 공지사항 최신글 3개 가져오기
 }
