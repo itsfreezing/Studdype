@@ -224,5 +224,11 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.selectStudyByLocation(si_no);
 	}
 
+	// [studyHome] 공지사항 게시글 리스트 최신글 3개 가져오기
+	@Override
+	public List<BoardDto> recentListForStudyHome(int s_no) {
+		return noticeDao.recentListForStudyHome(s_no);
+	}
+
 	
 }

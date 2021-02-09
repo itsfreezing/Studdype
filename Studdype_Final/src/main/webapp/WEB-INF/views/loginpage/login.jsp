@@ -118,8 +118,6 @@ span{
 		$(".justify-content-center").show(); 
 		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
 		$(".hero-text").html("<h1>로그인</h1><br><span>회원가입 후 StuDdye의 다양한 콘텐츠를 이용해보세요.</span>");
-
-		
 		
 	});
 	

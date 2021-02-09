@@ -47,9 +47,7 @@
 							<li class="nav-item">
 								<a class="nav-link" href="studyList.do">스터띱 홈<span class="sr-only">(current)</span></a>
 							</li>								
-	                              <li class="nav-item">
-								<a class="nav-link" href="logout.do">로그아웃</a>
-	                              </li>
+	                             
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
@@ -84,7 +82,7 @@
 						<div class="hero-text-inner">
 							<div class="hero-text">
 								
-								<c:if test="${study.s_name != null }"><h1>${study.s_name }</h1></c:if>
+								<c:if test="${study.s_name != null }"><h1>${study.s_name }</h1><span style="color:white">${study.s_info }</span></c:if>
 								
 							</div>
 						</div>
