@@ -6,7 +6,6 @@
 <html lang="en">
 
 <head>
-<script src="./resources/assets/js/profile.js"></script>
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script>
 function logout_btn(){
