@@ -15,6 +15,8 @@
 		<result property="s_maxcnt" column="S_MAXCNT" />
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
+
+
 	<select id="studyList" resultMap="studyMap" parameterType="searchPagination">
       SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
@@ -107,5 +109,5 @@
 	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
 		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
 	</select> -->
->>>>>>> d817253ab7895cd7b0b82839f9a6760a19d040c1
+
 </mapper>
