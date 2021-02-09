@@ -30,6 +30,10 @@ h1{
 	line-height: 20px;
 	text-align: center;
 }
+span{
+	color:white;
+	font-size: 20px;
+}
 #main_span{
 	font-size: 20px;
 	color:white;
@@ -51,6 +55,7 @@ h1{
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 3%;
+	margin-bottom: 10%;
 	
 }
 .loginTable{
@@ -85,13 +90,13 @@ h1{
 #signUp{
 	width:300px;
 	height:50px;
-	color: #5D5D5D;
+	color: #aaa;
 }
 #findId{
-	color: #5D5D5D;
+	color: #aaa;
 }
 #findPw{
-	color: #5D5D5D;
+	color: #aaa;
 }
 .findSection{
     margin-left:32.5%;
@@ -101,7 +106,7 @@ h1{
 	margin-left: 31%;
 }
 .footer-menu{
-	margin-bottom: -50%;
+	margin-bottom: -10%;
 }
 </style>
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -112,7 +117,11 @@ h1{
 		//$(".justify-content-center").hide(); 
 		$(".justify-content-center").show(); 
 		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	})
+		$(".hero-text").html("<h1>로그인</h1><br><span>회원가입 후 StuDdye의 다양한 콘텐츠를 이용해보세요.</span>");
+
+		
+		
+	});
 	
 function login_btn(){
 	var form = $(".loginForm");

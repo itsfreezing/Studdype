@@ -145,8 +145,9 @@ $(function() {
 	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 	//$(".justify-content-center").hide(); 
 	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
-})
+	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+	$(".hero-text").html("<h1>비밀번호 찾기</h1>");
+});
  
 $(function(){
 	

@@ -28,8 +28,9 @@
 <script type="text/javascript">
 $(function() {
 	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
-})
+	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+	$(".hero-text").html("<h1>아이디 찾기</h1>");
+});
 </script>
 <style type="text/css">
 .main_div{
