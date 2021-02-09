@@ -52,6 +52,7 @@ public interface MemberDao {
 	public int updatePw(MemberDto dto); // 비밀번호 변경
 	public int newemail(MemberDto dto); // 이메일 변경
 	public int memberDelete(int mem_no); // 마이페이지 회원 탈퇴
+	public int updatephone(MemberDto dto); // 전화번호 변경
 	// 도서 관련 메소드
 	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList); // 도서 게시판 리스트로 작성자 이름 가져오기
 	public Map<Integer, MemberDto> getBookWriterName(int mem_no); // 해당 도서 아이디, 이름 찾아오기

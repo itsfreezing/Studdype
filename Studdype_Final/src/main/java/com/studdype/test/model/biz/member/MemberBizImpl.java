@@ -95,5 +95,11 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.newemail(dto);
 	}
 
+	@Override
+	public int updatephone(MemberDto dto) {
+		
+		return memberDao.updatephone(dto);
+	}
+
 	
 }

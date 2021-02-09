@@ -1,17 +1,15 @@
 package com.studdype.test.model.dao.study;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
-import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -139,5 +137,20 @@ public class StudyDaoImpl implements StudyDao {
 		return studyList;
 	}
 
-
+	@Override
+	public Map<Integer, String> selectStudyName(int[] s_no) {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		String name = null;
+		try {
+			for(int i=0; i<s_no.length;i++) {
+		   
+			name = sqlSession.selectOne(NAMESPACE+"selectStudyName",s_no[i]);
+			map.put(s_no[i],name);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+	}
 }

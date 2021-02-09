@@ -1,5 +1,6 @@
 package com.studdype.test.model.biz.board;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -149,7 +150,15 @@ public class MeetBizImpl implements MeetBiz {
 	public Map<Integer, MemberDto> getAbsentMemberMap(List<VoteDto> list) {
 		return memberDao.selectAbsentMemberList(list);
 	}
+	
+	// 모임리스트 스터디 번호로 가져오기 
+	@Transactional
+	@Override
+	public List<MeetDto> selectMeetByS_no(int s_no[]) {
+		return meetBoardDao.selectMeetByS_no(s_no);
 
+	}
+	
 
 
 }

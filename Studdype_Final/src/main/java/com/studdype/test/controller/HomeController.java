@@ -18,15 +18,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.studdype.test.common.FileHandler;
 import com.studdype.test.model.biz.board.BookBiz;
+import com.studdype.test.model.biz.board.MeetBiz;
 import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
+import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyApplyingDto;
-import com.studdype.test.model.dto.study.StudyCategoryDto;
 import com.studdype.test.model.dto.study.StudyDto;
 import com.studdype.test.model.dto.study.StudyMemberDto;
 
@@ -47,7 +48,8 @@ public class HomeController {
 	private StudyApplyingBiz studyapplyingBiz;
 	@Autowired
 	private BookBiz bookBiz;
-	
+	@Autowired
+	private MeetBiz meetBiz;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private final static int pageSize = 5; // 한 페이지에 보여줄 개수
@@ -75,6 +77,7 @@ public class HomeController {
 	public String myPage(HttpSession session,String pagenum, Model model) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
 
+
 		
 		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
 		
@@ -90,6 +93,7 @@ public class HomeController {
 		List<StudyMemberDto> pageList = null;
 		List<MemberDto> allMember = memberBiz.allMember();
 		int totalStudyListNum = studymemberBiz.StudyTotalNum(login.getMem_no()); //5개씩 스터디 번호 가져오기
+
 		
 		List<MemberDto> applymember = new ArrayList<MemberDto>();
 		Map<String,Integer> pageMap = new HashMap<String,Integer>();
@@ -98,16 +102,35 @@ public class HomeController {
 		pageMap.put("mem_no", login.getMem_no());
 		
 		
-
-		
+		int[] joinSnoList = new int[joinedstudy.size()];
 		
 		
 		for(int i=0;i<joinedstudy.size();i++) {
 			StudyDto dto = studyBiz.selectOneBySno(joinedstudy.get(i).getS_no());
+			joinSnoList[i] = joinedstudy.get(i).getS_no();
 		
-			studylist.add(dto);
-			
+				studylist.add(dto);
 		}
+		
+		
+		
+		Map<Integer,String> nameMap = studyBiz.selectStudyName(joinSnoList);
+		
+		List<MeetDto> meetlist = meetBiz.selectMeetByS_no(joinSnoList);
+		
+		
+		model.addAttribute("meetlist",meetlist);
+		model.addAttribute("nameMap",nameMap);
+		
+		
+		
+		
+		
+		
+		model.addAttribute("joinSnoList",joinSnoList);
+		
+	
+		
 		
 		
 		
@@ -132,14 +155,9 @@ public class HomeController {
 		}
 		
 		
-		System.out.println("studyapplylist :"+studyApplylist.size());
-		System.out.println("씨발너뭔데"+receiveapplyname);
-		System.out.println(receiveapplyname.size());
-		System.out.println(Receiveapply.size());
-		System.out.println("씨발 넌또뭐야"+Receiveapply);
-		System.out.println("아니씨발 혹시너였니?"+applymember);
 		
-		System.out.println("전체멤버"+allMember);
+		
+
 		model.addAttribute("allMember",allMember);
 		model.addAttribute("applymember",applymember);
 		model.addAttribute("startPage", pageMap.get("startPage"));
@@ -235,59 +253,21 @@ public class HomeController {
 		}
 		
 	}
-	//마이페이지 회원 정보수정 폼으로 이동
-	@RequestMapping("/UpdateMember.do")
-	public String UpdateMember(HttpSession session, Model model,HttpServletRequest request) {
-		MemberDto login = (MemberDto)session.getAttribute("login");
-		MemberDto login2 = memberBiz.selectOne(login.getMem_no());
-		
+
+
 	
-		model.addAttribute("mem_id",request.getParameter("mem_id"));
-		model.addAttribute("mem_pw",request.getParameter("mem_pw"));
-		model.addAttribute("mem_email",request.getParameter("mem_email"));
-		model.addAttribute("mem_phone",request.getParameter("mem_phone"));
-		
-		session.setAttribute("login",login2);
-		return "studdype/UpdateMember";
-	}
-	//마이페이지 회원 정보 수정 아이디 중복체크
-	@RequestMapping(value="/idchk.do",method = RequestMethod.GET)
-	public String idchk(HttpServletRequest request, Model model,HttpSession session) {
-		MemberDto login = (MemberDto)session.getAttribute("login");
-	
-		
-		MemberDto dto = memberBiz.idchk(request.getParameter("mem_id"));
-		
-		
-		if(dto == null) {
-		
-		model.addAttribute("msg", "사용 가능한 아이디입니다!");
-		model.addAttribute("url", "UpdateMember.do?mem_id="+request.getParameter("mem_id")+"&mem_pw="+request.getParameter("mem_pw")+"&mem_email="+request.getParameter("mem_email")+"&mem_phone="+request.getParameter("mem_phone")+"&mem_no="+request.getParameter("mem_no"));
-		System.out.println("dto null일때 실행");
-		return "commond/alert";
-		}else if(request.getParameter("mem_id").equals(login.getMem_id())){
-			System.out.println("mem_id가 login.getMem_id랑 같을때 실행");
-		model.addAttribute("msg", "사용 가능한 아이디입니다!");
-		model.addAttribute("url", "UpdateMember.do?mem_id="+request.getParameter("mem_id")+"&mem_pw="+request.getParameter("mem_pw")+"&mem_email="+request.getParameter("mem_email")+"&mem_phone="+request.getParameter("mem_phone")+"&mem_no="+request.getParameter("mem_no"));
-			
-		return "commond/alert";
-		}else {
-			System.out.println("dto 널아닐때 실행 ");
-		model.addAttribute("msg", "중복된 아이디가있습니다,아이디를 변경해주세요!");
-		model.addAttribute("url", "UpdateMember.do");
-		return "commond/alert";
-		}
-		
-	}
 	//비밀번호 변경시 
 	@RequestMapping(value="/changepw.do",method = RequestMethod.GET)
-	public String changepw(HttpServletRequest request,Model model) {
+	public String changepw(HttpServletRequest request,Model model,HttpSession session) {
+		MemberDto login = (MemberDto)session.getAttribute("login");
 		MemberDto dto = new MemberDto(Integer.parseInt(request.getParameter("mem_no")),request.getParameter("new_pw"));
 		int res = memberBiz.updatePw(dto);
 		
 		if(res>0) {
 			model.addAttribute("msg", "비밀번호 변경 성공!");
 			model.addAttribute("url", "myPage.do");
+			login.setMem_pw(request.getParameter("new_pw"));
+			
 			return "commond/alert";
 		}else {
 			model.addAttribute("msg","비밀번호 변경 실패!");
@@ -300,13 +280,18 @@ public class HomeController {
 	@RequestMapping(value="/changeemail.do",method = RequestMethod.GET)
 	public String changeemail(HttpServletRequest request,Model model,HttpSession session) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
+	
 		MemberDto dto = new MemberDto(login.getMem_no(),login.getMem_phone(),request.getParameter("new_email"));
 		int res = memberBiz.newemail(dto);
 		
 		if(res>0) {
+			login.setMem_email(request.getParameter("new_email"));
+			
 			model.addAttribute("msg", "이메일 변경 성공!");
 			model.addAttribute("url", "myPage.do");
 			session.setAttribute("login", login);
+		    session.setMaxInactiveInterval(-1);
+		
 			return "redirect:myPage.do";
 		}else {
 			model.addAttribute("msg","이메일 변경 실패!");
@@ -314,25 +299,34 @@ public class HomeController {
 			return "commond/alert";
 		}
 	}
-	
-	
-	//마이페이지 회원정보 수정 버튼 클릭시
-	@RequestMapping(value="/memberupdate.do",method = RequestMethod.GET)
-	public String memberUpdate(HttpServletRequest request, Model model) {
-		MemberDto dto = new MemberDto(Integer.parseInt(request.getParameter("mem_no")),request.getParameter("mem_id"),request.getParameter("mem_pw"),request.getParameter("mem_phone"),request.getParameter("mem_email"));
-		int res = memberBiz.updateMember(dto);
+	@RequestMapping(value="/changephone.do",method = RequestMethod.GET)
+	public String changephone(HttpServletRequest request,Model model,HttpSession session) {
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		
+		MemberDto dto = new MemberDto(login.getMem_no(),request.getParameter("new_phone"),login.getMem_email());
+		int res = memberBiz.updatephone(dto);
 		
 		if(res>0) {
-			model.addAttribute("msg","수정성공!");
+			login.setMem_phone(request.getParameter("new_phone"));
+			model.addAttribute("msg","전화번호 수정 성공!");
+			model.addAttribute("url","myPage.do");
+			session.setAttribute("login", login);
+			session.setMaxInactiveInterval(-1);
+			return "redirect:myPage.do";
+		}else {
+			model.addAttribute("msg","전화번호 변경 실패!");
 			model.addAttribute("url","myPage.do");
 			return "commond/alert";
-		}else {
-			model.addAttribute("msg","수정 실패!");
-			model.addAttribute("url", "UpdateMember.do?mem_id="+request.getParameter("mem_id")+"&mem_pw="+request.getParameter("mem_pw")+"&mem_email="+request.getParameter("mem_email")+"&mem_phone="+request.getParameter("mem_phone")+"&mem_no="+request.getParameter("mem_no"));
-			return "commond/alert";
+			
 		}
-	
+		
+		
+		
+		
 	}
+	
+	
+
 	
 	
 	//페이징 함수

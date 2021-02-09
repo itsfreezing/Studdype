@@ -39,6 +39,6 @@ public interface StudyBiz {
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no);	// 시 이름 가져오기
 	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
-
+	public Map<Integer,String> selectStudyName(int[] s_no);
 	
 }

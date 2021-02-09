@@ -23,6 +23,6 @@ public interface StudyDao {
 	public int newInfo(StudyDto dto); //스터디관리 스터디 정보 변경
 
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
-
+	public Map<Integer,String> selectStudyName(int[] s_no);
 
 }

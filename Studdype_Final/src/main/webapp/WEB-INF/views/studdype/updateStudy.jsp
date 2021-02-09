@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Study Update!</title>
+<title>스터디 관리</title>
 
 
 <meta charset="UTF-8">
@@ -35,6 +35,8 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main2.js"></script>
 <style type="text/css">
+ 
+
 #main {
 	float: right;
 	display: inline-block;
@@ -47,15 +49,6 @@
 }
 
 
-#member {
-	border: 1px solid grey;
-	
-	width: 600px;
-	text-align: center;
-	position:absolute;
-	left:63%;
-	top:110%;
-}
 
 #studyimage {
 	width: 500px;
@@ -67,7 +60,7 @@
 }
 
 #studyimagep {
-	color: #967BDC;
+	color: #5a2b20;
 	font: bold;
 	font-size: 20px;
 	position: absolute;
@@ -123,7 +116,7 @@
 	top: 611px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #967BDC;
+	color: #5a2b20;
 }
 
 #createrarea {
@@ -145,7 +138,7 @@
 	left: 1070px;
 	top: 611px;
 	font-size: 20px;
-	color: #967BDC;
+	color: #5a2b20;
 	font-weight:bold;
 }
 
@@ -175,7 +168,7 @@
 	left: 1070px;
 	top: 716px;
 	font-size: 20px;
-	color: #967BDC;
+	color: #5a2b20;
 	font-weight:bold;
 }
 
@@ -192,7 +185,7 @@
 	top: 716px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #967BDC;
+	color: #5a2b20;
 }
 
 #Max_member {
@@ -206,7 +199,7 @@
 	position: absolute;
 	left: 1070px;
 	font-size: 20px;
-	color: #967BDC;
+	color: #5a2b20;
 	font-weight:bold;
 	top: 790px;
 }
@@ -224,7 +217,7 @@
 	top: 790px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #967BDC;
+	color: #5a2b20;
 }
 
 #locationgu {
@@ -240,7 +233,7 @@
 	top: 895px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #967BDC;
+	color: #5a2b20;
 }
 
 #studyinfot {
@@ -297,11 +290,11 @@
   position: absolute;
   display: inline-block;
   padding: .5em .75em;
-  color: #967BDC;
+  color: #5a2b20;
   font-size: inherit;
   line-height: normal;
   vertical-align: middle;
-  border:1px solid #967BDC;
+  border:1px solid #5a2b20;
   background-color: white;
   cursor: pointer;
   
@@ -346,36 +339,95 @@
 	height:1000px;
 	
 	}
-	#member{
-		
-		width:1117px;
-		position:absolute;
-		top:65%;
-		left:28%;
+	#scr::-webkit-scrollbar { width: 10px; }
+	/* 스크롤바의 width */
+	#scr::-webkit-scrollbar-track { background-color: #f0f0f0; }
+	/* 스크롤바의 전체 배경색 */
+	#scr::-webkit-scrollbar-thumb { 
+	    background: linear-gradient(to bottom, #1697bf, #62b7ac); 
 	}
-	#member2{
-		width:1117px;
-		display:none;
-	
-		position:absolute;
-		top:65%;
-		left:28%;
-	}
-	#member3{
-	
-		display:none;
-		width:1117px;
-		position:absolute;
-		top:65%;
-		left:28%;
-	}
-	#book1{
-		
-		width:1117px;
-		position:absolute;
-		top:65%;
-		left:28%;
-	}
+	/* 스크롤바 색 */
+	#scr::-webkit-scrollbar-button { display: none; }
+	.table14_8 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table14_8 th {
+	font-weight:bold;
+	background-color:#e7e0d5;
+	color:#5a2b20
+}
+.table14_8,.table14_8 th,.table14_8 td {
+	font-size:20px;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table14_8 th,.table14_8 td {
+	border: 1px solid #ffffff;
+	border-width:1px
+}
+.table14_8 th {
+	border: 1px solid #e7e0d5;
+	border-width:1px 0 1px 0
+}
+.table14_8 td {
+	border: 1px solid #eeeeee;
+	border-width:1px 0 1px 0
+}
+.table14_8 tr {
+	border: 1px solid #ffffff;
+}
+.table14_8 tr:nth-child(odd){
+	background-color:#f7f7f7;
+}
+.table14_8 tr:nth-child(even){
+	background-color:#ffffff;
+}
+
+
+/*Checkboxes styles*/
+input[type="checkbox"] { display: none; }
+
+input[type="checkbox"]+label{
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+input[type="checkbox"]+label:last-child { margin-bottom: 0; }
+
+input[type="checkbox"]+label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #6cc0e5;
+  position: absolute;
+  left: 40px;
+  top: 5px;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked+label:before {
+  width: 10px;
+  top: 1px;
+  left: 46px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 </style>
 <script type="text/javascript">
 	function LoadImg(value) {
@@ -417,11 +469,28 @@
 		var m = document.getElementById('Max_member').value;
 		var n = document.getElementById('studynameupdate').value;
 		
-		var imgname =document.getElementById('imgAttach').value;
-		alert(imgname);
+		var file = document.getElementById('ex_file');
+	
+		//파일 경로.
+		var filePath = file.value;
+	
+		//전체경로를 \ 나눔.
+		var filePathSplit = filePath.split('\\'); 
+		//전체경로를 \로 나눈 길이.
+		var filePathLength = filePathSplit.length;
+		//마지막 경로를 .으로 나눔.
+		var fileNameSplit = filePathSplit[filePathLength-1].split('.');
+		//파일명 : .으로 나눈 앞부분
+		var fileName = fileNameSplit[0];
+		//파일 확장자 : .으로 나눈 뒷부분
+		var fileExt = fileNameSplit[1];
+		//파일 크기
+		var fileSize = file.files[0].size;
+	
+		alert(fileName);
 		
 		location.href="studyupdate.do?"+"&s_no="+'${study.s_no}'+"&s_info="+i+"&b_no="+b
-				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+imgname+"&s_name="+n;
+				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+fileName+"&s_name="+n;
 		
 		
 		
@@ -461,17 +530,26 @@
 		var chk_arr = [];
 		$("input[name=exile]:checked").each(function(){
 			 var chk = $(this).val();
+			 $(this).checked
 			 chk_arr.push(chk);
 			 
-		})
+		});
+		
+		if(chk_arr.length == 0){
+			
+			location.href="updatelead.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m
+		}else{
+		
 		
 		location.href="updateleader.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m+"&exile_no="+chk_arr;
+		}
 	}
+	
 	function main(){
 		$('#main').show();
 		$('#main2').hide();
 		$('#main3').hide();
-		$('#p1').css("color","#967BDC");
+		$('#p1').css("color","#5a2b20");
 		$('#p2').css("color","#808080");
 		$('#p3').css("color","#808080");
 	}
@@ -479,7 +557,7 @@
 		$('#main2').show();
 		$('#main').hide();
 		$('#main3').hide();
-		$('#p2').css("color","#967BDC");
+		$('#p2').css("color","#5a2b20");
 		$('#p1').css("color","#808080");
 		$('#p3').css("color","#808080");
 		
@@ -488,11 +566,24 @@
 		$('#main3').show();
 		$('#main2').hide();
 		$('#main').hide();
-		$('#p3').css("color","#967BDC");
+		$('#p3').css("color","#5a2b20");
 		$('#p2').css("color","#808080");
 		$('#p1').css("color","#808080");
 		
 	}
+	function changebook(){
+		var main = document.getElementsByName("bookmain");
+		var main_check = 0;
+		for(var i=0;i<main.length;i++){
+			if(main[i].checked == true){
+				var m = main[i].value;
+				main_check++;
+			}
+		}
+		location.href="bookchange.do?b_no="+m;
+	}
+	
+	
 	
 </script>
 </head>
@@ -507,7 +598,7 @@
 	<!-- 메인 세션 -->
 	<div id="main" >
 
-		<p id="p1" style="color:#967BDC; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main1();">스터디 관리</p>
+		<p id="p1" style="color:#5a2b20; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main1();">스터디 관리</p>
 		<p id="p2" style="color:#808080; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 
@@ -518,7 +609,7 @@
 		<pre class="brush:html"></pre>
 		<div class="filebox">
 		  <label for="ex_file">업로드</label>
-		  <input type="file" id="ex_file" onchange="LoadImg(this);">
+		  <input type="file" id="ex_file" onchange="LoadImg(this);" >
 		</div>
 		
 
@@ -603,15 +694,15 @@
 	<!--  멤버 관리 -->
 	<div id="main2" style="display:none;">
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
-		<p id="p2" style="color:#967BDC; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
+		<p id="p2" style="color:#5a2b20; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
-		<p style="position:absolute; top:57%; left:28%; color:#967BDC; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
+		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
 		
-		
+		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; box-shadow:2px 2px 2px 2px grey;">
 		<table id="member"
-         class="table table-hover">
+         class="table14_8" style="width:1117px;">
          <thead>
-            <tr style="background-color:#967BDC;">
+            <tr >
                <th>이름</th>
                <th>이메일</th>
                <th>아이디</th>
@@ -621,20 +712,28 @@
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="membername" items="${membername}" begin='1' end='10'>
+            <c:forEach var="membername" items="${membername}" varStatus="status" >
             
                <tr >
                   <td>${membername.mem_name }</td>
                   <td>${membername.mem_email }</td>
                   <td>${membername.mem_id }</td>
                   <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
-                  <td><input type="checkbox" name="exile" value="${membername.mem_no }">추방</td>
+                  <td id="exilenum">
+                  <c:if test="${membername.mem_no != login.mem_no }">
+                  <input type="checkbox" id="box-1" name="exile" value="${membername.mem_no }" onclick="check(this)">
+                  <label for="box-1">추방</label>
+                  </c:if>
+                 <c:if test="${membername.mem_no == login.mem_no }">
+                 <input type="checkbox" name="exile" value="${membername.mem_no }" onclick="return false">
+                 <label >추방</label></c:if>
+                  </td>
                   <c:if test="${membername.mem_no == login.mem_no }">
-                     <td><input name="maker" type="radio" checked="checked"
+                     <td id="maker${status.count }"><input name="maker" type="radio" id="maker${status.count }" checked="checked"
                         value="${membername.mem_no }">대표</td>
                   </c:if>
                   <c:if test="${membername.mem_no != login.mem_no }">
-                     <td><input name="maker" type="radio"
+                     <td id="maker${status.count }"><input name="maker" id="maker${status.count }" type="radio"
                         value="${membername.mem_no }">대표</td>
                   </c:if>
 
@@ -644,99 +743,9 @@
 
          </tbody>
       </table>
-	  <table id="member2"
-         class="table table-hover">
-         <thead>
-            <tr style="background-color:#967BDC;">
-               <th>이름</th>
-               <th>이메일</th>
-               <th>아이디</th>
-               <th>성별</th>
-               <th>추방하기</th>
-               <th>대표설정</th>
-            </tr>
-         </thead>
-         <tbody>
-           
-            <c:forEach var="membername" items="${membername}" begin="11" end='20'>
-           
-               <tr>
-                  <td>${membername.mem_name }</td>
-                  <td>${membername.mem_email }</td>
-                  <td>${membername.mem_id }</td>
-                  <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
-                  <td><input type="checkbox" name="exile" value="${membername.mem_no }">추방</td>
-                  <c:if test="${membername.mem_no == login.mem_no }">
-                     <td><input name="maker" type="radio" checked="checked"
-                        value="${membername.mem_no }">대표</td>
-                  </c:if>
-                  <c:if test="${membername.mem_no != login.mem_no }">
-                     <td><input name="maker" type="radio"
-                        value="${membername.mem_no }">대표</td>
-                  </c:if>
-
-               </tr>
-              
-            </c:forEach>
-
-         </tbody>
-      </table>
-      <table id="member3"
-         class="table table-hover">
-         <thead>
-            <tr style="background-color:#967BDC;">
-               <th>이름</th>
-               <th>이메일</th>
-               <th>아이디</th>
-               <th>성별</th>
-               <th>추방하기</th>
-               <th>대표설정</th>
-            </tr>
-         </thead>
-         <tbody>
-            <c:forEach var="membername" items="${membername}" begin='21' >
-           
-               <tr>
-                  <td>${membername.mem_name }</td>
-                  <td>${membername.mem_email }</td>
-                  <td>${membername.mem_id }</td>
-                  <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
-                  <td><input type="checkbox" name="exile" value="${membername.mem_no }">추방</td>
-                  <c:if test="${membername.mem_no == login.mem_no }">
-                     <td><input name="maker" type="radio" checked="checked"
-                        value="${membername.mem_no }">대표</td>
-                  </c:if>
-                  <c:if test="${membername.mem_no != login.mem_no }">
-                     <td><input name="maker" type="radio"
-                        value="${membername.mem_no }">대표</td>
-                  </c:if>
-
-               </tr>
-               
-            </c:forEach>
-
-         </tbody>
-      </table>
-	<c:if test="${fn:length(membername) > 10 }">
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:124%; left:28%; cursor:pointer;" onclick="first();">
-		<p>1</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:124%; left:30%;  cursor:pointer;" onclick="second();">
-		<p>2</p>
-		</div>
-	</c:if>
-	<c:if test="${fn:length(membername) > 20 }">
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:124%; left:28%; cursor:pointer;" onclick="first();">
-		<p>1</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:124%; left:30%;  cursor:pointer;" onclick="second();">
-		<p>2</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:124%; left:32%;  cursor:pointer;" onclick="third();">
-		<p>3</p>
-		</div>
-	</c:if>
-	<button class="btn btn-purple" style="position:absolute; top: 123%;left: 82%;" onclick="change();">수정하기</button>
+      </div>
+	  
+	<button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="change();">수정하기</button>
 	</div>
 	<!-- 멤버 관리 끝 -->
 	
@@ -749,12 +758,12 @@
 	<div id="main3" >
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
 		<p id="p2" style="color:#808080; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
-		<p id="p3" style="color:#967BDC; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
-		<p style="position:absolute; top:57%; left:28%; color:#967BDC; font-size:20px; font-weight:bold;">전체 도서 </p>
+		<p id="p3" style="color:#5a2b20; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
+		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
+	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; box-shadow:2px 2px 2px 2px grey;">
 	<table id="book1"
-         class="table table-hover"
-         style="border: 1px solid;">
+         class="table14_8" style="width:1117px;">
 
          <thead>
             <tr style="text-align:center; background-color:#967BDC;">
@@ -764,7 +773,7 @@
             </tr>
          </thead>
          <tbody style="text-align:center;">
-            <c:forEach var="bookList" items="${bookList}" varStatus="status" begin="1" end="10">
+            <c:forEach var="bookList" items="${bookList}" varStatus="status" >
                <tr style="text-align:center;">
                   <td>${status.count }</td>
                   <td>${bookList.book_title }</td>
@@ -781,41 +790,9 @@
 
          </tbody>
       </table>            
-	
-	<c:if test="${fn:length(bookList) > 11 }">
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:53%; cursor:pointer;" onclick="first();">
-		<p>1</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:55%;  cursor:pointer;" onclick="second();">
-		<p>2</p>
-		</div>
-	</c:if>
-	<c:if test="${fn:length(bookList) > 21 }">
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:53%; cursor:pointer;" onclick="first();">
-		<p>1</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:55%;  cursor:pointer;" onclick="second();">
-		<p>2</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:57%;  cursor:pointer;" onclick="third();">
-		<p>3</p>
-		</div>
-	</c:if>
-	<c:if test="${fn:length(bookList) > 31 }">
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:53%; cursor:pointer;" onclick="first();">
-		<p>1</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:55%;  cursor:pointer;" onclick="second();">
-		<p>2</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:57%;  cursor:pointer;" onclick="third();">
-		<p>3</p>
-		</div>
-		<div style="height:30px; width:30px; border:1px solid black; text-align:center; position:absolute; top:130%; left:59%;  cursor:pointer;" onclick="four();">
-		<p>4</p>
-		</div>
-	</c:if>
-	<button class="btn btn-purple" style="position:absolute; top: 98%;left: 82%;" onclick="change();">수정하기</button>
+    
+	</div>
+	  <button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="changebook();">수정하기</button>
 	</div>
 	
 </body>

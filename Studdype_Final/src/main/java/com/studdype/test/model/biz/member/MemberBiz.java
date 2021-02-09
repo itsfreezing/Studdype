@@ -22,5 +22,6 @@ public interface MemberBiz {
 	public int updatePw(MemberDto dto); //비밀 번호 변경
 	public List<MemberDto> allMember(); // 전체멤버 리스트
 	public int newemail(MemberDto dto); // 이메일 변경
+	public int updatephone(MemberDto dto); //전화번호 변경
 
 }

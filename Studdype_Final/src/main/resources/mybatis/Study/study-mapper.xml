@@ -74,13 +74,16 @@
 
 	<update id="newInfo" parameterType="studyDto">
 		UPDATE STUDY SET S_INFO = #{s_info} , CATE_NO = #{cate_no}, SI_NO = #{si_no}, GU_NO =#{gu_no},
-		S_MAXCNT = #{s_maxcnt}, S_NAME = #{s_name} WHERE S_NO = ${s_no}
+		S_MAXCNT = #{s_maxcnt}, S_NAME = #{s_name} , S_PHOTO = #{photo}  WHERE S_NO = ${s_no}
 	</update>
 
 	
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
-
+	<select id="selectStudyName" parameterType="int" resultType="string">
+		SELECT S_NAME FROM STUDY WHERE S_NO = #{s_no}
+	</select>
+	
 
 </mapper>

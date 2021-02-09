@@ -153,7 +153,7 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return study_Dao.newLeader(dto);
 	}
-
+	@Transactional
 	@Override
 	public int newInfo(StudyDto dto) {
 		
@@ -201,6 +201,11 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public List<BoardDto> selectNoticeBoard(int s_no) {
 		return noticeDao.selectNoticeBoard(s_no);
+	}
+
+	@Override
+	public Map<Integer,String> selectStudyName(int[] s_no) {
+		return study_Dao.selectStudyName(s_no);
 	}
 
 }

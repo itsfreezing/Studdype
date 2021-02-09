@@ -1,11 +1,12 @@
 package com.studdype.test.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studdype.test.common.MailSender;
 import com.studdype.test.model.biz.member.MemberBiz;
+import com.studdype.test.model.biz.study.StudyBiz;
+import com.studdype.test.model.biz.study.StudyMemberBiz;
 import com.studdype.test.model.dto.member.MemberDto;
+import com.studdype.test.model.dto.study.StudyDto;
+import com.studdype.test.model.dto.study.StudyMemberDto;
 
 @Controller
 public class MemberController {
@@ -32,6 +37,10 @@ public class MemberController {
 	
 	@Autowired 
 	private MemberBiz memberBiz;
+	@Autowired
+	private StudyBiz studyBiz;
+	@Autowired
+	private StudyMemberBiz studymemberBiz;
 	
 	@RequestMapping(value = "/Member.do",method = RequestMethod.GET)
 	public String Member(Locale locale,Model model) {
@@ -105,9 +114,23 @@ public class MemberController {
 
 		MemberDto loginDto = memberBiz.login(dto);
 		
-		System.out.println(loginDto);
+		 
+		
+		
 		
 		if(loginDto != null) {
+			List<StudyDto> studylist = new ArrayList<StudyDto>();
+			List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(loginDto.getMem_no());
+			int[] joinSnoList = new int[joinedstudy.size()];
+			
+			for(int i=0;i<joinedstudy.size();i++) {
+				StudyDto dto1 = studyBiz.selectOneBySno(joinedstudy.get(i).getS_no());
+				joinSnoList[i] = joinedstudy.get(i).getS_no();
+			
+					studylist.add(dto1);
+			}
+			
+			session.setAttribute("studylist", studylist);
 			session.setAttribute("login", loginDto);
 			session.setMaxInactiveInterval(-1);
 			return "redirect:/studyList.do";

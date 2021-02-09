@@ -70,5 +70,7 @@
 		<update id="newemail" parameterType="memberDto">
 			UPDATE MEMBER SET MEM_EMAIL = #{mem_email} WHERE MEM_NO = #{mem_no}
 		</update>
-		
+		<update id="updatephone" parameterType="memberDto">
+			UPDATE MEMBER SET MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
+		</update>
 	</mapper>

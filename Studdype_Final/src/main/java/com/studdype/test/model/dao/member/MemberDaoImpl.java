@@ -467,6 +467,19 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 
 	}
+
+	@Override
+	public int updatephone(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updatephone",dto);
+		} catch (Exception e) {
+			System.out.println("전화 번호 변경 오류!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 
 }

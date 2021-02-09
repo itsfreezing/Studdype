@@ -1,5 +1,7 @@
 package com.studdype.test.model.dao.board.meet;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.VoteDto;
-import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MeetBoardDaoImpl implements MeetBoardDao{
@@ -276,6 +277,27 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 		
 		return absentList;
+	}
+
+	@Override
+	public List<MeetDto> selectMeetByS_no(int s_no[]) {
+		
+		List<MeetDto> dto = new ArrayList<MeetDto>();
+		
+		try {
+			for(int i=0; i<s_no.length;i++) {
+				if(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i])!=null) {
+					dto.addAll(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i]));
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ERROR ----------selectMeetByS_no--------------------------ERROR");
+			e.printStackTrace();
+		}
+				
+		return dto;
 	}
 
 

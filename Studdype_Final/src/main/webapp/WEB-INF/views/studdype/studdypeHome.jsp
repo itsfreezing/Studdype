@@ -82,6 +82,15 @@ input#search:focus {
 .feature-page.header-area {
 	height: 80px;
 }
+.owl-dot{
+	background-color:#c0d7e9 !important;
+}
+.owl-dot.active{
+	background-color:white !important;
+}
+#mainBanner{
+	box-shadow:none !important;
+}
 </style>
 
 </head>
