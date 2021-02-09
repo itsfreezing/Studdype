@@ -77,24 +77,15 @@ function search(){
 	var form =$("#location");
 	alert(selectSi);
 	alert(selectGu);
-	var locationVal={
-			"selectSi":selectSi,
-		 	"selectGu":selectGu 
-	};
-
-	$.ajax({
-		url:"studyListLocation.do",
-		data:locationVal,
-		async:false, 
-		type:"GET",
-		contentType:"application/json",
-		dataType:"json",
-		success:function(data){	
-			form.submit();
-		},error:function(){
-			alert("통신fail");
-		}
-	});
+	if(selectSi==null){
+		selectSi.focus();
+		return false;
+	}else if(selectGu==null){
+		selectGu.focus();
+		return false;
+	}else{
+		form.submit();
+	}
 	
 		
 }
@@ -148,11 +139,10 @@ $(function(){
 					<br><br>
 		<div class="container">
 			<div class="row">
-
+		<c:if test="${not empty list}">
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
-				<c:if test="${not empty list}">
 				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-lg-4 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
@@ -184,7 +174,7 @@ $(function(){
 						</div>
 					</div>
 				</c:forEach>
-				</c:if>
+			</c:if>
 			</div>
 		</div>
 		
