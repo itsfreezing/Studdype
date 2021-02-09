@@ -14,6 +14,8 @@ public interface PhotoBoardDao {
 	public List<BoardDto> galleryList(SearchPagination searchPagination);
 	public int totalGalleryListNum(SearchPagination searchPagination);
 	public BoardDto galleryDetailOne(int b_no);
-	
+	public int updateGallery(BoardDto board);
+	public int deleteGallery(int b_no);
+	public List<BoardDto> selectRecentList(int s_no, int b_no); 
 
 }

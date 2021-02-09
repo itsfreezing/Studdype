@@ -103,7 +103,31 @@ function clickFileBtn(fileName){
 }
 
 </script>
+<style type="text/css">
+.gallery_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.gallery_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 
+</style>
 
 
 </head>
@@ -134,8 +158,8 @@ function clickFileBtn(fileName){
 				</div>
 
 				<!-- </form> -->
-				<input type="submit" value="올리기"/>
-				<input type="button" onclick="location.href='gallery.do'" value="목록" />
+				<input type="submit" class="gallery_Btn"  value="올리기"/>
+				<input type="button" class="gallery_Btn" onclick="location.href='gallery.do'" value="목록" />
 			</div>
 		</form>
 		<br> <br> <br> <br>

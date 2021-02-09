@@ -322,5 +322,7 @@
 </div>
 </body>
 
-
+<footer>
+	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
+</footer>
 </html>

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<link rel="stylesheet" href="./resources/css/signup/signup.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function chkpwd(){
@@ -26,20 +27,55 @@ function chkpwd(){
 		$("#chkpw_no").show();
 		$("#chkpw_ok").hide();
 		$("#chkpw").hide();
+		$(".pwico").css("color","red");
 	
 	}
 	else if(pw==""||pw==null){
 		  $("#chkpw").show();
 		  $("#chkpw_no").hide();
 		  $("#chkpw_ok").hide();
+		 $(".pwico").css("color","red");
+
   }
 	else{
 		$("#chkpw_ok").show();
 		$("#chkpw_no").hide();
 		$("#chkpw").hide();
+		$(".pwico").css("color","#04700F");
+
 	}
 }
 
+function chktel(){
+	var tel=document.getElementById('memberphone').value;
+	if(tel==""||tel==null){
+		$(".phoneico").css("color","red");
+		return false;
+	}else{
+		$(".phoneico").css("color","#04700F");
+		return false;
+	}
+}
+function namechk(){
+	var name=document.getElementById('memberName').value;
+	if(name==""||name==null){
+		$(".nameico").css("color","red");
+		return false;
+	}else{
+		$(".nameico").css("color","#04700F");
+		return false;
+	}
+}
+function changen(gender){
+	var gender=document.getElementById('membergender').value;
+	if(gender.checked!=null||gender.checked!=""){
+		$(".genderico").css("color","#04700F");
+		return false;
+	}else{
+		$(".genderico").css("color","red");
+		return false;
+	}
+}
 $(function(){
 	
 	var chkNum_btn = $("#chkNum_btn");
@@ -64,11 +100,13 @@ function sendmail(){
 	         success:function(map){
 	          if(map.isExist=="n"){
 	        	  alert("메일이 잘못되었습니다");
+	        	  $(".mailico").css("color","red");
 	        	  
 	          }else{
-	        	  alert("인증번호 전송");
+	        	  alert("인증번호가 전송되었습니다.");
 	        	  var chkNum_btn=$("#chkNum_btn");
 	        	  var emailInput=$("#memberMail");
+	        	  $(".mailico").css("color","#04700F");
 	        	  emailInput.attr("readonly","readonly");
 	        	  chkNum_btn.removeAttr("disabled");
 	          }
@@ -98,11 +136,13 @@ function chkVerifiNum(){
 				$("#chk_ok").hide();
 				$("#chk_no").show();
 				$("#chknum").attr("title",'n');
+				$(".numico").css("color","red");
 			
 			}else{
 				$("#chk_no").hide();
 				$("#chk_ok").show();
 				$("#chknum").attr("title",'y');
+				$(".numico").css("color","#04700F");
 			}
 		} 
 		,
@@ -167,8 +207,8 @@ $(document).ready(function(){
 			man.focus();
    			return false;
    		}
-   		
 		signupform.submit();
+   		alert("회원가입되었습니다");
 
 	});	
 
@@ -186,24 +226,27 @@ $(document).ready(function(){
 			dataType:"json",
 			success:function(data){
 				console.log("1=사용가능 /0=사용불가"+data);
-				
 				if(data==1){
 					$("#chkid_ok").show();
 					$("#chkid_no").hide();
+					$(".idico").css("color","#04700F");
 					$("#chk").attr("title",'y');
-				
 				}
-				else {
+				else{
 					$("#chkid_no").show();
 					$("#chkid_ok").hide();
+					$(".idico").css("color","red");
 					$("#chk").attr("title",'n');
+					
 					}
+				
 				},error:function(){
 					alert("FAIL");
 			}		
 		});
 	});	
 });
+
 function num_check(){
 	 var num1 = document.getElementById("unum1");
      var num2 = document.getElementById("unum2");
@@ -235,178 +278,145 @@ function num_check(){
       if((11-(tempSum%11))%10!=arrNum2[6]) {
     		$("#chknum_no").show();
 			$("#chknum_ok").hide();
+			$(".rnoico").css("color","red");
+			
           return false;
       }else{
     	  $("#chknum_ok").show();
 			$("#chknum_no").hide();
+			$(".rnoico").css("color","#04700F");
+			return false;
       }
   }
 	
 
-
+$(function(){
+	$(".justify-content-center").hide();
+});
 </script>
-<style type="text/css">
-.title{
-   margin-left:45%;
-}
-.icos{
-	color:red;	
-	margin-left:65%;
-}
-.ico{
-   color:green;
-}
-hr{
-   width:900px;
-   border:1px solid black;
-}
-#signtitle{
-	margin-left:30%;
-}
-input{
-   width:350px;
-   height:44px;
-}
-#check{
-   width:120px;
-   height:40px;
-}
-#chkNum_btn{
-	width:120px;
-	height:40px;
-}
-#submit_email{
-   width:120px;
-   height:40px;
-}
-#sign{
-   width:150px;
-   height:44px;
-   margin-left:17%;
-}
-#unum1{
-   width:120px;
-   height:30px;
-}
-#unum2{
-   width:120px;
-   height:30px;
-}
-#signup{
-	width:150px;
-	height:30px;
-	margin-left:23%;
-}
-#signupform{
-	margin-left:10%;
-}
-.head{
-	margin-top:-1%;
-}
-</style>
-
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<div class="head">
-		<h3 class="title">회원가입</h3>
-			
+	<div class="img" >
+			  <img src="./resources/img/loginBanner.png" style="width:1900px; height:470px;">
 			<hr>
-	</div> 
-   <div id="signtitle"> 
+		<div class="content">
+			<h3>회원가입</h3>
+		</div>
+	</div>
 
-      <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
-        <table>
-        	<tr>
-				<th>
-				 아이디
-				 	<span class="ico">*</span>
-				</th>
-                 <td> 
-                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
-                    <input type="button" value="중복확인" id="check" >
-                     <input type="hidden" id="chk" title="n"><!-- 사용가능할경우  -->
-                 </td>
-             </tr>
-             <tr style="display:none;" id="chkid_ok">
-   				<td></td>
-   				<td style="color:blue">아이디 사용 가능</td>
-   			</tr>
-   			<tr style="display:none;" id="chkid_no">
-   				<td></td>
-   				<td style="color:red;">중복된 아이디 존재 </td>
-   			</tr>
-   		
-            
-              <tr>
-                 <th align="right" width="100">
-                    비밀번호 <span class="ico">*</span>
-                 </th>
-             
-                 <td colspan="4">
-                    <input type="password" id="memberpw"name="mem_pw" style="border:1px solid #ccc">
-                 </td>
-              </tr>
-         
-              <tr>
-                 <th align="right" width="100">
-                 비번확인 <span class="ico">*</span>
-                 </th>
-                 <td>
-                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
-                 </td> 
-              </tr> 
-              <tr style="display:none;" id="chkpw_ok">
-   				<td></td>
-   				<td style="color:blue">확인되었습니다</td>
-   			</tr>
-   			<tr style="display:none;" id="chkpw_no">
-   				<td></td>
-   				<td style="color:red;">패스워드가 다릅니다</td>
-   			</tr>
-   			<tr style="display:none;" id="chkpw">
-   				<td></td>
-   				<td style="color:red;">패스워드를 입력해주세요</td>
-   			</tr>
-   			
-                
-                <tr>
-                 <th align="right" width="100">
-                    이메일<span class="ico">*</span>
-                 </th>
-                 <td>
-                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
-                    <input type="button" value="인증번호 전송" id="submit_email" onclick="sendmail();">
-                 </td>
-              </tr>
-              <tr>
-   				<td><label for="chkNum">인증번호<span class="ico">*</span></label></td>
-   				<td>
-	   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
-	   				<input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" >
-	   				<input type="hidden" id="chknum" title="n">
-   				</td>
-   			</tr> 
-   			<tr style="display:none;" id="chk_ok">
-   				<td></td>
-   				<td style="color:#4075dd">인증번호가 같습니다.</td>
-   			</tr>
-   			<tr style="display:none;" id="chk_no">
-   				<td></td>
-   				<td style="color:red;">인증번호가 다릅니다.</td>
-   			</tr> 
-              <tr>
-                 <th align="right" width="100">
-                    이름<span class="ico">*</span>
-                   
-                 </th>
-                 <td>
-                    <input type="text" id="memberName" name="mem_name" style="border:1px solid #ccc"> 
-                 </td>
-              </tr>
+   <div id="signtitle"> 
+         <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
+	   <table>
+			   <tr>
+					<th align="right" width="100">
+					 아이디
+					 	<span class="idico" style="font-size:27px;">*</span>
+	
+	                 <td colspan="4"> 
+	                     <input type="text"  name="mem_id" id="memberId" title="n" style="border:1px solid #ccc;"placeholder="아이디를 입력해주세요"/>
+	                   	 <input type="button" value="중복확인" id="check" class="chk_btn">
+	                     <input type="hidden" id="chk"  title="n"><!-- 사용가능할경우  -->
+	                 </td>
+	                  <tr style="display:none;" id="chkid_ok">
+		   				<td></td>
+		   				<td style="color:#04700F">아이디 사용 가능</td>
+		   			</tr>
+		   			<tr style="display:none;" id="chkid_no">
+		   				<td></td>
+		   				<td style="color:red;">중복된 아이디 존재 </td>
+		   			</tr>
+		   		
+	   				<tr>
+		        		<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		                 <td width="600" height="30"></td>
+	             	</tr> 	   
+	   		   </tr>
+	 			<tr>
+	                 <th align="right" width="100">
+	                    비밀번호 <span class="pwico" style="font-size:25px;">*</span>
+	                 </th>
+	             
+	                 <td colspan="4">
+	                    <input type="password" id="memberpw"name="mem_pw" style="border:1px solid #ccc">
+	                 </td>
+	                
+	           </tr>
+	         		<tr>
+		        		<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		                 <td width="600" height="30"></td>
+	             	</tr>  
+	              <tr>
+	                 <th align="right" width="100">
+	                 비번확인 <span class="pwico" style="font-size:25px;">*</span>
+	                 </th>
+	                 <td>
+	                 	<input type="password" id="mempw" name="mempwchk" style="border:1px solid #ccc"onkeyup="chkpwd();">
+	                 </td> 
+	              </tr> 
+	              <tr style="display:none;" id="chkpw_ok">
+	   				<td></td>
+	   				<td style="color:#04700F">확인되었습니다</td>
+	   			</tr>
+	   			<tr style="display:none;" id="chkpw_no">
+	   				<td></td>
+	   				<td style="color:red;">패스워드가 다릅니다</td>
+	   			</tr>
+	   			<tr style="display:none;" id="chkpw">
+	   				<td></td>
+	   				<td style="color:red;">패스워드를 입력해주세요</td>
+	   			</tr>
+	   			<tr>
+		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		            <td width="600" height="30"></td>
+	            </tr>  
+	   		
+	           	<tr>
+	                 <th align="right" width="100">
+	                    이메일<span class="mailico" style="font-size:25px;">*</span>
+	                 <td>
+	                    <input type="text" id="memberMail"name="mem_email" title="n" style="border:1px solid #ccc" placeholder="email@studdype.com">
+	                    <input type="button" value="인증번호 전송" id="submit_email" class="mail_btn"onclick="sendmail();">
+	                 </td>
+	           </tr>
+           		<tr>
+	        		 <td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+	                 <td width="600" height="30"></td>
+            	</tr> 
+              	<tr>
+	   				<td><label for="chkNum">인증번호<span class="numico" style="font-size:25px;">*</span></label></td>
+	   				<td>
+		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
+		   				<input type="button" value="확인" id="chkNum_btn" class="chkNum_btn"onclick="chkVerifiNum();" >
+		   				<input type="hidden" id="chknum" title="n">
+	   				</td>
+   				</tr> 
+	   			<tr style="display:none;" id="chk_ok">
+	   				<td></td>
+	   				<td style="color:##04700F">인증번호가 같습니다.</td>
+	   			</tr>
+	   			<tr style="display:none;" id="chk_no">
+	   				<td></td>
+	   				<td style="color:red;">인증번호가 다릅니다.</td>
+	   			</tr> 
+	      		 <tr>
+		        		 <td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		                 <td width="600" height="30"></td>
+	            </tr> 
 	            <tr>
+	                 <th align="right" width="100">
+	                    이름<span class="nameico" style="font-size:25px;">*</span>
+	                 <td>
+	                    <input type="text" id="memberName" name="mem_name" style="border:1px solid #ccc" onkeyup="namechk();"> 
+	                 </td>
+              </tr>
+              <tr>
+			         <td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+			         <td width="600" height="30"></td>
+	         </tr>
+	           <tr>
 	               <th align="right" width="100">
-	                       주민번호<span class="ico">*</span>
+	                       주민번호<span class="rnoico" style="font-size:25px;">*</span>
 	                 </th>
 	                 <td colspan="5">
 	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
@@ -415,38 +425,51 @@ input{
 	            </tr>
 	            <tr style="display:none;" id="chknum_ok">
 	   				<td></td>
-	   				<td style="color:blue">올바른 주민번호입니다</td>
+	   				<td style="color:#04700F">올바른 주민번호입니다</td>
    				</tr>
 	   			<tr style="display:none;" id="chknum_no">
 	   				<td></td>
 	   				<td style="color:red;">올바르지 않은 주민번호 입니다</td>
-	   			</tr> 
-            	<tr>
+	   			</tr>   
+	            <tr>
+		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		            <td width="600" height="30"></td>
+	            </tr>
+	            <tr>
             		<th align="right" width="100">
-            			핸드폰번호<span class="ico">*</span>
+            			핸드폰번호<span class="phoneico" style="font-size:25px;">*</span>
             		</th>
             		<td colspan="5">
-            			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"/>
+            			<input type="tel" id="memberphone" name="mem_phone" maxlength="13" style="border:1px solid #ccc; width:350px;"pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-1234-5678 형식에 맞게 입력해주세요"onkeyup="chktel();"/>
             		</td>
             	</tr>
             	 <tr>
+			         <td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+			         <td width="600" height="30"></td>
+	         	</tr>
+            	 <tr>
                     <th align="right" width="100">
-            			성별<span class="ico">*</span>
+            			성별<span class="genderico" style="font-size:25px;">*</span>
             		</th>
             		<td>
-            		 	
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="M" >M
-            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="gender" value="F">F
-
+	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="M" onclick="changen(this.value);">M
+	            		&nbsp;&nbsp;&nbsp;
+	            		<input type="radio" style="width:23px;height:23px;" name="mem_gender" id="membergender" value="F" onclick="changen(this.value);">F
             		</td>
                 </tr>  
-             	
-        </table>
-        <br>
-          <input type="submit" id="sign" name="join" value="회원가입" >
-       </form>
-   </div>
-     <jsp:include page="../commond/studdypeFooter.jsp"></jsp:include>
+             	<tr>
+		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
+		            <td width="600" height="30"></td>
+	            </tr>
+      
+      
+  		 </table>
+             <input type="submit" id="sign" name="join" value="회원가입" >
+   
+	   </form>
+	   </div>
+
+     <jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 
 	<script src="./resources/assets/js/popper.min.js"></script>
 	<script src="./resources/assets/js/bootstrap.min.js"></script>

@@ -148,5 +148,20 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 		}
 		return res;
 	}
+	
+	@Override
+	public List<BoardDto> recentListForStudyHome(int s_no) {
+		List<BoardDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"recentListForStudyHome", s_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR][NoticeBoardDaoImpl] recentListForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 
 }

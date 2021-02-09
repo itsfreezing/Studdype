@@ -72,6 +72,30 @@ public class HomeController {
 		return "studdype/searchByCategory";
 	}
 	
+	@RequestMapping("/studdypeInfo.do")
+	public String studdypeInfo() {
+		
+		return "commond/studdypeInfo";
+	}
+	
+	@RequestMapping("/conditions.do")
+	public String condition() {
+		
+		return "commond/conditions";
+	}
+	
+	@RequestMapping("/policy.do")
+	public String policy() {
+		
+		return "commond/policy";
+	}
+	
+	@RequestMapping("/locationConditions.do")
+	public String locationConditions() {
+		
+		return "commond/locationConditions";
+	}
+	
 	//마이페이지로 이동
 	@RequestMapping("/myPage.do")
 	public String myPage(HttpSession session,String pagenum, Model model) {
@@ -174,9 +198,11 @@ public class HomeController {
 		session.setAttribute("login",login);
 		session.setAttribute("headerMenu", "myPage");
 		model.addAttribute("studylist", studylist);
+
 	
 	
 		return "studdype/myPage2";
+
 	}
 	//마이페이지 회원탈퇴 버튼 클릭시
 	@RequestMapping(value="/memberDelete.do",method = RequestMethod.GET)
@@ -381,7 +407,8 @@ public class HomeController {
 		String leaderName = studyBiz.leaderNameForStudyHome(study.getLeader_no());
 		String guName = studyBiz.guNameForStudyHome(study.getGu_no());
 		String siName = studyBiz.siNameForStudyHome(study.getSi_no());
-		List<BoardDto> noticeList = studyBiz.selectNoticeBoard(study.getS_no()); 
+		List<BoardDto> noticeList = studyBiz.recentListForStudyHome(study.getS_no()); 
+
 		// DB에 저장된 사진이 없을 때 
 		// null 값으로 넣으면 nullPointerException 발생
 		// File init~ 예외처리가 되지 않아서 임의 문자열을 입력

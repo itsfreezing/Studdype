@@ -439,7 +439,6 @@ function downloadFile(btn){
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
 		
-		
 		<!-- 첨부파일 부분 -->
 		<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
 			<div class="upload_box_detail">

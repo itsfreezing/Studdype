@@ -6,8 +6,7 @@
 <html lang="en">
 
 <head>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="./resources/assets/js/profile.js"></script>
+<link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script>
 function logout_btn(){
    var form = $("#logoutForm");
@@ -26,11 +25,11 @@ $(function() {
    // 해당 메뉴 페이지에 메뉴 active Class 추가
    $("#"+currentMenu).addClass("active");
    
-   $(".feature-page.header-area").css("height", "80px");
-   $(".hero-text-wrapper").css("height", "500px");
+   $(".feature-page.header-area").css("height", "70px");
+   $(".hero-text-wrapper").css("height", "400px");
    $(".nav-link").css("color", "black");
-   
 });
+
 
 
 
@@ -62,6 +61,9 @@ $(function() {
 	}
 
 </script>
+
+
+
 <style type="text/css">
 #studypopup .content{
   height:500px;
@@ -128,7 +130,7 @@ $(function() {
                            <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
-                           <a class="nav-link" href="searchByLocalPage.jsp">지역별 검색</a>
+                           <a class="nav-link" href="studyListLocation.do">지역별 검색</a>
                         </li>
                         <c:choose>
                         <c:when test="${login == null }">
@@ -151,12 +153,14 @@ $(function() {
 										<div id="down-menu">
 											<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
 											<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
+
 											<div id="down-bottom"><input type="button" onclick="studypopup();" value="나의 스터디"></div>
+
 										</div>
 											<a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
-											<a class="dropdown-item" href="myPage.do#myApply">신청 내역</a>
-											<a class="dropdown-item" href="myPage.do">신청받은 내역</a>
-											<a class="dropdown-item" href="myPage.do#myMeet">모임확인</a>
+											<a class="dropdown-item" id="myApply" href="myPage.do#myApply">스터디 신청 내역</a>
+											<a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
+											<a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
 											<hr id="profileHR">
 											<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
 									</div>
@@ -187,7 +191,6 @@ $(function() {
                   <div class="hero-text-inner">
                      <div class="hero-text">
 
-                        
 
                      </div>
                   </div>

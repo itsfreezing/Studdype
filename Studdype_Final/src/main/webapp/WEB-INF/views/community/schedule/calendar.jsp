@@ -31,45 +31,7 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 
     <script type="text/javascript">
-/*           document.addEventListener("DOMContentLoaded", function() {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-        	initialView: "dayGridMonth",
-        	    events: function(meetList, start, end, callback){
-        	    	$.ajax({
-        	    		url: "calendar.do",
-        	    		contentType:"application/json",
-        	    		dataType: "json",
-        	    		type:"post",
-        	    		data: {
-        	    				start: moment(meetList.vote_startdate).format("YYYY-MM-DD"),
-        	    				end: moment(meetList.vote_enddate).format("YYY-MM-DD"),
-        	    				title: meetList.meet_title
-        	    				}, 
-        	    		success: function(data){
-						console.log(data);
-        	    		},
-        	    		error: function(){
-        	    			alert("통신실패");
-        	    		}
-        	    	});
-        	    }
-        	
-        });
-        calendar.render();
-      }); */
-      $(function(){
-    	  alert("12");
-		
-    	  var calendarEl = document.getElementById('calendar');
-          alert("78");
-          var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-          });
-          calendar.render();
-       
-      alert("34");
-      });
+
     </script>
 <style type="text/css">
 h1 {

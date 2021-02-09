@@ -9,7 +9,7 @@ public class Pagination {
 	
 	public Pagination() {
 		this.page = 1;
-		this.perPageNum = 9;
+		this.perPageNum = 12;
 	}
 	
 	public void setPage(int page) {

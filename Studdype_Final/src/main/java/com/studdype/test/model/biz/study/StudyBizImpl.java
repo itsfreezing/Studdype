@@ -68,12 +68,13 @@ public class StudyBizImpl implements StudyBiz{
 	public StudyDto selectOneBySno(int s_no) {
 		return study_Dao.selectOneBySno(s_no);
 	}
+	
 	// 지역 (시) selectList
-
 	@Override
 	public List<LocationSiDto> locationSiList() {
 		return locationSidao.locationSiList();
 	}
+	
 	// 지역 (구/군) selectList
 	@Override
 	public List<LocationGuDto> locationGuList() {
@@ -204,8 +205,36 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
+
 	public Map<Integer,String> selectStudyName(int[] s_no) {
 		return study_Dao.selectStudyName(s_no);
 	}
+
+	public List<StudyDto> studyListCategory(SearchPagination searchPagination) {
+		return study_Dao.studyListCategory(searchPagination);
+	}
+
+	//지역별 검색 
+	@Override
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
+		return study_Dao.studyListLocation(searchPagination);
+	}
+	
+	@Override
+	public StudyDto selectOneBySi_no(int si_no) {
+		return study_Dao.selectOneBySi_no(si_no);
+	}
+	@Override
+	public List<StudyDto> selectStudyByLocation(int si_no){
+		return study_Dao.selectStudyByLocation(si_no);
+	}
+
+	// [studyHome] 공지사항 게시글 리스트 최신글 3개 가져오기
+	@Override
+	public List<BoardDto> recentListForStudyHome(int s_no) {
+		return noticeDao.recentListForStudyHome(s_no);
+	}
+
+	
 
 }
