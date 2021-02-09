@@ -145,32 +145,49 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
-
-	@Override
-	public List<StudyDto> selectStudyByLocation(int si_no) {
-		List<StudyDto>res=null;
-			try {
-				res=sqlSession.selectList(NAMESPACE+"selectStudyByLocation", si_no);
-			} catch (Exception e) {
-				System.out.println("[ERROR]:selectStudyByLocation");
-				e.printStackTrace();
-			}
-			return res;
-	}
-	
 	@Override
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
-		List<StudyDto> res= null;
+		List<StudyDto>res=null;
 		
 		try {
 			res=sqlSession.selectList(NAMESPACE+"studyListLocation",searchPagination);
 		} catch (Exception e) {
-			System.out.println("[ERROR]:LocationStudyList");
+			System.out.println("[ERROR]:studyListLocationError");
 			e.printStackTrace();
 		}
 		return res;
 	}
 
+	@Override
+	public List<StudyDto> selectStudyByLocation(int gu_no) {
+			List<StudyDto> res = null;
+		
+		try {
+			res = sqlSession.selectList(NAMESPACE+"selectStudyByLocation", gu_no);
+		} catch (Exception e) {
+			System.out.println("error:selectStudyByLocation");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	/*
+	 * @Override public List<StudyDto> selectStudyByLocation(int si_no) {
+	 * List<StudyDto>res=null; try {
+	 * res=sqlSession.selectList(NAMESPACE+"selectStudyByLocation", si_no); } catch
+	 * (Exception e) { System.out.println("[ERROR]:selectStudyByLocation");
+	 * e.printStackTrace(); } return res; }
+	 * 
+	 * @Override public List<StudyDto> studyListLocation(SearchPagination
+	 * searchPagination) { List<StudyDto> res= null;
+	 * 
+	 * try {
+	 * res=sqlSession.selectList(NAMESPACE+"studyListLocation",searchPagination); }
+	 * catch (Exception e) { System.out.println("[ERROR]:LocationStudyList");
+	 * e.printStackTrace(); } return res; }
+	 * 
+	 * 
+	 */
 	
 	
 

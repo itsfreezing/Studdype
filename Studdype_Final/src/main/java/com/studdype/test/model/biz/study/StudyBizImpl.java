@@ -211,10 +211,11 @@ public class StudyBizImpl implements StudyBiz{
 
 	//지역별 검색 
 	@Override
-	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination,int gu_no) {
 		return study_Dao.studyListLocation(searchPagination);
 	}
-
+	
+	
 	// [studyHome] 공지사항 게시글 리스트 최신글 3개 가져오기
 	@Override
 	public List<BoardDto> recentListForStudyHome(int s_no) {

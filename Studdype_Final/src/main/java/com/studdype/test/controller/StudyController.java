@@ -1,6 +1,7 @@
 package com.studdype.test.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.studdype.test.common.FileHandler;
@@ -451,18 +450,17 @@ public class StudyController {
 			
 		
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("studyList", studyList);
+		model.addAttribute("studyList",studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
 		session.setAttribute("headerMenu", "home");
-		
 		return "studdype/searchByCategory";
 	}
 	//지역별 검색 
-	@RequestMapping(value = "/studyListLocation.do", method = {RequestMethod.GET,RequestMethod.POST})
-	public String SearchLocation(Model model,StudyDto studyDto,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
+	@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
+	public String studyListLocation(Model model,HttpServletRequest request,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -472,22 +470,31 @@ public class StudyController {
 		Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
 		List<LocationSiDto> sidto = studyBiz.locationSiList();
 		List<LocationGuDto> gudto = studyBiz.locationGuList();
+		StudyDto res= new StudyDto();
 		// 로그
 		logger.info("STUDY - SearchLocationLIST");
-		
+		System.out.println("si_no:"+searchPagination.getSi_no());
+		System.out.println("gu_no:"+searchPagination.getGu_no());
 		studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
 		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
-		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); // 구 리스트
-		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
+		selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); //시 리스트
+		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 구 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
 	
+		
+		for(int i=0; i<studyList.size(); i++) {
+				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+		}
+			
+		
 		model.addAttribute("sidto", sidto);
 		model.addAttribute("gudto", gudto);
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("studyList", studyList);
+		model.addAttribute("studyList",studyList);
+		model.addAttribute("studyList", studyBiz.studyList(searchPagination));
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);

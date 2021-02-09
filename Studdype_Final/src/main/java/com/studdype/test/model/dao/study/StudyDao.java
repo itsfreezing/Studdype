@@ -23,6 +23,7 @@ String NAMESPACE="study.";
 
 	public List<StudyDto> studyListCategory(SearchPagination searchPagination); // 카테고리 번호로 스터디 정보 가져오기
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
-	public List<StudyDto>selectStudyByLocation(int si_no);//시 번호 스터디 검색
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
+	public List<StudyDto> selectStudyByLocation(int gu_no);
 }
+

@@ -22,10 +22,10 @@ public class SearchPagination extends Pagination{
 		this.si_no=si_no;
 	}
 	
-	public int getGU_no() {
+	public int getGu_no() {
 		return gu_no;
 	}
-	public void setGU_no(int gu_no) {
+	public void setGu_no(int gu_no) {
 		this.gu_no=gu_no;
 	}
 	public String getsi_name() {

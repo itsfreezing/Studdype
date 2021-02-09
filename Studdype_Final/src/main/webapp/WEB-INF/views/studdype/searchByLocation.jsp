@@ -27,32 +27,7 @@
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script type="text/javascript">
-/*$(document).ready(function(){
-	$("#Search").click(function(){
-			var selectSi=$("#selectLocationSi option:selected").val();
-			alert(selectSi);
-			var selectGu=$("#selectLocationGu option:selected").val();
-			alert(selectGu);
-			var locationVal={
-					"selectSi":selectSi,
-				 	"selectGu":selectGu 
-			};
-			$.ajax({
-				url:"studyListLocation.do",
-				data:JSON.stringify(locationVal),
-				type:"POST",
-				contentType:"application/json",
-				dataType:"json",
-				success:function(data){
-					locationVal=data;
-				},error:function(){
-					alert("통신fail");
-				}
-			});
-				
-		});
-	});
-	*/
+
 	$(function(){
 		$(".hero-text").html("<h3>지역별 검색</h3>");
 		$(".row justify-content-center").css({"background-image":"url('resources/img/location.png')"});	
@@ -77,18 +52,62 @@ function search(){
 	var form =$("#location");
 	alert(selectSi);
 	alert(selectGu);
-	if(selectSi==null){
-		selectSi.focus();
-		return false;
-	}else if(selectGu==null){
-		selectGu.focus();
-		return false;
-	}else{
+	if(selectSi!=null&&selectGu!=null){
+		alert("성공");
 		form.submit();
-	}
-	
-		
+	}else{
+		return false;
+	}	
 }
+/* $(document).ready(function(){
+	$("#search").click(function(){
+		var selectSi=$("#selectLocationSi option:selected").val();
+		var selectGu=$("#selectLocationGu option:selected").val();
+		var locationVal={
+				"selectSi":selectSi,
+			 	"selectGu":selectGu 
+		};
+		$.ajax({
+			url:"studyListLocation.do",
+			data:locationVal,
+			type:"GET",
+			contentType:"application/json",
+			dataType:"json",
+			success:function(map){
+				var selectSi=map.selectSi;
+				var selectGu=map.selectGu;
+				for(int i=0;i<studyList.size();i++){
+					
+				}
+			},error:function(){
+				alert("통신fail");
+			}
+		});
+	
+	});
+}); 
+function search(){
+	var selectSi=$("#selectLocationSi option:selected").val();
+	var selectGu=$("#selectLocationGu option:selected").val();
+	var locationVal={
+			"selectSi":selectSi,
+		 	"selectGu":selectGu 
+	};
+	$.ajax({
+		url:"studyListLocation.do",
+		data:locationVal,
+		type:"GET",
+		contentType:"application/json",
+		dataType:"json",
+		success:function(data){
+			
+		},error:function(){
+			alert("통신fail");
+		}
+	});
+}*/
+</script>
+<script type="text/javascript">
 $(function(){
 	$(".justify-content-center").hide();
 });
@@ -105,44 +124,45 @@ $(function(){
 	</div>
 	<!-- 스터디 영역 -->
 	<br><br>
-	<form action="studyListLocation.do" method="POST" id="location" >
+	<form action="studyListLocation.do" method="GET" id="location" onsubmit="search();">
 		 <div id="mainsection">
-		 		<div id="si">
-						<label>스터디 지역(시)</label> 
-						<select class="form-control"
-							name="si_no" id="selectLocationSi" >
-							<option>(시 단위)</option>
-							<c:forEach var="locationsi" items="${sidto}">
-								<option value="${locationsi.si_no}">${locationsi.si_name }</option>
-							</c:forEach>
-						</select>
-				</div>
-				<div id="gu">
-						<label>스터디 지역(구/군)</label> 
-						<select class="form-control"
-							name="gu_no" id="selectLocationGu" >
-							<option>(구/군 단위)</option>
-							<c:forEach var="locationgu" items="${gudto}">
-								<option class="${locationgu.si_no }"
-									value="${locationgu.gu_no }">${locationgu.gu_name }</option>
-							</c:forEach>
-						</select>
-				</div>
+		 				<div id="si">
+								<label>스터디 지역(시)</label> 
+								<select class="form-control"
+									name="si_no" id="selectLocationSi" >
+									<option>(시 단위)</option>
+									<c:forEach var="locationsi" items="${sidto}">
+										<option value="${locationsi.si_no}">${locationsi.si_name }</option>
+									</c:forEach>
+								</select>
+						</div>
+						<div id="gu">
+								<label>스터디 지역(구/군)</label> 
+								<select class="form-control"
+									name="gu_no" id="selectLocationGu" >
+									<option>(구/군 단위)</option>
+									<c:forEach var="locationgu" items="${gudto}">
+										<option class="${locationgu.si_no }"
+											value="${locationgu.gu_no }">${locationgu.gu_name }</option>
+									</c:forEach>
+								</select>
+						</div>
 						<div id="search_btn">
 							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
-								<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
+									<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>
-				</div>
-		</form>
+			</div>
+	
 			
 					<br><br>
-		<div class="container">
+		<div class="container" id="studyList">
 			<div class="row">
-		<c:if test="${not empty list}">
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
+		
+		 <c:if test="${not empty list}">
 				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-lg-4 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
@@ -165,19 +185,19 @@ $(function(){
 							<p>${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
-								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
-									style="float: right;"><img
-										src="./resources/assets/img/profile_user.png"
+								<span> <b>${leaderName.get(studyDto.leader_no)}</b> 
+								<a style="float: right;">
+								<img src="./resources/assets/img/profile_user.png"
 										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
 								</span>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-			</c:if>
+			 </c:if>
 			</div>
 		</div>
-		
+	</form>	
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
