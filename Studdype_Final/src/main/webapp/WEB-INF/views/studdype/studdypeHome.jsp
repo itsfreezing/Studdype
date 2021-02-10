@@ -51,15 +51,7 @@
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		$(".justify-content-center").hide(); 
 	});
-/* 	
-	$(document).on('pclick', '#btnSearch', function(e){
-		e.preventDefault();
-		var url = "${studyList}";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&search=" + $('#search').val();
-		location.href = url;
-		console.log(url);
-	}); */
+
 </script>
 
 <style type="text/css">
@@ -83,8 +75,33 @@ input#search:focus {
 }
 .blogpost-area{
 	background: #ffff;
-	margin-left: 5%;
-	margin-right: 5%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.studyBtn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+	float: right;
+}
+.studyBtn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
 }
 </style>
 
@@ -170,6 +187,11 @@ input#search:focus {
 				</c:forEach>
 			</div>
 		</div>
+		<c:choose>
+			<c:when test="${login != null }">
+				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+			</c:when>
+		</c:choose>
 	</div>
 	<!-- 스터디 리스트 끝 -->
 

@@ -69,6 +69,7 @@ public class ImageBoardController {
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("galleryList", photoList);
 		model.addAttribute("attachImage", attachImage);
+		session.setAttribute("leftnavi", "gallery");
 		
 		return "community/gallery/gallery";
 	}
@@ -140,6 +141,7 @@ public class ImageBoardController {
 			return "commond/alert";
 		}
 		if (res > 0) {
+			model.addAttribute("msg","글 작성을 완료했습니다.");
 			return "redirect:gallery.do";
 		} else {
 			return "redirect:gallerywriteform.do";
@@ -201,9 +203,10 @@ public class ImageBoardController {
 	public String galleryUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
 		int res = 0;
-
+		
 		//파일 업로드
-		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		MultipartFile[] mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
+		
 		//사진이 있으면
 		if(mfileList != null) {
 			String path = fileHandler.getPath(request);
