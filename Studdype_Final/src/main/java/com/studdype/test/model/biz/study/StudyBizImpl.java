@@ -101,6 +101,7 @@ public class StudyBizImpl implements StudyBiz{
 		}
 		
 		insertRes = study_Dao.insertStudy(dto);
+		System.out.println();
 		System.out.println("mfileList: "+mfileList+" path: "+path+" fileList:"+fileList);
 		// 실행 성공 시 실제 파일 저장
 		if(insertRes == 1 && basicPhoto == 0) {
@@ -170,6 +171,7 @@ public class StudyBizImpl implements StudyBiz{
 		if(insertRes == 1 && basicPhoto == 0) {
 			res = 1;
 			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+			System.out.println("mfileList :"+mfileList[0]);
 		}else {
 			res = insertRes;
 		}

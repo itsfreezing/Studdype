@@ -478,7 +478,7 @@ function studypopup(multipleFilter) {
     <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:45%; left:51%;" id="pwd1" name="pwd1"  type="password"><br>
     <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:49%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:49%; left:51%;" id="pwd2" name="pwd2"  type="password">
     <div class="alert alert-success" id="alert-success" style="position:absolute; top: 54%; left: 41%;width: 349px;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 54%; left: 41%; width: 349px;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
-    <p style="position:absolute; top:54%;left:41%; color:red; " id="aaaaa" >비밀번호를 잘생각해서 변경해 주세요!</p>
+    <p style="position:absolute; top:54%;left:41%; color:red; font-size:16px;" id="aaaaa" >비밀번호를 신중하게 변경해 주세요!</p>
 
 
     <button onclick="changepw()"  class="profileBtn submitBtnPW" >변경</button>
