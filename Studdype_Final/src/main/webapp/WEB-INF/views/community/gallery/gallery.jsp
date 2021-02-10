@@ -187,12 +187,12 @@ console.log(url);
 		<br> <br>
 		<h1 style="text-align: center;">Gallery</h1>
 		<br>
-		<form action="galleryList.do" method="get" role="form">
+		<!-- 검색창 -->
+		<form action="studyList.do" method="get" role="form">
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
-				<span><img src="./resources/assets/img/logo_purple.png"class="logo"></span> 
-					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword }" style="width:100px; height:60px; margin-top:10px;"> <span>
-					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:10px; border:none; background-color: #f9fafc;">
+					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword}" style="width:100px; height:60px; margin-top:10px;"> <span>
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:15px; border:none; background-color: #f9fafc;">
 						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 					</button>
 				</span>
@@ -215,10 +215,10 @@ console.log(url);
 						<a href="galleryDetail.do?b_no=${galleryList.b_no }" title="">
 						<img src="${attachImage.get(status.index).getF_url() }" alt="" style="width: 500px; height: 400px;"/>
 							<h2>
-								<span class="text-white">${galleryList.b_title} </span>
+								<span class="text-white" >클릭해주세요</span>
 							</h2>
 						</a>
-						<h4 class="text-center">${galleryList.b_title}</h4>
+						<h4 class="text-center" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${galleryList.b_title}</h4>
 					</div>
 				</div>
 				</c:forEach>

@@ -55,6 +55,8 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		
 		try {
 			res = sqlSession.selectList(NAMESPACE+"galleryDetail", b_no);
+			for(int i=0; i < res.size(); i++ ) {
+			}
 		} catch (Exception e) {
 			System.out.println("에러: 갤러리 파일 디테일");
 			e.printStackTrace();
@@ -84,12 +86,16 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		try {
 			for(int i=0; i < fileList.size(); i++) {
 				res = sqlSession.insert(NAMESPACE+"updateGalleryFile", fileList.get(i));
+				
+				if(res == 1) {
+					resCnt++;
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("에러 업데이트갤러리");
 			e.printStackTrace();
 		}
-		return res;
+		return resCnt;
 	}
 
 
