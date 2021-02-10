@@ -1,3 +1,7 @@
+
+
+
+
 $(function(){
 	$("#alert-success").hide();
    	$("#alert-danger").hide();
@@ -6,13 +10,16 @@ $(function(){
 		var pwd1=$("#pwd1").val(); 
 	  	var pwd2=$("#pwd2").val(); 
 	  
+		
 		if(pwd1 != "" || pwd2 != ""){
-	    	
+	    		
 			if(pwd1 == pwd2){ 
+				$("#aaaaa").hide();
 	        	$("#alert-success").show(); 
 	            $("#alert-danger").hide(); 
 	            $("#submit").removeAttr("disabled"); 
 	        }else{ 
+				$("#aaaaa").hide();
         		$("#alert-success").hide();
                	$("#alert-danger").show();
                	$("#submit").attr("disabled", "disabled"); 
@@ -118,75 +125,34 @@ function meet(){
    $('#a').css("color","white");
 }
         
-//비밀번호 변경
-function showPw(multipleFilter) {
-	
-	const popup = document.querySelector('#popup');
-    
-	if (multipleFilter) {
-       popup.classList.add('multiple-filter');
-    } else {
-       popup.classList.remove('multiple-filter');
-    }
-    
-	popup.classList.remove('hide');
-}
-
-function pwclosePopup() {
-	const popup = document.querySelector('#popup');
-    popup.classList.add('hide');
-}
-
-function changepw(){
-	var a = $('input[name=pwd2]').val();
-	         
-	location.href="changepw.do?mem_no="+'${login.mem_no}'+"&new_pw="+a;
-}
-
-//이메일 변경 
-function showEmail(multipleFilter) {
-    
-const emailpopup = document.querySelector('#emailpopup');
-    
-    if (multipleFilter) {
-       emailpopup.classList.add('multiple-filter');
-    } else {
-       emailpopup.classList.remove('multiple-filter');
-    }
-    
-    emailpopup.classList.remove('hide');
-}
-
-function closeemailPopup() {
-	const emailpopup = document.querySelector('#emailpopup');
-	emailpopup.classList.add('hide');
-}
-     
-function changeemail(){
-	var a = $('input[name=newemail]').val();
-	location.href="changeemail.do?mem_no="+'${login.mem_no}'+"&new_email="+a;
-
-}
-     
 //전화번호 변경
-function showphone(multipleFilter) {
-	const phonepopup = document.querySelector('#phonepopup');
-    
-    if (multipleFilter) {
-       phonepopup.classList.add('multiple-filter');
-    } else {
-       phonepopup.classList.remove('multiple-filter');
-    }
-    
-    phonepopup.classList.remove('hide');
-}
+		function showphone(multipleFilter) {
+			const phonepopup = document.querySelector('#phonepopup');
+		    
+		    if (multipleFilter) {
+		       phonepopup.classList.add('multiple-filter');
+		    } else {
+		       phonepopup.classList.remove('multiple-filter');
+		    }
+		    
+		    phonepopup.classList.remove('hide');
+		}
 
-function closephonePopup() {
-	const emailpopup = document.querySelector('#phonepopup');
-    phonepopup.classList.add('hide');
-}
+		function closephonePopup() {
+			const emailpopup = document.querySelector('#phonepopup');
+			
+		    phonepopup.classList.add('hide');
+		
+		}
 
-function changephone(){
-	var a = $('input[name=newphone]').val();
-    //location.href="changeemail.do?mem_no="+'${login.mem_no}'+"&new_email="+a;
+		function changephone(){
+			var a = $('input[name=newphone]').val();
+			var b = $('input[name=mem_no]').val();
+		
+		    location.href="changephone.do?mem_no="+b+"&new_phone="+a;
 }
+	
+
+
+
+     

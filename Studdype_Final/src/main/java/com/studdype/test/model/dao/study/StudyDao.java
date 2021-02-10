@@ -20,7 +20,13 @@ public interface StudyDao {
 
 	public List<StudyDto> studyListCategory(SearchPagination searchPagination); // 카테고리 번호로 스터디 정보 가져오기
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
+	public Map<Integer,String> selectStudyName(int[] s_no); //스터디 번호에 맞는 스터디 이름가져오기 
+	public int nomalStudyImg(StudyDto dto); 
+
+
+	public List<StudyDto>selectStudyByLocation(int si_no);//지역 시와 구 스터디 검색
+	public StudyDto selectOneBySi_no(int si_no);
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
-	public List<StudyDto> selectStudyByLocation(int gu_no);
+
 }
 

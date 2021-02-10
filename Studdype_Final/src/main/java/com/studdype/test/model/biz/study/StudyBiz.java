@@ -31,7 +31,7 @@ public interface StudyBiz {
 	public int selectTotalStudyListNum(SearchPagination searchPagination); //메인페이지 리스트 개수
 	public List<StudyDto> studyLeader(int leader_no);
 	public int newLeader(StudyDto dto); //스터디관리 리더변경 
-	public int newInfo(StudyDto dto); // 스터디관리 스터디 소개변경
+	public int newInfo(StudyDto dto,MultipartFile[] mfileList, String path, List<FileDto> fileList); // 스터디관리 스터디 소개변경
 	public String categoryNameForStudyHome(int cate_no); // [studyHome] 카테고리 번호로 카테고리 이름 가져오기
 	public String leaderNameForStudyHome(int leader_no); // [studyHome] 리더 번호로 리더 이름 가져오기
 	public String guNameForStudyHome(int gu_no); // [studyHome] 구 번호로 구 이름 가져오기
@@ -41,5 +41,13 @@ public interface StudyBiz {
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no);	// 시 이름 가져오기
 	public Map<Integer, String> selectLocationGuOfStudy(int gu_no);	// 구 이름 가져오기
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
-	public List<StudyDto> studyListLocation(SearchPagination searchPagination,int gu_no);//지역별 검색
+	public int nomalStudyImg(StudyDto dto);
+	public Map<Integer,String> selectStudyName(int[] s_no);
+	
+
+
+	public StudyDto selectOneBySi_no(int si_no);
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
+	public List<StudyDto> selectStudyByLocation(int si_no);
+
 }

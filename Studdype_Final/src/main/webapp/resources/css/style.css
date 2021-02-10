@@ -401,7 +401,24 @@ a.scroll-down:hover {
 	content: "";
 	margin-left: -110px;
 }
+.hero-slider-area .owl-dots div {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: purple;
+    margin: 2px;
+    border-radius: 50%;
+}
+.hero-slider-area .owl-dots div.active {
+    background: #ffffff;
+}
 
+.hero-slider-area .owl-dots {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 26px;
+}
 .features-top h6:after {
 	left: auto;
 	right: 50%;
@@ -1251,7 +1268,7 @@ a.scroll-down:hover {
 	left: 50%;
 	width: 24px;
 	height: 1px;
-	background: #fff;
+
 	content: "";
 	margin-left: -175px;
 }
@@ -1573,25 +1590,9 @@ div.mainBanner > img{
 	margin-top: 20px;
 }
 
-.hero-slider-area .owl-dots div {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	background: #c0d7e9;
-	margin: 2px;
-	border-radius: 50%;
-}
 
-.hero-slider-area .owl-dots div.active {
-	background: #ffffff;
-}
 
-.hero-slider-area .owl-dots {
-	text-align: center;
-	position: relative;
-	margin-top: -50px;
-	margin-bottom: 26px;
-}
+
 
 .blogpost-area {
 	padding: 100px 0;

@@ -101,7 +101,7 @@ public class StudyBizImpl implements StudyBiz{
 		}
 		
 		insertRes = study_Dao.insertStudy(dto);
-		
+		System.out.println("mfileList: "+mfileList+" path: "+path+" fileList:"+fileList);
 		// 실행 성공 시 실제 파일 저장
 		if(insertRes == 1 && basicPhoto == 0) {
 			res = 1;
@@ -154,11 +154,28 @@ public class StudyBizImpl implements StudyBiz{
 		
 		return study_Dao.newLeader(dto);
 	}
-
+	@Transactional
 	@Override
-	public int newInfo(StudyDto dto) {
+	public int newInfo(StudyDto dto,MultipartFile[] mfileList, String path, List<FileDto> fileList) {
+		int res = 0;
+		int insertRes = 0;
+		int basicPhoto = 0;
+		System.out.println(dto);
 		
-		return study_Dao.newInfo(dto);
+		if(mfileList == null) {
+			basicPhoto = 1;
+		}
+		insertRes = study_Dao.newInfo(dto);
+		
+		if(insertRes == 1 && basicPhoto == 0) {
+			res = 1;
+			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+		}else {
+			res = insertRes;
+		}
+		
+		
+		return res;
 	}
 	public Map<Integer, String> selectLocationSiOfStudy(int si_no) {
 
@@ -205,6 +222,11 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
+
+	public Map<Integer,String> selectStudyName(int[] s_no) {
+		return study_Dao.selectStudyName(s_no);
+	}
+
 	public List<StudyDto> studyListCategory(SearchPagination searchPagination) {
 		return study_Dao.studyListCategory(searchPagination);
 	}
@@ -222,5 +244,12 @@ public class StudyBizImpl implements StudyBiz{
 		return noticeDao.recentListForStudyHome(s_no);
 	}
 
+	@Override
+	public int nomalStudyImg(StudyDto dto) {
+		
+		return study_Dao.nomalStudyImg(dto);
+	}
+
 	
+
 }
