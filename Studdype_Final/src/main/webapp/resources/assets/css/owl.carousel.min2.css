@@ -23,6 +23,36 @@
 	width:100%;
 	z-index:1
 	}
+
+	.disabled{
+      /*display: inline-block!important;
+      next/prev 기본 버튼 만들고 싶으면 주석 풀면됨*/
+      display: none;
+   }
+   
+   .owl-next{
+      color: green;
+   }
+   
+   
+   .customNextBtn{
+      display: inline-block!important;
+      background-color: black;
+      color: #fff;
+      position: absolute;
+      top:  1152px;
+      left: 58%;
+   }
+   
+   .customPrevBtn{
+      display: inline-block!important;
+      background-color: black;
+      color: #fff;
+      position: absolute;
+      top: 1152px;
+      left: 40%;
+   }
+
 	
 	.disabled{
 		/*display: inline-block!important;
@@ -52,7 +82,7 @@
 		top: 1200px;
 		left: 40%;
 	}
-	
+
 	
 	.owl-carousel .owl-stage{
 	position:relative;

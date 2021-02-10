@@ -43,7 +43,7 @@
 		</select>
 		
 		<update id="updateMember" parameterType="memberDto" >
-			UPDATE MEMBER SET MEM_ID = #{mem_id}, MEM_PW = #{mem_pw}, MEM_EMAIL = #{mem_email}, MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
+			UPDATE MEMBER SET MEM_ID = #{mem_id},  MEM_EMAIL = #{mem_email}, MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
 		</update>
 		
 		<select id="idchk" parameterType="String" resultType="memberDto">
@@ -66,4 +66,11 @@
 		<select id="allMember" resultType="memberDto">
 			SELECT * FROM MEMBER
 		</select>
+		
+		<update id="newemail" parameterType="memberDto">
+			UPDATE MEMBER SET MEM_EMAIL = #{mem_email} WHERE MEM_NO = #{mem_no}
+		</update>
+		<update id="updatephone" parameterType="memberDto">
+			UPDATE MEMBER SET MEM_PHONE = #{mem_phone} WHERE MEM_NO = #{mem_no}
+		</update>
 	</mapper>

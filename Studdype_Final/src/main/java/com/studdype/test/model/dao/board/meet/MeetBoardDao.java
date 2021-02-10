@@ -33,6 +33,12 @@ public interface MeetBoardDao {
 	public List<VoteDto> selectAttendMember(int meet_no);				// 모임게시판_투표 '참석' [멤버 리스트]
 	public List<VoteDto> selectAbsentMember(int meet_no);				// 모임게시판_투표 '불참석' [멤버 리스트]
 	public List<MeetDto> selectMeetDBForCalendar(int s_no);				// 캘린더에 meet DB값 가져오기
+
+	
+	//성효꺼 
+	public List<MeetDto> selectMeetByS_no(int s_no[]); 					// 스터디번호로 모임리스트 가져오기
+
 	public MeetDto selectCalendarByData(int s_no, String meet_title, String vote_startdate, String vote_enddate );
+
 
 }
