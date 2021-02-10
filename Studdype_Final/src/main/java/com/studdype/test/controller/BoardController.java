@@ -329,7 +329,7 @@ public class BoardController {
 	public String calendarView(HttpSession session, Model model ) {
 		
 		
-		
+		session.setAttribute("leftnavi", "calendar1");
 		return "community/schedule/test";
 	}
 	
@@ -404,18 +404,28 @@ public class BoardController {
 	//켈린더
 	@RequestMapping(value="/calendar.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpServletResponse response, HttpSession session, MeetDto dto) {
+	Map<String, Object> calendar(HttpServletRequest request, Model model, HttpSession session, MeetDto dto) {
 		int s_no = ((StudyDto)session.getAttribute("study")).getS_no(); //스터디 번호
 		logger.info("calendar");
 		List<MeetDto> meetList = meetBiz.selectMeetDBForCalendar(s_no);
 		MeetDto dtos = meetBiz.selectOneMeetBoard(dto.getMeet_no());
-		
 		Map<String, Object> calendarMap = new HashMap<String, Object>();
+		
 		
 		
 		calendarMap.put("meetList", meetList);
 		calendarMap.put("dtos", dtos);
 		return calendarMap;
+	}
+	@RequestMapping(value="/selectcalendar.do",method = RequestMethod.GET )
+	@ResponseBody
+	Map selectcalendar(HttpServletRequest request, Model model, HttpSession session, MeetDto dto) {
+		int s_no = ((StudyDto)session.getAttribute("study")).getS_no();
+		Map dataMap = new HashMap();
+		MeetDto meetListData = meetBiz.selectCalendarByData(s_no, dto.getMeet_title(), dto.getVote_startdate(), dto.getVote_enddate());
+		dataMap.put("dataList", meetListData);
+		
+		return dataMap;
 	}
 		
 	// 페이징 함수

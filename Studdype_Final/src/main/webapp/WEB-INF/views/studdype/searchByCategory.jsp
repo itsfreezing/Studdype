@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>main page</title>
+<title>Studdype categories</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -324,135 +324,107 @@ height: 400px;
 					<button class="button button--winona button--border-thin button--round-s" data-text="IT" id="catebtn1" onclick="location.href='studycategoryList.do?cate_no=1'" style="display: inline-block;"><span>IT</span></button>
 					<button class="button button--winona button--border-thin button--round-s" data-text="자격증" id="catebtn2" onclick="location.href='studycategoryList.do?cate_no=2'" style="display: inline-block;"><span>자격증</span></button>
 					<button class="button button--winona button--border-thin button--round-s" data-text="공무원" id="catebtn3" onclick="location.href='studycategoryList.do?cate_no=3'" style="display: inline-block;"><span>공무원</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn4" onclick="location.href='studycategoryList.do?cate_no=4'" style="display: inline-block;"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn5" onclick="location.href='studycategoryList.do?cate_no=5'" style="display: inline-block;"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn6" onclick="location.href='studycategoryList.do?cate_no=6'" style="display: inline-block;"><span>Publish</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="Publish" id="catebtn7" onclick="location.href='studycategoryList.do?cate_no=7'" style="display: inline-block;"><span>Publish</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="뷰티" id="catebtn4" onclick="location.href='studycategoryList.do?cate_no=4'" style="display: inline-block;"><span>뷰티</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="수능" id="catebtn5" onclick="location.href='studycategoryList.do?cate_no=5'" style="display: inline-block;"><span>수능</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="어학" id="catebtn6" onclick="location.href='studycategoryList.do?cate_no=6'" style="display: inline-block;"><span>어학</span></button>
+					<button class="button button--winona button--border-thin button--round-s" data-text="취업스터디" id="catebtn7" onclick="location.href='studycategoryList.do?cate_no=7'" style="display: inline-block;"><span>취업스터디</span></button>
 					<button class="button button--winona button--border-thin button--round-s" data-text="기타" id="catebtn8" onclick="location.href='studycategoryList.do?cate_no=8'" style="display: inline-block;"><span>기타</span></button>
 				</div>
 <script type="text/javascript">
-
-
 $("#catebtn1").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	$("#changeImage").attr("src", './resources/assets/img/category/IT.jpg');
 	}
 });
-
 $("#catebtn1").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+		$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
 	}
 });
-
 $("#catebtn2").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	$("#changeImage").attr("src", './resources/assets/img/category/test.jpeg');
 	}
 });
-
 $("#catebtn2").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
+		$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
 	}
 });
-
-
 $("#catebtn3").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
+	$("#changeImage").attr("src", './resources/assets/img/category/government.jpeg');
 	}
 });
-
 $("#catebtn3").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
-	}
-});
-
-
-$("#catebtn4").on({
-	'mouseover': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
-	}
-});
-
-$("#catebtn4").on({
-	'mouseout': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
-	}
-});
-
-
-$("#catebtn5").on({
-	'mouseover': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
-	}
-});
-
-$("#catebtn5").on({
-	'mouseout': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
-	}
-});
-
-
-$("#catebtn6").on({
-	'mouseover': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn( 'slow' );
-	}
-});
-
-$("#catebtn6").on({
-	'mouseout': 
-	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeOut( 'slow' );
-	}
-});
-
-
-$("#catebtn7").on({
-	'mouseover': 
-	function() {
-	$("#changeImage").attr("style","animation: fadein 2s");
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png');
-	}
-});
-
-$("#catebtn7").on({
-	'mouseout': 
-	function() {
-	$("#changeImage").attr("style","transition-duration: 1s");
 	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
-	
 	}
 });
-
-
+$("#catebtn4").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/category/makeup.jpeg');
+	}
+});
+$("#catebtn4").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+	}
+});
+$("#catebtn5").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/category/test.jpeg');
+	}
+});
+$("#catebtn5").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+	}
+});
+$("#catebtn6").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/category/language.jpeg');
+	}
+});
+$("#catebtn6").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+	}
+});
+$("#catebtn7").on({
+	'mouseover': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/category/inteview.jpeg');
+	}
+});
+$("#catebtn7").on({
+	'mouseout': 
+	function() {
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+	}
+});
 $("#catebtn8").on({
 	'mouseenter': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_study1.png').fadeIn(600).css("display", "inline-block");
-
+	$("#changeImage").attr("src", './resources/assets/img/category/test2.jpeg');
 	}
 });
-
 $("#catebtn8").on({
 	'mouseleave':
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png').fadeIn(600).css("display", "inline-block");
-
+	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
 	}
 });
 </script>
@@ -464,6 +436,7 @@ $("#catebtn8").on({
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
+
 				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-sm-3 p-5 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">

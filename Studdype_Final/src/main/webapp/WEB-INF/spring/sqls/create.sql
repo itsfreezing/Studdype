@@ -3,7 +3,7 @@
 CREATE USER STUDDYPE IDENTIFIED BY STUDDYPE;
 GRANT CONNECT, RESOURCE TO STUDDYPE;
 -------------------------------------------------------------
-
+select * from MEET_BOARD;
 ------------------ DROP SEQUENCE ----------------------------
 -------------------------------------------------------------
  DROP SEQUENCE SISEQ;
@@ -122,6 +122,7 @@ DROP TABLE NOTICE_REPLY CASCADE CONSTRAINTS;
 DROP TABLE MEET_REPLY CASCADE CONSTRAINTS;
 DROP TABLE PHOTO_BOARD CASCADE CONSTRAINTS;
 DROP TABLE PHOTO_FILE CASCADE CONSTRAINTS;
+DROP TABLE PHOTO_REPLY CASCADE CONSTRAINTS;
 
 -------------------------------------------------------------
 SELECT * FROM PHOTO_BOARD;
@@ -203,7 +204,7 @@ CREATE TABLE LOCATION_GU(
     FOREIGN KEY(SI_NO) REFERENCES LOCATION_SI(SI_NO)  ON DELETE CASCADE
     
 );
-select * from book;
+select * from STUDY_CATEGORY;
 --스터디 카테고리
 CREATE TABLE STUDY_CATEGORY(
     CATE_NO NUMBER PRIMARY KEY, --카테고리 번호

@@ -5,117 +5,179 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
+    <link rel="stylesheet" href="./resources/css/community/header&footer.css">
+     <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
+    <link rel="stylesheet" href="./resources/css/community/mainsection.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
-<link rel="stylesheet" href="./resources/css/community/header&footer.css">
-<link rel="stylesheet" href="./resources/css/community/leftnavi.css">
-<link rel="stylesheet" href="./resources/css/community/mainsection.css">
+<link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
-<script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
 <link rel="stylesheet" href="./resources/assets/calendar/main.css">
+<script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="./resources/assets/calendar/main.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
- 	document.addEventListener("DOMContentLoaded", function() {
-		var calendarEl = document.getElementById("calendar");
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : "dayGridMonth",
-			locale: "ko",
-		    headerToolbar: {
-		        left: "prev,next today",
-		        center: "title",
-		        right: "dayGridMonth,timeGridWeek,timeGridDay"
-		      },
-		      dayMaxEvents: true,
-			events: function(data, successCallback, failureCallback){
-				$.ajax({
-					type: "post",
-					url: "calendar.do",
-					contentType:"application/json",
-					dataType: "json",
-					success:
-						function(data){
-						var events = [ ];
-						if(data != null){
-							$.each(data.meetList, function(index, meetList) {
-								var enddate = meetList.vote_enddate;
-								if(enddate==null) {
-									enddate=meetList.startdate;
-								}
-								var startdate=moment(meetList.vote_startdate).format("YYYY-MM-DD");
-								var enddate=moment(enddate).format("YYYY-MM-DD");
-								var ctitle=meetList.meet_title;
-								events.push({
-														title: ctitle,
-														start: startdate,
-														end: enddate
-													});
-							});	//each 끝
-						}	//if 끝
-						successCallback(events);
-					}
-				});
-			}
-/* 		    eventClick: function(calEvent, jsEvent) {
-		        // Display the modal and set event values.
-		        $(".modal").modal("show");
-		        $(".modal")
-		          .find("#title").val(calEvent.title);
-		        $(".modal").find("#starts-at").val(calEvent.start);
-		        $(".modal").find("#ends-at").val(calEvent.end);
-		        $("#save-event").hide();
-		        $("input").prop("readonly", true);
-		      }); */
-		    });
-		});
-		calendar.render();
+		document.addEventListener('DOMContentLoaded', function() {
+			  var calendarEl = document.getElementById('calendar');
+
+			  var calendar = new FullCalendar.Calendar(calendarEl, {
+			    initialView: 'dayGridMonth',
+			    initialDate: '2021-02-07',
+			    eventLimit: true,
+			    headerToolbar: {
+			      left: 'prev,next today',
+			      center: 'title',
+			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			    },
+			    eventClick: function(info) {
+			        var eventObj = info.event;
+			    	$.ajax({
+			    		type: "get",
+			    		url: "selectcalendar.do",
+			    		contentType:"application/json",
+						dataType: "json",
+						data: {
+							'meet_title': eventObj.title,
+							'vote_startdate': moment(eventObj.start).format("YYYY-MM-DD"),
+							'vote_enddate': moment(eventObj.end).format("YYYY-MM-DD")
+						},
+			    		success:function(data){
+							$('.calDescription').text(data.dataList.meet_content).css('float','left');
+						}
+			    	});
+			       			 $("#modal-one").show();
+			       			 $("#modal-one").fadeIn("slow");
+				    		  $("#modal-show").fadeIn("slow");
+			       			 $(".calTitle").text(eventObj.title);
+			       			 $(".calDate").text("투표기간: "+moment(eventObj.start).format("YYYY-MM-DD")+"~"+moment(eventObj.end).format("YYYY-MM-DD"));
+			    		
+
+			    		$(".close").click(function() {
+			    		  $("#modal-one").fadeOut("slow");
+			    		  $("#modal-show").fadeOut("slow");
+			    		});
+			    		
+			        
+			        
+			        
+			      },
+				events: function(data, successCallback, failureCallback){
+					$.ajax({
+						type: "post",
+						url: "calendar.do",
+						contentType:"application/json",
+						dataType: "json",
+						success:
+							function(data){
+							var events = [ ];
+							if(data != null){
+								$.each(data.meetList, function(index, meetList) {
+									var enddate = meetList.vote_enddate;
+									var description = meetList.meet_content;
+									if(enddate==null) {
+										enddate=meetList.startdate;
+									}
+									var startdate=moment(meetList.vote_startdate).format("YYYY-MM-DD");
+									var enddate=moment(enddate).format("YYYY-MM-DD");
+									var ctitle=meetList.meet_title;
+									events.push({
+															title: ctitle,
+															start: startdate,
+															end: enddate
+															
+														});
+								});	//each 끝
+							}	//if 끝
+							successCallback(events);
+						}
+					});
+				}
+			  });
+
+			  calendar.render();
+			});
+		
+
 	</script>
+	<style type="text/css">
+ 	#modal-one{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 2000px;
+	background-color: rgb(0,0,0,0.6);
+	z-index: 2000;
+	left: 0;
+	top: 0;
+	}
+	#modal-show{
+	width: 350px;
+	height: 300px;
+	position: absolute;
+	border-radius: 5px;
+	left: 50%;
+	top: 45%;
+	 background: #fefefe;
+	} 
+
+  .close {
+  cursor: pointer;
+  color: #FFF;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  position: absolute;
+  right: 0;
+  color: #999;
+  font-size: 40px;
+}
+.close span {
+  transform: rotate(45deg);
+  display: block;
+}
+
+.calDescription  {
+	margin-left: 20px;
+}
+ .calTitle{
+ margin-left: 20px;
+ }
+ .calDate{
+ margin-left: 20px;
+ }
+ hr{
+ background-color: gray;
+ }
+
+	</style>
 </head>
 <body>
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
+	 <jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 	<div class="main-section">
 	<br><br>
 		<h1>calendar</h1>
 	<div id='calendar'></div>
-
-<!-- <div id='datepicker'></div>
-
-<div class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4><input class="modal-title" type="text" name="title" id="title" placeholder="Event Title/Description" /></h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-12">
-            <label class="col-xs-4" for="starts-at">시작일: </label>
-            <input type="text" name="starts_at" id="starts-at" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <label class="col-xs-4" for="ends-at">종료일: </label>
-            <input type="text" name="ends_at" id="ends-at" />
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="save-event">Save</button>
-      </div>
-    </div>
-    /.modal-content
-  </div>
-  /.modal-dialog
-</div>
-/.modal
+	
+ 	<div id="modal-one">
+		<div id="modal-show">
+		<div class="close"><span>&#43;</span></div>
+			<h2 class="calTitle"></h2>
+			<hr>
+			<p class="calDate" ></p>
+			<hr>
+			<p style="margin-left: 20px;">내용:</p>
+			<p class="calDescription"></p>
+		</div>
+	</div>
+	
 	<br><br>
-	</div> -->
+	</div>
+
 	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
