@@ -34,6 +34,7 @@
 #selectLocationGu{
 	width:500px;
 	height:50px;
+	margin-left:45%;
 }
 #mainsection{
 	margin-left:40%;
@@ -43,12 +44,6 @@
 	margin-bottom:-3%;
 	margin-top:-5%;
 } */
-#search_btn{
-	margin-left:60%;
-	margin-bottom:-1%;
-	margin-top:-2%;
-}
-
 button[type=submit]{
 	box-shadow:none;
 	background:none;

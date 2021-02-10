@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +44,35 @@
 			});
 		});
 		
+
+	/*	 $(function(){
+				$('#Search').click(function(){
+			var selectSi=$("#selectLocationSi option:selected").val();
+			var selectGu=$("#selectLocationGu option:selected").val();
+			$.ajax({
+				url:"studyListLocation.do",
+				data:{
+					"selectSi":$("#selectLocationSi").val(),
+					"selectGu":$("#selectLocationGu").val(),
+				},
+				type:"GET",
+				contentType:"application/json",
+				dataType:"json",
+				success:function(data){
+					
+				},error:function(){
+					alert("통신fail");
+				}
+			});
+
+		});
+	}); */
+		
+		
+		
+		
+		
+		
 		/*		
 function search(){
 	var selectSi=$("#selectLocationSi option:selected").val();
@@ -59,35 +87,9 @@ function search(){
 	}else{
 		return false;
 	}	
-}
- $(document).ready(function(){
-	$("#search").click(function(){
-		var selectSi=$("#selectLocationSi option:selected").val();
-		var selectGu=$("#selectLocationGu option:selected").val();
-		var locationVal={
-				"selectSi":selectSi,
-			 	"selectGu":selectGu 
-		};
-		$.ajax({
-			url:"studyListLocation.do",
-			data:locationVal,
-			type:"GET",
-			contentType:"application/json",
-			dataType:"json",
-			success:function(map){
-				var selectSi=map.selectSi;
-				var selectGu=map.selectGu;
-				for(int i=0;i<studyList.size();i++){
-					
-				}
-			},error:function(){
-				alert("통신fail");
-			}
-		});
-	
-	});
-}); */
-function search(){
+}*/
+
+/*function search(){
 	var selectSi=$("#selectLocationSi option:selected").val();
 	var selectGu=$("#selectLocationGu option:selected").val();
 	var location={
@@ -112,6 +114,22 @@ function search(){
 					alert("fail");
 			}
 	});
+}*/
+function search_chk(){
+	var selectSi=$("#selectLocationSi option:selected").val();
+	var selectGu=$("#selectLocationGu option:selected").val();
+	alert(selectSi);
+	alert(selectGu);
+	if(selectSi.selected==null){
+		alert("시를 선택해주세요");
+		return false;
+	}else if(selectGu.selected==null){
+		alert("구를 선택해주세요");
+		return false;
+	}else{
+		$("#location_form").submit();
+	}
+	
 }
 </script>
 <script type="text/javascript">
@@ -131,8 +149,8 @@ $(function(){
 	</div>
 	<!-- 스터디 영역 -->
 	<br><br>
-	<form action="studyListLocation.do" method="GET" id="location" onsubmit="search();">
-		 <div id="mainsection">
+	<div id="mainsection">
+		 <form action="studyListLocation.do" method="GET" id="location_form"> 
 		 				<div id="si">
 								<label>스터디 지역(시)</label> 
 								<select class="form-control"
@@ -144,9 +162,9 @@ $(function(){
 								</select>
 						</div>
 						<div id="gu">
-								<label>스터디 지역(구/군)</label> 
+								<label style="margin-left:7%;">스터디 지역(구/군)</label> 
 								<select class="form-control"
-									name="gu_no" id="selectLocationGu" >
+									name="gu_no" id="selectLocationGu" style="margin-left:7%;margin-top:-1%;">
 									<option>(구/군 단위)</option>
 									<c:forEach var="locationgu" items="${gudto}">
 										<option class="${locationgu.si_no }"
@@ -154,57 +172,62 @@ $(function(){
 									</c:forEach>
 								</select>
 						</div>
-						<div id="search_btn">
-							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
+						<div class="input-group" style="width: 50%; margin-left:70%;">
+							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search_chk();">
 									<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
-						</div>
+						</div>  
+				</form>	 
 			</div>
-	
-			
 					<br><br>
-		<div class="container" id="studyList">
+			<div class="container-fluid">
 			<div class="row">
+
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
-		
-		 <c:if test="${not empty list}">
-				<c:forEach items="${studyList}" var="studyDto">
-					<div class="col-lg-4 blogs-load"
-						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer">
+				<c:choose>
+					<c:when test="${empty list }">
+						<td colspan="4">검색해주세요</td>
+					</c:when>
+				
+				<c:otherwise>
+				<c:if test="${not empty list}">
+				<c:forEach items="${studyList}" var="studyDto" begin="0" end="${list.size()-1 }" step="1">
+					<div class="col-sm-3 p-5 blogs-load"
+						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="./resources/assets/img/img_study1.png" alt=""
-									class="img-fluid">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
-								<h3>${studyDto.s_name}</h3>
+								<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
 								<br> <span><img
 									src="./resources/assets/img/profile_placeholder.png"
-									style="width: 15px;">${siList.get(studyDto.si_no) }&nbsp;
-									${guList.get(studyDto.gu_no) }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${cateList.get(studyDto.cate_no) }</span>
+									style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;
+									${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
 							</div>
 
 							<p>${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
-								<span> <b>${leaderName.get(studyDto.leader_no)}</b> 
-								<a style="float: right;">
-								<img src="./resources/assets/img/profile_user.png"
+								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
+									style="float: right;"><img
+										src="./resources/assets/img/profile_user.png"
 										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
 								</span>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-			 </c:if>
+					</c:forEach>
+					</c:if>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
-	</form>	
+ 
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
