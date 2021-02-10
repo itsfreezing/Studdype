@@ -1268,7 +1268,7 @@ a.scroll-down:hover {
 	left: 50%;
 	width: 24px;
 	height: 1px;
-	background: #fff;
+
 	content: "";
 	margin-left: -175px;
 }

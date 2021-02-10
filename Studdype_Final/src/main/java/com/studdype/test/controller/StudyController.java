@@ -171,7 +171,7 @@ public class StudyController {
 		MultipartFile[] mfileList = null;
 		List<FileDto> fileList = null;
 		String path = "";
-		
+		System.out.println(uploadFile);
 		if(studyDto.getPhoto().equals("")) {
 			//파일 업로드
 			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
@@ -184,7 +184,7 @@ public class StudyController {
 		}
 		
 		res = studyBiz.insertStudy(studyDto, mfileList, path, fileList);
-
+		
 		// 성공 시 -> 스터디 커뮤니티 홈
 		// 실패 시 -> 스터디 생성 폼
 		if (res > 0) {
@@ -239,30 +239,44 @@ public class StudyController {
 	
 		
 		StudyDto newstudy = new StudyDto(Integer.parseInt(request.getParameter("s_no")),request.getParameter("s_info"),Integer.parseInt(request.getParameter("cate")),Integer.parseInt(request.getParameter("locationsi_no")),Integer.parseInt(request.getParameter("locationgu_no")),Integer.parseInt(request.getParameter("max")),request.getParameter("s_name"),request.getParameter("img_name"));
-		int dto = studyBiz.newInfo(newstudy);
-		
-		
+		int res = 0;
+		MultipartFile[] mfileList = null;
+		List<FileDto> fileList = null;
+		String path = "";
 		
 	
 	
 		
-			if(dto>0) {
+		if(newstudy.getPhoto().equals("")) {
+			//파일 업로드
+			mfileList = uploadFile.getFile(); // multipartFile 
+			
+			//파일 요소들 뽑아서 fileList에 저장
+			fileList = fileHandler.getFileList(mfileList, request);
+			
+			path = fileHandler.getPath(request);
+			newstudy.setPhoto(fileList.get(0).getF_url());
+			
+		}
+		System.out.println(mfileList+path+fileList);
+			res = studyBiz.newInfo(newstudy, mfileList, path, fileList);
+			
+			if(res>0) {
 				model.addAttribute("msg","수정성공  !");
-				model.addAttribute("url","studyList.do");
-				session.setAttribute("s_no", newstudy.getS_no());
+				model.addAttribute("url","studycommunity.do?s_no="+newstudy.getS_no());
+		;
 				
 				return "commond/alert";
-				
 			}else {
-				model.addAttribute("msg"," 수정 실패!");
-				
-				model.addAttribute("url","studyList.do");
-				session.setAttribute("s_no", newstudy.getS_no());
+				model.addAttribute("msg","수정실패  !");
+				model.addAttribute("url","studycommunity.do?s_no="+newstudy.getS_no());
+			
 				
 				return "commond/alert";
+				
 			}
 		
-			
+
 	
 	}
 
@@ -275,11 +289,11 @@ public class StudyController {
 		int dto2 = studyBiz.newLeader(dto);
 		if(dto2>0) {
 			model.addAttribute("msg","수정성공!");
-			model.addAttribute("url","studyList.do");
+			model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 			return "commond/alert";
 		}else {
 			model.addAttribute("msg","수정실패!");
-			model.addAttribute("url","studyList.do");
+			model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 			return "commond/alert";
 			
 		}
@@ -296,11 +310,11 @@ public class StudyController {
 		if(request.getParameter("exile_no")==null) {
 			if(dto2>0) {
 				model.addAttribute("msg","수정성공  !");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				return "commond/alert";
 			}else {
 				model.addAttribute("msg"," 수정 실패!");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				
 				
 				return "commond/alert";
@@ -322,11 +336,11 @@ public class StudyController {
 		
 		if(dto2>0) {
 			model.addAttribute("msg","수정성공  !");
-			model.addAttribute("url","studyList.do");
+			model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 			return "commond/alert";
 		}else {
 			model.addAttribute("msg"," 수정 실패!");
-			model.addAttribute("url","studyList.do");
+			model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 			
 			
 			return "commond/alert";
@@ -334,9 +348,10 @@ public class StudyController {
 		}
 	
 	}
+
 	
 	
-	
+	//도서 관리 버튼 클릭시
 	@RequestMapping(value="/bookchange.do",method = RequestMethod.GET)
 	public String bookchange(Model model,HttpServletRequest request) {
 		
@@ -346,22 +361,22 @@ public class StudyController {
 		if(a>0) {
 			if(b>0) {
 				model.addAttribute("msg","수정성공  !");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				return "commond/alert";
 			}else {
 				model.addAttribute("msg","수정실패  !");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				return "commond/alert";
 			}
 			
 		}else {
 			if(b>0) {
 				model.addAttribute("msg","수정성공  !");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				return "commond/alert";
 			}else {
 				model.addAttribute("msg","수정실패  !");
-				model.addAttribute("url","studyList.do");
+				model.addAttribute("url","studycommunity.do?s_no="+request.getParameter("s_no"));
 				return "commond/alert";
 			}
 		}

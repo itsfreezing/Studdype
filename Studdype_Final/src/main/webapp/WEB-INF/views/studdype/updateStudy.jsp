@@ -57,6 +57,12 @@
 	left: 480px;
 	top: 590px;
 	border:1px solid grey;
+	
+}
+#studyimage img{
+	position: absolute; top:0; left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 #studyimagep {
@@ -428,6 +434,42 @@ input[type="checkbox"]:checked+label:before {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+#modal {
+	display:none;
+	position:absolute;
+	width:100%;
+	height:1580px;
+	background:rgba(0,0,0,0.3);
+	left:0%;
+	top:0%;
+	z-index:100;
+	translate:0.5 ease all;
+}
+
+#modal-inside {
+	position:absolute;
+	width:50%;
+	height:600px;
+	background:#fff;
+	left:25%;
+	top:35%;
+	text-align:center;
+	padding-top:1%;
+	padding-left:3%;
+}
+
+.modal-image {
+	float:left;
+	width:45%;
+	height:230px;
+	border:1px solid black;
+	margin-top:20px;
+	margin-right:20px;
+}
+
+.selected {
+	border:5px solid #7362DE;
+}
 </style>
 <script type="text/javascript">
 	function LoadImg(value) {
@@ -435,6 +477,7 @@ input[type="checkbox"]:checked+label:before {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$('#LoadImg').attr('src', e.target.result);
+				
 			}
 			reader.readAsDataURL(value.files[0]);
 
@@ -452,6 +495,7 @@ input[type="checkbox"]:checked+label:before {
 			
 			}
 		}
+		var image = $(".selected").attr("src");
 	 	var e = [];
 		$("input[name=exile]:checked").each(function(i){
 			e.push($(this).val());
@@ -462,13 +506,17 @@ input[type="checkbox"]:checked+label:before {
 				main_check++;
 			}
 		}
+		
 		var i = document.getElementById('studyinfot').value;
 		var c = document.getElementById('cate').value;
 		var s = document.getElementById('locationsi').value;
 		var g = document.getElementById('locationgu').value;
 		var m = document.getElementById('Max_member').value;
 		var n = document.getElementById('studynameupdate').value;
-		
+		if(image != null){
+			location.href="studyupdate.do?"+"&s_no="+'${study.s_no}'+"&s_info="+i+"&b_no="+b
+			+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+image+"&s_name="+n;
+		}
 		var file = document.getElementById('ex_file');
 	
 		//파일 경로.
@@ -491,8 +539,11 @@ input[type="checkbox"]:checked+label:before {
 		
 		location.href="studyupdate.do?"+"&s_no="+'${study.s_no}'+"&s_info="+i+"&b_no="+b
 				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+fileName+"&s_name="+n;
+	
+	
+	
 		
-		
+	
 		
 	}
 	
@@ -580,10 +631,37 @@ input[type="checkbox"]:checked+label:before {
 				main_check++;
 			}
 		}
-		location.href="bookchange.do?b_no="+m;
+		location.href="bookchange.do?b_no="+m+"&s_no="+'${study.s_no}';
 	}
+
+	function modal(){
+		$("#modal").show();
 	
 	
+
+	$("#basicImageCancel").click(function() {
+		$("#modal").hide();
+	});
+	
+	
+	$(".modal-image").click(function() {
+		$(".selected").removeClass("selected");
+		$(this).addClass("selected");
+	});
+	
+	$("#basicImageSelect").click(function() {
+		var image = $(".selected").attr("src");
+		$("#studyimage").empty();
+		$("#studyimage").append("<img id='studyMainPhoto' src='"+image+"' />");
+		$("#basicPhoto").val(image);
+		$("#modal").hide();
+
+		
+	});
+	}
+	$("#ex_file").click(function(){
+			$("#studyimage").empty();
+	});
 	
 </script>
 </head>
@@ -609,17 +687,33 @@ input[type="checkbox"]:checked+label:before {
 		<pre class="brush:html"></pre>
 		<div class="filebox">
 		  <label for="ex_file">업로드</label>
-		  <input type="file" id="ex_file" onchange="LoadImg(this);" >
+		  <input type="file" id="ex_file"  onchange="LoadImg(this);" >
 		</div>
-		
-
+			<button class="btn btn-purple" onclick="modal();" style="position:absolute; top: 851px; left: 788px; background-color:white; border:1px solid #5a2b20; color:#5a2b20;">기본사진</button>
+			<input type="hidden" id="basicPhoto" name="photo" value="">
 		<div id="studyimage" class="image-container">
 
 			<img id="LoadImg" style="width: 500px; height: 250px;"
 				onError="onError();">
 
 		</div>
-	
+		
+		
+		
+		<div id="modal">
+		<div id="modal-inside">
+			<img class="modal-image" src="./resources/assets/img/img_study7.png">
+			<img class="modal-image" src="./resources/assets/img/img_study5.png">
+			<img class="modal-image" src="./resources/assets/img/img_study3.png">
+			<img class="modal-image" src="./resources/assets/img/img_study1.png">
+			<div style="float:right; margin-top:25px;" class="fileSelectDiv" id="basicImageCancel">
+				<button class="btn btn-purple" style="position:absolute; background-color:white; border:1px solid #5a2b20; color:#5a2b20; left: 824px; top: 541px;">취소</button>
+			</div>
+			<div style="position: absolute;  top: 542px;  left: 721px;" class="fileSelectDiv" id="basicImageSelect">
+				<button class="btn btn-purple" style="background-color:white; border:1px solid #5a2b20; color:#5a2b20;">선택 완료</button>
+			</div>
+			</div>
+		</div>
 		<!-- 대표 사진 끝 -->
 		
 		<!-- 스터디 정보 수정  -->
@@ -655,14 +749,9 @@ input[type="checkbox"]:checked+label:before {
 		</select>
 		<p id="studyinfo">스터디 소개</p>
 		<input id="studyinfot" type="text" value="${study.s_info }">
-		<button id="update" type="button" class="btn btn-purple" onclick="update();">스터디 변경</button>
-
+	
+		<input id="update" type="submit" class="btn btn-purple" value="스터디 변경" onclick="update();">
 		
-
-
-
-
-
 
 		<br>
 		<br>
@@ -698,7 +787,7 @@ input[type="checkbox"]:checked+label:before {
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
 		
-		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; box-shadow:2px 2px 2px 2px grey;">
+		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; box-shadow:0px 0px 20px  #808080;">
 		<table id="member"
          class="table14_8" style="width:1117px;">
          <thead>
@@ -721,16 +810,17 @@ input[type="checkbox"]:checked+label:before {
                   <td><c:if test="${membername.mem_gender == 'M' }">남자</c:if><c:if test="${membername.mem_gender == 'F' }">여자</c:if></td>
                   <td id="exilenum">
                   <c:if test="${membername.mem_no != login.mem_no }">
-                  <input type="checkbox" id="box-1" name="exile" value="${membername.mem_no }" onclick="check(this)">
-                  <label for="box-1">추방</label>
+                  <input type="checkbox" id="box-${status.count }" name="exile" value="${membername.mem_no }" onclick="check(this)">
+                  <label for="box-${status.count }">추방</label>
                   </c:if>
                  <c:if test="${membername.mem_no == login.mem_no }">
-                 <input type="checkbox" name="exile" value="${membername.mem_no }" onclick="return false">
-                 <label >추방</label></c:if>
+                 <input type="checkbox"  id="box-${status.count }" name="exile" value="${membername.mem_no }" onclick="return false">
+                 <label for="box-${status.count }">추방</label></c:if>
                   </td>
+               
                   <c:if test="${membername.mem_no == login.mem_no }">
-                     <td id="maker${status.count }"><input name="maker" type="radio" id="maker${status.count }" checked="checked"
-                        value="${membername.mem_no }">대표</td>
+                     <td id="maker${status.count }">
+                     <input name="maker" type="radio" id="maker${status.count }" checked="checked" value="${membername.mem_no }">대표</td>
                   </c:if>
                   <c:if test="${membername.mem_no != login.mem_no }">
                      <td id="maker${status.count }"><input name="maker" id="maker${status.count }" type="radio"
@@ -761,7 +851,7 @@ input[type="checkbox"]:checked+label:before {
 		<p id="p3" style="color:#5a2b20; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
-	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; box-shadow:2px 2px 2px 2px grey;">
+	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; box-shadow:0px 0px 20px  #808080;">
 	<table id="book1"
          class="table14_8" style="width:1117px;">
 
@@ -792,6 +882,7 @@ input[type="checkbox"]:checked+label:before {
       </table>            
     
 	</div>
+		
 	  <button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="changebook();">수정하기</button>
 	</div>
 	

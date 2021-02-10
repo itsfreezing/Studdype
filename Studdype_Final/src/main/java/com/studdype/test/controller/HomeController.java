@@ -146,18 +146,7 @@ public class HomeController {
 		model.addAttribute("meetlist",meetlist);
 		model.addAttribute("nameMap",nameMap);
 		
-		
-		
-		
-		
-		
 		model.addAttribute("joinSnoList",joinSnoList);
-		
-	
-		
-		
-		
-		
 		
 		for(int i=0;i<studyApplylist.size();i++) {
 			StudyDto dto2 = studyBiz.selectOneBySno(studyApplylist.get(i).getS_no());

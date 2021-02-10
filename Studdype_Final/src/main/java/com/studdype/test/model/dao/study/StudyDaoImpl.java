@@ -204,6 +204,21 @@ public class StudyDaoImpl implements StudyDao {
 		return res;		
 	}
 
+	@Override
+	public int nomalStudyImg(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"nomalStudyImg",dto);
+		} catch (Exception e) {
+			System.out.println("ERROR !!!!!!!!");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
+
 
 }
 

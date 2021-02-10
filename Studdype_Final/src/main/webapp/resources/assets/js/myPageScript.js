@@ -140,7 +140,9 @@ function meet(){
 
 		function closephonePopup() {
 			const emailpopup = document.querySelector('#phonepopup');
+			
 		    phonepopup.classList.add('hide');
+		
 		}
 
 		function changephone(){

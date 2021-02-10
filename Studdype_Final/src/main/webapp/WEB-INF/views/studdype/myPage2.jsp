@@ -30,42 +30,83 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
+	// Header의 프로필 메뉴에 하위 메뉴들은 href에 #를 가지고 있다.
+	// ex) myPage.do#hashTag
+	// command 뒤에 붙는 #의 값을 strHash변수에 넣어준다.
+	var strHash = document.location.hash;
+	
+	// 프로필의 하위 메뉴 (dropdown-item 클래스를 가진 a태그)를 클릭했을 때
+	$("a.dropdown-item").click(function(){
+		var id = $(this).attr("id"); // 클릭 된 a태그의 아이디값을 가지고 온다.
+		
+		if ( id == "create" ){ // 스터디 생성을 클릭했을때
+			return "location.href='createStuddypeform.do'"
+			
+		} else { // 마이페이지 tab 메뉴가 아닌 프로필의 하위메뉴를 클릭했을 때
+			$("ul.nav-items li").removeClass("active"); 
+		    $("ul.nav-items li#"+id).addClass("active");
+		    $(".tab_content").hide();
+			
+		    $("div#"+id).fadeIn();
+		    
+		    return false;
+		}
+		
+	});
+	
+	// 마이페이지의 tab메뉴를 클릭했을 때
+ $("ul.nav-items li").click(function() {
+	    $("ul.nav-items li").removeClass("active"); 
+	    $(this).addClass("active"); 
+	    $(".tab_content").hide();
+		
+	    $("div"+$(this).find("a").attr("href")).fadeIn(); 
+	    
+	    return false;
+	});
+	
+	// 프로필의 마이페이지 하위 메뉴가 아닌 Header의 마이페이지 메뉴로 페이지를 로드했을(#값이 없을) 때
+ if ( strHash == "" || strHash == null ) {
+ 	$(".tab_content").hide(); 
+     $("ul.nav-items li:first").addClass("active");
 
-       $(".tab_content").hide(); 
-        $("ul.nav-items li:first").addClass("active").show();
-        $(".tab_content:first").show(); 
-        
-        var owl = $('.owl-carousel');
+     $(".tab_content:first").show(); 
+     
+     
+ // 프로필의 마이페이지 하위 메뉴로 페이지를 로드했을 때     
+ } else {
+ 	$(".tab_content").hide(); 
+     $("ul.nav-items li"+strHash).addClass("active");
+     $("div"+strHash).show();
+     
+     return false;
+ }
+ 
 
-        owl.owlCarousel({
-           items : 3, // 한번에 보여줄 아이템 수
-           loop : true, // 반복여부
-        });
 
-        $('.customNextBtn').click(function() {
-           owl.trigger('next.owl.carousel');
-        })
+ var owl = $('.owl-carousel');
 
-        $('.customPrevBtn').click(function() {
-           owl.trigger('prev.owl.carousel', [ 300 ]);
-        })
-        
+	owl.owlCarousel({
+		items : 1, // 한번에 보여줄 아이템 수
+		loop : false, // 반복여부
+	});
 
-    
-   $("ul.nav-items li").click(function() {
+	$('.customNextBtn').click(function() {
+		owl.trigger('next.owl.carousel');
+	})
 
-        $("ul.nav-items li").removeClass("active"); //Remove any "active" class
-        $(this).addClass("active"); //Add "active" class to selected tab
-        $(".tab_content").hide(); //Hide all tab content
-      
-        $($(this).find("a").attr("href")).fadeIn(); //Find the href attribute value to identify the active tab + content
-        return false;
-    });
-   
+	$('.customPrevBtn').click(function() {
+		owl.trigger('prev.owl.carousel', [ 300 ]);
+	})
+
+
+
+ 	 
+
 
 });
-
  	//이메일 변경
 function showEmail(multipleFilter) {
     
@@ -110,6 +151,11 @@ function showEmail(multipleFilter) {
 
 	function pwclosePopup() {
 		const popup = document.querySelector('#popup');
+		 document.getElementById("pw").value ='';
+		 document.getElementById("pwd1").value ='';
+		 document.getElementById("pwd2").value ='';
+		 $("#alert-success").hide();
+		 $("#alert-danger").hide();
 	    popup.classList.add('hide');
 	}
 
@@ -188,9 +234,9 @@ function studypopup(multipleFilter) {
 <!-- 상단 div_탭 -->
 <div id="nav-container">
    <ul class="nav-items">
-      <li class="my-nav-item" value="test1"><a href="#myApply">신청 내역</a></li>
-      <li class="my-nav-item" value="test2"><a href="#applyList">신청받은 내역</a></li>
-      <li class="my-nav-item" value="test3"><a href="#myMeet">모임확인</a></li>
+      <li class="my-nav-item" id="myApply"><a href="#myApply">신청 내역</a></li>
+      <li class="my-nav-item" id="applyList"><a href="#applyList">신청받은 내역</a></li>
+      <li class="my-nav-item" id="myMeet"><a href="#myMeet">모임확인</a></li>
    </ul>
 </div>
 <!-- 상단 div 끝 -->
@@ -313,20 +359,22 @@ function studypopup(multipleFilter) {
          <th style="position:sticky;top:0px; background-color:black;">모임날짜</th>
          <th style="position:sticky;top:0px; background-color:black;">투표마감일</th>
          <th style="position:sticky;top:0px; background-color:black;">확인하기</th>
+         
       </tr>
    </thead>
    <tbody>
     
       <c:if test="${not empty meetlist}">
-      <c:forEach var="meetlist" items="${meetlist }">
-      <fmt:formatDate value="${now }" pattern="yyy-MM--dd HH:mm:ss" var="nowDate"/>
+      <c:forEach var="meetlist" items="${meetlist }" varStatus="status">
+      <jsp:useBean id="now" class="java.util.Date" />
+	  <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today" />
+
       <fmt:parseDate value='${ meetlist.meet_date }' var='meet_date' pattern="yyyy-MM-dd HH:mm:ss"/>
-	  <c:if test="${meetlist.meet_date > nowDate }">
+	  <c:if test="${meetlist.meet_date > today }">
       <tr>
          <td><c:if test="${nameMap.containsKey(meetlist.s_no) = true }">${nameMap.get(meetlist.s_no) }</c:if></td>
          <td>${meetlist.meet_title }</td>
          <td>
-         
 		 <fmt:formatDate value="${ meet_date }" pattern="YYYY'년'MM'월'dd'일'"/>
     	 </td>
     	 <td>
@@ -334,14 +382,16 @@ function studypopup(multipleFilter) {
 		 <fmt:formatDate value="${ vote_enddate }" pattern="YYYY'년'MM'월'dd'일'"/>
     	 </td>
          <td><button  class="btn btn-purple" onclick="location.href='meetdetail.do?meetno=${meetlist.meet_no}'">확인하기</button></td>
+        
       </tr>
       </c:if>
+      <c:if test="${status.count < 1 }">
+   	  <p style="font-weight: bold;font-size: 30px;margin-left: 42%;margin-top: 9.5%;">모임이 없습니다!</p>
+   	  </c:if> 
 	 </c:forEach>
       </c:if>
      
-   	  <c:if test="${empty meetlist }">
-   	  <p style="font-weight: bold;font-size: 30px;margin-left: 46%;margin-top: 9.5%;">모임이 없습니다!</p>
-   	  </c:if> 
+   	  
    	   
    </tbody>
    
@@ -364,7 +414,7 @@ function studypopup(multipleFilter) {
      <c:forEach var="studylist" items="${studylist }" varStatus="status">
         <div class="hero-slider-info">
         <div style="height:130px; width:400px;  background-color:white; border:1px solid grey; margin-left:118px; cursor:pointer;  box-shadow: 3px 3px grey;" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">
-        <div style="height:129px; float:right; background-color:grey; width:147px;"><img style="height:128px; width:147px;" src="./resources/assets/img/img_study1.png"></div>
+        <div style="height:129px; float:right; background-color:grey; width:147px;"><img style="height:128px; width:147px;" src="${studylist.photo }" onError="this.src='./resources/assets/img/img_study1.png'" ></div>
         <p style="color:black !important;  margin-left:20px;font-size:10px; font-weight:bold; display:inline;position: absolute; margin-top: 22px;">
         <c:if test="${studylist.si_no == 1 }">서울</c:if>
         <c:if test="${studylist.si_no == 2 }">부산</c:if>

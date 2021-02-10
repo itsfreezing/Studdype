@@ -45,7 +45,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr22', 'user16', 'uesr16', '1389
 select * from study_member where mem_no = 9;
 select * from study_member;
 UPDATE STUDY SET LEADER_NO = 1 WHERE S_NO=1;
-insert into study_member values('1','27');
+insert into study_member values('1','15');
 --자유 게시판
 
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
