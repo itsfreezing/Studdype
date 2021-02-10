@@ -329,7 +329,7 @@ public class BoardController {
 	public String calendarView(HttpSession session, Model model ) {
 		
 		
-		
+		session.setAttribute("leftnavi", "calendar1");
 		return "community/schedule/test";
 	}
 	

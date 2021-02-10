@@ -69,6 +69,7 @@ public class ImageBoardController {
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("galleryList", photoList);
 		model.addAttribute("attachImage", attachImage);
+		session.setAttribute("leftnavi", "gallery");
 		
 		return "community/gallery/gallery";
 	}
