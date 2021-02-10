@@ -25,10 +25,15 @@
 
 <style type="text/css">
 h1{
-	font-weight:800;
+	margin-top: 3%;
+	font-weight:600;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
+}
+span{
+	color:white;
+	font-size: 20px;
 }
 .page_title{
 	margin-bottom: 3%;
@@ -71,9 +76,7 @@ h1{
  	background: gray;
  	color: white;
 }
-#submit_email:hover{
-	background-color: #6E45E3;
-}
+
 
 #chkNum{
 	margin-left:3%;
@@ -90,11 +93,8 @@ h1{
     border-radius: 5px;
     background: gray;
  	color: white;
+ 	
 }
-#chkNum_btn:hover{
-	background-color: #6E45E3;
-}
-
 .main_btn{
 	margin-left: 13%;
 	margin-top: 3%;
@@ -112,11 +112,9 @@ h1{
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
 	color:white;
-	background-color: gray;
-}
-#psw_btn:hover{
 	background-color: #6E45E3;
 }
+
 #cancel_btn{
 	width:200px;
 	height:50px;
@@ -130,9 +128,6 @@ h1{
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
 	color:white;
-	background-color: gray;
-}
-#cancel_btn:hover{
 	background-color: #6E45E3;
 }
 
@@ -146,7 +141,7 @@ $(function() {
 	//$(".justify-content-center").hide(); 
 	$(".justify-content-center").show(); 
 	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>비밀번호 찾기</h1>");
+	$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>비밀번호가 기억나지 않으시나요?</span>");
 });
  
 $(function(){

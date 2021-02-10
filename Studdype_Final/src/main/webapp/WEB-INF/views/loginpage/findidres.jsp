@@ -29,10 +29,21 @@
 $(function() {
 	$(".justify-content-center").show(); 
 	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>아이디 찾기</h1>");
+	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
 });
 </script>
 <style type="text/css">
+h1{
+	margin-top: 3%;
+	font-weight:600;
+	font-size: 30px;
+	line-height: 20px;
+	text-align: center;
+}
+span{
+	color:white;
+	font-size: 20px;
+}
 .main_div{
 	margin-top: 5%;
 	margin-bottom: 2%;
@@ -40,8 +51,8 @@ $(function() {
    	text-align: center;
 	width: 500px;
 	height: 70px;
-	color: white;
-	background: #6E45E3;
+	color: black;
+	background: #EAEAEA;
 	border-radius: 10px;
 }
 #name{
@@ -63,11 +74,11 @@ $(function() {
 		<c:choose>
 
 			<c:when test="${findId != null }">
-				<span>${findName }님의 아이디는<span id=name> '${findId }' </span>입니다.</span>
+				<div>${findName }님의 아이디는<div id=name> '${findId }' </div>입니다.</div>
 			</c:when>
 			
 			<c:otherwise>
-				<span>${findName }님이 가입한 아이디는 존재하지 않습니다.</span>
+				<div>${findName }님이 가입한 아이디는 존재하지 않습니다.</div>
 			</c:otherwise>
 		</c:choose>
    		

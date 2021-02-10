@@ -24,12 +24,15 @@
 	background: #fff;
 }
 h1{
-	font-weight:800;
+	margin-top: 3%;
+	font-weight:600;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
-	margin-top: 3%;
-	margin-bottom: -1%;
+}
+span{
+	color:white;
+	font-size: 20px;
 }
 #findLogo{
 	width: 50px;
@@ -38,15 +41,17 @@ h1{
 	margin-bottom: 1%;
 }
 .main_head{
-	width: 800px;
-	margin: auto;
-	margin-right: auto;
+	width: 600px;
+	height: 250px;
 	margin-left: auto;
-	padding-top: 50px;
+	margin-right:auto;
+	border-radius: 5px;
+	background-color: #EAEAEA;
 }
 .sub_head{
 	box-sizing: border-box;
-	display: block;
+	padding-top: 5%;
+	margin-top: 5%;
 }
 .namerno_part{
 	margin-left: 12%;
@@ -55,8 +60,8 @@ h1{
 	font-weight: 800;
 }
 #name{
-	margin-left:12%;
-    width:200px;
+	margin-left:15%;
+    width:150px;
     height:45px;
     margin-bottom: 3%;
 }
@@ -65,25 +70,23 @@ h1{
 }
 #rno1{
 	margin-left:3%;
-    width:200px;
+    width:150px;
     height:45px;
 }
 #mid_rno{
 	font-weight: 800;
 	font-size: 25px;
+	color: black;
 }
 #rno2{
 	margin-bottom:5%;
-    width:200px;
+    width:150px;
     height:45px;
 }
 .btn_part{
-	margin-left: auto;
-	margin-right: auto;
+
+	margin-top:-3%;
 	text-align: center;
-}
-.mid_menu{
-	margin-left: 41%;
 }
 #login{
 	font-weight: 800;
@@ -92,8 +95,8 @@ h1{
 	font-weight: 800;
 }
 #search_btn{
-	width: 200px;
-	height: 50px;
+	width: 120px;
+	height: 45px;
 	border-radius: 5px;
 	font-size: 18px;
 	transition: color 0.5s;
@@ -103,15 +106,14 @@ h1{
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
     color:white;
-    background-color: gray;
 }
 #search_btn:hover{
 	background-color: #6E45E3;
 }
 #cancel{
-	width: 200px;
-	height: 50px;
-	margin-left:7%;
+	width: 120px;
+	height: 45px;
+	margin-left:3%;
 	border-radius: 5px;
 	font-size: 18px;
 	transition: color 0.5s;
@@ -122,7 +124,6 @@ h1{
     -webkit-writing-mode: horizontal-tb !important;
     border-width: 3px;
 	color: white;
-	background-color: gray;
 }
 #cancel:hover{
 	background-color: #6E45E3;
@@ -134,7 +135,7 @@ h1{
 $(function() {
 	$(".justify-content-center").show(); 
 	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>아이디 찾기</h1>");
+	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>함께 계정을 찾아볼까요?</span>");
 });
 
 function idsearch(){
@@ -161,8 +162,6 @@ function cancel(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-	<h1>아이디 찾기</h1>
-	
 	<form class="main_head" id="findidform" action="findId.do" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">
@@ -177,10 +176,8 @@ function cancel(){
 			</div>
 			</div>
 			<div class="btn_part">
-				<div>
-					<button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
-					<button type="submit" class="submitBtn" id="cancel" value="취소 " onClick="cancel();">취소</button>
-				</div>
+				<button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
+				<button type="submit" class="submitBtn" id="cancel" value="취소 " onClick="cancel();">취소</button>
 			</div>
 		</div>
 	</form>

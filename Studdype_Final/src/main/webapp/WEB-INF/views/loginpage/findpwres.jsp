@@ -23,15 +23,26 @@
 <link rel="stylesheet" href="./resources/css/studdype/findpw.css">
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <style type="text/css">
+h1{
+	margin-top: 3%;
+	font-weight:600;
+	font-size: 30px;
+	line-height: 20px;
+	text-align: center;
+}
+span{
+	color:white;
+	font-size: 20px;
+}
 .main_div{
-	margin-left: 33%;
 	margin-top: 5%;
 	margin-bottom: 2%;
+	margin-left: 33%;
    	text-align: center;
-	width: 600px;
+	width: 500px;
 	height: 70px;
-	color: white;
-	background: #6E45E3;
+	color: black;
+	background: #EAEAEA;
 	border-radius: 10px;
 }
 #mail_name{
@@ -45,8 +56,8 @@
  <script type="text/javascript">
  $(function() {
 		$(".justify-content-center").show(); 
-		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner.png')","background-size":"cover"});
-		$(".hero-text").html("<h1>비밀번호 찾기</h1>");	
+		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+		$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>잊지말고 기억해요.</span>");	
  });
 </script>
 </head>
@@ -55,7 +66,7 @@
 
 	<div class="main_div">
 	
-   		<span><span id="mail_name">'${member.mem_email }' </span>로 임시 비밀번호를 전송했습니다.</span>
+   		<div><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</div>
    		
    </div>
    
