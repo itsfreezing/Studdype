@@ -476,11 +476,12 @@ input[type="checkbox"]:checked+label:before {
 		if (value.files && value.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
+				
 				$('#LoadImg').attr('src', e.target.result);
 				
 			}
 			reader.readAsDataURL(value.files[0]);
-
+			
 		}
 	}
 	function update(){
