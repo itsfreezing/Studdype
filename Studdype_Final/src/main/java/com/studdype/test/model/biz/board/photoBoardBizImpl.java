@@ -94,9 +94,6 @@ public class photoBoardBizImpl implements photoBoardBiz{
 			}
 		}
 		
-		if(updateRes < 1  || res < 1 || resCnt != fileList.size()) {
-			throw new RuntimeException("에러 글 가져오기 업데이트에서");
-		}		
 		return res;
 	}
 	

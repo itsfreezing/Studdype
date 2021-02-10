@@ -232,7 +232,7 @@
 	display: none;
 }
 
-.free_Btn{
+.gallery_Btn{
 	float: right;
 	margin-top : 15px;
 	background-color: #EFF0F2;
@@ -247,7 +247,7 @@
 	font-weight: bold;
 	margin-left: 1%;
 }
-.free_Btn:hover{
+.gallery_Btn:hover{
 	background-color: white;
 	border: 1px solid #6434ef;
 	font-weight:bold;
@@ -678,7 +678,7 @@ function showAttach(){
 		<!-- 갤러리 댓글 끝 -->
 			<div class="galleryBtnDiv">
 			<c:choose>
-				<c:when test="${dto.b_writer == login.mem_no }">
+				<c:when test="${detail.b_writer == login.mem_no }">
 					<input type="button" class="galleryBtn" value="삭제" onclick="location.href='galleryDelete.do?b_no=${detail.b_no}'" />
 					<input type="button" class="galleryBtn"  value="수정" onclick="location.href='galleryupdateform.do?b_no=${detail.b_no}'" />
 					<input type="button" class="galleryBtn" value="목록" onclick="location.href='gallery.do'">

@@ -1,5 +1,6 @@
 package com.studdype.test.model.biz.board;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +35,9 @@ public interface MeetBiz {
 	//성효꺼
 	public List<MeetDto> selectMeetByS_no(int s_no[]);						// 스터디번호로 모임리스트 가져오기
 
+
+
+	public MeetDto selectCalendarByData(int s_no, String meet_title, String vote_startdate, String vote_enddate);
+	
 
 }

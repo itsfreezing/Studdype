@@ -1,6 +1,9 @@
 package com.studdype.test.model.dao.board.meet;
 
 import java.util.ArrayList;
+=======
+import java.util.Date;
+>>>>>>> 5f7ceb80e275ff53b9cfd19c065d12bee0e75af4
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -298,6 +301,23 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 				
 		return dto;
+	}
+	@Override
+	public MeetDto selectCalendarByData(int s_no, String meet_title, String vote_startdate, String vote_enddate) {
+		MeetDto res = null;
+		Map resMap = new HashMap();
+		resMap.put("s_no", s_no);
+		resMap.put("meet_title", meet_title);
+		resMap.put("vote_startdate", vote_startdate);
+		resMap.put("vote_enddate", vote_enddate);
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectCalendarByData", resMap);
+		} catch (Exception e) {
+			System.out.println("에러다");
+			e.printStackTrace();
+		}
+		return res;
+
 	}
 
 

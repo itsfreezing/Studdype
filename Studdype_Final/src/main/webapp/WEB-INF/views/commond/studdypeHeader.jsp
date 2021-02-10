@@ -21,7 +21,6 @@ function logout_btn(){
 
 $(function() {
    var currentMenu = $("#currentMenu").val();
-   
    // 해당 메뉴 페이지에 메뉴 active Class 추가
    $("#"+currentMenu).addClass("active");
    
@@ -127,7 +126,7 @@ $(function() {
                         <a class="nav-link" href="studyList.do">스터띱 홈</a>
                         </li>
                         <li class="nav-item" id="category">
-                           <a class="nav-link" href="searchbycategory.do">카테고리별 검색</a>
+                           <a class="nav-link" href="studycategoryList.do">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
                            <a class="nav-link" href="studyListLocation.do">지역별 검색</a>

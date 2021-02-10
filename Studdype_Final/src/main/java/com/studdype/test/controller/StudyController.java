@@ -84,10 +84,14 @@ public class StudyController {
 		selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 		studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-//			
-//		for(int i=0; i<studyList.size(); i++) {
-//				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-//		}
+			
+		
+		for(int i=0; i<studyList.size(); i++) {
+			if(studyList.get(i).getPhoto() == null) {
+				studyList.get(i).setPhoto("./resources/assets/img/nothingBook.png");
+			}
+				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+		}
 			
 		
 		model.addAttribute("pageMaker", pageMaker);
@@ -491,6 +495,7 @@ public class StudyController {
 	
 	@RequestMapping(value = "/studycategoryList.do" , method = RequestMethod.GET)
 	public String studyCategoryList(Model model, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session, StudyDto studyDto) {
+		session.setAttribute("headerMenu", "category");
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
 		Map<Integer, String> selectSiForMainMap = null; // 시 리스트 담을 곳
@@ -502,8 +507,6 @@ public class StudyController {
 		studyList = studyBiz.studyListCategory(searchPagination); // 스터디 리스트
 		
 
-		System.out.println("cate_no: "+searchPagination.getCate_no());
-		System.out.println("search: "+searchPagination.getKeyword());
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
 		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
@@ -516,14 +519,13 @@ public class StudyController {
 				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
 		}
 			
-		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
 		model.addAttribute("siList", selectSiForMainMap);
 		model.addAttribute("guList", selectGuForMainMap);
 		model.addAttribute("cateList", selectCateForMainMap);
-		session.setAttribute("headerMenu", "home");
+		
 		
 		return "studdype/searchByCategory";
 	}

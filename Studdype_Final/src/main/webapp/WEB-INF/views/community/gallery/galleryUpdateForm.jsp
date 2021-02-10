@@ -63,7 +63,6 @@ function chkForm(){
 	var form = $("#updateForm");
 	var title = $("#title");
 	var content = $("#content");
-	alert("무슨일이지");
 	if( title.val() == null || title.val().trim() == ''){
 		alert("제목을 작성해주세요")
 	}else if( title.val().length  > 50  ){
@@ -73,7 +72,6 @@ function chkForm(){
 	}else{
 		form.submit();
 	}
-	
  };
  
  //파일첨부시 파일정보 div추가 함수
@@ -160,7 +158,6 @@ function deleteFile(fileName){
 	 	}
 	 	
 };
-
 </script>
 <style type="text/css">
 .gallery_Btn{

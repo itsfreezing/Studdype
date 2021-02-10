@@ -68,7 +68,8 @@ public class HomeController {
 	
 	@RequestMapping("/searchbycategory.do")
 	public String searchByCategory() {
-	
+		
+		
 		return "studdype/searchByCategory";
 	}
 	
