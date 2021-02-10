@@ -73,8 +73,22 @@ input#search:focus {
 .feature-page.header-area {
 	height: 80px;
 }
+
+.owl-dot{
+	background-color:#c0d7e9 !important;
+}
+.owl-dot.active{
+	background-color:white !important;
+}
+#mainBanner{
+	box-shadow:none !important;
+}
 .blogpost-area{
 	background: #ffff;
+
+	margin-left: 5%;
+	margin-right: 5%;
+
 	margin-left: 10%;
 	margin-right: 10%;
 }
@@ -101,6 +115,7 @@ input#search:focus {
 	color: #6434ef;
 	cursor: pointer;
 	transition: 0.5s;
+
 
 }
 </style>

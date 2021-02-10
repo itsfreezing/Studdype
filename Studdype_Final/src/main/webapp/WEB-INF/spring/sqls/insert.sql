@@ -27,7 +27,8 @@ INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '기타');
 select * from study_category;
 insert into STUDY_APPLYING values(49,1,'Y','ddd');
 --멤버 테이블
-INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader1', 'leader1', '테스트팀장', '960308-1010101', 'M', '010-8801-9068', 'bin3005@naver.com');
+SELECT S_NAME FROM STUDY WHERE S_NO = 1;
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'qwer', 'qwer', 'qwer', '616737-1010101', 'M', '010-6661-9068', 'qwerqewr@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin3005', 'bin3005', '이승빈', '960308-1110101', 'M', '010-8201-9068', 'bin2205@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin','1234','관리자','950111-1112123','M','010-1234-1234','admin12@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'user', 'user', 'user', '960308-1310101', 'M', '010-8221-9068', 'bin2205@nxver.com');
@@ -35,6 +36,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr2', 'user2', 'uesr2', '950201-
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr3', 'user3', 'uesr3', '960301-1110101', 'M', '030-8201-9068', 'bin3205@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'dudwnd2', 'hree5416!@', '이영중', '911229-1010101', 'M', '010-5290-7357', '2dudwnd@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'leader22', 'leader9', '테스트팀장', '966308-1010101', 'M', '036-8801-9068', 'bin3105@naver.com');
+
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'bin22', 'bin25', '이승빈', '914308-1880101', 'M', '010-8901-9068', 'bin2605@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin22','1236','관리자','935111-1119953','M','010-1774-1234','admin12@naver.com');
 INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'user22', 'user0', 'user0', '922208-0010101', 'M', '010-1121-9068', 'binbsaa5@nxver.com');
@@ -43,7 +45,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr22', 'user16', 'uesr16', '1389
 select * from study_member where mem_no = 9;
 select * from study_member;
 UPDATE STUDY SET LEADER_NO = 1 WHERE S_NO=1;
-insert into study_member values('1','27');
+insert into study_member values('1','15');
 --자유 게시판
 
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
