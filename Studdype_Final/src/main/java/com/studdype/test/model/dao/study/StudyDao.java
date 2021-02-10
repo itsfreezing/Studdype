@@ -1,15 +1,12 @@
 package com.studdype.test.model.dao.study;
 
 import java.util.List;
-import java.util.Map;
 
-
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.study.StudyDto;
 
 public interface StudyDao {
-String NAMESPACE="study.";
+		String NAMESPACE="study.";
 	
 	//메소드
 	public List<StudyDto> studyList(SearchPagination searchPagination); //메인페이지 리스트

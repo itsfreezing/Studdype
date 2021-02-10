@@ -1,11 +1,11 @@
 package com.studdype.test.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -460,7 +460,7 @@ public class StudyController {
 	}
 	//지역별 검색 
 	@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
-	public String studyListLocation(Model model,HttpServletRequest request,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
+			public String studyListLocation(Model model,HttpServletRequest request,HttpServletResponse response,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 		Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 		List<StudyDto> studyList = null; // 스터디 리스트 담을 곳

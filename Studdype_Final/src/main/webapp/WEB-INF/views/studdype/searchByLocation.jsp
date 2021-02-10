@@ -45,7 +45,7 @@
 			});
 		});
 		
-		
+		/*		
 function search(){
 	var selectSi=$("#selectLocationSi option:selected").val();
 	var selectGu=$("#selectLocationGu option:selected").val();
@@ -54,12 +54,13 @@ function search(){
 	alert(selectGu);
 	if(selectSi!=null&&selectGu!=null){
 		alert("성공");
+		return false;
 		form.submit();
 	}else{
 		return false;
 	}	
 }
-/* $(document).ready(function(){
+ $(document).ready(function(){
 	$("#search").click(function(){
 		var selectSi=$("#selectLocationSi option:selected").val();
 		var selectGu=$("#selectLocationGu option:selected").val();
@@ -85,27 +86,33 @@ function search(){
 		});
 	
 	});
-}); 
+}); */
 function search(){
 	var selectSi=$("#selectLocationSi option:selected").val();
 	var selectGu=$("#selectLocationGu option:selected").val();
-	var locationVal={
+	var location={
 			"selectSi":selectSi,
-		 	"selectGu":selectGu 
+			"selectGu":selectGu
 	};
+	alert(selectSi);
+	alert(selectGu);
 	$.ajax({
 		url:"studyListLocation.do",
-		data:locationVal,
+		data:JSON.stringify(location),
 		type:"GET",
 		contentType:"application/json",
 		dataType:"json",
 		success:function(data){
-			
-		},error:function(){
-			alert("통신fail");
-		}
+				if(data==null){
+						return false;
+					}else{
+						alert("asdf");
+					}
+				},error:function(){
+					alert("fail");
+			}
 	});
-}*/
+}
 </script>
 <script type="text/javascript">
 $(function(){

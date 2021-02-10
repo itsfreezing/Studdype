@@ -317,7 +317,7 @@ $(function(){
 
    <div id="signtitle"> 
          <form action="signup.do" id="signupform" name="register" method="POST" autocomplete="off">
-         <br>
+	   	<br>
 	   <table>
 			   <tr>
 					<th align="right" width="100">
@@ -404,11 +404,11 @@ $(function(){
    				</tr> 
 	   			<tr style="display:none;" id="chk_ok">
 	   				<td></td>
-	   				<td style="color:#32CD32">인증번호가 같습니다.</td>
+	   				<td style="color:#32CD32">인증확인되었습니다</td>
 	   			</tr>
 	   			<tr style="display:none;" id="chk_no">
 	   				<td></td>
-	   				<td style="color:red;">인증번호가 다릅니다.</td>
+	   				<td style="color:red;">잘못된 인증번호입니다 다시 입력해주세요.</td>
 	   			</tr> 
 	      		 <tr>
 		        		 <td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
@@ -472,10 +472,8 @@ $(function(){
 		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
 		            <td width="600" height="30"></td>
 	            </tr>
-      
-      
   		 </table>
-             <input type="submit" id="sign" name="join" value="회원가입" >
+             <input type="submit" id="sign" name="join" value="회원가입" style= "width:360px;height:44px;">
    
 	   </form>
 	   </div>
