@@ -28,6 +28,11 @@
 <script src="./resources/assets/js/main.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+
+
+       $(".tab_content").hide(); 
+        $("ul.nav-items li:first").addClass("active").show();
+
 	
 	// Header의 프로필 메뉴에 하위 메뉴들은 href에 #를 가지고 있다.
 	// ex) myPage.do#hashTag
@@ -68,6 +73,7 @@ $(document).ready(function() {
     if ( strHash == "" || strHash == null ) {
     	$(".tab_content").hide(); 
         $("ul.nav-items li:first").addClass("active");
+
         $(".tab_content:first").show(); 
         
         
@@ -80,6 +86,18 @@ $(document).ready(function() {
         return false;
     }
     
+
+   $("ul.nav-items li").click(function() {
+
+        $("ul.nav-items li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+        $(".tab_content").hide(); //Hide all tab content
+      
+        $($(this).find("a").attr("href")).fadeIn(); //Find the href attribute value to identify the active tab + content
+        return false;
+    });
+   
+
 	var owl = $('.owl-carousel');
 
 	owl.owlCarousel({
@@ -97,6 +115,7 @@ $(document).ready(function() {
 
     	 
 
+
 });
 
 </script>
@@ -106,42 +125,52 @@ $(document).ready(function() {
 
 <!-- 상단 div_회원정보 -->
 <div id="container">
-	<div id="myPageBanner"><b>My page</b></div>
-	<div id="memberInfo">
-		<div id="myPageName"><c:if test="${login != null }">${login.mem_name }</c:if></div>
-		<span class="memberInfo">님의</span><br><span class="memberInfo">회원정보 입니다.</span>
-		<a class="info-btn-dark" onclick="getout();">회원탈퇴</a>
-	</div>
-	<div id="myPageBanner-left">
-		<div class="myPageBanner-text"><b>아이디</b>&nbsp;${login.mem_id }
-			<a class="info-btn-bright" onclick="showPw();">비밀번호 변경</a>
-		</div>
-		<div class="myPageBanner-text"><c:choose> 
-											<c:when test="${login.mem_gender == 'M'}">
-												<b>성별</b>&nbsp;남자
-											</c:when>
-											<c:otherwise>
-												<b>성별</b>&nbsp;여자
-											</c:otherwise>
-										</c:choose>
-		</div>
-	</div>
-	<div id="myPageBanner-right">
-		<div class="myPageBanner-text"><b>이메일</b>&nbsp;${login.mem_email}
-			<a class="info-btn-bright" onclick="showEmail();">이메일 변경</a>
-		</div>
-		<div class="myPageBanner-text"><b>전화번호</b>&nbsp;${login.mem_phone }
-			<a class="info-btn-bright" onclick="showphone();">전화번호 변경</a>
-		</div>
-	</div>
+
+   <div id="myPageBanner"><b>My page</b></div>
+   <div id="memberInfo">
+      <div id="myPageName"><c:if test="${login != null }">${login.mem_name }</c:if></div>
+      <span class="memberInfo">님의</span><br><span class="memberInfo">회원정보 입니다.</span>
+      <a class="info-btn-dark" onclick="getout();">회원탈퇴</a>
+   </div>
+   <div id="myPageBanner-left">
+      <div class="myPageBanner-text"><b>아이디</b>&nbsp;${login.mem_id }
+         <a class="info-btn-bright" onclick="showPw();">비밀번호 변경</a>
+      </div>
+      <div class="myPageBanner-text"><c:choose> 
+                                 <c:when test="${login.mem_gender == 'M'}">
+                                    <b>성별</b>&nbsp;남자
+                                 </c:when>
+                                 <c:otherwise>
+                                    <b>성별</b>&nbsp;여자
+                                 </c:otherwise>
+                              </c:choose>
+      </div>
+   </div>
+   <div id="myPageBanner-right">
+      <div class="myPageBanner-text"><b>이메일</b>&nbsp;${login.mem_email}
+         <a class="info-btn-bright" onclick="showEmail();">이메일 변경</a>
+      </div>
+      <div class="myPageBanner-text"><b>전화번호</b>&nbsp;${login.mem_phone }
+         <a class="info-btn-bright" onclick="showphone();">전화번호 변경</a>
+      </div>
+   </div>
+
 </div>
 <!-- 상단 div_탭 -->
 <div id="nav-container">
+
+   <ul class="nav-items">
+      <li class="my-nav-item" value="test1"><a href="#myApply">신청 내역</a></li>
+      <li class="my-nav-item" value="test2"><a href="#applyList">신청받은 내역</a></li>
+      <li class="my-nav-item" value="test3"><a href="#myMeet">모임확인</a></li>
+   </ul>
+
 	<ul class="nav-items">
 	   <li class="my-nav-item" id="myApply"><a href="#myApply">신청 내역</a></li>
 	   <li class="my-nav-item" id="applyList"><a href="#applyList">신청받은 내역</a></li>
 	   <li class="my-nav-item" id="myMeet"><a href="#myMeet">모임확인</a></li>
 	</ul>
+
 </div>
 <!-- 상단 div 끝 -->
 
@@ -149,93 +178,96 @@ $(document).ready(function() {
 
 <!--  스터디 신청 내역 div -->
 <div class="tab_content" id="myApply">
-	<p class="tab_p">나의 스터디 신청 내역</p>
-	
-	<br>
-	<br>
-	<br>
-	<c:if test="${fn:length(applylist) != 0 }">
-	<table class="table table-striped table-bordered table-hover" style="border:1px solid blac; width:70%; text-align:center; position:absolute; top:47%; left:10%; ">
-	<thead>
-	<tr>
-		<th>내가 신청한 스터디 이름</th>
-		<th>나의 신청 상태</th>
-		<th>내 신청 삭제</th>
-	</tr>
-	</thead>
-	<tbody>
-	
+
+   <p class="tab_p">나의 스터디 신청 내역</p>
+   
+   <br>
+   <br>
+   <br>
+   <c:if test="${fn:length(applylist) != 0 }">
+   <table class="table table-striped table-bordered table-hover" style="border:1px solid blac; width:70%; text-align:center; position:absolute; top:47%; left:10%; ">
+   <thead>
+   <tr>
+      <th>내가 신청한 스터디 이름</th>
+      <th>나의 신청 상태</th>
+      <th>내 신청 삭제</th>
+   </tr>
+   </thead>
+   <tbody>
+   
 
 
-		<c:forEach var="applylist" items="${applylist }" varStatus="status1" >
+      <c:forEach var="applylist" items="${applylist }" varStatus="status1" >
 
-		
-		<c:forEach var="studyApplylist" items="${studyApplylist }" varStatus="status"  >
-		<c:if test="${status1.count == status.count }">
-	
-		<tr>
-			<td>${applylist.s_name }</td>
-			<c:if test="${studyApplylist.agree =='D' }"><td>진행중</td></c:if>
-			<c:if test="${studyApplylist.agree == 'Y' }"><td style="color:green;">수락됨</td></c:if>  
-			<c:if test="${studyApplylist.agree == 'N' }"><td style="color:red;">거절됨</td></c:if>
-			<td><button id="delete${status.count }" value="${studyApplylist.mem_no }"name="${studyApplylist.s_no }" onclick="receivedelete();">삭제</button></td>                        
-		</tr>
-		
-		</c:if>
-		</c:forEach>
-		</c:forEach>
-	
-	
-	
-	</tbody>
-	</table>
-	</c:if>
-	<c:if test="${fn:length(applylist) == 0 }">
-		<img onclick="location.href='studyList.do'" src="resources/img/no_study.png" style="height:300px; margin-left:40%; position:absolute; top:30%;" >
-		<a  style="font-weight:bold; font-size: 20px; margin-left:5%; position:absolute; left:33.3%; top:80%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가입 신청한 스터디가없습니다.<br>이미지를 클릭해 새로운 스터디를 가입해보세요!</a><br>
-	
-	
-	</c:if>
-	 
+      
+      <c:forEach var="studyApplylist" items="${studyApplylist }" varStatus="status"  >
+      <c:if test="${status1.count == status.count }">
+   
+      <tr>
+         <td>${applylist.s_name }</td>
+         <c:if test="${studyApplylist.agree =='D' }"><td>진행중</td></c:if>
+         <c:if test="${studyApplylist.agree == 'Y' }"><td style="color:green;">수락됨</td></c:if>  
+         <c:if test="${studyApplylist.agree == 'N' }"><td style="color:red;">거절됨</td></c:if>
+         <td><button id="delete${status.count }" value="${studyApplylist.mem_no }"name="${studyApplylist.s_no }" onclick="receivedelete();">삭제</button></td>                        
+      </tr>
+      
+      </c:if>
+      </c:forEach>
+      </c:forEach>
+   
+   
+   
+   </tbody>
+   </table>
+   </c:if>
+   <c:if test="${fn:length(applylist) == 0 }">
+      <img onclick="location.href='studyList.do'" src="resources/img/no_study.png" style="height:300px; margin-left:40%; position:absolute; top:30%;" >
+      <a  style="font-weight:bold; font-size: 20px; margin-left:5%; position:absolute; left:33.3%; top:80%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가입 신청한 스터디가없습니다.<br>이미지를 클릭해 새로운 스터디를 가입해보세요!</a><br>
+   
+   
+   </c:if>
+    
 
 </div>
 <!-- 스터디 신청내역 끝 -->
 
 <!--  신청 받은 내역 -->
 <div class="tab_content" id="applyList">
-	<p class="tab_p">내가 받은 스터디 신청</p>
-	
-	<table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
-	<thead>
-		<tr>
-			<th>스터디 이름</th>
-			<th>신청한 사람</th>
-			<th>수락/거절</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="receiveapplyname" items="${receiveapplyname }" varStatus="status">
-		<c:if test="${Receiveapply[status.index].agree == 'D' }">
-			<tr>
-				<c:if test="${Receiveapply[status.index].agree == 'D' }"><td id="receive">${receiveapplyname.s_name }</td></c:if>
-				<td>${applymember[status.index].mem_name }</td>
-				<td>
-				<button id="agree${status.count }" value="${Receiveapply[status.index].mem_no }" name="${Receiveapply[status.index].s_no }" onclick="agree();">수락</button>
-				<button id="reject${status.count }" value="${Receiveapply[status.index].mem_no }" name="${Receiveapply[status.index].s_no }" onclick="reject();" >거절</button>
-				</td>
-			
-			
-			</tr>
-		</c:if>
-		</c:forEach>
-	
-	</tbody>
-	
-	</table>
-	
-	<c:if test="${fn:length(applylist) == 0 }">
-		<p style="font-weight:bold; font-size: 30px; margin-left:42%; margin-top:9%;">받은 신청이 없습니다!</p>
-	</c:if>
+
+   <p class="tab_p">내가 받은 스터디 신청</p>
+   
+   <table class="table table-striped table-bordered table-hover" style=" width:70%; text-align:center; position:absolute; top:30%; left:14%; ">
+   <thead>
+      <tr>
+         <th>스터디 이름</th>
+         <th>신청한 사람</th>
+         <th>수락/거절</th>
+      </tr>
+   </thead>
+   <tbody>
+      <c:forEach var="receiveapplyname" items="${receiveapplyname }" varStatus="status">
+      <c:if test="${Receiveapply[status.index].agree == 'D' }">
+         <tr>
+            <c:if test="${Receiveapply[status.index].agree == 'D' }"><td id="receive">${receiveapplyname.s_name }</td></c:if>
+            <td>${applymember[status.index].mem_name }</td>
+            <td>
+            <button id="agree${status.count }" value="${Receiveapply[status.index].mem_no }" name="${Receiveapply[status.index].s_no }" onclick="agree();">수락</button>
+            <button id="reject${status.count }" value="${Receiveapply[status.index].mem_no }" name="${Receiveapply[status.index].s_no }" onclick="reject();" >거절</button>
+            </td>
+         
+         
+         </tr>
+      </c:if>
+      </c:forEach>
+   
+   </tbody>
+   
+   </table>
+   
+   <c:if test="${fn:length(applylist) == 0 }">
+      <p style="font-weight:bold; font-size: 30px; margin-left:42%; margin-top:9%;">받은 신청이 없습니다!</p>
+   </c:if>
+
 </div>
 
 <!-- 신청 받은 내역 끝 -->
@@ -364,8 +396,8 @@ $(document).ready(function() {
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-    	<p>새 전화번호:</p>
-    	<input style="" class="popupInput" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
+       <p>새 전화번호:</p>
+       <input style="" class="popupInput" id="newphone" name="newphone" placeholder="000-0000-0000"><br>
    
 
 

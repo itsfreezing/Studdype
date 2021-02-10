@@ -187,5 +187,9 @@
 			MEET_BOARD
 			WHERE S_NO = #{s_no}
 		</select>
-	
+		<select id="selectMeetByS_no" parameterType="int" resultType="meetDto">
+			SELECT * FROM
+			MEET_BOARD
+			WHERE S_NO = #{s_no}
+		</select>
 	</mapper>
