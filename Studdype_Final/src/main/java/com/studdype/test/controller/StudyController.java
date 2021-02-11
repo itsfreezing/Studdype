@@ -35,6 +35,7 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
+import com.studdype.test.model.dao.study.StudyMemberDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
@@ -213,14 +214,19 @@ public class StudyController {
 		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
 		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
+		StudyDto img = studyBiz.selectOneBySno(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
 			
 			MemberDto dto2 = memberBiz.selectOne(memberlist.get(i).getMem_no());
 			membername.add(dto2);
 		}
-
-		
+	
+		if(img.getPhoto() == null ) {
+			img.setPhoto("no_url_of_photo_from_studyTB"); 
+		}
+		System.out.println(img.getPhoto());
+		model.addAttribute("img",img);
 
 		model.addAttribute("membername", membername);
 		model.addAttribute("memberlist", memberlist);
@@ -231,7 +237,7 @@ public class StudyController {
 		model.addAttribute("category", category);
 
 		session.setAttribute("leftnavi", "updateStudy");
-
+		
 		return "studdype/updateStudy";
 	}
 	// 스터디 관리 페이지 update버튼 클릭시
@@ -457,6 +463,25 @@ public class StudyController {
 			}
 		}
 	}
+	
+	@RequestMapping(value="/studygetout.do",method = RequestMethod.GET)
+	public String studygetout(HttpSession session,HttpServletRequest request,Model model) {
+	
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		StudyMemberDto dto = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),login.getMem_no());
+		int res = StudyMemberBiz.deletemember(dto);
+		if(res>0) {
+			model.addAttribute("msg","탈퇴 성공  !");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg","탈퇴실패  !");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}
+
+	}
+	
 	
 	@RequestMapping("/studyMemberInsert.do")
 	public String StudyMemberInsert(Model model, HttpServletRequest request, StudyApplyingDto dto) {

@@ -737,9 +737,10 @@ input[type="checkbox"]:checked+label:before {
 			<button class="btn btn-purple" type="button" onclick="modal();" style="position:absolute; top: 851px; left: 788px; background-color:white; border:1px solid #5a2b20; color:#5a2b20;">기본사진</button>
 			<input type="hidden" id="basicPhoto" name="photo" value="">
 			
-		<div id="studyimage" class="image-container">
-
-			
+		<div id="studyimage" class="image-container" >
+			<img src="${img.photo }" style="height:100%; width:100%;">
+			<p>${img.photo }</p>
+		
 
 		</div>
 		
@@ -828,6 +829,7 @@ input[type="checkbox"]:checked+label:before {
 	<!--  메인 세션 끝 -->
 	<!--  멤버 관리 -->
 	<div id="main2" style="display:none;">
+		<form>
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
 		<p id="p2" style="color:#5a2b20; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
@@ -835,7 +837,7 @@ input[type="checkbox"]:checked+label:before {
 		
 		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; ">
 		<table id="member"
-         class="table14_8" style="width:1117px;">
+         class="table14_8" style="width:1117px; ">
          <thead>
             <tr >
                <th>이름</th>
@@ -879,9 +881,11 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>
+      <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
       </div>
-	  
-	<button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="change();">수정하기</button>
+      
+	  </form>
+	
 	</div>
 	<!-- 멤버 관리 끝 -->
 	
@@ -926,10 +930,10 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>            
-    
+    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
 	</div>
 		
-	  <button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="changebook();">수정하기</button>
+	  
 	</div>
 	
 </body>

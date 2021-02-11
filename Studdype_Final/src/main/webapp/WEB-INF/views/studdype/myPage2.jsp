@@ -251,10 +251,10 @@ function studypopup(multipleFilter) {
    <br>
    <br>
    <c:if test="${fn:length(applylist) != 0 }">
-   <table class="table table-hover" style="width: 70%; text-align: center; position: absolute; top: 13%; left: 14%; ">
+   <table class="table table-hover" style="width: 70%; text-align: center; position: absolute; top: 13%; left: 12%; ">
    <thead>
    <tr style="background-color:black; color:white;"> 
-      <th style="position:sticky;top:0px; background-color:black;">내가 신청한 스터디 이름</th>
+      <th style="position:sticky;top:0px; background-color:black;">스터디 이름</th>
       <th style="position:sticky;top:0px; background-color:black;">나의 신청 상태</th>
       <th style="position:sticky;top:0px; background-color:black;">내 신청 삭제</th>
    </tr>
@@ -328,15 +328,16 @@ function studypopup(multipleFilter) {
          
          </tr>
       </c:if>
+      <c:if test="${status.count < 1 }">
+      <p style="font-weight: bold; font-size: 30px; margin-left: 41%; margin-top: 6%;">받은 신청이 없습니다!</p>
+   	  </c:if>
       </c:forEach>
    
    </tbody>
    
    </table>
    
-   <c:if test="${fn:length(applylist) == 0 }">
-      <p style="font-weight: bold; font-size: 30px; margin-left: 41%; margin-top: 6%;">받은 신청이 없습니다!</p>
-   </c:if>
+   
    </div>
 </div>
 
@@ -385,7 +386,7 @@ function studypopup(multipleFilter) {
         
       </tr>
       </c:if>
-      <c:if test="${status.count < 1 }">
+      <c:if test="${status.count = 0 }">
    	  <p style="font-weight: bold;font-size: 30px;margin-left: 42%;margin-top: 9.5%;">모임이 없습니다!</p>
    	  </c:if> 
 	 </c:forEach>
@@ -491,8 +492,8 @@ function studypopup(multipleFilter) {
 <!--  이메일 변경 -->
    <div id="emailpopup" class="hide">
     <div class="content">
-     <p style="font-size:20px; font-weight:bold; position:absolute; top:41%; left:47%;">이메일 변경 </p>
-    <p style="font-size:20px; font-weight:bold; position:absolute; top:47%; left:41%;">새 이메일:</p>    <input class="popupInput" id="newemail" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
+     <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">이메일 변경 </p>
+    <p style="font-size:20px; font-weight:bold; position:absolute; top: 46.7%; left: 42%;">새 이메일:</p>    <input class="popupInput" id="newemail" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
     <button onclick="changeemail()" class="profileBtn submitBtn" >변경</button>
     <button onclick="closeemailPopup()" class="profileBtn cancelBtn" >취소</button>
     </div>
@@ -501,8 +502,8 @@ function studypopup(multipleFilter) {
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-        <p style="font-size:20px; font-weight:bold; position:absolute; top:39%; left:46%;">전화번호 변경</p>
-       <p style="font-size:20px; font-weight:bold; position:absolute; top:47%; left:41%;">새 전화번호:</p>
+        <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">전화번호 변경</p>
+       <p style="font-size:20px; font-weight:bold; position:absolute; top:46.8%; left:41%;">새 전화번호:</p>
        <input style="" class="popupInput" id="newphone" name="newphone" autocomplete="off" value="${login.mem_phone }"><br>
    
 
