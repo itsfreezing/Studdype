@@ -30,7 +30,6 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
 	// 헤더 빈영역 가려주기 (2021.02.11 [박기민] 추가)
 	$(".justify-content-center").hide();
@@ -74,7 +73,6 @@ $(document).ready(function() {
  if ( strHash == "" || strHash == null ) {
  	$(".tab_content").hide(); 
      $("ul.nav-items li:first").addClass("active");
-
      $(".tab_content:first").show(); 
      
      
@@ -87,28 +85,18 @@ $(document).ready(function() {
      return false;
  }
  
-
-
  var owl = $('.owl-carousel');
-
 	owl.owlCarousel({
 		items : 1, // 한번에 보여줄 아이템 수
 		loop : false, // 반복여부
 	});
-
 	$('.customNextBtn').click(function() {
 		owl.trigger('next.owl.carousel');
 	})
-
 	$('.customPrevBtn').click(function() {
 		owl.trigger('prev.owl.carousel', [ 300 ]);
 	})
-
-
-
  	 
-
-
 });
  	//이메일 변경
 function showEmail(multipleFilter) {
@@ -123,7 +111,6 @@ function showEmail(multipleFilter) {
 	    
 	    emailpopup.classList.remove('hide');
 	}
-
 	function closeemailPopup() {
 		const emailpopup = document.querySelector('#emailpopup');
 		emailpopup.classList.add('hide');
@@ -135,7 +122,6 @@ function showEmail(multipleFilter) {
 		
 		
 		location.href="changeemail.do?mem_no="+b+"&new_email="+a;
-
 	}
 	
 	//비밀번호 변경
@@ -151,7 +137,6 @@ function showEmail(multipleFilter) {
 	    
 		popup.classList.remove('hide');
 	}
-
 	function pwclosePopup() {
 		const popup = document.querySelector('#popup');
 		 document.getElementById("pw").value ='';
@@ -161,7 +146,6 @@ function showEmail(multipleFilter) {
 		 $("#alert-danger").hide();
 	    popup.classList.add('hide');
 	}
-
 	function changepw(){
 		var p2 = $('input[name=pwd2]').val();
 		var p1 = $('input[name=pwd1]').val();
@@ -192,12 +176,10 @@ function studypopup(multipleFilter) {
 	    
 		popup.classList.remove('hide');
 	}
-
 	function closestudypopup() {
 		const popup = document.querySelector('#studypopup');
 	    popup.classList.add('hide');
 	}
-
 </script>
 </head>
 <body>

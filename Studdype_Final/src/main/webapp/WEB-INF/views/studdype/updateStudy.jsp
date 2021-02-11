@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -738,8 +739,8 @@ input[type="checkbox"]:checked+label:before {
 			<input type="hidden" id="basicPhoto" name="photo" value="">
 			
 		<div id="studyimage" class="image-container" >
-			<img src="${img.photo }" style="height:100%; width:100%;">
-			<p>${img.photo }</p>
+			<img src="${fileName }" style="height:100%; width:100%;">
+			
 		
 
 		</div>

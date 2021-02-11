@@ -225,6 +225,9 @@ public class StudyController {
 		if(img.getPhoto() == null ) {
 			img.setPhoto("no_url_of_photo_from_studyTB"); 
 		}
+		FileHandler filehandler = new FileHandler();
+		String fileName = filehandler.getFileName(img.getPhoto(), "Studdype_Final");
+		model.addAttribute("fileName",fileName);
 		System.out.println(img.getPhoto());
 		model.addAttribute("img",img);
 
