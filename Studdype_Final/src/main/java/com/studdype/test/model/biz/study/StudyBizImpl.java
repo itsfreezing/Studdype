@@ -233,7 +233,7 @@ public class StudyBizImpl implements StudyBiz{
 
 	//지역별 검색 
 	@Override
-	public List<StudyDto> studyListLocation(SearchPagination searchPagination,int gu_no) {
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
 		return study_Dao.studyListLocation(searchPagination);
 	}
 	
@@ -248,6 +248,12 @@ public class StudyBizImpl implements StudyBiz{
 	public int nomalStudyImg(StudyDto dto) {
 		
 		return study_Dao.nomalStudyImg(dto);
+	}
+
+	@Override
+	public List<StudyDto> selectStudyByLocation(int si_no) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

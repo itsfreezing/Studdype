@@ -309,9 +309,10 @@ $(function(){
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	<div class="img" >
-			  <img src="./resources/img/loginBanner.png">
+			  <img src="./resources/img/loginBanner.png" style="width:100%;filter:brightness(0.5);">
 		<div class="content">
 			<h3>회원가입</h3>
+			<p style="font-size:13px;">회원가입 후 다양한 기능을 이용해보세요</p>
 		</div>
 	</div>
 

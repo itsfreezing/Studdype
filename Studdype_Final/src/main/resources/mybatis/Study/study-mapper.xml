@@ -92,7 +92,6 @@
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
- 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
 
 	<select id="selectStudyName" parameterType="int" resultType="string">
 		SELECT S_NAME FROM STUDY WHERE S_NO = #{s_no}
@@ -109,12 +108,5 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-	<select id="selectStudyByLocation" parameterType="int" resultType="studyDto">
-		SELECT * FROM STUDY WHERE GU_NO=#{gu_no}
-	</select>
 	
-	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
-		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
-	</select> 
-
 </mapper>

@@ -1,6 +1,7 @@
 package com.studdype.test.model.dao.study;
 
 import java.util.List;
+import java.util.Map;
 
 import com.studdype.test.common.SearchPagination;
 import com.studdype.test.model.dto.study.StudyDto;
@@ -24,8 +25,7 @@ public interface StudyDao {
 	public int nomalStudyImg(StudyDto dto); 
 
 
-	public List<StudyDto>selectStudyByLocation(int si_no);//지역 시와 구 스터디 검색
-	public StudyDto selectOneBySi_no(int si_no);
+	public List<StudyDto>selectStudyByLocation(int gu_no);//지역 시와 구 스터디 검색
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
 
 }
