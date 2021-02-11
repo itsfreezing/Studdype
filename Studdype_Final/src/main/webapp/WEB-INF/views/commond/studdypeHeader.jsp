@@ -180,8 +180,6 @@ $(function() {
                </div>
                </form>
          
-            <!-- 네비 끝 -->
-            <c:if test="${studylist == null }">
             
             
          <div class="row justify-content-center">
@@ -196,7 +194,6 @@ $(function() {
                </div>
             </div>
          </div>
-         </c:if>
          <!-- 헤더 텍스트 끝 -->
    <!-- 헤더 끝 -->
    <div id="studypopup" class="hide">
