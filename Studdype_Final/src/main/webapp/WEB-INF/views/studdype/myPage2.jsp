@@ -32,6 +32,9 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	// 헤더 빈영역 가려주기 (2021.02.11 [박기민] 추가)
+	$(".justify-content-center").hide();
+	
 	// Header의 프로필 메뉴에 하위 메뉴들은 href에 #를 가지고 있다.
 	// ex) myPage.do#hashTag
 	// command 뒤에 붙는 #의 값을 strHash변수에 넣어준다.

@@ -433,9 +433,9 @@ function writeRecomment(btn){
 						<col width="250">
 						<col width="100">
 						<tr>
-							<th style="font-size:25pt;">${detailBookDto.getB_title() }</th>
-							<th>${writerNameMap.get(detailBookDto.getB_writer()).getMem_id()}(${writerNameMap.get(detailBookDto.getB_writer()).getMem_name() })</th>
-							<th style="font-size:13pt;"><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.dd"/></th>
+							<th style="font-size:20pt;" tooltip='${detailBookDto.getB_title() }' tooltip-persistent data-backdrop='static'>${detailBookDto.getB_title() }</th>
+							<th style="font-size:12pt">${writerNameMap.get(detailBookDto.getB_writer()).getMem_id()}(${writerNameMap.get(detailBookDto.getB_writer()).getMem_name() })</th>
+							<th style="font-size:12pt;"><fmt:formatDate value="${detailBookDto.getB_regdate() }" pattern="YYYY.MM.dd"/></th>
 						</tr>
 					</table>
 				</div>

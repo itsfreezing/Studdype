@@ -75,9 +75,9 @@ div.blog-meta > span > img#placeHolderIcon{
 }
 
 .header-area {
-	background-image: url(./resources/assets/img/img_startPage.png);
+	/* background-image: url(./resources/assets/img/img_startPage.png);
 	background-size: cover;
-	background-position: center;
+	background-position: center; */
 	height: 1080px;
 	position: relative;
 	z-index: 3;
@@ -334,11 +334,11 @@ a.scroll-down:hover {
 /*Features Area*/
 
 .features-area {
-	background: rgb(110, 69, 226);
+	/* background: rgb(110, 69, 226);
 	background: -moz-linear-gradient(-45deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
 	background: -webkit-linear-gradient(-45deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
 	background: linear-gradient(135deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e45e2', endColorstr='#88d3ce', GradientType=1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e45e2', endColorstr='#88d3ce', GradientType=1); */
 	color: #fff;
 	padding: 120px 0 330px;
 }

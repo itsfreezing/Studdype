@@ -208,15 +208,23 @@ public class FileHandler {
 	public String getFileName(String f_url, String folderName) {
 		String[] fileNames;
 		String fileName = "";
+		File file = new File(f_url);
 		
-		if(f_url.contains(folderName)) {
-			fileNames = f_url.split(folderName);
-			fileName = "."+fileNames[fileNames.length-1];
+		if(file.exists()) {
+			if(f_url.contains(folderName)) {
+				fileNames = f_url.split(folderName);
+				fileName = "."+fileNames[fileNames.length-1];
+			}else {
+				fileName = f_url;
+			}
+			return fileName;
 		}else {
-			fileName = f_url;
+			if(f_url.contains("asset")) {
+				return f_url;
+			}
+			return null;
 		}
 		
-		return fileName;
 	}
 	
 }

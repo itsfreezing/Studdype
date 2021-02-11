@@ -25,13 +25,13 @@
 	background: #fff;
 }
 
-.header-area {
+/* .header-area {
 	background: #88d3ce;
 	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
 	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
 	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
-}
+} */
 h1{
 	margin-top: 3%;
 	font-weight:800;
