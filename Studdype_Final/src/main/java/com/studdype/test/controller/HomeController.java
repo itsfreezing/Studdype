@@ -104,6 +104,8 @@ public class HomeController {
 
 
 		
+		
+		
 		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
 		
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(login.getMem_no()); //해당 회원번호로 가입되있는 스터디 번호 가져오기
@@ -127,6 +129,9 @@ public class HomeController {
 		pageMap.put("mem_no", login.getMem_no());
 		
 		
+		
+		
+		
 		int[] joinSnoList = new int[joinedstudy.size()];
 		
 		
@@ -136,8 +141,9 @@ public class HomeController {
 		
 				studylist.add(dto);
 		}
+	
 		
-		
+	
 		
 		Map<Integer,String> nameMap = studyBiz.selectStudyName(joinSnoList);
 		
@@ -168,8 +174,14 @@ public class HomeController {
 			applymember.add(dto5);
 		}
 		
-		
-		
+		FileHandler fileHandler = new FileHandler();
+		for(int i=0; i<studylist.size(); i++) {
+			if(studylist.get(i).getPhoto() == null) {
+				studylist.get(i).setPhoto("./resources/assets/img/nothingBook.png");
+			}
+				studylist.get(i).setPhoto(fileHandler.getFileName(studylist.get(i).getPhoto(), "Studdype_Final"));
+		}
+	
 		
 
 		model.addAttribute("allMember",allMember);
@@ -281,8 +293,9 @@ public class HomeController {
 		
 		if(res>0) {
 			model.addAttribute("msg", "비밀번호 변경 성공!");
-			model.addAttribute("url", "myPage.do");
-			login.setMem_pw(request.getParameter("new_pw"));
+			session.removeAttribute("login");
+			model.addAttribute("url", "studyList.do");
+			
 			
 			return "commond/alert";
 		}else {
