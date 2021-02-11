@@ -30,7 +30,6 @@
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
 	// 헤더 빈영역 가려주기 (2021.02.11 [박기민] 추가)
 	$(".justify-content-center").hide();
@@ -74,7 +73,6 @@ $(document).ready(function() {
  if ( strHash == "" || strHash == null ) {
  	$(".tab_content").hide(); 
      $("ul.nav-items li:first").addClass("active");
-
      $(".tab_content:first").show(); 
      
      
@@ -87,28 +85,18 @@ $(document).ready(function() {
      return false;
  }
  
-
-
  var owl = $('.owl-carousel');
-
 	owl.owlCarousel({
 		items : 1, // 한번에 보여줄 아이템 수
 		loop : false, // 반복여부
 	});
-
 	$('.customNextBtn').click(function() {
 		owl.trigger('next.owl.carousel');
 	})
-
 	$('.customPrevBtn').click(function() {
 		owl.trigger('prev.owl.carousel', [ 300 ]);
 	})
-
-
-
  	 
-
-
 });
  	//이메일 변경
 function showEmail(multipleFilter) {
@@ -123,7 +111,6 @@ function showEmail(multipleFilter) {
 	    
 	    emailpopup.classList.remove('hide');
 	}
-
 	function closeemailPopup() {
 		const emailpopup = document.querySelector('#emailpopup');
 		emailpopup.classList.add('hide');
@@ -135,7 +122,6 @@ function showEmail(multipleFilter) {
 		
 		
 		location.href="changeemail.do?mem_no="+b+"&new_email="+a;
-
 	}
 	
 	//비밀번호 변경
@@ -151,7 +137,6 @@ function showEmail(multipleFilter) {
 	    
 		popup.classList.remove('hide');
 	}
-
 	function pwclosePopup() {
 		const popup = document.querySelector('#popup');
 		 document.getElementById("pw").value ='';
@@ -161,7 +146,6 @@ function showEmail(multipleFilter) {
 		 $("#alert-danger").hide();
 	    popup.classList.add('hide');
 	}
-
 	function changepw(){
 		var p2 = $('input[name=pwd2]').val();
 		var p1 = $('input[name=pwd1]').val();
@@ -192,12 +176,10 @@ function studypopup(multipleFilter) {
 	    
 		popup.classList.remove('hide');
 	}
-
 	function closestudypopup() {
 		const popup = document.querySelector('#studypopup');
 	    popup.classList.add('hide');
 	}
-
 </script>
 </head>
 <body>
@@ -254,10 +236,10 @@ function studypopup(multipleFilter) {
    <br>
    <br>
    <c:if test="${fn:length(applylist) != 0 }">
-   <table class="table table-hover" style="width: 70%; text-align: center; position: absolute; top: 13%; left: 14%; ">
+   <table class="table table-hover" style="width: 70%; text-align: center; position: absolute; top: 13%; left: 12%; ">
    <thead>
    <tr style="background-color:black; color:white;"> 
-      <th style="position:sticky;top:0px; background-color:black;">내가 신청한 스터디 이름</th>
+      <th style="position:sticky;top:0px; background-color:black;">스터디 이름</th>
       <th style="position:sticky;top:0px; background-color:black;">나의 신청 상태</th>
       <th style="position:sticky;top:0px; background-color:black;">내 신청 삭제</th>
    </tr>
@@ -331,15 +313,16 @@ function studypopup(multipleFilter) {
          
          </tr>
       </c:if>
+      <c:if test="${status.count < 1 }">
+      <p style="font-weight: bold; font-size: 30px; margin-left: 41%; margin-top: 6%;">받은 신청이 없습니다!</p>
+   	  </c:if>
       </c:forEach>
    
    </tbody>
    
    </table>
    
-   <c:if test="${fn:length(applylist) == 0 }">
-      <p style="font-weight: bold; font-size: 30px; margin-left: 41%; margin-top: 6%;">받은 신청이 없습니다!</p>
-   </c:if>
+   
    </div>
 </div>
 
@@ -388,7 +371,7 @@ function studypopup(multipleFilter) {
         
       </tr>
       </c:if>
-      <c:if test="${status.count < 1 }">
+      <c:if test="${status.count = 0 }">
    	  <p style="font-weight: bold;font-size: 30px;margin-left: 42%;margin-top: 9.5%;">모임이 없습니다!</p>
    	  </c:if> 
 	 </c:forEach>
@@ -481,7 +464,7 @@ function studypopup(multipleFilter) {
     <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:45%; left:51%;" id="pwd1" name="pwd1"  type="password"><br>
     <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:49%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:49%; left:51%;" id="pwd2" name="pwd2"  type="password">
     <div class="alert alert-success" id="alert-success" style="position:absolute; top: 54%; left: 41%;width: 349px;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 54%; left: 41%; width: 349px;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
-    <p style="position:absolute; top:54%;left:41%; color:red; " id="aaaaa" >비밀번호를 잘생각해서 변경해 주세요!</p>
+    <p style="position:absolute; top:54%;left:41%; color:red; font-size:16px;" id="aaaaa" >비밀번호를 신중하게 변경해 주세요!</p>
 
 
     <button onclick="changepw()"  class="profileBtn submitBtnPW" >변경</button>
@@ -494,8 +477,8 @@ function studypopup(multipleFilter) {
 <!--  이메일 변경 -->
    <div id="emailpopup" class="hide">
     <div class="content">
-     <p style="font-size:20px; font-weight:bold; position:absolute; top:41%; left:47%;">이메일 변경 </p>
-    <p style="font-size:20px; font-weight:bold; position:absolute; top:47%; left:41%;">새 이메일:</p>    <input class="popupInput" id="newemail" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
+     <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">이메일 변경 </p>
+    <p style="font-size:20px; font-weight:bold; position:absolute; top: 46.7%; left: 42%;">새 이메일:</p>    <input class="popupInput" id="newemail" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
     <button onclick="changeemail()" class="profileBtn submitBtn" >변경</button>
     <button onclick="closeemailPopup()" class="profileBtn cancelBtn" >취소</button>
     </div>
@@ -504,8 +487,8 @@ function studypopup(multipleFilter) {
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-        <p style="font-size:20px; font-weight:bold; position:absolute; top:39%; left:46%;">전화번호 변경</p>
-       <p style="font-size:20px; font-weight:bold; position:absolute; top:47%; left:41%;">새 전화번호:</p>
+        <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">전화번호 변경</p>
+       <p style="font-size:20px; font-weight:bold; position:absolute; top:46.8%; left:41%;">새 전화번호:</p>
        <input style="" class="popupInput" id="newphone" name="newphone" autocomplete="off" value="${login.mem_phone }"><br>
    
 

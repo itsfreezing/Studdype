@@ -55,7 +55,6 @@ public class StudyDaoImpl implements StudyDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
-			System.out.println(dto.getPhoto());
 		} catch (Exception e) {
 			System.out.println("[ERROR] : insertStudy");
 			e.printStackTrace();

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -361,8 +362,8 @@
 }
 .table14_8 th {
 	font-weight:bold;
-	background-color:#e7e0d5;
-	color:#5a2b20
+	background-color:#808080;
+	color:black;
 }
 .table14_8,.table14_8 th,.table14_8 td {
 	font-size:20px;
@@ -663,6 +664,49 @@ input[type="checkbox"]:checked+label:before {
 	$("#ex_file").click(function(){
 			$("#studyimage").empty();
 	});
+	function frmsubmit(){
+		var file = document.getElementById('ex_file');
+		
+		//파일 경로.
+		var filePath = file.value;
+	
+		//전체경로를 \ 나눔.
+		var filePathSplit = filePath.split('\\'); 
+		//전체경로를 \로 나눈 길이.
+		var filePathLength = filePathSplit.length;
+		//마지막 경로를 .으로 나눔.
+		var fileNameSplit = filePathSplit[filePathLength-1].split('.');
+		//파일명 : .으로 나눈 앞부분
+		var fileName = fileNameSplit[0];
+		//파일 확장자 : .으로 나눈 뒷부분
+		var fileExt = fileNameSplit[1];
+		//파일 크기
+		var fileSize = file.files[0].size;
+		
+	
+	   
+	
+		
+		return true;
+	}
+	function setThumbnail(event) { 
+		
+	var reader = new FileReader(); 
+		
+	reader.onload = function(event) { 
+		
+		var img = document.createElement("img"); 
+		img.setAttribute("src", event.target.result); 
+		document.querySelector("div#studyimage").appendChild(img); 
+	
+	}; 
+		reader.readAsDataURL(event.target.files[0]); 
+	}
+
+
+	$("#fileinput").change(function() {
+		readURL(this);
+	});
 	
 </script>
 </head>
@@ -675,8 +719,9 @@ input[type="checkbox"]:checked+label:before {
 
 
 	<!-- 메인 세션 -->
+	
 	<div id="main" >
-
+	<form method="post" enctype="multipart/form-data" action="studyupdate.do" autocomplete="off" onsubmit='return frmsubmit();'>
 		<p id="p1" style="color:#5a2b20; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main1();">스터디 관리</p>
 		<p id="p2" style="color:#808080; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
@@ -688,19 +733,20 @@ input[type="checkbox"]:checked+label:before {
 		<pre class="brush:html"></pre>
 		<div class="filebox">
 		  <label for="ex_file">업로드</label>
-		  <input type="file" id="ex_file"  onchange="LoadImg(this);" >
+		  <input type="file" id="ex_file" name="file" onchange="setThumbnail(event);" >
 		</div>
-			<button class="btn btn-purple" onclick="modal();" style="position:absolute; top: 851px; left: 788px; background-color:white; border:1px solid #5a2b20; color:#5a2b20;">기본사진</button>
+			<button class="btn btn-purple" type="button" onclick="modal();" style="position:absolute; top: 851px; left: 788px; background-color:white; border:1px solid #5a2b20; color:#5a2b20;">기본사진</button>
 			<input type="hidden" id="basicPhoto" name="photo" value="">
-		<div id="studyimage" class="image-container">
-
-			<img id="LoadImg" style="width: 500px; height: 250px;"
-				onError="onError();">
+			
+		<div id="studyimage" class="image-container" >
+			<img src="${fileName }" style="height:100%; width:100%;">
+			
+		
 
 		</div>
 		
 		
-		
+		<input type="hidden" name="s_no" value="${study.s_no }">
 		<div id="modal">
 		<div id="modal-inside">
 			<img class="modal-image" src="./resources/assets/img/img_study7.png">
@@ -708,13 +754,14 @@ input[type="checkbox"]:checked+label:before {
 			<img class="modal-image" src="./resources/assets/img/img_study3.png">
 			<img class="modal-image" src="./resources/assets/img/img_study1.png">
 			<div style="float:right; margin-top:25px;" class="fileSelectDiv" id="basicImageCancel">
-				<button class="btn btn-purple" style="position:absolute; background-color:white; border:1px solid #5a2b20; color:#5a2b20; left: 824px; top: 541px;">취소</button>
+				<button  type="button" class="btn btn-purple" style="position:absolute; background-color:white; border:1px solid #5a2b20; color:#5a2b20; left: 824px; top: 541px;">취소</button>
 			</div>
 			<div style="position: absolute;  top: 542px;  left: 721px;" class="fileSelectDiv" id="basicImageSelect">
-				<button class="btn btn-purple" style="background-color:white; border:1px solid #5a2b20; color:#5a2b20;">선택 완료</button>
+				<button  type="button" class="btn btn-purple" style="background-color:white; border:1px solid #5a2b20; color:#5a2b20;">선택 완료</button>
 			</div>
 			</div>
 		</div>
+		
 		<!-- 대표 사진 끝 -->
 		
 		<!-- 스터디 정보 수정  -->
@@ -722,37 +769,37 @@ input[type="checkbox"]:checked+label:before {
 		<p id="creater">스터디 팀장</p>
 		<input id="createrarea" readonly="readonly" value="${login.mem_name }">
 		<p id="studyname">스터디 이름</p>
-		<input id="studynameupdate" value="${study.s_name }">
+		<input id="studynameupdate" name="s_name" value="${study.s_name }">
 		
 		<p id="category">카테고리</p>
-		<select id="cate">
+		<select id="cate" name="cate_no">
 			<c:forEach var="category" items="${category }">
 				<option value="${category.cate_no }" <c:if test="${category.cate_no == study.cate_no }">selected     </c:if>>${category.cate_name }</option>
 			</c:forEach>
 		</select>
 		<p id="Max">최대 인원수</p>
-		<select id="Max_member">
+		<select id="Max_member" name="s_maxcnt">
 			<c:forEach var="i" begin="1" end="30" step="1">
 			<option value="${i }" <c:if test="${i == study.s_maxcnt }">selected </c:if>>${i } 명    </option>
 			</c:forEach>
 		</select>
 		<p id="locsi">지역(시)</p>
-		<select id="locationsi">
+		<select id="locationsi" name="si_no">
 			<c:forEach var="sidto" items="${sidto }">
 				<option value="${sidto.si_no }"<c:if test="${sidto.si_no == study.si_no }">selected </c:if>>${sidto.si_name }</option>
 			</c:forEach>
 		</select>
 		<p id="locgu">지역(구)</p>
-		<select id="locationgu">
+		<select id="locationgu" name="gu_no">
 			<c:forEach var="gudto" items="${gudto }">
 				<option value="${gudto.gu_no }" <c:if test="${gudto.gu_no == study.gu_no }">selected </c:if>>${gudto.gu_name}</option>
 			</c:forEach>
 		</select>
 		<p id="studyinfo">스터디 소개</p>
-		<input id="studyinfot" type="text" value="${study.s_info }">
+		<input id="studyinfot" name="s_info" type="text" value="${study.s_info }">
 	
-		<input id="update" type="submit" class="btn btn-purple" value="스터디 변경" onclick="update();">
-		
+		<input id="update" type="submit" class="btn btn-purple" value="스터디 변경">
+		</form>
 
 		<br>
 		<br>
@@ -783,14 +830,15 @@ input[type="checkbox"]:checked+label:before {
 	<!--  메인 세션 끝 -->
 	<!--  멤버 관리 -->
 	<div id="main2" style="display:none;">
+		<form>
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
 		<p id="p2" style="color:#5a2b20; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
 		
-		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; box-shadow:0px 0px 20px  #808080;">
+		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; ">
 		<table id="member"
-         class="table14_8" style="width:1117px;">
+         class="table14_8" style="width:1117px; ">
          <thead>
             <tr >
                <th>이름</th>
@@ -834,9 +882,11 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>
+      <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
       </div>
-	  
-	<button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="change();">수정하기</button>
+      
+	  </form>
+	
 	</div>
 	<!-- 멤버 관리 끝 -->
 	
@@ -852,12 +902,12 @@ input[type="checkbox"]:checked+label:before {
 		<p id="p3" style="color:#5a2b20; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
-	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; box-shadow:0px 0px 20px  #808080;">
+	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; ">
 	<table id="book1"
          class="table14_8" style="width:1117px;">
 
          <thead>
-            <tr style="text-align:center; background-color:#967BDC;">
+            <tr style="text-align:center; background-color:#808080 !important; color:black !important;">
                <th>번호</th>
                <th>등록된 책 제목</th>
                <th>대표 도서</th>
@@ -881,10 +931,10 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>            
-    
+    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
 	</div>
 		
-	  <button class="btn btn-purple" style="position:absolute; top: 65%;left: 88%;" onclick="changebook();">수정하기</button>
+	  
 	</div>
 	
 </body>
