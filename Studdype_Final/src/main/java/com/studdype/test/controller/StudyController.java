@@ -515,7 +515,8 @@ public class StudyController {
 			// 로그
 			logger.info("STUDY - SearchLocationLIST");
 
-			studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
+			studyList = studyBiz.studyListLocation(searchPagination);
+			// 스터디 리스트
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setPagination(searchPagination);
 			pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
