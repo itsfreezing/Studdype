@@ -53,7 +53,7 @@
 				    		  $("#modal-show").fadeIn("slow");
 			       			 $(".calTitle").text(eventObj.title);
 			       			 $(".calDate").text(moment(eventObj.start).format("YYYY-MM-DD")+" ~ "+moment(eventObj.end).format("YYYY-MM-DD"));
-			    		
+			       			$("#modal-inside")
 
 			    		$(".close").click(function() {
 			    		  $("#modal-one").fadeOut("slow");
