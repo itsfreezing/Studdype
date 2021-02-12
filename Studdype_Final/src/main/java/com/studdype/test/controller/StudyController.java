@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +28,6 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
-import com.studdype.test.model.dao.study.StudyMemberDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
@@ -502,9 +501,9 @@ public class StudyController {
 	}
 
 	
-	//지역별 검색 
+		//지역별 검색 
 		@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
-		public String studyListLocation(Model model,HttpServletRequest request,@ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session,int si_no,int gu_no) {
+		public String SearchLocation(Model model,StudyDto studyDto, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
 
 			Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 			List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -513,10 +512,9 @@ public class StudyController {
 			Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
 			List<LocationSiDto> sidtos = studyBiz.locationSiList();
 			List<LocationGuDto> gudtos = studyBiz.locationGuList();
-			Map<Integer, String>selectOneSi= new HashMap<Integer,String>();
-			Map<Integer, String>selectOneGu=new HashMap<Integer,String>();
 			// 로그
 			logger.info("STUDY - SearchLocationLIST");
+
 			studyList = studyBiz.studyList(searchPagination); // 스터디 리스트
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setPagination(searchPagination);
@@ -525,16 +523,17 @@ public class StudyController {
 			selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 			studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
 			selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
-			selectOneGu=studyBiz.selectOneGuno(gu_no);
-			selectOneSi=studyBiz.selectOneSino(si_no);
+			
+			for (int i=0;i<studyList.size();i++) {
+				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				System.out.println(studyList.get(i).getS_name());
+				System.out.println(studyList.get(i).getSi_no());
+				System.out.println(studyList.get(i).getGu_no());
+			}
 			model.addAttribute("sidtos", sidtos);
 			model.addAttribute("gudtos", gudtos);
 			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("studyList", studyList);
-			model.addAttribute("selectOneSi",selectOneSi);
-			System.out.println(selectOneSi);
-			System.out.println(selectOneGu);
-			model.addAttribute("selectOneGu",selectOneGu);
 			model.addAttribute("leaderName", studyMainLeaderNameMap);
 			model.addAttribute("siList", selectSiForMainMap);
 			model.addAttribute("guList", selectGuForMainMap);
