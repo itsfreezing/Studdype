@@ -198,40 +198,42 @@ $(function(){
 			<div class="container-fluid">
 			<div class="row">
 			<c:choose>
-				<c:when test="${not empty studyList}">
-					<c:forEach items="${studyList}" var="studyDto">
-					<div class="col-sm-3 p-5 blogs-load"
-						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
-						<div class="single-blog-post">
-							<div class="blog-img-responsive-4by3">
-								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
-							</div>
-							<!-- 제목/장소아이콘/장소/카테고리 -->
-							<div class="blog-meta">
-								<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
-								<br> <span><img
-									src="./resources/assets/img/profile_placeholder.png"
-									style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;
-									${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
-							</div>
-
-							<p>${studyDto.s_info }</p>
-							<!-- 최대인원수/팀장명 -->
-							<div class="blog-comments">
-								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
-									style="float: right;"><img
-										src="./resources/assets/img/profile_user.png"
-										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
-								</span>
-							</div>
-						</div>
-					</div>
-					</c:forEach>
+				<c:when test="${studyList==null}">
+						<p style="margin-left:50%;">검색해주세요</p>
+						
 					</c:when>
-							<c:otherwise>
-								<p style="margin-left:50%;">검색해주세요</p>
-							</c:otherwise>
+					<c:otherwise>
+					<c:forEach items="${studyList}" var="studyDto">
+							<div class="col-sm-3 p-5 blogs-load"
+								onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
+								<div class="single-blog-post">
+									<div class="blog-img-responsive-4by3">
+										<!-- 스터디 이미지 -->
+										<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
+									</div>
+									<!-- 제목/장소아이콘/장소/카테고리 -->
+									<div class="blog-meta">
+										<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
+										<br> <span><img
+											src="./resources/assets/img/profile_placeholder.png"
+											style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;
+											${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
+									</div>
+		
+									<p>${studyDto.s_info }</p>
+									<!-- 최대인원수/팀장명 -->
+									<div class="blog-comments">
+										<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
+											style="float: right;"><img
+												src="./resources/assets/img/profile_user.png"
+												style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
+										</span>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					
+					</c:otherwise>
 					</c:choose>
 					</div>
 				</div>
@@ -286,7 +288,7 @@ $(function(){
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
-	<div style="padding-left: 45%;">
+	 <div style="padding-left: 45%;">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
 				<li class="page-item"><a class="page-link" href="studyListLocation.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>

@@ -503,7 +503,7 @@ public class StudyController {
 	
 		//지역별 검색 
 		@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
-		public String SearchLocation(Model model,StudyDto studyDto, @ModelAttribute("searchPagination") SearchPagination searchPagination, HttpSession session) {
+		public String SearchLocation(Model model,StudyDto studyDto,  @ModelAttribute("searchPagination") SearchPagination searchPagination,HttpSession session) {
 
 			Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 			List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
