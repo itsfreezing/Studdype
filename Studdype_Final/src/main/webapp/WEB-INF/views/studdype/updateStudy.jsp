@@ -610,6 +610,9 @@ input[type="checkbox"]:checked+label:before {
 			 
 		});
 		
+		if(chk_arr.includes(m)){
+			alert("대표는 추방할수 없습니다!");
+		}else{
 		if(chk_arr.length == 0){
 			
 			location.href="updatelead.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m
@@ -617,6 +620,7 @@ input[type="checkbox"]:checked+label:before {
 		
 		
 		location.href="updateleader.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m+"&exile_no="+chk_arr;
+		}
 		}
 	}
 	
@@ -953,7 +957,7 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>            
-    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
+    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="changebook();" value="수정하기">   
 	</div>
 		
 	  

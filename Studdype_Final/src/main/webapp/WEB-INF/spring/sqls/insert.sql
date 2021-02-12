@@ -14,7 +14,7 @@ INSERT INTO PHOTO_BOARD VALUES(0,1,'photoboard test', 1, 'content test', SYSDATE
 SELECT * FROM PHOTO_BOARD;
 SELECT * FROM PHOTO_FILE;
 
-UPDATE STUDY SET LEADER_NO=1 WHERE S_NO = 1;
+UPDATE STUDY SET LEADER_NO=2 WHERE S_NO = 71;
 --스터디 카테고리 
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, 'IT');
 INSERT INTO STUDY_CATEGORY VALUES(CATEGORYSEQ.NEXTVAL, '자격증');
@@ -45,7 +45,7 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'uesr22', 'user16', 'uesr16', '1389
 select * from study_member where mem_no = 9;
 select * from study_member;
 UPDATE STUDY SET LEADER_NO = 1 WHERE S_NO=1;
-insert into study_member values('51','13');
+insert into study_member values('71','17');
 --자유 게시판
 
 INSERT INTO FREE_BOARD VALUES(FREEBOARDSEQ.NEXTVAL, 1, '1번째 글입니다.', 1,  '1번째 글 내용 입니다', SYSDATE, 0);
