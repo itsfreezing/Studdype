@@ -25,11 +25,99 @@
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
- <script type="text/javascript">
-
+<script type="text/javascript">
+$(function() {
+	$(".background").show(); 
+	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+	$(".background").css("height", "650px");
+		$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
+});
 </script>
+<style type="text/css">
+h1{
+	margin-top: 3%;
+	font-weight:600;
+	font-size: 30px;
+	line-height: 20px;
+	text-align: center;
+}
+span{
+	color:white;
+	font-size: 20px;
+}
+.footer-menu{
+	height: 55%;
+}
+.main_div{
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-left: auto;
+	margin-right: auto;
+   	text-align: center;
+	width: 550px;
+	height: 100px;
+	color: black;
+	opacity: 75%;
+	border-radius: 5px;
+	background-color: white;
+}
+#span_name{
+	margin-top: 10%;
+	padding-top: 5%;
+}
+#name{
+	font-size: 18px;
+	font-weight: 600;
+}
+.sub_btn{
+	margin-bottom: 2%;
+	font-weight: 800;
+}
+#login{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 0px 0px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#login:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+#findPw{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 8%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 0px 0px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#findPw:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+</style>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<div class="main_div">
@@ -37,17 +125,23 @@
 		<c:choose>
 
 			<c:when test="${findId != null }">
-				<span>${findName }님의 아이디는 ${findId }입니다.</span>
+				<span id="span_name" style="color:black">${findName }님의 아이디는<span id="name" style="color:black"> '${findId }' </span>입니다.</span>
+				
 			</c:when>
 			
-			 
 			<c:otherwise>
-				<span>${findName }님이 가입한 아이디는 존재하지 않습니다.</span>
+				<div>${findName }님이 가입한 아이디는 존재하지 않습니다.</div>
 			</c:otherwise>
 		</c:choose>
-   		
-   </div>
-   
+	
+	<div class="sub_btn">
+		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
+		<button type="submit" id="findPw"><a href="findpwform.do" onClick="loginpage/findpwform">비밀번호 찾기</a></button>
+	</div>
+	</div>
+</div>
+
+
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script>
