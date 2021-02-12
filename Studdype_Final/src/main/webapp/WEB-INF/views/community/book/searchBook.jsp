@@ -57,7 +57,7 @@
 	display: block;
 	position: relative;
 	width: 100%;
-	height:600px;
+	height:500px;
 }
 
 #register-section {
@@ -116,11 +116,7 @@
 	width:98%;
 	margin:1%;
 	border-top:1px solid black;
-}
-
-#book-area {
-	border-collapse: separate;
-	border-spacing: 0 15px;
+	padding-top:5px;
 }
 
 /* 화살표 css */
@@ -153,9 +149,9 @@
 
 .append {
 	position:relative;
-	left:23%;
-	width:30%;
-	height:560px;
+	left:26%;
+	width:22%;
+	height:430px;
 	opacity:1;
 	z-index:2;
 	border:none;
@@ -166,11 +162,11 @@
 }
 
 .append img{
-	height:400px;
+	height:300px;
 }
 
 .append .book-info-top {
-	height:400px;
+	height:300px;
 }
 
 .append:hover {
@@ -181,8 +177,8 @@
 	display:inline-block;
 	position:relative;
 	float:left;
-	top:40%;
-	left:44%;
+	top:34%;
+	left:43%;
 	width:10%;
 	height:30px;
 	text-align:center;
@@ -190,6 +186,20 @@
 	z-index:1;
 	border-radius:10px;
 	border:3px solid black;
+}
+
+.book_title_th {
+	white-space : nowrap;
+	text-overflow : ellipsis;
+	overflow:hidden;
+}
+
+.book-info-bottom p {
+	font-weight:bold;
+}
+
+.book-info-bottom p {
+	margin-top:5px;
 }
 </style>
 
@@ -282,17 +292,9 @@
 									</c:choose>
 								</div>
 								<div class="book-info-bottom">
-									<table>
-										<tr>
-											<th>제목&nbsp;</th>
-											<th>${list.get(i).getB_title() }</th>
-										</tr>
-										<tr>
-											<th>작성자&nbsp;</th>
-											<th>${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</th>
-											<th style="color:#6f42c1;">&nbsp;대표도서</th>
-										</tr>
-									</table>
+									<p style="color:red;">&nbsp;[대표도서]</p>
+									<p class="book_title_th">글제목 : ${list.get(i).getB_title() }</p>
+									<p class="book_title_th">작성자 : ${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</p>
 								</div>
 							</div>
 						</c:if>
@@ -322,19 +324,11 @@
 							</c:choose>
 						</div>
 						<div class="book-info-bottom">
-						<table id="book-area">
-							<tr>
-								<th>제목&nbsp;</th>
-								<th>${list.get(i).getB_title() }</th>
-							</tr>
-							<tr>
-								<th>작성자&nbsp;</th>
-								<th>${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</th>
-								<c:if test="${list.get(i).getBook_ismain() eq 'Y' }">
-								<th style="color:#6f42c1;">&nbsp;대표도서</th>
-								</c:if>
-							</tr>
-						</table>
+						<c:if test="${list.get(i).getBook_ismain() eq 'Y' }">
+							<p style="color:red;">&nbsp;[대표도서]</p>
+						</c:if>
+						<p class="book_title_th">글제목 : ${list.get(i).getB_title() }</p>
+						<p class="book_title_th">작성자 : ${writerMap.get(list.get(i).getB_writer()).getMem_id() }(${writerMap.get(list.get(i).getB_writer()).getMem_name() })</p>
 					</div>
 				</div>
 			</c:forEach>

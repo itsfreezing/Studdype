@@ -391,7 +391,7 @@ tooltip-persistent 요소 추가 할 것 */
     cursor:pointer;
 }
 
-.show {
+.showPaing {
 	color: white!important;
     background-color: #6434ef;
     cursor:default;
@@ -630,8 +630,8 @@ tooltip-persistent 요소 추가 할 것 */
 		
 		// 페이지 조건 처리
 		if($("#paging-section").children().hasClass("pageNumber") == true) {
-			$(".show").removeClass("show");
-			$("#"+clickPage).addClass("show");
+			$(".showPaing").removeClass("showPaing");
+			$("#"+clickPage).addClass("showPaing");
 			$(".divBox").hide();
 			for(var i = startBook; i <= endBook; i++) {
 				$(".divBox").eq(i).show();
@@ -647,7 +647,7 @@ tooltip-persistent 요소 추가 할 것 */
 		for(var i = startPage; i <= endPage; i++) {
 			$("#paging-section").append("<a class='pageNumber' id="+i+">"+i+"</a>");
 		}
-		$(".pageNumber:first").addClass("show");
+		$(".pageNumber:first").addClass("showPaing");
 	}
 	
 	function validateSubmit() {
@@ -773,7 +773,7 @@ tooltip-persistent 요소 추가 할 것 */
 	
 	<!-- 메인 섹션 시작 -->
 	<div class="main-section">
-	<h3>도서 검색</h3>
+	<h3 style="margin-left:30px;">도서 검색</h3>
 		<!-- ----------------------------------------------------------------------------------- -->
 		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">

@@ -89,5 +89,17 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.allMember();
 	}
 
+	@Override
+	public int newemail(MemberDto dto) {
+		
+		return memberDao.newemail(dto);
+	}
+
+	@Override
+	public int updatephone(MemberDto dto) {
+		
+		return memberDao.updatephone(dto);
+	}
+
 	
 }
