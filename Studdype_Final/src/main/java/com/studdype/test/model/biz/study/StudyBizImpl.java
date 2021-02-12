@@ -251,11 +251,14 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
-	public List<StudyDto> selectStudyByLocation(int si_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<Integer, String> selectOneGuno(int gu_no) {
+		return locationGudao.selectLocationGuOfStudy(gu_no);
 	}
 
-	
+	@Override
+	public Map<Integer, String> selectOneSino(int si_no) {
+		return locationSidao.selectLocationSiOfStudy(si_no);
+	}
+
 
 }

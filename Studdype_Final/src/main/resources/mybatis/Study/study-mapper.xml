@@ -97,8 +97,6 @@
 		SELECT S_NAME FROM STUDY WHERE S_NO = #{s_no}
 	</select>
 	
-
-
 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
 		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
@@ -108,5 +106,10 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-	
+		<select id="selectOneSi" parameterType="int" resultMap="studyMap">
+		SELECT SI_NO FROM STUDY WHERE SI_NO = #{si_no}
+		</select>
+		<select id="selectOneGu" parameterType="int" resultMap="studyMap">
+		SELECT GU_NO FROM STUDY WHERE GU_NO=#{gu_no}
+		</select>
 </mapper>

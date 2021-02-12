@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -178,19 +180,6 @@ public class StudyDaoImpl implements StudyDao {
 	}
 
 	@Override
-	public List<StudyDto> selectStudyByLocation(int gu_no) {
-			List<StudyDto> res = null;
-		
-		try {
-			res = sqlSession.selectList(NAMESPACE+"selectStudyByLocation", gu_no);
-		} catch (Exception e) {
-			System.out.println("error:selectStudyByLocation");
-			e.printStackTrace();
-		}
-		return res;
-	}
-
-	@Override
 	public int nomalStudyImg(StudyDto dto) {
 		int res = 0;
 		
@@ -201,6 +190,32 @@ public class StudyDaoImpl implements StudyDao {
 			e.printStackTrace();
 		}
 		
+		
+		return res;
+	}
+
+	@Override
+	public Map<Integer, String> selectStudyByLocation(int si_no) {
+		Map<Integer, String> res=new HashMap<Integer,String>();
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"selectOneSi",si_no);
+		} catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public Map<Integer, String> selectByLocation(int gu_no) {
+		Map<Integer, String> res= new HashMap<Integer,String>();
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"selectOneGu",gu_no);
+		} catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
 		
 		return res;
 	}

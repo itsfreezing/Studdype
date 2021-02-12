@@ -44,6 +44,6 @@ public interface StudyBiz {
 	public int nomalStudyImg(StudyDto dto);
 	public Map<Integer,String> selectStudyName(int[] s_no);
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
-	public List<StudyDto> selectStudyByLocation(int si_no);
-
+	public Map<Integer, String> selectOneGuno(int gu_no);
+	public Map<Integer, String> selectOneSino(int si_no);
 }

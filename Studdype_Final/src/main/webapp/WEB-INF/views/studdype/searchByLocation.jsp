@@ -114,19 +114,35 @@ function search(){
 					alert("fail");
 			}
 	});
-}*/
-function search_chk(){
-	alert($("#selectLocationSi option:selected").val());
-	if($("#selectLocationSi option:selected").val()==""){
+}
+function search(){
+	var selectSi=$("#selectLocationSi option:selected").val();
+	var selectGu=$("#selectLocationGu option:selected").val();
+	alert(selectSi);
+	if(selectSi==null){
 			alert("시를 선택해주세요");
 			return false;
-	}else if($("#selectLocationGu option:selected").val==""){
+	}else if(selectGu.val==null){
 		alert("구를 선택해주세요");
 		return false;
 	}else{
 		$("#locationform").submit();
 	}
-}
+}*/
+$(document).ready(function(){	
+	$("#Search").click(function(){
+		if($("#selectLocationSi option:selected").val()==null){
+			alert("시를 선택하세요");
+			$("#selectLocationSi").focus();
+			return false;
+		}else if($("#selectLocationGu option:selected").val()==null){
+			alert("구를 선택하세요");
+			$("#selectLocationGu").focus();
+			return false;
+		}
+		locationform.submit();
+	});
+});
 </script>
 <script type="text/javascript">
 $(function(){
@@ -147,7 +163,7 @@ $(function(){
 	<!-- 스터디 영역 -->
 	<br><br>
 	<div id="mainsection">
-		 <form action="studyListLocation.do" method="GET" id="locationform"> 
+		 <form action="studyListLocation.do" method="GET" id="locationform" > 
 		 				<div id="si">
 								<label>스터디 지역(시)</label> 
 								<select class="form-control"
@@ -170,13 +186,14 @@ $(function(){
 								</select>
 						</div>
 						<div class="input-group" style="width: 50%; margin-left:70%;">
-							<button id="Search" name="Search" style="border:none; background-color:white;" onclick="search();">
+							<button type="submit" id="Search" name="Search" style="border:none; background-color:white;" >
 									<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>  
 				</form>	 
 			</div>
 					<br><br>
+		<div class="blogpost-area">
 			<div class="container-fluid">
 			<div class="row">
 
@@ -221,7 +238,7 @@ $(function(){
 		</div>	 --%>
 					
 					<c:forEach items="${studyList}" var="studyDto" >
-						<c:if test="${si_no==list.si_no&&gu_no==list.gu_no}">
+					<c:if test="${si_no==list.si_no&&gu_no==list.gu_no}">
 					<div class="col-sm-3 p-5 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
 						<div class="single-blog-post">
@@ -251,9 +268,9 @@ $(function(){
 					</div>
 					</c:if>
 					</c:forEach>
-				</div>
+					</div>
 				</div>	
-					
+			</div>		
 					
 					
 					

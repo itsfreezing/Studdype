@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 public interface StudyDao {
@@ -23,10 +25,8 @@ public interface StudyDao {
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
 	public Map<Integer,String> selectStudyName(int[] s_no); //스터디 번호에 맞는 스터디 이름가져오기 
 	public int nomalStudyImg(StudyDto dto); 
-
-
-	public List<StudyDto>selectStudyByLocation(int gu_no);//지역 시와 구 스터디 검색
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
-
+	public Map<Integer, String> selectStudyByLocation(int si_no);
+	public Map<Integer, String> selectByLocation(int gu_no);
 }
 
