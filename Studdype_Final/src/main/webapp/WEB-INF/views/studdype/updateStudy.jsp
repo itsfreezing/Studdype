@@ -346,20 +346,7 @@
 	height:1000px;
 	
 	}
-	#scr::-webkit-scrollbar { width: 10px; }
-	/* 스크롤바의 width */
-	#scr::-webkit-scrollbar-track { background-color: #f0f0f0; }
-	/* 스크롤바의 전체 배경색 */
-	#scr::-webkit-scrollbar-thumb { 
-	    background: linear-gradient(to bottom, #1697bf, #62b7ac); 
-	}
-	/* 스크롤바 색 */
-	#scr::-webkit-scrollbar-button { display: none; }
-	.table14_8 table {
-	width:100%;
-	margin:15px 0;
-	border:0;
-}
+
 .table table-bordered th {
 	font-weight:bold;
 	background-color:#808080;
@@ -471,6 +458,41 @@ input[type="checkbox"]:checked+label:before {
 .selected {
 	border:5px solid #7362DE;
 }
+
+ #scr::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+  }
+  #scr::-webkit-scrollbar-thumb {
+    border-radius: 3.5px;
+    background-color: #ced4da;
+
+    &:hover {
+      background-color: #adb5bd;
+    }
+  }
+  #scr::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  
+  #scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+  }
+  #scroll::-webkit-scrollbar-thumb {
+    border-radius: 3.5px;
+    background-color: #ced4da;
+
+    &:hover {
+      background-color: #adb5bd;
+    }
+  }
+  #scroll::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
 </style>
 <script type="text/javascript">
 	function LoadImg(value) {
@@ -836,7 +858,7 @@ input[type="checkbox"]:checked+label:before {
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:black; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
 		
-		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; ">
+		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; height:600px; overflow-x:hidden; border-radius:4px; ">
 		<table id="member"
          class="table table-bordered" style="width:1117px; text-align:center; ">
          <thead>
@@ -845,7 +867,7 @@ input[type="checkbox"]:checked+label:before {
                <th style="position:sticky;top:0px; background-color:#f2f5f9;">이메일</th>
                <th style="position:sticky;top:0px; background-color:#f2f5f9;">아이디</th>
                <th style="position:sticky;top:0px; background-color:#f2f5f9;">성별</th>
-               <th style="position:sticky;top:0px; background-color:#f2f5f9;">추방하기</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9; z-index:1;">추방하기</th>
                <th style="position:sticky;top:0px; background-color:#f2f5f9;">대표설정</th>
             </tr>
          </thead>
@@ -902,7 +924,7 @@ input[type="checkbox"]:checked+label:before {
 		<p id="p3" style="color:#black; position:absolute; font-weight:bold; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 		<p style="position:absolute; top:57%; left:28%; color:black; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
-	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; ">
+	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; height:600px; border-radius:4px; ">
 	<table id="book1"
          class="table table-bordered" style="width:1117px; text-align:center;">
 
