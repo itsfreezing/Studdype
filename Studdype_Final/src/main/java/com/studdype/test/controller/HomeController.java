@@ -332,18 +332,19 @@ public class HomeController {
 	public String changephone(HttpServletRequest request,Model model,HttpSession session) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
 		
-		MemberDto dto = new MemberDto(login.getMem_no(),request.getParameter("new_phone"),login.getMem_email());
+		MemberDto dto = new MemberDto(login.getMem_no(),request.getParameter("new_phone"),request.getParameter("new_email"));
 		int res = memberBiz.updatephone(dto);
 		
 		if(res>0) {
 			login.setMem_phone(request.getParameter("new_phone"));
-			model.addAttribute("msg","전화번호 수정 성공!");
+			login.setMem_email(request.getParameter("new_email"));
+			model.addAttribute("msg"," 수정 성공!");
 			model.addAttribute("url","myPage.do");
 			session.setAttribute("login", login);
 			session.setMaxInactiveInterval(-1);
 			return "redirect:myPage.do";
 		}else {
-			model.addAttribute("msg","전화번호 변경 실패!");
+			model.addAttribute("msg","수정 실패!");
 			model.addAttribute("url","myPage.do");
 			return "commond/alert";
 			
