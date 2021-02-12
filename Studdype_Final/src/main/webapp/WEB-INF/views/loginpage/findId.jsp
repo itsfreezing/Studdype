@@ -29,13 +29,14 @@ h1{
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
+	color: black;
 }
 span{
 	color:white;
 	font-size: 20px;
 }
 label{
-	color: white;
+	color: black;
 }
 #findLogo{
 	width: 50px;
@@ -45,18 +46,20 @@ label{
 }
 .main_head{
 	width: 600px;
-	height: 250px;
+	height: 300px;
 	margin-top: 3%;
 	margin-left: auto;
 	margin-right:auto;
 	border-radius: 5px;
-	background: #EAEAEA;
-	border: 2px solid #353535;
 }
 .sub_head{
+	height: 250px;
 	box-sizing: border-box;
 	padding-top: 5%;
 	margin-top: 1%;
+	background: white;
+	opacity: 85%;
+	border-radius: 5px;
 }
 .namerno_part{
 	margin-left: 12%;
@@ -118,7 +121,7 @@ label{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -139,7 +142,7 @@ label{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -157,8 +160,9 @@ label{
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+	$(".background").show(); 
+	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+	$(".background").css("height", "800px");
 	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>하단에 정보를 기입해 주시면 아이디를 알려드려요.</span>");
 });
 
@@ -178,18 +182,13 @@ function idsearch(){
 	}
 };
 
-
-$(function() {
-	$(".main_head").show(); 
-	$(".main_head").css({"background-image":"url('resources/assets/img/findIdimg.jpg')","background-size":"cover"});
-});
-
 function cancel(){
 	self.close();
 }
 </script>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<form class="main_head" id="findidform" action="findId.do" method="POST">
@@ -211,7 +210,7 @@ function cancel(){
 			</div>
 		</div>
 	</form>
-	
+	</div>
 	
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 

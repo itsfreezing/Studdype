@@ -27,27 +27,23 @@
 h1{
 	margin-top: 3%;
 	font-weight:600;
+	margin-left:auto;
+	margin-right:auto;
+	margin:auto;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
 }
 span{
+	margin-left:auto;
+	margin-right:auto;
+	margin:auto;
 	color:white;
 	font-size: 20px;
 }
 label{
 	margin-left: 30%;
 	font-weight: 800;
-}
-.page_title{
-	margin-bottom: 3%;
-	margin-left: 8%;
-	width: 500px;
-}
-#findPsw{
-	width: 50px;
-	height: 50px;
-	margin-left: 4%;
 }
 #sendExtraPwForm{
 	width: 800px;
@@ -60,9 +56,9 @@ label{
 	width: 550px;
 	height: 300px;
 	margin-top: 3%;
-	background: #EAEAEA;
+	background: white;
 	border-radius: 5px;
-	border: 2px solid #353535;
+	opacity: 85%;
 }
 #id{
 	margin-left:3%;
@@ -89,8 +85,9 @@ label{
     margin-bottom: 10%;
     margin-left:-50%;
     border-radius: 5px;
- 	background: white;
+ 	background: gray;
  	border: 1px;
+ 	color: white;
 }
 #submit_email:hover{
 	background-color: white;
@@ -120,10 +117,18 @@ label{
     background: gray;
  	color: white;
 }
+#chkNum_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 .main_btn{
-	margin-left: 17%;
 	margin-top: 1%;
 	margin-bottom: 3%;
+	margin-left: 16%;
 }
 #psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	width:140px;
@@ -132,7 +137,7 @@ label{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -153,7 +158,7 @@ label{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -171,12 +176,11 @@ label{
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
- <script type="text/javascript">
+<script type="text/javascript">
 $(function() {
-	// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-	//$(".justify-content-center").hide(); 
-	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+	$(".background").show(); 
+	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+	$(".background").css("height", "850px");
 	$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>하단에 정보를 기입해 주시면 임시 비밀번호를 보내드려요.</span>");
 });
  
@@ -282,6 +286,7 @@ function cancel(){
 </script>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	<div class="main_div">
@@ -290,7 +295,7 @@ function cancel(){
    		<table>
    			<col width="150px"><col width="350px"><col width="100px">
    			<tr>
-   				<td><label>이름</label></td>
+   				<td><label>아이디</label></td>
    				<td><input type="text" id="id" placeholder=" 아이디를 입력해 주세요." name="mem_id"></td>
    			</tr>
    			<tr>
@@ -324,7 +329,7 @@ function cancel(){
    	</form>
    	
    	</div>
-   	
+   	</div>
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script> 

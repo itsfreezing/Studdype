@@ -40,18 +40,17 @@ span{
 	margin-left: 33%;
    	text-align: center;
 	width: 500px;
-	height: 70px;
+	height: 140px;
 	color: black;
-	background: #EAEAEA;
-	border-radius: 10px;
-	border: 2px solid #353535;
+	background: white;
+	border-radius: 5px;
+	opacity: 85%;
 }
 #mail_name{
 	font-size: 18px;
 	font-weight: 600;	
 }
 .footer_btn{
-	margin-left: 38.5%;
 	margin-bottom: 3%;
 	font-weight: 800;
 }
@@ -62,7 +61,7 @@ span{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -83,7 +82,7 @@ span{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -102,24 +101,27 @@ span{
 
  <script type="text/javascript">
  $(function() {
-		$(".justify-content-center").show(); 
-		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+		$(".background").show(); 
+		$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+		$(".background").css("height", "750px");
 		$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>임시 비밀번호를 변경해 주세요.</span>");	
  });
 </script>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<div class="main_div">
-   		<div><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</div>
-   </div>
+   	<span id="span_name" style="color:black"><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</apan>
+   
    
    <div class="footer_btn">
 		<button type="submit" id="home_btn"><a href="studyList.do">HOME</a></button>
 		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
 	</div>
-   
+</div>
+</div>
 
 
    

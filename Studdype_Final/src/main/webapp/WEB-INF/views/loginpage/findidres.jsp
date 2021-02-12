@@ -27,9 +27,10 @@
 
 <script type="text/javascript">
 $(function() {
-	$(".justify-content-center").show(); 
-	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
+	$(".background").show(); 
+	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+	$(".background").css("height", "650px");
+		$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
 });
 </script>
 <style type="text/css">
@@ -44,24 +45,31 @@ span{
 	color:white;
 	font-size: 20px;
 }
+.footer-menu{
+	height: 55%;
+}
 .main_div{
-	margin-top: 3%;
+	margin-top: 1%;
 	margin-bottom: 1%;
-	margin-left: 33%;
+	margin-left: auto;
+	margin-right: auto;
    	text-align: center;
-	width: 500px;
-	height: 85px;
+	width: 550px;
+	height: 100px;
 	color: black;
-	background: #EAEAEA;
-	border-radius: 10px;
-	border: 2px solid #353535;
+	opacity: 75%;
+	border-radius: 5px;
+	background-color: white;
+}
+#span_name{
+	margin-top: 10%;
+	padding-top: 5%;
 }
 #name{
 	font-size: 18px;
 	font-weight: 600;
 }
 .sub_btn{
-	margin-left: 38%;
 	margin-bottom: 2%;
 	font-weight: 800;
 }
@@ -69,11 +77,10 @@ span{
 	width:140px;
    	height:40px;
    	margin-top : 15px;
-
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -94,7 +101,7 @@ span{
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 5px 5px;
+	border-radius: 0px 0px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -110,6 +117,7 @@ span{
 </style>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<div class="main_div">
@@ -117,20 +125,23 @@ span{
 		<c:choose>
 
 			<c:when test="${findId != null }">
-				<div>${findName }님의 아이디는<div id=name> '${findId }' </div>입니다.</div>
+				<span id="span_name" style="color:black">${findName }님의 아이디는<span id="name" style="color:black"> '${findId }' </span>입니다.</span>
+				
 			</c:when>
 			
 			<c:otherwise>
 				<div>${findName }님이 가입한 아이디는 존재하지 않습니다.</div>
 			</c:otherwise>
 		</c:choose>
-	</div>
 	
 	<div class="sub_btn">
 		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
 		<button type="submit" id="findPw"><a href="findpwform.do" onClick="loginpage/findpwform">비밀번호 찾기</a></button>
 	</div>
-	
+	</div>
+</div>
+
+
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script>

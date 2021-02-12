@@ -54,8 +54,8 @@ span{
 	margin: auto;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 3%;
-	margin-bottom: 10%;
+	margin-top: 10%;
+	margin-bottom: 8%;
 }
 .loginTable{
 	margin: auto;
