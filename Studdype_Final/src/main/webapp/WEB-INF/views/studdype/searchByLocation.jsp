@@ -198,7 +198,7 @@ $(function(){
 			<div class="container-fluid">
 			<div class="row">
 			<c:choose>
-				<c:when test="${studyList==null}">
+					<c:when test="${empty studyList}">
 						<p style="margin-left:50%;">검색해주세요</p>
 						
 					</c:when>
