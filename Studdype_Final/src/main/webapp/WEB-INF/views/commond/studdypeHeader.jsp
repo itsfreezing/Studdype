@@ -191,9 +191,9 @@ $(function() {
    <!-- 헤더 끝 -->
    <div id="studypopup" class="hide">
     <div class="content">
-    	<p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 18px; ">내 전체 스터디 목록</p>
-    	<p style="position: absolute;top: 302px;left: 689px; color:red; font-size: 20px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
-       <div style="height: 300px; width: 28%; position: absolute; top: 34%; left: 36%; overflow:auto;" id="allstudy">
+    	<p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 22px; ">내 전체 스터디 목록</p>
+    	<p style="position: absolute; top: 313px; left: 765px; color:red; font-size: 16px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
+       <div style="height: 300px; width: 28%; position: absolute; top: 36%; left: 36%; overflow:auto;" id="allstudy">
        		<table id="studyall" style="height:500px; width:511px; text-align:center;" class="table table-hover">
        			<thead>
        				<tr>

@@ -148,8 +148,9 @@ function meet(){
 		function changephone(){
 			var a = $('input[name=newphone]').val();
 			var b = $('input[name=mem_no]').val();
+		    var c = $('input[name=newemail]').val();
 		
-		    location.href="changephone.do?mem_no="+b+"&new_phone="+a;
+		    location.href="changephone.do?mem_no="+b+"&new_phone="+a+"&new_email="+c;
 }
 	
 
