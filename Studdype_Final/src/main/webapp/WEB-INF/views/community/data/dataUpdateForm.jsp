@@ -36,14 +36,6 @@
 <script src="./resources/summernote/summernote.min.js"></script>
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
-<style type="text/css">
-
-
-.hideFile {
-	display:none;
-}
-</style>
-
 <script type="text/javascript">
 $(function() {
 	// 서머노트 양식
