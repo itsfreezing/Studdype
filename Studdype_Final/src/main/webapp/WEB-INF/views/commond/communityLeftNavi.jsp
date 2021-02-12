@@ -62,6 +62,9 @@
            <c:if test="${study.leader_no == login.mem_no }">
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디관리" onclick="location.href='updateStudy.do?s_no=${study.s_no}'" class="navBtn" id="updateStudy"></li>
          	</c:if>
+         	<c:if test="${study.leader_no != login.mem_no }">
+         	<li class="leftnavi-item"> <img src="./resources/assets/img/category_management_gray.png"><input type="button" value="스터디탈퇴" onclick="location.href='studygetout.do?s_no=${study.s_no}'"class="navBtn" id="getoutStudy"></li>
+         	</c:if>
             <li class="leftnavi-item"> <img src="./resources/assets/img/category_searchBook.png"><input type="button" value="도서검색" onclick="location.href='bookboardform.do'" class="navBtn" id="book"></li>
 
 
