@@ -1,14 +1,17 @@
 package com.studdype.test.model.dao.board.meet;
 
 import java.util.ArrayList;
+
+
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.VoteDto;
 
 @Repository
 public class MeetBoardDaoImpl implements MeetBoardDao{
@@ -16,20 +19,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	// 모임게시판 리스트
-	@Override
-	public List<MeetDto> meetBoardSelectList() {
-		List<MeetDto> list = new ArrayList<MeetDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"meetBoardSelectList"); // NAMESPACE: dao의 nameSpace
-		} catch (Exception e) {
-			System.out.println("[ERROR] ---------- MEET DAO selectList ---------- [ERROR]");
-			e.printStackTrace();
-		}
-		return list;
-	}
-
+	// 모임게시판 모임 [총 개수]
 	@Override
 	public int selectTotalMeetBoardNum(int s_no) {
 		int totalNum = 0;
@@ -44,6 +34,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return totalNum;
 	}
 	
+	// 모임게시판 [페이징]
 	@Override
 	public List<MeetDto> selectPagingMeetBoardList(Map pageMap) {
 		List<MeetDto> resList = null;
@@ -57,20 +48,51 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		return resList;
 	}
 	
-	// 모임게시판 디테일
+	// 모임게시판 '검색' 모임 [총 개수]
 	@Override
-	public MeetDto meetBoardSelectOne(int meet_no) {
+	public int selectSearchMeetBoardNum(Map searchNumMap) {
+		int totalNum = 0;
+		
+		try {
+			totalNum = sqlSession.selectOne(NAMESPACE+"totalSearchMeetBoardNum", searchNumMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectTotalSearchMeetBoardNum ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return totalNum;
+	}
+	
+	// 모임게시판 '검색' [페이징]
+	@Override
+	public List<MeetDto> selectPagingSearchMeetList(Map searchPageMap) {
+		List<MeetDto> resList = null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"pagingSearchMeetList", searchPageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectPagingSearchMeetList ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return resList;
+	}
+
+	
+	// 모임게시판 모임 [상세보기]
+	@Override
+	public MeetDto selectMeetBoardDetail(int meet_no) {
 		MeetDto dto = null;
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE+"meetBoardSelectOne", meet_no);
+			dto = sqlSession.selectOne(NAMESPACE+"meetBoardDetail", meet_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR] ---------- MEET DAO meetBoardSelectOne ---------- [ERROR]");
+			System.out.println("[ERROR] ---------- MEET DAO selectMeetBoardDetail ---------- [ERROR]");
 			e.printStackTrace();
 		}
 		return dto;
 	}
-
+	
+	// 모임게시판 '조회수' [증가]
 	@Override
 	public void updateMeetCnt(int meet_no) {
 		int res = 0;
@@ -83,6 +105,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		}
 	}
 
+	// 모임게시판 모임 [생성]
 	@Override
 	public int insertMeetBoard(MeetDto dto) {
 		int res = 0;
@@ -96,17 +119,204 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 		
 		return res;
 	}
- 
+	
+	// 모임게시판 모임 '1개' [가져오기]
+	@Override
+	public MeetDto selectOneMeetBoard(int meet_no) {
+		MeetDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOneMeetBoard", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectOneMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	// 모임게시판 모임 [수정]
 	@Override
 	public int updateMeetBoard(MeetDto dto) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMeetBoard", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO updateMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	// 모임게시판 모임 [삭제]
+	@Override
+	public int deleteMeetBoard(int meet_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteMeetBoard", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO deleteMeetBoard ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+
+	// meetBoard DB 캘린더로 가져오기
+	@Override
+	public List<MeetDto> selectMeetDBForCalendar(int s_no) {
+		List<MeetDto> meetDBForCalendar = null;
+		
+		try {
+			meetDBForCalendar = sqlSession.selectList(NAMESPACE+"selectMeetIntoCalendar",s_no);
+			
+		}catch (Exception e) {
+		System.out.println("에러: getDB for calendar");
+		e.printStackTrace();
+		}
+		return meetDBForCalendar;
+	}
+	
+	// 모임게시판_투표 '총' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Total(int meet_no) {
+		int voteTotalResult = 0;
+		
+		try {
+			voteTotalResult = sqlSession.selectOne(NAMESPACE+"selectVoteTotalResult", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteTotalResult ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteTotalResult;
+	}
+	
+	// 모임게시판_투표 '참가' [투표 수]
+	@Override
+	public int selectVoteResultCnt_Y(int meet_no) {
+		int voteResult = 0;
+		
+		try {
+			voteResult = sqlSession.selectOne(NAMESPACE+"selectVoteResult_Y", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteResult_Y ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteResult;
+	}
+	
+	// 모임게시판_투표 '불참가' [투표 수]
+	public int selectVoteResultCnt_N(int meet_no) {
+		int voteResult = 0;
+		
+		try {
+			voteResult = sqlSession.selectOne(NAMESPACE+"selectVoteResult_N", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteResult_N ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return voteResult;
+	}
+	
+	// 모임게시판_투표 [투표하기]
+	@Override
+	public int insertMeetVote(VoteDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"takeVote", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO insertMeetVote ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	// 모임게시판_투표 [중복체크]
+	@Override
+	public int selectVoteMemberCnt(VoteDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectVoteMemberCnt", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectVoteMemberCnt ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	// 모임게시판_투표 '참석' [멤버 리스트]
+	@Override
+	public List<VoteDto> selectAttendMember(int meet_no) {
+		List<VoteDto> attendList = null;
+		
+		try {
+			attendList = sqlSession.selectList(NAMESPACE+"selectAttendMember", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectAttendMember ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return attendList;
+	}
+	
+	// 모임게시판_투표 '불참석' [멤버 리스트]
+	@Override
+	public List<VoteDto> selectAbsentMember(int meet_no) {
+		List<VoteDto> absentList = null;
+		
+		try {
+			absentList = sqlSession.selectList(NAMESPACE+"selectAbsentMember", meet_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] ---------- MEET DAO selectAbsentMember ---------- [ERROR]");
+			e.printStackTrace();
+		}
+		
+		return absentList;
 	}
 
 	@Override
-	public int deleteMeetBoard(int meet_no) {
-		return 0;
+	public List<MeetDto> selectMeetByS_no(int s_no[]) {
+		
+		List<MeetDto> dto = new ArrayList<MeetDto>();
+		
+		try {
+			for(int i=0; i<s_no.length;i++) {
+				if(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i])!=null) {
+					dto.addAll(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i]));
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ERROR ----------selectMeetByS_no--------------------------ERROR");
+			e.printStackTrace();
+		}
+				
+		return dto;
 	}
+	@Override
+	public MeetDto selectCalendarByData(int s_no, String meet_title, String vote_startdate, String vote_enddate) {
+		MeetDto res = null;
+		Map resMap = new HashMap();
+		resMap.put("s_no", s_no);
+		resMap.put("meet_title", meet_title);
+		resMap.put("vote_startdate", vote_startdate);
+		resMap.put("vote_enddate", vote_enddate);
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectCalendarByData", resMap);
+		} catch (Exception e) {
+			System.out.println("에러다");
+			e.printStackTrace();
+		}
+		return res;
 
+	}
 
 
 }

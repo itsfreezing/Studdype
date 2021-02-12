@@ -10,8 +10,26 @@
   			<result property="f_name" column="F_NAME"></result>
   			<result property="photo_ismain" column="Photo_IsMain"></result>
   		</resultMap>
-  		
-  		
-  		
+  		<insert id="insertFile" parameterType="fileDto">
+  			INSERT INTO NOTICE_FILE
+  			VALUES ( NOTICEFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM NOTICE_BOARD ), #{f_name}, #{f_size}, #{f_url} )
+  		</insert>
+  		<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
+	 			SELECT * FROM NOTICE_FILE WHERE B_NO = #{b_no}
+	 	</select>
+	 	
+	 	<select id="selectFile" parameterType="int" resultMap="fileMap">
+	 		SELECT * FROM NOTICE_FILE WHERE F_NO = #{f_no}
+	 	</select>	 
+	 	
+	 	<insert id="insertAddFile" parameterType="fileDto">
+	 		INSERT INTO NOTICE_FILE
+	 		VALUES ( NOTICEFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+	 	</insert>	 
+	 		
+	 	<delete id="deleteFile" parameterType="int">
+	 		DELETE FROM NOTICE_FILE WHERE F_NO = #{f_no}
+	 	</delete>
+	 		
   		
   	</mapper>

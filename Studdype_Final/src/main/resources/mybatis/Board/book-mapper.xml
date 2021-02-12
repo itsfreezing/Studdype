@@ -16,22 +16,63 @@
 		<result property="b_regdate" column="B_REGDATE" />
 	</resultMap>
 
+	<!-- 해당 스터디 등록된 총 도서 수 -->
 	<select id="selectTotalRegisterBookNum" parameterType="int" resultType="_int">
 		SELECT COUNT(*)
 		FROM BOOK
 		WHERE S_NO = #{s_no}
 	</select>
 
-	<select id="selectPageBookList" parameterType="hashMap" resultType="bookDto">
-		<![CDATA[
-			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_REGDATE, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISH, BOOK_IMG, BOOK_URL, BOOK_ISMAIN
-			FROM (
-			SELECT ROWNUM RNUM, B_NO, S_NO, B_TITLE, B_WRITER, B_REGDATE, BOOK_TITLE, BOOK_AUTHOR, BOOK_PUBLISH, BOOK_IMG, BOOK_URL, BOOK_ISMAIN 
-			FROM BOOK
-			ORDER BY B_REGDATE DESC
-			)
-			WHERE RNUM >= #{startRow}  AND RNUM <= #{endRow}
-		]]>
+	<!-- 해당 도서 전체 리스트 -->
+	<select id="selectSearchBookList" parameterType="int" resultType="bookDto">
+		SELECT * 
+		FROM BOOK
+		WHERE S_NO = #{s_no}
+		ORDER BY B_REGDATE DESC
+	</select>
+	
+	<!-- 등록된 도서 게시글 한개 가져오기 -->
+	<select id="selectOneBook" parameterType="bookDto" resultType="bookDto">
+		SELECT *
+		FROM BOOK
+		WHERE S_NO = #{s_no} 
+			AND B_NO = #{b_no}
+	</select>
+	
+	<insert id="insertRegisterBook" parameterType="bookDto">
+		<!-- 가상 테이블로 SEQ 값 반환 -->
+		<selectKey keyProperty="b_no" resultType="int" order="BEFORE">
+			SELECT BOOKSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOOK
+		VALUES(#{b_no}, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE,
+		 #{book_title}, #{book_author}, #{book_publish}, #{book_img}, #{book_url}, #{book_ismain})
+	</insert>
+	
+	<delete id="deleteBook" parameterType="bookDto">
+		DELETE FROM BOOK WHERE B_NO = #{b_no} AND S_NO = #{s_no}
+	</delete>
+	
+	<update id="bookBoardUpdateBook" parameterType="bookDto">
+		UPDATE BOOK SET B_TITLE = #{b_title}, B_CONTENT = #{b_content}, B_REGDATE = SYSDATE 
+		WHERE S_NO = #{s_no} AND b_no = #{b_no}
+	</update>
+	
+	<select id="bookList" parameterType="int" resultType="bookDto">
+		SELECT * FROM BOOK WHERE S_NO = #{s_no}
+	</select>
+
+	<update id="deletebookmain" >
+		UPDATE BOOK SET BOOK_ISMAIN = 'N' WHERE BOOK_ISMAIN = 'Y'
+	</update>
+	<update id="bookmain" parameterType="int" >
+	 	UPDATE BOOK SET BOOK_ISMAIN = 'Y' WHERE B_NO = #{b_no}
+	</update>
+	
+	<select id="selectMainBookOfStudy" parameterType="int" resultType="bookDto">
+		SELECT *
+		FROM BOOK
+		WHERE S_NO = #{s_no} AND BOOK_ISMAIN = 'Y'
 	</select>
 
 </mapper>	

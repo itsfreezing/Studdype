@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CommunityHome</title>
+<title>스터띱 자유게시판</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/community/header&footer.css">
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
@@ -33,18 +33,20 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
-<!-- 댓글 구현 AJAX JS -->
+<!-- ToolTip CSS -->
+<link href="./resources/css/community/freeboard/pop-pop.min.css" rel="stylesheet" />
+
 <script type="text/javascript" >
 <!-- 댓글 목록 가져오기 AJAX -->
 function getReplyList() {
-	
-	
 	var boardVal = {
 			"b_no":${dto.b_no }
 	};
 
+	
+	
 	$.ajax({
 		type:"post",
 		url:"freeReplyList.do",
@@ -53,23 +55,17 @@ function getReplyList() {
 		dataType:"json",
 		success:function(map){
 			var list = map.replyList;
-		
 			var html = "<div class='replyTitle'><span>댓글</span> "+map.replyList.length+" 개 </div>"+
 					"<ul class='replyList'>";
-				
 				for(var i = 0 ; i < map.replyList.length; i++){
 					var replyDate = new Date(map.replyList[i].r_regdate);
-					
 					 var hour = (replyDate.getHours() / 10 < 1 ) ?  '0' + replyDate.getHours() : replyDate.getHours();
 					 var minute =  (replyDate.getMinutes() / 10 < 1 ) ?  '0' + replyDate.getMinutes() : replyDate.getMinutes();
-					
 					//데이트 포멧 맞추기
 					var dateFormat = replyDate.getFullYear() +'.'+ ( replyDate.getMonth()+1 ) +'.' + replyDate.getDate() +'  ' +
 										hour+':'+ minute;					
-					
 					//댓글이 부모댓글이면
 					if( map.replyList[i].r_class == 0){
-						
 						var reply = "<li class='replyItem'>"+
 										"<div class='reply_area showDiv'>"
 										+"<div class='reply_writer_box' style='padding-bottom: 15px;'>"+ map.replyMember[map.replyList[i].r_no].mem_id+"(" + map.replyMember[map.replyList[i].r_no].mem_name+ ")"  +"</div>"
@@ -93,8 +89,6 @@ function getReplyList() {
 										"<tr><td><textarea class='update_reply_comment' placeholder='댓글을 남겨보세요'></textarea></td></tr></table>"+
 										"<div class='update_reply_btnDiv'><button class='update_reply_btn' onclick='getReplyList();'>취소</button><button onclick='writeRecomment(this);' class='update_reply_btn' value="+map.replyList[i].r_no+">작성</button></div></div>"+
 										"</li><hr>";
-										
-										
 						//로그인 아이디와 댓글 작성자가 다르면
 						}else{
 							reply += "   <button class='write_recomeent_btn' onclick='writeRecommentForm(this);'>답글쓰기</button></div></div>"+
@@ -133,20 +127,15 @@ function getReplyList() {
 							reply += "</div></div></li><hr>";
 						}
 					}
-					
 					html += reply;
 				}
 				html += "</ul>";
-				
-			
 			$(".replyBox").html(html);
 			
 		},
 		error:function(){
 			alert("댓글목록 ajax 실패 ㅠ..");
 		}
-		
-		
 	});
 };
 
@@ -413,11 +402,20 @@ function writeRecomment(btn){
 //페이지 로드 후에
 $(document).ready( getReplyList() );
 
+function showAttach(){
+	var uploadFileDiv = $(".upload_file_box_detail");
+	
+	for(var i = 0 ; i < uploadFileDiv.length ; i++){
+		uploadFileDiv.eq(i).toggle();
+	}
+}
 
-
-
-
-
+//파일 다운로드 함수
+function downloadFile(btn){
+	
+	location.href="freeFileDown.do?f_no="+btn.title;
+	
+}
  
 </script>
 </head>
@@ -425,11 +423,13 @@ $(document).ready( getReplyList() );
 	<jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
 	<jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
 
-	
+	<!-- 게시글 부분 -->
  	<div class="main-section3">
-		<div class="titleDiv" >
-			<span class="title">${dto.b_title }</span>
+		<div class="titleDiv" aria-label="${dto.b_title }" data-pop="bottom"  data-pop-delay="short"  >
+			<span class="title" >${dto.b_title }</span>
 			<span class="regdate" ><fmt:formatDate value="${dto.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
+
+			
 		</div>
 		<div class="writerDiv">
 			<span class="writer"> ${member.mem_id } (${member.mem_name })</span>
@@ -438,18 +438,56 @@ $(document).ready( getReplyList() );
 			</span>
 		</div>
 		<div class="contentDiv">${dto.b_content }</div>
+		
+		<!-- 첨부파일 부분 -->
+		<c:if test="${fileList.size() != 0 }"> <!-- 0개가 아니면 -->
+			<div class="upload_box_detail">
+				<div class="attach_box_title">
+					<span style="font-size:25px; font-weight: bold">첨부파일 </span>
+					<span style="font-size: 20px;">${fileList.size() } 개</span>
+					<input type="button" value="↓" onclick="showAttach();" class="attach_Btn">			
+				</div>
+
+				<c:forEach var = "fileList" items="${fileList }">
+				
+					<div class='upload_file_box_detail hideDiv'>
+						<img class='file_format_img' src='./resources/img/fileFormat/${fileFormatMap.get(fileList.f_no) }.png' onError="this.src='./resources/img/fileFormat/nomal.png'">
+						<span class='file_name' >${fileList.f_name }</span>
+						<input type='button' class='download_file_btn'  onclick='downloadFile(this);' title='${fileList.f_no}'>
+						<span class='file_size'>${fileList.f_size }KB</span>
+					</div>
+				</c:forEach>		
+			</div>
+		
+		</c:if>
+		
+		
+		
+		
+		
+		<!-- 게시글 버튼 부분 (수정,삭제,목록) -->
 		<div class="btnDiv">
-			<input type="button" value="목록" onclick="location.href='freeboard.do'">
-			<input type="button" value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
-			<input type="button" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
+			<c:choose>
+				<c:when test="${dto.b_writer == login.mem_no }">
+					<input type="button" class="free_Btn" value="삭제" onclick="location.href='freeBoardDelete.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn"  value="수정" onclick="location.href='freeBoardUpdateForm.do?b_no=${dto.b_no}'" />
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="free_Btn" value="목록" onclick="location.href='freeboard.do'">
+				</c:otherwise>
+			</c:choose>
+		
 		</div>
 		
+		<!-- 댓글 리스트 부분 -->
 		<div class="replyBox" >
 			
-			</div>
-			
-			<div class="replyWrite"  >
-				<table >
+		</div>	
+		
+		<!-- 댓글 작성 부분 -->	
+		<div class="replyWrite"  >
+			<table >
 				<tr>
 					<td colspan="2"><p class="writerId">${login.mem_id } (${login.mem_name })</p></td>
 				</tr>
@@ -457,8 +495,62 @@ $(document).ready( getReplyList() );
 					<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
 					<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
 				</tr>				
-				</table>
-			</div>
+			</table>
+		</div>
+		
+		<!-- 게시글 위 아래 근처글 부분 -->
+		<div class="recent_board_box">
+			<h4>자유게시판 글</h4>
+			<table class="recent_table">	
+				<col width="60%"><col width="25%"><col width="15%">
+				
+				<c:choose>
+					<c:when test="${empty recentList }">
+						<td colspan="3">게 시 글 이 없 습 니 다</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="0" end="${recentList.size()-1 }" step="1" >
+							<c:choose>
+							<c:when test="${dto.b_no == recentList.get(i).getB_no() }">
+								<tr class="recent_board_tr current_board">
+							
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>							
+									</a>
+								</td>
+								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
+								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+								
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr class="recent_board_tr">
+							
+								<td class="tdtitle">
+									<a href="freedetail.do?b_no=${recentList.get(i).getB_no() }">${recentList.get(i).getB_title() }
+										<c:if test="${replyCntMap.get(recentList.get(i).getB_no())!=0}">
+											<span class="reply_cnt">[${replyCntMap.get(recentList.get(i).getB_no())}]</span>
+										</c:if>					
+									</a>
+								</td>
+								<td class="tdwriter">${memberMap.get( recentList.get(i).getB_no()).getMem_id() }(${memberMap.get( recentList.get(i).getB_no()).getMem_name()})</td>
+								<td class="tddate"><fmt:formatDate value="${recentList.get(i).getB_regdate()}" pattern="YYYY.MM.dd"/></td>
+								
+								</tr>
+							</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+					<tr style="border:none;">
+						<td colspan="3" class="look_all_td"><a href="freeboard.do">전체보기</a></td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
 			
  	</div>
  	
@@ -466,6 +558,6 @@ $(document).ready( getReplyList() );
 
 	<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
 	<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
-	<jsp:include page="../../commond/communityFooter.jsp"></jsp:include>
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

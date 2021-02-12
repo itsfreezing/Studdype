@@ -11,40 +11,40 @@ jQuery(document).ready(function ($) {
 
 	//On scroll header add background
 	$(window).scroll(function () {
+		var currentMenu = $("#currentMenu").val();
+	
+	
 		var a = 10;
 		var pos = $(window).scrollTop();
 		if (pos > a) {
 			$(".header-top .navbar").css({
-				background: '#7362de',
+				background: '#7362de',				
 				transition: 'all 0.3s ease-in-out',
 				height: 60,
 			});
 			$(".header-top .navbar").addClass("animated slideInDown");
+			$(".header-top .navbar li a").css({
+				color: '#fff',
+				transition: 'all 0.3s ease-in-out'
+			});
+			$(".logo").attr("src","./resources/assets/img/logo_white.png");
+			$("#"+currentMenu).removeClass("active");
+			
 		} else {
 			$(".header-top .navbar").css({
 				background: 'transparent'
 			});
 			$(".header-top .navbar").removeClass("animated slideInDown");
+			$(".header-top .navbar li a").css({
+				color: 'black',
+				transition: 'all 0.3s ease-in-out'
+			});
+			$(".logo").attr("src","./resources/assets/img/logo_black.png");
+			$("#"+currentMenu).addClass("active");
 		}
 	});
 
-	$(window).scroll(function () {
-		var a = 10;
-		var pos = $(window).scrollTop();
-		if (pos > a) {
-			$(".articles .header-top .navbar").css({
-				background: '#fff',
-				transition: 'all 0.3s ease-in-out',
-				height: 60,
-			});
-			$(".articles .header-top .navbar").addClass("animated slideInDown");
-		} else {
-			$(".articles .header-top .navbar").css({
-				background: '#fff'
-			});
-			$(".articles .header-top .navbar").removeClass("animated slideInDown");
-		}
-	});
+	
 
 	//Feautes Slider
 	$(".features-slider").owlCarousel({

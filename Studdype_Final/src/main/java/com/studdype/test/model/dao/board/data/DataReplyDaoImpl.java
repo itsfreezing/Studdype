@@ -1,0 +1,159 @@
+package com.studdype.test.model.dao.board.data;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.studdype.test.model.dto.board.BoardDto;
+import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.member.MemberDto;
+
+@Repository
+public class DataReplyDaoImpl implements DataReplyDao{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public Map<Integer, Integer> selectReplyCnt(List<BoardDto> list) {
+		Map<Integer, Integer> replyCntList = new HashMap<Integer, Integer>();
+		
+		for(int i = 0; i < list.size(); i++) {
+			int cnt = sqlSession.selectOne(NAMESPACE+"selectReplyCnt", list.get(i).getB_no());
+			replyCntList.put(list.get(i).getB_no(), cnt);
+		}
+		
+		return replyCntList;
+	}
+
+	@Override
+	public List<ReplyDto> selectDataReplyList(int b_no) {
+		List<ReplyDto> replyList = new ArrayList<ReplyDto>();
+		
+		try {
+			replyList = sqlSession.selectList(NAMESPACE+"selectDataReplyList", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectDataReplyList");
+			e.printStackTrace();
+		}
+		
+		return replyList;
+	}
+
+	@Override
+	public ReplyDto selectOne(int r_no) {
+		ReplyDto reply = null;
+		try {
+			reply = sqlSession.selectOne(NAMESPACE+"selectOne", r_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] selectOne");
+			e.printStackTrace();
+		}
+		
+		return reply;
+	}
+
+	@Override
+	public List<ReplyDto> selectGroupReplyList(int r_groupNo) {
+		List<ReplyDto> replyList = null;
+		
+		try {
+			replyList = sqlSession.selectList(NAMESPACE+"selectGroupReplyList", r_groupNo);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] selectGroupReplyList");
+			e.printStackTrace();
+		}
+		
+		return replyList;
+	}
+
+	@Override
+	public int deleteReply(int r_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteReply", r_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] deleteReply");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteParentReply(int r_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteParentReply", r_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] deleteParentReply");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertReply(ReplyDto reply) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertReply", reply);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] writeReply");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int updateReply(ReplyDto reply) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateReply", reply);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] updateReply");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertRecomment(ReplyDto reply) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertRecomment", reply);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] insertRecomment");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteBoardReply(int b_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteBoardReply", b_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : [학습자료실 댓글] deleteBoardReply");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+}

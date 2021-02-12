@@ -3,17 +3,40 @@
 <!DOCTYPE mapper
   		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  	<mapper namespace="datafile">
-  		<resultMap type="fileDto" id="fileMap">
-  			<result property="f_no"	column="F_NO"></result>
-  			<result property="b_no" column="B_NO"></result>
-  			<result property="f_name" column="F_NAME"></result>
-  			<result property="photo_ismain" column="Photo_Ismain"></result>
-  		</resultMap>	
+<mapper namespace="datafile">
+  	<resultMap type="fileDto" id="fileMap">
+  		<result property="f_no" column="F_NO"></result>
+		 <result property="b_no" column="B_NO"></result>
+		 <result property="f_name" column="F_NAME"></result>
+		 <result property="f_size" column="F_SIZE"></result>
+		 <result property="f_url" column="F_URL"></result>
+  	</resultMap>	
   		
+  	<select id="selectAttachFileList" parameterType="int" resultMap="fileMap">
+  		SELECT *
+  		FROM DATA_FILE
+  		WHERE B_NO = #{b_no}
+  	</select>
   	
+  	<select id="selectFile" parameterType="int" resultMap="fileMap">
+  		SELECT *
+  		FROM DATA_FILE
+  		WHERE F_NO = #{f_no}
+  	</select>
   	
+  	<insert id="insertFile" parameterType="fileDto" >
+	 	INSERT INTO DATA_FILE 
+		VALUES ( DATAFILESEQ.NEXTVAL, (SELECT MAX(B_NO) FROM DATA_BOARD ), #{f_name}, #{f_size}, #{f_url} )
+	 </insert>
+	 
+	 <delete id="deleteFile" parameterType="int">
+		DELETE FROM DATA_FILE 
+		WHERE F_NO = #{f_no}
+	 </delete>
   	
+  	<insert id="insertAddFile" parameterType="fileDto">
+  		INSERT INTO DATA_FILE
+	 	VALUES ( DATAFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} )
+  	</insert>
   	
-  	
-  	</mapper>
+</mapper>

@@ -45,14 +45,14 @@ h6 {
 
 /* 濡쒓퀬 */
 img.logo {
-	width: 250px;
-	height: 90px;
+	width: 200px;
+	height: 80px;
 	display: inline-block;
 }
 
 img.logo2 {
-	width: 270px;
-	height: 80px;
+	width: 250px;
+	height: 50px;
 	display: inline-block;
 	margin-bottom: 5px;
 }
@@ -75,10 +75,9 @@ div.blog-meta > span > img#placeHolderIcon{
 }
 
 .header-area {
-	background-image: url(./resources/assets/img/img_startPage.png);
-	
+	/* background-image: url(./resources/assets/img/img_startPage.png);
 	background-size: cover;
-	background-position: center;
+	background-position: center; */
 	height: 1080px;
 	position: relative;
 	z-index: 3;
@@ -145,7 +144,7 @@ div.blog-meta > span > img#placeHolderIcon{
 .mainmenu li:not(:last-child):hover:after {
 	width: 100%;
 	transition: width 0.3s ease-in-out;
-	background: #fff;
+	background: black;
 }
 
 
@@ -335,11 +334,11 @@ a.scroll-down:hover {
 /*Features Area*/
 
 .features-area {
-	background: rgb(110, 69, 226);
+	/* background: rgb(110, 69, 226);
 	background: -moz-linear-gradient(-45deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
 	background: -webkit-linear-gradient(-45deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
 	background: linear-gradient(135deg, rgba(110, 69, 226, 1) 0%, rgba(136, 211, 206, 1) 99%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e45e2', endColorstr='#88d3ce', GradientType=1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e45e2', endColorstr='#88d3ce', GradientType=1); */
 	color: #fff;
 	padding: 120px 0 330px;
 }
@@ -402,7 +401,24 @@ a.scroll-down:hover {
 	content: "";
 	margin-left: -110px;
 }
+.hero-slider-area .owl-dots div {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: purple;
+    margin: 2px;
+    border-radius: 50%;
+}
+.hero-slider-area .owl-dots div.active {
+    background: #ffffff;
+}
 
+.hero-slider-area .owl-dots {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 26px;
+}
 .features-top h6:after {
 	left: auto;
 	right: 50%;
@@ -1242,11 +1258,7 @@ a.scroll-down:hover {
 	content: "";
 	z-index: -1;
 	opacity: 0.75;
-	background: #7156e0;
-	background: -moz-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-	background: -webkit-linear-gradient(left, #7156e0 0%, #86c9cf 100%);
-	background: linear-gradient(to right, #7156e0 0%, #86c9cf 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7156e0', endColorstr='#86c9cf', GradientType=1);
+
 }
 
 .feature-page .hero-text h6:before,
@@ -1256,7 +1268,7 @@ a.scroll-down:hover {
 	left: 50%;
 	width: 24px;
 	height: 1px;
-	background: #fff;
+
 	content: "";
 	margin-left: -175px;
 }
@@ -1578,25 +1590,9 @@ div.mainBanner > img{
 	margin-top: 20px;
 }
 
-.hero-slider-area .owl-dots div {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	background: #c0d7e9;
-	margin: 2px;
-	border-radius: 50%;
-}
 
-.hero-slider-area .owl-dots div.active {
-	background: #ffffff;
-}
 
-.hero-slider-area .owl-dots {
-	text-align: center;
-	position: relative;
-	margin-top: -50px;
-	margin-bottom: 26px;
-}
+
 
 .blogpost-area {
 	padding: 100px 0;
@@ -1743,9 +1739,6 @@ i.user-comments.cmnts-color-two {
 
 /*Get Started*/
 
-.get-start.header-area {
-	background-image: url(../img/getstrated/hero-bg-1.jpg);
-}
 
 
 .contact-area {

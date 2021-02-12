@@ -1,0 +1,99 @@
+package com.studdype.test.model.biz.reply;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.studdype.test.model.dao.board.notice.NoticeReplyDao;
+import com.studdype.test.model.dao.member.MemberDao;
+import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.member.MemberDto;
+
+@Service
+public class NoticeReplyBizImpl implements NoticeReplyBiz{
+	@Autowired
+	NoticeReplyDao noticeReplyDao;
+	@Autowired
+	private MemberDao memberDao;
+	
+	@Override
+	public List<ReplyDto> selectReplyList(int b_no) {
+		return noticeReplyDao.selectReplyList(b_no);
+	}
+
+	//댓글리스트로 member 정보 받아오기
+	@Override
+	public Map<Integer, MemberDto> getMemberByList(List<ReplyDto> replyList) {
+		return memberDao.selectMemberByFreeReply(replyList);
+	}
+
+	// 댓글 삭제
+	@Transactional
+	@Override
+	public int deleteReply(int r_no) {
+		int res = 0;
+		// 1, 댓글 가져오기
+		ReplyDto reply = noticeReplyDao.selectOne(r_no);
+
+		// 2. 넘어온 댓글이 부모 댓글이면 값 수정 / 아니면 삭제
+		if (reply.getR_class() == 0) {
+			//그룹번호로 남은 게시글 수확인위해 리스트찾아옴
+			List<ReplyDto> groupReplyList = noticeReplyDao.selectGroupReplyList(reply.getR_groupno());
+			
+			//사이즈가 1개면 삭제
+			if (groupReplyList.size() == 1) { 
+				res = noticeReplyDao.deleteReply(r_no);
+			}else { //사이즈가 1이아니면 -> 답글이 있으면
+				res = noticeReplyDao.deleteParentReply(r_no);
+			}
+			if(res < 1 || reply == null || groupReplyList == null) {
+				throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+			}
+			
+		} else {
+			res = noticeReplyDao.deleteReply(r_no);
+			
+
+			//글 삭제에 성공했으면
+			if (res > 0) {
+				// 3. 삭제 후 댓글 그룹번호로 그룹번호 댓글 리스트 뽑아옴 ( 부모 댓글이 삭제된 댓글인지 알기위해 )
+				List<ReplyDto> groupReplyList = noticeReplyDao.selectGroupReplyList(reply.getR_groupno());
+
+				// 4. 삭제 후 댓글 그룹 남은 댓글이 1개이면
+				if (groupReplyList.size() == 1) { 
+
+					// 5. 댓글 클래스 컬럼 가져옴
+					int r_class = groupReplyList.get(0).getR_class();
+					// 6. 댓글 클래스가 -1이면(삭제된컬럼) 댓글 삭제
+					if (r_class == -1) {
+						res = noticeReplyDao.deleteReply(groupReplyList.get(0).getR_no());
+					}
+					if(res < 1 || reply == null || groupReplyList == null) {
+						throw new RuntimeException("[자유게시판] 글 가져오기 에러");
+					}
+				}
+			}
+		}
+
+		return res;
+	}
+
+	//댓글 쓰기
+	@Override
+	public int writeReply(ReplyDto dto) {
+		return noticeReplyDao.insertReply(dto);
+	}
+
+	@Override
+	public int updateReply(ReplyDto dto) {
+		return noticeReplyDao.updateReply(dto);
+	}
+
+	@Override
+	public int writeRecomment(ReplyDto dto) {
+		return noticeReplyDao.insertRecomment(dto);
+	}
+}

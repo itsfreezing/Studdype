@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+	<mapper namespace="studyapplying">
+	<resultMap type="StudyApplyingDto" id="studyApplyingMap">
+	<result property="s_no" column="S_NO"/>
+	<result property="mem_no" column="MEM_NO"/>
+	<result property="agree" column="AGREE"/>
+	<result property="info" column="INFO"/>
+	</resultMap>
+	
+	
+	<select id="studyApplyingList" resultType="StudyApplyingDto" parameterType="int">
+		SELECT * 
+		FROM STUDY_APPLYING
+		WHERE MEM_NO = ${mem_no}
+	</select>
+	<select id="selectOneByMno" parameterType="int" resultType="studyApplyingDto">
+		SELECT * FROM
+		STUDY_APPLYING
+		WHERE MEM_NO = ${mem_no}
+	</select>
+	<update id="receiveagree" parameterType="studyApplyingDto">
+		UPDATE STUDY_APPLYING SET AGREE = 'Y' WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</update>
+	<select id="snoList" parameterType="int" resultType="studyApplyingDto">
+		SELECT * FROM STUDY_APPLYING
+		WHERE S_NO = ${s_no}
+	</select>
+	<update id="receivereject" parameterType="studyApplyingDto">
+		UPDATE STUDY_APPLYING SET AGREE = 'N' WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</update>
+	<delete id="receivedelete" parameterType="studyApplyingDto">
+		DELETE FROM STUDY_APPLYING WHERE S_NO = ${s_no} AND MEM_NO = ${mem_no}
+	</delete>
+	
+	<!-- 스터디 가입신청 -->
+	<insert id="insertStudyMember">
+		INSERT INTO STUDY_APPLYING VALUES(#{s_no}, #{mem_no}, DEFAULT, #{info})
+	</insert>
+	
+	<select id="selectAgree" parameterType="studyApplyingDto" resultType="string">
+		SELECT AGREE
+		FROM STUDY_APPLYING
+		WHERE S_NO = #{s_no} 
+		AND MEM_NO = #{mem_no}
+	</select>
+	</mapper>

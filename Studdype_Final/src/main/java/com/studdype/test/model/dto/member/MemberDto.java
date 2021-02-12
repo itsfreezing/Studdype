@@ -26,6 +26,30 @@ public class MemberDto {
 		this.mem_phone = mem_phone;
 		this.mem_email = mem_email;
 	}
+	
+	public MemberDto(int mem_no, String mem_id, String mem_pw, String mem_phone, String mem_email) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_id = mem_id;
+		this.mem_pw = mem_pw;
+		this.mem_phone = mem_phone;
+		this.mem_email = mem_email;
+	}
+
+	
+
+	public MemberDto(int mem_no, String mem_phone, String mem_email) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_phone = mem_phone;
+		this.mem_email = mem_email;
+	}
+
+	public MemberDto(int mem_no, String mem_pw) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_pw = mem_pw;
+	}
 
 	public int getMem_no() {
 		return mem_no;

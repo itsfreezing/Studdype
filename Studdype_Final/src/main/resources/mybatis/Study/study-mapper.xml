@@ -16,43 +16,48 @@
 		<result property="s_currentcnt" column="S_CURRENTCNT" />
 	</resultMap>
 
-	<select id="studyList" resultType="studyDto" parameterType="com.studdype.test.common.SearchPagination">
-      SELECT *
+
+	<select id="studyList" resultMap="studyMap" parameterType="searchPagination">
+      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
-      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       				FROM STUDY
       				WHERE 1=1
       				<include refid="search"></include>
-      				) ST
+      				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-      ORDER BY S_NO DESC
 	</select>
 	
 	<sql id="search">
 			<if test="keyword != null">AND S_NAME LIKE '%' || #{keyword} || '%'</if>
 	</sql>
 
+	<select id="studyListCategory" resultMap="studyMap" parameterType="searchPagination">
+		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE CATE_NO = #{cate_no}
+      				)
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
 
 <!-- 총 게시글 수 -->
-<select id="selectTotalStudyListNum" resultType="int">
-      SELECT count(S_NO)
-      FROM STUDY
-      WHERE 1=1
-      <include refid="search"></include>
-      AND S_NO > 0
-</select>
 
+	<select id="selectTotalStudyListNum" resultType="int">
+	      SELECT count(S_NO)
+	      FROM STUDY
+	      WHERE 1=1
+	      <include refid="search"></include>
+	      AND S_NO > 0
+	</select>
+	<select id="totalstudyNum" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM STUDY
+		WHERE MEM_NO = ${mem_no}
+	</select>
 
-
-
-
-
-
-
-
-
-	<select id="selectOneBySno" parameterType="int"
-		resultMap="studyMap">
+	<select id="selectOneBySno" parameterType="int" resultMap="studyMap">
 		SELECT *
 		FROM STUDY
 		WHERE S_NO = #{s_no}
@@ -60,7 +65,7 @@
 	
 	<insert id="insertStudy" parameterType="studyDto">
 		INSERT INTO STUDY 
-		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, 1)
+		VALUES(STUDYSEQ.NEXTVAL, #{leader_no} , #{s_name}, #{s_info}, #{s_content}, #{photo}, #{cate_no}, #{si_no}, #{gu_no}, #{s_maxcnt}, DEFAULT)
 	</insert>
 	
 	<select id="selectStudyFinalNumber" resultType="int">
@@ -68,4 +73,43 @@
 		FROM (SELECT ROWNUM, S_NO FROM STUDY WHERE ROWNUM <![CDATA[<]]> 2 ORDER BY S_NO DESC)
 	</select>
 	
+	<select id="studyLeader" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE LEADER_NO = #{leader_no}
+	</select>
+	
+	<update id="newLeader" parameterType="int" >
+		UPDATE STUDY SET LEADER_NO = #{leader_no} WHERE S_NO = #{s_no}
+	</update>
+
+	<update id="newInfo" parameterType="studyDto">
+		UPDATE STUDY SET S_INFO = #{s_info} , CATE_NO = #{cate_no}, SI_NO = #{si_no}, GU_NO =#{gu_no},
+		S_MAXCNT = #{s_maxcnt}, S_NAME = #{s_name} , S_PHOTO = #{photo}  WHERE S_NO = ${s_no}
+	</update>
+	<update id="nomalStudyImg" parameterType="studyDto">
+		UPDATE STUDY SET S_PHOTO = #{photo} WHERE S_NO = #{s_no}
+	</update>
+	
+	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
+		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
+	</select>
+
+	<select id="selectStudyName" parameterType="int" resultType="string">
+		SELECT S_NAME FROM STUDY WHERE S_NO = #{s_no}
+	</select>
+	
+
+
+<!-- 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
+		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
+      				)
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
+		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
+	</select> -->
+
 </mapper>

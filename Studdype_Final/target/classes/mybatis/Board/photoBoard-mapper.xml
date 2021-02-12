@@ -1,5 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="photoboard">
+	<resultMap type="boardDto" id="boardMap">
+		<result property="b_no" column="B_NO"></result>
+		<result property="s_no" column="S_NO"></result>
+		<result property="b_title" column="B_TITLE"></result>
+		<result property="b_writer" column="B_WRITER"></result>
+		<result property="b_content" column="B_CONTENT"></result>
+		<result property="b_regdate" column="B_REGDATE"></result>
+		<result property="b_cnt" column="B_CNT"></result>
+	</resultMap>
+	
+	<insert id="insertBoard" parameterType="boardDto">
+		INSERT INTO PHOTO_BOARD
+		VALUES(PHOTOBOARDSEQ.NEXTVAL, #{s_no}, #{b_title}, #{b_writer}, #{b_content}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="galleryList" resultType="boardDto" parameterType="searchPagination">
+	  SELECT *
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY B_NO) AS RNUM, B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+      				FROM PHOTO_BOARD
+      				WHERE S_NO = #{s_no}
+      				<include refid="search"></include>
+      				) PB
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      ORDER BY B_NO ASC
+	</select>
+	
+	<sql id="search">
+			<if test="keyword != null">AND B_TITLE LIKE '%' || #{keyword} || '%'</if>
+	</sql>
+	
+	<select id="totalGalleryListNum" parameterType="int" resultType="_int">
+		SELECT COUNT(*)
+		FROM PHOTO_BOARD
+		WHERE S_NO = #{s_no}
+		<include refid="search"></include>
+		AND B_NO > 0
+	</select>
+	
+	<select id="galleryDetailOne" parameterType="int" resultType="boardDto">
+		SELECT *
+		FROM PHOTO_BOARD
+		WHERE B_NO = #{b_no}
+	</select>
+	
+	<update id="updateGallery" parameterType="boardDto">
+		UPDATE PHOTO_BOARD SET B_TITLE = #{b_title} , B_CONTENT = #{b_content} WHERE B_NO = #{b_no}
+	</update>
+	
+		<delete id="deleteGallery" parameterType="int">
+		DELETE FROM PHOTO_BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+		<select id="selectRecentList" parameterType="hashMap" resultMap="boardMap">
+		<![CDATA[
+			SELECT B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT 
+			FROM
+			(
+    			SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+    			FROM PHOTO_BOARD
+    			WHERE S_NO = #{s_no}
+    			ORDER BY B_NO DESC
+			)
+			WHERE R < 
+                	(
+                 	   SELECT R
+                	   FROM 
+              	       (
+              	       SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                	   FROM PHOTO_BOARD
+                	   WHERE S_NO =#{s_no}
+               	       ORDER BY B_NO DESC
+               	       )
+               	       WHERE B_NO = #{b_no}
+            	    ) +3 
+            AND
+                 R >
+                   (
+                     SELECT R
+                     FROM 
+                     (
+                     SELECT ROWNUM R , B_NO, S_NO, B_TITLE, B_WRITER, B_CONTENT, B_REGDATE, B_CNT
+                     FROM PHOTO_BOARD
+                     WHERE S_NO =#{s_no}
+                     ORDER BY B_NO DESC
+                     )
+                     WHERE B_NO = #{b_no}
+                    ) -3
+		]]>
+	</select>
+	
+</mapper>

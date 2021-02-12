@@ -1,4 +1,249 @@
+/* searchDiv css */
+#bigBox{
+	width: 40%; 
+	display: inline-block; 
+	margin-left: 37%;
+}
+
+.divBox {
+  width: 70%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.searchDiv {
+  position: relative;
+  overflow: hidden;
+  height: 88px;
+}
+.searchDiv.active::before {
+  top: 14px;
+  bottom: 14px;
+  opacity: 0;
+}
+.searchDiv.active path {
+  stroke-dashoffset: -400;
+}
+.searchDiv.active p {
+  pointer-events: all;
+}
+.searchDiv.active p::before, .searchDiv.active p::after {
+  opacity: 1;
+}
+.searchDiv.active span {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+}
+.searchDiv.active.remove::before {
+  transition: all 200ms linear 200ms, opacity 0ms linear 0ms;
+  top: 88px;
+  bottom: 2px;
+  opacity: 1;
+}
+.searchDiv.active.remove p::before, .searchDiv.active.remove p::after {
+  transition: all 0ms;
+  opacity: 0;
+}
+.searchDiv.active.remove path {
+  stroke-dashoffset: -800;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove span {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  transition-delay: 400ms;
+}
+.searchDiv.active.remove.done::before {
+  top: 0;
+  bottom: 88px;
+  opacity: 1;
+  transition: none;
+}
+.searchDiv.active.remove.done path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: none;
+}
+.searchDiv::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
+  width: 4px;
+  background: #6434ef;
+  bottom: 88px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: all 400ms ease-in-out 500ms, opacity 200ms linear 1000ms;
+}
+.searchDiv path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
+  transition: all 500ms ease-in-out;
+}
+.searchDiv span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 80px;
+  line-height: 80px;
+  width: 100%;
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 34px;
+  letter-spacing: 2px;
+  color: #6434ef;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 400ms ease-in-out;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  text-transform: uppercase;
+}
+.searchDiv input,
+.searchDiv p {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  height: 40px;
+  line-height: 80px;
+  width: 90%; 
+  margin-top: -40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+}
+.searchDiv input {
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.searchDiv p {
+  color: #6434ef;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.searchDiv p:after, .search p:before {
+  content: '';
+  opacity: 0;
+  width: 4px;
+  height: 60px;
+  vertical-align: middle;
+  border-radius: 20px;
+  margin-top: 8px;
+  transition: all .2s ease-in-out;
+  transition-delay: 1000ms;
+  display: inline-block;
+}
+.searchDiv p:after {
+  position: relative;
+  bottom: 8px;
+  left: 8px;
+  background: #6434ef;
+  -webkit-animation: blinky 450ms linear infinite alternate;
+          animation: blinky 450ms linear infinite alternate;
+}
+
+@-webkit-keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: #6434ef;
+  }
+}
+
+@keyframes blinky {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: F;
+  }
+}
+
 /* --------------------------------- meetList */
+
+/* meetList - Search 버튼 css */
+[tooltip]:before {
+    /* 여긴 건드리지 말 것 */
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    
+    /* 변경가능 */
+    transition: all 0.15s ease;
+    padding: 10px;
+    color: #6434ef;
+    border-radius: 10px;
+    border: 1px solid #6434ef;
+    box-shadow: 2px 2px 1px silver;    
+}
+
+[tooltip]:hover:before {
+    /* 여긴 건드리지 말 것 */
+    opacity: 1;
+    
+    /* 변경가능 */
+    background: #fff;
+    margin-top: 98px;
+    margin-left: 2px;    
+}
+
+/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
+tooltip-persistent 요소 추가 할 것 */
+[tooltip]:not([tooltip-persistent]):before {
+    pointer-events: none;
+}
+
+/* 모임등록버튼 */
+#listBtn_insertform{
+	position: relative;
+	right: -68%;
+}
+
+/* 모임이 존재하지 않을 때 */
+div#nothingImg img{
+	width: 13%;
+	display:block;
+	margin-top: 10%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 2%;
+}
+
+div#nothingMeet{
+	text-align: center; 
+	font-size: 40px;
+	font-weight: bold;
+}
+
+span#nothingKeyword{
+	color: red;
+}
+
+p#nothingTXT{
+	text-align: center; 
+	margin: 100px; 
+	font-size: 20px;
+	color: gray;
+	margin-top: 1%;
+}
 
 /* banner css */
 .hero-slider-info {
@@ -12,9 +257,9 @@
 	border: 1px solid #bababa;
 	box-shadow: 8px 8px 8px gray;
 	cursor: pointer;
-	width: 70%;
-	margin-right: auto;
+	width: 60%;
 	margin-left: auto;
+	margin-right: auto;  
 	margin-top: 4%;
 }
 
@@ -61,11 +306,6 @@
 	color: #7f7f81;
 }
 
-/* 모임등록버튼 */
-#listBtn_insertform{
-	position: relative;
-	right: -72%;  
-}
 /* --------------------------------- */
 
 <<<<<<< HEAD
@@ -89,6 +329,7 @@
 .pagin {
 	list-style: none;
 	display: table;
+	/*margin-left: 30%;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -148,7 +389,7 @@
 }
 
 .current_page {
-	color: white;
+	color: white!important;
 	background-color: #6434ef;
 }
 /* --------------------------------- */
@@ -198,7 +439,7 @@ div#cntDiv{
 div#titleDiv{
 	font-size: 300%; 
 	font-weight: bold;
-	color: #baabfb;
+	color: black;
 	text-align: center;
 	margin: 0;
 	padding: 1% 5% 1% 0;
@@ -215,13 +456,13 @@ div#contentDiv{
 
 div#contentDiv-left{
 	float: left;
-	width: 40%;
+	width: 50%;
 	border-left: none;
 }
 
 div#contentDiv-right{
 	float: right;
-	width: 60%;
+	width: 50%;
 	height: auto;
 	border-left: 3px solid #e3ddfd;
 }
@@ -237,23 +478,28 @@ div.meetDetailDiv{
 div#meetContentDiv{
 	font-size: 120%;
 	padding: 5% 2%;
+	height: 300px;
 }
 
 div#map{
-	width: 100%;
+	height: 409px; 
+	width: 100%; 
 }
 
 
-/* 수정버튼 */
-#detailBtn_updateform{
+/* 수정, 삭제, 목록, 댓글 버튼 */
+#detailBtn_updateform,
+#detailBtn_delete,
+#detailBtn_writeReply1,
+#detailBtn_list1{
 	position: relative;
-	right: -75%;  
+	right: -51%;
 }
-  
-/* 삭제버튼 */
-#detailBtn_delete{
+
+#detailBtn_writeReply2,
+#detailBtn_list2{
 	position: relative;
-	right: -75%;  
+	right: -76%;
 }
 
 #detailHR{
@@ -266,26 +512,79 @@ div#map{
 
 /* vote 전체 DIV */
 div#vote{
+	padding-top: 20px;
 	display: inline-block;
 	border: 3px solid #e3ddfd;
+	border-top: none;
 	border-left: none;
 	border-right: none;
 	width: 100%;
 	margin-top: 3%;
 }
 
-/* 참가여부 */
-#voteDiv{
-	text-align: center;
-	display: inline-block;
-	width: 40%;
-	padding: 2%;
+.voteResultForWriter{
+	width: 80%;
+	margin-left: 8%;
 }
 
+/* 투표 라벨 영역 */
+.btn-group{
+	width: 50%;
+	margin: 0 0 0 25%;
+}
+
+.btn-group:before{
+	width: 50%;
+	margin: 0!important;
+}
+
+/* 투표 라벨(color) */
 label.btn.btn-danger,
 label.btn.btn-success{
-	width: 80px;
+	display: inline-block;
+	width: 100%;
 	height: 50px;
+	border: 0;
+}
+
+label.btn.btn-success{
+	background-color: #baabfb;
+	color: #6434ef; 
+	font-weight: bold;
+	font-size: 120%;
+	cursor: pointer;
+	padding-top: 15px;  
+}
+
+label.btn.btn-success:hover{
+	background-color: #6434ef;
+	color: #fff;
+}
+
+label.btn.btn-success.active{
+	background-color: #6434ef!important;
+	border-color: #6434ef!important;
+    box-shadow: 0 0 0 0.2rem #6434ef!important; 
+}
+
+label.btn.btn-danger{
+	background-color: #b5b4bd;
+	color: #8d8d92;
+	font-weight: bold;
+	font-size: 120%;
+	cursor: pointer;
+	padding-top: 15px;  
+}
+
+label.btn.btn-danger:hover{
+	background-color: #8d8d92;
+	color: #fff;
+}
+
+label.btn.btn-danger.active{
+	background-color: #8d8d92!important;
+	border-color: #8d8d92!important;
+    box-shadow: 0 0 0 0.2rem #8d8d92!important; 
 }
 
 /* radio button */
@@ -298,11 +597,22 @@ label.btn.btn-success{
 	opacity: 1;				
 }
 
-/* 투표현황 */
-div#voteList{
-	display: inline-block;
-	width: 56%;
-	padding: 2%;
+/* 투표하기 버튼 */
+input.submitBtn.vote{
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	margin: 3% 0 5% 43%;
+	padding-bottom: 50px;
+	width: 15%;
+	height: 50px;
+	line-height: 52px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: 600;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
 }
 
 div.attend{
@@ -316,6 +626,7 @@ div.graph{
 	display: inline-block;
 	width: 60%;
 	padding: 3% 5%;
+	cursor: pointer;
 }
 
 div.percentage{
@@ -326,17 +637,67 @@ div.percentage{
 	margin: 0;
 }
 
-#member_count{
+#member_count_forWriter{
 	width: 100%;
-	padding: 3% 5%;
+	padding: 3% 12% 3% 3.5%;
 	text-align: right;
+	margin-left: 8%;
 }
 
+#member_count{
+	width: 100%;
+	padding: 3% 3.5% 3% 5%;
+	text-align: right;
+}
+#member_count_forWriter img,
 #member_count img{
 	width: 24px;
 	height: 24px; 
 }
+/* --------------------------------- */
 
+/* --------------------------------- modal */
+.modal-dialog {
+        display: inline-block;
+        text-align: center;
+        align-content: center;
+        vertical-align: middle;
+        width: 200px;
+}
+
+.modal {
+        text-align: center;
+}
+
+.modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        content: " ";
+        height: 100%;
+}
+
+/* 모달 닫기 버튼 */
+button.modalExitBtn{
+	background: #fff;
+	color: #6434ef;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 50px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+button.modalExitBtn:hover{
+	background: #6434ef;
+	color: #fff;
+} 
 /* --------------------------------- */
 
 /* --------------------------------- meetInsert */
@@ -429,8 +790,8 @@ div#addrBtn{
 
 input#addrBtn{
 	background: #fff;
-	color: #7362DE;
-	border: 1px solid #7362DE;
+	color: #6434ef;
+	border: 1px solid #6434ef;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	width: 120%;
 	font-size: 80%;
@@ -442,7 +803,7 @@ input#addrBtn{
 }
 
 input#addrBtn:hover{
-	background: #7362DE;
+	background: #6434ef;
 	color: #fff;
 }
 
@@ -490,17 +851,24 @@ div#fifthRow-right{
 }
 
 
+/* meetUpdate의 완료버튼 위치 */
+#updateBtn_update{
+	position: relative;
+	right: -55%;  
+}
 
-
-
-
+/* meetUpdate의 취소버튼 위치 */
+#updateBtn_cancle{
+	position: relative;
+	right: -55%;  
+}
 
 /* 흰색 버튼 css(submit) */
 input.submitBtn,
 button.submitBtn{
 	background: #fff;
-	color: #7362DE;
-	border: 1px solid #7362DE;
+	color: #6434ef;
+	border: 1px solid #6434ef;
 	box-shadow: 0 0 15px 5px #eaebf2;
 	margin-top: 40px;
 	padding-bottom: 50px;
@@ -518,8 +886,16 @@ button.submitBtn{
 /* 흰색 버튼에서 hover 시 보라색으로 변경 */
 input.submitBtn:hover,
 button.submitBtn:hover{
-	background: #7362DE;
+	background: #6434ef;
 	color: #fff;
+} 
+
+/* --------------------------------- */
+
+/* --------------------------------- 댓글 */
+/* 답글 */
+.replyItem{
+		list-style: none;
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -527,25 +903,220 @@ button.submitBtn:hover{
 =======
 >>>>>>> 8340377c4da4724b97ed5587f016795257d86247
 
+.replyWrite{
+	border-bottom: 1px solid #ccc;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.replyWrite table{
+	width: 100%;
+	margin-top: 15px;
+}
 
+.write_td{
+	width: 90%;	
+}
 
-/* meetUpdate의 완료버튼 위치 */
-#updateBtn_update{
-	position: relative;
-	right: -71%;  
+.write_btn_td{
+	width: 5%;
 }
 <<<<<<< HEAD
 >>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
 =======
 
-/* meetUpdate의 취소버튼 위치 */
-#updateBtn_cancle{
-	position: relative;
-	right: -71%;  
+.write_content{
+	width: 100%;
+	height: 100px;
+	resize: none;
+	border: 1px solid #808080;
+	border-radius: 5px 5px;
+	padding: 20px;
+	
+}
+
+.reply_write_btn{
+	width: 100px;
+	height: 100px;
+	background-color: white;
+	border: 1px solid #6434ef;
+	box-shadow: 0 0 15px 5px #eaebf2;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 5px 5px;
+	color: #6434ef;
+	cursor: pointer;
+	padding: 0px;
+	margin-bottom: 5px;
+	
+}
+
+.reply_write_btn:hover {
+	background-color: #6434ef;
+	color: white;	
+	transition: 0.3s;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.replyBox{
+	margin-top: 20px;
+	
+}
+
+.replyTitle{
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.replyTitle span{
+	font-size: 25px;
+	font-weight: bold;
 }
 
 
+.reply_arrow{
+	width:30px; 
+	height:auto;
+	padding-right: 5px;
+	padding-bottom: 15px;
+	
+}
 
+.reply_writer_box{
+	font-weight: bold;
+}
+
+.reply_writer_box > img{
+	width: 30px;
+	padding-bottom: 5px;
+	margin-right: 1%;
+}
+
+.reply_comment_box{
+	padding-bottom: 15px;
+	word-break:break-all;
+}
+
+.reply_info_box{
+	color:rgb(170,170,170);
+	
+}
+.write_recomeent_btn{
+	font-size: 15px;
+	color:rgb(170,170,170);
+	background: white;
+	border: none;
+	cursor: pointer;
+}
+
+.write_recomeent_btn:hover{
+	font-weight: bold;
+	color: black;
+}
+
+.writerId{
+	font-weight: bold;
+}
+
+/* 댓글 수정 css */
+.recomment_div{
+	width: 80%;
+	border: 1px solid rgb(180,180,180);
+}
+.recomment_div table{
+	width: 100%;
+	
+	margin-top: 15px;
+	
+}
+
+.recomment_div table tr td{
+	padding-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.recomment_div table tr{
+	margin-left: 20px;
+	margin-right:20px;
+}
+.update_reply_btnDiv{
+	height: 60px;
+	border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.update_reply_comment{
+	width: 98%;
+	height: 100px;
+	resize: none;	
+	border: none;	
+	padding: 20px;	
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	word-break:break-all;
+	
+	
+}
+
+.update_reply_comment:focus{
+	border: 1px solid #ccc;
+	border-radius: 5px 5px;
+}
+
+.update_reply_writer{
+	font-weight: bold;
+}
+
+.update_reply_btn{
+	float: right;
+	cursor: pointer;
+	height: 100%;
+	background-color:white;
+	border: none;
+	border-left: 1px solid rgba(0,0,0,.1);
+	font-weight: bold;
+	width: 100px;
+}
+
+.update_reply_btn:hover{
+	background-color:  #6434ef;
+	color:white;
+	transition: 0.3s;
+}
+
+.showDiv{
+	display: block;
+}
+
+.hideDiv{
+	display: none;
+}
+
+.free_Btn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+}
+.free_Btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
 
 
 

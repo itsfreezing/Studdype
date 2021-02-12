@@ -1,9 +1,10 @@
 package com.studdype.test.model.dao.member;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,54 @@ import org.springframework.stereotype.Repository;
 
 import com.studdype.test.model.dto.board.BoardDto;
 import com.studdype.test.model.dto.board.BookDto;
-import com.studdype.test.model.dto.board.ReplyDto;
+import com.studdype.test.model.dto.board.VoteDto;
 import com.studdype.test.model.dto.board.MeetDto;
+import com.studdype.test.model.dto.board.ReplyDto;
 import com.studdype.test.model.dto.member.MemberDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
-
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	//로그인
+	@Override
+	public MemberDto login(MemberDto dto) {
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"login",dto);
+		}catch (Exception e) {
+			System.out.println("[ERROR]:login");
+		}
+		return res;
+	}
+
+	//로그아웃
+	@Override
+	public String logout(HttpSession session) {
+		return null;
+	}
+	
+	//아이디 찾기
+	@Override 
+	public String findId(MemberDto dto) {
+		String res = null;
+			
+		try {
+		res = sqlSession.selectOne(NAMESPACE+"findId", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR]:findId");
+		}
+		return res;
+	}
 	
 	//멤버번호로 하나 셀렉트
 	@Override
 	public MemberDto selectOne(int mem_no) {
 		MemberDto res = null;
-		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 		} catch (Exception e) {
@@ -75,26 +108,6 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		return studyMainMap;
 	}
-	
-	// [모임 게시판]리스트로 작성자 이름 가져오기
-	@Override
-	public Map<Integer, String> selectWriterByMeetBoardList(List<MeetDto> list) {
-		Map<Integer, String> resMap = new HashMap<Integer, String>();
-		String writer = null;
-		int writerNo = 0;
-		for(int i = 0; i < list.size(); i++) {
-			writerNo = list.get(i).getMeet_writer();
-			try {
-				writer = sqlSession.selectOne(NAMESPACE+"selectNameByNo", writerNo);
-			} catch (Exception e) {
-				System.out.println("[ERROR] ---------- MEMBER DAO selectWriterByMeetBoardList ---------- [ERROR]");
-				e.printStackTrace();
-			}
-			resMap.put(list.get(i).getMeet_no(), writer);
-		}
-		
-		return resMap;
-	}
 
 	//멤버번호로 이름 가져오기
 	@Override
@@ -104,7 +117,7 @@ public class MemberDaoImpl implements MemberDao{
 		try {
 			name= sqlSession.selectOne(NAMESPACE+"selectNameByNo", mem_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectNameByNO!");
+			System.out.println("[ERROR] [MemberDaoImpl] selectNameByNO method");
 			e.printStackTrace();
 		}
 				
@@ -139,7 +152,7 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR]:  selectMemberByFreeList( !!!!!!");
+				System.out.println("[ERROR] [MemberDaoImpl]  selectMemberByFreeList method");
 				e.printStackTrace();
 			}
 			resMap.put(list.get(i).getB_no(), dto);
@@ -159,7 +172,85 @@ public class MemberDaoImpl implements MemberDao{
 			try {
 				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
-				System.out.println("[ERROR]: selectMemberByFreeReply !!!!!!");
+				System.out.println("[ERROR] [MemberDaoImpl] selectMemberByFreeReply method");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	// [모임게시판] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetList(List<MeetDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int meet_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			meet_no = list.get(i).getMeet_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", meet_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberByMeetList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMeet_no(), dto);
+		}
+		
+		return resMap;
+	}
+	
+	// [모임게시판 투표_참가] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectAttendMemberList(List<VoteDto> list) {
+		Map<Integer, MemberDto> resMap = new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getMem_no();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne",mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectAttendMemberList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMem_no(), dto);
+		}
+		return resMap;
+	}
+	
+	// [모임게시판 투표_불참가] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectAbsentMemberList(List<VoteDto> list) {
+		Map<Integer, MemberDto> resMap = new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getMem_no();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne",mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectAttendMemberList ---------- [ERROR]");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getMem_no(), dto);
+		}
+		return resMap;
+	}
+	
+	// [모임게시판 댓글] 리스트로 member 정보 가져오기
+	@Override
+	public Map<Integer, MemberDto> selectMemberByMeetReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] ---------- MEMBER DAO selectMemberByMeetReply ---------- [ERROR]");
 				e.printStackTrace();
 			}
 			resMap.put(replyList.get(i).getR_no(), dto);
@@ -170,25 +261,262 @@ public class MemberDaoImpl implements MemberDao{
 
 	// [도서 게시판] 리스트로 작성자 이름 가져오기
 	@Override
-	public Map<Integer, Map<String, String>> selectWriterByBookList(List<BookDto> bookList) {
-		Map<Integer, Map<String, String>> bookMap = new HashMap<Integer, Map<String, String>>();
-		Map<String, String> memberInfo = new HashMap<String, String>();
+	public Map<Integer, MemberDto> selectWriterByBookList(List<BookDto> bookList) {
+		Map<Integer, MemberDto> bookMap = new HashMap<Integer, MemberDto>();
 		int mem_no;
 		
 		for(int i = 0; i <bookList.size(); i++) {
 			mem_no = bookList.get(i).getB_writer();
 			MemberDto dto = new MemberDto();
 			try {
-				dto = sqlSession.selectOne(NAMESPACE+"selectWriterByBookList", mem_no);
-				memberInfo.put(dto.getMem_id(), dto.getMem_name());
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
 			} catch (Exception e) {
 				System.out.println("[ERROR] : selectWriterByBookList"+i+"번째 실행");
 				e.printStackTrace();
 			}
-			bookMap.put(mem_no, memberInfo);
+			bookMap.put(mem_no, dto);
 		}
 		
 		return bookMap;
+	}
+	//마이페이지 정보수정
+	@Override
+	public int updateMember(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateMember", dto);
+		} catch (Exception e) {
+			System.out.println("ERROR: updateMember!!!!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+				
+		return res;
+	}
+	//마이페이지 아이디 중복체크
+	@Override
+	public MemberDto idchk(String mem_id) {
+		MemberDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"idchk",mem_id);
+		} catch (Exception e) {
+			System.out.println("ERROR: idchk FAIL!!!!!!!!!!!!!!!!");
+			
+			e.printStackTrace();
+		}
+			
+		return dto;
+	}
+
+	
+
+	@Override
+	public Map<Integer, MemberDto> getBookWriterName(int mem_no) {
+		Map<Integer, MemberDto> getBookWriterName = new HashMap<Integer, MemberDto>();
+		MemberDto dto = new MemberDto();
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			getBookWriterName.put(mem_no, dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : getBookWriterName");
+			e.printStackTrace();
+		}
+		
+		return getBookWriterName;
+	}
+	
+
+		
+	//마이페이지 회원탈퇴 클릭시
+	@Override
+	public int memberDelete(int mem_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"memberDelete",mem_no);
+		} catch (Exception e) {
+			System.out.println("ERROR : memberDelete !!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+
+	//[비밀번호 찾기] 아이디와 이메일로 member가져오기
+	@Override
+	public MemberDto selectMemberByIdAndEmail(MemberDto dto) {
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectMemberByIdAndEmail", dto);
+		} catch (Exception e) {
+			System.out.println("[Error] [MemberDaoImpl] selectMemberByIdAndEmail method");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	//이메일 인증
+	@Override
+	public MemberDto sendMail(MemberDto dto) {
+		MemberDto res= null;
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"sendmail",dto);
+		} catch (Exception e) {
+			System.out.println("[error]:SendMail FAIL");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
+	//[비밀번호 찾기] 비밀번호 변경
+	@Override
+	public int updatePw(MemberDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"updatePw", dto);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [MemberDaoImpl] updatePw method");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	// [studyHome] 리더 번호로 리더 이름 가져오기
+	@Override
+	public String leaderNameForStudyHome(int leader_no) {
+		String leaderName = null;
+		
+		try {
+			leaderName = sqlSession.selectOne(NAMESPACE+"selectNameByNo", leader_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR]: leaderNameForStudyHome");
+			e.printStackTrace();
+		}
+		
+		return leaderName;
+	}
+
+
+	@Override
+	public List<MemberDto> allMember() {
+		List<MemberDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"allMember");
+		} catch (Exception e) {
+			System.out.println("ERROR : ALLMEMBER!!!!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	
+	//[도서게시판 댓글]  리스트로 member 정보 가져오기 
+	@Override
+	public Map<Integer, MemberDto> selectMemberByBookReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] : selectMemberByBookReply");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	@Override
+	public int newemail(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"newemail",dto);
+		} catch (Exception e) {
+			System.out.println("마이페이지 이메일 변경 오류");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	@Override
+	public Map<Integer, MemberDto> selectMemberByPhotoList(List<BoardDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int photo_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			photo_no = list.get(i).getB_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", photo_no);
+			} catch (Exception e) {
+				System.out.println("에러 갤러리 멤버 리스트");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getB_no(), dto);
+		}
+		
+		return resMap;
+	}
+
+	@Override
+	public Map<Integer, MemberDto> selectMemberByPhotoReply(List<ReplyDto> replyList) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < replyList.size(); i++) {
+			mem_no = replyList.get(i).getR_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("에러 selectOne");
+				e.printStackTrace();
+			}
+			resMap.put(replyList.get(i).getR_no(), dto);
+		}
+		
+		return resMap;
+	}
+		
+	@Override
+	public Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list) {
+		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
+		MemberDto dto = null;
+		int mem_no = 0;
+		for(int i = 0; i < list.size(); i++) {
+			mem_no = list.get(i).getB_writer();
+			try {
+				dto = sqlSession.selectOne(NAMESPACE+"selectOne", mem_no);
+			} catch (Exception e) {
+				System.out.println("[ERROR] [MemberDaoImpl]  selectMemberByFreeList method");
+				e.printStackTrace();
+			}
+			resMap.put(list.get(i).getB_no(), dto);
+		}
+		
+		return resMap;
+
+	}
+
+	@Override
+	public int updatephone(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updatephone",dto);
+		} catch (Exception e) {
+			System.out.println("전화 번호 변경 오류!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }

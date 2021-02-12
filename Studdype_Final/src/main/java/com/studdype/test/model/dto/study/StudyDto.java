@@ -1,17 +1,17 @@
 package com.studdype.test.model.dto.study;
 
 public class StudyDto {
-	private int s_no; 			// ���͵� ��ȣ
-	private int leader_no; 		// ���� ��ȣ
-	private String s_name; 		// ���͵� �̸�
-	private String s_info; 		// ���͵� ���� �Ұ�
-	private String s_content; 	// ���͵� �ڼ��� �Ұ�
-	private String photo; 		// ���͵� ��ǥ���� �����̸�
-	private int cate_no; 		// ���͵� ī�װ�
-	private int si_no; 			// ���͵� ����(��)
-	private int gu_no; 			// ���͵� ����(��)
-	private int s_maxcnt; 		// ���͵� �ִ� �ο�
-	private int s_currentcnt;	// ���͵� ���� �ο�
+	private int s_no; // ���͵� ��ȣ
+	private int leader_no; // ���� ��ȣ
+	private String s_name; // ���͵� �̸�
+	private String s_info; // ���͵� ���� �Ұ�
+	private String s_content; // ���͵� �ڼ��� �Ұ�
+	private String photo; // 스터디 대표사진 경로
+	private int cate_no; // ���͵� ī�װ�
+	private int si_no; // ���͵� ����(��)
+	private int gu_no; // ���͵� ����(��)
+	private int s_maxcnt; // ���͵� �ִ� �ο�
+	private int s_currentcnt; // ���͵� ���� �ο�
 
 	public StudyDto() {
 		super();
@@ -32,6 +32,32 @@ public class StudyDto {
 		this.gu_no = gu_no;
 		this.s_maxcnt = s_maxcnt;
 		this.s_currentcnt = s_currentcnt;
+	}
+
+	public StudyDto(int s_no, String s_info, int cate_no, int si_no, int gu_no, int s_maxcnt, String s_name , String photo) {
+		super();
+		this.s_no = s_no;
+		this.s_info = s_info;
+		this.cate_no = cate_no;
+		this.si_no = si_no;
+		this.gu_no = gu_no;
+		this.s_maxcnt = s_maxcnt;
+		this.s_name = s_name;
+		this.photo = photo;
+	}
+
+	
+
+	public StudyDto(int s_no, String photo) {
+		super();
+		this.s_no = s_no;
+		this.photo = photo;
+	}
+
+	public StudyDto(int leader_no, int s_no) {
+		super();
+		this.s_no = s_no;
+		this.leader_no = leader_no;
 	}
 
 	public int getS_no() {
@@ -128,7 +154,5 @@ public class StudyDto {
 				+ ", s_content=" + s_content + ", photo=" + photo + ", cate_no=" + cate_no + ", si_no=" + si_no
 				+ ", gu_no=" + gu_no + ", s_maxcnt=" + s_maxcnt + ", s_currentcnt=" + s_currentcnt + "]";
 	}
-	
-	
-	
+
 }

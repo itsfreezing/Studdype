@@ -1,5 +1,6 @@
 package com.studdype.test.model.dao.board.free;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			totalNum = sqlSession.selectOne(NAMESPACE+"totalBoardNum", s_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectTotalBoardNum(int s_no)!!");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectTotalBoardNum method");
 			e.printStackTrace();
 		}
 		
@@ -36,7 +37,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			resList = sqlSession.selectList(NAMESPACE+"pagingBoardList", pageMap);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectPagingBoardList");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectPagingBoardList method");
 			e.printStackTrace();
 		}
 		
@@ -51,7 +52,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertBoard", board);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: insertBoard!");
+			System.out.println("[ERROR] FreeBoardDaoImpl insertBoard method");
 			e.printStackTrace();
 		}
 		return res;
@@ -65,22 +66,23 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"selectOne", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: selectOne!!");
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectOne method");
 			e.printStackTrace();
 		}
 		return dto;
 	}
 
 	@Override
-	public void updateCnt(int b_no) {
+	public int updateCnt(int b_no) {
 		int res = 0;
 		
 		try {
 			res = sqlSession.update(NAMESPACE+"updateCnt", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: UpdateCnt");
+			System.out.println("[ERROR] FreeBoardDaoImpl UpdateCnt method");
 			e.printStackTrace();
 		}
+		return res;
 	}
 
 	//자유게시판 글 삭제
@@ -91,7 +93,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.delete(NAMESPACE+"deleteBoard", b_no);
 		} catch (Exception e) {
-			System.out.println("[ERROR]: deleteBoard!!");
+			System.out.println("[ERROR][FreeBoardDaoImpl] deleteBoard method");
 			e.printStackTrace();
 		}
 		return res;
@@ -105,10 +107,62 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		try {
 			res = sqlSession.update(NAMESPACE+"updateBoard", board);
 		} catch (Exception e) {
-			System.out.println("[ERROR}: updateBoard");
+			System.out.println("[ERROR} FreeBoardDaoImpl updateBoard method");
 			e.printStackTrace();
 		}
 		return res;
 	}
+
+	//자유게시판 디테일 최근글 5개 가져오기
+	@Override
+	public List<BoardDto> selectRecentList(int s_no, int b_no) {
+		List<BoardDto> resList = null;
+		Map<String, Integer> paramMap = new HashMap<String, Integer>();
+		paramMap.put("s_no", s_no);
+		paramMap.put("b_no", b_no);
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectRecentList", paramMap);
+		} catch (Exception e) {
+			System.out.println("{ERROR}FreeBoardDaoImpl selectRecentList method");
+			e.printStackTrace();
+		}
+		
+		return resList;
+	}
+
+	//자유게시판 검색 총 게시글 수
+	@Override
+	public int selectTotalBoardNumOfSearch(Map searchMap) {
+		int cnt = 0;
+		
+		try {
+			cnt = sqlSession.selectOne(NAMESPACE+"selectTotalBoardNumOfSearch", searchMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectTotalBoardNumOfSearch method");
+			e.printStackTrace();
+		}
+		
+		
+		return cnt;
+	}
+
+	// 자유게시판 검색 15개 페이징
+	@Override
+	public List<BoardDto> selectPagingSearchBoardList(Map<String, Object> pageMap) {
+		List<BoardDto> resList= null;
+		
+		try {
+			resList = sqlSession.selectList(NAMESPACE+"selectPagingSearchBoardList", pageMap);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeBoardDaoImpl] selectPagingSearchBoardList method");
+			e.printStackTrace();
+		}
+
+		return resList;
+	}
+
+
+	
 
 }

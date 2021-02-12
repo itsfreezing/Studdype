@@ -33,6 +33,12 @@
       </interceptor>
    </interceptors>
    
+      <!-- Multipart/form-data Parameter를 MultipartFile 형으로 자동 형 변환 해주는 객체 -->
+   <beans:bean id ="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="maxUploadSize" value="10485760"/> <!-- 10Mb 제한 -->
+   </beans:bean>
+   
+   
    
    
    <!-- 트랜잭션 (오류 무시하고 진행 가능)--> 
