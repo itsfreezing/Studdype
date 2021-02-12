@@ -98,6 +98,8 @@ $(document).ready(function() {
 	})
  	 
 });
+
+
  	//이메일 변경
 function showEmail(multipleFilter) {
     
@@ -209,10 +211,9 @@ function studypopup(multipleFilter) {
    </div>
    <div id="myPageBanner-right">
       <div class="myPageBanner-text"><b>이메일</b>&nbsp;${login.mem_email}
-         <a class="info-btn-bright" onclick="showEmail();">이메일 변경</a>
       </div>
       <div class="myPageBanner-text"><b>전화번호</b>&nbsp;${login.mem_phone }
-         <a class="info-btn-bright" onclick="showphone();">전화번호 변경</a>
+         <a class="info-btn-bright" onclick="showphone();">전화번호,이메일 변경</a>
       </div>
    </div>
 </div>
@@ -235,13 +236,14 @@ function studypopup(multipleFilter) {
    <br>
    <br>
    <br>
+   <div style="height:402px; width:70%; position:absolute; top:18%; left:16%; overflow:auto; border-radius:4px;" id="scroll">
    <c:if test="${fn:length(applylist) != 0 }">
-   <table class="table table-hover" style="width: 70%; text-align: center; position: absolute; top: 13%; left: 12%; ">
+   <table class="table table-bordered" style="width: 70%; text-align: center; position: absolute; left: 11%; ">
    <thead>
-   <tr style="background-color:black; color:white;"> 
-      <th style="position:sticky;top:0px; background-color:black;">스터디 이름</th>
-      <th style="position:sticky;top:0px; background-color:black;">나의 신청 상태</th>
-      <th style="position:sticky;top:0px; background-color:black;">내 신청 삭제</th>
+   <tr style="color:black;"> 
+      <th style="position:sticky;top:0px; background-color:#f2f5f9;">스터디 이름</th>
+      <th style="position:sticky;top:0px; background-color:#f2f5f9;">나의 신청 상태</th>
+      <th style="position:sticky;top:0px; background-color:#f2f5f9;">내 신청 삭제</th>
    </tr>
    </thead>
    <tbody>
@@ -270,7 +272,9 @@ function studypopup(multipleFilter) {
    
    </tbody>
    </table>
+  
    </c:if>
+   </div>
    <c:if test="${fn:length(applylist) == 0 }">
       <img  src="resources/img/no_study.png" style="height:200px; margin-left:42%; position:absolute; top:16%;" >
       <a  style="font-weight:bold; font-size: 20px; margin-left:5%; position:absolute; left:31.3%; top:54%; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가입 신청한 스터디가없습니다.</a>
@@ -278,6 +282,7 @@ function studypopup(multipleFilter) {
    
    </c:if>
     
+
 
 </div>
 <!-- 스터디 신청내역 끝 -->
@@ -287,16 +292,14 @@ function studypopup(multipleFilter) {
    <p style="   display: inline;
     font-size: 20px;
     font-weight: bold;
-    position: absolute;
-    top: 3%;
-    left: 43%;">내가 받은 스터디 신청</p>
-   <div style="height:402px; width:70%; position:absolute; top:15%; left:12%; overflow:auto; border-radius:4px;" id="scroll">
-   <table class="table table-hover" style="  text-align:center; ">
+    position: absolute;  top: 6%; left: 43%;">내가 받은 스터디 신청</p>
+   <div style="height:402px; width:70%; position:absolute; top:18%; left:16%; overflow:auto; border-radius:4px;" id="scroll">
+   <table class="table table-bordered" style="width:1162px;  text-align:center; ">
    <thead>
-      <tr style="background-color:black; color:white;">
-         <th style="position:sticky;top:0px; background-color:black;">스터디 이름</th>
-         <th style="position:sticky;top:0px; background-color:black;">신청한 사람</th>
-         <th style="position:sticky;top:0px; background-color:black;">수락/거절</th>
+      <tr style="background-color:black; color:black;">
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">스터디 이름</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">신청한 사람</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">수락/거절</th>
       </tr>
    </thead>
    <tbody>
@@ -334,17 +337,17 @@ function studypopup(multipleFilter) {
     font-size: 20px;
     font-weight: bold;
     position: absolute;
-    top: 3%;
+    top: 6%;
     left: 44%;">스터디 모임으로 이동</p>
-    <div style="height:402px; width:70%; position:absolute; top:15%; left:14%; overflow:auto; border-radius:4px;" id="scroll">
-   <table class="table table-hover" style=" position: absolute; top: -1px; text-align:center; ">
+    <div style="height:402px; width:70%; position:absolute; top:18%; left:14%; overflow:auto; border-radius:4px;" id="scroll">
+   <table class="table table-bordered" style=" position: absolute;  text-align:center; ">
    <thead>
-      <tr style="background-color:black; color:white; ">
-         <th style="position:sticky;top:0px; background-color:black;">스터디 이름</th>
-         <th style="position:sticky;top:0px; background-color:black;">모임이름</th>
-         <th style="position:sticky;top:0px; background-color:black;">모임날짜</th>
-         <th style="position:sticky;top:0px; background-color:black;">투표마감일</th>
-         <th style="position:sticky;top:0px; background-color:black;">확인하기</th>
+      <tr>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">스터디 이름</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">모임이름</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">모임날짜</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">투표마감일</th>
+         <th style="position:sticky;top:0px; background-color:#f2f5f9;">확인하기</th>
          
       </tr>
    </thead>
@@ -371,9 +374,7 @@ function studypopup(multipleFilter) {
         
       </tr>
       </c:if>
-      <c:if test="${status.count = 0 }">
-   	  <p style="font-weight: bold;font-size: 30px;margin-left: 42%;margin-top: 9.5%;">모임이 없습니다!</p>
-   	  </c:if> 
+  
 	 </c:forEach>
       </c:if>
      
@@ -459,76 +460,43 @@ function studypopup(multipleFilter) {
 <!--  비밀번호 변경    -->
 <div id="popup" class="hide">
   <div class="content">
-  	<p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:36.7%; left:47%;" >비밀번호 변경</p>
-  	<p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:40.7%; left:41%;" >현재 비밀번호:</p><input style="position:absolute; top:41%; left:51%;" id="pw" name="pw" type="password"><br>
-    <p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:45%; left:51%;" id="pwd1" name="pwd1"  type="password"><br>
-    <a style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:49%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:49%; left:51%;" id="pwd2" name="pwd2"  type="password">
-    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 54%; left: 41%;width: 349px;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 54%; left: 41%; width: 349px;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
-    <p style="position:absolute; top:54%;left:41%; color:red; font-size:16px;" id="aaaaa" >비밀번호를 신중하게 변경해 주세요!</p>
+  	<p style="display:inline; font-size:20px; font-weight:bold; position:absolute; top:34.7%; left:47%;" >비밀번호 변경</p>
+  	<p style="display:inline; font-size:18px; font-weight:bold; position:absolute; top:40.7%; left:41%;" >현재 비밀번호:</p><input style="position:absolute; top:41%; left:51%;" id="pw" name="pw" type="password"><br>
+    <p style="display:inline; font-size:18px; font-weight:bold; position:absolute; top:44.7%; left:41%;" >새 비밀번호:</p><input style="position:absolute; top:45%; left:51%;" id="pwd1" name="pwd1"  type="password"><br>
+    <a style="display:inline; font-size:18px; font-weight:bold; position:absolute; top:49%; left:41%;">비밀번호 확인:</a><input style="display:inline; position:absolute;top:49%; left:51%;" id="pwd2" name="pwd2"  type="password">
+    <div class="alert alert-success" id="alert-success" style="position:absolute; top: 54%; left: 41%;width: 366px;">비밀번호가 일치합니다.</div> <div style="position:absolute; top: 54%; left: 41%; width: 366px;" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+    <p style="position:absolute; top:54%;left:43%; color:red; font-size:16px;" id="aaaaa" >비밀번호를 신중하게 변경해 주세요!</p>
 
-
-    <button onclick="changepw()"  class="profileBtn submitBtnPW" >변경</button>
-    <button onclick="pwclosePopup()"  class="profileBtn cancelBtnPW" >취소</button>
+	<div class="btn-group" role="group" aria-label="..." style="height: 35px; top: 211px; left: 60px; width: 364px;">
+    <button onclick="changepw()" style="width:177px; margin-right:10px;" class="profileBtn submitBtnPW" >변경</button>
+    <button onclick="pwclosePopup()"  style="width:177px;" class="profileBtn cancelBtnPW" >취소</button>
+    </div>
   </div>
-   
+  
 
 </div>
 <!--  비밀 번호 변경 끝 -->
 <!--  이메일 변경 -->
-   <div id="emailpopup" class="hide">
-    <div class="content">
-     <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">이메일 변경 </p>
-    <p style="font-size:20px; font-weight:bold; position:absolute; top: 46.7%; left: 42%;">새 이메일:</p>    <input class="popupInput" id="newemail" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
-    <button onclick="changeemail()" class="profileBtn submitBtn" >변경</button>
-    <button onclick="closeemailPopup()" class="profileBtn cancelBtn" >취소</button>
-    </div>
-   </div>
+ 
 <!-- 이메일 변경 끝 -->
 <!-- 전화 번호 변경  -->
     <div id="phonepopup" class="hide">
     <div class="content">
-        <p style="font-size:20px; font-weight:bold; position:absolute; top:43%; left:47%;">전화번호 변경</p>
-       <p style="font-size:20px; font-weight:bold; position:absolute; top:46.8%; left:41%;">새 전화번호:</p>
-       <input style="" class="popupInput" id="newphone" name="newphone" autocomplete="off" value="${login.mem_phone }"><br>
+        <p style="font-size:20px; font-weight:bold; position:absolute; top:39%; left:45%;">전화번호,이메일 변경</p>
+       <p style="font-size:18px; font-weight:bold; position:absolute; top:44.8%; left:41%;">새 전화번호:</p>  <input class="popupInput" id="newphone" name="newphone" autocomplete="off" value="${login.mem_phone }"><br>
+    <p style="font-size:18px; font-weight:bold; position:absolute; top: 49.7%; left: 41%;">새 이메일:</p>    <input  id="newemail" style="position:absolute; top:50%; left:48%; width:215px;" name="newemail" autocomplete="off" value="${login.mem_email }"><br>
+      
    
 
-
-    <button onclick="changephone()" class="profileBtn submitBtn" >변경</button>
-    <button onclick="closephonePopup()" class="profileBtn cancelBtn" >취소</button>
+	<div class="btn-group" role="group" aria-label="..." style="height: 35px; top: 146px; left: 60px; width: 342px;">
+    <button onclick="changephone()" style="margin-right:10px; width:166px;" class="profileBtn submitBtn" >변경</button>
+    <button onclick="closephonePopup()" class="profileBtn cancelBtn" style="width:166px;">취소</button>
+    </div>
     </div>
    </div>
 <!-- 전화 번호 변경 끝 -->
-<!--  스터디 리스트 모달 -->
-	<div id="studypopup" class="hide">
-    <div class="content">
-    	<p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 18px; ">내 전체 스터디 목록</p>
-    	<p style="position: absolute;top: 302px;left: 689px; color:red;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
-       <div style="height: 300px; width: 28%; position: absolute; top: 34%; left: 36%; overflow:auto;" id="allstudy">
-       		<table id="studyall" style="height:500px; width:511px; text-align:center;" class="table table-hover">
-       			<thead>
-       				<tr>
-       					<th style="position:sticky;top:0px; background-color:white;">스터디 이름</th>
-       					<th style="position:sticky;top:0px; background-color:white;">이동하기</th>
-       				</tr>
-      			</thead>
-      			<tbody>
-      				<c:forEach var="studylist" items="${studylist }" varStatus="status">
-      					<tr>
-      						<c:if test="${studylist.leader_no != login.mem_no }"><td>${studylist.s_name }</td></c:if>
-      						<c:if test="${studylist.leader_no == login.mem_no }"><td style="color:red;">${studylist.s_name }</td></c:if>
-      						<td><button class="btn btn-purple" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">이동</button></td>
-      					</tr>
-      					
-      				</c:forEach>
- 
-      			</tbody>
-       		</table>
-       
-       
-       </div>
-    <button onclick="closestudypopup()" style="position:absolute; left:60.4%; top:69%;" class="profileBtn cancelBtn">닫기</button>
-    </div>
-   </div>
+
+	
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <input style="display:none;" name="mem_no" value="${login.mem_no }">
 </body>

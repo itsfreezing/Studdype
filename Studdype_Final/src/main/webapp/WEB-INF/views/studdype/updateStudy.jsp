@@ -67,7 +67,7 @@
 }
 
 #studyimagep {
-	color: #5a2b20;
+	color: black;
 	font: bold;
 	font-size: 20px;
 	position: absolute;
@@ -123,7 +123,7 @@
 	top: 611px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #5a2b20;
+	color: black;
 }
 
 #createrarea {
@@ -145,7 +145,7 @@
 	left: 1070px;
 	top: 611px;
 	font-size: 20px;
-	color: #5a2b20;
+	color: black;
 	font-weight:bold;
 }
 
@@ -175,7 +175,7 @@
 	left: 1070px;
 	top: 716px;
 	font-size: 20px;
-	color: #5a2b20;
+	color: black;
 	font-weight:bold;
 }
 
@@ -192,7 +192,7 @@
 	top: 716px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #5a2b20;
+	color: black;
 }
 
 #Max_member {
@@ -206,7 +206,7 @@
 	position: absolute;
 	left: 1070px;
 	font-size: 20px;
-	color: #5a2b20;
+	color: black;
 	font-weight:bold;
 	top: 790px;
 }
@@ -224,7 +224,7 @@
 	top: 790px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #5a2b20;
+	color: black;
 }
 
 #locationgu {
@@ -240,7 +240,7 @@
 	top: 895px;
 	font-size: 20px;
 	font-weight:bold;
-	color: #5a2b20;
+	color: black;
 }
 
 #studyinfot {
@@ -346,50 +346,37 @@
 	height:1000px;
 	
 	}
-	#scr::-webkit-scrollbar { width: 10px; }
-	/* 스크롤바의 width */
-	#scr::-webkit-scrollbar-track { background-color: #f0f0f0; }
-	/* 스크롤바의 전체 배경색 */
-	#scr::-webkit-scrollbar-thumb { 
-	    background: linear-gradient(to bottom, #1697bf, #62b7ac); 
-	}
-	/* 스크롤바 색 */
-	#scr::-webkit-scrollbar-button { display: none; }
-	.table14_8 table {
-	width:100%;
-	margin:15px 0;
-	border:0;
-}
-.table14_8 th {
+
+.table table-bordered th {
 	font-weight:bold;
 	background-color:#808080;
 	color:black;
 }
-.table14_8,.table14_8 th,.table14_8 td {
+.table table-bordered,.table table-bordered th,.table table-bordered td {
 	font-size:20px;
 	text-align:center;
 	padding:4px;
 	border-collapse:collapse;
 }
-.table14_8 th,.table14_8 td {
+.table table-bordered th,.table table-bordered td {
 	border: 1px solid #ffffff;
 	border-width:1px
 }
-.table14_8 th {
+.table table-bordered th {
 	border: 1px solid #e7e0d5;
 	border-width:1px 0 1px 0
 }
-.table14_8 td {
+.table table-bordered td {
 	border: 1px solid #eeeeee;
 	border-width:1px 0 1px 0
 }
-.table14_8 tr {
+.table table-bordered tr {
 	border: 1px solid #ffffff;
 }
-.table14_8 tr:nth-child(odd){
+.table table-bordered tr:nth-child(odd){
 	background-color:#f7f7f7;
 }
-.table14_8 tr:nth-child(even){
+.table table-bordered tr:nth-child(even){
 	background-color:#ffffff;
 }
 
@@ -471,6 +458,41 @@ input[type="checkbox"]:checked+label:before {
 .selected {
 	border:5px solid #7362DE;
 }
+
+ #scr::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+  }
+  #scr::-webkit-scrollbar-thumb {
+    border-radius: 3.5px;
+    background-color: #ced4da;
+
+    &:hover {
+      background-color: #adb5bd;
+    }
+  }
+  #scr::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  
+  #scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+  }
+  #scroll::-webkit-scrollbar-thumb {
+    border-radius: 3.5px;
+    background-color: #ced4da;
+
+    &:hover {
+      background-color: #adb5bd;
+    }
+  }
+  #scroll::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
 </style>
 <script type="text/javascript">
 	function LoadImg(value) {
@@ -722,7 +744,7 @@ input[type="checkbox"]:checked+label:before {
 	
 	<div id="main" >
 	<form method="post" enctype="multipart/form-data" action="studyupdate.do" autocomplete="off" onsubmit='return frmsubmit();'>
-		<p id="p1" style="color:#5a2b20; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main1();">스터디 관리</p>
+		<p id="p1" style="color:#black; position:absolute; font-weight:bold; left:1150px; top:555px; cursor:pointer;" onclick="main1();">스터디 관리</p>
 		<p id="p2" style="color:#808080; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
 
@@ -832,21 +854,21 @@ input[type="checkbox"]:checked+label:before {
 	<div id="main2" style="display:none;">
 		<form>
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
-		<p id="p2" style="color:#5a2b20; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
+		<p id="p2" style="color:#black; position:absolute; font-weight:bold; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
 		<p id="p3" style="color:#808080; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
-		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
+		<p style="position:absolute; top:57%; left:28%; color:black; font-size:20px; font-weight:bold;">스터디 전체 멤버</p>
 		
-		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; overflow-x:hidden; border-radius:4px; ">
+		<div id="scr" style=" width:1117px; position:absolute; top:65%; left:28%; height:600px; overflow-x:hidden; border-radius:4px; ">
 		<table id="member"
-         class="table14_8" style="width:1117px; ">
+         class="table table-bordered" style="width:1117px; text-align:center; ">
          <thead>
             <tr >
-               <th>이름</th>
-               <th>이메일</th>
-               <th>아이디</th>
-               <th>성별</th>
-               <th>추방하기</th>
-               <th>대표설정</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">이름</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">이메일</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">아이디</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">성별</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9; z-index:1;">추방하기</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">대표설정</th>
             </tr>
          </thead>
          <tbody>
@@ -899,18 +921,18 @@ input[type="checkbox"]:checked+label:before {
 	<div id="main3" >
 		<p id="p1" style="color:#808080; position:absolute; left:1150px; top:555px; cursor:pointer;" onclick="main();">스터디 관리</p>
 		<p id="p2" style="color:#808080; position:absolute; left:1352px; top:555px; cursor:pointer;" onclick="main2();">멤버 관리</p>
-		<p id="p3" style="color:#5a2b20; position:absolute; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
-		<p style="position:absolute; top:57%; left:28%; color:#5a2b20; font-size:20px; font-weight:bold;">전체 도서 </p>
+		<p id="p3" style="color:#black; position:absolute; font-weight:bold; left:1540px; top:555px; cursor:pointer;" onclick="main3();">대표 도서 지정</p>
+		<p style="position:absolute; top:57%; left:28%; color:black; font-size:20px; font-weight:bold;">전체 도서 </p>
 	
-	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; overflow:auto; border-radius:4px; ">
+	<div id="scr"style=" width:1117px; position:absolute; top:65%; left:28%; height:600px; border-radius:4px; ">
 	<table id="book1"
-         class="table14_8" style="width:1117px;">
+         class="table table-bordered" style="width:1117px; text-align:center;">
 
          <thead>
             <tr style="text-align:center; background-color:#808080 !important; color:black !important;">
-               <th>번호</th>
-               <th>등록된 책 제목</th>
-               <th>대표 도서</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">번호</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">등록된 책 제목</th>
+               <th style="position:sticky;top:0px; background-color:#f2f5f9;">대표 도서</th>
             </tr>
          </thead>
          <tbody style="text-align:center;">
