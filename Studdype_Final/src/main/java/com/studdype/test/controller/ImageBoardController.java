@@ -105,7 +105,7 @@ public class ImageBoardController {
 		model.addAttribute("galleryWriter", galleryWriter);
 		model.addAttribute("detail", detail);
 		model.addAttribute("fileDetail", fileDetail);
-		if(fileDetail.size() > 8) {
+		if(fileDetail.size() > 6) {
 			return "community/gallery/galleryDetail";
 		} else {
 			return "community/gallery/galleryDetailFew";
@@ -142,7 +142,8 @@ public class ImageBoardController {
 		}
 		if (res > 0) {
 			model.addAttribute("msg","글 작성을 완료했습니다.");
-			return "redirect:gallery.do";
+			model.addAttribute("url","gallery.do");
+			return "commond/alert";
 		} else {
 			return "redirect:gallerywriteform.do";
 		}

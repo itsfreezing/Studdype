@@ -14,8 +14,7 @@
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="./resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="./resources/assets/css/owl.carousel.min.css">
+<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
@@ -23,13 +22,12 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<script src="./resources/assets/js/main.js"></script>
 
-<script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function() {		
 		var owl = $('.owl-carousel');
-
 		owl.owlCarousel({
 			items : 1, // 한번에 보여줄 아이템 수
 			loop : true, // 반복여부
@@ -39,16 +37,13 @@
 			autoplayHoverPause : false
 		//마우스오버시 멈출지 여부
 		});
-
 		$('.customNextBtn').click(function() {
 			owl.trigger('next.owl.carousel');
 			mee
 		})
-
 		$('.customPrevBtn').click(function() {
 			owl.trigger('prev.owl.carousel', [ 300 ]);
 		})
-		
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		$(".justify-content-center").hide(); 
 	});
@@ -73,6 +68,7 @@
 </script>
 
 <style type="text/css">
+
 input#search {
 	height: 55px;
 	margin-top: 15px;
@@ -158,6 +154,7 @@ input#search:focus {
 	padding: 1em 2em;
 	border: none;
 	background: none;
+	display: inline-block;
 	color: inherit;
 	vertical-align: middle;
 	position: relative;
@@ -189,7 +186,7 @@ input#search:focus {
 
 /* Sizes */
 .button--size-s {
-	font-size: 14px;
+	font-size: 12px;
 }
 .button--size-m {
 	font-size: 16px;
@@ -293,7 +290,6 @@ input#search:focus {
 }
 .categoryImage {
 	width: 100%;
-	border: 1px solid;
 	height: 400px;
 }
 .categoryImage > img {
@@ -314,117 +310,119 @@ height: 400px;
 
 <!-- 카테고리 사진 hover시 변경하기 -->
 <div class="categoryImage">
-	<img src="./resources/assets/img/img_startPage.png" id="changeImage">
+	<img src="./resources/assets/img/category/init.png" id="changeImage">
 	
 </div>
 	<!-- 스터디 영역 -->
 		<!-- 카테고리 -->
-		<h2 style="text-align: center;">Studdype Categories</h2>
+		<h2 style="text-align: center; margin: 40px; font-size: 25px;">Studdype Categories</h2>
 				<div class="cateBtn2">
-					<button class="button button--winona button--border-thin button--round-s" data-text="IT" id="catebtn1" onclick="location.href='studycategoryList.do?cate_no=1'" style="display: inline-block;"><span>IT</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="자격증" id="catebtn2" onclick="location.href='studycategoryList.do?cate_no=2'" style="display: inline-block;"><span>자격증</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="공무원" id="catebtn3" onclick="location.href='studycategoryList.do?cate_no=3'" style="display: inline-block;"><span>공무원</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="뷰티" id="catebtn4" onclick="location.href='studycategoryList.do?cate_no=4'" style="display: inline-block;"><span>뷰티</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="수능" id="catebtn5" onclick="location.href='studycategoryList.do?cate_no=5'" style="display: inline-block;"><span>수능</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="어학" id="catebtn6" onclick="location.href='studycategoryList.do?cate_no=6'" style="display: inline-block;"><span>어학</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="취업스터디" id="catebtn7" onclick="location.href='studycategoryList.do?cate_no=7'" style="display: inline-block;"><span>취업스터디</span></button>
-					<button class="button button--winona button--border-thin button--round-s" data-text="기타" id="catebtn8" onclick="location.href='studycategoryList.do?cate_no=8'" style="display: inline-block;"><span>기타</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="IT" id="catebtn1" onclick="location.href='studycategoryList.do?cate_no=1'"><span>IT</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="자격증" id="catebtn2" onclick="location.href='studycategoryList.do?cate_no=2'"><span>자격증</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="공무원" id="catebtn3" onclick="location.href='studycategoryList.do?cate_no=3'"><span>공무원</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="뷰티" id="catebtn4" onclick="location.href='studycategoryList.do?cate_no=4'"><span>뷰티</span></button>
+				</div>
+				<div class="cateBtn2">
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="수능" id="catebtn5" onclick="location.href='studycategoryList.do?cate_no=5'"><span>수능</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="어학" id="catebtn6" onclick="location.href='studycategoryList.do?cate_no=6'"><span>어학</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="취업스터디" id="catebtn7" onclick="location.href='studycategoryList.do?cate_no=7'"><span>취업스터디</span></button>
+					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="기타" id="catebtn8" onclick="location.href='studycategoryList.do?cate_no=8'"><span>기타</span></button>
 				</div>
 <script type="text/javascript">
 $("#catebtn1").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/IT.jpg');
+	$("#changeImage").attr("src", './resources/assets/img/category/IT.png');
 	}
 });
 $("#catebtn1").on({
 	'mouseout': 
 	function() {
-		$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn2").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/test.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/test.png');
 	}
 });
 $("#catebtn2").on({
 	'mouseout': 
 	function() {
-		$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn3").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/government.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/government.png');
 	}
 });
 $("#catebtn3").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn4").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/makeup.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/makeup.png');
 	}
 });
 $("#catebtn4").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn5").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/test.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/test.png');
 	}
 });
 $("#catebtn5").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn6").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/language.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/language.png');
 	}
 });
 $("#catebtn6").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn7").on({
 	'mouseover': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/inteview.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/interview.png');
 	}
 });
 $("#catebtn7").on({
 	'mouseout': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 $("#catebtn8").on({
 	'mouseenter': 
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/category/test2.jpeg');
+	$("#changeImage").attr("src", './resources/assets/img/category/test2.png');
 	}
 });
 $("#catebtn8").on({
 	'mouseleave':
 	function() {
-	$("#changeImage").attr("src", './resources/assets/img/img_startPage.png');
+		$("#changeImage").attr("src", './resources/assets/img/category/init.png');
 	}
 });
 </script>
@@ -475,15 +473,15 @@ $("#catebtn8").on({
 	<div style="padding-left: 45%;">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

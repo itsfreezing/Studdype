@@ -81,6 +81,7 @@ public class PageMaker {
 	            UriComponentsBuilder.newInstance()
 	            .queryParam("page", page)
 	            .queryParam("perPageNum", pagination.getPerPageNum())
+	            .queryParam("cate_no", (((SearchPagination)pagination).getCate_no()))
 	            .queryParam("keyword", encoding(((SearchPagination)pagination).getKeyword()))
 	            .build(); 
 	    return uriComponents.toUriString();  
@@ -98,5 +99,6 @@ public class PageMaker {
 		}
 
 }
+	
 }
 

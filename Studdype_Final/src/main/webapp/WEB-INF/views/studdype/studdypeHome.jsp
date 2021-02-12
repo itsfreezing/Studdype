@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+<script src="./resources/assets/js/main.js"></script>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
@@ -103,6 +104,13 @@ input#search:focus {
 	transition: 0.5s;
 
 }
+.blog-meta{
+	padding: 15px;
+}
+.single-blog-post{
+	height: 450px;
+	margin-bottom: 15px;
+}
 </style>
 
 </head>
@@ -136,7 +144,7 @@ input#search:focus {
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
 					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword}" style="width:100px; height:60px; margin-top:10px;"> <span>
-					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:15px; border:none; background-color: #f9fafc;">
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:15px; border:none; background-color: #ffff;">
 						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 					</button>
 				</span>
@@ -162,7 +170,7 @@ input#search:focus {
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;" onerror="this.src='./resources/img/no-study-image.png'">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
@@ -173,7 +181,7 @@ input#search:focus {
 									${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
 							</div>
 
-							<p>${studyDto.s_info }</p>
+							<p style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
 								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
@@ -189,8 +197,11 @@ input#search:focus {
 		</div>
 		<c:choose>
 			<c:when test="${login != null }">
-				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='loginform.do'">
 			</c:when>
+			<c:otherwise>
+				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+			</c:otherwise>
 		</c:choose>
 	</div>
 	<!-- 스터디 리스트 끝 -->

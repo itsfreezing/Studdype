@@ -1744,7 +1744,7 @@ i.user-comments.cmnts-color-two {
 /*Get Started*/
 
 .get-start.header-area {
-   background-image: url(../img/getstrated/hero-bg-1.jpg);
+  /*  background-image: url(../img/getstrated/hero-bg-1.jpg); */
 }
 
 

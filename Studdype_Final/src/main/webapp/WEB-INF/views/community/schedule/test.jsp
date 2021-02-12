@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="./resources/css/community/header&footer.css">
      <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
     <link rel="stylesheet" href="./resources/css/community/mainsection.css">
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/mainstyle.css">
     <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 <link rel="stylesheet" href="./resources/assets/calendar/main.css">
 <script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="./resources/assets/calendar/main.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function() {
 			  var calendarEl = document.getElementById('calendar');
@@ -52,16 +52,13 @@
 			       			 $("#modal-one").fadeIn("slow");
 				    		  $("#modal-show").fadeIn("slow");
 			       			 $(".calTitle").text(eventObj.title);
-			       			 $(".calDate").text("투표기간: "+moment(eventObj.start).format("YYYY-MM-DD")+"~"+moment(eventObj.end).format("YYYY-MM-DD"));
+			       			 $(".calDate").text(moment(eventObj.start).format("YYYY-MM-DD")+" ~ "+moment(eventObj.end).format("YYYY-MM-DD"));
 			    		
 
 			    		$(".close").click(function() {
 			    		  $("#modal-one").fadeOut("slow");
 			    		  $("#modal-show").fadeOut("slow");
 			    		});
-			    		
-			        
-			        
 			        
 			      },
 				events: function(data, successCallback, failureCallback){
@@ -103,6 +100,8 @@
 
 	</script>
 	<style type="text/css">
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	
  	#modal-one{
 	display: none;
 	position: absolute;
@@ -114,8 +113,8 @@
 	top: 0;
 	}
 	#modal-show{
-	width: 350px;
-	height: 300px;
+	width: 500px;
+	height: 400px;
 	position: absolute;
 	border-radius: 5px;
 	left: 50%;
@@ -144,15 +143,17 @@
 	margin-left: 20px;
 }
  .calTitle{
- margin-left: 20px;
+ margin: 20px;
+font-family: Noto Sans;
  }
  .calDate{
- margin-left: 20px;
+ margin-right: 15px;
+ font-family: Noto Sans;
+ float: right;
  }
- hr{
- background-color: gray;
- }
-
+.feature-page.header-area {
+	background-image: url(./resources/assets/img/features/gam.png)!important;
+}
 	</style>
 </head>
 <body>
@@ -165,13 +166,17 @@
 	
  	<div id="modal-one">
 		<div id="modal-show">
-		<div class="close"><span>&#43;</span></div>
-			<h2 class="calTitle"></h2>
+			<div class="close"><span>&#43;</span></div>
+				<h2 class="calTitle"></h2>
 			<hr>
-			<p class="calDate" ></p>
+			<div>
+				<span style="margin-left: 15px; font-size: 17px; font-weight: bold; display: inline-block;">투표기간</span>
+				<span class="calDate"></span>
+			</div>
 			<hr>
-			<p style="margin-left: 20px;">내용:</p>
+			<p style="margin-left: 15px; font-weight: bold; font-size: 17px;">모임일정</p>
 			<p class="calDescription"></p>
+			
 		</div>
 	</div>
 	
