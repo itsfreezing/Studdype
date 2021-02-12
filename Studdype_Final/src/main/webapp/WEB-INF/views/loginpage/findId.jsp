@@ -34,6 +34,9 @@ span{
 	color:white;
 	font-size: 20px;
 }
+label{
+	color: white;
+}
 #findLogo{
 	width: 50px;
 	height: 50px;
@@ -43,15 +46,17 @@ span{
 .main_head{
 	width: 600px;
 	height: 250px;
+	margin-top: 3%;
 	margin-left: auto;
 	margin-right:auto;
 	border-radius: 5px;
-	background-color: #EAEAEA;
+	background: #EAEAEA;
+	border: 2px solid #353535;
 }
 .sub_head{
 	box-sizing: border-box;
 	padding-top: 5%;
-	margin-top: 5%;
+	margin-top: 1%;
 }
 .namerno_part{
 	margin-left: 12%;
@@ -61,17 +66,25 @@ span{
 }
 #name{
 	margin-left:15%;
-    width:150px;
-    height:45px;
+    width:300px;
+    height:44px;
     margin-bottom: 3%;
+    border:1px solid #A6A6A6
+}
+#name:hover{
+	border: 2px solid #6434ef;
 }
 .rno_part{
 	font-weight: 800;
 }
 #rno1{
 	margin-left:3%;
-    width:150px;
-    height:45px;
+    width:137px;
+    height:44px;
+    border:1px solid #A6A6A6
+}
+#rno1:hover{
+	border: 2px solid #6434ef;
 }
 #mid_rno{
 	font-weight: 800;
@@ -80,12 +93,16 @@ span{
 }
 #rno2{
 	margin-bottom:5%;
-    width:150px;
-    height:45px;
+    width:136px;
+    height:44px;
+    border:1px solid #A6A6A6
+}
+#rno2:hover{
+	border: 2px solid #6434ef;
 }
 .btn_part{
-
-	margin-top:-3%;
+	color: grey;
+	margin-top:-2%;
 	text-align: center;
 }
 #login{
@@ -95,38 +112,45 @@ span{
 	font-weight: 800;
 }
 #search_btn{
-	width: 120px;
-	height: 45px;
-	border-radius: 5px;
-	font-size: 18px;
-	transition: color 0.5s;
-	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	-webkit-appearance:s;
-    cursor: pointer;
-    -webkit-writing-mode: horizontal-tb !important;
-    border-width: 3px;
-    color:white;
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
 #search_btn:hover{
-	background-color: #6E45E3;
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 #cancel{
-	width: 120px;
-	height: 45px;
-	margin-left:3%;
-	border-radius: 5px;
-	font-size: 18px;
-	transition: color 0.5s;
-	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	border-color: #3f51b5;
-	-webkit-appearance:s;
-    cursor: pointer;
-    -webkit-writing-mode: horizontal-tb !important;
-    border-width: 3px;
-	color: white;
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 5%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
 #cancel:hover{
-	background-color: #6E45E3;
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 </style>
 
@@ -135,7 +159,7 @@ span{
 $(function() {
 	$(".justify-content-center").show(); 
 	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>함께 계정을 찾아볼까요?</span>");
+	$(".hero-text").html("<h1>아이디 찾기</h1><br><span>하단에 정보를 기입해 주시면 아이디를 알려드려요.</span>");
 });
 
 function idsearch(){
@@ -154,6 +178,12 @@ function idsearch(){
 	}
 };
 
+
+$(function() {
+	$(".main_head").show(); 
+	$(".main_head").css({"background-image":"url('resources/assets/img/findIdimg.jpg')","background-size":"cover"});
+});
+
 function cancel(){
 	self.close();
 }
@@ -166,12 +196,12 @@ function cancel(){
 		<div class="sub_head">
 			<div class="namerno_part">
 			<div class="name_part">
-				<label id="nameLabel">이름</label>
-				<input type="text" name="mem_name" id="name" title="n" style="border:2px solid #6E45E3" autofocus="autofocus">
+				<label>이름</label>
+				<input type="text" name="mem_name" id="name" placeholder=" 이름을 입력해 주세요." title="n" autofocus="autofocus">
 			</div>
 			<div class="rno_part">
-				<label id="rnoLabel">주민등록번호</label>
-				<input type="text" name="rno" id="rno1" style="border:2px solid #6E45E3" maxlength="6"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" style="border:2px solid #6E45E3" maxlength="7">
+				<label>주민등록번호</label>
+				<input type="text" name="rno" id="rno1" placeholder=" 주민번호 앞자리" maxlength="6"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" placeholder=" 주민번호 뒷자리" maxlength="7">
 				<input type="hidden" name="mem_rno" id="realRno">
 			</div>
 			</div>

@@ -45,24 +45,67 @@ span{
 	font-size: 20px;
 }
 .main_div{
-	margin-top: 5%;
-	margin-bottom: 2%;
+	margin-top: 3%;
+	margin-bottom: 1%;
 	margin-left: 33%;
    	text-align: center;
 	width: 500px;
-	height: 70px;
+	height: 85px;
 	color: black;
 	background: #EAEAEA;
 	border-radius: 10px;
+	border: 2px solid #353535;
 }
 #name{
 	font-size: 18px;
 	font-weight: 600;
 }
 .sub_btn{
-	margin-left: 45%;
-	margin-bottom: 3%;
+	margin-left: 38%;
+	margin-bottom: 2%;
 	font-weight: 800;
+}
+#login{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#login:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+#findPw{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 8%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#findPw:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 </style>
 </head>
@@ -81,11 +124,11 @@ span{
 				<div>${findName }님이 가입한 아이디는 존재하지 않습니다.</div>
 			</c:otherwise>
 		</c:choose>
-   		
-   </div>
-   <div class="sub_btn">
-	<a href="loginform.do" id="login" onClick="loginpage/loginform">로그인   |  </a>
-	<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기</a>
+	</div>
+	
+	<div class="sub_btn">
+		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
+		<button type="submit" id="findPw"><a href="findpwform.do" onClick="loginpage/findpwform">비밀번호 찾기</a></button>
 	</div>
 	
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>

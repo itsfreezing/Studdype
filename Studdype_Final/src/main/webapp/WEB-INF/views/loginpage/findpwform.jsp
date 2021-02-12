@@ -35,6 +35,10 @@ span{
 	color:white;
 	font-size: 20px;
 }
+label{
+	margin-left: 30%;
+	font-weight: 800;
+}
 .page_title{
 	margin-bottom: 3%;
 	margin-left: 8%;
@@ -53,7 +57,12 @@ span{
 	padding-top: 20px;
 }
 .main_div{
+	width: 550px;
+	height: 300px;
 	margin-top: 3%;
+	background: #EAEAEA;
+	border-radius: 5px;
+	border: 2px solid #353535;
 }
 #id{
 	margin-left:3%;
@@ -61,28 +70,44 @@ span{
     height:40px;
     margin-bottom: 3%;
 }
+#id:hover{
+	border: 2px solid #6434ef;
+}
 #email{
 	margin-left:3%;
     width:250px;
     height:40px;
     margin-bottom: 3%;
 }
+#email:hover{
+	border: 2px solid #6434ef;
+}
 #submit_email{
     width:50px;
     height:40px;
     margin-top: 3%;
     margin-bottom: 10%;
+    margin-left:-50%;
     border-radius: 5px;
- 	background: gray;
- 	color: white;
+ 	background: white;
+ 	border: 1px;
 }
-
-
+#submit_email:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 #chkNum{
 	margin-left:3%;
     width:250px;
     height:40px;
     margin-bottom: 5%;
+}
+#chkNum:hover{
+	border: 2px solid #6434ef;
 }
 #chkNum_btn{
     width:50px;
@@ -90,47 +115,58 @@ span{
     margin-bottom: 18%;
     margin-top: -15%;
     margin-bottom: 10%;
+    margin-left:-50%;
     border-radius: 5px;
     background: gray;
  	color: white;
- 	
 }
 .main_btn{
-	margin-left: 13%;
-	margin-top: 3%;
+	margin-left: 17%;
+	margin-top: 1%;
+	margin-bottom: 3%;
 }
 #psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	width:200px;
-	height:50px;
-	border-radius:2px;
-	font-size:18px;
-	transition: color 0.5s;
-	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	border-color: #3f51b5;
-	-webkit-appearance:s;
-    cursor: pointer;
-    -webkit-writing-mode: horizontal-tb !important;
-    border-width: 3px;
-	color:white;
-	background-color: #6E45E3;
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
-
+#psw_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 #cancel_btn{
-	width:200px;
-	height:50px;
-	border-radius:2px;
-	font-size:18px;
-	transition: color 0.5s;
-	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	border-color: #3f51b5;
-	-webkit-appearance:s;
-    cursor: pointer;
-    -webkit-writing-mode: horizontal-tb !important;
-    border-width: 3px;
-	color:white;
-	background-color: #6E45E3;
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 2%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
 
+#cancel_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 </style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -141,7 +177,7 @@ $(function() {
 	//$(".justify-content-center").hide(); 
 	$(".justify-content-center").show(); 
 	$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-	$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>비밀번호가 기억나지 않으시나요?</span>");
+	$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>하단에 정보를 기입해 주시면 임시 비밀번호를 보내드려요.</span>");
 });
  
 $(function(){
@@ -249,23 +285,22 @@ function cancel(){
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	<div class="main_div">
-	<h1 class="page_title">비밀번호 찾기</h1>
 	<form action="sendExtraPw.do" method="post" id="sendExtraPwForm">
 	<div>
    		<table>
    			<col width="150px"><col width="350px"><col width="100px">
    			<tr>
-   				<td><label for="id" style="font-weight: 800;">아이디</label></td>
-   				<td><input type="text" id="id" name="mem_id" style="border:2px solid #6E45E3"></td>
+   				<td><label>이름</label></td>
+   				<td><input type="text" id="id" placeholder=" 아이디를 입력해 주세요." name="mem_id"></td>
    			</tr>
    			<tr>
-   				<td><label for="email" style="font-weight: 800;">이메일</label></td>
-   				<td><input type="text" id="email" name="mem_email" placeholder="이메일 (email@studdype.com)" style="border:2px solid #6E45E3"></td>
+   				<td><label>이메일</label></td>
+   				<td><input type="text" id="email" name="mem_email" placeholder=" 이메일 (email@studdype.com)"></td>
    				<td><input type="button" value="전송" id="submit_email" onclick="sendEmail()"></td>
    			</tr>
    			<tr>
-   				<td><label for="chkNum" style="font-weight: 800;">인증번호</label></td>
-   				<td><input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:2px solid #6E45E3"></td>
+   				<td><label>인증번호</label></td>
+   				<td><input type="text" id="chkNum" name="chkNum" placeholder=" 인증번호 입력"></td>
    				<td><input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" ></td>
    				<input type="hidden" id="chk" title="n">
    			</tr> 
@@ -287,7 +322,9 @@ function cancel(){
    </div>
    
    	</form>
+   	
    	</div>
+   	
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script> 

@@ -36,7 +36,7 @@ span{
 }
 .main_div{
 	margin-top: 5%;
-	margin-bottom: 2%;
+	margin-bottom: 1%;
 	margin-left: 33%;
    	text-align: center;
 	width: 500px;
@@ -44,10 +44,57 @@ span{
 	color: black;
 	background: #EAEAEA;
 	border-radius: 10px;
+	border: 2px solid #353535;
 }
 #mail_name{
 	font-size: 18px;
 	font-weight: 600;	
+}
+.footer_btn{
+	margin-left: 38.5%;
+	margin-bottom: 3%;
+	font-weight: 800;
+}
+#home_btn{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#home_btn:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+#login{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 7%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 5px 5px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
+}
+#login:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 </style>
 
@@ -57,7 +104,7 @@ span{
  $(function() {
 		$(".justify-content-center").show(); 
 		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
-		$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>잊지말고 기억해요.</span>");	
+		$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>임시 비밀번호를 변경해 주세요.</span>");	
  });
 </script>
 </head>
@@ -65,10 +112,16 @@ span{
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<div class="main_div">
-	
    		<div><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</div>
-   		
    </div>
+   
+   <div class="footer_btn">
+		<button type="submit" id="home_btn"><a href="studyList.do">HOME</a></button>
+		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
+	</div>
+   
+
+
    
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->

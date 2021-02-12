@@ -56,7 +56,6 @@ span{
 	margin-left: auto;
 	margin-top: 3%;
 	margin-bottom: 10%;
-	
 }
 .loginTable{
 	margin: auto;
@@ -67,11 +66,19 @@ span{
 	margin-bottom:5%;
     width:300px;
     height:50px;
+    border: 1px solid #A6A6A6;
+}
+#id:hover{
+	border: 2px solid #6434ef;
 }
 #pw{
 	margin-bottom:10%;
     width:300px;
     height:50px;
+    border: 1px solid #A6A6A6;
+}
+#pw:hover{
+	border: 2px solid #6434ef;
 }
 #login{
 	width:300px;
@@ -80,12 +87,23 @@ span{
 	font-size:18px;
 	transition: color 0.5s;
 	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-	border-color: #3f51b5;
+	border: 1px solid #A6A6A6;
 	-webkit-appearance:s;
     cursor: pointer;
     -webkit-writing-mode: horizontal-tb !important;
  	color: white;
- 	background-color: #6E45E3;
+ 	background-color: white;
+ 	box-shadow: none;
+ 	color: black;
+ 	padding: 1%;
+}
+#login:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 #signUp{
 	width:300px;
@@ -118,7 +136,6 @@ span{
 		$(".justify-content-center").show(); 
 		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
 		$(".hero-text").html("<h1>로그인</h1><br><span>회원가입 후 StuDdye의 다양한 콘텐츠를 이용해보세요.</span>");
-		
 	});
 	
 function login_btn(){
@@ -148,12 +165,12 @@ function login_btn(){
     	<table class="loginTable">
        		<tr>
             	<td>
-            	<input type="text" name="mem_id" id="id" placeholder="아이디를 입력해주세요" style="border:2px solid #6E45E3" autofocus="autofocus">
+            	<input type="text" name="mem_id" id="id" placeholder=" 아이디를 입력해주세요" autofocus="autofocus">
             	</td>
           	</tr>
           	<tr>
              	<td>
-                <input type="password" name="mem_pw" id="pw" placeholder="비밀번호를 입력해주세요" style="border: 2px solid #6E45E3">
+                <input type="password" name="mem_pw" id="pw" placeholder=" 비밀번호를 입력해주세요">
              	</td>
           	</tr>
        		<br>
