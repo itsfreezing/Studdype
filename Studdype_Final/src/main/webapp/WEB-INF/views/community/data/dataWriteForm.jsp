@@ -206,13 +206,16 @@
  		<table class="maintable">
 
 		<tr>
-			<td><h1>학습 자료실 게시글 작성</h1><span style="color:red">* 파일첨부는 필수 사항입니다.</span></td>
+			<td><h1>학습 자료실 글쓰기</h1></td>
 		</tr>
 		<tr>
 			<td ><input type="text" id="boardtitle" name="b_title" placeholder="제목을 입력해주세요" autocomplete="off"></td>
 		</tr>
 		<tr>
 			<td ><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;"></textarea></td>
+		</tr>
+		<tr style="text-align:right">
+			<th><span style="color:red">* 파일첨부는 필수 사항입니다.</span></th>
 		</tr>
 		<tr>
 			<td>

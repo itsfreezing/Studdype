@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 
-<link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css">
+<!-- <link rel="stylesheet" href="./resources/css/studdype/createStuddype/createStuddype.css"> -->
 
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -34,6 +34,152 @@
 <link rel="stylesheet" href="./resources/summernote/summernote.min.css">
 <script src="./resources/summernote/summernote.min.js"></script>
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+
+<style type="text/css">
+/* @charset "UTF-8"; */
+.main-section {
+	display: block;
+	position: relative;
+	width: 52.5%;
+	margin: 0px auto;
+	left:1.5%;
+}
+
+#main-contrainer {
+	position: relative;
+	width: 100%;
+	hight: 100%;
+	margin: 0px auto;
+	margin-top: 5%;
+}
+
+#mainleft {
+	position: relative;
+	float: left;
+	width: 50%;
+}
+
+#mainright {
+	position: relative;
+	float: right;
+	width: 50%;
+	padding-left: 5%;
+}
+
+#image-section {
+	width: 100%;
+	height: 400px;
+	text-align:center;
+	border: 2px solid #f8f9fa;
+}
+
+#studyMainPhoto {
+	width:100%;
+	height:400px;
+}
+
+#mainbottom {
+	clear: both;
+}
+
+#btndiv {
+	text-align: center;
+}
+
+input#fileinput {
+	margin-top: 6.5%;
+}
+
+#createBtn {
+	background: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	border-radius:5px;
+	margin-top: 40px;
+	width: 400px;
+	height: 50px;
+	font-size: 20px;
+	font-weight: 600;
+	text-align:center;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+/* 흰색 버튼에서 hover 시 보라색으로 변경 */
+#createBtn:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+
+label {
+	font-weight: bold;
+}
+
+/* 이미지 파일 선택 div */
+.fileSelectDiv {
+	float:left;
+	margin-top:35px;
+	margin-right:10px;
+	width:100px;
+	height:40px;
+	font-size:12pt;
+	border:1px solid #EFF0F2;
+	color:black;
+	background:#EFF0F2;
+	border-radius: 5px 5px;
+	text-align:center;
+	padding-top:6px;
+	font-weight:bold;
+}
+
+.fileSelectDiv:hover {
+	background-color: white;
+	border: 1px solid #6434ef;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+/* 기본 이미지 모달 영역 */
+#modal {
+	display:none;
+	position:absolute;
+	width:100%;
+	height:2000px;
+	background:rgba(0,0,0,0.3);
+	left:0;
+	top:0;
+	z-index:100;
+}
+
+#modal-inside {
+	position:absolute;
+	width:50%;
+	height:600px;
+	background:#fff;
+	left:25%;
+	top:0;
+	text-align:center;
+	padding-top:1%;
+	padding-left:3%;
+}
+
+.modal-image {
+	float:left;
+	width:45%;
+	height:230px;
+	border:1px solid black;
+	margin-top:20px;
+	margin-right:20px;
+}
+
+.selected {
+	border:5px solid #7362DE;
+}
+</style>
 
 <script type="text/javascript">
 	$(function() {
@@ -124,7 +270,7 @@
 		///////////////////////////////////////////////////////////////
 		
 		// 스터디 생성 문구 생성
-		$(".hero-text").html("<h1>스터디 생성</h1>");
+		$(".hero-text").html("<h1 style='margin-top:65px;'>스터디 생성<p style='font-size:16px; margin-top:10px;'>원하는 분야의 스터디를 만들어 새로운 만남을 시작해보세요</p></h1>");
 		
 		// 스터디 생성에 맞는 이미지 가져오기
 		$(".justify-content-center").css({
@@ -144,11 +290,23 @@
 		
 		// 기본 이미지 클릭 이벤트 (모달 show)
 		$("#basicImageDiv").click(function() {
+			$(".selected").removeClass("selected");
+			$("body").css({
+				"overflow-y":"hidden"
+			});
+			
+			$("#modal-inside").css("top", $(document).scrollTop()+100);
+			
 			$("#modal").show();
+			
 		});
 		
 		// 모달 취소 이벤트 (모달 hide)
 		$("#basicImageCancel").click(function() {
+			$("body").css({
+				"overflow-y":"scroll"
+			});
+			
 			$("#modal").hide();
 		});
 		

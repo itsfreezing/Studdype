@@ -22,7 +22,7 @@
 .mainmenu li.active:not(:last-child):after,
 .mainmenu li:not(:last-child):hover:after { 
 	background: #fff;
-}
+}ss
 h1{
 	margin-top: 3%;
 	font-weight:600;
