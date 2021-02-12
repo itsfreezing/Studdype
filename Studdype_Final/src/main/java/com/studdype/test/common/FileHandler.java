@@ -27,7 +27,7 @@ public class FileHandler {
 	
 	//파일 저장 함수
 	public void writeFile(MultipartFile file, String path, String f_url) {
-		
+			
 		try {
 			byte fileData[] = file.getBytes();
 			
@@ -46,8 +46,8 @@ public class FileHandler {
 			if(!fileFolder.exists()) {
 				fileFolder.mkdir();
 			}
-			
-			
+			System.out.println("file: "+file+" path:"+path+" f_url:"+f_url);
+
 			
 			fos = new FileOutputStream(f_url);
 			fos.write(fileData);
@@ -155,7 +155,7 @@ public class FileHandler {
 	//파일 dto반환 파일요소들 뽑아서 fileList에 저장
 	public List<FileDto> getFileList(MultipartFile[] mfileList, HttpServletRequest request) {
 		List<FileDto> fileList = new ArrayList<FileDto>();//파일리스트 생성
-		
+	
 		for(int i = 0 ;  i < mfileList.length  ; i++) {
 			String f_name = mfileList[i].getOriginalFilename(); // 파일 실제이름
 			double f_size = mfileList[i].getSize(); // 파일 실제크기

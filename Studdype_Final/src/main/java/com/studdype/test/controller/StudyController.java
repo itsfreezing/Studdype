@@ -28,6 +28,7 @@ import com.studdype.test.model.biz.member.MemberBiz;
 import com.studdype.test.model.biz.study.StudyApplyingBiz;
 import com.studdype.test.model.biz.study.StudyBiz;
 import com.studdype.test.model.biz.study.StudyMemberBiz;
+import com.studdype.test.model.dao.study.StudyMemberDao;
 import com.studdype.test.model.dto.board.BookDto;
 import com.studdype.test.model.dto.board.FileDto;
 import com.studdype.test.model.dto.location.LocationGuDto;
@@ -131,7 +132,7 @@ public class StudyController {
 		MultipartFile[] mfileList = null;
 		List<FileDto> fileList = null;
 		String path = "";
-		System.out.println(uploadFile);
+		System.out.println("씨발실마리를찾았다"+request);
 		if(studyDto.getPhoto().equals("")) {
 			//파일 업로드
 			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
@@ -157,7 +158,7 @@ public class StudyController {
 			return "commond/alert";
 		}
 	}
-
+	
 	// 스터디 관리 페이지 이동
 	@RequestMapping("/updateStudy.do")
 	public String updateStudy(HttpSession session, Model model,HttpServletRequest request) {
@@ -169,14 +170,22 @@ public class StudyController {
 		List<BookDto> bookList = bookBiz.bookList(Integer.parseInt(request.getParameter("s_no")));
 		List<StudyDto> LeaderList = studyBiz.studyLeader(login.getMem_no());
 		List<StudyMemberDto> memberlist = StudyMemberBiz.StudyMemberList(Integer.parseInt(request.getParameter("s_no")));
+		StudyDto img = studyBiz.selectOneBySno(Integer.parseInt(request.getParameter("s_no")));
 		List<MemberDto> membername = new ArrayList<MemberDto>();
 		for (int i = 0; i < memberlist.size(); i++) {
 			
 			MemberDto dto2 = memberBiz.selectOne(memberlist.get(i).getMem_no());
 			membername.add(dto2);
 		}
-
-		
+	
+		if(img.getPhoto() == null ) {
+			img.setPhoto("no_url_of_photo_from_studyTB"); 
+		}
+		FileHandler filehandler = new FileHandler();
+		String fileName = filehandler.getFileName(img.getPhoto(), "Studdype_Final");
+		model.addAttribute("fileName",fileName);
+		System.out.println(img.getPhoto());
+		model.addAttribute("img",img);
 
 		model.addAttribute("membername", membername);
 		model.addAttribute("memberlist", memberlist);
@@ -187,54 +196,41 @@ public class StudyController {
 		model.addAttribute("category", category);
 
 		session.setAttribute("leftnavi", "updateStudy");
-
+		
 		return "studdype/updateStudy";
 	}
 	// 스터디 관리 페이지 update버튼 클릭시
-	@RequestMapping(value="/studyupdate.do",method = RequestMethod.GET)
-	public String studyupdate(HttpServletRequest request,Model model,HttpSession session,UploadFile uploadFile) {
-		System.out.println("들어오긴함");
-		System.out.println(request.getParameter("mem_no"));
-		System.out.println("s_no:"+request.getParameter("s_no"));
-	
-		
-		StudyDto newstudy = new StudyDto(Integer.parseInt(request.getParameter("s_no")),request.getParameter("s_info"),Integer.parseInt(request.getParameter("cate")),Integer.parseInt(request.getParameter("locationsi_no")),Integer.parseInt(request.getParameter("locationgu_no")),Integer.parseInt(request.getParameter("max")),request.getParameter("s_name"),request.getParameter("img_name"));
+	@RequestMapping("studyupdate.do")
+	public String studyupdate(HttpServletRequest request,Model model,HttpSession session,UploadFile uploadFile,StudyDto dto) {
 		int res = 0;
 		MultipartFile[] mfileList = null;
 		List<FileDto> fileList = null;
 		String path = "";
 		
-	
-	
-		
-		if(newstudy.getPhoto().equals("")) {
+		if(dto.getPhoto().equals("")) {
 			//파일 업로드
-			mfileList = uploadFile.getFile(); // multipartFile 
+			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
 			
-			//파일 요소들 뽑아서 fileList에 저장
-			fileList = fileHandler.getFileList(mfileList, request);
+			// 파일요소들 뽑아서 fileList에 저장
+			fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성
 			
-			path = fileHandler.getPath(request);
-			newstudy.setPhoto(fileList.get(0).getF_url());
+			path = fileHandler.getPath(request); //파일이 저장될 가장 기본 폴더
 			
+			dto.setPhoto(fileList.get(0).getF_url());
 		}
-		System.out.println(mfileList+path+fileList);
-			res = studyBiz.newInfo(newstudy, mfileList, path, fileList);
-			
-			if(res>0) {
-				model.addAttribute("msg","수정성공  !");
-				model.addAttribute("url","studycommunity.do?s_no="+newstudy.getS_no());
-		;
-				
-				return "commond/alert";
-			}else {
-				model.addAttribute("msg","수정실패  !");
-				model.addAttribute("url","studycommunity.do?s_no="+newstudy.getS_no());
-			
-				
-				return "commond/alert";
-				
-			}
+	
+		res = studyBiz.newInfo(dto, mfileList, path, fileList);
+		
+		
+		if (res > 0) {
+			model.addAttribute("msg", "수정 완료");
+			model.addAttribute("url", "studyList.do");
+			return "commond/alert";
+		} else {
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("url", "studycommunity.do?s_no="+request.getParameter("s_no"));
+			return "commond/alert";
+		}
 		
 
 	
@@ -426,6 +422,25 @@ public class StudyController {
 			}
 		}
 	}
+	
+	@RequestMapping(value="/studygetout.do",method = RequestMethod.GET)
+	public String studygetout(HttpSession session,HttpServletRequest request,Model model) {
+	
+		MemberDto login = (MemberDto)session.getAttribute("login");
+		StudyMemberDto dto = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),login.getMem_no());
+		int res = StudyMemberBiz.deletemember(dto);
+		if(res>0) {
+			model.addAttribute("msg","탈퇴 성공  !");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg","탈퇴실패  !");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}
+
+	}
+	
 	
 	@RequestMapping("/studyMemberInsert.do")
 	public String StudyMemberInsert(Model model, HttpServletRequest request, StudyApplyingDto dto) {
