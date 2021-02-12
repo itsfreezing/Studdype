@@ -8,7 +8,16 @@
 <head>
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
 <script>
-
+function logout_btn(){
+   var form = $("#logoutForm");
+   var logout = $("#logout");
+   
+   if ( logout.val() == null || logout.val().trim() == ''){
+      alert("로그아웃 되었습니다.");
+   }else {
+      form.submit();
+   }
+};
 
 $(function() {
    var currentMenu = $("#currentMenu").val();
@@ -97,7 +106,7 @@ $(function() {
 <body>
 <input type="hidden" id="currentMenu" value="${headerMenu }">
    <!-- 헤더 시작 -->
- 
+   <form id="logoutForm" action="logout.do" method="POST">
    <div class="feature-page get-start header-area">
       <div class="container">
          <div class="header-top">
@@ -152,7 +161,7 @@ $(function() {
 											<a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
 											<a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
 											<hr id="profileHR">
-											<a class="dropdown-item"  onclick="location.href='logout.do'" id="logout">로그아웃</a>
+											<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
 									</div>
 								</li>
                         	</c:otherwise>
@@ -169,9 +178,8 @@ $(function() {
                   </div>
          
                </div>
-          
+               </form>
          
-
             
             
          <div class="row justify-content-center">
@@ -185,7 +193,6 @@ $(function() {
                </div>
             </div>
          </div>
-
          <!-- 헤더 텍스트 끝 -->
    <!-- 헤더 끝 -->
    <div id="studypopup" class="hide">
