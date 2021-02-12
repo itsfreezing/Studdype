@@ -74,8 +74,22 @@ input#search:focus {
 .feature-page.header-area {
 	height: 80px;
 }
+
+.owl-dot{
+	background-color:#c0d7e9 !important;
+}
+.owl-dot.active{
+	background-color:white !important;
+}
+#mainBanner{
+	box-shadow:none !important;
+}
 .blogpost-area{
 	background: #ffff;
+
+	margin-left: 5%;
+	margin-right: 5%;
+
 	margin-left: 10%;
 	margin-right: 10%;
 }
@@ -102,6 +116,7 @@ input#search:focus {
 	color: #6434ef;
 	cursor: pointer;
 	transition: 0.5s;
+
 
 }
 .blog-meta{
@@ -170,7 +185,7 @@ input#search:focus {
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;" onerror="this.src='./resources/img/no-study-image.png'">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;" onError="this.src='./resources/img/no-image1.png'">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">

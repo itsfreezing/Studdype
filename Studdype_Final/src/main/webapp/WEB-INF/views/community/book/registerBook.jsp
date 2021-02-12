@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="./resources/css/community/leftnavi.css">
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 
-<!-- <link rel="stylesheet" href="./resources/css/community/book/registerBook.css"> -->
+<link rel="stylesheet" href="./resources/css/community/book/registerBook.css">
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -32,449 +32,6 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main2.js"></script>
-
-<style type="text/css">
-[tooltip]:before {
-    /* 여긴 건드리지 말 것 */
-    content: attr(tooltip);
-    position: absolute;
-    opacity: 0;
-    
-    /* 변경가능 */
-    transition: all 0.15s ease;
-    padding: 10px;
-    color: rgb(115, 98, 222);
-    border-radius: 10px;
-    box-shadow: 2px 2px 1px silver;    
-    text-align:center;
-}
-
-[tooltip]:hover:before {
-    /* 여긴 건드리지 말 것 */
-    opacity: 0.9;
-    
-    /* 변경가능 */
-    background: #fff;
-    border:2px solid rgb(115, 98, 222);
-    margin-top: 90px;
-    margin-left: 12px;    
-}
-
-/* 안내 문구 영역에 마우스 올리면 텍스트 없어지게 하고싶을 때 
-tooltip-persistent 요소 추가 할 것 */
-[tooltip]:not([tooltip-persistent]):before {
-    pointer-events: none;
-}
-
-/* 모달 CSS */
-*,
-:before,
-:after {
-  box-sizing: border-box;
-  margin: 0;
-  transition: 0.7s ease all;
-}
-
-.modal {
-  height: 600px;
-  width: 1300px;
-  margin: auto;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  top: 0;
-  bottom: 0;
-  left: 12%;
-  right: 0;
-  transition: 0.4s, box-shadow 0.3s 0.4s;
-  font-family: Roboto;
-  display:block;
-  border-color:rgba(0,0,0,0.5);
-  z-index:100;
-  background:#fff;
-}
-.modal.hidden {
-  box-shadow: none;
-  transition: 0.4s, box-shadow 0s;
-  opacity: 0;
-  visibility: hidden;
-}
-.modal.hidden .form {
-  top: 100%;
-}
-.modal.hidden .invite {
-  top: -100%;
-}
-.modal.hidden .invite .close {
-  height: 0;
-  width: 0;
-  top: 0;
-  right: 0;
-}
-
-.form {
-	width: 60%;
-	height: 100%;
-	padding: 25px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	background:rgba(167, 148, 255, 0.2);
-}
-
-.board-label {
-	font-weight:600;
-	font-size:15pt;
-}
-
-.board-input {
-	width:100%;
-	height:30px;
-	padding-top:5px;
-	font-weight:550;
-	border:none;
-}
-
-.board-input:focus {
-	border:2px solid gray;
-	transition: none;
-}
-
-#content {
-	width:100%;
-	padding-top:5px;
-	font-weight:550;
-	border:none;
-}
-
-#content:focus {
-	border:2px solid gray;
-	transition: none;
-}
-
-.invite {
-  width: 40%;
-  height: 100%;
-  padding: 25px;
-  position: absolute;
-  top: 0;
-  left: 60%;
-  text-align:center;
-}
-
-.content-div {
-	width:100%;
-	text-align:left;
-	margin:5px 0 5px 0;
-}
-
-.book-label {
-	font-weight:600;
-	font-size:15pt;
-}
-
-.book-input {
-	width:100%;
-	border:none;
-}
-
-.invite img {
-	width:30%;
-	height:32%;
-	border:5px solid #f9f9f0;
-	border-radius:10px;
-	background:#f6f5f0;
-}
-
-#modal-top {
-	width:100%;
-	height:100px;
-}
-
-#modal-bottom {
-	width:100%;
-	height:480px;
-}
-
-#modal-textarea {
-	width:100%;
-	height:450px;
-}
-
-#modal-content {
-	width:100%;
-	height:330px;
-	padding:1%;
-	text-align:center;
-}
-
-#modal-content img {
-	width:25px;
-	height:25px;
-}
-
-#modal-content textarea {
-	width:450px;
-}
-
-.form input, textarea {
-  font-size: 15px;
-}
-
-.label {
-  font: 500 14px Roboto;
-  color: #fb5781;
-}
-
-.form button {
-  background: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 15px;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  padding:2% 5%;
-  bottom: 30px;
-  left: 50%;
-  color: black;
-  font-size: 18px;
-  cursor: pointer;
-  transform: translateX(-50%);
-}
-
-.form button:hover {
-	color:#fff;
-	background:gray;
-}
-
-.form button:hover:before {
-  left: 110%;
-  transition: 0.3s;
-}
-.form button:before {
-  content: "";
-  background: rgba(255, 255, 255, 0.3);
-  height: 100%;
-  width: 65px;
-  position: absolute;
-  top: 0;
-  left: -100%;
-  transform: skew(-45deg);
-}
-
-.nope {
-  background: rgba(167, 148, 255, 0.2);
-  padding: 10px 15px;
-  border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  font-size: 18px;
-  font-weight:550;
-  white-space: nowrap;
-  cursor: pointer;
-  transform: translateX(-50%);
-  color:black;
-}
-.nope:hover {
-	background:gray;
-	color:#fff;
-}
-
-.nope:hover:before {
-	left: 110%;
-	transition: 0.3s;
-}
-
-.nope:before {
-  content: "";
-  background: rgba(255, 255, 255, 0.3);
-  height: 100%;
-  width: 65px;
-  position: absolute;
-  top: 0;
-  left: -100%;
-  transform: skew(-45deg);
-}
-
-.close {
-  background: #474747;
-  height: 30px;
-  width: 30px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  cursor: pointer;
-  transition: 0.4s 0.3s;
-}
-.close:before, .close:after {
-  content: "";
-  background: #fff;
-  height: 80%;
-  width: 3px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-.close:after {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-/* 모달 CSS 종료 */
-
-#main-section-top {
-	position:relative;
-	width:100%;
-	border:1px solid #fff;
-}
-
-#main-section-bottom {
-	position:relative;
-	width:100%;
-	border:1px solid #fff;
-}
-
-#book-img-section {
-	position:relative;
-	display:inline-block;
-	width:100%;
-}
-
-.divBox {
-	position:relative;
-	float:left;
-	margin:2%;
-	width:15%;
-	border:5px solid #f9f9f0;
-	border-radius:10px;
-	background:#f6f5f0;
-	box-shadow:9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
-}
-
-#book-img-section img {
-	width:100%;
-	height:250px;
-}
-
-#book-img-section img:hover {
-	cursor:pointer;
-}
-
-#no-list {
-	position:relative;
-	width:30%;
-	height:auto;
-	left:35%;
-}
-
-#paging-section {
-	position:relative;
-	display:inline-block;
-	width:100%;
-	text-align:center;
-}
-
-.pageNumber {
-    padding: 0px 10px 5px 10px;
-    padding-top: 10px;
-    margin-right: 5px;
-    width: 40px;
-    height: 40px;
-    color: pink;
-    font-weight: bold;
-    border: 1px solid #dee2e6;
-    text-align: center;
-    text-decoration: none;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.show {
-	color: white!important;
-    background-color: #6434ef;
-    cursor:default;
-}
-#homeSearch {
-	margin-top:10px; 
-	border:none; 
-	background-color: #f9fafc; 
-	cursor:pointer;
-	padding:10px 5px 5px 20px;
-	background:#fff;
-	text-transform: uppercase;
-	box-shadow: none;
-}
-
-.recommend-img {
-	width:100%!important;
-	height:250px!important;
-	text-align:center!important;
-	margin:25px 0 25px 0!important;
-}
-
-.categoryDiv {
-	display:inline-block;
-	width:15%!important;
-	height:250px!important;
-	margin-right:20px!important;
-}
-
-.categoryDiv:hover {
-	cursor:pointer;
-}
-
-.categoryDiv img {
-	width:100%!important;
-	height:250px!important;
-}
-
-#recommend-comment {
-	text-align:center; 
-	font-weight:600; 
-	font-size:20pt; 
-	margin-top:30px;
-}
-
-#category {
-	width:100%;
-	text-align:center;
-}
-
-#category input {
-    background-color: #EFF0F2;
-    border: 1px solid #EFF0F2;
-    width: 80px;
-    height: 30px;
-    font-size: 10pt;
-    border-radius: 10px 10px;
-    color: black;
-    font-weight: bold;
-    margin-left: 1%;
-}
-
-#category input:hover {
-	background-color: white;
-	border: 1px solid #6434ef;
-	font-weight:bold;
-	color: #6434ef;
-	cursor: pointer;
-	transition: 0.5s;
-}
-
-.categorySelected {
-	background:#6434ef!important;
-	color:#fff!important;
-}
-
-#no-categoryList {
-	position:relative;
-	text-align:center;
-	width:200px!important;
-	height:200px!important;
-}
-</style>
 
 <script type="text/javascript">
 	var bookList = [];		// 전달받은 도서 정보 리스트
@@ -630,8 +187,8 @@ tooltip-persistent 요소 추가 할 것 */
 		
 		// 페이지 조건 처리
 		if($("#paging-section").children().hasClass("pageNumber") == true) {
-			$(".show").removeClass("show");
-			$("#"+clickPage).addClass("show");
+			$(".showPaing").removeClass("showPaing");
+			$("#"+clickPage).addClass("showPaing");
 			$(".divBox").hide();
 			for(var i = startBook; i <= endBook; i++) {
 				$(".divBox").eq(i).show();
@@ -647,7 +204,7 @@ tooltip-persistent 요소 추가 할 것 */
 		for(var i = startPage; i <= endPage; i++) {
 			$("#paging-section").append("<a class='pageNumber' id="+i+">"+i+"</a>");
 		}
-		$(".pageNumber:first").addClass("show");
+		$(".pageNumber:first").addClass("showPaing");
 	}
 	
 	function validateSubmit() {
@@ -662,6 +219,9 @@ tooltip-persistent 요소 추가 할 것 */
 			return false;
 		}else if( (content.trim().length==0) || (content.trim()=='') || (conetnt==null) ) {
 			alert("도서 설명을 작성해주세요.");
+			return false;
+		}else if(content.trim().length > 800) {
+			alert("글 내용은 800자 이내로 작성해주세요.")
 			return false;
 		}else {
 			return true;
@@ -773,7 +333,7 @@ tooltip-persistent 요소 추가 할 것 */
 	
 	<!-- 메인 섹션 시작 -->
 	<div class="main-section">
-	<h3>도서 검색</h3>
+	<h3 style="margin-left:30px;">도서 검색</h3>
 		<!-- ----------------------------------------------------------------------------------- -->
 		<!-- 메인 섹션 상단 시작 -->
 		<div id="main-section-top">

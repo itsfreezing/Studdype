@@ -437,6 +437,18 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public int newemail(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"newemail",dto);
+		} catch (Exception e) {
+			System.out.println("마이페이지 이메일 변경 오류");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	@Override
 	public Map<Integer, MemberDto> selectMemberByPhotoList(List<BoardDto> list) {
 		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
 		MemberDto dto = null;
@@ -474,6 +486,7 @@ public class MemberDaoImpl implements MemberDao{
 		return resMap;
 	}
 		
+	@Override
 	public Map<Integer, MemberDto> selectWriteByDataList(List<BoardDto> list) {
 		Map<Integer, MemberDto> resMap =  new HashMap<Integer, MemberDto>();
 		MemberDto dto = null;
@@ -490,6 +503,20 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 		return resMap;
+
+	}
+
+	@Override
+	public int updatephone(MemberDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updatephone",dto);
+		} catch (Exception e) {
+			System.out.println("전화 번호 변경 오류!!!!!!!!!!!!");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }

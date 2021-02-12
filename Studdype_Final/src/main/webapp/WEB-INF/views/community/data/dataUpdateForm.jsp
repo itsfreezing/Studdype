@@ -36,14 +36,6 @@
 <script src="./resources/summernote/summernote.min.js"></script>
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 
-<style type="text/css">
-
-
-.hideFile {
-	display:none;
-}
-</style>
-
 <script type="text/javascript">
 $(function() {
 	// 서머노트 양식
@@ -281,7 +273,7 @@ function sendFile(file, editor){
 		<input type="hidden" name="b_no" value="${dataDto.b_no }">
  		<table class="maintable">
 		<tr>
-			<td><h1>학습자료실 글 수정</h1><span style="color:red">* 파일첨부는 필수 사항입니다.</span></td>
+			<td><h1>학습자료실 글 수정</h1></td>
 		</tr>
 		<!-- 제목 부분 -->
 		<tr>
@@ -292,7 +284,9 @@ function sendFile(file, editor){
 		<tr>
 			<td><textarea id="summernote" rows="5" name="b_content" style="width:100%; height:250px;">${dataDto.b_content }</textarea></td>
 		</tr>
-		
+		<tr style="text-align:right">
+			<th><span style="color:red">* 파일첨부는 필수 사항입니다.</span></th>
+		</tr>
 		<!-- 파일첨부 부분 -->
 		<tr>
 			<td>		

@@ -124,7 +124,7 @@
 		///////////////////////////////////////////////////////////////
 		
 		// 스터디 생성 문구 생성
-		$(".hero-text").html("<h1>스터디 생성</h1>");
+		$(".hero-text").html("<h1 style='margin-top:65px;'>스터디 생성<p style='font-size:16px; margin-top:10px;'>원하는 분야의 스터디를 만들어 새로운 만남을 시작해보세요</p></h1>");
 		
 		// 스터디 생성에 맞는 이미지 가져오기
 		$(".justify-content-center").css({
@@ -144,11 +144,23 @@
 		
 		// 기본 이미지 클릭 이벤트 (모달 show)
 		$("#basicImageDiv").click(function() {
+			$(".selected").removeClass("selected");
+			$("body").css({
+				"overflow-y":"hidden"
+			});
+			
+			$("#modal-inside").css("top", $(document).scrollTop()+100);
+			
 			$("#modal").show();
+			
 		});
 		
 		// 모달 취소 이벤트 (모달 hide)
 		$("#basicImageCancel").click(function() {
+			$("body").css({
+				"overflow-y":"scroll"
+			});
+			
 			$("#modal").hide();
 		});
 		

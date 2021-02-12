@@ -1,17 +1,17 @@
 package com.studdype.test.model.dao.board.meet;
 
+import java.util.ArrayList;
+
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.studdype.test.model.dto.board.MeetDto;
 import com.studdype.test.model.dto.board.VoteDto;
-import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
 public class MeetBoardDaoImpl implements MeetBoardDao{
@@ -281,6 +281,26 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 	}
 
 	@Override
+	public List<MeetDto> selectMeetByS_no(int s_no[]) {
+		
+		List<MeetDto> dto = new ArrayList<MeetDto>();
+		
+		try {
+			for(int i=0; i<s_no.length;i++) {
+				if(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i])!=null) {
+					dto.addAll(sqlSession.selectList(NAMESPACE+"selectMeetByS_no",s_no[i]));
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ERROR ----------selectMeetByS_no--------------------------ERROR");
+			e.printStackTrace();
+		}
+				
+		return dto;
+	}
+	@Override
 	public MeetDto selectCalendarByData(int s_no, String meet_title, String vote_startdate, String vote_enddate) {
 		MeetDto res = null;
 		Map resMap = new HashMap();
@@ -295,6 +315,7 @@ public class MeetBoardDaoImpl implements MeetBoardDao{
 			e.printStackTrace();
 		}
 		return res;
+
 	}
 
 
