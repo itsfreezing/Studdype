@@ -153,6 +153,9 @@
 			
 			$("#modal").show();
 			
+			$("body").css({
+				"overflow-y":"scroll"
+			});
 		});
 		
 		// 모달 취소 이벤트 (모달 hide)
