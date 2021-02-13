@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 @Repository
@@ -55,7 +57,6 @@ public class StudyDaoImpl implements StudyDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insertStudy", dto);
-			System.out.println(dto.getPhoto());
 		} catch (Exception e) {
 			System.out.println("[ERROR] : insertStudy");
 			e.printStackTrace();
@@ -164,44 +165,17 @@ public class StudyDaoImpl implements StudyDao {
 		return map;
 	}
 
-
-	@Override
-	public List<StudyDto> selectStudyByLocation(int si_no) {
-		List<StudyDto>res=null;
-			try {
-				res=sqlSession.selectList(NAMESPACE+"selectStudyByLocation", si_no);
-			} catch (Exception e) {
-				System.out.println("[ERROR]:selectStudyByLocation");
-				e.printStackTrace();
-			}
-			return res;
-		}
 	@Override
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination) {
-		List<StudyDto> res= null;
+		List<StudyDto>res=null;
 		
 		try {
 			res=sqlSession.selectList(NAMESPACE+"studyListLocation",searchPagination);
 		} catch (Exception e) {
-			System.out.println("[ERROR]:LocationStudyList");
+			System.out.println("[ERROR]:studyListLocationError");
 			e.printStackTrace();
 		}
-		
-		
 		return res;
-	}
-	
-	@Override
-	public StudyDto selectOneBySi_no(int si_no) {
-		StudyDto res = null;
-		
-		try {
-			res = sqlSession.selectOne(NAMESPACE+"selectOneBySi_no", si_no);
-		} catch (Exception e) {
-			System.out.println("[ERROR]: selectOneBySno");
-			e.printStackTrace();
-		}
-		return res;		
 	}
 
 	@Override
@@ -215,6 +189,34 @@ public class StudyDaoImpl implements StudyDao {
 			e.printStackTrace();
 		}
 		
+		
+		return res;
+	}
+
+	//지역별 검색 시 번호 받기
+	@Override
+	public Map<Integer, String> selectStudyByLocation(int si_no) {
+		Map<Integer, String> res=new HashMap<Integer,String>();
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"selectOneSi",si_no);
+		} catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	//지역별 검색 구 번호 받기
+	@Override
+	public Map<Integer, String> selectByLocation(int gu_no) {
+		Map<Integer, String> res= new HashMap<Integer,String>();
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"selectOneGu",gu_no);
+		} catch (Exception e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
 		
 		return res;
 	}

@@ -25,10 +25,25 @@
 
 <style type="text/css">
 h1{
-	font-weight:800;
+	margin-top: 3%;
+	font-weight:600;
+	margin-left:auto;
+	margin-right:auto;
+	margin:auto;
 	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
+}
+span{
+	margin-left:auto;
+	margin-right:auto;
+	margin:auto;
+	color:white;
+	font-size: 20px;
+}
+label{
+	margin-left: 30%;
+	font-weight: 800;
 }
 #sendExtraPwForm{
 	width: 800px;
@@ -37,11 +52,22 @@ h1{
 	margin-left: auto;
 	padding-top: 20px;
 }
+.main_div{
+	width: 550px;
+	height: 300px;
+	margin-top: 3%;
+	background: white;
+	border-radius: 5px;
+	opacity: 85%;
+}
 #id{
 	margin-left:3%;
     width:250px;
     height:40px;
     margin-bottom: 3%;
+}
+#id:hover{
+	border: 2px solid #6434ef;
 }
 #email{
 	margin-left:3%;
@@ -49,65 +75,115 @@ h1{
     height:40px;
     margin-bottom: 3%;
 }
+#email:hover{
+	border: 2px solid #6434ef;
+}
 #submit_email{
     width:50px;
     height:40px;
-    margin-bottom: 15%;
+    margin-top: 3%;
+    margin-bottom: 10%;
+    margin-left:-50%;
+    border-radius: 5px;
+ 	background: gray;
+ 	border: 1px;
+ 	color: white;
 }
-
+#submit_email:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 #chkNum{
 	margin-left:3%;
     width:250px;
     height:40px;
     margin-bottom: 5%;
 }
+#chkNum:hover{
+	border: 2px solid #6434ef;
+}
 #chkNum_btn{
     width:50px;
     height:40px;
     margin-bottom: 18%;
+    margin-top: -15%;
+    margin-bottom: 10%;
+    margin-left:-50%;
+    border-radius: 5px;
+    background: gray;
+ 	color: white;
+}
+#chkNum_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
 }
 .main_btn{
-	margin-left: 15%;
+	margin-top: 1%;
+	margin-bottom: 3%;
+	margin-left: 16%;
 }
-#home_btn{
-	position: relative;
-	background: #fff;
-	color: #6434ef;
-	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	width: 150px;
-	height: 50px;
-	line-height: 30px;
-	padding: 0;
-	font-size: 18px;
-	font-weight: 400;
-	border-radius: 25px;
-	transition: all 0.3s ease-in-out;
-	cursor: pointer;
+#psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 0px 0px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
-#psw_btn{
-	margin-left: 5%;
-	position: relative;
-	background: #fff;
-	color: #6434ef;
+#psw_btn:hover{
+	background-color: white;
 	border: 1px solid #6434ef;
-	box-shadow: 0 0 15px 5px #eaebf2;
-	width: 150px;
-	height: 50px;
-	line-height: 30px;
-	padding: 0;
-	font-size: 18px;
-	font-weight: 400;
-	border-radius: 25px;
-	transition: all 0.3s ease-in-out;
+	font-weight:bold;
+	color: #6434ef;
 	cursor: pointer;
+	transition: 0.5s;
+}
+#cancel_btn{
+	width:140px;
+   	height:40px;
+   	margin-top : 15px;
+   	margin-left: 2%;
+	background-color: white;
+	border: 1px solid #A6A6A6;
+	font-size: 15px;
+	border-radius: 0px 0px;
+	color: black;
+	padding: 1%;
+	box-shadow: none;
 }
 
+#cancel_btn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
 </style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
- <script type="text/javascript">
+<script type="text/javascript">
+$(function() {
+	$(".background").show(); 
+	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
+	$(".background").css("height", "850px");
+	$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>하단에 정보를 기입해 주시면 임시 비밀번호를 보내드려요.</span>");
+});
+ 
 $(function(){
 	
 	var chkNum_btn = $("#chkNum_btn");
@@ -203,29 +279,33 @@ function chkSubmit(){
 	}
 	
 }
+
+function cancel(){
+	self.close();
+}
 </script>
 </head>
 <body>
+<div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 	
 	<div class="main_div">
-	<h1 class="page_title">비밀번호 찾기</h1>
 	<form action="sendExtraPw.do" method="post" id="sendExtraPwForm">
 	<div>
    		<table>
    			<col width="150px"><col width="350px"><col width="100px">
    			<tr>
-   				<td><label for="id" style="font-weight: 800;">아이디</label></td>
-   				<td><input type="text" id="id" name="mem_id" style="border:2px solid #6E45E3"></td>
+   				<td><label>아이디</label></td>
+   				<td><input type="text" id="id" placeholder=" 아이디를 입력해 주세요." name="mem_id"></td>
    			</tr>
    			<tr>
-   				<td><label for="email" style="font-weight: 800;">이메일</label></td>
-   				<td><input type="text" id="email" name="mem_email" placeholder="이메일 (email@studdype.com)" style="border:2px solid #6E45E3"></td>
+   				<td><label>이메일</label></td>
+   				<td><input type="text" id="email" name="mem_email" placeholder=" 이메일 (email@studdype.com)"></td>
    				<td><input type="button" value="전송" id="submit_email" onclick="sendEmail()"></td>
    			</tr>
    			<tr>
-   				<td><label for="chkNum" style="font-weight: 800;">인증번호</label></td>
-   				<td><input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:2px solid #6E45E3"></td>
+   				<td><label>인증번호</label></td>
+   				<td><input type="text" id="chkNum" name="chkNum" placeholder=" 인증번호 입력"></td>
    				<td><input type="button" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" ></td>
    				<input type="hidden" id="chk" title="n">
    			</tr> 
@@ -241,17 +321,18 @@ function chkSubmit(){
    		</table>
    		
    </div>
-   <br><br>
    <div class="main_btn">
-   		<input type="button" id="home_btn" value="홈" onclick="" class="findform_btn">
-   		<input type="button" id="psw_btn" value="비밀번호 찾기" class="findform_btn" onclick="chkSubmit();">
+		<button type="submit" class="findform_btn" id="psw_btn" onClick="chkSubmit();">비밀번호 찾기</button>
+   		<button type="submit" class="findform_btn" id="cancel_btn" onClick="cancel();">취소</button>
    </div>
    
    	</form>
+   	
+   	</div>
    	</div>
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
-	<script src="./resources/assets/js/popper.min.js"></script>
+	<script src="./resources/assets/js/popper.min.js"></script> 
 	<script src="./resources/assets/js/bootstrap.min.js"></script>
 	<script src="./resources/assets/js/owl.carousel.min.js"></script>
 	<script src="./resources/assets/js/modal-video.js"></script>

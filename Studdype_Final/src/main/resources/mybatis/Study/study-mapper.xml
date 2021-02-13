@@ -41,8 +41,25 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-
-<!-- 총 게시글 수 -->
+	<!-- SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
+      				)
+	</select> -->
+	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
+	  SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      FROM (
+      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
+      				FROM STUDY
+      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
+      		)
+      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      </select>
+      
+      
+	<!-- 총 게시글 수 -->
 
 	<select id="selectTotalStudyListNum" resultType="int">
 	      SELECT count(S_NO)
@@ -98,18 +115,8 @@
 	</select>
 	
 
-
-<!-- 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
-		      SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
-      FROM (
-      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
-      				FROM STUDY
-      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
-      				)
-      WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-	</select>
-	<select id="seelctOneBySi_no" parameterType="int" resultMap="studyMap">
-		SELECT * FROM STUDY WHERE SI_NO=#{si_no}
-	</select> -->
-
+		<select id="selectOneSi" parameterType="int" resultMap="studyMap">
+		SELECT * FROM STUDY WHERE SI_NO = #{si_no}AND GU_NO=#{gu_no}
+		</select>
+		
 </mapper>

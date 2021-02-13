@@ -104,6 +104,8 @@ public class HomeController {
 
 
 		
+		
+		
 		 //해당 회원번호로 가입되있는 스터디 번호 가져오기
 		
 		List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(login.getMem_no()); //해당 회원번호로 가입되있는 스터디 번호 가져오기
@@ -127,6 +129,9 @@ public class HomeController {
 		pageMap.put("mem_no", login.getMem_no());
 		
 		
+		
+		
+		
 		int[] joinSnoList = new int[joinedstudy.size()];
 		
 		
@@ -136,8 +141,9 @@ public class HomeController {
 		
 				studylist.add(dto);
 		}
+	
 		
-		
+	
 		
 		Map<Integer,String> nameMap = studyBiz.selectStudyName(joinSnoList);
 		
@@ -168,8 +174,14 @@ public class HomeController {
 			applymember.add(dto5);
 		}
 		
-		
-		
+		FileHandler fileHandler = new FileHandler();
+		for(int i=0; i<studylist.size(); i++) {
+			if(studylist.get(i).getPhoto() == null) {
+				studylist.get(i).setPhoto("./resources/assets/img/nothingBook.png");
+			}
+				studylist.get(i).setPhoto(fileHandler.getFileName(studylist.get(i).getPhoto(), "Studdype_Final"));
+		}
+	
 		
 
 		model.addAttribute("allMember",allMember);
@@ -281,8 +293,9 @@ public class HomeController {
 		
 		if(res>0) {
 			model.addAttribute("msg", "비밀번호 변경 성공!");
-			model.addAttribute("url", "myPage.do");
-			login.setMem_pw(request.getParameter("new_pw"));
+			session.removeAttribute("login");
+			model.addAttribute("url", "studyList.do");
+			
 			
 			return "commond/alert";
 		}else {
@@ -319,18 +332,19 @@ public class HomeController {
 	public String changephone(HttpServletRequest request,Model model,HttpSession session) {
 		MemberDto login = (MemberDto)session.getAttribute("login");
 		
-		MemberDto dto = new MemberDto(login.getMem_no(),request.getParameter("new_phone"),login.getMem_email());
+		MemberDto dto = new MemberDto(login.getMem_no(),request.getParameter("new_phone"),request.getParameter("new_email"));
 		int res = memberBiz.updatephone(dto);
 		
 		if(res>0) {
 			login.setMem_phone(request.getParameter("new_phone"));
-			model.addAttribute("msg","전화번호 수정 성공!");
+			login.setMem_email(request.getParameter("new_email"));
+			model.addAttribute("msg"," 수정 성공!");
 			model.addAttribute("url","myPage.do");
 			session.setAttribute("login", login);
 			session.setMaxInactiveInterval(-1);
 			return "redirect:myPage.do";
 		}else {
-			model.addAttribute("msg","전화번호 변경 실패!");
+			model.addAttribute("msg","수정 실패!");
 			model.addAttribute("url","myPage.do");
 			return "commond/alert";
 			

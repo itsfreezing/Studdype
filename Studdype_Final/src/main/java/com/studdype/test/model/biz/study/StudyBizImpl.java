@@ -101,6 +101,7 @@ public class StudyBizImpl implements StudyBiz{
 		}
 		
 		insertRes = study_Dao.insertStudy(dto);
+		System.out.println();
 		System.out.println("mfileList: "+mfileList+" path: "+path+" fileList:"+fileList);
 		// 실행 성공 시 실제 파일 저장
 		if(insertRes == 1 && basicPhoto == 0) {
@@ -170,6 +171,7 @@ public class StudyBizImpl implements StudyBiz{
 		if(insertRes == 1 && basicPhoto == 0) {
 			res = 1;
 			fileHandler.writeFile(mfileList[0], path, fileList.get(0).getF_url());
+			System.out.println("mfileList :"+mfileList[0]);
 		}else {
 			res = insertRes;
 		}
@@ -237,15 +239,7 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.studyListLocation(searchPagination);
 	}
 	
-	@Override
-	public StudyDto selectOneBySi_no(int si_no) {
-		return study_Dao.selectOneBySi_no(si_no);
-	}
-	@Override
-	public List<StudyDto> selectStudyByLocation(int si_no){
-		return study_Dao.selectStudyByLocation(si_no);
-	}
-
+	
 	// [studyHome] 공지사항 게시글 리스트 최신글 3개 가져오기
 	@Override
 	public List<BoardDto> recentListForStudyHome(int s_no) {
@@ -258,6 +252,15 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.nomalStudyImg(dto);
 	}
 
-	
+	@Override
+	public Map<Integer, String> selectOneGuno(int gu_no) {
+		return locationGudao.selectLocationGuOfStudy(gu_no);
+	}
+
+	@Override
+	public Map<Integer, String> selectOneSino(int si_no) {
+		return locationSidao.selectLocationSiOfStudy(si_no);
+	}
+
 
 }

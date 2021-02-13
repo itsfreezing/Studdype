@@ -49,7 +49,7 @@ public class MailSender {
 		
 		try {
 			helper = new MimeMessageHelper(msg,true);
-			helper.setFrom(new InternetAddress("ehldks2104","StuDdype","UTF-8"));
+			helper.setFrom(new InternetAddress("2dudwnd","StuDdype","UTF-8"));
 			helper.setTo(dto.getMem_email());
 			helper.setSubject("[스터띱] 에서 보낸 인증번호 :"+" 회원가입 시 인증번호 입니다.");
 			helper.setText(html, true);
