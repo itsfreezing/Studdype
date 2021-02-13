@@ -193,6 +193,7 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	//지역별 검색 시 번호 받기
 	@Override
 	public Map<Integer, String> selectStudyByLocation(int si_no) {
 		Map<Integer, String> res=new HashMap<Integer,String>();
@@ -205,6 +206,7 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	//지역별 검색 구 번호 받기
 	@Override
 	public Map<Integer, String> selectByLocation(int gu_no) {
 		Map<Integer, String> res= new HashMap<Integer,String>();
