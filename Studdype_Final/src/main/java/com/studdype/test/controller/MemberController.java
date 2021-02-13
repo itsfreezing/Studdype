@@ -114,10 +114,6 @@ public class MemberController {
 
 		MemberDto loginDto = memberBiz.login(dto);
 		
-		 
-		
-		
-		
 		if(loginDto != null) {
 			List<StudyDto> studylist = new ArrayList<StudyDto>();
 			List<StudyMemberDto> joinedstudy = studymemberBiz.StudyList(loginDto.getMem_no());
@@ -143,12 +139,14 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		logger.info("logout");
 		
 		session.removeAttribute("login");
-		return "redirect:/studyList.do";		
-	}
+		model.addAttribute("msg","로그아웃 되었습니다");
+		model.addAttribute("url","studyList.do");
+		return "commond/alert";
+		}
 	
 	//아이디 찾기 페이지
 	@RequestMapping("/findIdForm.do")
