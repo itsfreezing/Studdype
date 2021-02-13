@@ -181,7 +181,6 @@ function idsearch(){
 		form.submit();
 	}
 };
-
 function cancel(){
 	self.close();
 }
