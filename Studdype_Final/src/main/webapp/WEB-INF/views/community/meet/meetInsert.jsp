@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meet Detail Page</title>
+<title>Meet Insert Page</title>
 
 <link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/assets/css/font-awesome.min.css">
@@ -23,8 +20,8 @@
 <link rel="stylesheet" href="./resources/css/community/mainsection.css">
 <link rel="stylesheet" href="./resources/css/community/meet.css">
 
-<!-- kakao map API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04bc0d5da72e456d3406d52a61067ecd&libraries=services"></script>
+<!-- Daum 도로명 주소 Api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/popper.min.js"></script>
@@ -32,97 +29,229 @@
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
 <script src="./resources/assets/js/main.js"></script>
+
+<script type="text/javascript">
+   
+<!-- 도로명주소 검색 버튼 함수 --> 
+function execPostcode(){ 
+   daum.postcode.load(function(){ 
+      new daum.Postcode({
+         oncomplete: function(data) { 
+
+            // 주소 변수
+            var addr = ''; 
+            
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다. 
+            if (data.userSelectedType === 'R') {       // 사용자가 도로명 주소를 선택했을 경우 
+               addr = data.roadAddress; 
+            } else {                            // 사용자가 지번 주소를 선택했을 경우(J) 
+               addr = data.jibunAddress; 
+            }  
+             
+            // 주소 정보를 해당 필드에 넣는다.            
+            document.getElementById("address").value = addr; 
+
+            // 커서를 상세주소 필드로 이동한다. 
+            document.getElementById("detailAddress").focus(); 
+         }
+      }).open();
+   });
+}
+// 모임 날짜 체크
+function chkMeetDate(){
+
+   var now = new Date();
+   year = now.getFullYear();   // 현재 년도 4자리수로 가져오기
+   month = now.getMonth()+1;   // 현재 월 가져오기
+   
+   if((month+"").length < 2){  // 월이 '1'로 찍히지 않고 '01'로 찍히도록 길이를 받아온다
+      month = "0" +month;     // 길이가 1이라면 앞에 0을 붙여서 '07'형태로 나오게 한다
+   }
+   
+   date = now.getDate();       // 현재 날짜 가져오기
+   
+   if((date+"").length < 2){   // 일이 '1'로 찍히지 않고 '01'로 찍히도록 길이를 받아온다
+      date = "0" +date;       // 길이가 1이라면 앞에 0을 붙여서 '01'형태로 나오게 한다
+   }
+   
+   today = year +""+ month +""+ date ;   // 오늘 날짜 ex) 20080801
+
+   var meetDate = document.getElementById("meetDate").value;    // 입력된 모임날짜 받아오기
+   var dateSplit = meetDate.split("-");                      //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+ 
+
+   year = dateSplit[0];  // 첫 번째 배열은 년
+   month = dateSplit[1]; // 두 번째 배열은 월
+   day = dateSplit[2];   // 세 번째 배열은 일
+
+   InputDate = year +""+ month +""+ day; //입력된 값을 더해준다.
+
+ 
+
+   if (parseInt(InputDate) < parseInt(today) ){        //int형으로 변환하여 비교한다
+      alert("오늘 날짜보다 이전 날짜입니다.");
+      document.getElementById("meetDate").value = ""; //이전 날짜라면 입력폼 리셋처리
+   }
+ 
+}
+
+// 모집시작 날짜 체크
+function chkStartDate(){
+
+   var meetDate = document.getElementById("meetDate").value;    
+   var meetDateSplit = meetDate.split("-");                   
+   
+   year = meetDateSplit[0];  
+   month = meetDateSplit[1]; 
+   day = meetDateSplit[2];   
+
+   InputMeetDate = year +""+ month +""+ day; 
+   
+   var startDate = document.getElementById("voteStartDate").value; 
+   var startDateSplit = startDate.split("-");                     
+   
+   year = startDateSplit[0];  
+   month = startDateSplit[1]; 
+   day = startDateSplit[2];   
+
+   InputStartDate = year +""+ month +""+ day; 
+
+    if ( meetDate == null || meetDate.trim() == '' ) {
+       alert("모임날짜를 입력 해주세요.");
+       document.getElementById("voteStartDate").value = ""; 
+   }else if ( parseInt(InputMeetDate) == parseInt(InputStartDate) ){        
+      alert("모집시작일이 모임날짜와 같은 날짜일 수 없습니다.\n다시 입력 해주세요.");
+      document.getElementById("voteStartDate").value = ""; 
+   } else if ( parseInt(InputMeetDate) < parseInt(InputStartDate) ) {
+      alert("모집시작일이 모임날짜보다 느린 날짜일 수 없습니다.\n다시 입력 해주세요.");
+      document.getElementById("voteStartDate").value = ""; 
+   }
+ 
+}
+
+// 모집마감 날짜 체크
+function chkEndDate(){
+
+   var meetDate = document.getElementById("meetDate").value;    
+   var meetDateSplit = meetDate.split("-");                   
+   
+   year = meetDateSplit[0];  
+   month = meetDateSplit[1]; 
+   day = meetDateSplit[2];   
+
+   InputMeetDate = year +""+ month +""+ day; 
+   
+   var startDate = document.getElementById("voteStartDate").value; 
+   var startDateSplit = startDate.split("-");                     
+   
+   year = startDateSplit[0];  
+   month = startDateSplit[1]; 
+   day = startDateSplit[2];   
+
+   InputStartDate = year +""+ month +""+ day; 
+   
+   var endDate = document.getElementById("voteEndDate").value; 
+   var endDateSplit = endDate.split("-");                     
+   
+   year = endDateSplit[0];  
+   month = endDateSplit[1]; 
+   day = endDateSplit[2];   
+
+   InputEndDate = year +""+ month +""+ day; 
+
+    if ( meetDate == null || meetDate.trim() == '' ) {
+       alert("모임날짜를 입력 해주세요.");
+       document.getElementById("voteEndDate").value = ""; 
+   }else if ( startDate == null || startDate.trim() == '' ){        
+      alert("모집시작일을 입력 해주세요.");
+      document.getElementById("voteEndDate").value = ""; 
+   }else if ( parseInt(InputEndDate) < parseInt(InputStartDate) ){        
+      alert("모집마감일이 모집시작일 보다 빠른 날짜일 수 없습니다.\n다시 입력 해주세요.");
+      document.getElementById("voteEndDate").value = ""; 
+   }else if ( parseInt(InputEndDate) > parseInt(InputMeetDate) ){        
+      alert("모집마감일이 모임날짜 보다 느린 날짜일 수 없습니다.\n다시 입력 해주세요.");
+      document.getElementById("voteEndDate").value = ""; 
+   }else if ( parseInt(InputEndDate) == parseInt(InputMeetDate) ){        
+      alert("모집마감일이 모임날짜와 같은 날짜일 수 없습니다.\n다시 입력 해주세요.");
+      document.getElementById("voteEndDate").value = ""; 
+   }  
+}
+
+
+<!-- insert 하기전에 비어있는 input 태그가 없는지 확인 -->
+function chkForm(){
+   var form = $("#meetWriteForm");
+   var meetTime = $("#meetTime");
+   var meetEndDate = $("#voteEndDate");
+   var title = $("#meetTitle");
+   var address = $("#address");
+   var detailAddress = $("#detailAddress");
+   var content = $("#contentArea");
+   
+   if( meetTime.val() == null || meetTime.val().trim() == ''){
+      alert("모임시간을 입력 해주세요.")
+   }else if( meetEndDate.val() == null || meetEndDate.val().trim() == ''){
+      alert("모집 마감일을 입력 해주세요.")
+   }else if( title.val() == null || title.val().trim() == ''){
+      alert("제목을 작성해주세요")
+   }else if( address.val() == null || address.val().trim() == ''){
+      alert("도로명 주소를 입력 해주세요.")
+   }else if( detailAddress.val() == null || detailAddress.val().trim() == ''){
+      alert("상세주소를 작성해주세요")
+   }else if( content.val() == null || content.val().trim() == ''){
+      alert("모임 상세내용을 작성해주세요.")
+   }else{
+      form.submit();
+   }
+};
+
+</script>
+   
 </head>
 <body>
-   <!-- 모임 댓글 관련 스크립트 -->
-   <jsp:include page="../../community/meet/meetReplyScript.jsp"></jsp:include>
-   <jsp:include page="../../community/meet/voteScript.jsp"></jsp:include>
-   
+
    <jsp:include page="../../commond/communityHeader.jsp"></jsp:include>
    <jsp:include page="../../commond/communityLeftNavi.jsp"></jsp:include>
-
-   <!--main content 섹션-->
-   <div class="main-section">
-      
-         <!-- 모임 상세보기 -->
-         <div id="topDiv">
-            <div id="topDiv-left">
-               <div id="writerDiv"><img src="./resources/assets/img/meetWriter.png">&nbsp;&nbsp; ${member.mem_id } </div>
-               <div id="cntDiv"><img src="./resources/assets/img/meetCnt.png">&nbsp;&nbsp; ${dto.meet_cnt } </div>
-            </div>
-            <div id="topDiv-right">
-               <div id="titleDiv"> ${ dto.meet_title } </div>
-            </div>
-         </div>
-         <div id="contentDiv">
-            <div id="contentDiv-left">
-               
-               <!-- jstl:fmt = 날짜를 String값으로 받아서 Date형으로 parse 해준 뒤 화면에 뿌릴 때에는 다시 String 형으로 format -->
-               <div class="meetDetailDiv"><img src="./resources/assets/img/meetDate.png">&nbsp;&nbsp;<fmt:setLocale value="en_US" scope="session"/>
-                                                                                <fmt:parseDate value='${ dto.meet_date }' var='meet_date' pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                                                <fmt:formatDate value="${ meet_date }" pattern="YYYY'년'MM'월'dd'일'"/></div>
-               <div class="meetDetailDiv"><img src="./resources/assets/img/meetTime.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.meet_time }' var='meet_time' pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                                                <fmt:formatDate value="${ meet_time }" pattern="HH:mm"/></div>
-               <div class="meetDetailDiv"><img src="./resources/assets/img/meetAddr.png">&nbsp;&nbsp;${dto.meet_addr }&nbsp;${dto.meet_addr_detail }</div>
-               <div class="meetDetailDiv"><img src="./resources/assets/img/meetVote.png">&nbsp;&nbsp;<fmt:parseDate value='${ dto.vote_startdate }' var='vote_startdate' pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                                                <fmt:formatDate value="${ vote_startdate }" pattern="yyyy.MM.dd"/> ~ 
-                                                                                <fmt:parseDate value='${ dto.vote_enddate }' var='vote_enddate' pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                                                <fmt:formatDate value="${ vote_enddate }" pattern="yyyy.MM.dd"/>
-               </div>
-               <!-- ---------------------------------- -->
-               
-               <div id="meetContentDiv">${dto.meet_content }</div>
-            </div>
-            <div id="contentDiv-right"> 
-               
-               <!-- br 태그를 추가하지 않으면 지도가 화면에 보이지 않음 -->
-               <div id="map" >
-               </div> 
-            </div> 
-         </div>
-         
-         <!-- 투표 영역 -->
-         <div id="vote">
-            
-         </div>
-         
-         <!-- 자신이 생성한 모임일때만 수정/삭제 버튼 보이게 -->
-         <div>
-         <c:choose>
-            <c:when test="${ dto.meet_writer == login.mem_no }">
-               <input type="button" value="수정" class="submitBtn" id="detailBtn_updateform" onclick="location.href='meetupdateform.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp; 
-               <input type="button" value="삭제" class="submitBtn" id="detailBtn_delete" onclick="location.href='meetdelete.do?meet_no=${dto.meet_no}'">&nbsp;&nbsp;
-               <input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply1" onclick="location.href='#write_content'">&nbsp;&nbsp; 
-               <input type="button" value="목록" class="submitBtn" id="detailBtn_list1" onclick="location.href='meetlist.do'">
-            </c:when>
-            <c:otherwise>                  
-               <input type="button" value="댓글" class="submitBtn scroll" id="detailBtn_writeReply2" onclick="location.href='#write_content'">&nbsp;&nbsp; 
-               <input type="button" value="목록" class="submitBtn" id="detailBtn_list2" onclick="location.href='meetlist.do'">
-            </c:otherwise> 
-         </c:choose>
-         </div>
-         <!-- ---------------------------------- -->
-         
-         <!-- 댓글 리스트 영역 -->
-         <div class="replyBox"></div>
-         
-         <!-- 댓글 작성 영역 -->   
-         <div class="replyWrite"  >
-            <table >
-               <tr>
-                  <td colspan="2"><p class="writerId">${login.mem_id }</p></td>
-               </tr>
-               <tr>
-                  <td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
-                  <td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
-               </tr>            
-            </table>
-         </div>
-         
-         
-   </div>
-<input type="hidden" id="mem_id" name="mem_id" value="${login.mem_id }">
-<input type="hidden" id="mem_name" name="mem_name" value="${login.mem_name }">
+   
+   
+     <!--main content 섹션-->
+     <div class="main-section">
+     
+        <img src="./resources/assets/img/banner_meetInsert.png" id="meetInsertBanner">
+        <form action="meetinsert.do" method="post" id="meetWriteForm">
+           <div id="firstRow">
+              <div class="insertText">모임날짜</div>
+              <div class="dateCol1"><input type="date" name="meet_date" id="meetDate" onchange="chkMeetDate();"></div>
+              <div class="insertText">모임시간</div>
+              <div class="dateCol2"><input type="time" name="meet_time" id="meetTime" onchange=""></div>
+           </div>
+           <div id="secondRow">
+              <div class="insertText">모집시작일</div>
+              <div class="dateCol1"><input type="date" name="vote_startdate" id="voteStartDate" onchange="chkStartDate();"></div>
+              <div class="insertText">모집마감일</div>
+              <div class="dateCol2"><input type="date" name="vote_enddate" id="voteEndDate" onchange="chkEndDate();"></div>
+           </div>
+           <div id="thirdRow">
+              <div class="insertText">제목</div>
+              <div class="longDiv"><input type="text" name="meet_title" placeholder="50자 내로 입력하세요." id="meetTitle"></div>
+           </div>
+           <div id="fourthRow">
+              <div class="insertText">장소</div>
+              <div class="longDiv"><input type="text" name="meet_addr" id="address" readonly></div>
+              <div id="addrBtn"><input type="button" id="addrBtn" value="도로명 주소검색" onclick="execPostcode();"></div>
+              <div id="addrDiv"><input type="text" name="meet_addr_detail" id="detailAddress" placeholder="나머지 주소를 입력해주세요."></div>
+           </div>
+           <div id="fifthRow">
+              <div id="fifthRow-left"><div class="insertText">상세내용</div><br><br><br><br><br><br><br><br><br><br><br><br></div>
+              <div id="fifthRow-right"><textarea id="contentArea" name="meet_content" placeholder="2000자 내로 입력하세요."></textarea></div>
+           </div>
+           <div id="sixthRow">
+              <input type="button" class="submitBtn" id="insertBtn_insert" onclick="chkForm();" value="등록하기">
+           </div>
+        </form>
+    </div>
+    
 <jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>
