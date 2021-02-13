@@ -19,26 +19,30 @@
 <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style type="text/css">
-<style type="text/css">
 .mainmenu li.active:not(:last-child):after,
 .mainmenu li:not(:last-child):hover:after { 
 	background: #fff;
-}
-
-/* .header-area {
-	background: #88d3ce;
-	background: -moz-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
-	background: -webkit-linear-gradient(left, #88d3ce 0%, #6e45e2 100%);
-	background: linear-gradient(to right, #88d3ce 0%, #6e45e2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88d3ce', endColorstr='#6e45e2', GradientType=1);
-} */
+}ss
 h1{
 	margin-top: 3%;
-	font-weight:800;
-	font-size: 35px;
+	font-weight:600;
+	font-size: 30px;
 	line-height: 20px;
 	text-align: center;
-	
+}
+span{
+	color:white;
+	font-size: 20px;
+}
+#main_span{
+	font-size: 20px;
+	color:white;
+}
+#loginLogo{
+	width: 50px;
+	height: 50px;
+	margin-left: 2%;
+	margin-bottom: 1%;
 }
 .main{
 	width: 800px;
@@ -50,7 +54,8 @@ h1{
 	margin: auto;
 	margin-right: auto;
 	margin-left: auto;
-	
+	margin-top: 10%;
+	margin-bottom: 8%;
 }
 .loginTable{
 	margin: auto;
@@ -61,23 +66,55 @@ h1{
 	margin-bottom:5%;
     width:300px;
     height:50px;
+    border: 1px solid #A6A6A6;
+}
+#id:hover{
+	border: 2px solid #6434ef;
 }
 #pw{
 	margin-bottom:10%;
     width:300px;
     height:50px;
+    border: 1px solid #A6A6A6;
+}
+#pw:hover{
+	border: 2px solid #6434ef;
 }
 #login{
 	width:300px;
 	height:50px;
-	border-radius:25px;
-	font-size:20px;
+	border-radius:2px;
+	font-size:18px;
+	transition: color 0.5s;
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	border: 1px solid #A6A6A6;
+	-webkit-appearance:s;
+    cursor: pointer;
+    -webkit-writing-mode: horizontal-tb !important;
+ 	color: white;
+ 	background-color: white;
+ 	box-shadow: none;
+ 	color: black;
+ 	padding: 1%;
 }
-#signup{
+#login:hover{
+	background-color: white;
+	border: 2px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+}
+#signUp{
 	width:300px;
 	height:50px;
-	border-radius:25px;
-	font-size:20px;
+	color: #aaa;
+}
+#findId{
+	color: #aaa;
+}
+#findPw{
+	color: #aaa;
 }
 .findSection{
     margin-left:32.5%;
@@ -87,7 +124,7 @@ h1{
 	margin-left: 31%;
 }
 .footer-menu{
-	margin-bottom: -50%;
+	margin-bottom: -10%;
 }
 </style>
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -97,9 +134,9 @@ h1{
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		//$(".justify-content-center").hide(); 
 		$(".justify-content-center").show(); 
-		
-		$(".justify-content-center").css({"background-image":"url('resources/assets/img/logintest.JPG')","background-size":"cover"});
-	})
+		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
+		$(".hero-text").html("<h1>로그인</h1><br><span>회원가입 후 StuDdye의 다양한 콘텐츠를 이용해보세요.</span>");
+	});
 	
 function login_btn(){
 	var form = $(".loginForm");
@@ -123,29 +160,26 @@ function login_btn(){
 </head>
 <body>
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
-	<h1>로그인</h1>
 	<div class="main">
     <form class="loginForm" action="login.do" method="POST">
     	<table class="loginTable">
        		<tr>
-       		<br>
             	<td>
-            	<input type="text" name="mem_id" id="id" placeholder="아이디를 입력해주세요" style="border:2px solid #6E45E3" autofocus="autofocus">
+            	<input type="text" name="mem_id" id="id" placeholder=" 아이디를 입력해주세요" autofocus="autofocus">
             	</td>
           	</tr>
           	<tr>
              	<td>
-                <input type="password" name="mem_pw" id="pw" placeholder="비밀번호를 입력해주세요" style="border: 2px solid #6E45E3">
+                <input type="password" name="mem_pw" id="pw" placeholder=" 비밀번호를 입력해주세요">
              	</td>
           	</tr>
        		<br>
    		</table>
    		<div class="findSection">
-   		<a href="signform.do" id="signUp" onClick="loginpage/signup">회원가입 | </a>
-   		<a href="findIdForm.do" id="findId" onClick="loginpage/findId">아이디 찾기  | </a>
-   		<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기</a>
+   		<a href="findIdForm.do" id="findId" onClick="loginpage/findId">아이디 찾기  |  </a>
+   		<a href="findpwform.do" id="findPw" onClick="loginpage/findpwform">비밀번호 찾기   |  </a>
+   		<a href="signform.do" id="signUp" onClick="loginpage/signup">회원가입</a>
    		</div>
-   		<br>
    		<div class="mainBtn">
        	<button type="submit" id="login" onclick="login_btn();">LOGIN</button>
        	<br>

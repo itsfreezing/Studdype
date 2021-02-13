@@ -1,7 +1,8 @@
 @charset "UTF-8";
 .img{
-	position:relative;	
+	position:relative;		
 }
+
 .img .content{
 	 position: absolute;
      top:50%;
@@ -14,36 +15,58 @@
      font-weight:bold;
 	
 }
-.idico{
-   color:red;
-   margin:40px 10px 10px;
+#membergender{
+	font-size:20px;
+	top:5px;
 }
-
+.idico{
+	color:red;
+	margin-left:3px;
+	top:5px;
+	position:relative;
+}
 .pwico{
 	color:red;
-   margin: 5px 7px 5px ;
+	margin-left:3px;
+	top:5px;
+	position:relative;
 }
 .mailico{
 	color:red;
-   margin:50px 10px 10px;
+	margin-left:3px;
+	top:5px;
+	position:relative;
 }
-
+.numico{
+	color:red;
+	margin-left:3px;
+	top:5px;
+	position:relative;
+}
 .nameico{
-	color:red;
-   	margin:40px 10px 10px;
-
-}
-.rnoico{
-	color:red;
-   	margin:40px 10px 10px;
+		color:red;
+	margin-left:3px;
+	top:5px;
+	position:relative;
 }
 .genderico{
 	color:red;
-   	margin:40px 10px 10px;
+	margin-left:3px;
+	top:5px;
+	position:relative;
+
+}
+.rnoico{
+		color:red;
+	margin-left:3px;
+	top:5px;
+	position:relative;
 }
 .phoneico{
-	color:red;
-   	margin:5px 1px 1px 5px;
+		color:red;
+	margin-left:3px;
+	top:5px;
+	position:relative;
 }
 hr{
    border:1px solid black;
@@ -123,10 +146,8 @@ input{
    
 }
 #sign{
-   width:150px;
-   height:44px;
-   margin-top : 15px;
-   margin-left:17%;
+   margin-top :15px;
+   margin-left:7%;
    background-color: #EFF0F2;
    border: 1px solid #EFF0F2;
    font-size: 15px; 

@@ -3,13 +3,13 @@ package com.studdype.test.model.dao.study;
 import java.util.List;
 import java.util.Map;
 
-
-import com.studdype.test.common.Pagination;
 import com.studdype.test.common.SearchPagination;
+import com.studdype.test.model.dto.location.LocationGuDto;
+import com.studdype.test.model.dto.location.LocationSiDto;
 import com.studdype.test.model.dto.study.StudyDto;
 
 public interface StudyDao {
-String NAMESPACE="study.";
+		String NAMESPACE="study.";
 	
 	//메소드
 	public List<StudyDto> studyList(SearchPagination searchPagination); //메인페이지 리스트
@@ -25,10 +25,9 @@ String NAMESPACE="study.";
 	public List<StudyDto> selectStudyByCategory(int cate_no); // 카테고리 번호로 스터디 정보 가져오기
 	public Map<Integer,String> selectStudyName(int[] s_no); //스터디 번호에 맞는 스터디 이름가져오기 
 	public int nomalStudyImg(StudyDto dto); 
-
-
-	public List<StudyDto>selectStudyByLocation(int si_no);//지역 시와 구 스터디 검색
-	public StudyDto selectOneBySi_no(int si_no);
-	public List<StudyDto> studyListLocation(SearchPagination searchPagination);
+	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
+	public Map<Integer, String> selectStudyByLocation(int si_no);	//지역별 검색 시  번호 받기
+	public Map<Integer, String> selectByLocation(int gu_no);	//지역별 검색 구 번호 받기
 
 }
+
