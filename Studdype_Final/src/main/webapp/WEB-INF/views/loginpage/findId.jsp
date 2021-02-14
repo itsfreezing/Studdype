@@ -155,6 +155,9 @@ label{
 	cursor: pointer;
 	transition: 0.5s;
 }
+.footer-text{
+	margin-top: 20px;
+}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -183,6 +186,7 @@ function idsearch(){
 };
 
 function cancel(){
+	return "studyList.do"
 	self.close();
 }
 </script>
