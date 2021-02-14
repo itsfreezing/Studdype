@@ -124,7 +124,7 @@ $(function() {
                         <a class="nav-link" href="studyList.do">스터띱 홈</a>
                         </li>
                         <li class="nav-item" id="category">
-                           <a class="nav-link" href="studycategoryList.do">카테고리별 검색</a>
+                           <a class="nav-link" href="studycategoryList.do?cate_no=1">카테고리별 검색</a>
                         </li>
                         <li class="nav-item" id="location">
                            <a class="nav-link" href="studyListLocation.do">지역별 검색</a>
