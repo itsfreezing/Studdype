@@ -59,7 +59,7 @@ public class StudyDto {
 		this.s_no = s_no;
 		this.leader_no = leader_no;
 	}
-
+	
 	public int getS_no() {
 		return s_no;
 	}
