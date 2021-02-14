@@ -78,9 +78,7 @@ public class StudyController {
 		selectCateForMainMap = studyBiz.categoryListForHome(studyList); // 카테고리 리스트
 			
 		
-		for(int i=0; i<studyList.size(); i++) {
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-		}
+		
 			
 		
 		model.addAttribute("pageMaker", pageMaker);
