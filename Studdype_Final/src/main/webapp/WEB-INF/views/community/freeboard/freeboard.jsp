@@ -167,6 +167,7 @@ function search_chk(){
 		</div>
 
 		<!-- 페이징 -->
+		<c:if test="${not empty list }">
 				<div class="pagin_div">
 					<ul class="pagin">
 						<li class="page_li"><a class="next_page" onclick="prePageGroup();"><</a></li>
@@ -191,6 +192,7 @@ function search_chk(){
 					</form>
 
 				</div>
+			</c:if>
 
 	</div>
 
