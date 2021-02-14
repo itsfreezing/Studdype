@@ -222,7 +222,6 @@ function sendEmail(){
          contentType:"application/json",
          dataType:"json",
          success: function(map){
-        	
             if(map.isExist == "n"){//이메일이 올바르지 않음
                alert("입력하신 정보와 회원 정보가 일치하지 않습니다!")
             }else{

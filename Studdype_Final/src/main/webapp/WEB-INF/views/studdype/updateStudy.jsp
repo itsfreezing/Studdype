@@ -260,9 +260,17 @@
 #update {
 	position: absolute;
 	left: 480px;
-	width: 1211px;
+	width: 600px;
 	top: 1265px;
 }
+
+#deletestudy {
+	position: absolute;
+	left: 1100px;
+	width: 600px;
+	top: 1265px;
+}
+
 
 #mainbook {
 	color: black;
@@ -733,7 +741,16 @@ input[type="checkbox"]:checked+label:before {
 	$("#fileinput").change(function() {
 		readURL(this);
 	});
-	
+	function deletestudy(){
+		var a = '${study.s_currentcnt}'
+		
+		if(a!=1){
+			alert("스터디 대표를 양도해주세요!");
+		}else{
+			location.href="deletestudy.do?&s_no="+'${study.s_no}';
+			
+		}
+	}
 </script>
 </head>
 <body>
@@ -826,6 +843,7 @@ input[type="checkbox"]:checked+label:before {
 	
 		<input id="update" type="submit" class="btn btn-purple" value="스터디 변경">
 		</form>
+		<input id="deletestudy" type="submit" class="btn btn-purple" value="스터디 삭제" onclick="deletestudy();">
 
 		<br>
 		<br>

@@ -234,6 +234,33 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	@Override
+	public int deletestudy(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deletestudy",dto);
+		} catch (Exception e) {
+			System.out.println("스터디 삭제 오류");
+			e.printStackTrace();
+		}
+				
+		return res;
+	}
+
+	@Override
+	public int deletecurrent(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"deletecurrent",dto);
+		} catch (Exception e) {
+			System.out.println("ERORR: DELETECURRENT");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 }
 

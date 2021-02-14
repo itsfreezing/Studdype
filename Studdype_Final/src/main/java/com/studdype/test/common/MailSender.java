@@ -25,7 +25,7 @@ public class MailSender {
 		mail.setHost("smtp.gmail.com");
 		mail.setPort(587);
 		mail.setUsername("2dudwnd");
-		mail.setPassword("hree5416");
+		mail.setPassword("hree1215!@");
 		mail.setDefaultEncoding("UTF-8");
 		Properties prop = new Properties();
 		prop.setProperty("mail.smtp.auth", "true");
