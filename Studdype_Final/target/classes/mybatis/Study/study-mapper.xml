@@ -102,6 +102,9 @@
 	<update id="pluscurrent" parameterType="studyDto">
 		UPDATE STUDY SET S_CURRENTCNT = S_CURRENTCNT + 1 WHERE S_NO = #{s_no}
 	</update>
+	<update id="deletecurrent" parameterType="studyDto">
+		UPDATE STUDY SET S_CURRENTCNT = S_CURRENTCNT - 1 WHERE S_NO = #{s_no}
+	</update>
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
@@ -114,5 +117,7 @@
 		<select id="selectOneSi" parameterType="int" resultMap="studyMap">
 		SELECT * FROM STUDY WHERE SI_NO = #{si_no}AND GU_NO=#{gu_no}
 		</select>
-		
+	<delete id="deletestudy" parameterType="studyDto">
+		DELETE FROM STUDY WHERE S_NO = #{s_no} 
+	</delete>
 </mapper>

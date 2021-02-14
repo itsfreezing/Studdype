@@ -268,5 +268,17 @@ public class StudyBizImpl implements StudyBiz{
 		return study_Dao.pluscurrent(dto);
 	}
 
+	@Override
+	public int deletestudy(StudyDto dto) {
+		
+		return study_Dao.deletestudy(dto);
+	}
+
+	@Override
+	public int deletecurrent(StudyDto dto) {
+		
+		return study_Dao.deletecurrent(dto);
+	}
+
 
 }

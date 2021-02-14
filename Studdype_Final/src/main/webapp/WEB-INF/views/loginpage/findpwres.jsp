@@ -95,6 +95,9 @@ span{
 	cursor: pointer;
 	transition: 0.5s;
 }
+.footer-text{
+	margin-top: 20px;
+}
 </style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
