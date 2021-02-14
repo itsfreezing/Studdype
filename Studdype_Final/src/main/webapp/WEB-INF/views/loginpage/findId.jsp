@@ -47,7 +47,7 @@ label{
 .main_head{
    width: 600px;
    height: 300px;
-   margin-top: 3%;
+   margin-top: -2%;
    margin-left: auto;
    margin-right:auto;
    border-radius: 5px;
@@ -80,7 +80,8 @@ label{
     border-radius: 5px;
 }
 .namerno_part{
-   margin-left: 12%;
+   margin-left: 15%;
+   margin-top: 30px;
 }
 .name_part{
    font-weight: 800;
@@ -125,6 +126,8 @@ label{
    color: grey;
    margin-top:-2%;
    text-align: center;
+   padding-top: 55px;
+   height: 50px;
 }
 #login{
    font-weight: 800;
@@ -133,9 +136,10 @@ label{
    font-weight: 800;
 }
 #search_btn{
-   width:140px;
-      height:40px;
-      margin-top : 15px;
+	display: inline-block;
+   width:50%;
+   float: left;
+   height:50px;
    background-color: white;
    border: 1px solid #A6A6A6;
    font-size: 15px;
@@ -143,6 +147,8 @@ label{
    color: black;
    padding: 1%;
    box-shadow: none;
+   margin: 0!important;
+   border-radius: 0 0 0 5px;
 }
 #search_btn:hover{
    background-color: white;
@@ -153,14 +159,14 @@ label{
    transition: 0.5s;
 }
 #cancel{
-   width: 140px;
-    height: 40px;
-    margin-top: 15.5px;
-    margin-left: 5%;
+   display: inline-block;
+   width:50%;
+   float: right;
+    height: 50px;
     background-color: white;
     border: 1px solid #A6A6A6;
     font-size: 15px;
-    border-radius: 0px 0px;
+    border-radius: 0 0 5px 0;
     color: black;
     padding: 1%;
     box-shadow: none;
@@ -175,6 +181,7 @@ label{
     cursor: pointer;
     transition: 0.5s;
 }
+
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -184,6 +191,7 @@ $(function() {
    $(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
    $(".background").css("height", "800px");
    $(".hero-text").html("<h1>아이디 찾기</h1><br><span>하단에 정보를 기입해 주시면 아이디를 알려드려요.</span>");
+   $(".footer-text").css("margin-top", "20px");
 });
 
 function idsearch(){

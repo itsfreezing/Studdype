@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="./resources/css/signup/signup.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+
 function chkpwd(){
 	var pw=document.getElementById('memberpw').value;
 	var pw2=document.getElementById('mempw').value;
@@ -166,6 +167,7 @@ function chkVerifiNum(){
 }
 
 $(document).ready(function(){	
+	
 		var man=document.register.mem_gender[0];
 		var woman=document.register.mem_gender[1];
 		$("#sign").click(function(){	
@@ -311,8 +313,8 @@ $(function(){
 	<div class="img" >
 			  <img src="./resources/img/signup.png" style="width:100%;height:400px;">
 		<div class="content">
-			<h3>회원가입</h3>
-			<p style="font-size:13px;">회원가입 후 다양한 기능을 이용해보세요</p>
+			<p style="font-size: 60px; font-weight: 500;">회원가입</p>
+			<p style="font-size:20px; font-weight: 300;">회원가입 후 다양한 기능을 이용해보세요</p>
 		</div>
 	</div>
 
