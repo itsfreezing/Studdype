@@ -29,7 +29,7 @@
 $(function() {
 	$(".background").show(); 
 	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
-	$(".background").css("height", "650px");
+	$(".background").css("height", "800px");
 		$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
 });
 </script>
@@ -55,7 +55,7 @@ span{
 	margin-right: auto;
    	text-align: center;
 	width: 550px;
-	height: 100px;
+	height: 200px;
 	color: black;
 	opacity: 75%;
 	border-radius: 5px;
@@ -63,13 +63,14 @@ span{
 }
 #span_name{
 	margin-top: 10%;
-	padding-top: 5%;
+	padding-top: 10%;
 }
 #name{
 	font-size: 18px;
 	font-weight: 600;
 }
 .sub_btn{
+    margin-top: 15%;	
 	margin-bottom: 2%;
 	font-weight: 800;
 }
@@ -135,8 +136,8 @@ span{
 		</c:choose>
 	
 	<div class="sub_btn">
-		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
-		<button type="submit" id="findPw"><a href="findpwform.do" onClick="loginpage/findpwform">비밀번호 찾기</a></button>
+		<button type="submit" id="login" onClick="location.href='loginform.do?'">로그인</button>
+		<button type="submit" id="findPw" onClick="location.href='findpwform.do?'">비밀번호 찾기</button>
 	</div>
 	</div>
 </div>
