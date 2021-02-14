@@ -70,6 +70,15 @@ label{
     opacity: 85%;
     border-radius: 5px;
 }
+.a{
+	height: 250px;
+    box-sizing: border-box;
+    padding-top: 5%;
+    margin-top: 1%;
+    background: white;
+    opacity: 85%;
+    border-radius: 5px;
+}
 .namerno_part{
    margin-left: 12%;
 }
