@@ -430,7 +430,10 @@ function studypopup(multipleFilter) {
         <c:if test="${studylist.cate_no == 7 }">취업스터디</c:if>
         <c:if test="${studylist.cate_no == 8 }">기타</c:if>
         </p>
-        <a style="color:black; font-weight:bold; margin-left:20px; font-size:20px;  display:block; position: absolute;top: 91px;">${studylist.s_name }</a>
+       
+        <a style="color:black; font-weight:bold; margin-left:20px; font-size:20px;  display:block; position: absolute;top: 91px;"><c:choose><c:when test="${fn:length(studylist.s_name)>9 }">${fn:substring(studylist.s_name,0,9) }...</c:when>
+        <c:otherwise>${studylist.s_name }</c:otherwise></c:choose>
+        </a>
         <c:forEach var="allMember" items="${allMember }">
         <c:if test="${studylist.leader_no == allMember.mem_no }">
         <p style="color:black !important; margin-left:20px; font-size:10px; font-weight:bold; display:inline; position: absolute;top: 136px;">팀장: ${allMember.mem_name }</p>

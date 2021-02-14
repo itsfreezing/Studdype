@@ -47,8 +47,7 @@
 	<!-- a태그 영역 종료--------------------------------------------------------- -->
 	</div>
 	<!-- 메인 섹션 종료------------------------------------------------------- -->
-	
-	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 
+	<jsp:include page="../../commond/commondFooter.jsp"></jsp:include>
 </body>
 </html>

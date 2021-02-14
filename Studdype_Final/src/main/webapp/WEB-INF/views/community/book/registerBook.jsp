@@ -52,7 +52,10 @@
 				url:"https://dapi.kakao.com/v3/search/book?sort=accuracy&page=3&size=50&query="+$("#bookName").val()+"&target=title&target=person",
 				headers:{ Authorization: "KakaoAK 6e0eb818150f47faddc3398e2aef87b6" },
 				error:function() {
-					alert("도서 검색 실패!");
+					alert("키워드를 입력하고 검색해주세요.");
+					$("#book-img-section").empty();
+					$(".recommend-img").empty();
+					$(".categorySelected").removeClass("categorySelected");
 				},
 			})
 			// 데이터 정제
