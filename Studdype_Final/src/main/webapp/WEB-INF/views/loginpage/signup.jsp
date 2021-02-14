@@ -396,7 +396,7 @@ $(function(){
 	                 <td width="600" height="30"></td>
             	</tr> 
               	<tr>
-	   				<td><label for="chkNum">인증번호<span class="numico" style="font-size:20px">*</span></label></td>
+	   				<td><label for="chkNum" style="font-weight:bold;">인증번호<span class="numico" style="font-size:20px;">*</span></label></td>
 	   				<td>
 		   				<input type="text" id="chkNum" name="chkNum" placeholder="인증번호 입력" style="border:1px solid #ccc">
 		   				<input type="button" value="확인" id="chkNum_btn" class="chkNum_btn"onclick="chkVerifiNum();" >
