@@ -16,4 +16,3 @@
 <jsp:forward page="studyList.do"></jsp:forward>
 </body>
 </html>
-

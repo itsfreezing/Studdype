@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
+<script src="./resources/assets/js/main.js"></script>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
@@ -92,6 +93,12 @@ input#search:focus {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
+.pagin_div {
+	padding-left: 45%;
+	margin-top: 25px;
+}
+
 .studyBtn{
 	float: right;
 	margin-top : 15px;
@@ -117,6 +124,46 @@ input#search:focus {
 	transition: 0.5s;
 
 
+}
+.blog-meta{
+	padding: 15px;
+}
+.single-blog-post{
+	height: 450px;
+	margin-bottom: 15px;
+}
+
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: black;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	/* background-color: #6434ef; */
+	cursor: pointer;
 }
 </style>
 
@@ -151,7 +198,7 @@ input#search:focus {
 			<div class="input-group"
 				style="width: 50%; margin: auto; margin-bottom: 100px;">
 					<input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="스터디 제목을 검색하세요." value="${searchPagination.keyword}" style="width:100px; height:60px; margin-top:10px;"> <span>
-					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:15px; border:none; background-color: #f9fafc;">
+					<button type="button" id="homeSearch" name="homeSearch" style="margin-top:15px; border:none; background-color: #ffff;">
 						<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 					</button>
 				</span>
@@ -188,7 +235,7 @@ input#search:focus {
 									${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
 							</div>
 
-							<p>${studyDto.s_info }</p>
+							<p style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
 								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
@@ -204,25 +251,28 @@ input#search:focus {
 		</div>
 		<c:choose>
 			<c:when test="${login != null }">
-				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='loginform.do'">
 			</c:when>
+			<c:otherwise>
+				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+			</c:otherwise>
 		</c:choose>
 	</div>
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
-	<div style="padding-left: 45%;">
-		<ul class="pagination">
+	<div class="pagin_div">
+		<ul class="pagin">
 			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li class="page_li"><a class="next_page" href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<li class="page_li li_hober"><a class="page_a current_page" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li class="page_li"><a class="next_page" href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>
