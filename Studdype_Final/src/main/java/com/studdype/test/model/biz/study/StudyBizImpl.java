@@ -262,5 +262,11 @@ public class StudyBizImpl implements StudyBiz{
 		return locationSidao.selectLocationSiOfStudy(si_no);
 	}
 
+	@Override
+	public int pluscurrent(StudyDto dto) {
+		
+		return study_Dao.pluscurrent(dto);
+	}
+
 
 }

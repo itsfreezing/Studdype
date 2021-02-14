@@ -79,10 +79,9 @@ public class StudyController {
 			
 		
 		for(int i=0; i<studyList.size(); i++) {
-			if(studyList.get(i).getPhoto() == null) {
-				studyList.get(i).setPhoto("./resources/assets/img/nothingBook.png");
-			}
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				if( studyList.get(i).getPhoto() != null ) {
+					studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				}
 		}
 			
 		

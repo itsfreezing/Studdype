@@ -1,3 +1,4 @@
+
 package com.studdype.test.model.dao.board.meet;
 
 import java.util.Date;
@@ -42,3 +43,4 @@ public interface MeetBoardDao {
 
 
 }
+

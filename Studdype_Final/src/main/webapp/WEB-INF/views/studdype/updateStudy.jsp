@@ -610,6 +610,9 @@ input[type="checkbox"]:checked+label:before {
 			 
 		});
 		
+		if(chk_arr.includes(m)){
+			alert("대표는 추방할수 없습니다!");
+		}else{
 		if(chk_arr.length == 0){
 			
 			location.href="updatelead.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m
@@ -617,6 +620,7 @@ input[type="checkbox"]:checked+label:before {
 		
 		
 		location.href="updateleader.do?"+"&s_no="+'${study.s_no}'+"&leader_no="+m+"&exile_no="+chk_arr;
+		}
 		}
 	}
 	
@@ -939,7 +943,7 @@ input[type="checkbox"]:checked+label:before {
             <c:forEach var="bookList" items="${bookList}" varStatus="status" >
                <tr style="text-align:center;">
                   <td>${status.count }</td>
-                  <td>${bookList.book_title }</td>
+                  <td style="cursor:pointer;" onclick="location.href='bookDetailform.do?b_no=${bookList.b_no}'">${bookList.book_title }</td>
                   <c:if test="${bookList.book_ismain eq 'N' }">
                      <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
                         name="bookmain">대표</td>
@@ -953,7 +957,7 @@ input[type="checkbox"]:checked+label:before {
 
          </tbody>
       </table>            
-    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="change();" value="수정하기">   
+    <input type="button" class="btn btn-purple" style="display:block; margin-top:20px; margin-left:90%;" onclick="changebook();" value="수정하기">   
 	</div>
 		
 	  
