@@ -241,7 +241,7 @@ input#search:focus {
 								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
 									style="float: right;"><img
 										src="./resources/assets/img/profile_user.png"
-										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
+										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_currentcnt}/${studyDto.s_maxcnt}</a>
 								</span>
 							</div>
 						</div>
