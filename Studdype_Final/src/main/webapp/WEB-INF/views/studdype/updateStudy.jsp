@@ -567,7 +567,7 @@ input[type="checkbox"]:checked+label:before {
 		//파일 크기
 		var fileSize = file.files[0].size;
 	
-		alert(fileName);
+		
 		
 		location.href="studyupdate.do?"+"&s_no="+'${study.s_no}'+"&s_info="+i+"&b_no="+b
 				+"&cate="+c+"&locationsi_no="+s+"&locationgu_no="+g+"&max="+m+"&img_name="+fileName+"&s_name="+n;
