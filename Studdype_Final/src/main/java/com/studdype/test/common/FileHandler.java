@@ -208,6 +208,7 @@ public class FileHandler {
 	public String getFileName(String f_url, String folderName) {
 		String[] fileNames;
 		String fileName = "";
+		System.out.println(f_url);
 		File file = new File(f_url);
 		
 		if(file.exists()) {
