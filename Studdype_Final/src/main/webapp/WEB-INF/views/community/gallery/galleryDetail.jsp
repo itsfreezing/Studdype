@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -38,7 +38,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
 
 
@@ -54,7 +54,7 @@ div#carousel {
 }
 
 #fewsize{
-	width: 410px;
+	width: 580px;
 	height: 350px;
 	margin: 15px;
 }
@@ -67,10 +67,9 @@ figure#spinner {
 }
 
 figure#spinner a {
-	width: 425px;
-	max-width: 425px;
+	width: 550px;
 	position: absolute;
-	left: 30%;
+	left: 18%;
 	transform-origin: 50% 50% -500px;
 	outline: 1px solid transparent;
 }
@@ -80,32 +79,25 @@ figure#spinner a:nth-child(1) {
 }
 
 figure#spinner a:nth-child(2) {
-	transform: rotateY(-45deg);
+	transform: rotateY(-60deg);
 }
 
 figure#spinner a:nth-child(3) {
-	transform: rotateY(-90deg);
+	transform: rotateY(-120deg);
 }
 
 figure#spinner a:nth-child(4) {
-	transform: rotateY(-135deg);
-}
-
-figure#spinner a:nth-child(5) {
 	transform: rotateY(-180deg);
 }
 
+figure#spinner a:nth-child(5) {
+	transform: rotateY(-240deg);
+}
+
 figure#spinner a:nth-child(6) {
-	transform: rotateY(-225deg);
+	transform: rotateY(-300deg);
 }
 
-figure#spinner a:nth-child(7) {
-	transform: rotateY(-270deg);
-}
-
-figure#spinner a:nth-child(8) {
-	transform: rotateY(-315deg);
-}
 
 div#carousel ~ span {
 	color: #100;
@@ -332,6 +324,75 @@ div#carousel ~ span:hover {
 	cursor: pointer;
 	transition: 0.5s;
 
+}
+
+
+
+.title {
+	font-size: 40px;
+	font-weight: bold;
+	float: left;	
+	width: 75%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.title_full{
+	opacity: 0;
+	
+	
+}
+
+.writer {
+	font-size: 20px;
+	float: left;
+	font-weight: bold;
+}
+
+.regdate {
+	width: 20%;
+	padding-top:15px;
+	font-size: 20px;
+	float: right;
+}
+
+.cnt {
+	font-size: 20px;
+	float: right;
+}
+
+.cnt2 {
+	font-weight: bold;
+}
+
+.titleDiv {
+	height: 100px;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+	padding-left: 20px;
+	background-color: #fcfcfc;
+	
+	
+}
+
+.writerDiv {
+	padding: 15px;
+	border-bottom: 1px solid #ccc;
+	height: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.contentDiv {
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 </style>
 
@@ -712,8 +773,13 @@ div#carousel ~ span:hover {
 	<!--main conternt 섹션-->
 	<div class="main-section">
 		<br>
-		<h1 style="text-align: center; font-weight: bold;">${detail.b_title }</h1><hr>
-		<p>by. ${galleryWriter}</p>
+		<div class="titleDiv" aria-label="${detail.b_title }" data-pop="bottom"  data-pop-delay="short"  >
+			<span class="title" >${detail.b_title }</span>
+			<span class="regdate" ><fmt:formatDate value="${detail.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
+		</div>
+		<div class="writerDiv">
+			<span class="writer"> ${galleryWriter}</span>
+		</div>
 		<div class="container mt-5">
 			<div id="carousel">
 				<figure id="spinner">
@@ -724,18 +790,19 @@ div#carousel ~ span:hover {
 					</c:forEach>
 				</figure>
 			</div>
-			<span style="float: left" class="ss-icon" onclick="galleryspin('-')">&lt;</span>
-			<span style="float: right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
+			<span style="float: left" class="ss-icon" onclick="galleryspin('-')"><img alt="" src="./resources/img/left-allow.png" style="width: 34px;left: -79px;top: -182px;position: relative;" ></span>
+			<span style="float: right" class="ss-icon" onclick="galleryspin('')"><img alt="" src="./resources/img/right-allow.png" style="width: 32px;left: 57px;position: relative;top: -165px;"></span>
 			<!-- /row -->
 		</div>
+		<div class="contentDiv">${detail.b_content }</div>
 		<script type="text/javascript">
 		var angle = 0;
 		function galleryspin(sign) {
 			spinner = document.querySelector("#spinner");
 			if (!sign) {
-				angle = angle + 45;
+				angle = angle + 60;
 			} else {
-				angle = angle - 45;
+				angle = angle - 60;
 			}
 			spinner.setAttribute("style", "-webkit-transform: rotateY(" + angle
 					+ "deg); -moz-transform: rotateY(" + angle
@@ -751,8 +818,6 @@ div#carousel ~ span:hover {
 		<!-- 갤러리 뷰 끝 -->
 
 		<!-- 갤러리 내용 시작 -->
-		<div class="galleryContent">${detail.b_content }</div>
-		<!-- 갤러리 내용 끝 -->
 
 
 		<hr>

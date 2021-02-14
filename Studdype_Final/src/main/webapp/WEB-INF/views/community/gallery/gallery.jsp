@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,7 @@
 	href="./resources/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -28,7 +30,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 <script type="text/javascript">
 $('.customNextBtn').click(function() {
 	owl.trigger('next.owl.carousel');
@@ -172,7 +174,84 @@ console.log(url);
 	color: #6434ef;
 	cursor: pointer;
 	transition: 0.5s;
+}
 
+.pagination {
+	margin-left: 35%;
+}
+
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+	margin-left: 30%;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	/* background-color: #6434ef; */
+	cursor: pointer;
+}
+
+.next_page {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.next_page:hover {
+	cursor: pointer;
+}
+
+.pagin_div {
+	margin-top: 25px;
+}
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+.spantitle{
+ display: inline-block;
+ width:75%;
+  font-weight: bold;
+   text-overflow : ellipsis; 
+  white-space : nowrap;
+   overflow:hidden;
+}
+.spandate{
+ width:20%;
+  float: right; 
+  font-weight: bold;
 }
 </style>
 </head>
@@ -218,7 +297,10 @@ console.log(url);
 								<span class="text-white" >클릭해주세요</span>
 							</h2>
 						</a>
-						<h4 class="text-center" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${galleryList.b_title}</h4>
+						<div>
+						<span class="spantitle">${galleryList.b_title}</span>
+						<span class="spandate"><fmt:formatDate value="${galleryList.b_regdate }" pattern="YYYY.MM.dd"/></span>
+						</div>
 					</div>
 				</div>
 				</c:forEach>
@@ -227,21 +309,23 @@ console.log(url);
 			</div>
 		</div>
 	<button onclick="location.href='gallerywriteform.do'" class="gallery_Btn">글쓰기</button>
-		<div>
-		<ul>
-			<c:if test="${pageMaker.prev}">
-				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-			</c:if>
-
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="i">
-				<li><a href="gallery.do${pageMaker.makeSearch(i)}">${i}</a></li>
-			</c:forEach>
-
-			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="gallery.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-			</c:if>
-		</ul>
-	</div>
+	
+	<div class="pagin_div">
+					<ul class="pagin">
+							<c:if test="${pageMaker.prev}">
+								<li class="page_li"><a class="next_page" href="gallery.do${pageMaker.makeSearch(pageMaker.startPage - 1)}"><</a></li>
+							</c:if>
+			
+						<c:forEach var="i" begin="${pageMaker.startPage}" end="${pageMaker.endPage}" step="1" varStatus="status">
+									<li class="page_li li_hober"><a class="page_a current_page"	href="gallery.do${pageMaker.makeSearch(i)}">${i}</a></li>
+						</c:forEach>
+						
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<li class="page_li"><a class="next_page" href="gallery.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">></a></li>
+							</c:if>
+					</ul>
+				</div>
+	
 	</div>
 
 
