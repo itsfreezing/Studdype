@@ -168,7 +168,15 @@
 				</div>
 			</div>
 			<div id="apply-bottom-section">
-				<button id="apply-button" onclick="studyApply();">스터디 신청</button>
+				<c:choose>
+					<c:when test="">
+						<button id="apply-button" onclick="studyApply();">스터디 신청</button>
+					</c:when>
+					<c:otherwise>
+						<button id="apply-button">스터디 마감</button>
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 	
