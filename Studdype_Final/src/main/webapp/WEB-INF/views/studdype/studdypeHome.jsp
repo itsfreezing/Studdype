@@ -126,6 +126,39 @@ input#search:focus {
 	height: 450px;
 	margin-bottom: 15px;
 }
+
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	/* background-color: #6434ef; */
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -222,18 +255,18 @@ input#search:focus {
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
-	<div style="padding-left: 45%;">
-		<ul class="pagination">
+	<div class="pagin_div">
+		<ul class="pagin">
 			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li class="page_li"><a class="next_page" href="studyList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<li class="page_li li_hober"><a class="page_a current_page" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a class="page-link" href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li class="page_li"><a class="next_page" href="studyList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

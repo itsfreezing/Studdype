@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 <script src="./resources/assets/js/main2.js"></script>
 <link rel="stylesheet" href="./resources/assets/calendar/main.css">
@@ -43,16 +45,18 @@
 							'meet_title': eventObj.title,
 							'vote_startdate': moment(eventObj.start).format("YYYY-MM-DD"),
 							'vote_enddate': moment(eventObj.end).format("YYYY-MM-DD")
+							
 						},
 			    		success:function(data){
-							$('.calDescription').text(data.dataList.meet_content).css('float','left');
+							$('.calDescription').text(data.dataList.meet_content).css({'float':'left','font-family':'Jua'});
+							$('.calDday').text(moment(data.dataList.meet_time).format("YYYY-MM-DD HH : MM")).css('font-family','Jua');
 						}
 			    	});
 			       			 $("#modal-one").show();
 			       			 $("#modal-one").fadeIn("slow");
 				    		  $("#modal-show").fadeIn("slow");
-			       			 $(".calTitle").text(eventObj.title);
-			       			 $(".calDate").text(moment(eventObj.start).format("YYYY-MM-DD")+" ~ "+moment(eventObj.end).format("YYYY-MM-DD"));
+			       			 $(".calTitle").text(eventObj.title).css('font-family','Jua');
+			       			 $(".calDate").text(moment(eventObj.start).format("YYYY-MM-DD")+" ~ "+moment(eventObj.end).format("YYYY-MM-DD")).css('font-family','Jua');
 			       			$("#modal-inside")
 
 			    		$(".close").click(function() {
@@ -113,8 +117,8 @@
 	top: 0;
 	}
 	#modal-show{
-	width: 500px;
-	height: 400px;
+	width: 600px;
+	height: 550px;
 	position: absolute;
 	border-radius: 5px;
 	left: 50%;
@@ -151,8 +155,28 @@ font-family: Noto Sans;
  font-family: Noto Sans;
  float: right;
  }
+  .calDday{
+ margin-right: 15px;
+ font-family: Noto Sans;
+ float: right;
+ }
 .feature-page.header-area {
 	background-image: url(./resources/assets/img/features/gam.png)!important;
+}
+.modalhead{
+	color: black;
+    text-align: center;
+    font-size: 30px;
+    font-family: Jua;
+    margin-bottom: 50px;
+}
+.modalheadimage{
+	margin-left: 46%;
+    margin-top: 10%;
+    width: 50px;
+}
+#modalheaddiv{
+	margin-bottom: 20px;
 }
 	</style>
 </head>
@@ -167,14 +191,22 @@ font-family: Noto Sans;
  	<div id="modal-one">
 		<div id="modal-show">
 			<div class="close"><span>&#43;</span></div>
+				<div id="modalheaddiv">
+					<img class="modalheadimage" src="./resources/assets/img/category_schedule.png">
+					<p class="modalhead">모임일정 상세보기</p>
+				</div>
 				<h2 class="calTitle"></h2>
 			<hr>
 			<div>
-				<span style="margin-left: 15px; font-size: 17px; font-weight: bold; display: inline-block;">투표기간</span>
+				<span style="margin-left: 15px; font-size: 17px; font-weight: bold; display: inline-block;  font-family: Jua;">투표기간</span>
 				<span class="calDate"></span>
 			</div>
+			<div>
+				<span style="margin-left: 15px; font-size: 17px; font-weight: bold; display: inline-block; font-family: Jua;">모임날짜</span>
+				<span class="calDday"></span>
+			</div>
 			<hr>
-			<p style="margin-left: 15px; font-weight: bold; font-size: 17px;">모임일정</p>
+			<p style="margin-left: 15px; font-weight: bold; font-size: 17px; font-family: Jua;">모임일정</p>
 			<p class="calDescription"></p>
 			
 		</div>

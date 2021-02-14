@@ -300,7 +300,95 @@ height: 400px;
 	text-align: center;
 }
 
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+}
 
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	/* background-color: #6434ef; */
+	cursor: pointer;
+}
+
+.next_page {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: pink;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.next_page:hover {
+	cursor: pointer;
+}
+
+.pagin_div {
+	padding-left: 45%;
+	margin-top: 25px;
+}
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+.spantitle{
+ display: inline-block;
+ width:75%;
+  font-weight: bold;
+   text-overflow : ellipsis; 
+  white-space : nowrap;
+   overflow:hidden;
+}
+.spandate{
+ width:20%;
+  float: right; 
+  font-weight: bold;
+}
+.blogpost-area{
+	background: #ffff;
+
+	margin-left: 5%;
+	margin-right: 5%;
+
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.blog-meta{
+	padding: 15px;
+}
+.single-blog-post{
+	height: 450px;
+	margin-bottom: 15px;
+}
 </style>
 
 </head>
@@ -441,18 +529,18 @@ $("#catebtn8").on({
 						<div class="single-blog-post">
 							<div class="blog-img-responsive-4by3">
 								<!-- 스터디 이미지 -->
-								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;">
+								<img src="${studyDto.getPhoto() }" alt="" class="img-fluid" style="width: 379px; height: 233px;" onError="this.src='./resources/img/no-image1.png'">
 							</div>
 							<!-- 제목/장소아이콘/장소/카테고리 -->
 							<div class="blog-meta">
-								<h3>${studyDto.s_name}</h3>
+								<h3 style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_name}</h3>
 								<br> <span><img
 									src="./resources/assets/img/profile_placeholder.png"
 									style="width: 15px;"><b>${siList.get(studyDto.si_no) }&nbsp;
 									${guList.get(studyDto.gu_no)}</b><a style="float:right;">${cateList.get(studyDto.cate_no)}</a> </span>
 							</div>
 
-							<p>${studyDto.s_info }</p>
+							<p style="white-space : nowrap; text-overflow : ellipsis; overflow:hidden;">${studyDto.s_info }</p>
 							<!-- 최대인원수/팀장명 -->
 							<div class="blog-comments">
 								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
@@ -470,18 +558,18 @@ $("#catebtn8").on({
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
-	<div style="padding-left: 45%;">
-		<ul class="pagination">
+	<div class="pagin_div">
+		<ul class="pagin">
 			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+				<li class="page_li"><a class="next_page" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<li class="page_li li_hober"><a class="page_a current_page" href="studycategoryList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a class="page-link" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+				<li class="page_li"><a class="next_page" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>
