@@ -11,12 +11,9 @@
 function logout_btn(){
    var form = $("#logoutForm");
    var logout = $("#logout");
+
    
-   if ( logout.val() == null || logout.val().trim() == ''){
-      alert("로그아웃 되었습니다.");
-   }else {
-      form.submit();
-   }
+   location.href="logout.do";
 };
 
 $(function() {
@@ -106,7 +103,7 @@ $(function() {
 <body>
 <input type="hidden" id="currentMenu" value="${headerMenu }">
    <!-- 헤더 시작 -->
-   <form id="logoutForm" action="logout.do" method="POST">
+
    <div class="feature-page get-start header-area">
       <div class="container">
          <div class="header-top">
@@ -178,7 +175,7 @@ $(function() {
                   </div>
          
                </div>
-               </form>
+   
          
             
             
@@ -198,7 +195,7 @@ $(function() {
    <div id="studypopup" class="hide">
     <div class="content">
     	<p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 18px; ">내 전체 스터디 목록</p>
-    	<p style="position: absolute;top: 302px;left: 689px; color:red; font-size: 20px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
+    	<p style="position: absolute;top: 302px;left: 760px; color:red; font-size: 16px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
        <div style="height: 300px; width: 28%; position: absolute; top: 34%; left: 36%; overflow:auto;" id="allstudy">
        		<table id="studyall" style="height:500px; width:511px; text-align:center;" class="table table-hover">
        			<thead>
