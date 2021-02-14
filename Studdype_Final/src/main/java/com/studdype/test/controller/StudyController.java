@@ -79,7 +79,9 @@ public class StudyController {
 			
 		
 		for(int i=0; i<studyList.size(); i++) {
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				if( studyList.get(i).getPhoto() != null ) {
+					studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				}
 		}
 			
 		

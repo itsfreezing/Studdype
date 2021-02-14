@@ -105,7 +105,9 @@
 	<update id="nomalStudyImg" parameterType="studyDto">
 		UPDATE STUDY SET S_PHOTO = #{photo} WHERE S_NO = #{s_no}
 	</update>
-	
+	<update id="pluscurrent" parameterType="studyDto">
+		UPDATE STUDY SET S_CURRENTCNT = S_CURRENTCNT + 1 WHERE S_NO = #{s_no}
+	</update>
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
