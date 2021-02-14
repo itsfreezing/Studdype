@@ -142,7 +142,6 @@ span{
 	</div>
 </div>
 
-
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->
 	<script src="./resources/assets/js/popper.min.js"></script>
