@@ -30,5 +30,6 @@ public interface StudyDao {
 	public Map<Integer, String> selectByLocation(int gu_no);	//지역별 검색 구 번호 받기
 	public int pluscurrent(StudyDto dto); // 스터디 가입시 current + 1
 	public int deletestudy(StudyDto dto); // 스터디 삭제 
+	public int deletecurrent(StudyDto dto); // 추방시 current -1 
 }
 
