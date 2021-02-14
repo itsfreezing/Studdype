@@ -93,6 +93,12 @@ input#search:focus {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
+.pagin_div {
+	padding-left: 45%;
+	margin-top: 25px;
+}
+
 .studyBtn{
 	float: right;
 	margin-top : 15px;
@@ -146,7 +152,7 @@ input#search:focus {
 	margin-right: 3px;
 	width: 40px;
 	height: 40px;
-	color: pink;
+	color: black;
 	font-weight: bold;
 	border: 1px solid #dee2e6;
 	text-align: center;
