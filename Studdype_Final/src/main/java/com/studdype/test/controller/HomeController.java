@@ -228,13 +228,19 @@ public class HomeController {
 	public String receiveagree(HttpServletRequest request, Model model) {
 		
 		StudyApplyingDto dto = new StudyApplyingDto(Integer.parseInt(request.getParameter("s_no")),Integer.parseInt(request.getParameter("mem_no")));
-		
+		StudyDto dto2 = new StudyDto(Integer.parseInt(request.getParameter("s_no")));
 		int res = studyapplyingBiz.receiveagree(dto);
-		
+		int res2 = studyBiz.pluscurrent(dto2);
 		if(res>0) {
+			if(res2>0) {
 			model.addAttribute("msg","수락 되었습니다.");
 			model.addAttribute("url","myPage.do");
 			return "commond/alert";
+			}else {
+			model.addAttribute("msg","실패 하였습니다.");
+			model.addAttribute("url","myPage.do");
+			return "commond/alert";
+			}
 		}else {
 			model.addAttribute("msg","실패 하였습니다.");
 			model.addAttribute("url","myPage.do");

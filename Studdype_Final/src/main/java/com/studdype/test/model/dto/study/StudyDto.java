@@ -48,6 +48,11 @@ public class StudyDto {
 
 	
 
+	public StudyDto(int s_no) {
+		super();
+		this.s_no = s_no;
+	}
+
 	public StudyDto(int s_no, String photo) {
 		super();
 		this.s_no = s_no;
@@ -59,7 +64,7 @@ public class StudyDto {
 		this.s_no = s_no;
 		this.leader_no = leader_no;
 	}
-
+	
 	public int getS_no() {
 		return s_no;
 	}
