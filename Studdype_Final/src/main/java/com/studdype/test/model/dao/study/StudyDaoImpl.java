@@ -221,6 +221,19 @@ public class StudyDaoImpl implements StudyDao {
 		return res;
 	}
 
+	@Override
+	public int pluscurrent(StudyDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"pluscurrent",dto);
+		} catch (Exception e) {
+			System.out.println("현재인원 오류");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 }
 
