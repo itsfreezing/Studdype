@@ -56,7 +56,7 @@ label{
    margin-left: auto;
    margin-right: auto;
    width: 550px;
-   height: 300px;
+   height: 270px;
    margin-top: -1%;
    background: white;
    border-radius: 5px;
@@ -128,21 +128,22 @@ label{
    transition: 0.5s;
 }
 .main_btn{
-   margin-top: 1%;
-   margin-bottom: 3%;
-   margin-left: 16%;
+   margin-top: 8%;
+       width: 550px;
 }
-#psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-   width:140px;
-      height:40px;
-      margin-top : 15px;
+#psw_btn{        
+display: inline-block;
+   width:50%;
+   float: left;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+      height:50px;
    background-color: white;
    border: 1px solid #A6A6A6;
    font-size: 15px;
-   border-radius: 0px 0px;
    color: black;
    padding: 1%;
    box-shadow: none;
+   border-radius: 0 0 0 5px;
+   margin: 0!important;
 }
 #psw_btn:hover{
    background-color: white;
@@ -153,19 +154,19 @@ label{
    transition: 0.5s;
 }
 #cancel_btn{
-   width:140px;
-      height:40px;
-      margin-top : 15px;
-      margin-left: 2%;
+   display: inline-block;
+   width:50%;
+   float: right;  
+      height:50px;
    background-color: white;
    border: 1px solid #A6A6A6;
    font-size: 15px;
-   border-radius: 0px 0px;
    color: black;
    padding: 1%;
    box-shadow: none;
    text-align: center;
    font-weight: bold;
+   border-radius: 0 0 5px 0;
 }
 
 #cancel_btn:hover{
@@ -189,6 +190,7 @@ $(function() {
    $(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
    $(".background").css("height", "850px");
    $(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>하단에 정보를 기입해 주시면 임시 비밀번호를 보내드려요.</span>");
+   $(".footer-text").css("margin-top", "20px");
 });
  
 $(function(){
@@ -222,7 +224,6 @@ function sendEmail(){
          contentType:"application/json",
          dataType:"json",
          success: function(map){
-           
             if(map.isExist == "n"){//이메일이 올바르지 않음
                alert("입력하신 정보와 회원 정보가 일치하지 않습니다!")
             }else{

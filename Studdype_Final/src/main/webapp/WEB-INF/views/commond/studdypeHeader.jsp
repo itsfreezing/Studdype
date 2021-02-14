@@ -24,6 +24,7 @@ $(function() {
    $(".feature-page.header-area").css("height", "70px");
    $(".hero-text-wrapper").css("height", "400px");
    $(".nav-link").css("color", "black");
+   
 });
 
 
