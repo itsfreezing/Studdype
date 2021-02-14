@@ -943,7 +943,7 @@ input[type="checkbox"]:checked+label:before {
             <c:forEach var="bookList" items="${bookList}" varStatus="status" >
                <tr style="text-align:center;">
                   <td>${status.count }</td>
-                  <td>${bookList.book_title }</td>
+                  <td style="cursor:pointer;" onclick="location.href='bookDetailform.do?b_no=${bookList.b_no}'">${bookList.book_title }</td>
                   <c:if test="${bookList.book_ismain eq 'N' }">
                      <td id="mainbook"><input id="bookmain" type="radio" value="${bookList.b_no }"
                         name="bookmain">대표</td>

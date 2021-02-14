@@ -161,7 +161,7 @@ $(function() {
 											<a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
 											<a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
 											<hr id="profileHR">
-											<a class="dropdown-item" href="logout.do" onclick="logout_btn();" id="logout">로그아웃</a>
+											<a class="dropdown-item"  onclick="logout_btn();" id="logout">로그아웃</a>
 									</div>
 								</li>
                         	</c:otherwise>
