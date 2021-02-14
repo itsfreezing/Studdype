@@ -40,11 +40,24 @@
 				$("." + selectSi).show();
 			});
 		});
+
+function search(){
+	var locationsi=$("#selectLocationSi option:selected").text();
+	var locationgu=$("#selectLocationGu option:selected").text();
+	if(locationsi=="(시단위)"){
+		alert("스터디 지역(시)을 선택해주세요");
+		return false;
+	}else if(locationgu=="(구/군단위)"){
+		alert("구/군단위를 선택해주세요");
+		return false;
+	}
+}
+</script>
+<script>
 $(function(){
 	$(".justify-content-center").hide();
 });
 </script>
-
 </head>
 
 <body>
@@ -59,7 +72,7 @@ $(function(){
 	<!-- 스터디 영역 -->
 	<br><br>
 	<div id="mainsection">
-		 <form action="studyListLocation.do" method="GET" id="locationform" > 
+		 <form action="studyListLocation.do" method="GET" id="locationform" onsubmit='return search();'> 
 		 				<div id="si">
 								<label>스터디 지역(시)</label> 
 								<select class="form-control"
@@ -68,7 +81,7 @@ $(function(){
 									<c:forEach var="locationsi" items="${sidtos}">
 										<option value="${locationsi.si_no }">${locationsi.si_name }</option>
 									</c:forEach>
-						</select>
+								</select>
 						</div>
 						<div id="gu">
 								<label style="margin-left:6.5%;">스터디 지역(구/군)</label> 
@@ -79,14 +92,14 @@ $(function(){
 										<option class="${locationgu.si_no }"
 											value="${locationgu.gu_no }">${locationgu.gu_name }</option>
 									</c:forEach>
-						</select>
+								</select>
 						</div>
 						<div class="input-group">
-							<button type="submit" class="Search" name="Search" style="border:none; background-color:white;" onclick="search();" >
+							<button class="Search" name="Search" style="border:none; background-color:white;" >
 									<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>  
-				</form>	 
+					</form>	 
 			</div>
 					<br><br>
 		<div class="blogpost-area">
@@ -94,7 +107,8 @@ $(function(){
 			<div class="row">
 			<c:choose>
 					<c:when test="${empty studyList}">
-						<p style="margin-left:50%;">검색해주세요</p>
+						<img src="./resources/img/images_nothing.png" style="width: 300px; margin-left:40%; margin-top:-2%;">
+						<p style="margin-left:40%;">검색 결과가 없습니다. 검색해주세요</p>
 						
 					</c:when>
 					<c:otherwise>
@@ -132,34 +146,41 @@ $(function(){
 					</c:choose>
 					</div>
 				</div>
+				<c:choose>
+					<c:when test="${login != null }">
+						<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='loginform.do'">
+					</c:when>
+					<c:otherwise>
+						<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+					</c:otherwise>
+				</c:choose>
+			</div>	
 				
-					<c:choose>
-						<c:when test="${login != null }">
-							<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
-						</c:when>
-					</c:choose>
-				
-				
-					
-			</div>		
 	<!-- 스터디 리스트 끝 -->
 
 	<!-- 스터디 리스트 페이징 -->
-	 <div style="padding-left: 45%;">
-		<ul class="pagination">
-			<c:if test="${pageMaker.prev}">
-				<li class="page-item"><a class="page-link" href="studyListLocation.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-			</c:if>
-
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page-item"><a class="page-link" href="studyListLocation.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
-			</c:forEach>
-
-			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a class="page-link" href="studyListLocation.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-			</c:if>
-		</ul>
-	</div>
+	<c:choose>
+	   <c:when test="${empty studyList}">
+	         
+	   </c:when>
+	   <c:otherwise>
+	         <div class="pagin_div">
+	         <ul class="pagin">
+	            <c:if test="${pageMaker.prev}">
+	               <li class="page_li"><a class="next_page" href="studyListLocation.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+	            </c:if>
+	   
+	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+	               <li class="page_li li_hober"><a class="page_a current_page" href="studyListLocation.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+	            </c:forEach>
+	   
+	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+	               <li class="page_li"><a class="next_page" href="studyListLocation.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+	            </c:if>
+	         </ul>
+	      </div>
+	   </c:otherwise>
+   </c:choose>
 	<!-- 스터디 리스트 페이징 끝 -->
 
 
