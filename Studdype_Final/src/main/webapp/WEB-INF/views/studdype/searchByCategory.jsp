@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet" href="./resources/css/studdype/mainsection.css">
 <link rel="stylesheet" href="./resources/css/studdype/header&footer.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script src="./resources/assets/js/main.js"></script>
 
 
@@ -291,11 +293,9 @@ input#search:focus {
 .categoryImage {
 	width: 100%;
 	height: 400px;
+	z-index: -3;
 }
-.categoryImage > img {
-width: 100%;
-height: 400px;
-}
+
 .cateBtn2{
 	text-align: center;
 }
@@ -389,6 +389,37 @@ height: 400px;
 	height: 450px;
 	margin-bottom: 15px;
 }
+.headtitle{
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+	font-size: 35px;
+	color: white;
+	z-index:2;
+	
+}
+.headsubtitle{
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+	color: white;
+	z-index:2;
+}
+.image-cover{
+		position: absolute;
+	   height: 400px;
+	   width: 100%;
+	   background-color: rgba(0, 0, 0, 0.7);                                                                 
+	   z-index:1;
+	   top:7.5%
+}
+
 </style>
 
 </head>
@@ -399,12 +430,13 @@ height: 400px;
 <!-- 카테고리 사진 hover시 변경하기 -->
 <div class="categoryImage">
 	<img src="./resources/assets/img/category/init.png" id="changeImage">
-	
+	<h2 class="headtitle">카테고리 검색</h2>
+	<p class="headsubtitle">${cateList.get(studyDto.cate_no)}</p>
+	<div class="image-cover"></div>
 </div>
 	<!-- 스터디 영역 -->
 		<!-- 카테고리 -->
-		<h2 style="text-align: center; margin: 40px; font-size: 25px;">Studdype Categories</h2>
-				<div class="cateBtn2">
+				<div class="cateBtn2" style="margin-top: 40px;">
 					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="IT" id="catebtn1" onclick="location.href='studycategoryList.do?cate_no=1'"><span>IT</span></button>
 					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="자격증" id="catebtn2" onclick="location.href='studycategoryList.do?cate_no=2'"><span>자격증</span></button>
 					<button class="button button--winona button--border-thin button--round-s button--size-s" data-text="공무원" id="catebtn3" onclick="location.href='studycategoryList.do?cate_no=3'"><span>공무원</span></button>
@@ -522,7 +554,6 @@ $("#catebtn8").on({
 				<!-- 이미지 크기에 따라 스터디의 길이가 달라질 수 있음 -->
 				<!-- div 태그 클릭시 해당 스터디홈으로 이동 -->
 				<!-- list 시작 -->
-
 				<c:forEach items="${studyList}" var="studyDto">
 					<div class="col-sm-3 p-5 blogs-load"
 						onclick="location.href='studdypeDetailForm.do?s_no=${studyDto.getS_no()}'" style="cursor: pointer;">
@@ -546,7 +577,7 @@ $("#catebtn8").on({
 								<span> <b>${leaderName.get(studyDto.leader_no)}</b> <a
 									style="float: right;"><img
 										src="./resources/assets/img/profile_user.png"
-										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_maxcnt}</a>
+										style="width: 15px;">&nbsp;&nbsp;${studyDto.s_currentcnt}/${studyDto.s_maxcnt}</a>
 								</span>
 							</div>
 						</div>
@@ -563,11 +594,9 @@ $("#catebtn8").on({
 			<c:if test="${pageMaker.prev}">
 				<li class="page_li"><a class="next_page" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
-
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				<li class="page_li li_hober"><a class="page_a current_page" href="studycategoryList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 			</c:forEach>
-
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li class="page_li"><a class="next_page" href="studycategoryList.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
