@@ -224,7 +224,6 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
-
 	public Map<Integer,String> selectStudyName(int[] s_no) {
 		return study_Dao.selectStudyName(s_no);
 	}
