@@ -43,6 +43,16 @@
 $(function(){
 	$(".justify-content-center").hide();
 });
+function search(){
+	var locationSi=$("#selectLocationSi option:selected").val();
+	var locationGu=$("#selectLocationGu option:selected").val();
+	if(locationSi=="스터디 지역(시)"){
+		alert("스터디 지역을 선택해주세요");
+		return false;
+	}
+}
+
+
 </script>
 
 </head>
@@ -82,7 +92,7 @@ $(function(){
 						</select>
 						</div>
 						<div class="input-group">
-							<button type="submit" class="Search" name="Search" style="border:none; background-color:white;" onclick="search();" >
+							<button class="Search" name="Search" style="border:none; background-color:white;" onclick="search();" >
 									<img src="./resources/assets/img/icon_search_purple.png" style="width: 50px;">
 							</button>
 						</div>  
@@ -94,7 +104,8 @@ $(function(){
 			<div class="row">
 			<c:choose>
 					<c:when test="${empty studyList}">
-						<p style="margin-left:50%;">검색해주세요</p>
+						<img src="./resources/img/images_nothing.png" style="width: 300px; margin-left:50%;">
+						<!--  <p style="margin-left:50%;">검색해주세요</p>-->
 						
 					</c:when>
 					<c:otherwise>

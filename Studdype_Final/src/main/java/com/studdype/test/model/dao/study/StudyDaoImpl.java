@@ -198,7 +198,7 @@ public class StudyDaoImpl implements StudyDao {
 	public Map<Integer, String> selectStudyByLocation(int si_no) {
 		Map<Integer, String> res=new HashMap<Integer,String>();
 		try {
-			res=sqlSession.selectOne(NAMESPACE+"selectOneSi",si_no);
+			res=sqlSession.selectOne(NAMESPACE+"selectOneSi",Integer.toString(si_no));
 		} catch (Exception e) {
 			System.out.println("error");
 			e.printStackTrace();
