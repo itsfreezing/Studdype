@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -34,7 +35,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 
 <style type="text/css">
@@ -232,7 +233,7 @@
 	display: none;
 }
 
-.gallery_Btn{
+.galleryBtn{
 	float: right;
 	margin-top : 15px;
 	background-color: #EFF0F2;
@@ -247,7 +248,7 @@
 	font-weight: bold;
 	margin-left: 1%;
 }
-.gallery_Btn:hover{
+.galleryBtn:hover{
 	background-color: white;
 	border: 1px solid #6434ef;
 	font-weight:bold;
@@ -255,6 +256,74 @@
 	cursor: pointer;
 	transition: 0.5s;
 
+}
+
+
+.title {
+	font-size: 40px;
+	font-weight: bold;
+	float: left;	
+	width: 75%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.title_full{
+	opacity: 0;
+	
+	
+}
+
+.writer {
+	font-size: 20px;
+	float: left;
+	font-weight: bold;
+}
+
+.regdate {
+	width: 20%;
+	padding-top:15px;
+	font-size: 20px;
+	float: right;
+}
+
+.cnt {
+	font-size: 20px;
+	float: right;
+}
+
+.cnt2 {
+	font-weight: bold;
+}
+
+.titleDiv {
+	height: 100px;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+	padding-left: 20px;
+	background-color: #fcfcfc;
+	
+	
+}
+
+.writerDiv {
+	padding: 15px;
+	border-bottom: 1px solid #ccc;
+	height: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.contentDiv {
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 </style>
 
@@ -638,8 +707,13 @@ function showAttach(){
 	<!--main conternt 섹션-->
 	<div class="main-section">
 		<br>
-		<h1 style="text-align: center;">${detail.b_title}</h1>
-		<h2>by.${galleryWriter }</h2>
+				<div class="titleDiv" aria-label="${detail.b_title }" data-pop="bottom"  data-pop-delay="short"  >
+			<span class="title" >${detail.b_title }</span>
+			<span class="regdate" ><fmt:formatDate value="${detail.b_regdate }" pattern="YYYY.MM.dd HH:mm"/></span>
+		</div>
+		<div class="writerDiv">
+			<span class="writer"> ${galleryWriter}</span>
+		</div>
 		<div class="container mt-5">
 				<div class="row">
 				<c:forEach items="${fileDetail}" var="fileDetail">
@@ -670,7 +744,7 @@ function showAttach(){
 				<tr>
 					<td class="write_td" ><textarea class="write_content" id="write_content" placeholder="댓글을 남겨보세요"></textarea></td>
 					<td class="write_btn_td" ><button class="reply_write_btn" onclick="insertReply();">등록</button></td>
-				</tr>				
+				</tr>
 			</table>
 		</div>
 		
@@ -679,7 +753,7 @@ function showAttach(){
 			<div class="galleryBtnDiv">
 			<c:choose>
 				<c:when test="${detail.b_writer == login.mem_no }">
-					<input type="button" class="galleryBtn" value="삭제" onclick="location.href='galleryDelete.do?b_no=${detail.b_no}'" />
+					<input type="button" class="galleryBtn" value="삭제" onclick="location.href='gallerydelete.do?b_no=${detail.b_no}'" />
 					<input type="button" class="galleryBtn"  value="수정" onclick="location.href='galleryupdateform.do?b_no=${detail.b_no}'" />
 					<input type="button" class="galleryBtn" value="목록" onclick="location.href='gallery.do'">
 				</c:when>

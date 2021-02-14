@@ -43,11 +43,8 @@ public interface StudyBiz {
 	public Map<Integer, String> selectCategoryOfStudy(int cate_no);	// 스터디 카테고리 이름 가져오기
 	public int nomalStudyImg(StudyDto dto);
 	public Map<Integer,String> selectStudyName(int[] s_no);
-	
-
-
-	public StudyDto selectOneBySi_no(int si_no);
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
-	public List<StudyDto> selectStudyByLocation(int si_no);
-
+	public Map<Integer, String> selectOneGuno(int gu_no);
+	public Map<Integer, String> selectOneSino(int si_no);
+	public int pluscurrent(StudyDto dto);
 }

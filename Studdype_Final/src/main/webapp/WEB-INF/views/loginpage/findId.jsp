@@ -184,7 +184,6 @@ function idsearch(){
 		form.submit();
 	}
 };
-
 function cancel(){
 	return "studyList.do"
 	self.close();

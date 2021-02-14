@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -29,12 +29,12 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
 <script type="text/javascript">
 //파일첨부 함수
 function attachFile(){
-	var html = "<div class='upload_file_box'><input type='file' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
+	var html = "<div class='upload_file_box'><input type='file' multiple='multiple' class='upload_file' name='file' onchange='create_file_info(this);'></input></div>";
 	
 	
 	//만약 전파일이 업로드안됬으면 지워버리기
@@ -140,20 +140,21 @@ function clickFileBtn(fileName){
 	<div class="main-section">
 		<br> <br> <br> <br> <br>
 		<form action="gallerywrite.do" method="post" id="writeForm" enctype="multipart/form-data">
+		 
 			<div class="container" role="main">
 				<h2>gallery write</h2>
 				<div class="mb-3">
-					<label for="title">제목:</label> <input type="text" class="form-control" name="b_title" id="title" placeholder="제목을 입력해 주세요" autocomplete="off">
+				<input type="text" class="form-control" name="b_title" id="title" placeholder="제목을 입력해 주세요" autocomplete="off">
 				</div>
 				<br>
 					<div class="upload_box">
 						<div class="upload_btn_box">
-							<input type="button" onclick="attachFile();" class="uploadFile" value="파일 첨부..." >
+							<input type="button" multiple="multiple" onclick="attachFile();" class="uploadFile"  value="파일 첨부..." >
 						</div>
 					</div>
 				<br>
 				<div class="mb-3">
-					<label for="content">내용:</label>
+				<label for="title">content:</label>
 					<textarea class="form-control" rows="10" cols="5" name="b_content" id="content" placeholder="내용을 입력해 주세요"></textarea>
 				</div>
 
