@@ -121,7 +121,7 @@
 	height: 550px;
 	position: absolute;
 	border-radius: 5px;
-	left: 50%;
+	left: 40%;
 	top: 45%;
 	 background: #fefefe;
 	} 

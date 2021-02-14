@@ -12,7 +12,7 @@ public class PageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private int displayPageNum = 10;
+	private int displayPageNum = 5;
 	private Pagination pagination;
 	
 	public void setPagination(Pagination pagination) {

@@ -202,7 +202,7 @@ public class BoardController {
 	public String freeBoardUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
 		int res = 0;
-
+		
 		//파일 업로드
 		MultipartFile[] mfileList =   uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
 		//사진이 있으면

@@ -500,7 +500,6 @@ public class StudyController {
 		
 		studyList = studyBiz.studyListCategory(searchPagination); // 스터디 리스트
 		
-
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setPagination(searchPagination);
 		pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
@@ -512,7 +511,7 @@ public class StudyController {
 		for(int i=0; i<studyList.size(); i++) {
 				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
 		}
-			
+		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList",studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);
