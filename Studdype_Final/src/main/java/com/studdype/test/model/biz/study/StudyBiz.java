@@ -48,4 +48,5 @@ public interface StudyBiz {
 	public Map<Integer, String> selectOneSino(int si_no);
 	public int pluscurrent(StudyDto dto); //스터디 가입시 스터디 현재인원 증가 
 	public int deletestudy(StudyDto dto); // 스터디 삭제 
+	public int deletecurrent(StudyDto dto); // 스터디 추방시 스터디 현재원 감소
 }
