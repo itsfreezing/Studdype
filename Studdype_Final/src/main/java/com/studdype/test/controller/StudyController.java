@@ -364,6 +364,24 @@ public class StudyController {
 		
 		return "studdype/StuddypeDetailForm";
 	}
+	@RequestMapping("/deletestudy.do")
+	public String deletestudy(Model model,HttpSession session,HttpServletRequest request) {
+		StudyDto dto = new StudyDto(Integer.parseInt(request.getParameter("s_no")));
+		
+		int res = studyBiz.deletestudy(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg","스터디 삭제 성공!");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg","스터디 삭제 실패!");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}
+		
+		
+	}
 	
 	// 스터디 가입 신청
 	@RequestMapping("/apply.do")
