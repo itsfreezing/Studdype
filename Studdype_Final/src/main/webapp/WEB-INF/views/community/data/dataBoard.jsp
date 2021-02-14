@@ -219,6 +219,7 @@
 		</div>
 		
 		<!-- 페이징  영역-->
+		<c:if test="${not empty dataList }">
 		<div class="pagin_div">
 			<ul class="pagin">
 				<!-- 이전 페이지 -->
@@ -244,7 +245,8 @@
 				<input type="hidden" name="pagenum" id="pagenum">
 			</form>
 				
-		</div>		
+		</div>
+		</c:if>		
 		
 	</div>
 	<!-- 메인 섹션 종료 -->
