@@ -110,11 +110,20 @@ span{
 	height:50px;
 	color: #aaa;
 }
+#signUp:hover{
+	color: black;
+}
 #findId{
 	color: #aaa;
 }
+#findId:hover{
+	color: black;
+}
 #findPw{
 	color: #aaa;
+}
+#findPw:hover{
+	color: black;
 }
 .findSection{
     margin-left:32.5%;
@@ -131,8 +140,6 @@ span{
 
 <script type="text/javascript">
 	$(function() {
-		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
-		//$(".justify-content-center").hide(); 
 		$(".justify-content-center").show(); 
 		$(".justify-content-center").css({"background-image":"url('resources/assets/img/loginBanner2.png')","background-size":"cover"});
 		$(".hero-text").html("<h1>로그인</h1><br><span>회원가입 후 StuDdye의 다양한 콘텐츠를 이용해보세요.</span>");
