@@ -120,5 +120,7 @@
 		<select id="selectOneSi" parameterType="int" resultMap="studyMap">
 		SELECT * FROM STUDY WHERE SI_NO = #{si_no}AND GU_NO=#{gu_no}
 		</select>
-		
+	<delete id="deletestudy" parameterType="studyDto">
+		DELETE FROM STUDY WHERE S_NO = #{s_no} 
+	</delete>
 </mapper>

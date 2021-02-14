@@ -33,7 +33,7 @@ public class StudyDto {
 		this.s_maxcnt = s_maxcnt;
 		this.s_currentcnt = s_currentcnt;
 	}
-
+	
 	public StudyDto(int s_no, String s_info, int cate_no, int si_no, int gu_no, int s_maxcnt, String s_name , String photo) {
 		super();
 		this.s_no = s_no;

@@ -61,6 +61,15 @@ label{
 	opacity: 85%;
 	border-radius: 5px;
 }
+.a{
+	height: 250px;
+    box-sizing: border-box;
+    padding-top: 5%;
+    margin-top: 1%;
+    background: white;
+    opacity: 85%;
+    border-radius: 5px;
+}
 .namerno_part{
 	margin-left: 12%;
 }
@@ -135,25 +144,26 @@ label{
 	transition: 0.5s;
 }
 #cancel{
-	width:140px;
-   	height:40px;
-   	margin-top : 15px;
-   	margin-left: 5%;
-	background-color: white;
-	border: 1px solid #A6A6A6;
-	font-size: 15px;
-	border-radius: 0px 0px;
-	color: black;
-	padding: 1%;
-	box-shadow: none;
+	width: 140px;
+    height: 40px;
+    margin-top: 15.3px;
+    background-color: white;
+    border: 1px solid #A6A6A6;
+    font-size: 15px;
+    border-radius: 0px 0px;
+    color: black;
+    padding: 1%;
+    box-shadow: none;
+    text-align:center;
+    font-weight:bold;
 }
 #cancel:hover{
-	background-color: white;
-	border: 2px solid #6434ef;
-	font-weight:bold;
-	color: #6434ef;
-	cursor: pointer;
-	transition: 0.5s;
+    background-color: white;
+    border: 2px solid #6434ef;
+    font-weight: bold;
+    color: #6434ef;
+    cursor: pointer;
+    transition: 0.5s;
 }
 </style>
 
@@ -190,7 +200,7 @@ function cancel(){
 <div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-	<form class="main_head" id="findidform" action="findId.do" method="POST">
+	<form class="main_head" id="findidform" action="findId.do" onsubmit="return idsearch();" method="POST">
 		<div class="sub_head">
 			<div class="namerno_part">
 			<div class="name_part">
@@ -205,7 +215,7 @@ function cancel(){
 			</div>
 			<div class="btn_part">
 				<button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
-				<button type="submit" class="submitBtn" id="cancel" value="취소 " onClick="cancel();">취소</button>
+			    <input class="submitBtn" id="cancel" value="취소 " onClick="location.href='loginform.do?'">
 			</div>
 		</div>
 	</form>
