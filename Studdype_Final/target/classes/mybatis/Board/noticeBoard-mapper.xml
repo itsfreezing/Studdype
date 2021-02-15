@@ -91,10 +91,14 @@
 	<select id="recentListForStudyHome" parameterType="int" resultMap="boardMap">
 		<![CDATA[
 			SELECT B_TITLE
-			FROM NOTICE_BOARD 
+			FROM 
+			 (
+			  SELECT B_TITLE, S_NO
+			  FROM NOTICE_BOARD
+			  ORDER BY B_NO DESC
+			 )
 			WHERE S_NO = #{s_no}
 			AND ROWNUM <= 3
-			ORDER BY B_NO DESC
 		]]>
 	</select>
 	
