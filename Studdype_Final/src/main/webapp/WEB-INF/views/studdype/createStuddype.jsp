@@ -152,10 +152,6 @@
 			$("#modal-inside").css("top", $(document).scrollTop()+100);
 			
 			$("#modal").show();
-			
-			$("body").css({
-				"overflow-y":"scroll"
-			});
 		});
 		
 		// 모달 취소 이벤트 (모달 hide)
@@ -180,6 +176,10 @@
 			$("#image-section").append("<img id='studyMainPhoto' src='"+image+"' />");
 			$("#basicPhoto").val(image);
 			$("#modal").hide();
+			
+			$("body").css({
+				"overflow-y":"scroll"
+			});
 		});
 		
 		// 서머노트 양식

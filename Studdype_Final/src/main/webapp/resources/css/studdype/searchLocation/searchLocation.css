@@ -2,11 +2,7 @@
 .img{
 	position:relative;		
 }
-.input-group{
-	width: 50%; 
-	margin-top:-3.5%;
-	margin-left:70%;
-}
+
 .img .content{
 	 position: absolute;
      top:50%;
@@ -19,13 +15,57 @@
      font-weight:bold;
 	
 }
+.blogpost-area{
+	background: #ffff;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding:50px 0;
+}
+
+.pagin_div {
+	padding-left: 45%;
+	margin-top: 25px;
+}
+
+.studyBtn{
+	float: right;
+	margin-top : 15px;
+	background-color: #EFF0F2;
+	border: 1px solid #EFF0F2;
+	width: 8%;
+	height: 50px;
+	font-size: 15px;
+	padding: 1%;
+	
+	border-radius: 10px 10px;
+	color: black;
+	font-weight: bold;
+	margin-left: 1%;
+	float: right;
+}
+.studyBtn:hover{
+	background-color: white;
+	border: 1px solid #6434ef;
+	font-weight:bold;
+	color: #6434ef;
+	cursor: pointer;
+	transition: 0.5s;
+
+
+}
+.blog-meta{
+	padding: 15px;
+}
+.single-blog-post{
+	height: 450px;
+	margin-bottom: 15px;
+}
 
 .pagin {
 	list-style: none;
 	float: left;
 	display: inline;
 	clear: right;
-	margin-left:40%;
 }
 
 .page_li {
@@ -50,74 +90,38 @@
 .page_a:hover {
 	transition: 0.3s;
 	border: 2px solid #6434ef;
-	/* background-color: #6434ef; */
 	cursor: pointer;
 }
-#si{
-	position:left;
-	margin-left:-30%;
+
+#location_search_area {
+	position:relative;
+	width:100%;
 }
-#gu{
-	margin-top:-7.2%;
-	margin-bottom:-5%;
-	margin-left:15%;
+
+#si {
+	display:inline-block;
+	width:30%;
+	margin-left:18%;
 }
-#title{
-	text-align:center;
+
+#gu {
+	display:inline-block;
+	width:30%;
 }
-#selectLocationSi{
-	width:500px;
-	height:50px;	
+.input-group{
+	display:inline-block;
+	left:3%;
+	width:10%;
 }
-#selectLocationGu{
-	width:500px;
-	height:50px;
-	margin-left:45%;
-	top:1%;
-}
-#mainsection{
-	margin-left:40%;
-}
-/* #Search{
-	margin-left:45%;
-	margin-bottom:-3%;
-	margin-top:-5%;
-} */
-button[type=submit]{
-	box-shadow:none;
-	background:none;
+.input-group button {
 	padding:0;
+	border-radius:0;
+	box-shadow:none;
+	margin-top:19px;
 }
-.studyBtn{
-	float: right;
-	margin-top : 15px;
-	background-color: #EFF0F2;
-	border: 1px solid #EFF0F2;
-	width: 8%;
-	height: 50px;
-	font-size: 15px;
-	padding: 1%;
-	
-	border-radius: 10px 10px;
-	color: black;
-	font-weight: bold;
-	margin-left: 1%;
-}
-.blogpost-area{
-	padding:100px 0;
-	background:white;
-	margin-right:3%;
-}
-.input-group .Search{
-	margin-top:1.5%;
-}
-.studyBtn:hover{
-	background-color: white;
-	border: 1px solid #6434ef;
-	font-weight:bold;
-	color: #6434ef;
-	cursor: pointer;
-	transition: 0.5s;
-
-
+#no-studyList-area {
+	position:relative;
+	width:100%;
+	padding-top:30px;
+	text-align:center;
 }
