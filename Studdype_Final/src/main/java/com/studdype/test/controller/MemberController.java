@@ -221,7 +221,6 @@ public class MemberController {
 			session.setAttribute("randNum", randNum);
 		}else {
 			resMap.put("isExist","n");
-			
 		}
 		
 		return resMap;

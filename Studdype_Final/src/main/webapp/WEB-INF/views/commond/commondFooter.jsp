@@ -14,17 +14,23 @@
 }
 
 .footer-text{
-	margin-top: 100px;
+	margin: 10px;
+} 
+
+#footer_logo {
+	
+	width:200px;
+	height:80px;
 }
 </style>
 </head>
 <body>
 	<!-- footer 영역 -->
 	<div class="footer-menu">
-
-		<!-- SNS -->
 		
+		<!-- SNS -->
 					<div class="footer-text">
+						<img id="footer_logo" src="./resources/assets/img/logo_black.png">
 						<p>
 							<a href="studdypeInfo.do">회사 소개</a> | 
 							<a href="conditions.do">이용약관</a> | 

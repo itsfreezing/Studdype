@@ -50,13 +50,15 @@
   "dependencies": {
     "canvas-designer": "latest",
     "detectrtc": "latest",
+    "express": "^4.17.1",
     "fbr": "latest",
     "getstats": "latest",
     "multistreamsmixer": "latest",
     "recordrtc": "latest",
     "rtcmulticonnection-server": "latest",
     "rtcmulticonnection-v3": "^3.4.5",
-    "socket.io": "latest",
+    "save": "^2.4.0",
+    "socket.io": "^3.1.1",
     "webrtc-adapter": "latest"
   },
   "analyze": false,

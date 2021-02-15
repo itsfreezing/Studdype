@@ -162,8 +162,6 @@ public class DataBoardController {
 		
 		FileDto dto = dataFileBiz.getFileByFno(f_no);
 		
-		System.out.println(dto.getF_name());
-		
 		if(dto != null) {
 			fileHandler.downloadFile(dto,response);
 		}

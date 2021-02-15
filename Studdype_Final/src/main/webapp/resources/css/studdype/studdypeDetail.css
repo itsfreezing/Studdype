@@ -107,8 +107,9 @@
 .table-style {
 	width:100%;
 	border-collapse: separate;
-	border-spacing: 0 20px;
-	text-align:center;
+	border-spacing: 0 25px;
+	text-align:left;
+	margin-left:100px;
 }
 
 #content-detail pre{
@@ -117,6 +118,7 @@
 	font-size:14pt;
 	font-weight:700;
 	font-family: "Noto Sans KR", sans-serif !important;
+	padding: 0 11% 0 11%;
 }
 
 #content-book {

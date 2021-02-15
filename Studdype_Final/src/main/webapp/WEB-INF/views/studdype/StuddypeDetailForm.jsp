@@ -86,10 +86,9 @@
 					<pre id="pre-study-info">${study.getS_content() }</pre>
 				</div>
 				<div id="study-detail-section">
+					<p style="text-align:center; margin-bottom:0; margin-top:15px;"><label class="label-title">상세정보</label></p>
 					<table class="table-style">
-						<tr>
-							<th colspan="4" style="text-align:center;"><label class="label-title">상세정보</label></th>
-						</tr>
+						<col width="12%"><col width="26%"><col width="20%"><col width="42%">
 						<tr>
 							<th>지역</th>
 							<td>${studySi.get(study.getSi_no()) } ${studyGu.get(study.getGu_no()) }</td>
@@ -99,8 +98,8 @@
 						</tr>
 						<tr>
 							<th>팀장</th>
-							<td>${leader.getMem_name() }
-							(<c:choose>
+							<td>${leader.getMem_id() }(${leader.getMem_name() })
+							<%-- (<c:choose>
 								<c:when test="${leader.getMem_gender() eq 'M' }">
 								남
 								</c:when>
@@ -108,7 +107,7 @@
 								여
 								</c:otherwise>
 							</c:choose>
-							)
+							) --%>
 							</td>
 							<th>팀장 이메일</th>
 							<td>${leader.getMem_email() }</td>
@@ -119,10 +118,8 @@
 							<th>팀장 번호</th>
 							<td>${leader.getMem_phone() }</td>
 						</tr>
-						<tr>
-							<th colspan="4"><p><b style="color:red; font-size:9pt;">스터디가 문의가 아닌 광고 등의 목적으로 연락처를 사용할 경우 법적 처벌을 받을 수 있습니다</b></p></th>
-						</tr>
 					</table>
+					<p style="margin-top:10px; text-align:center; font-weight:bold;"><b style="color:red; font-size:9pt;">스터디가 문의가 아닌 광고 등의 목적으로 연락처를 사용할 경우 법적 처벌을 받을 수 있습니다</b></p>
 				</div>
 				<c:if test="${not empty mainBook }">
 					<div id="content-book">
@@ -168,7 +165,15 @@
 				</div>
 			</div>
 			<div id="apply-bottom-section">
-				<button id="apply-button" onclick="studyApply();">스터디 신청</button>
+				<c:choose>
+					<c:when test="${study.getS_maxcnt() > study.getS_currentcnt() }">
+						<button id="apply-button" onclick="studyApply();">스터디 신청</button>
+					</c:when>
+					<c:otherwise>
+						<button style="cursor:default; background:rgba(0,0,0,0.2);" id="apply-button">스터디 신청 마감</button>
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 	

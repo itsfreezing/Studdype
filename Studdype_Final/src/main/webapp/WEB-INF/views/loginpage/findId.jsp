@@ -192,6 +192,14 @@ $(function() {
    $(".background").css("height", "800px");
    $(".hero-text").html("<h1>아이디 찾기</h1><br><span>하단에 정보를 기입해 주시면 아이디를 알려드려요.</span>");
    $(".footer-text").css("margin-top", "20px");
+   
+   
+   $("#rno1").keyup(function(event) {
+	   if($("#rno1").val().length == 6) {
+		   $("#rno2").focus();
+	   }
+   })
+   
 });
 
 function idsearch(){
@@ -201,10 +209,14 @@ function idsearch(){
    if(name.val() == null || name.val().trim() == ''){
       alert("이름을 확인해 주세요.");
       return false;
-   }else if(rno == null || rno.trim() == ''){
-      alert("주민번호를 확인해 주세요.");
+   }else if($("#rno1").val() == null || $("#rno1").val().trim() == '' || $("#rno1").val().trim().length < 6){
+      alert("주민번호 앞자리를 확인해 주세요.");
+      $("#rno1").val("");
       return false;
-   }else{
+   }else if($("#rno2").val() == null || $("#rno2").val().trim() == '' || $("#rno2").val().trim().length < 7){
+	      alert("주민번호 뒷자리를 확인해 주세요.");
+	      return false;
+	}else{
       $("#realRno").val(rno);
       form.submit();
    }
@@ -218,7 +230,7 @@ function cancel(){
 <div class="background">
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
-   <form class="main_head" id="findidform" action="findId.do" onsubmit="return idsearch();" method="POST">
+   <form class="main_head" id="findidform" action="findId.do" onsubmit="return idsearch();" method="POST" autocomplete="off">
       <div class="sub_head">
          <div class="namerno_part">
          <div class="name_part">
@@ -227,13 +239,14 @@ function cancel(){
          </div>
          <div class="rno_part">
             <label>주민등록번호</label>
-            <input type="text" name="rno" id="rno1" placeholder=" 주민번호 앞자리" maxlength="6"><span id="mid_rno"> - </span><input type="password" name="rno" id="rno2" placeholder=" 주민번호 뒷자리" maxlength="7">
+            <input type="text" id="rno1" placeholder=" 주민번호 앞자리" maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span id="mid_rno"> - </span>
+            <input type="password" id="rno2" placeholder=" 주민번호 뒷자리" maxlength="7" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
             <input type="hidden" name="mem_rno" id="realRno">
          </div>
          </div>
          <div class="btn_part">
-            <button type="submit" class="submitBtn" id="search_btn" value="찾기" onClick="idsearch();">찾기</button>
-             <input class="submitBtn" id="cancel" value="취소 " onClick="location.href='loginform.do?'">
+            <button type="submit" class="submitBtn" id="search_btn" value="찾기" >찾기</button>
+             <input class="submitBtn" id="cancel" value="취소 " onClick="location.href='loginform.do'">
          </div>
       </div>
    </form>

@@ -119,12 +119,12 @@ span{
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
 
 	<div class="main_div">
-   	<span id="span_name" style="color:black"><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</apan>
+   	<span id="span_name" style="color:black"><div id="mail_name">'${member.mem_email }' </div>로 임시 비밀번호를 전송했습니다.</span>
    
    
    <div class="footer_btn">
-		<button type="submit" id="home_btn"><a href="studyList.do">HOME</a></button>
-		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
+		<button id="home_btn" onclick="location.href='studyList.do'">HOME</button>
+		<button id="login" onclick="location.href='loginform.do'">로그인</button>
 	</div>
 </div>
 </div>
