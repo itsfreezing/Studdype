@@ -88,7 +88,7 @@ function agree(){
    var d = document.getElementById(c).value;
    var f = document.getElementById(c).name;
    
- 	alert('mem_no:'+d+"s_no:"+f);
+
    	if (confirm("정말 수락하시겠습니까?") == true){    //확인
    		location.href="receiveagree.do?mem_no="+d+"&s_no="+f;
    	}else{   

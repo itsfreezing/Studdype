@@ -79,7 +79,9 @@ public class StudyController {
 			
 		
 		for(int i=0; i<studyList.size(); i++) {
-				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				if( studyList.get(i).getPhoto() != null ) {
+					studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
+				}
 		}
 			
 		
@@ -275,11 +277,18 @@ public class StudyController {
 		}else {
 			String a = request.getParameter("exile_no");
 			String[] array = a.split(",");
+			System.out.println("설마이건가"+array.length);
+			
+			
 		for(int i=0; i<array.length;i++) {
 			StudyMemberDto dto3 = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),Integer.parseInt(array[i]));
+			StudyDto dto4 = new StudyDto(Integer.parseInt(request.getParameter("s_no")));
 			int res = StudyMemberBiz.deletemember(dto3);
+			int res2 = studyBiz.deletecurrent(dto4);
 			if(res>0) {
-				
+				if(res2>0) {
+					
+				}
 			}else {
 				model.addAttribute("msg","멤버삭제 실패!");
 			}
@@ -361,6 +370,24 @@ public class StudyController {
 		model.addAttribute("mainBook", bookDto);
 		
 		return "studdype/StuddypeDetailForm";
+	}
+	@RequestMapping("/deletestudy.do")
+	public String deletestudy(Model model,HttpSession session,HttpServletRequest request) {
+		StudyDto dto = new StudyDto(Integer.parseInt(request.getParameter("s_no")));
+		
+		int res = studyBiz.deletestudy(dto);
+		
+		if(res>0) {
+			model.addAttribute("msg","스터디 삭제 성공!");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}else {
+			model.addAttribute("msg","스터디 삭제 실패!");
+			model.addAttribute("url","studyList.do");
+			return "commond/alert";
+		}
+		
+		
 	}
 	
 	// 스터디 가입 신청
@@ -484,7 +511,7 @@ public class StudyController {
 		for(int i=0; i<studyList.size(); i++) {
 				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
 		}
-			
+		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList",studyList);
 		model.addAttribute("leaderName", studyMainLeaderNameMap);

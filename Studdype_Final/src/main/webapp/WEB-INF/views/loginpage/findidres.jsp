@@ -29,8 +29,9 @@
 $(function() {
 	$(".background").show(); 
 	$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
-	$(".background").css("height", "650px");
+	$(".background").css("height", "800px");
 		$(".hero-text").html("<h1>아이디 찾기</h1><br><span>잊지말고 기억해요.</span>");
+		$(".footer-text").css("margin-top", "20px");
 });
 </script>
 <style type="text/css">
@@ -49,13 +50,13 @@ span{
 	height: 55%;
 }
 .main_div{
-	margin-top: 1%;
+	margin-top: -2%;
 	margin-bottom: 1%;
 	margin-left: auto;
 	margin-right: auto;
    	text-align: center;
 	width: 550px;
-	height: 100px;
+	height: 150px;
 	color: black;
 	opacity: 75%;
 	border-radius: 5px;
@@ -63,20 +64,22 @@ span{
 }
 #span_name{
 	margin-top: 10%;
-	padding-top: 5%;
+	padding-top: 10%;
 }
 #name{
 	font-size: 18px;
 	font-weight: 600;
 }
 .sub_btn{
+    margin-top: 5%;	
 	margin-bottom: 2%;
 	font-weight: 800;
 }
 #login{
-	width:140px;
-   	height:40px;
-   	margin-top : 15px;
+	display: inline-block;
+   width:50%;
+   float: left;
+   	height:50px;
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
@@ -84,6 +87,7 @@ span{
 	color: black;
 	padding: 1%;
 	box-shadow: none;
+	border-radius: 0 0 0 5px;
 }
 #login:hover{
 	background-color: white;
@@ -94,10 +98,10 @@ span{
 	transition: 0.5s;
 }
 #findPw{
-	width:140px;
-   	height:40px;
-   	margin-top : 15px;
-   	margin-left: 8%;
+	display: inline-block;
+   width:50%;
+   float: right;
+   	height:50px;
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
@@ -105,6 +109,7 @@ span{
 	color: black;
 	padding: 1%;
 	box-shadow: none;
+	border-radius: 0 0 5px 0;
 }
 #findPw:hover{
 	background-color: white;
@@ -113,6 +118,10 @@ span{
 	color: #6434ef;
 	cursor: pointer;
 	transition: 0.5s;
+}
+
+#spanBox{
+	padding-top: 30px;
 }
 </style>
 </head>
@@ -125,7 +134,7 @@ span{
 		<c:choose>
 
 			<c:when test="${findId != null }">
-				<span id="span_name" style="color:black">${findName }님의 아이디는<span id="name" style="color:black"> '${findId }' </span>입니다.</span>
+				<div id="spanBox"><span id="span_name" style="color:black">${findName }님의 아이디는<span id="name" style="color:black"> '${findId }' </span>입니다.</span></div>
 				
 			</c:when>
 			
@@ -135,12 +144,11 @@ span{
 		</c:choose>
 	
 	<div class="sub_btn">
-		<button type="submit" id="login"><a href="loginform.do" onclick="loginpage/loginform">로그인</a></button>
-		<button type="submit" id="findPw"><a href="findpwform.do" onClick="loginpage/findpwform">비밀번호 찾기</a></button>
+		<button type="submit" id="login" onClick="location.href='loginform.do?'">로그인</button>
+		<button type="submit" id="findPw" onClick="location.href='findpwform.do?'">비밀번호 찾기</button>
 	</div>
 	</div>
 </div>
-
 
 	<jsp:include page="../commond/commondFooter.jsp"></jsp:include>
 	<!-- 스크립트 -->

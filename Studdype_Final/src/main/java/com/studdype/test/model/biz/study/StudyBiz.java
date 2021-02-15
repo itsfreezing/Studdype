@@ -47,4 +47,7 @@ public interface StudyBiz {
 	public Map<Integer, String> selectOneGuno(int gu_no);
 	public Map<Integer, String> selectOneSino(int si_no);
 	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination); // 카테고리로 검색된  스터디 총 갯수
+	public int pluscurrent(StudyDto dto); //스터디 가입시 스터디 현재인원 증가 
+	public int deletestudy(StudyDto dto); // 스터디 삭제 
+	public int deletecurrent(StudyDto dto); // 스터디 추방시 스터디 현재원 감소
 }

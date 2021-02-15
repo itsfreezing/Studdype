@@ -224,7 +224,6 @@ public class StudyBizImpl implements StudyBiz{
 	}
 
 	@Override
-
 	public Map<Integer,String> selectStudyName(int[] s_no) {
 		return study_Dao.selectStudyName(s_no);
 	}
@@ -265,6 +264,21 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination) {
 		return study_Dao.selectTotalStudyListNumByLocation(searchPagination);
+	public int pluscurrent(StudyDto dto) {
+		
+		return study_Dao.pluscurrent(dto);
+	}
+
+	@Override
+	public int deletestudy(StudyDto dto) {
+		
+		return study_Dao.deletestudy(dto);
+	}
+
+	@Override
+	public int deletecurrent(StudyDto dto) {
+		
+		return study_Dao.deletecurrent(dto);
 	}
 
 

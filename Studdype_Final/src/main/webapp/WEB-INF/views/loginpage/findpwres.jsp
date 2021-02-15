@@ -35,9 +35,10 @@ span{
 	font-size: 20px;
 }
 .main_div{
-	margin-top: 5%;
+	margin-top: -1%;
 	margin-bottom: 1%;
-	margin-left: 33%;
+	margin-left: auto;
+	margin-right: auto;
    	text-align: center;
 	width: 500px;
 	height: 140px;
@@ -51,17 +52,18 @@ span{
 	font-weight: 600;	
 }
 .footer_btn{
-	margin-bottom: 3%;
+	margin-top: 3%;
 	font-weight: 800;
 }
 #home_btn{
-	width:140px;
-   	height:40px;
-   	margin-top : 15px;
+	display: inline-block;
+   width:50%;
+   float: left;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+      height:50px;
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 0px 0px;
+	border-radius: 0 0 0 5px;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -75,14 +77,14 @@ span{
 	transition: 0.5s;
 }
 #login{
-	width:140px;
-   	height:40px;
-   	margin-top : 15px;
-   	margin-left: 7%;
+	display: inline-block;
+   width:50%;
+   float: right;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+      height:50px;
 	background-color: white;
 	border: 1px solid #A6A6A6;
 	font-size: 15px;
-	border-radius: 0px 0px;
+	border-radius: 0 0 5px 0;
 	color: black;
 	padding: 1%;
 	box-shadow: none;
@@ -95,6 +97,9 @@ span{
 	cursor: pointer;
 	transition: 0.5s;
 }
+.footer-text{
+	margin-top: 20px;
+}
 </style>
 
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
@@ -105,6 +110,7 @@ span{
 		$(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
 		$(".background").css("height", "750px");
 		$(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>임시 비밀번호를 변경해 주세요.</span>");	
+		$(".footer-text").css("margin-top", "40px");
  });
 </script>
 </head>

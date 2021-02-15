@@ -76,7 +76,6 @@ function search() {
 	
 } 
 </script>
-
 </head>
 
 <body>

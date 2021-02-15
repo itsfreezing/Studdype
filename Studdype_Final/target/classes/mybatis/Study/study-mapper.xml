@@ -41,13 +41,6 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-	<!-- SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
-      FROM (
-      				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
-      				FROM STUDY
-      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
-      				)
-	</select> -->
 	
 	<sql id="locationSearch">
 		<if test="searchType eq 'si'">
@@ -125,7 +118,12 @@
 	<update id="nomalStudyImg" parameterType="studyDto">
 		UPDATE STUDY SET S_PHOTO = #{photo} WHERE S_NO = #{s_no}
 	</update>
-	
+	<update id="pluscurrent" parameterType="studyDto">
+		UPDATE STUDY SET S_CURRENTCNT = S_CURRENTCNT + 1 WHERE S_NO = #{s_no}
+	</update>
+	<update id="deletecurrent" parameterType="studyDto">
+		UPDATE STUDY SET S_CURRENTCNT = S_CURRENTCNT - 1 WHERE S_NO = #{s_no}
+	</update>
 	<select id="selectStudyByCategory" parameterType="int" resultType="studyDto">
 		SELECT * FROM STUDY WHERE CATE_NO = #{cate_no}
 	</select>
@@ -138,5 +136,7 @@
 		<select id="selectOneSi" parameterType="int" resultMap="studyMap">
 		SELECT * FROM STUDY WHERE SI_NO = #{si_no}AND GU_NO=#{gu_no}
 		</select>
-		
+	<delete id="deletestudy" parameterType="studyDto">
+		DELETE FROM STUDY WHERE S_NO = #{s_no} 
+	</delete>
 </mapper>
