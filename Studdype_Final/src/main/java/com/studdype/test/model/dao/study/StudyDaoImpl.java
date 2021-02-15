@@ -232,6 +232,10 @@ public class StudyDaoImpl implements StudyDao {
 			e.printStackTrace();
 		}
 		
+		return res;
+	}
+	
+	@Override
 	public int pluscurrent(StudyDto dto) {
 		int res = 0;
 		

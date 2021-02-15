@@ -264,6 +264,9 @@ public class StudyBizImpl implements StudyBiz{
 	@Override
 	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination) {
 		return study_Dao.selectTotalStudyListNumByLocation(searchPagination);
+	}
+	
+	@Override
 	public int pluscurrent(StudyDto dto) {
 		
 		return study_Dao.pluscurrent(dto);
