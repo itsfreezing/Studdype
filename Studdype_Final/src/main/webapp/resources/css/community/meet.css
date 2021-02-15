@@ -308,28 +308,20 @@ p#nothingTXT{
 
 /* --------------------------------- */
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 .meetInsertAddr:focus{
 	border: 1px solid #6610F2;
 }
 
->>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
 /* 주소 입력란에 버튼 추가를 위해 width 값 조정 */
 .meetInsertAddr{
 	width: 80%;
 	border: 0;
-<<<<<<< HEAD
-=======
 	margin-top: 9px;
->>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
-=======
+}
 /* --------------------------------- paging */
 .pagin {
 	list-style: none;
 	display: table;
-	/*margin-left: 30%;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -337,7 +329,6 @@ p#nothingTXT{
 .page_li {
 	float: left;
 	color: black;
->>>>>>> 8340377c4da4724b97ed5587f016795257d86247
 }
 
 .page_a {
@@ -376,12 +367,7 @@ p#nothingTXT{
 
 .next_page:hover {
 	cursor: pointer;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	float: right;
->>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
-=======
 }
 
 .pagin_div {
@@ -417,7 +403,6 @@ div#topDiv-right{
 	float: right;
 	width: 90%;
 	border: none;
->>>>>>> 8340377c4da4724b97ed5587f016795257d86247
 }
 
 div#writerDiv{
@@ -897,11 +882,6 @@ button.submitBtn:hover{
 .replyItem{
 		list-style: none;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 8340377c4da4724b97ed5587f016795257d86247
 
 .replyWrite{
 	border-bottom: 1px solid #ccc;
@@ -920,9 +900,6 @@ button.submitBtn:hover{
 .write_btn_td{
 	width: 5%;
 }
-<<<<<<< HEAD
->>>>>>> 02dfd6335ebe91c5dfdbaf4b2390e80f42d7b465
-=======
 
 .write_content{
 	width: 100%;
@@ -1117,7 +1094,3 @@ button.submitBtn:hover{
 	transition: 0.5s;
 
 }
-
-
-
->>>>>>> 8340377c4da4724b97ed5587f016795257d86247
