@@ -85,7 +85,6 @@ public class photoBoardBizImpl implements photoBoardBiz{
 		
 		updateRes = photoDao.updateGallery(board); //자유게시판에 글 삽입
 		int resCnt = photoFileDao.updateGalleryFile(fileList); // 자유게시판 파일 테이블에 파일 삽입
-		
 		//둘다 성공하면 실제 파일 저장시킴.
 		if(resCnt == fileList.size() && updateRes ==1) {
 			res = 1;
