@@ -28,6 +28,7 @@ public interface StudyDao {
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
 	public Map<Integer, String> selectStudyByLocation(int si_no);	//지역별 검색 시  번호 받기
 	public Map<Integer, String> selectByLocation(int gu_no);	//지역별 검색 구 번호 받기
+	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination); // 카테고리로 검색된  스터디 총 갯수
 
 }
 

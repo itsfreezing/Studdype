@@ -262,5 +262,10 @@ public class StudyBizImpl implements StudyBiz{
 		return locationSidao.selectLocationSiOfStudy(si_no);
 	}
 
+	@Override
+	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination) {
+		return study_Dao.selectTotalStudyListNumByLocation(searchPagination);
+	}
+
 
 }

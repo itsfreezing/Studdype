@@ -46,4 +46,5 @@ public interface StudyBiz {
 	public List<StudyDto> studyListLocation(SearchPagination searchPagination);//지역별 검색
 	public Map<Integer, String> selectOneGuno(int gu_no);
 	public Map<Integer, String> selectOneSino(int si_no);
+	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination); // 카테고리로 검색된  스터디 총 갯수
 }
