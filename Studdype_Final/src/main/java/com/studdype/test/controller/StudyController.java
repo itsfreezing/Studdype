@@ -526,7 +526,7 @@ public class StudyController {
 	
 		//지역별 검색 
 		@RequestMapping(value = "/studyListLocation.do", method = RequestMethod.GET)
-		public String SearchLocation(Model model,StudyDto studyDto,  @ModelAttribute("searchPagination") SearchPagination searchPagination,HttpSession session) {
+		public String SearchLocation(Model model,  @ModelAttribute("searchPagination") SearchPagination searchPagination,HttpSession session) {
 
 			Map<Integer, String> studyMainLeaderNameMap = null; // 리더이름을 담을 MAP 설정
 			List<StudyDto> studyList = null; // 스터디 리스트 담을 곳
@@ -535,14 +535,29 @@ public class StudyController {
 			Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
 			List<LocationSiDto> sidtos = studyBiz.locationSiList();
 			List<LocationGuDto> gudtos = studyBiz.locationGuList();
+			
+			if(searchPagination.getSi_no() == 0) {
+				searchPagination.setSearchType("all");
+			}
+			
+			if(searchPagination.getSi_no() != 0) {
+				model.addAttribute("si", searchPagination.getSi_no());
+			}
+			
+			if(searchPagination.getGu_no() != 0) {
+				model.addAttribute("gu", searchPagination.getGu_no());
+			}
+			
 			// 로그
 			logger.info("STUDY - SearchLocationLIST");
 
 			studyList = studyBiz.studyListLocation(searchPagination);
+			
 			// 스터디 리스트
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setPagination(searchPagination);
-			pageMaker.setTotalCount(studyBiz.selectTotalStudyListNum(searchPagination));
+			pageMaker.setTotalCount(studyBiz.selectTotalStudyListNumByLocation(searchPagination));
+			System.out.println(pageMaker.getTotalCount());
 			selectSiForMainMap = studyBiz.selectSiForMainPage(studyList); // 구 리스트
 			selectGuForMainMap = studyBiz.selectGuForMainPage(studyList); // 시 리스트
 			studyMainLeaderNameMap = studyBiz.selectLeaderNameByMainPage(studyList); // 리더이름 리스트
@@ -550,9 +565,6 @@ public class StudyController {
 			
 			for (int i=0;i<studyList.size();i++) {
 				studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
-				System.out.println(studyList.get(i).getS_name());
-				System.out.println(studyList.get(i).getSi_no());
-				System.out.println(studyList.get(i).getGu_no());
 			}
 			model.addAttribute("sidtos", sidtos);
 			model.addAttribute("gudtos", gudtos);
@@ -562,7 +574,8 @@ public class StudyController {
 			model.addAttribute("siList", selectSiForMainMap);
 			model.addAttribute("guList", selectGuForMainMap);
 			model.addAttribute("cateList", selectCateForMainMap);
-			session.setAttribute("headerMenu", "home");
+			
+			session.setAttribute("headerMenu", "location");
 
 			return "studdype/searchByLocation";
 		}

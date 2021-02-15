@@ -41,15 +41,34 @@
       				)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-
+	
+	<sql id="locationSearch">
+		<if test="searchType eq 'si'">
+			WHERE SI_NO = #{si_no} 
+		</if>
+		<if test="searchType eq 'gu'">
+			WHERE SI_NO = #{si_no} 
+			AND GU_NO = #{gu_no}
+		</if>
+		<if test="searchType eq 'all'">
+			
+		</if>
+	</sql>
+	
 	<select id="studyListLocation" resultMap="studyMap" parameterType="searchPagination">
 	  SELECT S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       FROM (
       				SELECT ROW_NUMBER() OVER(ORDER BY S_NO DESC) AS RNUM, S_NO, LEADER_NO, S_NAME, S_INFO, S_CONTENT, S_PHOTO, CATE_NO, SI_NO, GU_NO, S_MAXCNT, S_CURRENTCNT
       				FROM STUDY
-      				WHERE SI_NO = #{si_no} AND GU_NO=#{gu_no}
+      				<include refid="locationSearch"></include>
       		)
       WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+      </select>
+      
+      <select id="selectTotalStudyListNumByLocation" parameterType="searchPagination" resultType="_int">
+      		SELECT COUNT(*)
+      		FROM STUDY
+      		<include refid="locationSearch"></include>
       </select>
       
       

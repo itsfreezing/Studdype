@@ -222,6 +222,20 @@ public class StudyDaoImpl implements StudyDao {
 	}
 
 	@Override
+	public int selectTotalStudyListNumByLocation(SearchPagination searchPagination) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectTotalStudyListNumByLocation", searchPagination);
+		} catch (Exception e) {
+			System.out.println("[ERROR] : selectTotalStudyListNumByLocation");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	@Override
 	public int pluscurrent(StudyDto dto) {
 		int res = 0;
 		

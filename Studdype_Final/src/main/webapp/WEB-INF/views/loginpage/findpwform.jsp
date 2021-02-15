@@ -56,7 +56,7 @@ label{
    margin-left: auto;
    margin-right: auto;
    width: 550px;
-   height: 300px;
+   height: 270px;
    margin-top: -1%;
    background: white;
    border-radius: 5px;
@@ -128,21 +128,22 @@ label{
    transition: 0.5s;
 }
 .main_btn{
-   margin-top: 1%;
-   margin-bottom: 3%;
-   margin-left: 16%;
+   margin-top: 8%;
+       width: 550px;
 }
-#psw_btn{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-   width:140px;
-      height:40px;
-      margin-top : 15px;
+#psw_btn{        
+display: inline-block;
+   width:50%;
+   float: left;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+      height:50px;
    background-color: white;
    border: 1px solid #A6A6A6;
    font-size: 15px;
-   border-radius: 0px 0px;
    color: black;
    padding: 1%;
    box-shadow: none;
+   border-radius: 0 0 0 5px;
+   margin: 0!important;
 }
 #psw_btn:hover{
    background-color: white;
@@ -153,19 +154,19 @@ label{
    transition: 0.5s;
 }
 #cancel_btn{
-   width:140px;
-      height:40px;
-      margin-top : 15px;
-      margin-left: 2%;
+   display: inline-block;
+   width:50%;
+   float: right;  
+      height:50px;
    background-color: white;
    border: 1px solid #A6A6A6;
    font-size: 15px;
-   border-radius: 0px 0px;
    color: black;
    padding: 1%;
    box-shadow: none;
    text-align: center;
    font-weight: bold;
+   border-radius: 0 0 5px 0;
 }
 
 #cancel_btn:hover{
@@ -184,11 +185,15 @@ label{
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
 <script type="text/javascript">
+var mem_id;
+var mem_email;
+
 $(function() {
    $(".background").show(); 
    $(".background").css({"background-image":"url('resources/assets/img/main3.png')","background-size":"cover"});
    $(".background").css("height", "850px");
    $(".hero-text").html("<h1>비밀번호 찾기</h1><br><span>하단에 정보를 기입해 주시면 임시 비밀번호를 보내드려요.</span>");
+   $(".footer-text").css("margin-top", "20px");
 });
  
 $(function(){
@@ -199,8 +204,9 @@ $(function(){
 });
 
 function sendEmail(){
-   var mem_id = $("#id").val();
-   var mem_email = $("#email").val();
+	
+	mem_id = $("#id").val();
+	mem_email = $("#email").val();
    
    if( mem_id == null || mem_id.trim() ==''){
       alert("아이디를 입력해주세요.");
@@ -209,7 +215,12 @@ function sendEmail(){
       alert("이메일을 입력해주세요.");
       return false;
    }else{
-      var verificationVal = {
+	   emailCheck(mem_id, mem_email);
+   }
+}
+
+function emailCheck(mem_id, mem_email) {
+	var verificationVal = {
             "mem_id":mem_id,
             "mem_email":mem_email
       };
@@ -222,9 +233,8 @@ function sendEmail(){
          contentType:"application/json",
          dataType:"json",
          success: function(map){
-           
             if(map.isExist == "n"){//이메일이 올바르지 않음
-               alert("입력하신 정보와 회원 정보가 일치하지 않습니다!")
+               alert("입력하신 정보와 회원 정보가 일치하지 않습니다!");
             }else{
                alert("이메일을 전송했습니다.")
                var chkNum_btn = $("#chkNum_btn");      
@@ -242,8 +252,8 @@ function sendEmail(){
          
          
       });      
-   }
 }
+
 function chkVerifiNum(){
    var input = $("#chkNum").val();
    
@@ -286,7 +296,7 @@ function chkSubmit(){
    if( chk == 'y'){
       form.submit();
    }else{
-      alert("이메일 인증을 해주세요.");
+       return false;
    }
    
 }
@@ -301,7 +311,7 @@ function cancel(){
 <jsp:include page="../commond/studdypeHeader.jsp"></jsp:include>
    
    <div class="main_div">
-   <form action="sendExtraPw.do" method="post" id="sendExtraPwForm" onsubmit="return sendEmail()">
+   <form action="sendExtraPw.do" method="post" id="sendExtraPwForm" onsubmit="return sendEmail()" autocomplete="off">
    <div>
          <table>
             <col width="150px"><col width="350px"><col width="100px">
@@ -316,9 +326,10 @@ function cancel(){
             </tr>
             <tr>
                <td><label>인증번호</label></td>
-               <td><input type="text" id="chkNum" name="chkNum" placeholder=" 인증번호 입력"></td>
-               <td><input type="button" name="chk_num" value="확인" id="chkNum_btn" onclick="chkVerifiNum();" readonly="true"></td>
+               <td><input type="text" id="chkNum" name="chkNum" placeholder=" 인증번호 입력" ></td>
+               <td><input type="button" name="chk_num" value="확인" id="chkNum_btn" onclick="chkVerifiNum();">
                <input type="hidden" id="chk" title="n">
+               </td>
             </tr> 
             <tr style="display:none;" id="chk_ok">
                <td></td>
@@ -333,8 +344,8 @@ function cancel(){
          
    </div>
    <div class="main_btn">
-      <button type="submit" class="findform_btn" id="psw_btn" onClick="chkSubmit();">비밀번호 찾기</button>
-         <input class="findform_btn" id="cancel_btn" value="취소" onClick="location.href='loginform.do?'">
+      <button type="submit" class="findform_btn" id="psw_btn">비밀번호 찾기</button>
+         <input class="findform_btn" id="cancel_btn" value="취소" onClick="location.href='loginform.do'">
    </div>
    
       </form>

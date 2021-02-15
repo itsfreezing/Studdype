@@ -2,11 +2,7 @@
 .img{
 	position:relative;		
 }
-.input-group{
-	width: 50%; 
-	margin-top:-3.5%;
-	margin-left:70%;
-}
+
 .img .content{
 	 position: absolute;
      top:50%;
@@ -19,41 +15,18 @@
      font-weight:bold;
 	
 }
-#si{
-	position:left;
-	margin-left:-30%;
+.blogpost-area{
+	background: #ffff;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding:50px 0;
 }
-#gu{
-	margin-top:-7.2%;
-	margin-bottom:-5%;
-	margin-left:15%;
+
+.pagin_div {
+	padding-left: 45%;
+	margin-top: 25px;
 }
-#title{
-	text-align:center;
-}
-#selectLocationSi{
-	width:500px;
-	height:50px;	
-}
-#selectLocationGu{
-	width:500px;
-	height:50px;
-	margin-left:45%;
-	top:1%;
-}
-#mainsection{
-	margin-left:40%;
-}
-/* #Search{
-	margin-left:45%;
-	margin-bottom:-3%;
-	margin-top:-5%;
-} */
-button[type=submit]{
-	box-shadow:none;
-	background:none;
-	padding:0;
-}
+
 .studyBtn{
 	float: right;
 	margin-top : 15px;
@@ -68,14 +41,7 @@ button[type=submit]{
 	color: black;
 	font-weight: bold;
 	margin-left: 1%;
-}
-.blogpost-area{
-	padding:100px 0;
-	background:white;
-	margin-right:3%;
-}
-.input-group .Search{
-	margin-top:1.5%;
+	float: right;
 }
 .studyBtn:hover{
 	background-color: white;
@@ -86,4 +52,76 @@ button[type=submit]{
 	transition: 0.5s;
 
 
+}
+.blog-meta{
+	padding: 15px;
+}
+.single-blog-post{
+	height: 450px;
+	margin-bottom: 15px;
+}
+
+.pagin {
+	list-style: none;
+	float: left;
+	display: inline;
+	clear: right;
+}
+
+.page_li {
+	float: left;
+	color: black;
+}
+
+.page_a {
+	float: left;
+	padding: 4px;
+	padding-top: 10px;
+	margin-right: 3px;
+	width: 40px;
+	height: 40px;
+	color: black;
+	font-weight: bold;
+	border: 1px solid #dee2e6;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page_a:hover {
+	transition: 0.3s;
+	border: 2px solid #6434ef;
+	cursor: pointer;
+}
+
+#location_search_area {
+	position:relative;
+	width:100%;
+}
+
+#si {
+	display:inline-block;
+	width:30%;
+	margin-left:18%;
+}
+
+#gu {
+	display:inline-block;
+	width:30%;
+}
+.input-group{
+	display:inline-block;
+	left:3%;
+	width:10%;
+}
+.input-group button {
+	padding:0;
+	border-radius:0;
+	box-shadow:none;
+	margin-top:19px;
+}
+#no-studyList-area {
+	position:relative;
+	width:100%;
+	padding-top:30px;
+	text-align:center;
 }
