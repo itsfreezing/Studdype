@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="./resources/assets/css/modal-video.min.css">
 <link rel="stylesheet" href="./resources/assets/css/animate.css">
 <link rel="stylesheet" href="./resources/assets/css/normalize.css">
-<link rel="stylesheet" href="./resources/css/style.css">
+<link rel="stylesheet" href="./resources/css/mainstyle.css">
 <link rel="stylesheet" href="./resources/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="./resources/css/community/header&footer.css">
@@ -33,7 +33,7 @@
 <script src="./resources/assets/js/bootstrap.min.js"></script>
 <script src="./resources/assets/js/owl.carousel.min.js"></script>
 <script src="./resources/assets/js/modal-video.js"></script>
-<script src="./resources/assets/js/main.js"></script>
+<script src="./resources/assets/js/main2.js"></script>
 
 <script type="text/javascript">
 //파일첨부 함수
@@ -75,7 +75,7 @@ function chkForm(){
  };
  
  //파일첨부시 파일정보 div추가 함수
-function create_file_info(file){ 
+function create_file_info(file){
 	//업로드 파일 박스
 	var upload_div = $(".upload_file_box");
 	var fileSize = $(file)[0].files[0].size; //파일사이즈
@@ -117,7 +117,6 @@ function clickFileBtn(fileName){
 	
 	upload_file_box.remove();
 	
-	fileName.className = 'upload_file'; //추가한 클래스 원상복구
 }
 
 //파일삭제 db랑 로컬도 AJAX

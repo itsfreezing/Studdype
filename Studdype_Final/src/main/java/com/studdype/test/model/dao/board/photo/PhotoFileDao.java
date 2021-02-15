@@ -14,5 +14,6 @@ public interface PhotoFileDao {
 	public List<FileDto> galleryDetailFile(int b_no); //b_no로 한개만 가져오기
 	public int deleteGalleryFile(int f_no);
 	public int updateGalleryFile(List<FileDto> fileList);
+	FileDto selectFile(int f_no);
 	
 }

@@ -129,7 +129,7 @@ DROP TABLE PHOTO_FILE CASCADE CONSTRAINTS;
 DROP TABLE PHOTO_REPLY CASCADE CONSTRAINTS;
 
 -------------------------------------------------------------
-
+SELECT * FROM PHOTO_FILE;
 ------------------ CREATE TABLE -----------------------------
 -------------------------------------------------------------
 

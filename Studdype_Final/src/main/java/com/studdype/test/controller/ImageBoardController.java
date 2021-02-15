@@ -200,7 +200,7 @@ public class ImageBoardController {
 		return "community/gallery/galleryUpdateForm";
 	}
 	
-	@RequestMapping(value="/galleryupdate.do")
+	@RequestMapping("/galleryupdate.do")
 	public String galleryUpdate(BoardDto dto, Model model, UploadFile uploadFile, HttpServletRequest request) {
 
 		int res = 0;
@@ -209,7 +209,7 @@ public class ImageBoardController {
 		//사진이 있으면
 		if(mfileList != null) {
 			String path = fileHandler.getPath(request);
-			List<FileDto> fileList = fileHandler.getFileList(mfileList, request);//파일리스트 생성 파일요소들 뽑아서 fileList에 저장		
+			List<FileDto> fileList = fileHandler.getGalleryList(mfileList, request);//파일리스트 생성 파일요소들 뽑아서 fileList에 저장		
 			//사진이 담겨잇는 게시글 번호 넣어주기
 			for(int i = 0 ; i < fileList.size(); i++) {
 				fileList.get(i).setB_no(dto.getB_no());

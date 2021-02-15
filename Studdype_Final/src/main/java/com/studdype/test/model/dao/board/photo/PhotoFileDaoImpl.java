@@ -97,7 +97,20 @@ public class PhotoFileDaoImpl implements PhotoFileDao{
 		}
 		return resCnt;
 	}
-
+	//자유게시판 첨부파일 가져오기
+	@Override
+	public FileDto selectFile(int f_no) {
+		FileDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectFile", f_no);
+		} catch (Exception e) {
+			System.out.println("[ERROR] [FreeFileDaoImpl] selectFile method");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 
 
 }
