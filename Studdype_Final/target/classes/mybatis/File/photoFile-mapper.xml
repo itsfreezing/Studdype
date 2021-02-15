@@ -34,9 +34,14 @@
 	
 	<insert id="updateGalleryFile" parameterType="fileDto">
 		INSERT INTO PHOTO_FILE
-	 	VALUES ( PHOTOFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} #{photo_ismain} )
+	 	VALUES ( PHOTOFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url}, #{photo_ismain} )
 	</insert>
-
+	
+	  	<select id="selectFile" parameterType="int" resultMap="fileMap">
+  		SELECT *
+  		FROM DATA_FILE
+  		WHERE F_NO = #{f_no}
+  	</select>
 
 
 </mapper>
