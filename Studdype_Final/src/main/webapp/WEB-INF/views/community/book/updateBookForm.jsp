@@ -133,7 +133,7 @@
 								</tr>
 								<tr>
 									<th><textarea style="width: 100%;" rows="15" id="book_board_content" 
-									name="b_content">${detailBookDto.getB_content() }</textarea></th>
+									name="b_content">${bookDto.getB_content() }</textarea></th>
 								</tr>
 							</table>
 						</div>

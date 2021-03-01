@@ -35,27 +35,27 @@ $(function() {
 
         $(".dropdown-item").removeClass("active"); //Remove any "active" class
         $(this).addClass("active"); //Add "active" class to selected tab
-		
+      
         return true;
     });
     //스터디 팝업 
-	function studypopup(multipleFilter) {
-		
-		const popup = document.querySelector('#studypopup');
-	    
-		if (multipleFilter) {
-	       popup.classList.add('multiple-filter');
-	    } else {
-	       popup.classList.remove('multiple-filter');
-	    }
-	    
-		popup.classList.remove('hide');
-	}
+   function studypopup(multipleFilter) {
+      
+      const popup = document.querySelector('#studypopup');
+       
+      if (multipleFilter) {
+          popup.classList.add('multiple-filter');
+       } else {
+          popup.classList.remove('multiple-filter');
+       }
+       
+      popup.classList.remove('hide');
+   }
 
-	function closestudypopup() {
-		const popup = document.querySelector('#studypopup');
-	    popup.classList.add('hide');
-	}
+   function closestudypopup() {
+      const popup = document.querySelector('#studypopup');
+       popup.classList.add('hide');
+   }
 
 </script>
 
@@ -71,14 +71,14 @@ $(function() {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
 }
 #studypopup.multiple-fileter{
-	backdrop-filter: blur(4px) grayscale(90%);
+   backdrop-filter: blur(4px) grayscale(90%);
   -webkit-backdrop-filter: blur(4px) grayscale(90%);
 }
 #studypopup.hide{
-	display:none;
+   display:none;
 }
 #studypopup{
-	 display: flex;
+    display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -138,31 +138,31 @@ $(function() {
                            <a class="nav-link" href="signform.do">회원가입</a>
                         </li>
                         </c:when>
-                        	<c:otherwise>
-		                        <li class="nav_item" id="myPage">
-		                           <a class="nav-link" href="myPage.do" >마이 페이지</a>
-		                        </li>
-		                        <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
-									</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<div id="down-menu">
-											<div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
-											<div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
+                           <c:otherwise>
+                              <li class="nav_item" id="myPage">
+                                 <a class="nav-link" href="myPage.do" >마이 페이지</a>
+                              </li>
+                              <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img id="userImg" src="./resources/assets/img/user3.png">${login.mem_name }
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <div id="down-menu">
+                                 <div id="down-left"><img id="userSquare" src="./resources/assets/img/userSquare.png"></div>
+                                 <div id="down-top"><b>${login.mem_name }</b>님 환영합니다!</div>
 
-											<div id="down-bottom"><input type="button" onclick="studypopup();" value="나의 스터디"></div>
+                                 <div id="down-bottom"><input type="button" onclick="studypopup();" value="나의 스터디"></div>
 
-										</div>
-											<a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
-											<a class="dropdown-item" id="myApply" href="myPage.do#myApply">스터디 신청 내역</a>
-											<a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
-											<a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
-											<hr id="profileHR">
-											<a class="dropdown-item"  onclick="logout_btn();" id="logout">로그아웃</a>
-									</div>
-								</li>
-                        	</c:otherwise>
+                              </div>
+                                 <a class="dropdown-item" id="create" href="createStuddypeform.do"><b>스터디 생성</b></a>
+                                 <a class="dropdown-item" id="myApply" href="myPage.do#myApply">스터디 신청 내역</a>
+                                 <a class="dropdown-item" id="applyList" href="myPage.do#applyList">스터디 신청받은 내역</a>
+                                 <a class="dropdown-item" id="myMeet" href="myPage.do#myMeet">모임확인</a>
+                                 <hr id="profileHR">
+                                 <a class="dropdown-item"  onclick="logout_btn();" id="logout">로그아웃</a>
+                           </div>
+                        </li>
+                           </c:otherwise>
                         </c:choose>
                         <!-- 마지막 요소는 hover 시 라인 생성 안되서 일부러 추가해 놓았음!! -->
                         <li class="nav-item"></li>
@@ -195,28 +195,28 @@ $(function() {
    <!-- 헤더 끝 -->
    <div id="studypopup" class="hide">
     <div class="content">
-    	<p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 18px; ">내 전체 스터디 목록</p>
-    	<p style="position: absolute;top: 302px;left: 760px; color:red; font-size: 16px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
-       <div style="height: 300px; width: 28%; position: absolute; top: 34%; left: 36%; overflow:auto;" id="allstudy">
-       		<table id="studyall" style="height:500px; width:511px; text-align:center;" class="table table-hover">
-       			<thead>
-       				<tr>
-       					<th>스터디 이름</th>
-       					<th>이동하기</th>
-       				</tr>
-      			</thead>
-      			<tbody>
-      				<c:forEach var="studylist" items="${studylist }" varStatus="status">
-      					<tr>
-      						<c:if test="${studylist.leader_no != login.mem_no }"><td>${studylist.s_name }</td></c:if>
-      						<c:if test="${studylist.leader_no == login.mem_no }"><td style="color:red;">${studylist.s_name }</td></c:if>
-      						<td><button class="btn btn-purple" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">이동</button></td>
-      					</tr>
-      					
-      				</c:forEach>
+       <p style="font-weight: bold; position: absolute; top: 272px; left: 880px; font-size: 18px; ">내 전체 스터디 목록</p>
+       <p style="position: absolute;top: 302px;left: 760px; color:red; font-size: 16px; font-weight: bold;">*본인이 리더인 스터디의 경우 빨간색으로 표시됩니다</p>
+       <div style="height: 250px; width: 28%; position: absolute; top: 38%; left: 36%; overflow:auto;" id="allstudy">
+             <table id="studyall" style="height:500px; width:511px; text-align:center;" class="table table-hover">
+                <thead>
+                   <tr>
+                      <th>스터디 이름</th>
+                      <th>이동하기</th>
+                   </tr>
+               </thead>
+               <tbody>
+                  <c:forEach var="studylist" items="${studylist }" varStatus="status">
+                     <tr>
+                        <c:if test="${studylist.leader_no != login.mem_no }"><td>${studylist.s_name }</td></c:if>
+                        <c:if test="${studylist.leader_no == login.mem_no }"><td style="color:red;">${studylist.s_name }</td></c:if>
+                        <td><button class="btn btn-purple" onclick="location.href='studycommunity.do?s_no=${studylist.s_no }'">이동</button></td>
+                     </tr>
+                     
+                  </c:forEach>
  
-      			</tbody>
-       		</table>
+               </tbody>
+             </table>
        
        
        </div>

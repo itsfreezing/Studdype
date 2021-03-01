@@ -24,6 +24,13 @@
 <link rel="stylesheet" href="./resources/css/studdype/searchLocation/searchLocation.css">
 <script src="./resources/assets/js/jquery.3.2.1.min.js"></script>
 
+<style type="text/css">
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
+</style>
+
 <script type="text/javascript">
 	$(function(){
 		// 위치 숨기기
@@ -83,9 +90,8 @@ function search() {
 	<div class="img" >
 		<img src="./resources/img/location.png" style="width:100%;height:400px;">
 		<div class="content">
-			<h3>지역별 검색 </h3>
-			<p style="font-size:13px;">지역별로 다양한 스터디를 참여해보세요</p>
-			<p style="font-size:12pt;"></p>
+			<p style="font-size: 60px; font-weight: 500;">지역별 검색 </p>
+			<p style="font-size:20px; font-weight: 300;">지역별로 다양한 스터디를 참여해보세요</p>
 		</div>
 	</div>
 	<!-- 스터디 영역 -->
@@ -176,7 +182,15 @@ function search() {
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page_li li_hober"><a class="page_a current_page" href="studyListLocation.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<c:choose>
+					<c:when test="${current_page == idx }">
+						<li class="page_li li_hober"><a class="page_a current_page" href="studyListLocation.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page_li li_hober"><a class="page_a" href="studyListLocation.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					</c:otherwise>
+				</c:choose>
+				
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">

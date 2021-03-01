@@ -117,7 +117,6 @@ public class NoticeBoardController {
 
 			// 조회수 함수 isVisitPage = 1 -> 방문한 적있음 0 -> 없음
 			int isVisitPage = pageChecker.chkVisited(request, response, "noticeboardvisit", request.getParameter("b_no"));
-			
 			BoardDto board = noticeBiz.selectDetail(b_no, isVisitPage); // 게시글 가져오기 / 조회수 증가
 			MemberDto member = memberBiz.selectOne(board.getB_writer()); // 작성자 이름 가져오기
 

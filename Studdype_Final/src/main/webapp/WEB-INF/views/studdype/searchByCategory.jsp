@@ -48,6 +48,8 @@
 		})
 		// 해더 상단 영역 숨기기 (메뉴 넘어갈때는 이 코드 show()로 바꾸기)
 		$(".justify-content-center").hide(); 
+		
+		$(".pagin_div").hide();
 	});
 	
 	$(document).on('click', '#btnSearch', function(e){
@@ -99,6 +101,7 @@ input#search:focus {
 	transition: border-color 0.3s, background-color 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	cursor:pointer;
 }
 .button--winona::after {
 	content: attr(data-text);
