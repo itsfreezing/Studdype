@@ -28,22 +28,7 @@ $(function(){
 	}); 
 });
  
-// 회원탈퇴
-function getout(){
-	
-	var no = '${login.mem_no}';
-	
-	if('${LeaderList}'!="[]"){
-		alert('본인이 팀장인 스터디가 존재합니다. 스터디 관리를 통해 스터디 대표를 양도해주세요.');
-	}else{
-		
-		if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
-			location.href="memberDelete.do?mem_no="+no;
-		}else{
-			return;
-		}
-	}
-}
+
 
 //내가 신청한 가입 삭제
 function receivedelete(){

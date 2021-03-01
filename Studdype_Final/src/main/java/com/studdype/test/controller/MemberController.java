@@ -183,9 +183,8 @@ public class MemberController {
 	public @ResponseBody Map sendVerification(@RequestBody MemberDto dto, HttpSession session) {
 		MailSender sender = new MailSender();
 		Map resMap = new HashMap();
-		
+		logger.info("sendVerification");
 		MemberDto resDto = memberBiz.selectMemberByIdAndEmail(dto);
-		
 		//아이디와 이메일이 일치하면
 		if ( resDto != null) {
 			resMap.put("isExist", "y"); //결과
@@ -193,6 +192,7 @@ public class MemberController {
 			
 			sender.sendVerifiMail(resDto, randNum);
 			session.setAttribute("randNum", randNum);
+			
 		}else {
 			resMap.put("isExist", "n"); //결과
 		}

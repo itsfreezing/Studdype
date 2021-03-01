@@ -34,7 +34,7 @@
 	
 	<insert id="updateGalleryFile" parameterType="fileDto">
 		INSERT INTO PHOTO_FILE
-	 	VALUES ( PHOTOFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url} #{photo_ismain} )
+	 	VALUES ( PHOTOFILESEQ.NEXTVAL, #{b_no}, #{f_name}, #{f_size}, #{f_url}, #{photo_ismain} )
 	</insert>
 
 

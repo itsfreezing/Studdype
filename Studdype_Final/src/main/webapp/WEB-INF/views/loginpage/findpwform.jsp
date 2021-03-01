@@ -56,7 +56,7 @@ label{
    margin-left: auto;
    margin-right: auto;
    width: 550px;
-   height: 270px;
+   height: 280px;
    margin-top: -1%;
    background: white;
    border-radius: 5px;
@@ -215,8 +215,15 @@ function sendEmail(){
       alert("이메일을 입력해주세요.");
       return false;
    }else{
-	   emailCheck(mem_id, mem_email);
-   }
+		if(chkSubmit()) {
+			if(!emailCheck(mem_id, mem_email)) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+		
+	}
 }
 
 function emailCheck(mem_id, mem_email) {
@@ -235,6 +242,7 @@ function emailCheck(mem_id, mem_email) {
          success: function(map){
             if(map.isExist == "n"){//이메일이 올바르지 않음
                alert("입력하신 정보와 회원 정보가 일치하지 않습니다!");
+            	return false;
             }else{
                alert("이메일을 전송했습니다.")
                var chkNum_btn = $("#chkNum_btn");      
@@ -291,12 +299,11 @@ function chkVerifiNum(){
 
 function chkSubmit(){
    var chk = $("#chk").attr("title");
-   var form = $("#sendExtraPwForm");
    
    if( chk == 'y'){
-      form.submit();
+      return false;
    }else{
-       return false;
+       return true;
    }
    
 }
@@ -333,7 +340,7 @@ function cancel(){
             </tr> 
             <tr style="display:none;" id="chk_ok">
                <td></td>
-               <td style="color:#4075dd">인증번호가 같습니다.</td>
+               <td style="color:#32CD32">인증번호가 같습니다.</td>
             </tr>
             <tr style="display:none;" id="chk_no">
                <td></td>

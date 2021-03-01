@@ -59,7 +59,7 @@ public class BoardController {
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	private final static int pageSize = 15; // 한페이지에 보여줄 개수
+	private final static int pageSize = 10; // 한페이지에 보여줄 개수
 	private final static int pageGroupSize = 5; // 페이지 그룹 사이즈
 
 	private FileHandler fileHandler = new FileHandler();

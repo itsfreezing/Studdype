@@ -139,6 +139,8 @@
 			$('.modal').removeClass('hidden');
 		});
 		
+		$(".footer-text").css("margin-left", "250px");
+		
 	}); // 즉시 실행 종료
 
 	// 도서 리스트 영역별로 정보 append

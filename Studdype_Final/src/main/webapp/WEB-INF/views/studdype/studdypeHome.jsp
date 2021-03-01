@@ -53,6 +53,20 @@
 		$(".justify-content-center").hide(); 
 	});
 
+	$(function(){
+		
+        $(".page_a").click(function() {
+        	$(".current_page").removeClass("current_page");
+        	$(this).addClass("current_page");
+        });
+        
+		/* 부모 선택 후 흰색변경 JS */
+		$(".current_page").parent().css('color','white');
+		$(".current_page").css('border','1px solid #6434ef');
+		$(".current_page").css('cursor','default');
+	});	
+	
+	
 </script>
 
 <style type="text/css">
@@ -165,6 +179,11 @@ input#search:focus {
 	/* background-color: #6434ef; */
 	cursor: pointer;
 }
+
+.current_page {
+	color: white;
+	background-color: #6434ef;
+}
 </style>
 
 </head>
@@ -209,7 +228,9 @@ input#search:focus {
 		        $('#homeSearch').click(function() {
 		          self.location = "studyList.do" + '${pageMaker.makeQuery(1)}' +  "&keyword=" + encodeURIComponent($('#keywordInput').val());
 		        });
-		      }); 
+		        
+
+		    }); 
 		</script>
 
 		<div class="container-fluid">
@@ -249,14 +270,9 @@ input#search:focus {
 				</c:forEach>
 			</div>
 		</div>
-		<c:choose>
-			<c:when test="${login != null }">
-				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='loginform.do'">
-			</c:when>
-			<c:otherwise>
-				<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
-			</c:otherwise>
-		</c:choose>
+		
+		<input type="button" value="스터디 생성" class="studyBtn" onclick="location.href='createStuddypeform.do'">
+
 	</div>
 	<!-- 스터디 리스트 끝 -->
 
@@ -268,7 +284,15 @@ input#search:focus {
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<li class="page_li li_hober"><a class="page_a current_page" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+				<c:choose>
+					<c:when test="${current_page == idx }">
+						<li class="page_li li_hober"><a class="page_a current_page" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page_li li_hober"><a class="page_a" href="studyList.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					</c:otherwise>
+				</c:choose>
+				
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
