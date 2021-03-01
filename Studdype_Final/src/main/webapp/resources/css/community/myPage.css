@@ -137,7 +137,7 @@
 
 .my-nav-item.active{
 	z-index: 1;
-   padding-bottom: 2%;
+   padding-bottom: 0.5%;
    border-bottom: 5px solid orange;   
 }
 

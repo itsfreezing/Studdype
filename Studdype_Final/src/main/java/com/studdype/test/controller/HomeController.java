@@ -182,7 +182,7 @@ public class HomeController {
 				studylist.get(i).setPhoto(fileHandler.getFileName(studylist.get(i).getPhoto(), "Studdype_Final"));
 		}
 	
-		
+		System.out.println(LeaderList.size());
 
 		model.addAttribute("allMember",allMember);
 		model.addAttribute("applymember",applymember);
@@ -192,7 +192,7 @@ public class HomeController {
 		model.addAttribute("totalPageNum",pageMap.get("totalPageNum"));
 		model.addAttribute("pageList",pageList);
 		model.addAttribute("LeaderList",LeaderList);
-	
+		model.addAttribute("lead",LeaderList.size());
 		model.addAttribute("Receiveapply",Receiveapply);
 		model.addAttribute("receiveapplyname",receiveapplyname);
 		model.addAttribute("studyApplylist",studyApplylist);

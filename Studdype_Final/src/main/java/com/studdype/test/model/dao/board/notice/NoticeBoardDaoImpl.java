@@ -78,7 +78,7 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 	@Override
 	public BoardDto selectOne(int b_no) {
 		BoardDto dto = null;
-		
+		System.out.println("b_no : "+b_no);
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"selectOne", b_no);
 		} catch (Exception e) {
@@ -152,7 +152,6 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao{
 	@Override
 	public List<BoardDto> recentListForStudyHome(int s_no) {
 		List<BoardDto> list = null;
-		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"recentListForStudyHome", s_no);
 		} catch (Exception e) {

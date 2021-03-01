@@ -31,12 +31,12 @@ function chkpwd(){
 		$(".pwico").css("color","red");
 	
 	}
-	else if(pw==""||pw==null){
+	else if(pw.trim()==""||pw==null){
 		  $("#chkpw").show();
 		  $("#chkpw_no").hide();
 		  $("#chkpw_ok").hide();
 		 $(".pwico").css("color","red");
-
+		
   }
 	else{
 		$("#chkpw_ok").show();
@@ -70,7 +70,7 @@ function chktel(){
 
 function namechk(){
 	var name=document.getElementById('memberName').value;
-	if(name.length<3){
+	if(name.trim().length <= 0){
 		$(".nameico").css("color","red");
 		return false;
 	}else{
@@ -197,15 +197,15 @@ $(document).ready(function(){
 			$("#chknum").focus();
 			return false;
 		}
-		else if($("#memberName").val()==""){
+		else if($("#memberName").val().trim()==""){
 			alert("이름을 입력해주세요");
 			$("#memberName").focus();
 			return false;
-		}else if($("#unum1").val()==""||$("#unum1").val()==null){
+		}else if($("#unum1").val().trim()==""||$("#unum1").val()==null || $("#unum1").val().trim().length < 6){
 			alert("주민번호를 입력해주세요");
 			$("#rno1").focus();
 			return false;
-		}else if($("#unum2").val()==""||$("#unum2").val()==null){
+		}else if($("#unum2").val().trim()==""||$("#unum2").val()==null || $("#unum2").val().trim().length < 7){
 			alert("주민번호 뒷자리를 입력해주세요");
 			$("#rno2").focus();
 			return false;
@@ -224,6 +224,12 @@ $(document).ready(function(){
    		alert("회원가입되었습니다");
 
 	});	
+		
+		$("#unum1").keyup(function(event) {
+			   if($("#unum1").val().length == 6) {
+				   $("#unum2").focus();
+			   }
+		   })
 
 //아이디 중복체크 확인 (아이디 중복된 경우 =1, 사용가능하면 =0)
 	$("#check").click(function(){
@@ -231,6 +237,12 @@ $(document).ready(function(){
 		var memberVal = {
 						"mem_id":mem_id
 		};
+		
+		if(mem_id.trim() == "") {
+			alert("띄어쓰기만은 불가능")
+			return false;
+		}
+		
 		$.ajax({
 			url:"idcheck.do",
 			data:JSON.stringify(memberVal),
@@ -260,7 +272,7 @@ $(document).ready(function(){
 	});	
 });
 
-function num_check(){
+/* function num_check(){
 	 var num1 = document.getElementById("unum1");
      var num2 = document.getElementById("unum2");
      var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
@@ -300,7 +312,7 @@ function num_check(){
 			$(".rnoico").css("color","#19ce60");
 			return false;
       }
-  }
+  } */
 </script>
 <script type="text/javascript">
 $(function(){
@@ -378,7 +390,7 @@ $(function(){
 	   			</tr>
 	   			<tr style="display:none;" id="chkpw">
 	   				<td></td>
-	   				<td style="color:red;">패스워드를 입력해주세요</td>
+	   				<td style="color:red;">패스워드를 입력해주세요.(띄어쓰기만은 불가능)</td>
 	   			</tr>
 	   			<tr>
 		        	<td valign="top">&nbsp;&nbsp;<font color="red"></font></td>
@@ -433,8 +445,8 @@ $(function(){
 	                       주민번호<span class="rnoico" style="font-size:20px;">*</span>
 	                 </th>
 	                 <td colspan="5">
-	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6">-
-	                    <input type="password"name="unum2" id="unum2" style="border:1px solid #ccc" maxlength="7" onkeyup="num_check();">
+	                    <input type="text" name="unum1" id="unum1" style="border:1px solid #ccc" maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">-
+	                    <input type="password"name="unum2" id="unum2" style="border:1px solid #ccc" maxlength="7" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 	                 </td>
 	            </tr>
 	            <tr style="display:none;" id="chknum_ok">

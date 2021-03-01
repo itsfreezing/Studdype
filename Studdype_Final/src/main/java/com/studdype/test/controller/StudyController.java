@@ -83,7 +83,10 @@ public class StudyController {
 					studyList.get(i).setPhoto(fileHandler.getFileName(studyList.get(i).getPhoto(), "Studdype_Final"));
 				}
 		}
-			
+		
+		int current = searchPagination.getPage();
+		
+		model.addAttribute("current_page", current);
 		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("studyList", studyList);
@@ -96,8 +99,6 @@ public class StudyController {
 		return "studdype/studdypeHome";
 	}
 	
-
-	
 	// 스터디 생성 폼
 	@RequestMapping("/createStuddypeform.do")
 	public String createStuddypeForm(Model model,HttpSession session) {
@@ -106,7 +107,7 @@ public class StudyController {
 		// 로그인 인터셉터 완료 전까지 비로그인 스터디생성 막기
 		if(session.getAttribute("login") == null) {
 			model.addAttribute("msg", "로그인을 하고 진행주세요.");
-			model.addAttribute("url", "studyList.do");
+			model.addAttribute("url", "loginform.do");
 			return "commond/alert";
 		}
 		
@@ -130,7 +131,7 @@ public class StudyController {
 		MultipartFile[] mfileList = null;
 		List<FileDto> fileList = null;
 		String path = "";
-		System.out.println("씨발실마리를찾았다"+request);
+		
 		if(studyDto.getPhoto().equals("")) {
 			//파일 업로드
 			mfileList = uploadFile.getFile();  //multipartFile 리스트 반환해서 생성
@@ -447,22 +448,25 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/studygetout.do",method = RequestMethod.GET)
-	public String studygetout(HttpSession session,HttpServletRequest request,Model model) {
-	
-		MemberDto login = (MemberDto)session.getAttribute("login");
-		StudyMemberDto dto = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),login.getMem_no());
-		int res = StudyMemberBiz.deletemember(dto);
-		if(res>0) {
-			model.addAttribute("msg","탈퇴 성공  !");
-			model.addAttribute("url","studyList.do");
-			return "commond/alert";
-		}else {
-			model.addAttribute("msg","탈퇴실패  !");
-			model.addAttribute("url","studyList.do");
-			return "commond/alert";
-		}
+	   public String studygetout(HttpSession session,HttpServletRequest request,Model model) {
+	   
+	      MemberDto login = (MemberDto)session.getAttribute("login");
+	      StudyMemberDto dto = new StudyMemberDto(Integer.parseInt(request.getParameter("s_no")),login.getMem_no());
+	      StudyDto dto2 = new StudyDto(Integer.parseInt(request.getParameter("s_no")));
+	      int res = StudyMemberBiz.deletemember(dto);
+	   
+	      if(res>0) {
+	         int res2 = studyBiz.deletecurrent(dto2);
+	         model.addAttribute("msg","탈퇴 성공  !");
+	         model.addAttribute("url","studyList.do");
+	         return "commond/alert";
+	      }else {
+	         model.addAttribute("msg","탈퇴실패  !");
+	         model.addAttribute("url","studyList.do");
+	         return "commond/alert";
+	      }
 
-	}
+	   }
 	
 	
 	@RequestMapping("/studyMemberInsert.do")
@@ -535,6 +539,10 @@ public class StudyController {
 			Map<Integer, String> selectCateForMainMap = null; // 카테고리 리스트 담을 곳
 			List<LocationSiDto> sidtos = studyBiz.locationSiList();
 			List<LocationGuDto> gudtos = studyBiz.locationGuList();
+			
+			int current = searchPagination.getPage();
+			
+			model.addAttribute("current_page", current);
 			
 			if(searchPagination.getSi_no() == 0) {
 				searchPagination.setSearchType("all");

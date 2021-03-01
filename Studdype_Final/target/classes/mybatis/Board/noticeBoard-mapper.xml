@@ -90,7 +90,7 @@
 	
 	<select id="recentListForStudyHome" parameterType="int" resultMap="boardMap">
 		<![CDATA[
-			SELECT B_TITLE
+			SELECT *
 			FROM NOTICE_BOARD 
 			WHERE S_NO = #{s_no}
 			AND ROWNUM <= 3

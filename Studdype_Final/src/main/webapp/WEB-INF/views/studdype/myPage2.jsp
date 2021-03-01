@@ -182,6 +182,21 @@ function studypopup(multipleFilter) {
 		const popup = document.querySelector('#studypopup');
 	    popup.classList.add('hide');
 	}
+	function getout(){
+		
+		var no = '${login.mem_no}';
+		
+		if('${lead}' != '0'){
+			alert('본인이 팀장인 스터디가 존재합니다. 스터디 관리를 통해 스터디 대표를 양도해주세요.');
+		}else{
+			
+			if(confirm("정말 회원 탈퇴 하시겠습니까?")==true){
+				location.href="memberDelete.do?mem_no="+no;
+			}else{
+				return;
+			}
+		}
+	}
 </script>
 </head>
 <body>
@@ -218,7 +233,7 @@ function studypopup(multipleFilter) {
    </div>
 </div>
 <!-- 상단 div_탭 -->
-<div id="nav-container">
+<div id="nav-container" style="top:32.7%;">
    <ul class="nav-items">
       <li class="my-nav-item" id="myApply"><a href="#myApply">신청 내역</a></li>
       <li class="my-nav-item" id="applyList"><a href="#applyList">신청받은 내역</a></li>
@@ -236,9 +251,9 @@ function studypopup(multipleFilter) {
    <br>
    <br>
    <br>
-   <div style="height:402px; width:70%; position:absolute; top:18%; left:16%; overflow:auto; border-radius:4px;" id="scroll">
+   <div style="height:402px; width:70%; position:absolute; top:18%; left:11%; overflow:auto; border-radius:4px;" id="scroll">
    <c:if test="${fn:length(applylist) != 0 }">
-   <table class="table table-bordered" style="width: 70%; text-align: center; position: absolute; left: 11%; ">
+   <table class="table table-bordered" style="width: 89%; text-align: center; position: absolute; left: 11%; ">
    <thead>
    <tr style="color:black;"> 
       <th style="position:sticky;top:0px; background-color:#f2f5f9;">스터디 이름</th>
@@ -259,7 +274,7 @@ function studypopup(multipleFilter) {
       <tr>
          <td>${applylist.s_name }</td>
          <c:if test="${studyApplylist.agree =='D' }"><td>진행중</td></c:if>
-         <c:if test="${studyApplylist.agree == 'Y' }"><td style="color:green;">수락됨</td></c:if>  
+         <c:if test="${studyApplylist.agree == 'Y' }"><td style="color:#32CD32;">수락됨</td></c:if>  
          <c:if test="${studyApplylist.agree == 'N' }"><td style="color:red;">거절됨</td></c:if>
          <td><button id="delete${status.count }" value="${studyApplylist.mem_no }"name="${studyApplylist.s_no }" class="btn btn-purple" onclick="receivedelete();">삭제</button></td>                        
       </tr>
@@ -449,10 +464,10 @@ function studypopup(multipleFilter) {
    
   
   <!-- prev/next 버튼 -->
-   <div class="customNextBtn" style="height:20px; width:20px; position: absolute; top: 1152px;  left: 58%; z-index:1;"><img src="./resources/img/next-allow.png" style=" overflow: hidden; display: flex; align-items: center; justify-content: center; height:20px; width:20px; position: absolute;
+   <div class="customNextBtn" style="height:20px; width:20px; position: absolute; top: 1152px;  left: 58%; z-index:1; cursor:pointer;"><img src="./resources/img/next-allow.png" style=" overflow: hidden; display: flex; align-items: center; justify-content: center; height:20px; width:20px; position: absolute;
     top: -100px;
     left: 720px"></div>
-   <div class="customPrevBtn" style="height:20px; width:20px; z-index:1;"><img src="./resources/img/pre-allow.png" style="overlfow:hidden; display:flex; align-items:center; justify-content: center; height:20px; width:20px; position:absolute; top: -100px;  left: -700px;"></div>
+   <div class="customPrevBtn" style="height:20px; width:20px; z-index:1; cursor:pointer;"><img src="./resources/img/pre-allow.png" style="overlfow:hidden; display:flex; align-items:center; justify-content: center; height:20px; width:20px; position:absolute; top: -100px;  left: -700px;"></div>
    </c:if>
    <c:if test="${fn:length(studylist) == 0 }">
       <p id="mystudyl" style="font-size:20px; font-weight:bold; position:absolute; top:94%; left:7%; ">내가 가입한 스터디</p>
